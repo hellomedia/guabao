@@ -1,0 +1,15 @@
+easy_admin:
+    site_name: Guabao
+    design:
+        menu:
+            - { entity: 'Video', icon: 'video'}
+            - { entity: 'Tag', icon: 'tag'}
+            - { entity: 'VideoTag'}
+    list:
+        actions:
+        - { name: 'show', icon: 'eye' }
+        - { name: 'edit', icon: 'pencil' }
+        - { name: 'delete', icon: 'trash' }
+    entities:
+        VideoTag:
+            class: App\Entity\VideoTag

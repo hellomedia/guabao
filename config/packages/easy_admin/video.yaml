@@ -1,0 +1,25 @@
+easy_admin:
+    entities:
+        Video:
+            class: App\Entity\Video
+            label: Videos
+            controller: App\Controller\Admin\VideoController
+            list:
+                actions:
+                    - { name: 'new', label: 'Add Video' }
+                fields:
+                    - id
+                    - title
+                    - url
+                    - { property: 'tags', type: 'array' }
+            show:
+                fields:
+                    - id
+                    - title
+                    - slug
+                    - url
+                    - { property: 'tags', type: 'array' }
+            form:
+                fields:
+                    - title
+                    - url

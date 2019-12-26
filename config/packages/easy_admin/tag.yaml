@@ -1,0 +1,22 @@
+easy_admin:
+    entities:
+        Tag:
+            class: App\Entity\Tag
+            label: Tags
+            list:
+                actions:
+                    - { name: 'new', label: 'Add Tag' }
+                sort: ['name', 'ASC']
+                fields:
+                    - id
+                    - name
+                    - { property: 'videos', type: 'array' }
+            show:
+                fields:
+                    - id
+                    - name
+                    - slug
+                    - { property: 'videos', type: 'array' }
+            form:
+                fields:
+                    - name

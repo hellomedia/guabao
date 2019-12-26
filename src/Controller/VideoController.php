@@ -10,7 +10,7 @@ use App\Entity\Video;
 class VideoController extends AbstractController
 {
     /**
-     * @Route("/videos", name="video_index")
+     * @Route("/", name="video_index")
      */
     public function index(EntityManagerInterface $em)
     {
