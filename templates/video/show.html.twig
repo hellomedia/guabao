@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ video.title }}{% endblock %}
+
+{% block body %}
+<style>
+    .tags { list-style-type: none; display: flex; margin: 0; padding: 0;}
+    .tags li { background-color: green; padding: 6px 15px; color: white; margin: 0 15px 15px 0;}
+    .tags li a { color: white; text-decoration: none; }
+</style>
+
+<h1>{{ video.title }}</h1>
+
+<p>
+    <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/{{ video.url }}" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+</p>
+
+<ul class="tags">
+    {% for tag in video.tags %}
+        <li>
+            <a href="{{ path('tag_show', { slug: tag.slug }) }}">{{ tag }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

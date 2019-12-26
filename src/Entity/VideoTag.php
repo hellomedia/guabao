@@ -28,6 +28,11 @@ class VideoTag
      */
     private $tag;
 
+    public function __toString(): string
+    {
+        return $this->video. ' '. $this->tag;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

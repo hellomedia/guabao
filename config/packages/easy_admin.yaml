@@ -1,0 +1,54 @@
+easy_admin:
+    site_name: Guabao
+    design:
+        menu:
+            - { entity: 'Video', icon: 'video'}
+            - { entity: 'Tag', icon: 'tag'}
+            - { entity: 'VideoTag'}
+    list:
+        actions:
+        - { name: 'show', icon: 'eye' }
+        - { name: 'edit', icon: 'pencil' }
+        - { name: 'delete', icon: 'trash' }
+    entities:
+        Video:
+            class: App\Entity\Video
+            label: Videos
+            controller: App\Controller\Admin\VideoController
+            list:
+                fields:
+                    - id
+                    - title
+                    - url
+                    - { property: 'tags', type: 'array' }
+            show:
+                fields:
+                    - id
+                    - title
+                    - slug
+                    - url
+                    - { property: 'tags', type: 'array' }
+            form:
+                fields:
+                    - title
+                    - url
+        Tag:
+            class: App\Entity\Tag
+            label: Tags
+            list:
+                sort: ['name', 'ASC']
+                fields:
+                    - id
+                    - name
+                    - { property: 'videos', type: 'array' }
+            show:
+                fields:
+                    - id
+                    - name
+                    - slug
+                    - { property: 'videos', type: 'array' }
+            form:
+                fields:
+                    - name
+        VideoTag:
+            class: App\Entity\VideoTag

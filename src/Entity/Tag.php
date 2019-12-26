@@ -23,9 +23,24 @@ class Tag
      */
     private $videoTags;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=50, unique=true)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->videoTags = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -39,6 +54,16 @@ class Tag
     public function getVideoTags(): Collection
     {
         return $this->videoTags;
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videoTags->map(function($videoTag) {
+            return $videoTag->getVideo();
+        });
     }
 
     public function addVideoTag(VideoTag $videoTag): self
@@ -60,6 +85,30 @@ class Tag
                 $videoTag->setTag(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

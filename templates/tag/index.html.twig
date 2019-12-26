@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Videos!{% endblock %}
+
+{% block body %}
+
+<h1>Tags</h1>
+
+{% for tag in tags %}
+    <div>
+        <p>
+            <a href="{{ path('tag_show', { slug: tag.slug }) }}">
+                {{ tag.name }}
+            </a>
+        </p>
+    </div>
+{% endfor %}
+
+{% endblock %}

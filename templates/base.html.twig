@@ -3,10 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        <style>
+            .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+            .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+            .menu { list-style-type: none; display: flex; margin: 10px 0; padding: 0;}
+            .menu li { margin: 0 15px 0 0; }
+        </style>
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="example-wrapper">
+            <ul class="menu">
+                <li>
+                    <a href="{{ path('video_index')}}">Videos</a>
+                </li>
+                <li>
+                    <a href="{{ path('tag_index')}}">Tags</a>
+                </li>
+            </ul>
+            {% block body %}{% endblock %}
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

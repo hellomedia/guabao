@@ -33,9 +33,19 @@ class Video
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $title;
+
     public function __construct()
     {
         $this->videoTags = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->title;
     }
 
     public function getId(): ?int
@@ -86,6 +96,16 @@ class Video
         return $this;
     }
 
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->videoTags->map(function($videoTag) {
+            return $videoTag->getTag();
+        });
+    }
+
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -94,6 +114,18 @@ class Video
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }
