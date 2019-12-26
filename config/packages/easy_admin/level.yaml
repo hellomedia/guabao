@@ -1,0 +1,16 @@
+easy_admin:
+    entities:
+        Level:
+            class: App\Entity\Level
+            list:
+                title: Levels
+                sort: ['displayOrder', 'ASC']
+            show:
+                - id
+                - label
+                - slug
+                - displayOrder
+            form:
+                fields:
+                    - label
+                    - displayOrder

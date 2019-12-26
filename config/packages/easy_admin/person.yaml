@@ -1,0 +1,10 @@
+easy_admin:
+    entities:
+        Person:
+            class: App\Entity\Person
+            list:
+                title: People
+                sort: ['name', 'ASC']
+            form:
+                fields:
+                    - name

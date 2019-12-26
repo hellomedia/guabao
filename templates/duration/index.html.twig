@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Duration{% endblock %}
+
+{% block body %}
+
+<h1>Durations</h1>
+
+{% for duration in durations %}
+    <div>
+        <p>
+            <a href="{{ path('duration_show', { slug: duration.slug }) }}">
+                {{ duration.label }} ({{ duration.videos|length }})
+            </a>
+        </p>
+    </div>
+{% endfor %}
+
+{% endblock %}

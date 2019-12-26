@@ -2,8 +2,11 @@ easy_admin:
     site_name: Guabao
     design:
         menu:
-            - { entity: 'Video', icon: 'video'}
-            - { entity: 'Tag', icon: 'tag'}
+            - { entity: 'Video', label: 'Videos', icon: 'video'}
+            - { entity: 'Tag', label: 'Tags', icon: 'tag'}
+            - { entity: 'Person', label: 'People', icon: 'user'}
+            - { entity: 'Level', label: 'Levels', icon: 'star'}
+            - { entity: 'Duration', label: 'Durations', icon: 'clock'}
             - { entity: 'VideoTag'}
     list:
         actions:

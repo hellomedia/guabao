@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Levels{% endblock %}
+
+{% block body %}
+
+<h1>Levels</h1>
+
+{% for level in levels %}
+    <div>
+        <p>
+            <a href="{{ path('level_show', { slug: level.slug }) }}">
+                {{ level.label }} ({{ level.videos|length }})
+            </a>
+        </p>
+    </div>
+{% endfor %}
+
+{% endblock %}

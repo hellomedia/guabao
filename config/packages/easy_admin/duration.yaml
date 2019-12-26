@@ -1,0 +1,16 @@
+easy_admin:
+    entities:
+        Duration:
+            class: App\Entity\Duration
+            list:
+                title: Durations
+                sort: ['displayOrder', 'ASC']
+            show:
+                - id
+                - label
+                - slug
+                - displayOrder
+            form:
+                fields:
+                    - label
+                    - displayOrder

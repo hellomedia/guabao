@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ tag.name }}{% endblock %}
+{% block title %}{{ level.name }}{% endblock %}
 
 {% block body %}
 
-<h1>{{ tag.name }}</h1>
+<h1>{{ level.name }}</h1>
 
-{% for video in tag.videos %}
+{% for video in level.videos %}
 <p>
     <iframe width="560" height="315"
         src="https://www.youtube.com/embed/{{ video.url }}" frameborder="0"
@@ -14,9 +14,9 @@
         allowfullscreen>
     </iframe>
     <ul class="tags">
-        {% for tag in video.tags %}
-            <li class="tag--tag">
-                <a href="{{ path('tag_show', { slug: tag.slug }) }}">{{ tag }}</a>
+        {% for level in video.levels %}
+            <li class="tag--level">
+                <a href="{{ path('level_show', { slug: level.slug }) }}">{{ level }}</a>
             </li>
         {% endfor %}
     </ul>

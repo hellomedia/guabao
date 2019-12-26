@@ -2,24 +2,31 @@ easy_admin:
     entities:
         Video:
             class: App\Entity\Video
-            label: Videos
             controller: App\Controller\Admin\VideoController
             list:
-                actions:
-                    - { name: 'new', label: 'Add Video' }
                 fields:
                     - id
                     - title
-                    - url
                     - { property: 'tags', type: 'array' }
+                    - people
+                    - duration
+                    - level
             show:
                 fields:
                     - id
                     - title
                     - slug
                     - url
+                    - description
                     - { property: 'tags', type: 'array' }
+                    - people
+                    - duration
+                    - level
             form:
                 fields:
                     - title
                     - url
+                    - description
+                    - { property: 'people', type_options: { by_reference: false} }
+                    - duration
+                    - level

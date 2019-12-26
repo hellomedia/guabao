@@ -33,6 +33,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
                 $slug = $this->slugger->slug($entity->getTitle());
             } elseif (method_exists($entity, 'getName')) {
                 $slug = $this->slugger->slug($entity->getName());
+            } elseif (method_exists($entity, 'getLabel')) {
+                $slug = $this->slugger->slug($entity->getLabel());
             }
 
             $entity->setSlug($slug);
