@@ -19,6 +19,13 @@ class TagRepository extends ServiceEntityRepository
         parent::__construct($registry, Tag::class);
     }
 
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    {
+        $orderBy ??= array('name' => 'asc');
+
+        return parent::findBy($criteria, $orderBy, $limit, $offset);
+    }
+    
     // /**
     //  * @return Tag[] Returns an array of Tag objects
     //  */

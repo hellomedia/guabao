@@ -17,13 +17,13 @@ class VideoTag
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Video", inversedBy="videoTags")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Video", inversedBy="videoTags", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $video;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Tag", inversedBy="videoTags")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Tag", inversedBy="videoTags", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $tag;

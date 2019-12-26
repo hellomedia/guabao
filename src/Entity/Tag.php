@@ -19,7 +19,7 @@ class Tag
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\VideoTag", mappedBy="tag", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\VideoTag", mappedBy="tag", orphanRemoval=true, fetch="EAGER")
      */
     private $videoTags;
 

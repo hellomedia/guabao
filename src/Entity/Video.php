@@ -24,7 +24,7 @@ class Video
     private $url;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\VideoTag", mappedBy="video", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\VideoTag", mappedBy="video", orphanRemoval=true, fetch="EAGER")
      */
     private $videoTags;
 

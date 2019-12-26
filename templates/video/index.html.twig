@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Videos!{% endblock %}
+{% block title %}Videos{% endblock %}
 
 {% block body %}
 <h1>Videos</h1>
@@ -11,6 +11,13 @@
             <a href="{{ path('video_show', { slug: video.slug }) }}">
                 {{ video.title }}
             </a>
+            <ul class="tags">
+                {% for tag in video.tags %}
+                    <li>
+                        <a href="{{ path('tag_show', { slug: tag.slug }) }}">{{ tag }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
         </p>
     </div>
 {% endfor %}

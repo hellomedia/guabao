@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Videos!{% endblock %}
+{% block title %}Tags{% endblock %}
 
 {% block body %}
 
@@ -10,7 +10,7 @@
     <div>
         <p>
             <a href="{{ path('tag_show', { slug: tag.slug }) }}">
-                {{ tag.name }}
+                {{ tag.name }} ({{ tag.videos|length }})
             </a>
         </p>
     </div>

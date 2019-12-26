@@ -13,6 +13,13 @@
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
     </iframe>
+    <ul class="tags">
+        {% for tag in video.tags %}
+            <li>
+                <a href="{{ path('tag_show', { slug: tag.slug }) }}">{{ tag }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 </p>
 {% endfor %}
 
