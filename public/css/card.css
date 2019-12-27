@@ -1,0 +1,22 @@
+.card {
+    background-color: #fff;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card a {
+    color: black;
+    text-decoration: none;
+}
+.card img {
+    margin-top: -15px;
+    margin-left: -15px;
+    height: 200px;
+}
+.card h3 {
+    font-size: 15px;
+}
+.card .tags {
+    align-self: flex-end;
+}

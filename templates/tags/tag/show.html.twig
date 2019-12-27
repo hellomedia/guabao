@@ -2,19 +2,12 @@
 
 {% block title %}{{ tag.name }}{% endblock %}
 
+{% block body_class 'floating-cards' %}
+
 {% block body %}
 
 <h1>{{ tag.name }}</h1>
 
-{% for video in tag.videos %}
-<p>
-    <iframe width="560" height="315"
-        src="https://www.youtube.com/embed/{{ video.url }}" frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-    </iframe>
-    {% include 'tags/tags.html.twig' %}
-</p>
-{% endfor %}
+{% include 'video/list.html.twig' with {'videos': tag.videos} %}
 
 {% endblock %}

@@ -1,0 +1,28 @@
+.menu {
+    list-style-type: none;
+    display: flex;
+    margin: 10px 0;
+    padding: 0;
+}
+.menu > li {
+    margin: 0 25px 0 0;
+}
+.menu > li > a {
+    color: black;
+    text-decoration: none;
+}
+.menu > li > a.tag {
+    border-bottom: 4px solid green;
+}
+.menu > li > a.person {
+    border-bottom: 4px solid black;
+}
+.menu > li > a.level {
+    border-bottom: 4px solid orange;
+}
+.menu > li > a.duration {
+    border-bottom: 4px solid purple;
+}
+.menu > li > a.channel {
+    border-bottom: 4px solid red;
+}

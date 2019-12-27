@@ -2,18 +2,11 @@
 
 {% block title %}Videos{% endblock %}
 
+{% block body_class 'floating-cards' %}
+
 {% block body %}
 <h1>Videos</h1>
 
-{% for video in videos %}
-    <div>
-        <p>
-            <a href="{{ path('video_show', { slug: video.slug }) }}">
-                {{ video.title }}
-            </a>
-            {% include 'tags/tags.html.twig' %}
-        </p>
-    </div>
-{% endfor %}
+{% include 'video/list.html.twig' %}
 
 {% endblock %}

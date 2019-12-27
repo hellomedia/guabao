@@ -2,47 +2,40 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Tube.Info{% endblock %}</title>
         {% block stylesheets %}
-        <link href="/css/font-awesome/css/all.css" rel="stylesheet">
-        <style>
-            .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-            .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-            .menu { list-style-type: none; display: flex; margin: 10px 0; padding: 0;}
-            .menu > li { margin: 0 25px 0 0; }
-            .menu > li > a { color: black; text-decoration: none; }
-            .menu > li > a.tag { border-bottom: 4px solid green}
-            .menu > li > a.person { border-bottom: 4px solid black}
-            .menu > li > a.level { border-bottom: 4px solid orange}
-            .menu > li > a.duration { border-bottom: 4px solid purple}
-            .tags { list-style-type: none; display: flex; margin: 0; padding: 0;}
-            .tags > li { padding: 3px 15px; color: white; margin: 0 15px 15px 0;}
-            .tags > li > a { color: white; text-decoration: none; font-size: 15px;}
-            .tags > li > a i { margin-right: 5px; }
-            .tag--tag { background-color: green; }
-            .tag--person { background-color: black; }
-            .tag--level { background-color: orange; }
-            .tag--duration { background-color: purple; }
-        </style>
+        <link href="{{ asset('css/font-awesome/css/all.css')}}" rel="stylesheet">
+        <link href="{{ asset('css/layout.css')}}" rel="stylesheet">
+        <link href="{{ asset('css/menu.css')}}" rel="stylesheet">
+        <link href="{{ asset('css/tags.css')}}" rel="stylesheet">
+        <link href="{{ asset('css/card.css')}}" rel="stylesheet">
         {% endblock %}
     </head>
-    <body>
+    <body class="{% block body_class '' %}">
         <div class="example-wrapper">
             <ul class="menu">
                 <li>
                     <a href="{{ path('video_index')}}">Videos</a>
                 </li>
                 <li>
+                    <i class="fab fa-youtube"></i>
+                    <a class="channel" href="{{ path('channel_index')}}">Channel</a>
+                </li>
+                <li>
+                    <i class="fas fa-user"></i>
                     <a class="person" href="{{ path('person_index')}}">People</a>
                 </li>
                 <li>
-                    <a class="duration" href="{{ path('duration_index')}}">Durations</a>
+                    <i class="fas fa-clock"></i>
+                    <a class="duration" href="{{ path('duration_index')}}">Duration</a>
                 </li>
                 <li>
-                    <a class="level" href="{{ path('level_index')}}">Levels</a>
+                    <i class="fas fa-star"></i>
+                    <a class="level" href="{{ path('level_index')}}">Level</a>
                 </li>
                 <li>
-                    <a class="tag" href="{{ path('tag_index')}}">Tags</a>
+                    <i class="fas fa-tags"></i>
+                    <a class="tag" href="{{ path('tag_index')}}">Tag</a>
                 </li>
             </ul>
             {% block body %}{% endblock %}

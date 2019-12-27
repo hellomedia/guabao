@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Channels{% endblock %}
+
+{% block body %}
+
+<h1>Channels</h1>
+
+{% for channel in channels %}
+    <div>
+        <p>
+            <a href="{{ path('channel_show', { slug: channel.slug }) }}">
+                {{ channel.name }} ({{ channel.videos|length }})
+            </a>
+        </p>
+    </div>
+{% endfor %}
+
+{% endblock %}

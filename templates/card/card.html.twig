@@ -1,0 +1,7 @@
+<div class="item card">
+    <a href="{{ path('video_show', { slug: video.slug }) }}">
+        <img src="http://lorempixel.com/320/200/city/{{ random(1, 10) }}" />
+        <h3>{{ video.title }}</h3>
+    </a>
+    {% include 'tags/tags.html.twig' %}
+</div>
