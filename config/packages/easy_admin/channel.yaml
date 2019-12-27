@@ -1,0 +1,12 @@
+easy_admin:
+    entities:
+        Channel:
+            class: App\Entity\Channel
+            list:
+                title: Channels
+                sort: ['name', 'ASC']
+            form:
+                fields:
+                    - name
+                    - url
+                    - description

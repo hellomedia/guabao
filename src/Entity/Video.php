@@ -68,6 +68,11 @@ class Video
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Channel", inversedBy="videos")
+     */
+    private $channel;
+
     public function __construct()
     {
         $this->videoTags = new ArrayCollection();
@@ -245,6 +250,18 @@ class Video
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getChannel(): ?Channel
+    {
+        return $this->channel;
+    }
+
+    public function setChannel(?Channel $channel): self
+    {
+        $this->channel = $channel;
 
         return $this;
     }

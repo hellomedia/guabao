@@ -8,6 +8,7 @@ easy_admin:
                     - id
                     - createdAt
                     - title
+                    - channel
                     - { property: 'tags', type: 'array' }
                     - people
                     - duration
@@ -20,6 +21,7 @@ easy_admin:
                     - createdAt
                     - updatedAt
                     - url
+                    - channel
                     - description
                     - { property: 'tags', type: 'array' }
                     - people
@@ -29,7 +31,7 @@ easy_admin:
                 fields:
                     - title
                     - url
-                    - createdAt
+                    - channel
                     - description
                     - { property: 'people', type_options: { by_reference: false} }
                     - duration

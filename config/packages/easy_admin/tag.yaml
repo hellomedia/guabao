@@ -2,10 +2,7 @@ easy_admin:
     entities:
         Tag:
             class: App\Entity\Tag
-            label: Tags
             list:
-                actions:
-                    - { name: 'new', label: 'Add Tag' }
                 sort: ['name', 'ASC']
                 fields:
                     - id
