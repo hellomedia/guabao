@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ duration.name }}{% endblock %}
+{% block title %}{{ duration.label }}{% endblock %}
 
 {% block body %}
 
-<h1>{{ duration.name }}</h1>
+<h1>{{ duration.label }}</h1>
 
 {% for video in duration.videos %}
 <p>
@@ -13,13 +13,7 @@
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
     </iframe>
-    <ul class="tags">
-        {% for duration in video.durations %}
-            <li class="tag--duration">
-                <a href="{{ path('duration_show', { slug: duration.slug }) }}">{{ duration }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    {% include 'tags/tags.html.twig' %}
 </p>
 {% endfor %}
 

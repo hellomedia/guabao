@@ -17,10 +17,17 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
-            'easy_admin.pre_persist' => array('setSlug'),
-            'easy_admin.pre_update' => array('setSlug'),
-        );
+        return [
+            'easy_admin.pre_persist' => [
+                ['setSlug', 10],
+                ['setCreatedAt', 11],
+                ['setUpdatedAt', 12],
+            ],
+            'easy_admin.pre_update' => [
+                ['setSlug', 10],
+                ['setUpdatedAt', 12],
+            ]
+        ];
     }
 
     public function setSlug(GenericEvent $event)
@@ -38,6 +45,30 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             }
 
             $entity->setSlug($slug);
+
+            $event['entity'] = $entity;
+        }
+    }
+
+    public function setCreatedAt(GenericEvent $event)
+    {
+        $entity = $event->getSubject();
+
+        if (method_exists($entity, 'setCreatedAt')) {
+
+            $entity->setCreatedAt(new \Datetime());
+
+            $event['entity'] = $entity;
+        }
+    }
+
+    public function setUpdatedAt(GenericEvent $event)
+    {
+        $entity = $event->getSubject();
+
+        if (method_exists($entity, 'setUpdatedAt')) {
+
+            $entity->setUpdatedAt(new \Datetime());
 
             $event['entity'] = $entity;
         }

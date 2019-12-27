@@ -21,17 +21,27 @@ class Person
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $name;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
     private $slug;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Video", inversedBy="people", cascade="persist")
      */
     private $videos;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $firstname;
 
     public function __construct()
     {
@@ -40,7 +50,7 @@ class Person
 
     public function __toString(): string
     {
-        return $this->name;
+        return $this->getName();
     }
 
     public function getId(): ?int
@@ -50,14 +60,7 @@ class Person
 
     public function getName(): ?string
     {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
+        return $this->firstname.' '. $this->lastname;
     }
 
     public function getSlug(): ?string
@@ -94,6 +97,42 @@ class Person
         if ($this->videos->contains($video)) {
             $this->videos->removeElement($video);
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(?string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(?string $firstname): self
+    {
+        $this->firstname = $firstname;
 
         return $this;
     }

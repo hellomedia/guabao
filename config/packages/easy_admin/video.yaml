@@ -6,6 +6,7 @@ easy_admin:
             list:
                 fields:
                     - id
+                    - createdAt
                     - title
                     - { property: 'tags', type: 'array' }
                     - people
@@ -16,6 +17,8 @@ easy_admin:
                     - id
                     - title
                     - slug
+                    - createdAt
+                    - updatedAt
                     - url
                     - description
                     - { property: 'tags', type: 'array' }
@@ -26,6 +29,7 @@ easy_admin:
                 fields:
                     - title
                     - url
+                    - createdAt
                     - description
                     - { property: 'people', type_options: { by_reference: false} }
                     - duration

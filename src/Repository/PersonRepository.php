@@ -19,6 +19,13 @@ class PersonRepository extends ServiceEntityRepository
         parent::__construct($registry, Person::class);
     }
 
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    {
+        $orderBy ??= array('lastname' => 'asc');
+
+        return parent::findBy($criteria, $orderBy, $limit, $offset);
+    }
+
     // /**
     //  * @return Person[] Returns an array of Person objects
     //  */

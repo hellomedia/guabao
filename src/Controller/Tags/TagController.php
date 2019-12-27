@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Tags;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +17,7 @@ class TagController extends AbstractController
         $repository = $em->getRepository(Tag::class);
         $tags = $repository->findAll();
 
-        return $this->render('tag/index.html.twig', [
+        return $this->render('tags/tag/index.html.twig', [
             'tags' => $tags,
         ]);
     }
@@ -30,7 +30,7 @@ class TagController extends AbstractController
         $repository = $em->getRepository(Tag::class);
         $tag = $repository->findOneBySlug($slug);
 
-        return $this->render('tag/show.html.twig', [
+        return $this->render('tags/tag/show.html.twig', [
             'tag' => $tag,
         ]);
     }

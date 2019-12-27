@@ -6,6 +6,12 @@
 
 <h1>{{ person.name }}</h1>
 
+<p>
+    {{ person.description|nl2br }}
+</p>
+
+<h2>Vidéos</h2>
+
 {% for video in person.videos %}
 <p>
     <iframe width="560" height="315"
@@ -13,13 +19,7 @@
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
     </iframe>
-    <ul class="tags">
-        {% for person in video.people %}
-            <li class="tag--person">
-                <a href="{{ path('person_show', { slug: person.slug }) }}">{{ person }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    {% include 'tags/tags.html.twig' %}
 </p>
 {% endfor %}
 

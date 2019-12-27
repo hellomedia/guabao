@@ -1,0 +1,28 @@
+<ul class="tags">
+    {% for person in video.people %}
+    <li class="tag--person">
+        <a href="{{ path('person_show', { slug: person.slug }) }}">
+            <i class="fas fa-user"></i> {{ person }}
+        </a>
+    </li>
+    {% endfor %}
+    {% if video.level %}
+        <li class="tag--level">
+            <a href="{{ path('level_show', { slug: video.level.slug }) }}">
+                <i class="fas fa-star"></i> {{ video.level }}
+            </a>
+        </li>
+    {% endif %}
+    {% if video.duration %}
+        <li class="tag--duration">
+            <a href="{{ path('duration_show', { slug: video.duration.slug }) }}">
+                <i class="fas fa-clock"></i> {{ video.duration }}
+            </a>
+        </li>
+    {% endif %}
+    {% for tag in video.tags %}
+    <li class="tag--tag">
+        <a href="{{ path('tag_show', { slug: tag.slug }) }}">{{ tag }}</a>
+    </li>
+    {% endfor %}
+</ul>

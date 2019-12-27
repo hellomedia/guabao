@@ -19,6 +19,13 @@ class DurationRepository extends ServiceEntityRepository
         parent::__construct($registry, Duration::class);
     }
 
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    {
+        $orderBy ??= array('displayOrder' => 'asc');
+
+        return parent::findBy($criteria, $orderBy, $limit, $offset);
+    }
+
     // /**
     //  * @return Duration[] Returns an array of Duration objects
     //  */

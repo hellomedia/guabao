@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Tags;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +17,7 @@ class DurationController extends AbstractController
         $repository = $em->getRepository(Duration::class);
         $durations = $repository->findAll();
 
-        return $this->render('duration/index.html.twig', [
+        return $this->render('tags/duration/index.html.twig', [
             'durations' => $durations,
         ]);
     }
@@ -30,7 +30,7 @@ class DurationController extends AbstractController
         $repository = $em->getRepository(Duration::class);
         $duration = $repository->findOneBySlug($slug);
 
-        return $this->render('duration/show.html.twig', [
+        return $this->render('tags/duration/show.html.twig', [
             'duration' => $duration,
         ]);
     }

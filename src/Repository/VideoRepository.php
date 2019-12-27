@@ -19,6 +19,13 @@ class VideoRepository extends ServiceEntityRepository
         parent::__construct($registry, Video::class);
     }
 
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    {
+        $orderBy ??= array('createdAt' => 'desc');
+
+        return parent::findBy($criteria, $orderBy, $limit, $offset);
+    }
+
     // /**
     //  * @return Video[] Returns an array of Video objects
     //  */

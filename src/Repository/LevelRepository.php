@@ -19,6 +19,13 @@ class LevelRepository extends ServiceEntityRepository
         parent::__construct($registry, Level::class);
     }
 
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    {
+        $orderBy ??= array('displayOrder' => 'asc');
+
+        return parent::findBy($criteria, $orderBy, $limit, $offset);
+    }
+
     // /**
     //  * @return Level[] Returns an array of Level objects
     //  */

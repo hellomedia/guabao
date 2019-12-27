@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Tags;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +17,7 @@ class LevelController extends AbstractController
         $repository = $em->getRepository(Level::class);
         $levels = $repository->findAll();
 
-        return $this->render('level/index.html.twig', [
+        return $this->render('tags/level/index.html.twig', [
             'levels' => $levels,
         ]);
     }
@@ -30,7 +30,7 @@ class LevelController extends AbstractController
         $repository = $em->getRepository(Level::class);
         $level = $repository->findOneBySlug($slug);
 
-        return $this->render('level/show.html.twig', [
+        return $this->render('tags/level/show.html.twig', [
             'level' => $level,
         ]);
     }

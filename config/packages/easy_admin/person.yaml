@@ -4,7 +4,14 @@ easy_admin:
             class: App\Entity\Person
             list:
                 title: People
-                sort: ['name', 'ASC']
+                sort: ['lastname', 'ASC']
+                fields:
+                    - id
+                    - firstname
+                    - lastname
+                    - videos
             form:
                 fields:
-                    - name
+                    - firstname
+                    - lastname
+                    - description
