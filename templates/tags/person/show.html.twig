@@ -8,6 +8,8 @@
 
 <h1>{{ person.name }}</h1>
 
+<img src="{{ vich_uploader_asset(person, 'imageFile') }}" alt="{{ person.name }}" />
+
 <p>
     {{ person.description|nl2br }}
 </p>

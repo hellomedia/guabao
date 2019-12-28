@@ -9,9 +9,21 @@ easy_admin:
                     - id
                     - firstname
                     - lastname
+                    - { property: 'image', type: 'image', base_path: '%app.path.people_images%' }
+                    - videos
+            show:
+                fields:
+                    - id
+                    - updatedAt
+                    - firstname
+                    - lastname
+                    - slug
+                    - { property: 'image', type: 'image', base_path: '%app.path.people_images%' }
+                    - description
                     - videos
             form:
                 fields:
                     - firstname
                     - lastname
                     - description
+                    - { property: 'imageFile', type: 'vich_image' }

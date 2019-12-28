@@ -17,3 +17,7 @@ body.floating-cards {
 .item {
 
 }
+
+img {
+    max-width: 100%;
+}
