@@ -9,7 +9,7 @@ easy_admin:
                     - createdAt
                     - title
                     - channel
-                    - { property: 'tags', type: 'array' }
+                    - tags
                     - people
                     - duration
                     - level
@@ -23,7 +23,7 @@ easy_admin:
                     - url
                     - channel
                     - description
-                    - { property: 'tags', type: 'array' }
+                    - tags
                     - people
                     - duration
                     - level
@@ -34,5 +34,6 @@ easy_admin:
                     - channel
                     - description
                     - { property: 'people', type_options: { by_reference: false} }
+                    - { property: 'tags', type_options: { by_reference: false} }
                     - duration
                     - level

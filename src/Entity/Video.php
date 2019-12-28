@@ -24,11 +24,6 @@ class Video
     private $url;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\VideoTag", mappedBy="video", orphanRemoval=true, fetch="EAGER")
-     */
-    private $videoTags;
-
-    /**
      * @ORM\Column(type="string", length=100, unique=true)
      */
     private $slug;
@@ -73,10 +68,15 @@ class Video
      */
     private $channel;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="videos")
+     */
+    private $tags;
+
     public function __construct()
     {
-        $this->videoTags = new ArrayCollection();
         $this->people = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -99,47 +99,6 @@ class Video
         $this->url = $url;
 
         return $this;
-    }
-
-    /**
-     * @return Collection|VideoTag[]
-     */
-    public function getVideoTags(): Collection
-    {
-        return $this->videoTags;
-    }
-
-    public function addVideoTag(VideoTag $videoTag): self
-    {
-        if (!$this->videoTags->contains($videoTag)) {
-            $this->videoTags[] = $videoTag;
-            $videoTag->setVideo($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVideoTag(VideoTag $videoTag): self
-    {
-        if ($this->videoTags->contains($videoTag)) {
-            $this->videoTags->removeElement($videoTag);
-            // set the owning side to null (unless already changed)
-            if ($videoTag->getVideo() === $this) {
-                $videoTag->setVideo(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Tag[]
-     */
-    public function getTags(): Collection
-    {
-        return $this->videoTags->map(function($videoTag) {
-            return $videoTag->getTag();
-        });
     }
 
     public function getSlug(): ?string
@@ -262,6 +221,32 @@ class Video
     public function setChannel(?Channel $channel): self
     {
         $this->channel = $channel;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+        }
 
         return $this;
     }

@@ -4,16 +4,6 @@ easy_admin:
             class: App\Entity\Tag
             list:
                 sort: ['name', 'ASC']
-                fields:
-                    - id
-                    - name
-                    - { property: 'videos', type: 'array' }
-            show:
-                fields:
-                    - id
-                    - name
-                    - slug
-                    - { property: 'videos', type: 'array' }
             form:
                 fields:
                     - name

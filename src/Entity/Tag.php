@@ -19,11 +19,6 @@ class Tag
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\VideoTag", mappedBy="tag", orphanRemoval=true, fetch="EAGER")
-     */
-    private $videoTags;
-
-    /**
      * @ORM\Column(type="string", length=50)
      */
     private $name;
@@ -33,9 +28,14 @@ class Tag
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Video", mappedBy="tags")
+     */
+    private $videos;
+
     public function __construct()
     {
-        $this->videoTags = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -46,47 +46,6 @@ class Tag
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|VideoTag[]
-     */
-    public function getVideoTags(): Collection
-    {
-        return $this->videoTags;
-    }
-
-    /**
-     * @return Collection|Video[]
-     */
-    public function getVideos(): Collection
-    {
-        return $this->videoTags->map(function($videoTag) {
-            return $videoTag->getVideo();
-        });
-    }
-
-    public function addVideoTag(VideoTag $videoTag): self
-    {
-        if (!$this->videoTags->contains($videoTag)) {
-            $this->videoTags[] = $videoTag;
-            $videoTag->setTag($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVideoTag(VideoTag $videoTag): self
-    {
-        if ($this->videoTags->contains($videoTag)) {
-            $this->videoTags->removeElement($videoTag);
-            // set the owning side to null (unless already changed)
-            if ($videoTag->getTag() === $this) {
-                $videoTag->setTag(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -109,6 +68,34 @@ class Tag
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->addTag($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->videos->contains($video)) {
+            $this->videos->removeElement($video);
+            $video->removeTag($this);
+        }
 
         return $this;
     }

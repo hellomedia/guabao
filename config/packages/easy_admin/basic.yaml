@@ -8,13 +8,9 @@ easy_admin:
             - { entity: 'Person', label: 'People', icon: 'user'}
             - { entity: 'Level', icon: 'star'}
             - { entity: 'Duration', icon: 'clock'}
-            - { entity: 'VideoTag'}
     list:
         actions:
         - { name: 'show', icon: 'eye' }
         - { name: 'edit', icon: 'pencil' }
         - { name: 'delete', icon: 'trash' }
         collapse_actions: true
-    entities:
-        VideoTag:
-            class: App\Entity\VideoTag
