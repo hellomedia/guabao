@@ -12,17 +12,17 @@
     text-decoration: none;
 }
 .menu > li > a.tag {
-    border-bottom: 4px solid green;
+    border-bottom: 4px solid $tagColor;
 }
 .menu > li > a.person {
-    border-bottom: 4px solid black;
+    border-bottom: 4px solid $personColor;
 }
 .menu > li > a.level {
-    border-bottom: 4px solid orange;
+    border-bottom: 4px solid $levelColor;
 }
 .menu > li > a.duration {
-    border-bottom: 4px solid purple;
+    border-bottom: 4px solid $durationColor;
 }
 .menu > li > a.channel {
-    border-bottom: 4px solid red;
+    border-bottom: 4px solid $channelColor;
 }

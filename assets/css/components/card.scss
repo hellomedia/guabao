@@ -1,6 +1,8 @@
+$cardPadding: 15px;
+
 .card {
     background-color: #fff;
-    padding: 15px;
+    padding: $cardPadding;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -10,8 +12,9 @@
     text-decoration: none;
 }
 .card img {
-    margin-top: -15px;
-    margin-left: -15px;
+    margin-top: -$cardPadding;
+    margin-left: -$cardPadding;
+    margin-right: -$cardPadding;
     height: 200px;
     max-width: 320px;
 }

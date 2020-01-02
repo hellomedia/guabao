@@ -1,17 +1,18 @@
+$tagSpacing: 10px;
+$tagPadding: 15px;
+
 .tags {
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
-    margin: 0;
-    margin-bottom: -10px;
-    margin-right: -10px;
+    margin: 0 -#{$tagSpacing} -#{$tagSpacing} 0;
     padding: 0;
 }
 .tags > li {
-    margin: 0 10px 10px 0;
+    margin: 0 $tagSpacing $tagSpacing 0;
 }
 .tags > li > a {
-    padding: 3px 15px;
+    padding: 3px $tagPadding;
     color: white;
     text-decoration: none;
     font-size: 13px;
@@ -22,17 +23,17 @@
     margin-right: 5px;
 }
 .tag--channel {
-    background-color: red;
+    background-color: $channelColor;
 }
 .tag--tag {
-    background-color: green;
+    background-color: $tagColor;
 }
 .tag--person {
-    background-color: black;
+    background-color: $personColor;
 }
 .tag--level {
-    background-color: orange;
+    background-color: $levelColor;
 }
 .tag--duration {
-    background-color: purple;
+    background-color: $durationColor;
 }
