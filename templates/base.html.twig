@@ -10,35 +10,8 @@
     </head>
     <body class="{% block body_class '' %}">
         <div class="example-wrapper">
-            <ul class="menu">
-                <li>
-                    <a href="{{ path('video_index')}}">Videos</a>
-                </li>
-                <li>
-                    <i class="fab fa-youtube"></i>
-                    <a class="channel" href="{{ path('channel_index')}}">Channel</a>
-                </li>
-                <li>
-                    <i class="fas fa-user"></i>
-                    <a class="person" href="{{ path('person_index')}}">People</a>
-                </li>
-                <li>
-                    <i class="fas fa-clock"></i>
-                    <a class="duration" href="{{ path('duration_index')}}">Duration</a>
-                </li>
-                <li>
-                    <i class="fas fa-star"></i>
-                    <a class="level" href="{{ path('level_index')}}">Level</a>
-                </li>
-                <li>
-                    <i class="fas fa-tags"></i>
-                    <a class="tag" href="{{ path('tag_index')}}">Tag</a>
-                </li>
-                <li>
-                    <i class="fas fa-school"></i>
-                    <a class="" href="">Les Bases</a>
-                </li>
-            </ul>
+            {% include 'layout/menu.html.twig' %}
+
             {% block body %}{% endblock %}
         </div>
         {% block javascripts %}

@@ -2,34 +2,36 @@
     {% for person in video.people %}
         <li class="tag--person">
             <a href="{{ path('person_show', { slug: person.slug }) }}">
-                <i class="fas fa-user"></i> {{ person }}
+                <i class="fa fa-user"></i> {{ person }}
             </a>
         </li>
     {% endfor %}
     {% if video.channel %}
         <li class="tag--channel">
             <a href="{{ path('channel_show', { slug: video.channel.slug }) }}">
-                <i class="fas fa-play-circle"></i> {{ video.channel }}
+                <i class="fa fa-play-circle"></i> {{ video.channel }}
             </a>
         </li>
     {% endif %}
     {% if video.level %}
         <li class="tag--level">
             <a href="{{ path('level_show', { slug: video.level.slug }) }}">
-                <i class="fas fa-star"></i> {{ video.level }}
+                <i class="fa fa-star"></i> {{ video.level }}
             </a>
         </li>
     {% endif %}
     {% if video.duration %}
         <li class="tag--duration">
             <a href="{{ path('duration_show', { slug: video.duration.slug }) }}">
-                <i class="fas fa-clock"></i> {{ video.duration }}
+                <i class="fa fa-clock-o"></i> {{ video.duration }}
             </a>
         </li>
     {% endif %}
     {% for tag in video.tags %}
         <li class="tag--tag">
-            <a href="{{ path('tag_show', { slug: tag.slug }) }}">{{ tag }}</a>
+            <a href="{{ path('tag_show', { slug: tag.slug }) }}">
+                <i class="fa fa-tags"></i> {{ tag }}
+            </a>
         </li>
     {% endfor %}
 </ul>
