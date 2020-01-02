@@ -10,6 +10,9 @@
         "sass-loader": "^7.3.1",
         "ts-loader": "^5.4.5",
         "typescript": "^3.7.4",
+        "vue": "^2.6.11",
+        "vue-loader": "^15.8.3",
+        "vue-template-compiler": "^2.6.11",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
