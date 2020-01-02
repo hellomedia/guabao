@@ -36,17 +36,17 @@ class Video
     private $title;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Person", mappedBy="videos", cascade="persist", fetch="EAGER")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Person", mappedBy="videos", cascade="persist")
      */
     private $people;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Level", inversedBy="videos", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Level", inversedBy="videos")
      */
     private $level;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Duration", inversedBy="videos", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Duration", inversedBy="videos")
      */
     private $duration;
 

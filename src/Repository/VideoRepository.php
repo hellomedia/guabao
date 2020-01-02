@@ -26,6 +26,24 @@ class VideoRepository extends ServiceEntityRepository
         return parent::findBy($criteria, $orderBy, $limit, $offset);
     }
 
+    public function findAll()
+    {
+        $dql = "
+            SELECT v, t, p, l, d, c
+            FROM App\Entity\Video v
+            LEFT JOIN v.tags t
+            LEFT JOIN v.people p
+            LEFT JOIN v.level l
+            LEFT JOIN v.duration d
+            LEFT JOIN v.channel c
+            ORDER BY v.createdAt DESC
+            ";
+
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        return $query->getResult();
+    }
+
     // /**
     //  * @return Video[] Returns an array of Video objects
     //  */
