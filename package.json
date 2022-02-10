@@ -4,7 +4,7 @@
         "autoprefixer": "^9.7.3",
         "core-js": "^3.0.0",
         "font-awesome": "^4.7.0",
-        "node-sass": "^4.13.0",
+        "node-sass": "^7.0.0",
         "postcss-loader": "^3.0.0",
         "regenerator-runtime": "^0.13.2",
         "sass-loader": "^7.3.1",
