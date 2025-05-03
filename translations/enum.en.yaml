@@ -1,0 +1,19 @@
+month:
+    january: January
+    february: February
+    march: March
+    april: April
+    may: May
+    june: June
+    july: July
+    august: August
+    september: September
+    october: October
+    november: November
+    december: December
+level:
+    1: 1
+    2: 2
+    3: 3
+    4: 4
+    5: 5

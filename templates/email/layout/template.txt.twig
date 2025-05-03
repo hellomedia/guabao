@@ -1,0 +1,32 @@
+{% autoescape 'html' %}
+
+{% set language = language is defined ? language : app.locale %}
+
+{% block header %}
+{{ 'Hello'|trans(locale=language)}} {{ name }},
+
+{% endblock %}
+
+{% block content '' %}
+
+
+{% block footer %}
+
+{# {{ 'email.signature.line1'|trans({'%site%': siteName}, locale=language)
+     }}
+
+{{ 'email.signature.line2'|trans({'%site%': siteUrl}, locale=language)
+     }}
+
+
+=====
+
+{{ 'email.signature.line3'|trans({
+     '%date%': "now"|format_datetime('full', 'none', locale=language),
+     '%time%': "now"|format_datetime('none', 'short', locale=language)},
+     locale=language)
+}} #}
+
+{% endblock %}
+
+{% endautoescape %}

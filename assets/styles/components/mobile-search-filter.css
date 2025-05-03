@@ -1,0 +1,120 @@
+@layer components {
+
+    #mobile-filter-btn {
+        z-index: 200;
+        background-color: var(--color-button-primary);
+        width: 70px;
+        height: 70px;
+        border-radius: 35px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-content: center;
+        position: fixed;
+        right: 8px;
+        bottom: 100px;
+        @media (min-width: theme(--breakpoint-bottom-menu)) {
+            right: 12px;
+            top: 77px;
+            bottom: auto;
+        }
+        @media (min-width: theme(--breakpoint-contextual-menu)) {
+            @apply hidden;
+        }
+    }
+
+    #mobile-filter-btn-icon {
+        color: white;
+        @apply w-7;
+    }
+
+    #mobile-filter-menu-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100dvh;
+        width: 100dvw;
+        
+        /* Add will-change for better performance */
+        will-change: transform, opacity;
+
+        /* Containment for browser optimization */
+        contain: strict;
+
+        /* handle z-index in stimulus controller */
+
+        &.open {
+            /* handle z-index change in stimulus controller */
+        }
+    }
+
+    #mobile-filter-menu-backdrop {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        @apply inset-0;
+        @apply bg-black/25;
+        
+        /* TRANSITION */
+
+        transition: opacity; /* transition on opacity only */
+        transition-duration: 300ms;
+        transition-timing-function: var(--bezier-easing);
+        /* transition-timing-function: var(--default-transition-timing-function); */
+        
+        opacity: 0;
+
+        #mobile-filter-menu-container.open & {
+            opacity: 1; 
+        }
+    }
+
+    #mobile-filter-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100dvh;
+        width: var(--container-xs);
+        overflow-y: auto;
+        @apply pb-6;
+
+        background-color: var(--color-drawer-background);
+        color: var(--color-drawer-text);
+
+        display: flex;
+        flex-direction: column;
+    
+        /* TRANSITION */
+
+        translate: var(--container-xs) 0;
+        opacity: 0.8;
+
+        transition-property: all;
+        transition-duration: 300ms;
+        transition-timing-function: var(--bezier-easing);
+        /* transition-timing-function: var(--default-transition-timing-function); */
+
+        #mobile-filter-menu-container.open & {
+            translate: 0 0;
+            opacity: 1;
+        }
+    }
+
+    #mobile-filter-menu-header {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-items: start;
+        @apply h-16;
+        @apply pe-4;
+    }
+    
+    #mobile-filter-menu-grab-vertical-icon {
+        width: 20px;
+        margin-right: 10px;
+        margin-left: 5px;
+        color: var(--color-gray-300);
+    }
+}

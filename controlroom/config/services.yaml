@@ -1,0 +1,18 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $googleBackendApiKey: '%google_backend_api_key%'
+            $googleMapsJsApiKey: '%google_maps_js_api_key%'
+
+    # makes classes in sites/controlroom/src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    Controlroom\:
+        resource: '../src/'
+        exclude:
+            - '../src/Utils/'

@@ -1,0 +1,31 @@
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+
+# parameters can be arrays but only the top variable is the parameter
+# ie : you cannot pass an array item to services, you must pass the whole parameter
+# https://symfony.com/doc/current/service_container/parameters.html
+
+parameters:
+
+    # Performance: Dump service container into single file
+    # https://symfony.com/doc/current/performance.html#dump-the-service-container-into-a-single-file
+    .container.dumper.inline_factories: true
+
+    site_name: 'Guabao'
+    email_domain: 'guabao.be'
+    host: '%env(HOST)%'
+    host_controlroom: '%env(HOST_CONTROLROOM)%'
+
+    default_locale: 'fr'
+    locales: ['fr', 'en']
+
+    uploads_dir: 'uploads'
+    uploads_base_url: '/%uploads_dir%'
+
+    google_backend_api_key: '%env(GOOGLE_BACKEND_API_KEY)%'
+    google_maps_js_api_key: '%env(GOOGLE_MAPS_JS_API_KEY)%'
+
+    # small banner on top of the page warning of maintenance coming up soon
+    maintenance_warning: false
+    # set to true when experiencing deliverability issues
+    deliverability_issues: false

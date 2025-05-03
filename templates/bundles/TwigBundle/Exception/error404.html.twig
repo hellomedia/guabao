@@ -1,0 +1,24 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'layout/layout_error.html.twig' %}
+
+{% block title %}
+    <h1>{{ 'page_not_found.title'|trans(domain='security') }}</h1>
+{% endblock %}
+
+{% block burger_nav_main '' %}
+
+{% block primary_nav_registration '' %}
+
+{% block primary_nav_user '' %}
+
+{% block primary_nav_language '' %}
+
+
+{% block content %}
+{# This is not really a flash-message, just needs the look of it #}
+    <div id="flash-messages">
+        <div class="alert alert-info">
+            {{ 'page_not_found.message'|trans({'%url%': path('homepage') }, 'security')|raw }}
+        </div>
+    </div>
+{% endblock %}

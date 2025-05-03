@@ -1,0 +1,25 @@
+<div id="language-switcher" data-controller="dropdown" class="dropdown-container h-6">
+	<button type="button" class="dropdown-button" data-action="dropdown#toggle">
+		<twig:ux:icon name="language" class="h-6"/>
+	</button>
+
+	<div data-dropdown-target="menu" class="dropdown-menu hidden" style="left: -60px;">
+		<div class="dropdown-inner">
+			{# we can't use current_route and current_parameters for urls with locale aware slugs
+			since the slugs retrieved from the current route do not match the target locale
+			So we have to use our custom path() twig function for those urls #}
+			<a href="{{ attribute(i18nUrls, 'en') }}" class="dropdown-link" data-action="dropdown#toggle">
+				English
+			</a>
+			<a href="{{ attribute(i18nUrls, 'fr') }}" class="dropdown-link" data-action="dropdown#toggle">
+				Français
+			</a>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+

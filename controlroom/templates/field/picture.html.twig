@@ -1,0 +1,18 @@
+{% if field %}
+    <div class="thumb-versions">
+        <img
+            src="{{ vich_uploader_asset(entity.instance)|imagine_filter('thumb_large') }}"
+            class="thumb-large"
+        />
+        <img
+            src="{{ vich_uploader_asset(entity.instance)|imagine_filter('thumb_card') }}"
+            class="thumb-card"
+        />
+        <img
+            src="{{ vich_uploader_asset(entity.instance)|imagine_filter('thumb_small') }}"
+            class="thumb-small"
+        />
+    </div>
+{% else %}
+    <span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
+{% endif %}

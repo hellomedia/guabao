@@ -1,0 +1,44 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block head_title %}
+	Admin
+{% endblock %}
+
+
+{% block extra_head_tags %}
+    {# do not caching admin pages to avoid
+        - On accessing admin page: flash of cached dashboard page before getting the login page
+        - flash with cached admin page content (no listing, unread message, ...) before seeing updated content
+     #}
+    <meta name="turbo-cache-control" content="no-cache">
+{% endblock %}
+
+{% block main %}
+    <div id="main-wrapper">
+        <header class="{% block header_classes '' %}">
+            <div class="default-container default-container-xpadding">
+                
+                {% block breadcrumbs %}
+                    <twig:breadcrumbs />
+                {% endblock %}
+                
+                {% if block('title') %}
+                    <h1>{% block title '' %}</h1>
+                {% endif %}
+
+                {% block header_extra_content '' %}
+
+            </div>
+        </header>
+
+        <main>
+            <div class="default-container default-container-xpadding">
+
+                    {% block flash_messages '' %}
+
+                    {% block content '' %}
+
+            </div>
+        </main>
+    </div>
+{% endblock %}

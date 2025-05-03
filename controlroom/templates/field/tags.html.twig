@@ -1,0 +1,9 @@
+{% if field.value|length > 0 %}
+	<div class="thumb-list">
+		{% for tag in field.value %}
+			{{ tag|trans }}
+		{% endfor %}
+	</div>
+{% else %}
+	<span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
+{% endif %}

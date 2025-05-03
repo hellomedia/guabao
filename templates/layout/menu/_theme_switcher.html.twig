@@ -1,0 +1,16 @@
+<div id="theme-switcher" class="h-6 xl:px-3">
+	{% set target_theme = (theme == 'light' ? 'dark' : 'light') %}
+	<a 
+		href="?theme={{ target_theme }}"
+		data-turbo="false" {# force full page refresh to save session data sever side (theme) #}
+		{# IMPORTANT: session data, while kept on the server, somehow needs a full page load -not ajax- to be saved correctly in symfony #}
+		{# Seems like a known limitation of symfony lazy session management. #}
+		{# Tried saving the session manually, but it didn't fix it, so we force a full page load #}
+		{# https://chatgpt.com/share/67e236c1-f758-8012-a848-3b114a5b721e #}
+		data-controller="turbo-cache"
+		data-action="turbo-cache#clearCache" {# clear turbo cache to avoid previous theme flash with cached pages #}
+		{# NB: Finally, we also need to avoid browser cache (private HTTTP cache), or invalidate it when theme changes #}
+	>
+		<twig:ux:icon name="theme" class="h-6"/>
+	</a>
+</div>

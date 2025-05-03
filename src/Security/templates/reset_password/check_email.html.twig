@@ -1,0 +1,21 @@
+{% extends 'layout/default.html.twig' %}
+
+{% block extra_head_tags %}
+    <title>{{ 'password reset'|trans }}</title>
+    <meta name="robots" content="noindex" />
+{% endblock %}
+
+{% block title %}
+    {{ 'password reset'|trans }}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="alert alert-info">
+        <p>
+            {{ 'password_reset.check_email'|trans(domain='security')|raw }}
+        </p>
+    </div>
+
+{% endblock %}

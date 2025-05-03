@@ -1,0 +1,35 @@
+{% autoescape 'html' %}
+
+{% set language = language is defined ? language : app.locale %}
+
+{% block header %}
+<p>
+    {{ 'Hello'|trans(locale=language)}} {{ name }},
+</p>
+<br/>
+{% endblock %}
+
+{% block content '' %}
+
+{% block footer %}
+    <br/>
+    <br/>
+    {# {% block footer_line_1 %}
+    <p>
+        {{ 'email.signature.line1'|trans({'%site%': siteName}, locale=language) }}
+    </p>
+    {% endblock %}
+    <br/>
+    <p>
+        {{ 'email.signature.line2'|trans({'%site%': siteUrl}, locale=language) }}
+    </p>
+    <p style="color:#555;font-style:italic;"> #}
+        {# break Gmail trimming #}
+        {# {{ 'email.signature.line3'|trans({
+            '%date%': "now"|format_datetime('full', 'none', locale=language),
+            '%time%': "now"|format_datetime('none', 'short', locale=language)},
+            locale=language)
+        }}
+    </p> #}
+{% endblock %}
+{% endautoescape %}

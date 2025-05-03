@@ -1,0 +1,34 @@
+food:
+    create:
+        confirmation: The food is saved in your account and ready to be published!
+    publish:
+        question: Do you want to publish this food?
+        success: food published successfully
+        error: There was an error publishing the food
+    save:
+        success: food saved successfully
+        error: There was an error saving the food
+    edit:
+        success: food edited successfully
+        error: There was an error editing the food
+    archive:
+        question: Do you want to archive this food?
+        success: food archived successfully
+        error: There was an error archiving the food
+    delete:
+        question: Do you want to delete this food?
+        success: food deleted successfully
+        error: There was an error deleting the food
+    unpublish:
+        question: Do you want to unpublish this food?
+        success: food unpublished successfully
+        error: There was an error unpublishing the food
+    unarchive:
+        question: Do you want to unarchive this food?
+        success: food unarchived successfully
+        error: There was an error unarchiving the food
+image:
+    delete:
+        question: Do you want to delete this image?
+        success: Image deleted successfully
+        error: There was an error deleting this image

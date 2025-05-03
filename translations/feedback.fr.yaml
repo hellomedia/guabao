@@ -1,0 +1,34 @@
+food:
+    create:
+        confirmation: La nourriture est sauvée dans ton compte et prête à être publiée !
+    publish:
+        question: Publier l'nourriture ?
+        success: nourriture publiée avec succès
+        error: Une erreur a empêché la publication de cette nourriture
+    save: 
+        success: nourriture sauvée avec succès
+        error: Une erreur a empêché la sauvegarde de cette nourriture
+    edit:
+        success: nourriture modifiée avec succès
+        error: Une erreur a empêché la modification de cette nourriture
+    archive:
+        question: Archiver l'nourriture ?
+        success: nourriture archivée avec succès
+        error: Une erreur a empêché l'archivage de cette nourriture
+    delete:
+        question: Supprimer l'nourriture ?
+        success: nourriture supprimée avec succès
+        error: Une erreur a empêché le suppression de cette nourriture
+    unpublish:
+        question: Retirer l'nourriture ?
+        success: nourriture retirée avec succès
+        error: Une erreur a empêché le retrait de cette nourriture
+    unarchive:
+        question: Désarchiver l'nourriture ?
+        success: nourriture désarchivée avec succès
+        error: Une erreur a empêché de désarchivage de cette nourriture
+image:
+    delete:
+        question: Supprimer la photo ?
+        success: Photo supprimée avec succès
+        error: Une erreur a empêché le suppression de cette photo

@@ -1,0 +1,26 @@
+{% extends 'layout/default.html.twig' %}
+
+{% block extra_head_tags %}
+    <title>{{ 'password_reset.title'|trans(domain='security') }}</title>
+    <meta name="robots" content="noindex" />
+{% endblock %}
+
+{% block title %}
+    {{ 'password reset'|trans }}
+{% endblock %}
+
+
+{% block content %}
+
+    {{ form_start(form, {'attr': {'class': 'form form-horizontal'}}) }}
+
+        {{ form_row(form.email) }}
+
+        {% embed 'form/_form_actions.html.twig' %}
+            {% block submit_label 'password_reset.submit'|trans(domain='security') %}
+            {% block cancel '' %}
+        {% endembed %}
+
+    {{ form_end(form) }}
+
+{% endblock %}

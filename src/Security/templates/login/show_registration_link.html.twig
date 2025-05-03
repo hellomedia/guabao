@@ -1,0 +1,7 @@
+{# see comments in controller #}
+{% if show %}
+    {{ 'registration.not_yet_registered'|trans(domain='security') }}
+    <a href="{{ path('registration') }}" style="margin-left: 15px">
+        {{ 'registration.signup'|trans(domain='security') }}
+    </a>
+{% endif %}

@@ -1,0 +1,15 @@
+@layer base {
+
+    select {
+        /* Remove native arrow */
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
+    .dark select {
+        background-color: var(--color-gray-300);
+        color: var(--color-gray-800);
+    }
+
+}

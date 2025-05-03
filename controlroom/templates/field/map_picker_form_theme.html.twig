@@ -1,0 +1,8 @@
+{% block map_picker_row %}
+
+	{{ form_row(form.search) }}
+	{# <input type="text" data-map-picker-target="searchInput" placeholder="Search place..." style="width: 100%; margin-bottom: 0.5rem;"/> #}
+
+	<div data-map-picker-target="map" style="height: 400px; width: 100%; border: 1px solid #ccc; margin-bottom: 2rem;"></div>
+
+{% endblock %}

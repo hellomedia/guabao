@@ -1,0 +1,8 @@
+{% if field %}
+	<img
+        src="{{ vich_uploader_asset(entity.instance)|imagine_filter('thumb_small') }}"
+        class="thumb-small"
+    />
+{% else %}
+    <span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
+{% endif %}

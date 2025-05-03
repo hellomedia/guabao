@@ -1,0 +1,52 @@
+<div
+	id="mobile-menu"
+	data-mobile-menu-target="menu"
+	data-action="touchstart->mobile-menu#handleGestureStart"
+>
+	<div id="mobile-menu-drag-indicator">
+	</div>
+
+	<div class="pt-1 pb-2">
+	
+		<a
+			href="{{ path('homepage') }}"
+			class="mobile-menu-item {{ is_current_page('homepage') ? 'active' }}"
+			data-action="mobile-menu#toggle"
+		>
+			<twig:ux:icon name="home" class="mobile-menu-item-icon"/>
+			Home
+		</a>
+
+	</div>
+
+	<hr>
+
+	<div class="pt-1 pb-2">
+
+		{% set target_theme = (theme == 'light' ? 'dark' : 'light') %}
+		<a href="?theme={{ target_theme }}"
+			class="mobile-menu-item"
+			data-turbo="false" {# force full page refresh to update session data (theme) #}
+			data-controller="turbo-cache"
+			data-action="mobile-menu#toggle turbo-cache#clearCache" {# clear turbo cache to avoid previous theme flash with cached pages #}
+		>
+			<twig:ux:icon name="theme" class="mobile-menu-item-icon" />
+			Switch theme
+		</a>
+
+	</div>
+
+	<hr>
+
+	<div class="pt-1 pb-2">
+		<a href="{{ attribute(i18nUrls, 'en') }}" class="mobile-menu-item" data-action="mobile-menu#toggle">
+			<twig:ux:icon name="language" class="mobile-menu-item-icon"/>
+			English
+		</a>
+		<a href="{{ attribute(i18nUrls, 'fr') }}" class="mobile-menu-item" data-action="mobile-menu#toggle">
+			<twig:ux:icon name="language" class="mobile-menu-item-icon"/>
+			Français
+		</a>
+	</div>
+
+</div>

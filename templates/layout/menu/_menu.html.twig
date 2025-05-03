@@ -1,0 +1,41 @@
+<nav
+	id="main-menu"
+	data-controller="menu-hover"
+>
+
+	<div class="full-w-container full-w-container-xpadding">
+		<div class="flex h-16 justify-between">
+			<div class="flex">
+				<div class="flex shrink-0 items-center logo">
+					<a href="{{ path('homepage') }}" class="flex items-center space-x-2 px-5 rtl:space-x-reverse">
+						<img src="{{ asset('images/logo.svg') }}" class="hidden light:block" style="height: 33px;" alt="Guabao Logo"/>
+						<img src="{{ asset('images/logo-dark.svg') }}" class="h-8 hidden dark:block" alt="Guabao Logo"/>
+					</a>
+				</div>
+			</div>
+
+			<div class="flex">
+				<div class="hidden md:flex md:mr-5 md:items-center">
+					{% include "layout/menu/_language_switcher.html.twig" %}
+				</div>
+
+				<div class="hidden md:flex md:mr-5 md:items-center">
+					{% include "layout/menu/_theme_switcher.html.twig" %}
+				</div>
+
+				<div
+					class="-mr-2 flex items-center lg:hidden"
+					data-controller="mobile-menu"
+				>
+					{% include "layout/menu/_mobile_menu_button.html.twig" with {
+						mobile_menu_button_extra_classes: 'mr-2',
+						mobile_menu_button_svg_classes: 'h-7'
+					} %}
+					{% include "layout/menu/_mobile_menu.html.twig" %}
+					{% include 'layout/menu/_bottom_menu.html.twig' %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+</nav>

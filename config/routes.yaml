@@ -1,0 +1,17 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+    prefix:
+        fr: '/fr'
+        en: ''
+
+security_controllers:
+    resource:
+        path: ../src/Security/Controller/
+        namespace: App\Security\Controller
+    type: attribute
+    prefix:
+        fr: '/fr'
+        en: ''

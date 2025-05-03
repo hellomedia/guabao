@@ -1,0 +1,11 @@
+{% extends 'email/layout/template.txt.twig' %}
+
+{% block content %}
+
+{{ 'registration.validation_email.click_link'|trans(domain='security') }}
+
+{{ signedUrl|raw }}
+
+{% endblock %}
+
+{% block footer_line_1 '' %}

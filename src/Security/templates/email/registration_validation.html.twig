@@ -1,0 +1,33 @@
+{% extends 'email/layout/template.html.twig' %}
+
+{% block content %}
+
+    <p>
+        {{ 'registration.validation_email.click_link'|trans(domain='security') }}
+    </p>
+
+    <br />
+
+    <p>
+        {% include 'email/includes/button.html.twig'
+            with {
+                url: signedUrl,
+                text: 'registration.validation_email.button'|trans(domain='security')
+            }
+        %}
+    </p>
+
+    <br/>
+
+    <p>
+        {{ 'registration.validation_email.fallback_link'|trans(domain='security') }}
+    </p>
+
+    <p>
+        {{ signedUrl|raw }}
+    </p>
+
+
+{% endblock %}
+
+{% block footer_line_1 '' %}

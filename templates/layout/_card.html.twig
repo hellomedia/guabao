@@ -1,0 +1,63 @@
+<div class="listing-card group"> {# group for hover effect #}
+	{% set image = listing.images.first %}
+	
+    {% if image %}
+		<img
+			class="listing-card-image"
+			src="{{ uploaded_asset(image.path)|imagine_filter('thumb_card') }}"
+			alt="" 
+		/>
+	{% else %}
+		{% include 'listing/_placeholder_image.html.twig' %}
+	{% endif %}
+
+    {% if link_to_admin ?? false %}
+        {% set url = path('admin_listing_show', {'id': listing.id}) %}
+    {% else %}
+        {% set url = path(listing) %}
+    {% endif %}
+
+	<div class="listing-card-info">
+		<div class="listing-card-info-top">
+			<h3 class="listing-card-name">
+				<a href="{{ url }}">
+					<span aria-hidden="true" class="absolute inset-0"></span>
+					{# absolute inset-0 makes the <span> stretch over the entire card. #}
+					{# inset-0 is shorthand for top: 0; right: 0; bottom: 0; left: 0;, making it cover the full parent. #}
+					{# which makes the whole card clickable #}
+					{# as long as the card is positionned with relative #}
+					{# PROS: #}
+					{# - Makes the entire card a clickable link. #}
+					{# - Still allows interactive elements inside (buttons, links, etc.). #}
+					{# - Works with Tailwind’s group for hover effects. #}
+				{{ listing.name(app.locale)|u.truncate(28, '...', false) }}
+			</a>
+			</h3>
+
+				<p class="listing-card-excerpt"> {{ listing.description|u.truncate(80, '...', false) }}
+			</p>
+		</div>
+
+		<div class="listing-card-tags">
+			<p>
+				{{ listing.offerType|trans }}
+				|
+				{{ listing.condition|trans }}
+			</p>
+
+			<div class="listing-card-extra-tags">
+				{% if listing.subcategory.supports('gender') %}
+					<span>{{ listing.gender|trans}}</span>
+				{% endif %}
+
+				{% if listing.subcategory.supports('size') %}
+					<span>{{ listing.size|trans }}</span>
+				{% endif %}
+
+				{% if listing.subcategory.supports('style') %}
+					<span>{{ listing.style|trans }}</span>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
