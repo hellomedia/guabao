@@ -11,7 +11,9 @@ use App\Entity\FoodItem\Fruit;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Tag\PlaceTag;
 use App\Entity\Tag\Tag;
+use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Repository\PictureRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -23,6 +25,8 @@ use Symfony\Component\HttpFoundation\File\File;
 #[Vich\Uploadable]
 class Picture implements EntityInterface
 {
+    use LocalizedDescriptionTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -75,10 +79,7 @@ class Picture implements EntityInterface
     #[ORM\JoinColumn(nullable: true)]
     private ?Fruit $fruit = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $caption = null;
-
-    #[ORM\ManyToOne(inversedBy: 'pictures')]
+    #[ORM\ManyToOne]
     private ?Trip $trip = null;
 
     #[ORM\Column(nullable: true)]
@@ -152,6 +153,11 @@ class Picture implements EntityInterface
     public function setFilePath(?string $filePath): void
     {
         $this->filePath = $filePath;
+    }
+
+    public function setUpdatedAt(DateTimeImmutable $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     public function getTakenAt(): ?\DateTimeImmutable
@@ -282,18 +288,6 @@ class Picture implements EntityInterface
     public function setPlace(?Place $place): static
     {
         $this->place = $place;
-
-        return $this;
-    }
-
-    public function getCaption(): ?string
-    {
-        return $this->caption;
-    }
-
-    public function setCaption(?string $caption): static
-    {
-        $this->caption = $caption;
 
         return $this;
     }

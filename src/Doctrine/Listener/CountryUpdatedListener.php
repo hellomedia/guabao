@@ -10,6 +10,8 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * https://symfony.com/doc/current/doctrine/events.html
+ * Example of EntityListener
+ * Already covered by SluggableListener which applies to all entities
  */
 #[AsEntityListener(event: Events::preUpdate, method: 'update', entity: Country::class, lazy: true)]
 class CountryUpdatedListener
@@ -27,7 +29,9 @@ class CountryUpdatedListener
 
     private function _updateSlugs(Country $country)
     {
-        $country->setSlugFr($this->slugger->slug(\mb_strtolower($country->getNameFr())));
-        $country->setSlugEn($this->slugger->slug(\mb_strtolower($country->getNameEn())));
+        // already covered by SluggableListener which applies to all entities
+
+        // $country->setSlugFr($this->slugger->slug(\mb_strtolower($country->getNameFr())));
+        // $country->setSlugEn($this->slugger->slug(\mb_strtolower($country->getNameEn())));
     }
 }

@@ -6,6 +6,8 @@ use App\Entity\Picture;
 use App\Entity\Trip;
 use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -65,30 +67,53 @@ class TripRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findPlaceTags(Trip $trip): array
+    public function findPlaceTags(Trip $trip): Collection
     {
-        return $this->getEntityManager()
-            ->createQueryBuilder()
-            ->select('DISTINCT pt')
-            ->from(Picture::class, 'pic')
-            ->join('pic.placeTags', 'pt')
-            ->where('pic.trip = :trip')
-            ->setParameter('trip', $trip)
-            ->getQuery()
-            ->getResult();
+        $dql = <<<DQL
+            SELECT DISTINCT pt, pic
+            FROM App\Entity\Picture pic
+            JOIN pic.placeTags pt
+            WHERE pic.trip = :trip
+        DQL;
+
+        /* root entity (pic) not selected first, so result is an array of [pt, pic] items */
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setParameter('trip', $trip);
+
+        // build expected array collection of place tags
+        return new ArrayCollection(array_map(fn($row) => $row['pt'], $query->getResult()));
     }
 
-    public function findCountries(Trip $trip): array
+    public function findCountries(Trip $trip): Collection
+    {
+        $dql = <<<DQL
+            SELECT DISTINCT c, pic
+            FROM App\Entity\Picture pic
+            JOIN pic.placeTags pt
+            JOIN pt.country c
+            WHERE pic.trip = :trip
+        DQL;
+
+        /* root entity (pic) not selected first, so result is an array of [pt, pic] items */
+        $query = $this->getEntityManager()
+            ->createQuery($dql)
+            ->setParameter('trip', $trip);
+
+        // build expected array collection of place tags
+        return new ArrayCollection(array_map(fn($row) => $row['c'], $query->getResult()));
+    }
+
+    public function findCover(Trip $trip): ?Picture
     {
         return $this->getEntityManager()
             ->createQueryBuilder()
-            ->select('DISTINCT c')
+            ->select('pic')
             ->from(Picture::class, 'pic')
-            ->join('pic.placeTags', 'pt')
-            ->join('pt.country', 'c')
             ->where('pic.trip = :trip')
+            ->andWhere('pic.cover = true')
             ->setParameter('trip', $trip)
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
     }
 }

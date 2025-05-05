@@ -14,4 +14,8 @@ interface LocalizedNameInterface
     public function getNameEn(): ?string;
 
     public function getName(string $locale): ?string;
+
+    public function setNameFr(string $nameFr);
+
+    public function setNameEn(string $nameEn);
 }

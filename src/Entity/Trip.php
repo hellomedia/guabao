@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
+use App\Entity\Tag\PlaceTag;
+use App\Entity\Trait\KeyTrait;
+use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
 use App\Repository\TripRepository;
@@ -19,6 +22,10 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     use LocalizedNameTrait;
 
     use LocalizedSlugTrait;
+
+    use LocalizedDescriptionTrait;
+
+    use KeyTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -40,9 +47,21 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     #[ORM\ManyToMany(targetEntity: Country::class)]
     private Collection $countries;
 
+    /**
+     * Unmapped. Convenience property.
+     * @var Collection<int, PlaceTag>
+     */
+    private Collection $placeTags;
+
+    /**
+     * Unmapped. Convenience property
+     */
+    private ?Picture $cover = null;
+
     public function __construct()
     {
         $this->countries = new ArrayCollection();
+        $this->placeTags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,5 +115,44 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
         $this->countries->removeElement($country);
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, PlaceTag>
+     */
+    public function getPlaceTags(): Collection
+    {
+        return $this->placeTags;
+    }
+
+    /**
+     * @var Collection<int, PlaceTag>
+     */
+    public function setPlaceTags(Collection $placeTags): static
+    {
+        $this->placeTags = $placeTags;
+
+        return $this;
+    }
+
+    public function setCover(?Picture $cover): static
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    public function getCover(): ?Picture
+    {
+        return $this->cover;
+    }
+
+    public function getPeriod(): string
+    {
+        if ($this->startedAt->format('m-Y') == $this->endedAt->format('m-Y')) {
+            return $this->startedAt->format('M Y');
+        }
+
+        return $this->startedAt->format('M Y') . ' - ' . $this->endedAt->format('M Y');
     }
 }

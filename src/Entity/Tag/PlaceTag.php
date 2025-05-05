@@ -6,6 +6,7 @@ use App\Entity\Country;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
+use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,6 +18,8 @@ class PlaceTag implements LocalizedNameInterface, LocalizedSlugInterface, Entity
     use LocalizedNameTrait;
 
     use LocalizedSlugTrait;
+
+    use LocalizedDescriptionTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -14,4 +14,8 @@ interface LocalizedSlugInterface
     public function getSlugEn(): ?string;
 
     public function getSlug(string $locale): ?string;
+
+    public function setSlugFr(string $slugFr);
+
+    public function setSlugEn(string $slugEn);
 }
