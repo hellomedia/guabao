@@ -42,6 +42,7 @@ class AppExtension extends AbstractExtension implements GlobalsInterface
     public function getFunctions(): array
     {
         return [
+            new TwigFunction('path', [AppExtensionRuntime::class, 'getPath']),
             new TwigFunction('absolute_url', [AppExtensionRuntime::class, 'getAbsoluteUrl']),
             new TwigFunction('uploaded_asset', [AppExtensionRuntime::class, 'getUploadedAssetPath']),
             new TwigFunction('is_current_page', [AppExtensionRuntime::class, 'isCurrentPage']),

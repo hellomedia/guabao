@@ -2,9 +2,8 @@
 
 namespace App\Helper;
 
-use App\Entity\Category;
-use App\Entity\Listing;
-use App\Entity\Subcategory;
+use App\Entity\FoodItem;
+use App\Entity\Trip;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class BreadcrumbsHelper
@@ -17,35 +16,16 @@ class BreadcrumbsHelper
 
     private array $breadcrumbs = [];
 
-    public function addBreadcrumb(Category|Subcategory|Listing|string $item, ?string $route = null, ?array $routeParams = [], ?bool $isAdmin = null): void
+    public function addBreadcrumb(Trip|FoodItem|string $item, ?string $route = null, ?array $routeParams = [], ?bool $isAdmin = null): void
     {
-        if ($item instanceof Category) {
-            $route = 'category_index';
-            $routeParams = [
-                'slug' => $item->getSlug($this->requestStack->getCurrentRequest()->getLocale())
-            ];
-        }
+        $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
-        if ($item instanceof Subcategory) {
-            $route = 'subcategory_index';
+        if ($item instanceof Trip) {
+            $route = 'trip_show';
             $routeParams = [
-                'category_slug' => $item->getCategory()->getSlug($this->requestStack->getCurrentRequest()->getLocale()),
-                'subcategory_slug' => $item->getSlug($this->requestStack->getCurrentRequest()->getLocale()),
+                'slug' => $item->getSlug($locale)
             ];
-        }
-
-        if ($item instanceof Listing) {
-            if ($isAdmin) {
-                $route = 'admin_listing_show';
-                $routeParams = ['id' => $item->getId()];
-            } else {
-                $route = 'listing_show';
-                $routeParams = [
-                    'id' => $item->getId(),
-                    'category_slug' => $item->getCategory()->getSlug($this->requestStack->getCurrentRequest()->getLocale()),
-                    'subcategory_slug' => $item->getSubcategory()->getSlug($this->requestStack->getCurrentRequest()->getLocale()),
-                ];
-            }
+            $item = $item->getName($locale) . ' ' . $item->getPeriod();
         }
     
         $this->breadcrumbs[] = [

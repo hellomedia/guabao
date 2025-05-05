@@ -96,9 +96,9 @@ class DateExtension extends AbstractExtension
     /**
      * Custom date formating with i18n.
      *
-     * TODAY         ==> time only      : 14:23 (fr) or 2:23 PM (en)
-     * THIS YEAR     ==> day/month only : 28/05 (fr) or 5/28 (en) or 28-05 (nl)
-     * PREVIOUS YEAR ==> day/month/year : 28/05/19 (fr)  or 5/28/19 (fr) or 28-05-19 (nl)
+     * TODAY         ==> time only      : 14:23 FR or 2:23 PM EN
+     * THIS YEAR     ==> day/month only : 28/05 FR or 5/28 EN or 28-05 (nl)
+     * PREVIOUS YEAR ==> day/month/year : 28/05/19 FR  or 5/28/19 FR or 28-05-19 (nl)
      *
      * ** i18n FORMATS **
      * FR: "28/05/2019"

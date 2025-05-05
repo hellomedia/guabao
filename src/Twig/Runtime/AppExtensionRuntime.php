@@ -3,6 +3,7 @@
 namespace App\Twig\Runtime;
 
 use App\Entity\Interface\LocalizedNameInterface;
+use App\Entity\Trip;
 use App\Helper\Upload\UploadHelper;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -47,22 +48,22 @@ class AppExtensionRuntime implements RuntimeExtensionInterface
 
     public function getPath(mixed $item, array $parameters = [], ?int $referenceType = Router::ABSOLUTE_PATH): string
     {
-        // if ($item instanceof Category) {
-        //     return $this->_getCategoryPath($item, $parameters, $referenceType);
-        // }
+        if ($item instanceof Trip) {
+            return $this->_getTripPath($item, $parameters, $referenceType);
+        }
 
         return $this->router->generate($item, $parameters, $referenceType);
     }
 
-    // private function _getCategoryPath(Category $category, array $parameters, int $referenceType): string
-    // {
-    //     $locale = $parameters['_locale'] ?? $this->requestStack->getCurrentRequest()->getLocale();
+    private function _getTripPath(Trip $trip, array $parameters, int $referenceType): string
+    {
+        $locale = $parameters['_locale'] ?? $this->requestStack->getCurrentRequest()->getLocale();
 
-    //     return $this->router->generate('category_index', [
-    //         'slug' => $category->getSlug($locale),
-    //         '_locale' => $locale,
-    //     ], $referenceType);
-    // }
+        return $this->router->generate('trip_show', [
+            'slug' => $trip->getSlug($locale),
+            '_locale' => $locale,
+        ], $referenceType);
+    }
 
     // private function _getListingPath(Listing $listing, array $parameters, int $referenceType): string
     // {
