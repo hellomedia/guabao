@@ -26,7 +26,7 @@ class CountryCrudController extends AbstractCrudController
     {
         yield TextField::new('code');
 
-        yield TextField::new('nameFr', 'Name (FR)');
-        yield TextField::new('nameEn', 'Name (EN)');
+        yield TextField::new('nameFr', 'Name FR');
+        yield TextField::new('nameEn', 'Name EN');
     }
 }

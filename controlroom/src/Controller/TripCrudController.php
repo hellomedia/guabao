@@ -12,6 +12,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class TripCrudController extends AbstractCrudController
@@ -30,14 +32,31 @@ class TripCrudController extends AbstractCrudController
         ;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
-        yield TextField::new('nameFr', 'Name (FR)');
-        yield TextField::new('nameEn', 'Name (EN)');
+        yield Field::new('cover.imageFile', 'Cover')
+            ->setTemplatePath('@controlroom/field/picture_thumbnail.html.twig')
+            ->onlyOnIndex();
+
+        yield Field::new('cover.imageFile', 'Cover')
+            ->setTemplatePath('@controlroom/field/picture.html.twig')
+            ->onlyOnDetail();
+
+        yield AssociationField::new('highlights')
+            ->setTemplatePath('@controlroom/field/picture_collection_thumbnails.html.twig')
+            ->onlyOnDetail();
+        
+        yield TextField::new('nameFr', 'Name FR');
+        yield TextField::new('nameEn', 'Name EN');
 
         yield DateField::new('startedAt');
         yield DateField::new('endedAt');
+
+        yield TextareaField::new('headlineFr', 'Headline FR');
+        yield TextareaField::new('headlineEn', 'Headline EN');
+
+        yield TextareaField::new('descriptionFr', 'Description FR')->hideOnIndex();
+        yield TextareaField::new('descriptionEn', 'Description EN')->hideOnIndex();
 
         yield AssociationField::new('countries')
             ->setTemplatePath('@controlroom/field/countries.html.twig');
@@ -48,7 +67,10 @@ class TripCrudController extends AbstractCrudController
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
 
         $qb->leftJoin('entity.countries', 'c')
-            ->addSelect('c');
+            ->addSelect('c')
+            ->leftJoin('entity.cover', 'cover')
+            ->addSelect('cover')
+        ;
 
         return $qb;
     }

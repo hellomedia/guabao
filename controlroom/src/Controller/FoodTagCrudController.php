@@ -24,7 +24,7 @@ class FoodTagCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield TextField::new('nameFr', 'Name (FR)');
-        yield TextField::new('nameEn', 'Name (EN)');
+        yield TextField::new('nameFr', 'Name FR');
+        yield TextField::new('nameEn', 'Name EN');
     }
 }

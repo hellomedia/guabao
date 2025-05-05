@@ -53,7 +53,7 @@ class DashboardController extends AbstractDashboardController
     {
         return Crud::new()
             ->setDateTimeFormat('d/MM/yy HH:mm') // https://unicode-org.github.io/icu/userguide/format_parse/datetime/
-            ->setPaginatorPageSize('50')
+            ->setPaginatorPageSize('30')
             ->setDefaultSort(['id' => 'DESC'])
             ->setAutofocusSearch()
             ->showEntityActionsInlined()

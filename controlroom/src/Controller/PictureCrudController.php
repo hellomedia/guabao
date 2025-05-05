@@ -10,9 +10,14 @@ use App\Helper\GpsParsingHelper;
 use App\Repository\PlaceRepository;
 use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -21,6 +26,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+use phpDocumentor\Reflection\Types\Boolean;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PictureCrudController extends AbstractCrudController
@@ -84,7 +90,7 @@ class PictureCrudController extends AbstractCrudController
         yield FormField::addFieldset('Trip');
         yield AssociationField::new('trip')
             ->setHelp('Leave empty for auto-fill from exif data');
-        yield BooleanField::new('cover');
+        yield BooleanField::new('highlight');
 
         yield FormField::addFieldset('Place');
         yield AssociationField::new('place');
@@ -101,6 +107,7 @@ class PictureCrudController extends AbstractCrudController
         yield TextField::new('descriptionEn');
 
         yield FormField::addFieldset('Tags');
+        
         yield AssociationField::new('tags')
             ->setFormTypeOptions([
                 'by_reference' => false, // important for ManyToMany when using add/remove methods
@@ -111,6 +118,7 @@ class PictureCrudController extends AbstractCrudController
             ])
             ->setTemplatePath('@controlroom/field/tags.html.twig')
             ->setHelp('Hold Ctrl (or Cmd) to select multiple tags');
+        
         yield AssociationField::new('placeTags')
             ->setFormTypeOptions([
                 'by_reference' => false, // important for ManyToMany when using add/remove methods
@@ -259,5 +267,18 @@ class PictureCrudController extends AbstractCrudController
                 implode(' | ', $linkParts)
             ));
         }
+    }
+
+    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
+    {
+        $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
+
+        $qb->leftJoin('entity.tags', 't')
+            ->addSelect('t')
+            ->leftJoin('entity.placeTags', 'pt')
+            ->addSelect('pt')
+        ;
+
+        return $qb;
     }
 }
