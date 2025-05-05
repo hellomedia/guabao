@@ -39,6 +39,8 @@
 @import "./components/modal-icon.css";
 @import "./components/modal-animation.css";
 
+@import "./content/trip.css";
+
 /* path processing only works from app.css */
 #foo-container {
     /* background-image: url('../icons/gridicons/chat.svg'); */

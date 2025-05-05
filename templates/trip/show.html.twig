@@ -1,27 +1,28 @@
 {% extends 'layout/default.html.twig' %}
 
-{% block title %}
-	{{ trip|trans }}
-{% endblock %}
+{% block body_extra_classes %}trip-page{% endblock %}
 
 {% block content %}
-	
+
+    <div id="cover">
+        <img src="{{ vich_uploader_asset(trip.cover)|imagine_filter('thumb_large') }}"/>
+    </div>
+
+    <div id="description">
+        {{ trip.description(app.locale)|nl2br }}
+    </div>
+
+    <div id="highlights">
+        {% for highlight in trip.highlights %}
+            <img src="{{ vich_uploader_asset(highlight)|imagine_filter('thumb_card') }}" />
+        {% endfor %}
+    </div>
+
     <div id="countries">
         {% for country in trip.countries %}
             {{ country|trans }}
         {% endfor %}
     </div>
 
-    <div id="description">
-        {{ trip.description(app.locale) }}
-    </div>
-
-    <div id="place-tags">
-        {% for placeTag in trip.placeTags %}
-            <span class="tag place-tag">
-                {{ placeTag|trans }}
-            </span>
-        {% endfor %}
-    </div>
 
 {% endblock %}

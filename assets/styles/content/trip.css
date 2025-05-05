@@ -1,0 +1,26 @@
+@layer content {
+    .trip-page {
+
+        #countries {
+            margin-bottom: 20px;
+        }
+
+        #cover {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        #description {
+            margin-bottom: 30px;
+            @apply text-xl;
+        }
+
+        #highlights {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+    }
+}

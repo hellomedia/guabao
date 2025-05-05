@@ -4,24 +4,26 @@
 	{{ 'Trips'|trans }}
 {% endblock %}
 
+{% block body_extra_classes %}with-cards{% endblock %}
+
 {% block content %}
 	
     <div id="trips" class="cards">
         {% for trip in trips %}
             <div class="card card-trip" id="card-{{ trip.id }}">
                 {% if trip.cover %}
-                    <a href="{{ path('trip_show', {'id': trip.id}) }}" class="card-image-wrapper">
+                    <a href="{{ path(trip) }}" class="card-image-wrapper">
                         <img src="{{ vich_uploader_asset(trip.cover)|imagine_filter('thumb_card') }}"/>
                     </a>
                 {% else %}
-                    <a href="{{ path('trip_show', {'id': trip.id}) }}" class="card-image-wrapper">
+                    <a href="{{ path(trip) }}" class="card-image-wrapper">
                         {% include 'picture/_placeholder_image.html.twig' %}
                     </a>
                 {% endif %}
 
                 <div class="card-info">
                     <h3 class="card-title">
-                        <a href="{{ path('trip_show', {'id': trip.id}) }}">
+                        <a href="{{ path(trip) }}">
                             {{ trip.name(app.locale) }}
                         </a>
                     </h3>
@@ -30,8 +32,8 @@
                         {{ trip.period }}
                     </div>
 
-                    <p class="card-excerpt">
-                        {{ trip.description(app.locale)|u.truncate(80, '...', false) }}
+                    <p class="card-headline">
+                        {{ trip.headline(app.locale) }}
                     </p>
 
                     <div class="card-tags">

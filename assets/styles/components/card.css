@@ -33,7 +33,7 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: start;
             align-items: center;
         }
 
@@ -50,6 +50,10 @@
         }
 
         .card-period {
+            margin-top: 10px;
+        }
+
+        .card-headline {
             margin-top: 10px;
         }
     }
