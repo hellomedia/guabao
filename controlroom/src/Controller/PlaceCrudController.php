@@ -78,5 +78,8 @@ class PlaceCrudController extends AbstractCrudController
 
         yield TextField::new('country')
             ->hideOnForm();
+
+        yield TextField::new('descriptionFr', 'Description (FR)');
+        yield TextField::new('descriptionEn', 'Description (EN)');
     }
 }

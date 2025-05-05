@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class TripCrudController extends AbstractCrudController
@@ -35,7 +36,11 @@ class TripCrudController extends AbstractCrudController
         yield TextField::new('nameFr', 'Name (FR)');
         yield TextField::new('nameEn', 'Name (EN)');
 
-        yield AssociationField::new('countries');
+        yield DateField::new('startedAt');
+        yield DateField::new('endedAt');
+
+        yield AssociationField::new('countries')
+            ->setTemplatePath('@controlroom/field/countries.html.twig');
     }
 
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder

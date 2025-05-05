@@ -1,0 +1,11 @@
+{% if field.value|length > 0 %}
+	<div class="thumb-list">
+		{% for country in field.value %}
+			<a href="{{ path('controlroom_country_detail', {entityId: country.id}) }}">
+				<span class="badge badge-outline">{{ country|trans }}</span>
+			</a>
+		{% endfor %}
+	</div>
+{% else %}
+	<span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
+{% endif %}

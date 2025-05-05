@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -66,17 +67,24 @@ class PictureCrudController extends AbstractCrudController
         yield DateTimeField::new('takenAt')
             ->setHelp('Leave empty for auto-fill from exif data');
 
-        yield FormField::addFieldset('Food Item')->collapsible();
-        yield AssociationField::new('dish')->setColumns(4);
-        yield AssociationField::new('breakfast')->setColumns(4);
-        yield AssociationField::new('drink')->setColumns(4);
-        yield AssociationField::new('dessert')->setColumns(4);
-        yield AssociationField::new('bakeryItem')->setColumns(4);
-        yield AssociationField::new('fruit')->setColumns(4);
+        if ($pageName == Crud::PAGE_INDEX) {
+            yield AssociationField::new('foodItem');
+        }
+
+        if ($pageName != Crud::PAGE_INDEX) {
+            yield FormField::addFieldset('Food Item')->collapsible();
+            yield AssociationField::new('dish')->setColumns(4);
+            yield AssociationField::new('breakfast')->setColumns(4);
+            yield AssociationField::new('drink')->setColumns(4);
+            yield AssociationField::new('dessert')->setColumns(4);
+            yield AssociationField::new('bakeryItem')->setColumns(4);
+            yield AssociationField::new('fruit')->setColumns(4);
+        }
 
         yield FormField::addFieldset('Trip');
         yield AssociationField::new('trip')
             ->setHelp('Leave empty for auto-fill from exif data');
+        yield BooleanField::new('cover');
 
         yield FormField::addFieldset('Place');
         yield AssociationField::new('place');
@@ -89,8 +97,8 @@ class PictureCrudController extends AbstractCrudController
             ->hideWhenUpdating();
 
         yield FormField::addFieldset('Text');
-        yield TextField::new('caption')
-            ->hideOnIndex();
+        yield TextField::new('descriptionFr');
+        yield TextField::new('descriptionEn');
 
         yield FormField::addFieldset('Tags');
         yield AssociationField::new('tags')

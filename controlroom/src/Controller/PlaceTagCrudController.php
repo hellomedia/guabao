@@ -29,5 +29,8 @@ class PlaceTagCrudController extends AbstractCrudController
         yield TextField::new('nameEn', 'Name (EN)');
 
         yield AssociationField::new('country');
+
+        yield TextField::new('descriptionFr', 'Description (FR)');
+        yield TextField::new('descriptionEn', 'Description (EN)');
     }
 }
