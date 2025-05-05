@@ -24,6 +24,8 @@
 @import "./form/select.css";
 @import "./form/textarea.css";
 
+
+@import "./components/card.css";
 @import "./components/header.css";
 @import "./components/menu.css";
 @import "./components/mobile-menu.css";

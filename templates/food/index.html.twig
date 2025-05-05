@@ -1,0 +1,17 @@
+{% extends 'layout/default.html.twig' %}
+
+{% block title %}
+	{{ 'Food'|trans }}
+{% endblock %}
+
+{% block content %}
+	
+    <div id="food" class="cards">
+        {% for foodItem in foodItems %}
+            <div class="card food-item">
+                {{ foodItem|trans }}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

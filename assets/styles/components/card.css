@@ -1,0 +1,57 @@
+@layer components {
+    .cards {
+        display: grid;
+        @apply grid-cols-1;
+        @apply md:grid-cols-2;
+        @apply lg:grid-cols-4;
+        @apply gap-6;
+        align-items: stretch;
+        grid-auto-rows: minmax(100px, auto);
+        /* make all grid items match the tallest item's height */
+    }
+
+    .card-trip {
+        background-color: var(--color-secondary-background);
+        border: 1px solid var(--color-border);
+        @apply rounded;
+
+        /* without this flex column justify content, vertical alignment is buggy for subcategories */
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+
+        .dark & {
+            border: none;
+        }
+
+        .card-image {
+            height: 140px;
+        }
+
+        .card-info {
+            height: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-title {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            span {
+                margin-top: 9px;
+            }
+        }
+
+        .card-period {
+            margin-top: 10px;
+        }
+    }
+
+}

@@ -1,0 +1,14 @@
+{# liip_imagine expects files to be in /public but asset mapper, in dev, does not publish files in /public
+Since the placeholder is 800x800 anyway, which is close to the thumb_size, 
+and we use object-fit:cover on the image anyway, we can just serve the image without thumb processing #}
+<picture>
+    <source
+        srcset="{{ asset('images/placeholder-800x800.webp') }}"
+        media="(max-width: 600px)">
+    <source
+        srcset="{{ asset('images/placeholder-400x400.webp') }}"
+        media="(min-width: 601px)">
+    <img
+        class="listing-card-image"
+        src="{{ asset('images/placeholder-800x800.webp') }}" alt="" />
+</picture>

@@ -1,0 +1,17 @@
+{% extends 'layout/default.html.twig' %}
+
+{% block title %}
+	{{ 'Pictures'|trans }}
+{% endblock %}
+
+{% block content %}
+	
+    <div id="pictures" class="cards">
+        {% for picture in pictures %}
+            <div class="card picture">
+                <img src="{{ vich_uploader_asset(picture)|imagine_filter('thumb_small') }}" />
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

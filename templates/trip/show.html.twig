@@ -1,0 +1,27 @@
+{% extends 'layout/default.html.twig' %}
+
+{% block title %}
+	{{ trip|trans }}
+{% endblock %}
+
+{% block content %}
+	
+    <div id="countries">
+        {% for country in trip.countries %}
+            {{ country|trans }}
+        {% endfor %}
+    </div>
+
+    <div id="description">
+        {{ trip.description(app.locale) }}
+    </div>
+
+    <div id="place-tags">
+        {% for placeTag in trip.placeTags %}
+            <span class="tag place-tag">
+                {{ placeTag|trans }}
+            </span>
+        {% endfor %}
+    </div>
+
+{% endblock %}

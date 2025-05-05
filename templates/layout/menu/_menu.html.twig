@@ -12,6 +12,24 @@
 						<img src="{{ asset('images/logo-dark.svg') }}" class="h-8 hidden dark:block" alt="Guabao Logo"/>
 					</a>
 				</div>
+				<div id="main-menu-items">
+					<a href="{{ path('trip_index') }}"
+						class="main-menu-item {{ app.current_route starts with 'trip' ? 'current' }}"
+						data-action="mouseenter->menu-hover#enter mouseleave->menu-hover#leave">
+						{{ 'Trips'|trans }}
+					</a>
+					<a href="{{ path('food_index') }}"
+						class="main-menu-item {{ app.current_route starts with 'food' ? 'current' }}"
+						data-action="mouseenter->menu-hover#enter mouseleave->menu-hover#leave">
+						{{ 'Food'|trans }}
+					</a>
+					<a href="{{ path('picture_index') }}"
+						class="main-menu-item {{ app.current_route starts with 'picture' ? 'current' }}"
+						data-action="mouseenter->menu-hover#enter mouseleave->menu-hover#leave">
+						{{ 'All Pictures'|trans }}
+					</a>
+				</div>
+
 			</div>
 
 			<div class="flex">

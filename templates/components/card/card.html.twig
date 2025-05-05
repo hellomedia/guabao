@@ -1,0 +1,34 @@
+<div class="card card-trip" id="card-{{ trip.id }}">
+	{% if trip.cover %}
+		<a href="{{ path('trip_show', {'id': trip.id}) }}" class="card-image-wrapper">
+			<img src="{{ vich_uploader_asset(trip.cover)|imagine_filter('thumb_small') }}" />
+		</a>
+	{% else %}
+		<a href="{{ path('trip_show', {'id': trip.id}) }}" class="card-image-wrapper">
+			{% include 'picture/_placeholder_image.html.twig' %}
+		</a>
+	{% endif %}
+
+	<div class="card-info">
+		<div class="card-info-top">
+			<h3 class="card-name">
+				<a href="{{ path('trip_show', {'id': trip.id}) }}">
+					{{ trip.name(app.locale)|u.truncate(28, '...', false) }}
+				</a>
+			</h3>
+
+			<p class="card-excerpt">
+				{{ trip.description|u.truncate(80, '...', false) }}
+			</p>
+
+			<div class="card-tags">
+				<p>
+				</p>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
