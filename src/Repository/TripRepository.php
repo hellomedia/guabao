@@ -9,41 +9,62 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @extends ServiceEntityRepository<Trip>
  */
 class TripRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(
+        private RequestStack $requestStack,
+        ManagerRegistry $registry,
+    )
     {
         parent::__construct($registry, Trip::class);
     }
 
-//    /**
-//     * @return Trip[] Returns an array of Trip objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Trip[] Returns an array of Trip objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('t')
+    //            ->andWhere('t.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('t.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Trip
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Trip
+    //    {
+    //        return $this->createQueryBuilder('t')
+    //            ->andWhere('t.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+    public function findAll(): array
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.startedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findOneBySlug(string $slug): ?Trip
+    {
+        $locale = $this->requestStack->getCurrentRequest()->getLocale();
+
+        return $this->findOneBy([
+            'slug' . \ucfirst($locale) => $slug
+        ]);
+    }
 
     public function findOneByPictureDate(DateTimeImmutable $pictureTakenAt)
     {
@@ -55,9 +76,9 @@ class TripRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    public function findPictures(Trip $trip): array
+    public function findPictures(Trip $trip): Collection
     {
-        return $this->getEntityManager()
+        $query = $this->getEntityManager()
             ->createQueryBuilder()
             ->select('pic')
             ->from(Picture::class, 'pic')
@@ -65,6 +86,8 @@ class TripRepository extends ServiceEntityRepository
             ->setParameter('trip', $trip)
             ->getQuery()
             ->getResult();
+
+        return new ArrayCollection($query->getResult());
     }
 
     public function findPlaceTags(Trip $trip): Collection
@@ -83,37 +106,5 @@ class TripRepository extends ServiceEntityRepository
 
         // build expected array collection of place tags
         return new ArrayCollection(array_map(fn($row) => $row['pt'], $query->getResult()));
-    }
-
-    public function findCountries(Trip $trip): Collection
-    {
-        $dql = <<<DQL
-            SELECT DISTINCT c, pic
-            FROM App\Entity\Picture pic
-            JOIN pic.placeTags pt
-            JOIN pt.country c
-            WHERE pic.trip = :trip
-        DQL;
-
-        /* root entity (pic) not selected first, so result is an array of [pt, pic] items */
-        $query = $this->getEntityManager()
-            ->createQuery($dql)
-            ->setParameter('trip', $trip);
-
-        // build expected array collection of place tags
-        return new ArrayCollection(array_map(fn($row) => $row['c'], $query->getResult()));
-    }
-
-    public function findCover(Trip $trip): ?Picture
-    {
-        return $this->getEntityManager()
-            ->createQueryBuilder()
-            ->select('pic')
-            ->from(Picture::class, 'pic')
-            ->where('pic.trip = :trip')
-            ->andWhere('pic.cover = true')
-            ->setParameter('trip', $trip)
-            ->getQuery()
-            ->getOneOrNullResult();
     }
 }

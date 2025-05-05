@@ -2,6 +2,7 @@
 
 namespace App\Doctrine\Listener;
 
+use App\Entity\Interface\HasPeriodInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
@@ -51,6 +52,13 @@ class SluggableListener
     private function _setLocalizedSlugs(LocalizedSlugInterface $entity)
     {
         assert($entity instanceof LocalizedNameInterface);
+
+        if ($entity instanceof HasPeriodInterface) {
+            $entity->setSlugFr($this->slugger->slug(\mb_strtolower($entity->getNameFr() . ' ' . $entity->getPeriod())));
+            $entity->setSlugEn($this->slugger->slug(\mb_strtolower($entity->getNameEn() . ' ' . $entity->getPeriod())));
+
+            return;
+        }
 
         $entity->setSlugFr($this->slugger->slug(\mb_strtolower($entity->getNameFr())));
         $entity->setSlugEn($this->slugger->slug(\mb_strtolower($entity->getNameEn())));

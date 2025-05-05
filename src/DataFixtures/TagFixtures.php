@@ -11,11 +11,15 @@ class TagFixtures extends Fixture
     private const array TAGS = [
         [
             'nameFr' => 'Bivouac',
-            'nameEn' => 'Hiking camp',
+            'nameEn' => 'Hiking/trek camp',
         ],
         [
             'nameFr' => 'Rando',
-            'nameEn' => 'Hiking',
+            'nameEn' => 'Hiking/trek',
+        ],
+        [
+            'nameFr' => 'Rando en autonomie',
+            'nameEn' => 'Self-supported hike/trek',
         ],
         [
             'nameFr' => 'Lieu de travail',

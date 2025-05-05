@@ -48,8 +48,11 @@ class CoverPictureFixtures extends Fixture implements DependentFixtureInterface
             $picture->setImageFile($uploadedFile);
             $picture->setUpdatedAt(new \DateTimeImmutable()); // Required by Vich to trigger update
 
-            $picture->setTrip($this->getReference($key, Trip::class));
-            $picture->setCover(true);
+            $trip = $this->getReference($key, Trip::class);
+
+            $picture->setTrip($trip);
+
+            $trip->setCover($picture);
     
             $manager->persist($picture);
         }

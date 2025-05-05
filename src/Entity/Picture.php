@@ -80,13 +80,19 @@ class Picture implements EntityInterface
     private ?Fruit $fruit = null;
 
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Trip $trip = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $highlight = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?bool $cover = null;
+    
+    // highlightedTrip below is redundant with trip above
+    // but it allows doctrine to have a trip#highlights association
+    // which is convenient for queries and easyadmin
+    // highligthedTrip is handled inside setHighlight
+    #[ORM\ManyToOne(inversedBy: 'highlights')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?Trip $highlightedTrip = null;
 
     #[ORM\ManyToOne(inversedBy: 'pictures')]
     private ?Place $place = null;
@@ -313,17 +319,8 @@ class Picture implements EntityInterface
     {
         $this->highlight = $highlight;
 
-        return $this;
-    }
-
-    public function isCover(): ?bool
-    {
-        return $this->cover;
-    }
-
-    public function setCover(?bool $cover): static
-    {
-        $this->cover = $cover;
+        // auto set highlightedTrip convenience property
+        $this->highlightedTrip = $highlight ? $this->trip : null;
 
         return $this;
     }
@@ -399,5 +396,17 @@ class Picture implements EntityInterface
     public function getCountry(): ?Country
     {
         return $this->placeTags->first()?->getCountry();
+    }
+
+    public function getHighlightedTrip(): ?Trip
+    {
+        return $this->highlightedTrip;
+    }
+
+    public function setHighlightedTrip(?Trip $highlightedTrip): static
+    {
+        $this->highlightedTrip = $highlightedTrip;
+
+        return $this;
     }
 }

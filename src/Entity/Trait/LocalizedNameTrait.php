@@ -3,12 +3,17 @@
 namespace App\Entity\Trait;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 trait LocalizedNameTrait
 {
+    #[Assert\NotBlank()]
+    #[Assert\Length(max:100)]
     #[ORM\Column(length: 100)]
     private ?string $nameFr = null;
 
+    #[Assert\NotBlank()]
+    #[Assert\Length(max: 100)]
     #[ORM\Column(length: 100)]
     private ?string $nameEn = null;
 

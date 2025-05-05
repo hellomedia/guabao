@@ -3,40 +3,39 @@
 namespace App\Entity;
 
 use App\Entity\Interface\EntityInterface;
+use App\Entity\Interface\HasPeriodInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
-use App\Entity\Tag\PlaceTag;
+use App\Entity\Trait\HasPeriodTrait;
 use App\Entity\Trait\KeyTrait;
 use App\Entity\Trait\LocalizedDescriptionTrait;
+use App\Entity\Trait\LocalizedHeadlineTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
 use App\Repository\TripRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TripRepository::class)]
-class Trip implements LocalizedNameInterface, LocalizedSlugInterface, EntityInterface
+class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodInterface, EntityInterface
 {
     use LocalizedNameTrait;
 
     use LocalizedSlugTrait;
 
+    use LocalizedHeadlineTrait;
+
     use LocalizedDescriptionTrait;
 
     use KeyTrait;
+
+    use HasPeriodTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    private ?\DateTimeImmutable $startedAt = null;
-
-    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    private ?\DateTimeImmutable $endedAt = null;
 
     /**
      * Let's link to countries directly from trip
@@ -47,50 +46,25 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     #[ORM\ManyToMany(targetEntity: Country::class)]
     private Collection $countries;
 
-    /**
-     * Unmapped. Convenience property.
-     * @var Collection<int, PlaceTag>
-     */
-    private Collection $placeTags;
+    #[ORM\OneToOne]
+    #[ORM\JoinColumn(nullable: true)] // nullable for fixtures
+    private ?Picture $cover = null;
 
     /**
-     * Unmapped. Convenience property
+     * @var Collection<int, Picture>
      */
-    private ?Picture $cover = null;
+    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'highlightedTrip')]
+    private Collection $highlights;
 
     public function __construct()
     {
         $this->countries = new ArrayCollection();
-        $this->placeTags = new ArrayCollection();
+        $this->highlights = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getStartedAt(): ?\DateTimeImmutable
-    {
-        return $this->startedAt;
-    }
-
-    public function setStartedAt(\DateTimeImmutable $startedAt): static
-    {
-        $this->startedAt = $startedAt;
-
-        return $this;
-    }
-
-    public function getEndedAt(): ?\DateTimeImmutable
-    {
-        return $this->endedAt;
-    }
-
-    public function setEndedAt(\DateTimeImmutable $endedAt): static
-    {
-        $this->endedAt = $endedAt;
-
-        return $this;
     }
 
     /**
@@ -118,26 +92,31 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     }
 
     /**
-     * @return Collection<int, PlaceTag>
+     * @return Collection<int, Picture>
      */
-    public function getPlaceTags(): Collection
+    public function getHighlights(): Collection
     {
-        return $this->placeTags;
+        return $this->highlights;
     }
 
-    /**
-     * @var Collection<int, PlaceTag>
-     */
-    public function setPlaceTags(Collection $placeTags): static
+    public function addHighlight(Picture $highlight): static
     {
-        $this->placeTags = $placeTags;
+        if (!$this->highlights->contains($highlight)) {
+            $this->highlights->add($highlight);
+            $highlight->setHighlightedTrip($this);
+        }
 
         return $this;
     }
 
-    public function setCover(?Picture $cover): static
+    public function removeHighlight(Picture $highlight): static
     {
-        $this->cover = $cover;
+        if ($this->highlights->removeElement($highlight)) {
+            // set the owning side to null (unless already changed)
+            if ($highlight->getHighlightedTrip() === $this) {
+                $highlight->setHighlightedTrip(null);
+            }
+        }
 
         return $this;
     }
@@ -147,12 +126,10 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
         return $this->cover;
     }
 
-    public function getPeriod(): string
+    public function setCover(Picture $cover): static
     {
-        if ($this->startedAt->format('m-Y') == $this->endedAt->format('m-Y')) {
-            return $this->startedAt->format('M Y');
-        }
+        $this->cover = $cover;
 
-        return $this->startedAt->format('M Y') . ' - ' . $this->endedAt->format('M Y');
+        return $this;
     }
 }
