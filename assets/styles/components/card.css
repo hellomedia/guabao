@@ -51,15 +51,24 @@
         }
 
         .card-period {
+            margin-bottom: 5px;
+        }
+
+        .card-bottom {
+            align-self: start;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 10px;
         }
 
         .card-headline {
-            margin-bottom: 3px;
         }
 
         .card-tags {
-            align-self: start;
-            margin-top: auto; /* pushes the element to the end of the flexbox container -- replacement for justify-self:end */
+            margin-top: 0;
             margin-bottom: 0;
         }
     }
