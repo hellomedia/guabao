@@ -30,7 +30,7 @@ trait LocalizedDescriptionTrait
         return $this->descriptionFr;
     }
 
-    public function setDescriptionFr(string $descriptionFr): static
+    public function setDescriptionFr(?string $descriptionFr): static
     {
         $this->descriptionFr = $descriptionFr;
 
@@ -42,7 +42,7 @@ trait LocalizedDescriptionTrait
         return $this->descriptionEn;
     }
 
-    public function setDescriptionEn(string $descriptionEn): static
+    public function setDescriptionEn(?string $descriptionEn): static
     {
         $this->descriptionEn = $descriptionEn;
 

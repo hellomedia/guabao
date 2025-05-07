@@ -2,9 +2,9 @@
 
     .light {
 
-        --color-theme: var(--color-annie-purple-dark);
+        --color-theme: var(--color-purple-dark);
         --color-theme-lighter: #9c664a;
-        --color-theme-lighter2: var(--color-annie-brown-light);
+        --color-theme-lighter2: var(--color-brown-light);
         --color-theme-lightest: #dec6ba;
         --color-theme-darker: #684431;
 
@@ -59,15 +59,15 @@
         --color-menu-border-current: var(--color-theme);
         --color-menu-text-mobile: var(--color-white);
 
-        --color-category-1: var(--color-annie-brown-dark);
-        --color-category-2: var(--color-annie-blue-dark);
-        --color-category-3: var(--color-annie-pink-dark);
+        --color-category-1: var(--color-brown-dark);
+        --color-category-2: var(--color-blue-dark);
+        --color-category-3: var(--color-pink-dark);
         --color-category-4: #10b981;
-        --color-category-5: var(--color-annie-grey-dark);
+        --color-category-5: var(--color-grey-dark);
         --color-category-6: #10b981;
-        --color-category-7: var(--color-annie-purple-dark);
-        --color-category-8: var(--color-annie-orange-dark);
-        --color-category-9: var(--color-annie-yellow-dark);
+        --color-category-7: var(--color-purple-dark);
+        --color-category-8: var(--color-orange-dark);
+        --color-category-9: var(--color-yellow-dark);
 
         /* MOBILE MENU */
         --color-mobile-menu-background: var(--color-white);

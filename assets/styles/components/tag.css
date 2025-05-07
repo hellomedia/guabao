@@ -1,0 +1,30 @@
+@layer components {
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 13px;
+        margin-bottom: 13px;
+        
+        .tag {
+            @apply text-sm;
+            color: var(--color-secondary-text);
+            border: 1px solid var(--color-secondary-text);
+            padding: 5px 10px;
+            border-radius: var(--radius-xl);
+        }
+
+        .tag-slow-travel {
+            /* background-color: var(--color-purple-dark);
+            color: white;
+            border-color: white; */
+        }
+    
+        .tag-hiking-trip {
+            /* background-color: var(--color-green-600);
+            color: white;
+            border-color: white; */
+        }
+    }
+
+}

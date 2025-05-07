@@ -3,6 +3,7 @@
 namespace App\Twig\Runtime;
 
 use App\Entity\Interface\LocalizedNameInterface;
+use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
 use App\Helper\Upload\UploadHelper;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;

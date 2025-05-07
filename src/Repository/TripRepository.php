@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Picture;
+use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
 use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -53,6 +54,17 @@ class TripRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('t')
             ->orderBy('t.startedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllByTag(TripTag $tag): array
+    {
+        return $this->createQueryBuilder('t')
+            ->join('t.tripTags', 'tt')
+            ->where('tt.slugEn = :slugEn')
+            ->orderBy('t.startedAt', 'DESC')
+            ->setParameter('slugEn', $tag->getSlugEn())
             ->getQuery()
             ->getResult();
     }

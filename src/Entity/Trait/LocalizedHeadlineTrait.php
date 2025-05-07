@@ -29,7 +29,7 @@ trait LocalizedHeadlineTrait
         return $this->headlineFr;
     }
 
-    public function setHeadlineFr(string $headlineFr): static
+    public function setHeadlineFr(?string $headlineFr): static
     {
         $this->headlineFr = $headlineFr;
 
@@ -41,7 +41,7 @@ trait LocalizedHeadlineTrait
         return $this->headlineEn;
     }
 
-    public function setHeadlineEn(string $headlineEn): static
+    public function setHeadlineEn(?string $headlineEn): static
     {
         $this->headlineEn = $headlineEn;
 

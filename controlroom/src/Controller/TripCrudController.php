@@ -11,10 +11,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class TripCrudController extends AbstractCrudController
 {
@@ -45,6 +47,8 @@ class TripCrudController extends AbstractCrudController
         yield AssociationField::new('highlights')
             ->setTemplatePath('@controlroom/field/picture_collection_thumbnails.html.twig')
             ->onlyOnDetail();
+    
+        yield ChoiceField::new('type');
         
         yield TextField::new('nameFr', 'Name FR');
         yield TextField::new('nameEn', 'Name EN');

@@ -15,6 +15,7 @@ use App\Entity\Place;
 use App\Entity\Tag\FoodTag;
 use App\Entity\Tag\PlaceTag;
 use App\Entity\Tag\Tag;
+use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
@@ -91,21 +92,20 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Fruit', 'fa fa-lemon', Fruit::class);
         yield MenuItem::linkToCrud('Drink', 'fa fa-lemon', Drink::class);
         yield MenuItem::linkToCrud('Bakery Item', 'fa fa-lemon', BakeryItem::class);
+        yield MenuItem::linkToCrud('Food Tag', 'fa fa-tag', FoodTag::class);
 
         yield MenuItem::section('Trips');
         yield MenuItem::linkToCrud('Trip', 'fa fa-globe', Trip::class);
+        yield MenuItem::linkToCrud('Trip Tags', 'fa fa-tag', TripTag::class);
 
         yield MenuItem::section('Pictures');
         yield MenuItem::linkToCrud('Picture', 'fa fa-photo', Picture::class);
+        yield MenuItem::linkToCrud('Tag', 'fa fa-tag', Tag::class);
 
         yield MenuItem::section('Places');
         yield MenuItem::linkToCrud('Place', 'fa fa-map-marker', Place::class);
         yield MenuItem::linkToCrud('Place Tag', 'fa fa-tag', PlaceTag::class);
         yield MenuItem::linkToCrud('Country', 'fa fa-map-marker', Country::class);
-
-        yield MenuItem::section('Tags');
-        yield MenuItem::linkToCrud('Tag', 'fa fa-tag', Tag::class);
-        yield MenuItem::linkToCrud('Food Tag', 'fa fa-tag', FoodTag::class);
 
         yield MenuItem::section('Users');
         yield MenuItem::linkToCrud('User', 'fa fa-user', User::class);

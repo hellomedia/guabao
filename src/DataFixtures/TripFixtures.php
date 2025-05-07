@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Country;
+use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -30,6 +31,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             CountryFixtures::class,
+            TripTagFixtures::class,
         ];
     }
 
@@ -41,6 +43,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '14/09/2023',
             'endedAt' => '29/08/2024',
             'countries' => ['China', 'Thailand', 'Malaysia', 'Laos', 'Japan'],
+            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
         ],
         [
             'key' => self::TRIP_THAILAND_22,
@@ -49,6 +52,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '06/05/2022',
             'endedAt' => '19/11/2022',
             'countries' => ['Thailand', 'Vietnam', 'Malaysia', 'Indonesia'],
+            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
         ],
         [
             'key' => self::TRIP_SPAIN_22,
@@ -57,6 +61,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '12/02/2022',
             'endedAt' => '10/03/2022',
             'countries' => ['Spain'],
+            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::HIKING, TripTagFixtures::SOLO],
         ],
         [
             'key' => self::TRIP_VERDON_21,
@@ -65,6 +70,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '16/09/2021',
             'endedAt' => '25/09/2021',
             'countries' => ['France'],
+            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::SOLO],
         ],
         [
             'key' => self::TRIP_MORGON_21,
@@ -73,6 +79,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '20/06/2021',
             'endedAt' => '26/06/2021',
             'countries' => ['France'],
+            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
         ],
         [
             'key' => self::TRIP_MARTELANGE_21,
@@ -81,6 +88,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '29/05/2021',
             'endedAt' => '30/05/2021',
             'countries' => ['Belgium'],
+            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
         ],
         [
             'key' => self::TRIP_SART_TILMAN_21,
@@ -89,6 +97,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '15/09/2020',
             'endedAt' => '16/09/2020',
             'countries' => ['Belgium'],
+            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::SOLO],
         ],
         [
             'key' => self::TRIP_SPAIN_20,
@@ -97,6 +106,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '1/03/2020',
             'endedAt' => '16/03/2020',
             'countries' => ['Spain'],
+            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::HIKING, TripTagFixtures::SOLO],
         ],
         [
             'key' => self::TRIP_SARDAIGNE_19,
@@ -105,6 +115,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '11/10/2019',
             'endedAt' => '19/10/2019',
             'countries' => ['Italy'],
+            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
         ],
         [
             'key' => self::TRIP_CHINA_18,
@@ -113,6 +124,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '15/10/2018',
             'endedAt' => '15/01/2019',
             'countries' => ['China', 'Taiwan', 'Vietnam'],
+            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
         ],
         [
             'key' => self::TRIP_SWITZERLAND_18,
@@ -121,6 +133,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '22/08/2018',
             'endedAt' => '29/08/2018',
             'countries' => ['Switzerland'],
+            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
         ],
         [
             'key' => self::TRIP_VERCORS_17,
@@ -129,6 +142,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '12/08/2017',
             'endedAt' => '19/08/2017',
             'countries' => ['France'],
+            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
             'headlineFr' => 'Une semaine de rando en autonomie dans la plus grande réserve naturelle de France',
             'headlineEn' => '5 day self-supported hike in the largest natural reserve in France',
             'descriptionFr' => "
@@ -167,6 +181,7 @@ To this day, my most stunning and immersive hiking experience!",
             'startedAt' => '07/03/2015',
             'endedAt' => '30/03/2015',
             'countries' => ['China', 'Philippines'],
+            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
         ],
         [
             'key' => self::TRIP_PHILIPPINES_12,
@@ -175,6 +190,7 @@ To this day, my most stunning and immersive hiking experience!",
             'startedAt' => '04/12/2012',
             'endedAt' => '11/01/2013',
             'countries' => ['Korea', 'Philippines'],
+            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
         ],
     ];
 
@@ -201,6 +217,10 @@ To this day, my most stunning and immersive hiking experience!",
             
             foreach ($item['countries'] as $country) {
                 $trip->addCountry($this->getReference('country-' . $country, Country::class));
+            }
+
+            foreach ($item['tripTags'] as $tag) {
+                $trip->addTripTag($this->getReference('triptag-' . $tag, TripTag::class));
             }
 
             $manager->persist($trip);

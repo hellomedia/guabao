@@ -6,12 +6,14 @@ use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\HasPeriodInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
+use App\Entity\Tag\TripTag;
 use App\Entity\Trait\HasPeriodTrait;
 use App\Entity\Trait\KeyTrait;
 use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedHeadlineTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
+use App\Enum\TripType;
 use App\Repository\TripRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -56,10 +58,17 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'highlightedTrip')]
     private Collection $highlights;
 
+    /**
+     * @var Collection<int, TripTag>
+     */
+    #[ORM\ManyToMany(targetEntity: TripTag::class)]
+    private Collection $tripTags;
+
     public function __construct()
     {
         $this->countries = new ArrayCollection();
         $this->highlights = new ArrayCollection();
+        $this->tripTags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,6 +138,30 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     public function setCover(Picture $cover): static
     {
         $this->cover = $cover;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TripTag>
+     */
+    public function getTripTags(): Collection
+    {
+        return $this->tripTags;
+    }
+
+    public function addTripTag(TripTag $tripTag): static
+    {
+        if (!$this->tripTags->contains($tripTag)) {
+            $this->tripTags->add($tripTag);
+        }
+
+        return $this;
+    }
+
+    public function removeTripTag(TripTag $tripTag): static
+    {
+        $this->tripTags->removeElement($tripTag);
 
         return $this;
     }

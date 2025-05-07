@@ -1,49 +1,35 @@
 {% extends 'layout/default.html.twig' %}
 
-{% block title %}
-	{{ 'Trips'|trans }}
-{% endblock %}
-
 {% block body_extra_classes %}with-cards{% endblock %}
 
 {% block content %}
 	
-    <div id="trips" class="cards">
-        {% for trip in trips %}
-            <div class="card card-trip" id="card-{{ trip.id }}">
-                {% if trip.cover %}
-                    <a href="{{ path(trip) }}" class="card-image-wrapper">
-                        <img src="{{ vich_uploader_asset(trip.cover)|imagine_filter('thumb_card') }}"/>
-                    </a>
-                {% else %}
-                    <a href="{{ path(trip) }}" class="card-image-wrapper">
-                        {% include 'picture/_placeholder_image.html.twig' %}
-                    </a>
-                {% endif %}
-
-                <div class="card-info">
-                    <h3 class="card-title">
-                        <a href="{{ path(trip) }}">
-                            {{ trip.name(app.locale) }}
-                        </a>
-                    </h3>
-
-                    <div class="card-period">
-                        {{ trip.period }}
-                    </div>
-
-                    <p class="card-headline">
-                        {{ trip.headline(app.locale) }}
-                    </p>
-
-                    <div class="card-tags">
-                        <p></p>
-                    </div>
-
-                </div>
-            </div>
-
-        {% endfor %}
-    </div>
+    {# <turbo-frame id="trips"> #}
+        <div id="trip-filters">
+            <a 
+                href="{{ path('trip_index') }}"
+                class="{{ app.current_route == 'trip_index' ? 'current' }}"
+            >
+                {{ 'All trips'|trans }}
+            </a>
+            <a 
+                href="{{ path('trip_index_slow_travel') }}"
+                class="{{ app.current_route == 'trip_index_slow_travel' ? 'current' }}"
+            >
+                {{ 'Slow travel'|trans }}
+            </a>
+            <a 
+                href="{{ path('trip_index_hiking') }}"
+                class="{{ app.current_route == 'trip_index_hiking' ? 'current' }}"
+            >
+                {{ 'Hiking trips'|trans }}
+            </a>
+        </div>
+        <div id="trips" class="cards">
+            {% for trip in trips %}
+                {% include 'trip/_card.html.twig' %}
+            {% endfor %}
+        </div>
+    {# </turbo-frame> #}
 
 {% endblock %}
