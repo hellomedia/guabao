@@ -2,7 +2,7 @@
 
 namespace Controlroom\Controller;
 
-use App\Entity\FoodItem\Dish;
+use App\Entity\Food;
 use App\Entity\Tag\FoodTag;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -19,7 +19,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class DishCrudController extends AbstractCrudController
+class FoodCrudController extends AbstractCrudController
 {
     public function __construct(
         private UrlGeneratorInterface $urlGenerator
@@ -27,7 +27,7 @@ class DishCrudController extends AbstractCrudController
 
     public static function getEntityFqcn(): string
     {
-        return Dish::class;
+        return Food::class;
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -71,7 +71,7 @@ class DishCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         $viewPictures = Action::new('viewPictures', 'Pictures')
-            ->linkToUrl(function (Dish $dish) {
+            ->linkToUrl(function (Food $dish) {
                 return $this->urlGenerator->generate('controlroom_picture_index', [
                     'filters' => [
                         'dish' => [

@@ -2,7 +2,7 @@
 
 namespace App\Helper;
 
-use App\Entity\FoodItem;
+use App\Entity\Food;
 use App\Entity\Trip;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -16,7 +16,7 @@ class BreadcrumbsHelper
 
     private array $breadcrumbs = [];
 
-    public function addBreadcrumb(Trip|FoodItem|string $item, ?string $route = null, ?array $routeParams = [], ?bool $isAdmin = null): void
+    public function addBreadcrumb(Trip|Food|string $item, ?string $route = null, ?array $routeParams = [], ?bool $isAdmin = null): void
     {
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 

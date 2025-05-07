@@ -13,7 +13,6 @@ use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedHeadlineTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
-use App\Enum\TripType;
 use App\Repository\TripRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

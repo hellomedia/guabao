@@ -44,6 +44,8 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'endedAt' => '29/08/2024',
             'countries' => ['China', 'Thailand', 'Malaysia', 'Laos', 'Japan'],
             'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
+            // 'headlineFr' => '12 mois de slow travel dans 4 pays',
+            // 'headlineEn' => '12 month slow travel in 4 countries',
         ],
         [
             'key' => self::TRIP_THAILAND_22,
@@ -53,6 +55,8 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'endedAt' => '19/11/2022',
             'countries' => ['Thailand', 'Vietnam', 'Malaysia', 'Indonesia'],
             'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
+            // 'headlineFr' => 'Long séjours à Chiang Mai, Da Nang et Bandung',
+            // 'headlineEn' => 'Long stays in Chiang Mai, Da Nang and Bandung',
         ],
         [
             'key' => self::TRIP_SPAIN_22,
@@ -62,6 +66,8 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'endedAt' => '10/03/2022',
             'countries' => ['Spain'],
             'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::HIKING, TripTagFixtures::SOLO],
+            'headlineFr' => '1 mois dans un village de l\'arrière pays et 1 rando de 3 jours',
+            'headlineEn' => '1 month in a secluded village and a 3-day hiking trip',
         ],
         [
             'key' => self::TRIP_VERDON_21,
@@ -71,6 +77,8 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'endedAt' => '25/09/2021',
             'countries' => ['France'],
             'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::SOLO],
+            'headlineFr' => '1 nuit en rando solo',
+            'headlineEn' => '1 solo hiking night in the hills',
         ],
         [
             'key' => self::TRIP_MORGON_21,
@@ -80,6 +88,8 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'endedAt' => '26/06/2021',
             'countries' => ['France'],
             'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
+            'headlineFr' => '5 jours de rando en autonomie',
+            'headlineEn' => '5 day self-supported hike',
         ],
         [
             'key' => self::TRIP_MARTELANGE_21,
@@ -89,6 +99,8 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'endedAt' => '30/05/2021',
             'countries' => ['Belgium'],
             'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
+            'headlineFr' => 'Nuit en hamac dans les bois',
+            'headlineEn' => 'One night of camping in the woods',
         ],
         [
             'key' => self::TRIP_SART_TILMAN_21,
@@ -98,6 +110,8 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'endedAt' => '16/09/2020',
             'countries' => ['Belgium'],
             'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::SOLO],
+            'headlineFr' => 'Nuit en hamac dans les bois du Sart-Tilman',
+            'headlineEn' => 'Solo night in the local woods',
         ],
         [
             'key' => self::TRIP_SPAIN_20,
@@ -107,6 +121,8 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'endedAt' => '16/03/2020',
             'countries' => ['Spain'],
             'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::HIKING, TripTagFixtures::SOLO],
+            'headlineFr' => '2 semaines dans un village et rando solo de 2 jours',
+            'headlineEn' => '2 weeks in a secluded village and 2-day solo hike',
         ],
         [
             'key' => self::TRIP_SARDAIGNE_19,
@@ -116,6 +132,8 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'endedAt' => '19/10/2019',
             'countries' => ['Italy'],
             'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
+            'headlineFr' => '5 jours de rando en autonomie',
+            'headlineEn' => '5 day self-supported hike',
         ],
         [
             'key' => self::TRIP_CHINA_18,
@@ -125,6 +143,8 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'endedAt' => '15/01/2019',
             'countries' => ['China', 'Taiwan', 'Vietnam'],
             'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
+            'headlineFr' => 'Premier long trip de plusieurs mois',
+            'headlineEn' => 'First multiple-month trip',
         ],
         [
             'key' => self::TRIP_SWITZERLAND_18,
@@ -134,6 +154,8 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'endedAt' => '29/08/2018',
             'countries' => ['Switzerland'],
             'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
+            'headlineFr' => '5 jours de rando en autonomie',
+            'headlineEn' => '5 day self-supported hike',
         ],
         [
             'key' => self::TRIP_VERCORS_17,
@@ -143,8 +165,8 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'endedAt' => '19/08/2017',
             'countries' => ['France'],
             'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
-            'headlineFr' => 'Une semaine de rando en autonomie dans la plus grande réserve naturelle de France',
-            'headlineEn' => '5 day self-supported hike in the largest natural reserve in France',
+            'headlineFr' => '5 jours de rando en autonomie',
+            'headlineEn' => '5 day self-supported hike',
             'descriptionFr' => "
             Première expérience de rando de 5 jours en autonmie en bivouac !
 
@@ -182,6 +204,8 @@ To this day, my most stunning and immersive hiking experience!",
             'endedAt' => '30/03/2015',
             'countries' => ['China', 'Philippines'],
             'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
+            'headlineFr' => '3 semaines dans un petit resort isolé',
+            'headlineEn' => '3 weeks in a small secluded resort',
         ],
         [
             'key' => self::TRIP_PHILIPPINES_12,
@@ -191,6 +215,8 @@ To this day, my most stunning and immersive hiking experience!",
             'endedAt' => '11/01/2013',
             'countries' => ['Korea', 'Philippines'],
             'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
+            'headlineFr' => '1 mois à la découverte de Séoul et de Bacolod',
+            'headlineEn' => '1 month between Seoul and Bacolod',
         ],
     ];
 

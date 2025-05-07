@@ -2,28 +2,28 @@
 
 namespace App\Controller;
 
-use App\Entity\FoodItem;
-use App\Repository\FoodItemRepository;
+use App\Entity\Food;
+use App\Repository\FoodRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class FoodController extends BaseController
 {
     #[Route('/food', name: 'food_index')]
-    public function index(FoodItemRepository $foodItemRepository): Response
+    public function index(FoodRepository $FoodRepository): Response
     {
-        $foodItems = $foodItemRepository->findAll();
+        $Foods = $FoodRepository->findAll();
         
         return $this->render('food/index.html.twig', [
-            'foodItems' => $foodItems
+            'Foods' => $Foods
         ]);
     }
 
-    #[Route('/food/{id:foodItem}', name: 'food_show')]
-    public function show(FoodItem $foodItem): Response
+    #[Route('/food/{id:Food}', name: 'food_show')]
+    public function show(Food $Food): Response
     {
         return $this->render('food/show.html.twig', [
-            'foodItem' => $foodItem
+            'Food' => $Food
         ]);
     }
 }

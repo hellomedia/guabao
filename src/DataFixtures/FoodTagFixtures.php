@@ -10,6 +10,34 @@ class FoodTagFixtures extends Fixture
 {
     private const array FOOD_TAGS = [
         [
+            'nameFr' => 'Déjeuner',
+            'nameEn' => 'Breakfast',
+        ],
+        [
+            'nameFr' => 'Repas',
+            'nameEn' => 'Dish',
+        ],
+        [
+            'nameFr' => 'Dessert',
+            'nameEn' => 'Dessert',
+        ],
+        [
+            'nameFr' => 'Boulangerie',
+            'nameEn' => 'Bakery',
+        ],
+        [
+            'nameFr' => 'Fruit',
+            'nameEn' => 'Fruit',
+        ],
+        [
+            'nameFr' => 'Soupe',
+            'nameEn' => 'Soup',
+        ],
+        [
+            'nameFr' => 'Boisson',
+            'nameEn' => 'Drink',
+        ],
+        [
             'nameFr' => 'Street food',
             'nameEn' => 'Street food',
         ],
@@ -24,6 +52,14 @@ class FoodTagFixtures extends Fixture
         [
             'nameFr' => 'Food court',
             'nameEn' => 'Food court',
+        ],
+        [
+            'nameFr' => 'Végé',
+            'nameEn' => 'Vegetarian',
+        ],
+        [
+            'nameFr' => 'Courses',
+            'nameEn' => 'Groceries',
         ],
     ];
 

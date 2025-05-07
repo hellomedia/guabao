@@ -2,12 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\FoodItem\BakeryItem;
-use App\Entity\FoodItem\Breakfast;
-use App\Entity\FoodItem\Dessert;
-use App\Entity\FoodItem\Dish;
-use App\Entity\FoodItem\Drink;
-use App\Entity\FoodItem\Fruit;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Tag\PlaceTag;
 use App\Entity\Tag\Tag;
@@ -45,39 +39,9 @@ class Picture implements EntityInterface
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $takenAt = null;
 
-    // 2 things:
-    //   - Keep association with Food Item link for querying across all food items
-    //   - This is the inversed association that links fooditems and child types (dish, etc.) to their picture
-    // BUT it's not the association that gets set in picture form in easy admin (see $dish, etc. below)
-    // ===> we synchronise fooditem property in the settter for all types (setDish(), etc.)
     #[ORM\ManyToOne(inversedBy: 'pictures')]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?FoodItem $foodItem = null;
-
-    // Add associations to specific types for easyadmin
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Dish $dish = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Breakfast $breakfast = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Drink $drink = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?BakeryItem $bakeryItem = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Dessert $dessert = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Fruit $fruit = null;
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?Food $Food = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
@@ -178,110 +142,14 @@ class Picture implements EntityInterface
         return $this;
     }
 
-    public function getFoodItem(): ?FoodItem
+    public function getFood(): ?Food
     {
-        return $this->foodItem;
+        return $this->Food;
     }
 
-    public function setFoodItem(?FoodItem $foodItem): static
+    public function setFood(?Food $Food): static
     {
-        $this->foodItem = $foodItem;
-
-        return $this;
-    }
-
-    public function getDish(): ?Dish
-    {
-        return $this->dish;
-    }
-
-    public function setDish(?Dish $dish): static
-    {
-        $this->dish = $dish;
-
-        if ($dish != null) {
-            $this->foodItem = $dish;
-        }
-
-        return $this;
-    }
-
-    public function getBreakfast(): ?Breakfast
-    {
-        return $this->breakfast;
-    }
-
-    public function setBreakfast(?Breakfast $breakfast): static
-    {
-        $this->breakfast = $breakfast;
-
-        if ($breakfast != null) {
-            $this->foodItem = $breakfast;
-        }
-
-        return $this;
-    }
-
-    public function getDessert(): ?Dessert
-    {
-        return $this->dessert;
-    }
-
-    public function setDessert(?Dessert $dessert): static
-    {
-        $this->dessert = $dessert;
-
-        if ($dessert != null) {
-            $this->foodItem = $dessert;
-        }
-
-        return $this;
-    }
-
-    public function getFruit(): ?Fruit
-    {
-        return $this->fruit;
-    }
-
-    public function setFruit(?Fruit $fruit): static
-    {
-        $this->fruit = $fruit;
-
-        if ($fruit != null) {
-            $this->foodItem = $fruit;
-        }
-
-        return $this;
-    }
-
-    public function getBakeryItem(): ?BakeryItem
-    {
-        return $this->bakeryItem;
-    }
-
-    public function setBakeryItem(?BakeryItem $bakeryItem): static
-    {
-        $this->bakeryItem = $bakeryItem;
-
-        if ($bakeryItem != null) {
-            $this->foodItem = $bakeryItem;
-        }
-
-        return $this;
-    }
-
-    public function getDrink(): ?Drink
-    {
-        return $this->drink;
-    }
-
-    public function setDrink(?Drink $drink): static
-    {
-        $this->drink = $drink;
-
-        if ($drink != null) {
-            $this->foodItem = $drink;
-        }
+        $this->Food = $Food;
 
         return $this;
     }

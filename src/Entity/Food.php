@@ -2,12 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\FoodItem\BakeryItem;
-use App\Entity\FoodItem\Breakfast;
-use App\Entity\FoodItem\Dessert;
-use App\Entity\FoodItem\Dish;
-use App\Entity\FoodItem\Drink;
-use App\Entity\FoodItem\Fruit;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
@@ -16,23 +10,13 @@ use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
 use App\Enum\Level;
 use App\Enum\Month;
-use App\Repository\FoodItemRepository;
+use App\Repository\FoodRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: FoodItemRepository::class)]
-#[ORM\InheritanceType('JOINED')]
-#[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
-#[ORM\DiscriminatorMap([
-    'dish' => Dish::class,
-    'breakfast' => Breakfast::class,
-    'dessert' => Dessert::class,
-    'drink' => Drink::class,
-    'fruit' => Fruit::class,
-    'bakery_item' => BakeryItem::class,
-])]
-abstract class FoodItem implements LocalizedNameInterface, LocalizedSlugInterface, EntityInterface
+#[ORM\Entity(repositoryClass: FoodRepository::class)]
+class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInterface
 {
     use LocalizedNameTrait;
 
@@ -61,7 +45,7 @@ abstract class FoodItem implements LocalizedNameInterface, LocalizedSlugInterfac
     /**
      * @var Collection<int, Picture>
      */
-    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'foodItem')]
+    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'Food')]
     private Collection $pictures;
 
     /**
@@ -153,7 +137,7 @@ abstract class FoodItem implements LocalizedNameInterface, LocalizedSlugInterfac
     {
         if (!$this->pictures->contains($picture)) {
             $this->pictures->add($picture);
-            $picture->setFoodItem($this);
+            $picture->setFood($this);
         }
 
         return $this;
@@ -163,8 +147,8 @@ abstract class FoodItem implements LocalizedNameInterface, LocalizedSlugInterfac
     {
         if ($this->pictures->removeElement($picture)) {
             // set the owning side to null (unless already changed)
-            if ($picture->getFoodItem() === $this) {
-                $picture->setFoodItem(null);
+            if ($picture->getFood() === $this) {
+                $picture->setFood(null);
             }
         }
 

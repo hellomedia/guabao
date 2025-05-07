@@ -2,7 +2,7 @@
 
 namespace Controlroom\Controller;
 
-use App\Entity\FoodItem\Breakfast;
+use App\Entity\Food\Breakfast;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;

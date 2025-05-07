@@ -74,7 +74,7 @@ class PictureCrudController extends AbstractCrudController
             ->setHelp('Leave empty for auto-fill from exif data');
 
         if ($pageName == Crud::PAGE_INDEX) {
-            yield AssociationField::new('foodItem');
+            yield AssociationField::new('Food');
         }
 
         if ($pageName != Crud::PAGE_INDEX) {

@@ -3,12 +3,7 @@
 namespace Controlroom\Controller;
 
 use App\Entity\Country;
-use App\Entity\FoodItem\BakeryItem;
-use App\Entity\FoodItem\Breakfast;
-use App\Entity\FoodItem\Dessert;
-use App\Entity\FoodItem\Dish;
-use App\Entity\FoodItem\Drink;
-use App\Entity\FoodItem\Fruit;
+use App\Entity\Food;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Picture;
 use App\Entity\Place;
@@ -85,18 +80,13 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-dashboard');
 
-        yield MenuItem::section('Food Items');
-        yield MenuItem::linkToCrud('Dish', 'fa fa-lemon', Dish::class);
-        yield MenuItem::linkToCrud('Breakfast', 'fa fa-lemon', Breakfast::class);
-        yield MenuItem::linkToCrud('Dessert', 'fa fa-lemon', Dessert::class);
-        yield MenuItem::linkToCrud('Fruit', 'fa fa-lemon', Fruit::class);
-        yield MenuItem::linkToCrud('Drink', 'fa fa-lemon', Drink::class);
-        yield MenuItem::linkToCrud('Bakery Item', 'fa fa-lemon', BakeryItem::class);
+        yield MenuItem::section('Food');
+        yield MenuItem::linkToCrud('Food', 'fa fa-lemon', Food::class);
         yield MenuItem::linkToCrud('Food Tag', 'fa fa-tag', FoodTag::class);
 
         yield MenuItem::section('Trips');
         yield MenuItem::linkToCrud('Trip', 'fa fa-globe', Trip::class);
-        yield MenuItem::linkToCrud('Trip Tags', 'fa fa-tag', TripTag::class);
+        yield MenuItem::linkToCrud('Trip Tag', 'fa fa-tag', TripTag::class);
 
         yield MenuItem::section('Pictures');
         yield MenuItem::linkToCrud('Picture', 'fa fa-photo', Picture::class);
