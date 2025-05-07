@@ -7,9 +7,9 @@
 {% block content %}
 	
     <div id="food" class="cards">
-        {% for Food in Foods %}
+        {% for food in foods %}
             <div class="card food-item">
-                {{ Food|trans }}
+                {{ food|trans }}
             </div>
         {% endfor %}
     </div>

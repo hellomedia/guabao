@@ -96,7 +96,7 @@ class CountryFixtures extends Fixture
             $country->setNameFr($item['nameFr']);
             $country->setNameEn($item['nameEn']);
 
-            $this->addReference('country-' . $item['nameEn'], $country);
+            $this->setReference('country-' . $item['nameEn'], $country);
         
             $manager->persist($country);
         }

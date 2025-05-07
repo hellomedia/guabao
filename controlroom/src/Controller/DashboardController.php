@@ -5,6 +5,7 @@ namespace Controlroom\Controller;
 use App\Entity\Country;
 use App\Entity\Food;
 use App\Entity\Interface\EntityInterface;
+use App\Entity\Meal;
 use App\Entity\Picture;
 use App\Entity\Place;
 use App\Entity\Tag\FoodTag;
@@ -82,6 +83,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Food');
         yield MenuItem::linkToCrud('Food', 'fa fa-lemon', Food::class);
+        yield MenuItem::linkToCrud('Meal', 'fa fa-meal', Meal::class);
         yield MenuItem::linkToCrud('Food Tag', 'fa fa-tag', FoodTag::class);
 
         yield MenuItem::section('Trips');

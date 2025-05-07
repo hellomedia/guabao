@@ -2,15 +2,11 @@
 
 namespace Controlroom\Controller;
 
-use App\Entity\Meal;
 use App\Entity\Picture;
 use App\Entity\Tag\PlaceTag;
 use App\Entity\Tag\Tag;
 use App\Helper\GoogleMapsApiHelper;
-use App\Helper\GpsParsingHelper;
-use App\Repository\MealRepository;
-use App\Repository\PlaceRepository;
-use App\Repository\TripRepository;
+use App\Helper\PictureAutoFillHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -28,16 +24,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
-use phpDocumentor\Reflection\Types\Boolean;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PictureCrudController extends AbstractCrudController
 {
     public function __construct(
-        private GpsParsingHelper $gpsParsingHelper,
-        private TripRepository $tripRepository,
-        private PlaceRepository $placeRepository,
-        private MealRepository $mealRepository,
+        private PictureAutoFillHelper $autoFillHelper,
         private GoogleMapsApiHelper $mapsApiHelper,
     )
     {
@@ -151,106 +143,27 @@ class PictureCrudController extends AbstractCrudController
 
     private function _updateAutoFields(Picture $picture, $entityManager)
     {
-        $exif = $this->_extractExifData($picture);
+        $exif = $this->autoFillHelper->_extractExifData($picture);
 
-        $this->_setTakenAt($picture, $exif);
+        $this->autoFillHelper->_setTakenAt($picture, $exif);
 
-        $this->_setCoordinates($picture, $exif);
+        $this->autoFillHelper->_setCoordinates($picture, $exif);
 
-        $this->_autoAssignPlace($picture, $entityManager);
+        $this->autoFillHelper->_autoAssignPlace($picture, $entityManager);
 
-        $this->_setTrip($picture);
+        if ($picture->getPlace() == null) {
+            $this->_suggestPlace($picture);
+        }
 
-        $this->_setMeal($picture);
+        $this->autoFillHelper->_setTrip($picture);
+
+        $this->autoFillHelper->_setMeal($picture);
     }
 
-    private function _extractExifData(Picture $picture): array|false
+    private function _suggestPlace(Picture $picture)
     {
-        $file = $picture->getImageFile();
-
-        if (!$file instanceof \SplFileInfo || !file_exists($file->getPathname())) {
-            return false;
-        }
-
-        return @exif_read_data($file->getPathname());
-    }
-
-    private function _setTakenAt(Picture $picture, array|false $exif)
-    {
-        if ($picture->getTakenAt() !== null) {
-            return; // already set manually
-        }
-
-        if (!empty($exif['DateTimeOriginal'])) {
-            $date = \DateTimeImmutable::createFromFormat('Y:m:d H:i:s', $exif['DateTimeOriginal']);
-            if ($date) {
-                $picture->setTakenAt($date);
-            }
-        }
-    }
-
-    private function _setTrip(Picture $picture)
-    {
-        if ($picture->getTrip() !== null) {
-            return; // already set manually
-        }
-
-        $trip = $this->tripRepository->findOneByPictureDate($picture->getTakenAt());
-
-        if ($trip) {
-            $picture->setTrip($trip);
-        }
-    }
-
-    private function _setMeal(Picture $picture)
-    {
-        if ($picture->isMeal() == false) {
-            return;
-        }
-
-        if ($picture->getMeal() !== null) {
-            return; // already set
-        }
-
-        $meal = $this->mealRepository->findOneByPictureDate($picture->getTakenAt());
-
-        if (!$meal) {
-            $meal = new Meal;
-            $meal->setEnjoyedAt($picture->getTakenAt());
-        }
-
-        $picture->setMeal($meal);
-    }
-
-    private function _setCoordinates(Picture $picture, array|false $exif)
-    {
-        if (!empty($exif['GPSLatitude']) && !empty($exif['GPSLongitude'])) {
-            $lat = $this->gpsParsingHelper->getGpsDecimal($exif['GPSLatitude'], $exif['GPSLatitudeRef']);
-            $lng = $this->gpsParsingHelper->getGpsDecimal($exif['GPSLongitude'], $exif['GPSLongitudeRef']);
-
-            $picture->setLatitude($lat);
-            $picture->setLongitude($lng);
-        }
-    }
-
-    private function _autoAssignPlace(Picture $picture, EntityManagerInterface $entityManager): void
-    {
-        if ($picture->getPlace() !== null) {
-            return; // already set manually
-        }
-
         $lat = $picture->getLatitude();
         $lng = $picture->getLongitude();
-
-        if ($lat === null || $lng === null) {
-            return;
-        }
-
-        $nearby = $this->placeRepository->findNearby($lat, $lng);
-        
-        if ($nearby !== null) {
-            $picture->setPlace($nearby);
-        }
 
         // No nearby match, suggest new place
         // Suggestion only — don't persist

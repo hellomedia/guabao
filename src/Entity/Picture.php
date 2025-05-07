@@ -41,7 +41,7 @@ class Picture implements EntityInterface
 
     #[ORM\ManyToOne(inversedBy: 'pictures')]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private ?Food $Food = null;
+    private ?Food $food = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
@@ -150,12 +150,12 @@ class Picture implements EntityInterface
 
     public function getFood(): ?Food
     {
-        return $this->Food;
+        return $this->food;
     }
 
-    public function setFood(?Food $Food): static
+    public function setFood(?Food $food): static
     {
-        $this->Food = $Food;
+        $this->food = $food;
 
         return $this;
     }

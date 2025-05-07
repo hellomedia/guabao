@@ -6,6 +6,7 @@ use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
 use App\Entity\Tag\FoodTag;
+use App\Entity\FoodType;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
 use App\Enum\Level;
@@ -27,37 +28,40 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     #[ORM\Column(type: 'integer')]
     protected int $id;
 
-    #[ORM\Column(enumType: Level::class, nullable: false)]
+    #[ORM\Column(enumType: Level::class, nullable: true)]
     protected ?Level $loveLevel = null;
 
-    #[ORM\Column(enumType: Level::class, nullable: false)]
+    #[ORM\Column(enumType: Level::class, nullable: true)]
     protected ?Level $localLevel = null;
 
-    #[ORM\Column(enumType: Level::class, nullable: false)]
+    #[ORM\Column(enumType: Level::class, nullable: true)]
     protected ?Level $healthyLevel = null;
 
-    #[ORM\Column(nullable: true, enumType: Month::class)]
+    #[ORM\Column(enumType: Month::class, nullable: true)]
     private ?Month $seasonStart = null;
 
-    #[ORM\Column(nullable: true, enumType: Month::class)]
+    #[ORM\Column(enumType: Month::class, nullable: true)]
     private ?Month $seasonEnd = null;
 
     /**
      * @var Collection<int, Picture>
      */
-    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'Food')]
+    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'food')]
     private Collection $pictures;
 
     /**
      * @var Collection<int, Tag>
      */
     #[ORM\ManyToMany(targetEntity: FoodTag::class)]
-    private Collection $foodTags;
+    private Collection $tags;
+
+    #[ORM\ManyToOne]
+    private ?FoodType $type = null;
 
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
-        $this->foodTags = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -158,23 +162,35 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     /**
      * @return Collection<int, FoodTag>
      */
-    public function getFoodTags(): Collection
+    public function getTags(): Collection
     {
-        return $this->foodTags;
+        return $this->tags;
     }
 
-    public function addFoodTag(FoodTag $foodTag): static
+    public function addTag(FoodTag $tag): static
     {
-        if (!$this->foodTags->contains($foodTag)) {
-            $this->foodTags->add($foodTag);
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
         }
 
         return $this;
     }
 
-    public function removeFoodTag(FoodTag $foodTag): static
+    public function removeTag(FoodTag $tag): static
     {
-        $this->foodTags->removeElement($foodTag);
+        $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getType(): ?FoodType
+    {
+        return $this->type;
+    }
+
+    public function setType(?FoodType $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }

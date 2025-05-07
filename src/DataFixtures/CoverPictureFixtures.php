@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Picture;
 use App\Entity\Trip;
+use App\Helper\PictureAutoFillHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -13,6 +14,13 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class CoverPictureFixtures extends Fixture implements DependentFixtureInterface
 {
+
+    public function __construct(
+        private PictureAutoFillHelper $autoFillHelper,
+    )
+    {   
+    }
+
     public function getDependencies(): array
     {
         return [
@@ -53,11 +61,27 @@ class CoverPictureFixtures extends Fixture implements DependentFixtureInterface
             $picture->setTrip($trip);
 
             $trip->setCover($picture);
+
+            $this->_updateAutoFields($picture);
     
             $manager->persist($picture);
         }
 
         $manager->flush();
+    }
+
+    private function _updateAutoFields(Picture $picture)
+    {
+        $exif = $this->autoFillHelper->_extractExifData($picture);
+
+        $this->autoFillHelper->_setTakenAt($picture, $exif);
+
+        $this->autoFillHelper->_setCoordinates($picture, $exif);
+
+        // currently no place fixtures, so nothing in the DB to link to,
+        // but if we do add place fixtures
+        // we could query the DB  as long as PlaceFixtures is added to the dependencies
+        $this->autoFillHelper->_autoAssignPlace($picture);
     }
 
     private function _removeOldFiles()

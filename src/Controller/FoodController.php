@@ -10,20 +10,20 @@ use Symfony\Component\Routing\Attribute\Route;
 class FoodController extends BaseController
 {
     #[Route('/food', name: 'food_index')]
-    public function index(FoodRepository $FoodRepository): Response
+    public function index(FoodRepository $foodRepository): Response
     {
-        $Foods = $FoodRepository->findAll();
+        $foods = $foodRepository->findAll();
         
         return $this->render('food/index.html.twig', [
-            'Foods' => $Foods
+            'foods' => $foods
         ]);
     }
 
-    #[Route('/food/{id:Food}', name: 'food_show')]
-    public function show(Food $Food): Response
+    #[Route('/food/{id:food}', name: 'food_show')]
+    public function show(Food $food): Response
     {
         return $this->render('food/show.html.twig', [
-            'Food' => $Food
+            'food' => $food
         ]);
     }
 }

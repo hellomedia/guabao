@@ -2,9 +2,7 @@
 
 namespace Controlroom\Controller;
 
-use App\Entity\Food;
 use App\Entity\Meal;
-use App\Entity\Tag\FoodTag;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
@@ -18,7 +16,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MealCrudController extends AbstractCrudController
@@ -29,7 +26,7 @@ class MealCrudController extends AbstractCrudController
 
     public static function getEntityFqcn(): string
     {
-        return Food::class;
+        return Meal::class;
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -48,6 +45,10 @@ class MealCrudController extends AbstractCrudController
         yield IdField::new('id')->hideOnForm();
 
         yield DateField::new('enjoyedAt');
+
+        yield ChoiceField::new('type');
+
+        yield AssociationField::new('place');
         
         yield AssociationField::new('pictures')
             ->setTemplatePath('@controlroom/field/picture_collection_thumbnails.html.twig')

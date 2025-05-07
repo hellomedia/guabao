@@ -44,28 +44,30 @@ class FoodCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield IdField::new('id')->hideOnForm();
-        
-        yield TextField::new('nameFr');
-        yield TextField::new('nameEn');
 
         yield AssociationField::new('pictures')
             ->setTemplatePath('@controlroom/field/picture_collection_thumbnails.html.twig')
             ->hideOnForm();
 
-        yield ChoiceField::new('loveLevel');
-        yield ChoiceField::new('healthyLevel');
-        yield ChoiceField::new('localLevel');
+        yield TextField::new('nameFr');
+        yield TextField::new('nameEn');
 
-        yield AssociationField::new('foodTags')
+        yield AssociationField::new('type');
+
+        yield AssociationField::new('tags')
             ->setFormTypeOptions([
                 'by_reference' => false, // important for ManyToMany when using add/remove methods
-                'choice_label' => function (FoodTag $foodTag) {
+                'choice_label' => function (FoodTag $tag) {
                     $locale = $this->getContext()?->getRequest()?->getLocale() ?? 'fr';
-                    return $foodTag->getName($locale);
+                    return $tag->getName($locale);
                 }
             ])
             ->setTemplatePath('@controlroom/field/tags.html.twig')
             ->setHelp('Hold Ctrl (or Cmd) to select multiple tags');
+
+        yield ChoiceField::new('loveLevel');
+        yield ChoiceField::new('healthyLevel');
+        yield ChoiceField::new('localLevel');
     }
 
     public function configureActions(Actions $actions): Actions

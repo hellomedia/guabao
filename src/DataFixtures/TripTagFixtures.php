@@ -46,7 +46,7 @@ class TripTagFixtures extends Fixture
             $tripTag->setNameFr($item['nameFr']);
             $tripTag->setNameEn($item['nameEn']);
 
-            $this->addReference('triptag-' . $item['key'], $tripTag);
+            $this->setReference('triptag-' . $item['key'], $tripTag);
         
             $manager->persist($tripTag);
         }

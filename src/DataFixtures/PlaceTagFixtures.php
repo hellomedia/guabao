@@ -261,7 +261,7 @@ class PlaceTagFixtures extends Fixture implements DependentFixtureInterface
     
                 $placeTag->setCountry($this->getReference('country-' . $country, Country::class));
     
-                $this->addReference('placeTag-' . $item['nameEn'], $placeTag);
+                $this->setReference('placeTag-' . $item['nameEn'], $placeTag);
             
                 $manager->persist($placeTag);
             }
