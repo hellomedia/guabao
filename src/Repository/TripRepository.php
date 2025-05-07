@@ -80,6 +80,7 @@ class TripRepository extends ServiceEntityRepository
 
     public function findOneByPictureDate(DateTimeImmutable $pictureTakenAt)
     {
+        
         return $this->createQueryBuilder('t')
             ->andWhere('t.startedAt < :pictureTakenAt')
             ->andWhere('t.endedAt > :pictureTakenAt')

@@ -2,11 +2,13 @@
 
 namespace Controlroom\Controller;
 
+use App\Entity\Meal;
 use App\Entity\Picture;
 use App\Entity\Tag\PlaceTag;
 use App\Entity\Tag\Tag;
 use App\Helper\GoogleMapsApiHelper;
 use App\Helper\GpsParsingHelper;
+use App\Repository\MealRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\TripRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,6 +37,7 @@ class PictureCrudController extends AbstractCrudController
         private GpsParsingHelper $gpsParsingHelper,
         private TripRepository $tripRepository,
         private PlaceRepository $placeRepository,
+        private MealRepository $mealRepository,
         private GoogleMapsApiHelper $mapsApiHelper,
     )
     {
@@ -73,19 +76,11 @@ class PictureCrudController extends AbstractCrudController
         yield DateTimeField::new('takenAt')
             ->setHelp('Leave empty for auto-fill from exif data');
 
-        if ($pageName == Crud::PAGE_INDEX) {
-            yield AssociationField::new('Food');
-        }
-
-        if ($pageName != Crud::PAGE_INDEX) {
-            yield FormField::addFieldset('Food Item')->collapsible();
-            yield AssociationField::new('dish')->setColumns(4);
-            yield AssociationField::new('breakfast')->setColumns(4);
-            yield AssociationField::new('drink')->setColumns(4);
-            yield AssociationField::new('dessert')->setColumns(4);
-            yield AssociationField::new('bakeryItem')->setColumns(4);
-            yield AssociationField::new('fruit')->setColumns(4);
-        }
+        yield FormField::addFieldset('Food');
+        yield AssociationField::new('food');
+        yield BooleanField::new('isMeal');
+        yield AssociationField::new('meal')
+            ->setHelp('Leave empty, will be auto-filled if isMeal set to true');
 
         yield FormField::addFieldset('Trip');
         yield AssociationField::new('trip')
@@ -135,7 +130,8 @@ class PictureCrudController extends AbstractCrudController
     {
         return $filters
             ->add(EntityFilter::new('trip'))
-            ->add(EntityFilter::new('dish'))
+            ->add(EntityFilter::new('food'))
+            ->add(EntityFilter::new('meal'))
         ;
     }
 
@@ -164,6 +160,8 @@ class PictureCrudController extends AbstractCrudController
         $this->_autoAssignPlace($picture, $entityManager);
 
         $this->_setTrip($picture);
+
+        $this->_setMeal($picture);
     }
 
     private function _extractExifData(Picture $picture): array|false
@@ -202,6 +200,26 @@ class PictureCrudController extends AbstractCrudController
         if ($trip) {
             $picture->setTrip($trip);
         }
+    }
+
+    private function _setMeal(Picture $picture)
+    {
+        if ($picture->isMeal() == false) {
+            return;
+        }
+
+        if ($picture->getMeal() !== null) {
+            return; // already set
+        }
+
+        $meal = $this->mealRepository->findOneByPictureDate($picture->getTakenAt());
+
+        if (!$meal) {
+            $meal = new Meal;
+            $meal->setEnjoyedAt($picture->getTakenAt());
+        }
+
+        $picture->setMeal($meal);
     }
 
     private function _setCoordinates(Picture $picture, array|false $exif)

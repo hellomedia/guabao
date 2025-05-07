@@ -3,6 +3,7 @@
 namespace Controlroom\Controller;
 
 use App\Entity\Food;
+use App\Entity\Meal;
 use App\Entity\Tag\FoodTag;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -15,11 +16,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class FoodCrudController extends AbstractCrudController
+class MealCrudController extends AbstractCrudController
 {
     public function __construct(
         private UrlGeneratorInterface $urlGenerator
@@ -33,8 +35,8 @@ class FoodCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Food')
-            ->setEntityLabelInPlural('Food')
+            ->setEntityLabelInSingular('Meal')
+            ->setEntityLabelInPlural('Meals')
             ->setSearchFields([
                 'name',
             ])
@@ -44,39 +46,23 @@ class FoodCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield IdField::new('id')->hideOnForm();
-        
-        yield TextField::new('nameFr');
-        yield TextField::new('nameEn');
 
+        yield DateField::new('enjoyedAt');
+        
         yield AssociationField::new('pictures')
             ->setTemplatePath('@controlroom/field/picture_collection_thumbnails.html.twig')
             ->hideOnForm();
-
-        yield ChoiceField::new('loveLevel');
-        yield ChoiceField::new('healthyLevel');
-        yield ChoiceField::new('localLevel');
-
-        yield AssociationField::new('foodTags')
-            ->setFormTypeOptions([
-                'by_reference' => false, // important for ManyToMany when using add/remove methods
-                'choice_label' => function (FoodTag $foodTag) {
-                    $locale = $this->getContext()?->getRequest()?->getLocale() ?? 'fr';
-                    return $foodTag->getName($locale);
-                }
-            ])
-            ->setTemplatePath('@controlroom/field/tags.html.twig')
-            ->setHelp('Hold Ctrl (or Cmd) to select multiple tags');
     }
 
     public function configureActions(Actions $actions): Actions
     {
         $viewPictures = Action::new('viewPictures', 'Pictures')
-            ->linkToUrl(function (Food $food) {
+            ->linkToUrl(function (Meal $meal) {
                 return $this->urlGenerator->generate('controlroom_picture_index', [
                     'filters' => [
-                        'food' => [
+                        'meal' => [
                             'comparison' => '=',
-                            'value' => $food->getId(),
+                            'value' => $meal->getId(),
                         ]
                     ]
                 ]);

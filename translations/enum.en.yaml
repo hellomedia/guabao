@@ -17,3 +17,9 @@ level:
     3: 3
     4: 4
     5: 5
+meal:
+    breakfast: Breakfast
+    lunch: Lunch
+    dinner: Dinner
+    snack: Snack
+    drink: Drink

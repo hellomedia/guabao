@@ -47,9 +47,16 @@ class Place implements EntityInterface
     #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'place')]
     private Collection $pictures;
 
+    /**
+     * @var Collection<int, Meal>
+     */
+    #[ORM\OneToMany(targetEntity: Meal::class, mappedBy: 'place')]
+    private Collection $meals;
+
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
+        $this->meals = new ArrayCollection();
     }
 
     public function __toString()
@@ -183,5 +190,35 @@ class Place implements EntityInterface
     public function getCountry(): ?Country
     {
         return $this->placeTags->first()?->getCountry();
+    }
+
+    /**
+     * @return Collection<int, Meal>
+     */
+    public function getMeals(): Collection
+    {
+        return $this->meals;
+    }
+
+    public function addMeal(Meal $meal): static
+    {
+        if (!$this->meals->contains($meal)) {
+            $this->meals->add($meal);
+            $meal->setPlace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeal(Meal $meal): static
+    {
+        if ($this->meals->removeElement($meal)) {
+            // set the owning side to null (unless already changed)
+            if ($meal->getPlace() === $this) {
+                $meal->setPlace(null);
+            }
+        }
+
+        return $this;
     }
 }

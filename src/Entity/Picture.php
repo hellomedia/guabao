@@ -85,6 +85,12 @@ class Picture implements EntityInterface
     #[ORM\ManyToMany(targetEntity: Tag::class)]
     private Collection $tags;
 
+    #[ORM\ManyToOne(inversedBy: 'pictures')]
+    private ?Meal $meal = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isMeal = null;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -162,6 +168,10 @@ class Picture implements EntityInterface
     public function setPlace(?Place $place): static
     {
         $this->place = $place;
+
+        if ($this->getMeal()) {
+            $this->meal->setPlace($place);
+        }
 
         return $this;
     }
@@ -274,6 +284,30 @@ class Picture implements EntityInterface
     public function setHighlightedTrip(?Trip $highlightedTrip): static
     {
         $this->highlightedTrip = $highlightedTrip;
+
+        return $this;
+    }
+
+    public function getMeal(): ?Meal
+    {
+        return $this->meal;
+    }
+
+    public function setMeal(?Meal $meal): static
+    {
+        $this->meal = $meal;
+
+        return $this;
+    }
+
+    public function isMeal(): ?bool
+    {
+        return $this->isMeal;
+    }
+
+    public function setIsMeal(?bool $isMeal): static
+    {
+        $this->isMeal = $isMeal;
 
         return $this;
     }
