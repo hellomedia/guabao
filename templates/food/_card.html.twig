@@ -1,0 +1,28 @@
+<div class="card card-food">
+    {% if food.pictures.first %}
+        <a href="{{ path(food) }}" class="card-image-wrapper">
+            <img src="{{ vich_uploader_asset(food.pictures.first)|imagine_filter('thumb_card') }}"/>
+        </a>
+    {% else %}
+        <a href="{{ path(food) }}" class="card-image-wrapper">
+            {% include 'picture/_placeholder_image.html.twig' %}
+        </a>
+    {% endif %}
+
+    <div class="card-info">
+        <h3 class="card-title">
+            <a href="{{ path(food) }}">
+                {{ food|trans }}
+            </a>
+        </h3>
+
+        <div class="card-bottom">
+            <div class="card-tags tags">
+                {% for tag in food.tags %}
+                    <span class="tag trip-tag tag-{{ tag.slugEn }}">{{ tag|trans }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</div>

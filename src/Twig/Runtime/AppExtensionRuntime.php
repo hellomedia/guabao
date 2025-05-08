@@ -2,6 +2,7 @@
 
 namespace App\Twig\Runtime;
 
+use App\Entity\Food;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
@@ -53,6 +54,10 @@ class AppExtensionRuntime implements RuntimeExtensionInterface
             return $this->_getTripPath($item, $parameters, $referenceType);
         }
 
+        if ($item instanceof Food) {
+            return $this->_getFoodPath($item, $parameters, $referenceType);
+        }
+
         return $this->router->generate($item, $parameters, $referenceType);
     }
 
@@ -62,6 +67,16 @@ class AppExtensionRuntime implements RuntimeExtensionInterface
 
         return $this->router->generate('trip_show', [
             'slug' => $trip->getSlug($locale),
+            '_locale' => $locale,
+        ], $referenceType);
+    }
+
+    private function _getFoodPath(Food $food, array $parameters, int $referenceType): string
+    {
+        $locale = $parameters['_locale'] ?? $this->requestStack->getCurrentRequest()->getLocale();
+
+        return $this->router->generate('food_show', [
+            'slug' => $food->getSlug($locale),
             '_locale' => $locale,
         ], $referenceType);
     }

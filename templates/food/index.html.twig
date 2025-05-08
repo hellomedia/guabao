@@ -1,17 +1,20 @@
 {% extends 'layout/default.html.twig' %}
 
-{% block title %}
-	{{ 'Food'|trans }}
+{% block body_extra_classes %}with-cards
 {% endblock %}
 
 {% block content %}
-	
-    <div id="food" class="cards">
-        {% for food in foods %}
-            <div class="card food-item">
-                {{ food|trans }}
-            </div>
-        {% endfor %}
-    </div>
+
+	<div id="food-filters">
+		<a href="{{ path('food_index') }}" class="{{ app.current_route == 'trip_index' ? 'current' }}">
+			{{ 'All foods'|trans }}
+		</a>
+	</div>
+	<div id="foods" class="cards">
+		{% for food in foods %}
+			{% include 'food/_card.html.twig' %}
+		{% endfor %}
+	</div>
 
 {% endblock %}
+

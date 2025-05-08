@@ -1,7 +1,6 @@
 @layer content {
 
-    /* trip index page */
-    #trip-filters {
+    #trip-filters, #food-filters {
         display: flex;
         gap: 15px;
         margin-bottom: 15px;
