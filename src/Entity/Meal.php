@@ -106,4 +106,9 @@ class Meal
 
         return $this;
     }
+
+    public function getTrip(): ?Trip
+    {
+        return $this->pictures?->first->getTrip();
+    }
 }

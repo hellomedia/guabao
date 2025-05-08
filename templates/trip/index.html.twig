@@ -4,32 +4,30 @@
 
 {% block content %}
 	
-    {# <turbo-frame id="trips"> #}
-        <div id="trip-filters">
-            <a 
-                href="{{ path('trip_index') }}"
-                class="{{ app.current_route == 'trip_index' ? 'current' }}"
-            >
-                {{ 'All trips'|trans }}
-            </a>
-            <a 
-                href="{{ path('trip_index_slow_travel') }}"
-                class="{{ app.current_route == 'trip_index_slow_travel' ? 'current' }}"
-            >
-                {{ 'Slow travel'|trans }}
-            </a>
-            <a 
-                href="{{ path('trip_index_hiking') }}"
-                class="{{ app.current_route == 'trip_index_hiking' ? 'current' }}"
-            >
-                {{ 'Hiking trips'|trans }}
-            </a>
-        </div>
-        <div id="trips" class="cards">
-            {% for trip in trips %}
-                {% include 'trip/_card.html.twig' %}
-            {% endfor %}
-        </div>
-    {# </turbo-frame> #}
+    <div id="trip-filters">
+        <a 
+            href="{{ path('trip_index') }}"
+            class="{{ app.current_route == 'trip_index' ? 'current' }}"
+        >
+            {{ 'All trips'|trans }}
+        </a>
+        <a 
+            href="{{ path('trip_index_slow_travel') }}"
+            class="{{ app.current_route == 'trip_index_slow_travel' ? 'current' }}"
+        >
+            {{ 'Slow travel'|trans }}
+        </a>
+        <a 
+            href="{{ path('trip_index_hiking') }}"
+            class="{{ app.current_route == 'trip_index_hiking' ? 'current' }}"
+        >
+            {{ 'Hiking trips'|trans }}
+        </a>
+    </div>
+    <div id="trips" class="cards">
+        {% for trip in trips %}
+            {% include 'trip/_card.html.twig' %}
+        {% endfor %}
+    </div>
 
 {% endblock %}
