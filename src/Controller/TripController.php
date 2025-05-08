@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\DataFixtures\TripTagFixtures;
-use App\Entity\Tag\TripTag;
+use App\DataFixtures\Tag\TripTagFixtures;
 use App\Entity\Trip;
 use App\Repository\TripRepository;
 use App\Repository\TripTagRepository;

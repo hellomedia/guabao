@@ -1,7 +1,8 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\Tag;
 
+use App\DataFixtures\CountryFixtures;
 use App\Entity\Country;
 use App\Entity\Tag\PlaceTag;
 use Doctrine\Bundle\FixturesBundle\Fixture;

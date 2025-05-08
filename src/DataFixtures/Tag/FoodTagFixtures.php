@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\Tag;
 
 use App\Entity\Tag\FoodTag;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -18,7 +18,6 @@ class FoodTagFixtures extends Fixture
     const STREETFOOD = 'streefood';
     const HEALTHY = 'healthy';
     const HOME_COOKING = 'homecooking';
-    const FOOD_COURT = 'foodcourt';
     const VEGETARIAN = 'vege';
     const GROCERIES = 'groceries';
 

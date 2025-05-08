@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\DataFixtures\Tag\TagFixtures;
 use App\Entity\Food;
 use App\Entity\Picture;
 use App\Entity\Tag\Tag;

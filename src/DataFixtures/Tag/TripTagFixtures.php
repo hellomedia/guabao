@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\Tag;
 
 use App\Entity\Tag\TripTag;
 use Doctrine\Bundle\FixturesBundle\Fixture;

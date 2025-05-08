@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\DataFixtures\Tag\TripTagFixtures;
 use App\Entity\Country;
 use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
@@ -43,7 +44,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '14/09/2023',
             'endedAt' => '29/08/2024',
             'countries' => ['China', 'Thailand', 'Malaysia', 'Laos', 'Japan'],
-            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
+            'tags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
             // 'headlineFr' => '12 mois de slow travel dans 4 pays',
             // 'headlineEn' => '12 month slow travel in 4 countries',
         ],
@@ -54,7 +55,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '06/05/2022',
             'endedAt' => '19/11/2022',
             'countries' => ['Thailand', 'Vietnam', 'Malaysia', 'Indonesia'],
-            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
+            'tags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
             // 'headlineFr' => 'Long séjours à Chiang Mai, Da Nang et Bandung',
             // 'headlineEn' => 'Long stays in Chiang Mai, Da Nang and Bandung',
         ],
@@ -65,7 +66,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '12/02/2022',
             'endedAt' => '10/03/2022',
             'countries' => ['Spain'],
-            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::HIKING, TripTagFixtures::SOLO],
+            'tags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::HIKING, TripTagFixtures::SOLO],
             'headlineFr' => '1 mois dans un village de l\'arrière pays et 1 rando de 3 jours',
             'headlineEn' => '1 month in a secluded village and a 3-day hiking trip',
         ],
@@ -76,7 +77,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '16/09/2021',
             'endedAt' => '25/09/2021',
             'countries' => ['France'],
-            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::SOLO],
+            'tags' => [TripTagFixtures::HIKING, TripTagFixtures::SOLO],
             'headlineFr' => '1 nuit en rando solo',
             'headlineEn' => '1 solo hiking night in the hills',
         ],
@@ -87,7 +88,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '20/06/2021',
             'endedAt' => '26/06/2021',
             'countries' => ['France'],
-            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
+            'tags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
             'headlineFr' => '5 jours de rando en autonomie',
             'headlineEn' => '5 day self-supported hike',
         ],
@@ -98,7 +99,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '29/05/2021',
             'endedAt' => '30/05/2021',
             'countries' => ['Belgium'],
-            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
+            'tags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
             'headlineFr' => 'Nuit en hamac dans les bois',
             'headlineEn' => 'One night of camping in the woods',
         ],
@@ -109,7 +110,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '15/09/2020',
             'endedAt' => '16/09/2020',
             'countries' => ['Belgium'],
-            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::SOLO],
+            'tags' => [TripTagFixtures::HIKING, TripTagFixtures::SOLO],
             'headlineFr' => 'Nuit en hamac dans les bois du Sart-Tilman',
             'headlineEn' => 'Solo night in the local woods',
         ],
@@ -120,7 +121,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '1/03/2020',
             'endedAt' => '16/03/2020',
             'countries' => ['Spain'],
-            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::HIKING, TripTagFixtures::SOLO],
+            'tags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::HIKING, TripTagFixtures::SOLO],
             'headlineFr' => '2 semaines dans un village et rando solo de 2 jours',
             'headlineEn' => '2 weeks in a secluded village and 2-day solo hike',
         ],
@@ -131,7 +132,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '11/10/2019',
             'endedAt' => '19/10/2019',
             'countries' => ['Italy'],
-            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
+            'tags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
             'headlineFr' => '5 jours de rando en autonomie',
             'headlineEn' => '5 day self-supported hike',
         ],
@@ -142,7 +143,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '15/10/2018',
             'endedAt' => '15/01/2019',
             'countries' => ['China', 'Taiwan', 'Vietnam'],
-            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
+            'tags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
             'headlineFr' => 'Premier long trip de plusieurs mois',
             'headlineEn' => 'First multiple-month trip',
         ],
@@ -153,7 +154,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '22/08/2018',
             'endedAt' => '29/08/2018',
             'countries' => ['Switzerland'],
-            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
+            'tags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
             'headlineFr' => '5 jours de rando en autonomie',
             'headlineEn' => '5 day self-supported hike',
         ],
@@ -164,7 +165,7 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
             'startedAt' => '12/08/2017',
             'endedAt' => '19/08/2017',
             'countries' => ['France'],
-            'tripTags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
+            'tags' => [TripTagFixtures::HIKING, TripTagFixtures::WITH_FRIENDS],
             'headlineFr' => '5 jours de rando en autonomie',
             'headlineEn' => '5 day self-supported hike',
             'descriptionFr' => "
@@ -203,7 +204,7 @@ To this day, my most stunning and immersive hiking experience!",
             'startedAt' => '07/03/2015',
             'endedAt' => '30/03/2015',
             'countries' => ['China', 'Philippines'],
-            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
+            'tags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
             'headlineFr' => '3 semaines dans un petit resort isolé',
             'headlineEn' => '3 weeks in a small secluded resort',
         ],
@@ -214,7 +215,7 @@ To this day, my most stunning and immersive hiking experience!",
             'startedAt' => '04/12/2012',
             'endedAt' => '11/01/2013',
             'countries' => ['Korea', 'Philippines'],
-            'tripTags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
+            'tags' => [TripTagFixtures::SLOW_TRAVEL, TripTagFixtures::SOLO],
             'headlineFr' => '1 mois à la découverte de Séoul et de Bacolod',
             'headlineEn' => '1 month between Seoul and Bacolod',
         ],
@@ -245,8 +246,8 @@ To this day, my most stunning and immersive hiking experience!",
                 $trip->addCountry($this->getReference('country-' . $country, Country::class));
             }
 
-            foreach ($item['tripTags'] as $tag) {
-                $trip->addTripTag($this->getReference('triptag-' . $tag, TripTag::class));
+            foreach ($item['tags'] as $tag) {
+                $trip->addTag($this->getReference('triptag-' . $tag, TripTag::class));
             }
 
             $manager->persist($trip);

@@ -1,4 +1,4 @@
-<div class="card card-trip" id="card-{{ trip.id }}">
+<div class="card card-trip">
     {% if trip.cover %}
         <a href="{{ path(trip) }}" class="card-image-wrapper">
             <img src="{{ vich_uploader_asset(trip.cover)|imagine_filter('thumb_card') }}"/>
@@ -22,7 +22,7 @@
 
         <div class="card-bottom">
             <div class="card-tags tags">
-                {% for tag in trip.tripTags %}
+                {% for tag in trip.tags %}
                     {% if tag.nameEn in ['Slow travel', 'Hiking trip'] %}
                         <span class="tag trip-tag tag-{{ tag.slugEn }}">{{ tag|trans }}</span>
                     {% endif %}

@@ -61,13 +61,13 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
      * @var Collection<int, TripTag>
      */
     #[ORM\ManyToMany(targetEntity: TripTag::class)]
-    private Collection $tripTags;
+    private Collection $tags;
 
     public function __construct()
     {
         $this->countries = new ArrayCollection();
         $this->highlights = new ArrayCollection();
-        $this->tripTags = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -144,23 +144,23 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     /**
      * @return Collection<int, TripTag>
      */
-    public function getTripTags(): Collection
+    public function getTags(): Collection
     {
-        return $this->tripTags;
+        return $this->tags;
     }
 
-    public function addTripTag(TripTag $tripTag): static
+    public function addTag(TripTag $tag): static
     {
-        if (!$this->tripTags->contains($tripTag)) {
-            $this->tripTags->add($tripTag);
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
         }
 
         return $this;
     }
 
-    public function removeTripTag(TripTag $tripTag): static
+    public function removeTag(TripTag $tag): static
     {
-        $this->tripTags->removeElement($tripTag);
+        $this->tags->removeElement($tag);
 
         return $this;
     }

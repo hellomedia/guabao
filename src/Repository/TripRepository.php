@@ -61,7 +61,7 @@ class TripRepository extends ServiceEntityRepository
     public function findAllByTag(TripTag $tag): array
     {
         return $this->createQueryBuilder('t')
-            ->join('t.tripTags', 'tt')
+            ->join('t.tags', 'tt')
             ->where('tt.slugEn = :slugEn')
             ->orderBy('t.startedAt', 'DESC')
             ->setParameter('slugEn', $tag->getSlugEn())
