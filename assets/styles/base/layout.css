@@ -95,6 +95,12 @@
         @apply sm:px-8;
         @apply lg:px-10;
         transition: padding 1s;
+
+        .with-cards & {
+            @media (max-width: 600px) { /* end of regular phones -- start of phablets */
+                padding-inline: 0;
+            }
+        }
     }
 
     header {

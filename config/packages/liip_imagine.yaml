@@ -48,11 +48,11 @@ liip_imagine:
             filters:
                 #  'outbound' to force sqare image aspect ratio. easier for card layouts to have consistent sizes.
                 thumbnail: 
-                    size: [600, 600]
+                    size: [700, 700]
                     mode: outbound
                     allow_upscale: true
                 background:
-                    size: [600, 600]
+                    size: [700, 700]
                     color: '#DDDDDD'  # gray for background fill color
                     position: 'center'
         thumb_large:

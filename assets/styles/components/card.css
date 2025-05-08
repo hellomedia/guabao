@@ -3,14 +3,15 @@
         display: grid;
         @apply grid-cols-1;
         @apply md:grid-cols-2;
-        @apply lg:grid-cols-4;
+        @apply lg:grid-cols-3;
+        @apply xl:grid-cols-4;
         @apply gap-6;
         align-items: stretch;
         grid-auto-rows: minmax(100px, auto);
         /* make all grid items match the tallest item's height */
     }
 
-    .card-trip {
+    .card {
         background-color: var(--color-secondary-background);
         border: 1px solid var(--color-border);
         @apply rounded;
@@ -51,7 +52,7 @@
         }
 
         .card-period {
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
         .card-bottom {
