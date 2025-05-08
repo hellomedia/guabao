@@ -1,7 +1,8 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\Picture;
 
+use App\DataFixtures\TripFixtures;
 use App\Entity\Picture;
 use App\Entity\Trip;
 use App\Helper\PictureAutoFillHelper;
@@ -22,7 +23,7 @@ class HighlightedPictureFixtures extends Fixture implements DependentFixtureInte
     {
         return [
             TripFixtures::class,
-            CoverPictureFixtures::class, // force CoverPicture first because it removes old files
+            TripCoverPictureFixtures::class, // force TripCoverPicture first because it removes old files
         ];
     }
 
@@ -32,7 +33,7 @@ class HighlightedPictureFixtures extends Fixture implements DependentFixtureInte
 
             $key = $trip['key'];
 
-            $dir = __DIR__ . '/image/trip_highlights/' . $key . '/';
+            $dir = __DIR__ . '/../image/trips/' . $key . '/highlights/';
 
             foreach (glob($dir . '*.jpg') as $originalPath) {
 

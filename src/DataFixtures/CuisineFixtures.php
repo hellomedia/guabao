@@ -2,11 +2,11 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\FoodType;
+use App\Entity\Cuisine;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class FoodTypeFixtures extends Fixture
+class CuisineFixtures extends Fixture
 {
     const BELGIAN = 'belgian';
     const FRENCH = 'french';
@@ -25,7 +25,7 @@ class FoodTypeFixtures extends Fixture
     const INDONESIAN = 'indonesian';
     const FILIPINO = 'filipino';
 
-    private const array FOOD_TYPES = [
+    private const array CUISINES = [
         [
             'key' => self::BELGIAN,
             'nameFr' => 'Belge',
@@ -43,8 +43,8 @@ class FoodTypeFixtures extends Fixture
         ],
         [
             'key' => self::AMERICAN,
-            'nameFr' => 'américaine',
-            'nameEn' => 'american',
+            'nameFr' => 'Américaine',
+            'nameEn' => 'American',
         ],
         [
             'key' => self::TEXMEX,
@@ -64,7 +64,7 @@ class FoodTypeFixtures extends Fixture
         [
             'key' => self::VIETNAMESE,
             'nameFr' => 'Vietnamienne',
-            'nameEn' => 'Vietnamian',
+            'nameEn' => 'Vietnamese',
         ],
         [
             'key' => self::TAIWANESE,
@@ -110,16 +110,16 @@ class FoodTypeFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach(self::FOOD_TYPES as $item) {
-            
-            $foodType = new FoodType();
+        foreach(self::CUISINES as $item) {
 
-            $foodType->setNameFr($item['nameFr']);
-            $foodType->setNameEn($item['nameEn']);
+            $cuisine = new Cuisine();
 
-            $this->setReference('foodType-' . $item['key'], $foodType);
+            $cuisine->setNameFr($item['nameFr']);
+            $cuisine->setNameEn($item['nameEn']);
+
+            $this->setReference('cuisine-' . $item['key'], $cuisine);
         
-            $manager->persist($foodType);
+            $manager->persist($cuisine);
         }
 
         $manager->flush();

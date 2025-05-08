@@ -4,11 +4,13 @@ namespace Controlroom\Controller;
 
 use App\Entity\Country;
 use App\Entity\Food;
+use App\Entity\Ingredient;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Meal;
 use App\Entity\Picture;
 use App\Entity\Place;
 use App\Entity\Tag\FoodTag;
+use App\Entity\Tag\PictureTag;
 use App\Entity\Tag\PlaceTag;
 use App\Entity\Tag\Tag;
 use App\Entity\Tag\TripTag;
@@ -84,6 +86,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Food');
         yield MenuItem::linkToCrud('Food', 'fa fa-lemon', Food::class);
         yield MenuItem::linkToCrud('Meal', 'fa fa-meal', Meal::class);
+        yield MenuItem::linkToCrud('Ingredient', 'fa fa-lemon', Ingredient::class);
         yield MenuItem::linkToCrud('Food Tag', 'fa fa-tag', FoodTag::class);
 
         yield MenuItem::section('Trips');
@@ -92,7 +95,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Pictures');
         yield MenuItem::linkToCrud('Picture', 'fa fa-photo', Picture::class);
-        yield MenuItem::linkToCrud('Tag', 'fa fa-tag', Tag::class);
+        yield MenuItem::linkToCrud('Picture Tag', 'fa fa-tag', PictureTag::class);
 
         yield MenuItem::section('Places');
         yield MenuItem::linkToCrud('Place', 'fa fa-map-marker', Place::class);

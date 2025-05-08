@@ -1,7 +1,8 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\Picture;
 
+use App\DataFixtures\TripFixtures;
 use App\Entity\Picture;
 use App\Entity\Trip;
 use App\Helper\PictureAutoFillHelper;
@@ -12,7 +13,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class CoverPictureFixtures extends Fixture implements DependentFixtureInterface
+class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterface
 {
 
     public function __construct(
@@ -36,7 +37,7 @@ class CoverPictureFixtures extends Fixture implements DependentFixtureInterface
 
             $key = $trip['key'];
 
-            $originalPath = __DIR__ . '/image/trip_covers/cover-' . $key . '.jpg';
+            $originalPath = __DIR__ . '/../image/trips/' . $key . '/cover.jpg';
 
             // Copy to a temporary file (unique filename each time)
             // so that original file is not moved by upload process and still avaialable for next time
@@ -45,7 +46,7 @@ class CoverPictureFixtures extends Fixture implements DependentFixtureInterface
 
             $uploadedFile = new UploadedFile(
                 $tempPath,
-                'cover-' . $key . '.jpg',
+                'cover.jpg',
                 null,
                 null,
                 true // true = test mode, skips file upload checks
@@ -87,7 +88,7 @@ class CoverPictureFixtures extends Fixture implements DependentFixtureInterface
     private function _removeOldFiles()
     {
         $filesystem = new Filesystem();
-        $uploadDir = __DIR__ . '/../../public/uploads/pictures';
+        $uploadDir = __DIR__ . '/../../../public/uploads/pictures';
 
         // Delete all files in the upload directory (but not the directory itself)
         if ($filesystem->exists($uploadDir)) {

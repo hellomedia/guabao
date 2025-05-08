@@ -3,8 +3,8 @@
 namespace App\Entity;
 
 use App\Entity\Interface\EntityInterface;
+use App\Entity\Tag\PictureTag;
 use App\Entity\Tag\PlaceTag;
-use App\Entity\Tag\Tag;
 use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Repository\PictureRepository;
 use DateTimeImmutable;
@@ -80,12 +80,13 @@ class Picture implements EntityInterface
     private ?float $longitude = null;
 
     /**
-     * @var Collection<int, Tag>
+     * @var Collection<int, PictureTag>
      */
-    #[ORM\ManyToMany(targetEntity: Tag::class)]
+    #[ORM\ManyToMany(targetEntity: PictureTag::class)]
     private Collection $tags;
 
     #[ORM\ManyToOne(inversedBy: 'pictures')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Meal $meal = null;
 
     #[ORM\Column(nullable: true)]
@@ -224,14 +225,14 @@ class Picture implements EntityInterface
     }
 
     /**
-     * @return Collection<int, Tag>
+     * @return Collection<int, PictureTag>
      */
     public function getTags(): Collection
     {
         return $this->tags;
     }
 
-    public function addTag(Tag $tag): static
+    public function addTag(PictureTag $tag): static
     {
         if (!$this->tags->contains($tag)) {
             $this->tags->add($tag);
@@ -240,7 +241,7 @@ class Picture implements EntityInterface
         return $this;
     }
 
-    public function removeTag(Tag $tag): static
+    public function removeTag(PictureTag $tag): static
     {
         $this->tags->removeElement($tag);
 

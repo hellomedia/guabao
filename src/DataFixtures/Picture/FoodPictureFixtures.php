@@ -1,11 +1,13 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\Picture;
 
-use App\DataFixtures\Tag\TagFixtures;
+use App\DataFixtures\FoodFixtures;
+use App\DataFixtures\Tag\PictureTagFixtures;
+use App\DataFixtures\TripFixtures;
 use App\Entity\Food;
 use App\Entity\Picture;
-use App\Entity\Tag\Tag;
+use App\Entity\Tag\PictureTag;
 use App\Helper\PictureAutoFillHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -18,7 +20,7 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
         [
             'filename' => 'belgian_tomato',
             'food' => FoodFixtures::TOMATO,
-            'tags' => [TagFixtures::HOME_COOKING],
+            'tags' => [PictureTagFixtures::HOME_COOKING],
             'isMeal' => false,
         ],
         [
@@ -44,7 +46,7 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
         return [
             TripFixtures::class,
             FoodFixtures::class,
-            CoverPictureFixtures::class, // force CoverPicture first because it removes old files
+            TripCoverPictureFixtures::class, // force TripCoverPicture first because it removes old files
         ];
     }
 
@@ -52,7 +54,7 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
     {
         foreach (self::FOOD_PICTURES as $item) {
 
-            $originalPath = __DIR__ . '/image/food/' . $item['filename']. '.jpg';
+            $originalPath = __DIR__ . '/../image/food/' . $item['filename']. '.jpg';
 
             // Copy to a temporary file (unique filename each time)
             // so that original file is not moved by upload process and still avaialable for next time
@@ -78,9 +80,11 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
 
             $picture->setFood($this->getReference('food-' . $item['food'], Food::class));
 
-            foreach ($item['tags'] as $foodTag) {
-                $picture->addTag($this->getReference('tag-' . $foodTag, Tag::class));
+            foreach ($item['tags'] as $tag) {
+                $picture->addTag($this->getReference('pictureTag-' . $tag, PictureTag::class));
             }
+
+            $this->setReference('picture-'. $item['filename'], $picture);
 
             $manager->persist($picture);
 

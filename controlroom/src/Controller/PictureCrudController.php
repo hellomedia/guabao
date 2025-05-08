@@ -3,8 +3,8 @@
 namespace Controlroom\Controller;
 
 use App\Entity\Picture;
+use App\Entity\Tag\PictureTag;
 use App\Entity\Tag\PlaceTag;
-use App\Entity\Tag\Tag;
 use App\Helper\GoogleMapsApiHelper;
 use App\Helper\PictureAutoFillHelper;
 use Doctrine\ORM\EntityManagerInterface;
@@ -98,7 +98,7 @@ class PictureCrudController extends AbstractCrudController
         yield AssociationField::new('tags')
             ->setFormTypeOptions([
                 'by_reference' => false, // important for ManyToMany when using add/remove methods
-                'choice_label' => function (Tag $tag) {
+                'choice_label' => function (PictureTag $tag) {
                     $locale = $this->getContext()?->getRequest()?->getLocale() ?? 'fr';
                     return $tag->getName($locale);
                 }

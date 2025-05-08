@@ -1,25 +1,22 @@
 <?php
 
-namespace App\Entity\Tag;
+namespace App\Entity;
 
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
-use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
-use App\Repository\TagRepository;
+use App\Repository\CuisineRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Table(name: 'tag')]
-#[ORM\Entity(repositoryClass: TagRepository::class)]
-class Tag implements LocalizedNameInterface, LocalizedSlugInterface, EntityInterface
+#[ORM\Table(name: 'cuisine')]
+#[ORM\Entity(repositoryClass: CuisineRepository::class)]
+class Cuisine implements LocalizedNameInterface, LocalizedSlugInterface, EntityInterface
 {
     use LocalizedNameTrait;
 
     use LocalizedSlugTrait;
-
-    use LocalizedDescriptionTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

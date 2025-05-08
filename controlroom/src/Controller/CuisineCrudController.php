@@ -2,23 +2,23 @@
 
 namespace Controlroom\Controller;
 
-use App\Entity\Tag\Tag;
+use App\Entity\Cuisine;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class TagCrudController extends AbstractCrudController
+class CuisineCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Tag::class;
+        return Cuisine::class;
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Tag')
-            ->setEntityLabelInPlural('Tags')
+            ->setEntityLabelInSingular('Cuisine')
+            ->setEntityLabelInPlural('Cuisines')
         ;
     }
 
@@ -26,8 +26,5 @@ class TagCrudController extends AbstractCrudController
     {
         yield TextField::new('nameFr', 'Name FR');
         yield TextField::new('nameEn', 'Name EN');
-
-        yield TextField::new('descriptionFr', 'Description FR');
-        yield TextField::new('descriptionEn', 'Description EN');
     }
 }

@@ -13,6 +13,7 @@ class CountryFixtures extends Fixture
             'code' => 'BE',
             'nameFr' => 'Belgique',
             'nameEn' => 'Belgium',
+            'foodCover' => 'belgian_tomato'
         ],
         [
             'code' => 'FR',

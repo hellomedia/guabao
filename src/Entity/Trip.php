@@ -51,6 +51,10 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     #[ORM\JoinColumn(nullable: true)] // nullable for fixtures
     private ?Picture $cover = null;
 
+    #[ORM\OneToOne]
+    #[ORM\JoinColumn(nullable: true)] // nullable for fixtures
+    private ?Picture $foodCover = null;
+
     /**
      * @var Collection<int, Picture>
      */
@@ -137,6 +141,18 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     public function setCover(Picture $cover): static
     {
         $this->cover = $cover;
+
+        return $this;
+    }
+
+    public function getFoodCover(): ?Picture
+    {
+        return $this->foodCover;
+    }
+
+    public function setFoodCover(Picture $foodCover): static
+    {
+        $this->foodCover = $foodCover;
 
         return $this;
     }

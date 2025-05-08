@@ -7,10 +7,11 @@ use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
+use App\Repository\FoodTagRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'food_tag')]
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: FoodTagRepository::class)]
 class FoodTag implements LocalizedNameInterface, LocalizedSlugInterface, EntityInterface
 {
     use LocalizedNameTrait;

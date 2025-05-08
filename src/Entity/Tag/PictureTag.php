@@ -1,21 +1,25 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Tag;
 
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
+use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
+use App\Repository\PictureTagRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Table(name: 'food_type')]
-#[ORM\Entity]
-class FoodType implements LocalizedNameInterface, LocalizedSlugInterface, EntityInterface
+#[ORM\Table(name: 'picture_tag')]
+#[ORM\Entity(repositoryClass: PictureTagRepository::class)]
+class PictureTag implements LocalizedNameInterface, LocalizedSlugInterface, EntityInterface
 {
     use LocalizedNameTrait;
 
     use LocalizedSlugTrait;
+
+    use LocalizedDescriptionTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

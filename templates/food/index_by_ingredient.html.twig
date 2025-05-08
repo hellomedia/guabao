@@ -6,9 +6,9 @@
 
 	{% include 'food/_top_filters.html.twig' %}
 	
-	<div id="foods" class="cards">
-		{% for food in foods %}
-			{% include 'food/_card.html.twig' %}
+	<div id="foods" class="cards cards-ingredient">
+		{% for ingredient in ingredients %}
+			{% include 'food/_ingredient_card.html.twig' %}
 		{% endfor %}
 	</div>
 

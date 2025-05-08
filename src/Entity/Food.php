@@ -6,7 +6,6 @@ use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
 use App\Entity\Tag\FoodTag;
-use App\Entity\FoodType;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
 use App\Enum\Level;
@@ -56,12 +55,19 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     private Collection $tags;
 
     #[ORM\ManyToOne]
-    private ?FoodType $type = null;
+    private ?Cuisine $cuisine = null;
+
+    /**
+     * @var Collection<int, Ingredient>
+     */
+    #[ORM\ManyToMany(targetEntity: Ingredient::class)]
+    private Collection $ingredients;
 
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->ingredients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -183,14 +189,38 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
         return $this;
     }
 
-    public function getType(): ?FoodType
+    public function getCuisine(): ?Cuisine
     {
-        return $this->type;
+        return $this->cuisine;
     }
 
-    public function setType(?FoodType $type): static
+    public function setCuisine(?Cuisine $cuisine): static
     {
-        $this->type = $type;
+        $this->cuisine = $cuisine;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ingredient>
+     */
+    public function getIngredients(): Collection
+    {
+        return $this->ingredients;
+    }
+
+    public function addIngredient(Ingredient $ingredient): static
+    {
+        if (!$this->ingredients->contains($ingredient)) {
+            $this->ingredients->add($ingredient);
+        }
+
+        return $this;
+    }
+
+    public function removeIngredient(Ingredient $ingredient): static
+    {
+        $this->ingredients->removeElement($ingredient);
 
         return $this;
     }

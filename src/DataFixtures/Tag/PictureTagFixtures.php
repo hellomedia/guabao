@@ -2,11 +2,11 @@
 
 namespace App\DataFixtures\Tag;
 
-use App\Entity\Tag\Tag;
+use App\Entity\Tag\PictureTag;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class TagFixtures extends Fixture
+class PictureTagFixtures extends Fixture
 {
     const BIVOUAC = 'bivouac';
     const HIKING = 'hiking';
@@ -18,7 +18,7 @@ class TagFixtures extends Fixture
     CONST HOME_COOKING = 'homecooking';
     CONST FOOD_COURT = 'foodcourt';
 
-    private const array TAGS = [
+    private const array PICTURE_TAGS = [
         [
             'key' => self::BIVOUAC,
             'nameFr' => 'Bivouac',
@@ -68,14 +68,14 @@ class TagFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach(self::TAGS as $item) {
+        foreach(self::PICTURE_TAGS as $item) {
             
-            $tag = new Tag();
+            $tag = new PictureTag;
 
             $tag->setNameFr($item['nameFr']);
             $tag->setNameEn($item['nameEn']);
 
-            $this->setReference('tag-' . $item['key'], $tag);
+            $this->setReference('pictureTag-' . $item['key'], $tag);
         
             $manager->persist($tag);
         }

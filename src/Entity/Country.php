@@ -7,10 +7,13 @@ use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
+use App\Repository\CountryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'country')]
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: CountryRepository::class)]
 class Country implements LocalizedNameInterface, LocalizedSlugInterface, EntityInterface
 {
     use LocalizedNameTrait;
@@ -25,6 +28,10 @@ class Country implements LocalizedNameInterface, LocalizedSlugInterface, EntityI
     #[ORM\Column(length: 2, nullable: true)]
     private ?string $code = null;
 
+    #[ORM\OneToOne]
+    #[ORM\JoinColumn(nullable: true)] // nullable for fixtures
+    private ?Picture $foodCover = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -38,6 +45,18 @@ class Country implements LocalizedNameInterface, LocalizedSlugInterface, EntityI
     public function setCode(?string $code): static
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    public function getFoodCover(): ?Picture
+    {
+        return $this->foodCover;
+    }
+
+    public function setFoodCover(Picture $foodCover): static
+    {
+        $this->foodCover = $foodCover;
 
         return $this;
     }

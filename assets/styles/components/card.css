@@ -5,10 +5,18 @@
         @apply md:grid-cols-2;
         @apply lg:grid-cols-3;
         @apply xl:grid-cols-4;
-        @apply gap-6;
+        gap: calc(var(--spacing) * 5);
         align-items: stretch;
-        grid-auto-rows: minmax(100px, auto);
+        grid-auto-rows: minmax(80px, auto);
         /* make all grid items match the tallest item's height */
+        
+        &.cards-ingredient,
+        &.cards-country,
+        &.cards-cuisine,
+        &.cards-tag {
+            gap: calc(var(--spacing) * 3);
+        }
+
     }
 
     .card {
@@ -20,6 +28,13 @@
         display: flex;
         flex-direction: column;
         justify-content: start;
+
+        &.card-ingredient,
+        &.card-country,
+        &.card-cuisine,
+        &.card-tag {
+            justify-content: center;
+        }
 
         .dark & {
             border: none;
