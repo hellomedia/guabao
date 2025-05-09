@@ -1,0 +1,25 @@
+{% extends 'layout/default.html.twig' %}
+
+{% block content %}
+
+	{% for meal in meals %}
+
+		<h3>
+			{{ meal.enjoyedAt|date('Y-m-D') }}
+			--
+			{{ meal.place|trans }}
+		</h3>
+
+		{% for picture in meal.pictures %}
+			<img src="{{ vich_uploader_asset(picture)|imagine_filter('thumb_card') }}"/>
+
+			{% for tags in picture.tags %}
+				{{ tags|trans }}
+			{% endfor %}
+
+		{% endfor %}
+
+	{% endfor %}
+
+{% endblock %}
+

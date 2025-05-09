@@ -1,9 +1,24 @@
 {% extends 'layout/default.html.twig' %}
 
 {% block title %}
-	{{ Food }}
+	{{ food }}
 {% endblock %}
 
 {% block content %}
+	{% for picture in food.pictures %}
+		<img src="{{ vich_uploader_asset(picture)|imagine_filter('thumb_card') }}"/>
+
+		{% for tags in picture.tags %}
+			{{ tags|trans }}
+		{% endfor %}
+
+		<div>
+			{{ picture.takenAt|format('Y-m-D') }}
+		</div>
+
+		<div>
+			{{ picture.place }}
+		</div>
+	{% endfor %}
 
 {% endblock %}

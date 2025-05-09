@@ -3,7 +3,7 @@ dashboard: Tableau de bord
 trips: Trips
 food:
     index: Food
-    by_country: Food par pays
-    by_cuisine: Food par cuisine
-    by_type: Food par type
-    by_ingredient: Food par ingrédient
+    by_country: Par pays
+    by_cuisine: Par cuisine
+    by_tag: Par type
+    by_ingredient: Par ingrédient

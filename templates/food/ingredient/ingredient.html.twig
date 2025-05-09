@@ -6,7 +6,9 @@
 	
 	<div id="foods" class="cards">
 		{% for food in foods %}
-			{% include 'food/_food_card.html.twig' %}
+			{% include 'food/_food_card.html.twig' with {
+				url: path('food_by_ingredient_food', { slugIngredient: ingredient.slugEn, slugEn: food.slugEn}) 
+			} %}
 		{% endfor %}
 	</div>
 

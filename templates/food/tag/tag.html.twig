@@ -5,8 +5,10 @@
 {% block content %}
 	
 	<div id="foods" class="cards">
-		{% for picture in pictures %}
-			{% include 'food/_picture_card.html.twig' %}
+		{% for food in foods %}
+			{% include 'food/_food_card.html.twig' with {
+				url: path('food_by_tag_food', { slugTag: tag.slugEn, slugEn: food.slugEn}) 
+			} %}
 		{% endfor %}
 	</div>
 

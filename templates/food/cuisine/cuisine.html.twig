@@ -1,0 +1,16 @@
+{% extends 'layout/default.html.twig' %}
+
+{% block body_extra_classes %}with-cards{% endblock %}
+
+{% block content %}
+	
+	<div id="foods" class="cards">
+		{% for food in foods %}
+			{% include 'food/_food_card.html.twig' with {
+				url: path('food_by_cuisine_food', { slugCuisine: cuisine.slugEn, slugEn: food.slugEn}) 
+			} %}
+		{% endfor %}
+	</div>
+
+{% endblock %}
+

@@ -1,14 +1,14 @@
 <div id="top-filters">
-	<a href="{{ path('food_index_by_country') }}" class="{{ app.current_route in ['food_index_by_country', 'food_index'] ? 'current' }}">
+	<a href="{{ path('food_by_country_index') }}" class="{{ app.current_route in ['food_by_country_index', 'food_index'] ? 'current' }}">
 		{{ 'Food by country'|trans }}
 	</a>
-	<a href="{{ path('food_index_by_cuisine') }}" class="{{ app.current_route == 'food_index_by_cuisine' ? 'current' }}">
+	<a href="{{ path('food_by_cuisine_index') }}" class="{{ app.current_route == 'food_by_cuisine_index' ? 'current' }}">
 		{{ 'Food by cuisine'|trans }}
 	</a>
-	<a href="{{ path('food_index_by_tag') }}" class="{{ app.current_route == 'food_index_by_tag' ? 'current' }}">
+	<a href="{{ path('food_by_tag_index') }}" class="{{ app.current_route == 'food_by_tag_index' ? 'current' }}">
 		{{ 'Food by type'|trans }}
 	</a>
-	<a href="{{ path('food_index_by_ingredient') }}" class="{{ app.current_route == 'food_index_by_ingredient' ? 'current' }}">
+	<a href="{{ path('food_by_ingredient_index') }}" class="{{ app.current_route == 'food_by_ingredient_index' ? 'current' }}">
 		{{ 'Food by ingredient'|trans }}
 	</a>
 </div>

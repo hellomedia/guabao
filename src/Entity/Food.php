@@ -224,4 +224,19 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
 
         return $this;
     }
+
+    public function getMeals(): array
+    {
+        $meals = [];
+
+        foreach($this->pictures as $picture) {
+            $meal = $picture->getMeal();
+            if ($meal instanceof Meal && !isset($seen[$meal->getId()])) {
+                $seen[$meal->getId()] = true;
+                $meals[] = $meal;
+            }
+        }
+
+        return $meals;
+    }
 }

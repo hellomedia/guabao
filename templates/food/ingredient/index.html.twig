@@ -9,14 +9,14 @@
 	<h3 style="margin-bottom: 15px">Favourites</h3>
 	<div class="cards cards-ingredient">
 		{% for ingredient in favourites %}
-			{% include 'food/_ingredient_card.html.twig' %}
+			{% include 'food/ingredient/_card.html.twig' %}
 		{% endfor %}
 	</div>
 
 	<h3 style="margin-top: 30px;margin-bottom: 15px;">All</h3>
 	<div class="cards cards-ingredient">
 		{% for ingredient in others %}
-			{% include 'food/_ingredient_card.html.twig' %}
+			{% include 'food/ingredient/_card.html.twig' %}
 		{% endfor %}
 	</div>
 
