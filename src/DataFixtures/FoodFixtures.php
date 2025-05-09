@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\DataFixtures\Tag\FoodTagFixtures;
 use App\Entity\Cuisine;
 use App\Entity\Food;
+use App\Entity\Ingredient;
 use App\Entity\Tag\FoodTag;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -21,14 +22,16 @@ class FoodFixtures extends Fixture implements DependentFixtureInterface
             'nameFr' => 'Tomate belge',
             'nameEn' => 'Belgian Tomato',
             'tags' => [FoodTagFixtures::HOME_COOKING],
-            'type' => CuisineFixtures::BELGIAN,
+            'cuisine' => CuisineFixtures::BELGIAN,
+            'ingredients' => [IngredientFixtures::TOMATO]
         ],
         [
             'key' => self::WONTON_NOODLE_SOUP_WITH_ROASTED_DUCK,
             'nameFr' => 'Soupe aux wonton et canard',
             'nameEn' => 'Wonton noodle soup with roasted duck',
             'tags' => [FoodTagFixtures::SOUP],
-            'type' => CuisineFixtures::THAI,
+            'cuisine' => CuisineFixtures::THAI,
+            'ingredients' => [IngredientFixtures::DUCK, IngredientFixtures::NOODLES]
         ],
     ];
 
@@ -54,7 +57,11 @@ class FoodFixtures extends Fixture implements DependentFixtureInterface
                 $food->addTag($this->getReference('foodTag-' . $foodTag, FoodTag::class));
             }
 
-            $food->setCuisine($this->getReference('cuisine-' . $item['type'], Cuisine::class));
+            $food->setCuisine($this->getReference('cuisine-' . $item['cuisine'], Cuisine::class));
+
+            foreach ($item['ingredients'] as $ingredient) {
+                $food->addIngredient($this->getReference('ingredient-' . $ingredient, Ingredient::class));
+            }
 
             $this->setReference('food-' . $item['key'], $food);
             

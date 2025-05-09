@@ -5,8 +5,8 @@
 {% block content %}
 	
 	<div id="foods" class="cards">
-		{% for picture in pictures %}
-			{% include 'food/_picture_card.html.twig' %}
+		{% for food in foods %}
+			{% include 'food/_food_card.html.twig' %}
 		{% endfor %}
 	</div>
 

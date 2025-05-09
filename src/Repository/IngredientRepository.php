@@ -28,4 +28,26 @@ class IngredientRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findFavourites(): array
+    {
+        $locale = $this->requestStack->getCurrentRequest()->getLocale();
+
+        return $this->createQueryBuilder('i')
+            ->where('i.favourite = true')
+            ->orderBy('i.name' . \ucfirst($locale), 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findNonFavourites(): array
+    {
+        $locale = $this->requestStack->getCurrentRequest()->getLocale();
+
+        return $this->createQueryBuilder('i')
+            ->where('i.favourite != true')
+            ->orderBy('i.name' . \ucfirst($locale), 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

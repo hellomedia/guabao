@@ -1,4 +1,9 @@
 homepage: Home
 dashboard: Dashboard
 trips: Trips
-food: Food
+food:
+    index: Food
+    by_country: Food by country
+    by_cuisine: Food by cuisine
+    by_type: Food by type
+    by_ingredient: Food by ingredient

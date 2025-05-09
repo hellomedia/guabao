@@ -17,9 +17,13 @@ class FoodTagFixtures extends Fixture
     const DRINK = 'drink';
     const STREETFOOD = 'streefood';
     const HEALTHY = 'healthy';
+    const DUMPLINGS = 'dumplings';
+    const SANDWHICH = 'sandwhich';
+    const BAO = 'bao';
     const HOME_COOKING = 'homecooking';
     const VEGETARIAN = 'vege';
     const GROCERIES = 'groceries';
+    const DISCOVERY = 'discovery';
 
     private const array FOOD_TAGS = [
         [
@@ -68,6 +72,21 @@ class FoodTagFixtures extends Fixture
             'nameEn' => 'Healthy',
         ],
         [
+            'key' => self::DUMPLINGS,
+            'nameFr' => 'Dumplings',
+            'nameEn' => 'Dumplings',
+        ],
+        [
+            'key' => self::BAO,
+            'nameFr' => 'Bao',
+            'nameEn' => 'Bao',
+        ],
+        [
+            'key' => self::SANDWHICH,
+            'nameFr' => 'Sandwhich',
+            'nameEn' => 'Sandwhich',
+        ],
+        [
             'key' => self::HOME_COOKING,
             'nameFr' => 'Home cooking',
             'nameEn' => 'Home cooking',
@@ -81,6 +100,11 @@ class FoodTagFixtures extends Fixture
             'key' => self::GROCERIES,
             'nameFr' => 'Courses',
             'nameEn' => 'Groceries',
+        ],
+        [
+            'key' => self::DISCOVERY,
+            'nameFr' => 'Découverte',
+            'nameEn' => 'Discovery',
         ],
     ];
 

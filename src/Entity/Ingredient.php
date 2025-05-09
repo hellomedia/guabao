@@ -23,8 +23,23 @@ class Ingredient implements LocalizedNameInterface, LocalizedSlugInterface, Enti
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $favourite = null;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function isFavourite(): ?bool
+    {
+        return $this->favourite;
+    }
+
+    public function setFavourite(?bool $favourite): static
+    {
+        $this->favourite = $favourite;
+
+        return $this;
     }
 }

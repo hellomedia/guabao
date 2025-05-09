@@ -20,11 +20,12 @@ class PictureRepository extends ServiceEntityRepository
         parent::__construct($registry, Picture::class);
     }
 
-    public function findFoodPictureByCountry(Country $country): array
+    public function findFoodPicturesByCountry(Country $country): array
     {
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
-        return $this->createQueryBuilder('p')
+        // contains duplicate food pics (2 food pics of the same food taken during a meal)
+        $pictures = $this->createQueryBuilder('p')
             ->innerJoin('p.food', 'f')
             ->join('p.placeTags', 'pt')
             ->where('pt.country = :country')
@@ -32,5 +33,22 @@ class PictureRepository extends ServiceEntityRepository
             ->setParameter('country', $country)
             ->getQuery()
             ->getResult();
+
+        $seen = [];
+        $filtered = [];
+
+        // remove dupliplcate pics of same food on same day
+        foreach ($pictures as $pic) {
+            $foodId = $pic->getFood()->getId();
+            $dateKey = $pic->getTakenAt()->format('Y-m-d');
+            $groupKey = $foodId . '_' . $dateKey;
+
+            if (!isset($seen[$groupKey])) {
+                $seen[$groupKey] = true;
+                $filtered[] = $pic;
+            }
+        }
+
+        return $filtered;
     }
 }

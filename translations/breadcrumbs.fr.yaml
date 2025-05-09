@@ -1,4 +1,9 @@
 homepage: Accueil
 dashboard: Tableau de bord
 trips: Trips
-food: Food
+food:
+    index: Food
+    by_country: Food par pays
+    by_cuisine: Food par cuisine
+    by_type: Food par type
+    by_ingredient: Food par ingrédient

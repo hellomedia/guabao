@@ -1,7 +1,7 @@
 <div class="card card-ingredient">
 
     <h3 class="card-title">
-        <a href="">
+        <a href="{{ path('food_by_ingredient', {slugEn: ingredient.slugEn}) }}">
             {{ ingredient|trans }}
         </a>
     </h3>
