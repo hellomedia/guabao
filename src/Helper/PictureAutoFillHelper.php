@@ -108,7 +108,12 @@ class PictureAutoFillHelper
         if (!$meal) {
             $meal = new Meal;
             $meal->setEnjoyedAt($picture->getTakenAt());
-            // meal place will be set when it's set for a meal picture
+            // meal place : will be set when it's set for a meal picture
+            
+            // place tag, let's auto-fill
+            foreach ($picture->getPlaceTags() as $placeTag) {
+                $meal->addPlaceTag($placeTag);
+            }
            
             $this->entityManager->persist($meal);
         }

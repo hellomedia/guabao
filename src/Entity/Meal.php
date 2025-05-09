@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Tag\PlaceTag;
 use App\Enum\MealType;
 use App\Repository\MealRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -31,9 +32,16 @@ class Meal
     #[ORM\ManyToOne(inversedBy: 'meals')]
     private ?Place $place = null;
 
+    /**
+     * @var Collection<int, PlaceTag>
+     */
+    #[ORM\ManyToMany(targetEntity: PlaceTag::class)]
+    private Collection $placeTags;
+
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
+        $this->placeTags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,5 +118,29 @@ class Meal
     public function getTrip(): ?Trip
     {
         return $this->pictures?->first->getTrip();
+    }
+
+    /**
+     * @return Collection<int, PlaceTag>
+     */
+    public function getPlaceTags(): Collection
+    {
+        return $this->placeTags;
+    }
+
+    public function addPlaceTag(PlaceTag $placeTag): static
+    {
+        if (!$this->placeTags->contains($placeTag)) {
+            $this->placeTags->add($placeTag);
+        }
+
+        return $this;
+    }
+
+    public function removePlaceTag(PlaceTag $placeTag): static
+    {
+        $this->placeTags->removeElement($placeTag);
+
+        return $this;
     }
 }

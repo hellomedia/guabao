@@ -1,17 +1,17 @@
 <div class="card card-food">
     {% if picture %}
-        <a href="{{ path(picture.food) }}" class="card-image-wrapper">
+        <a href="{{ url }}" class="card-image-wrapper">
             <img src="{{ vich_uploader_asset(picture)|imagine_filter('thumb_card') }}"/>
         </a>
     {% else %}
-        <a href="{{ path(picture.food) }}" class="card-image-wrapper">
+        <a href="{{ url }}" class="card-image-wrapper">
             {% include 'picture/_placeholder_image.html.twig' %}
         </a>
     {% endif %}
 
     <div class="card-info">
         <h3 class="card-title">
-            <a href="{{ path(picture.food) }}">
+            <a href="{{ url }}">
                 {{ picture.food|trans }}
             </a>
         </h3>

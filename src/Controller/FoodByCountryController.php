@@ -40,7 +40,8 @@ class FoodByCountryController extends BaseController
         $this->addBreadcrumb($country->getName($request->getLocale()));
 
         return $this->render('food/country/country.html.twig', [
-            'pictures' => $pictures
+            'pictures' => $pictures,
+            'country' => $country,
         ]);
     }
 
@@ -50,7 +51,7 @@ class FoodByCountryController extends BaseController
         Food $food,
         Request $request
     ): Response {
-        $this->addBreadcrumb('food.by_cuisine', 'food_by_cuisine_index');
+        $this->addBreadcrumb('food.by_country', 'food_by_country_index');
         $this->addBreadcrumb($country->getName($request->getLocale()), 'food_by_country_country', ['slugEn' => $country->getSlugEn()]);
         $this->addBreadcrumb($food->getName($request->getLocale()));
 

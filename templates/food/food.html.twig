@@ -5,9 +5,11 @@
 	{% for meal in meals %}
 
 		<h3>
-			{{ meal.enjoyedAt|date('Y-m-D') }}
-			--
-			{{ meal.place|trans }}
+			{{ meal.enjoyedAt|format_date('long') }}
+			-
+			{% for placeTag in meal.placeTags %}
+				{{ placeTag|trans }}
+			{% endfor %}
 		</h3>
 
 		{% for picture in meal.pictures %}

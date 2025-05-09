@@ -81,18 +81,18 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
             $picture->setUpdatedAt(new \DateTimeImmutable()); // Required by Vich to trigger update
 
             $picture->setIsMeal($item['isMeal']);
+            
+            foreach ($item['tags'] as $tag) {
+                $picture->addTag($this->getReference('pictureTag-' . $tag, PictureTag::class));
+            }
+
+            foreach ($item['placeTags'] as $tag) {
+                $picture->addPlaceTag($this->getReference('placeTag-' . $tag, PlaceTag::class));
+            }
 
             $this->_updateAutoFields($picture);
 
             $picture->setFood($this->getReference('food-' . $item['food'], Food::class));
-
-            foreach ($item['tags'] as $tag) {
-                $picture->addTag($this->getReference('pictureTag-' . $tag, PictureTag::class));
-            }
-        
-            foreach ($item['placeTags'] as $tag) {
-                $picture->addPlaceTag($this->getReference('placeTag-' . $tag, PlaceTag::class));
-            }
 
             $this->setReference('picture-'. $item['filename'], $picture);
 
