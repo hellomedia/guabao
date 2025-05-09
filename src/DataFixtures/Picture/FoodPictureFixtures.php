@@ -4,10 +4,12 @@ namespace App\DataFixtures\Picture;
 
 use App\DataFixtures\FoodFixtures;
 use App\DataFixtures\Tag\PictureTagFixtures;
+use App\DataFixtures\Tag\PlaceTagFixtures;
 use App\DataFixtures\TripFixtures;
 use App\Entity\Food;
 use App\Entity\Picture;
 use App\Entity\Tag\PictureTag;
+use App\Entity\Tag\PlaceTag;
 use App\Helper\PictureAutoFillHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -22,18 +24,21 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
             'food' => FoodFixtures::TOMATO,
             'tags' => [PictureTagFixtures::HOME_COOKING],
             'isMeal' => false,
+            'placeTags' => ['Liege']
         ],
         [
             'filename' => 'thai_muslim_1',
             'food' => FoodFixtures::WONTON_NOODLE_SOUP_WITH_ROASTED_DUCK,
             'tags' => [],
             'isMeal' => true,
+            'placeTags' => ['Chiang Mai']
         ],
         [
             'filename' => 'thai_muslim_2',
             'food' => FoodFixtures::WONTON_NOODLE_SOUP_WITH_ROASTED_DUCK,
             'tags' => [],
             'isMeal' => true,
+            'placeTags' => ['Chiang Mai']
         ],
     ];
 
@@ -44,6 +49,7 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies(): array
     {
         return [
+            PlaceTagFixtures::class,
             TripFixtures::class,
             FoodFixtures::class,
             TripCoverPictureFixtures::class, // force TripCoverPicture first because it removes old files
@@ -82,6 +88,10 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
 
             foreach ($item['tags'] as $tag) {
                 $picture->addTag($this->getReference('pictureTag-' . $tag, PictureTag::class));
+            }
+        
+            foreach ($item['placeTags'] as $tag) {
+                $picture->addPlaceTag($this->getReference('placeTag-' . $tag, PlaceTag::class));
             }
 
             $this->setReference('picture-'. $item['filename'], $picture);

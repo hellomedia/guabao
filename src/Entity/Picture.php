@@ -65,6 +65,7 @@ class Picture implements EntityInterface
      * PlaceTags are useful when no place is attached to the picture.
      * Which might happen regularly (place is attached only for shops etc)
      * For consistency, we always add placeTags to the picture
+     * It is also the safe link to country.
      * @var Collection<int, PlaceTag>
      */
     #[ORM\ManyToMany(targetEntity: PlaceTag::class)]

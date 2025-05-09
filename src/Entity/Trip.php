@@ -48,11 +48,11 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     private Collection $countries;
 
     #[ORM\OneToOne]
-    #[ORM\JoinColumn(nullable: true)] // nullable for fixtures
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')] // nullable for fixtures
     private ?Picture $cover = null;
 
     #[ORM\OneToOne]
-    #[ORM\JoinColumn(nullable: true)] // nullable for fixtures
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')] // nullable for fixtures
     private ?Picture $foodCover = null;
 
     /**

@@ -4,10 +4,10 @@
 
 {% block content %}
 
-	{% include 'food/_top_filters.html.twig' %}
+	{# {% include 'food/_top_filters.html.twig' %} #}
 	
 	<div id="foods" class="cards">
-		{% for food in foods %}
+		{% for picture in pictures %}
 			{% include 'food/_card.html.twig' %}
 		{% endfor %}
 	</div>

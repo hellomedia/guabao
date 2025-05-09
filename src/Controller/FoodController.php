@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Country;
 use App\Entity\Food;
 use App\Repository\CountryRepository;
 use App\Repository\CuisineRepository;
-use App\Repository\FoodRepository;
 use App\Repository\FoodTagRepository;
 use App\Repository\IngredientRepository;
+use App\Repository\PictureRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -21,12 +23,12 @@ class FoodController extends BaseController
     }
 
     #[Route('/food', name: 'food_index')]
-    public function index(FoodRepository $foodRepository): Response
+    public function index(CountryRepository $countryRepository): Response
     {
-        $foods = $foodRepository->findAll();
-        
-        return $this->render('food/index.html.twig', [
-            'foods' => $foods
+        $countries = $countryRepository->findAll();
+
+        return $this->render('food/index_by_country.html.twig', [
+            'countries' => $countries
         ]);
     }
 
@@ -37,6 +39,18 @@ class FoodController extends BaseController
         
         return $this->render('food/index_by_country.html.twig', [
             'countries' => $countries
+        ]);
+    }
+
+    #[Route('/food/country/{slugEn:country}', name: 'food_by_country')]
+    public function foodByCountry(Country $country, PictureRepository $pictureRepository, Request $request): Response
+    {
+        $pictures = $pictureRepository->findFoodPictureByCountry($country);
+        
+        $this->addBreadcrumb($country->getName($request->getLocale()));
+
+        return $this->render('food/food_by_country.html.twig', [
+            'pictures' => $pictures
         ]);
     }
 

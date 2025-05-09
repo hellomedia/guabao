@@ -41,7 +41,7 @@ trait LocalizedSlugTrait
         return match ($locale) {
             'fr' => $this->slugFr,
             'en' => $this->slugEn,
-            default => $this->slugFr,
+            default => $this->slugEn,
         };
     }
 }
