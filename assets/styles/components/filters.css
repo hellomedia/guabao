@@ -1,0 +1,21 @@
+ @layer components {
+    #top-filters {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+
+        a {
+            border: 1px solid var(--color-secondary-background);
+            border-radius: var(--radius-3xl);
+            background-color: var(--color-secondary-background);
+            padding: 10px 15px;
+
+            &.current {
+                background-color: var(--color-theme);
+                border: var(--color-theme);
+                color: white;
+            }
+        }
+    }
+ }

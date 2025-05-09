@@ -1,10 +1,16 @@
 @layer components {
     .cards {
         display: grid;
-        @apply grid-cols-1;
-        @apply md:grid-cols-2;
-        @apply lg:grid-cols-3;
-        @apply xl:grid-cols-4;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        @media (width >= theme(--breakpoint-md)) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        @media (width >= theme(--breakpoint-lg)) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        @media (width >= theme(--breakpoint-xl)) {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
         gap: calc(var(--spacing) * 5);
         align-items: stretch;
         grid-auto-rows: minmax(80px, auto);
@@ -16,13 +22,12 @@
         &.cards-tag {
             gap: calc(var(--spacing) * 3);
         }
-
     }
 
     .card {
         background-color: var(--color-secondary-background);
         border: 1px solid var(--color-border);
-        @apply rounded;
+        border-radius: var(--radius-sm);
 
         /* without this flex column justify content, vertical alignment is buggy for subcategories */
         display: flex;

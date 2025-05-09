@@ -1,23 +1,5 @@
 @layer content {
 
-    #trip-filters, #food-filters {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 15px;
-
-        a {
-            border: 1px solid white;
-            border-radius: var(--radius-3xl);
-            background-color: white;
-            padding: 10px 15px;
-            &.current {
-                background-color: var(--color-theme);
-                border: var(--color-theme);
-                color: white;
-            }
-        }
-    }
-
     .trip-page {
 
         #countries {
