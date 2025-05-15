@@ -49,16 +49,16 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
 
     #[ORM\OneToOne]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')] // nullable for fixtures
-    private ?Picture $cover = null;
+    private ?Media $cover = null;
 
     #[ORM\OneToOne]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')] // nullable for fixtures
-    private ?Picture $foodCover = null;
+    private ?Media $foodCover = null;
 
     /**
-     * @var Collection<int, Picture>
+     * @var Collection<int, Media>
      */
-    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'highlightedTrip')]
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'highlightedTrip')]
     private Collection $highlights;
 
     /**
@@ -104,14 +104,14 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     }
 
     /**
-     * @return Collection<int, Picture>
+     * @return Collection<int, Media>
      */
     public function getHighlights(): Collection
     {
         return $this->highlights;
     }
 
-    public function addHighlight(Picture $highlight): static
+    public function addHighlight(Media $highlight): static
     {
         if (!$this->highlights->contains($highlight)) {
             $this->highlights->add($highlight);
@@ -121,7 +121,7 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
         return $this;
     }
 
-    public function removeHighlight(Picture $highlight): static
+    public function removeHighlight(Media $highlight): static
     {
         if ($this->highlights->removeElement($highlight)) {
             // set the owning side to null (unless already changed)
@@ -133,24 +133,24 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
         return $this;
     }
 
-    public function getCover(): ?Picture
+    public function getCover(): ?Media
     {
         return $this->cover;
     }
 
-    public function setCover(Picture $cover): static
+    public function setCover(Media $cover): static
     {
         $this->cover = $cover;
 
         return $this;
     }
 
-    public function getFoodCover(): ?Picture
+    public function getFoodCover(): ?Media
     {
         return $this->foodCover;
     }
 
-    public function setFoodCover(Picture $foodCover): static
+    public function setFoodCover(Media $foodCover): static
     {
         $this->foodCover = $foodCover;
 

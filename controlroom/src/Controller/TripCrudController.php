@@ -2,6 +2,7 @@
 
 namespace Controlroom\Controller;
 
+use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -16,7 +17,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class TripCrudController extends AbstractCrudController
 {
@@ -36,19 +36,28 @@ class TripCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield Field::new('cover.imageFile', 'Cover')
-            ->setTemplatePath('@controlroom/field/picture_thumbnail.html.twig')
+        yield Field::new('cover.path', 'Cover')
+            ->setTemplatePath('@media/easyadmin/field/thumbnail.html.twig')
             ->onlyOnIndex();
 
-        yield Field::new('cover.imageFile', 'Cover')
-            ->setTemplatePath('@controlroom/field/picture.html.twig')
+        yield Field::new('cover.path', 'Cover')
+            ->setTemplatePath('@media/easyadmin/field/media.html.twig')
             ->onlyOnDetail();
 
         yield AssociationField::new('highlights')
-            ->setTemplatePath('@controlroom/field/picture_collection_thumbnails.html.twig')
+            ->setTemplatePath('@media/easyadmin/field/thumbnail_list.html.twig')
             ->onlyOnDetail();
     
-        yield ChoiceField::new('type');
+        yield AssociationField::new('tags')
+            ->setFormTypeOptions([
+                'by_reference' => false, // important for ManyToMany when using add/remove methods
+                'choice_label' => function (TripTag $tag) {
+                    $locale = $this->getContext()?->getRequest()?->getLocale() ?? 'fr';
+                    return $tag->getName($locale);
+                }
+            ])
+            ->setTemplatePath('@controlroom/field/tags.html.twig')
+            ->setHelp('Hold Ctrl (or Cmd) to select multiple tags');
         
         yield TextField::new('nameFr', 'Name FR');
         yield TextField::new('nameEn', 'Name EN');

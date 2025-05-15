@@ -45,14 +45,14 @@ class FoodCrudController extends AbstractCrudController
     {
         yield IdField::new('id')->hideOnForm();
 
-        yield AssociationField::new('pictures')
-            ->setTemplatePath('@controlroom/field/picture_collection_thumbnails.html.twig')
+        yield AssociationField::new('medias')
+            ->setTemplatePath('@media/easyadmin/field/thumbnail_list.html.twig')
             ->hideOnForm();
 
         yield TextField::new('nameFr');
         yield TextField::new('nameEn');
 
-        yield AssociationField::new('type');
+        yield AssociationField::new('cuisine');
 
         yield AssociationField::new('tags')
             ->setFormTypeOptions([
@@ -72,9 +72,9 @@ class FoodCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $viewPictures = Action::new('viewPictures', 'Pictures')
+        $viewMedias = Action::new('viewMedias', 'Medias')
             ->linkToUrl(function (Food $food) {
-                return $this->urlGenerator->generate('controlroom_picture_index', [
+                return $this->urlGenerator->generate('controlroom_media_index', [
                     'filters' => [
                         'food' => [
                             'comparison' => '=',
@@ -86,15 +86,19 @@ class FoodCrudController extends AbstractCrudController
             ->setIcon('fa fa-images')
             ->addCssClass('btn btn-outline-primary');
 
-        return $actions->add(Action::DETAIL, $viewPictures);
+        return $actions->add(Action::DETAIL, $viewMedias);
     }
 
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
 
-        $qb->leftJoin('entity.pictures', 'p')
-            ->addSelect('p');
+        $qb->leftJoin('entity.medias', 'md')
+            ->addSelect('md')
+            ->leftJoin('entity.cuisine', 'c')
+            ->addSelect('c')
+            ->leftJoin('entity.tags', 't')
+            ->addSelect('t');
 
         return $qb;
     }

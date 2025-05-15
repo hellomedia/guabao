@@ -1,0 +1,19 @@
+{% if field %}
+    {% set media = attribute(entity.instance, 'cover') ?? entity.instance %}
+    <div class="thumb-versions">
+        <img
+            src="{{ uploaded_asset(media)|imagine_filter('thumb_large') }}"
+            class="thumb-large"
+        />
+        <img
+            src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
+            class="thumb-card"
+        />
+        <img
+            src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+            class="thumb-small"
+        />
+    </div>
+{% else %}
+    <span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
+{% endif %}

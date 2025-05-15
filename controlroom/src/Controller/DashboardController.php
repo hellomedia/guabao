@@ -7,10 +7,10 @@ use App\Entity\Food;
 use App\Entity\Ingredient;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Meal;
-use App\Entity\Picture;
+use App\Entity\Media;
 use App\Entity\Place;
 use App\Entity\Tag\FoodTag;
-use App\Entity\Tag\PictureTag;
+use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
 use App\Entity\Tag\Tag;
 use App\Entity\Tag\TripTag;
@@ -93,9 +93,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Trip', 'fa fa-globe', Trip::class);
         yield MenuItem::linkToCrud('Trip Tag', 'fa fa-tag', TripTag::class);
 
-        yield MenuItem::section('Pictures');
-        yield MenuItem::linkToCrud('Picture', 'fa fa-photo', Picture::class);
-        yield MenuItem::linkToCrud('Picture Tag', 'fa fa-tag', PictureTag::class);
+        yield MenuItem::section('Medias');
+        yield MenuItem::linkToCrud('Media', 'fa fa-photo', Media::class);
+        yield MenuItem::linkToCrud('Media Tag', 'fa fa-tag', MediaTag::class);
 
         yield MenuItem::section('Places');
         yield MenuItem::linkToCrud('Place', 'fa fa-map-marker', Place::class);

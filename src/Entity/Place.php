@@ -42,10 +42,10 @@ class Place implements EntityInterface
     private Collection $placeTags;
 
     /**
-     * @var Collection<int, Picture>
+     * @var Collection<int, Media>
      */
-    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'place')]
-    private Collection $pictures;
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'place')]
+    private Collection $medias;
 
     /**
      * @var Collection<int, Meal>
@@ -55,7 +55,7 @@ class Place implements EntityInterface
 
     public function __construct()
     {
-        $this->pictures = new ArrayCollection();
+        $this->medias = new ArrayCollection();
         $this->meals = new ArrayCollection();
     }
 
@@ -120,29 +120,29 @@ class Place implements EntityInterface
     }
 
     /**
-     * @return Collection<int, Picture>
+     * @return Collection<int, Media>
      */
-    public function getPictures(): Collection
+    public function getMedias(): Collection
     {
-        return $this->pictures;
+        return $this->medias;
     }
 
-    public function addPicture(Picture $picture): static
+    public function addMedia(Media $media): static
     {
-        if (!$this->pictures->contains($picture)) {
-            $this->pictures->add($picture);
-            $picture->setPlace($this);
+        if (!$this->medias->contains($media)) {
+            $this->medias->add($media);
+            $media->setPlace($this);
         }
 
         return $this;
     }
 
-    public function removePicture(Picture $picture): static
+    public function removeMedia(Media $media): static
     {
-        if ($this->pictures->removeElement($picture)) {
+        if ($this->medias->removeElement($media)) {
             // set the owning side to null (unless already changed)
-            if ($picture->getPlace() === $this) {
-                $picture->setPlace(null);
+            if ($media->getPlace() === $this) {
+                $media->setPlace(null);
             }
         }
 

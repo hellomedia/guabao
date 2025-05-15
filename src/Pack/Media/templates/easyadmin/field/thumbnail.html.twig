@@ -1,0 +1,9 @@
+{% if field %}
+    {% set media = attribute(entity.instance, 'cover') ?? entity.instance %}
+	<img
+        src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+        class="thumbnail"
+    />
+{% else %}
+    <span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
+{% endif %}

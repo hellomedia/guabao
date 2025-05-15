@@ -24,10 +24,10 @@ class Meal
     private ?MealType $type = null;
 
     /**
-     * @var Collection<int, Picture>
+     * @var Collection<int, Media>
      */
-    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'meal')]
-    private Collection $pictures;
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'meal')]
+    private Collection $medias;
 
     #[ORM\ManyToOne(inversedBy: 'meals')]
     private ?Place $place = null;
@@ -40,8 +40,13 @@ class Meal
 
     public function __construct()
     {
-        $this->pictures = new ArrayCollection();
+        $this->medias = new ArrayCollection();
         $this->placeTags = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return 'Meal ' . $this->id;
     }
 
     public function getId(): ?int
@@ -74,29 +79,29 @@ class Meal
     }
 
     /**
-     * @return Collection<int, Picture>
+     * @return Collection<int, Media>
      */
-    public function getPictures(): Collection
+    public function getMedias(): Collection
     {
-        return $this->pictures;
+        return $this->medias;
     }
 
-    public function addPicture(Picture $picture): static
+    public function addMedia(Media $media): static
     {
-        if (!$this->pictures->contains($picture)) {
-            $this->pictures->add($picture);
-            $picture->setMeal($this);
+        if (!$this->medias->contains($media)) {
+            $this->medias->add($media);
+            $media->setMeal($this);
         }
 
         return $this;
     }
 
-    public function removePicture(Picture $picture): static
+    public function removeMedia(Media $media): static
     {
-        if ($this->pictures->removeElement($picture)) {
+        if ($this->medias->removeElement($media)) {
             // set the owning side to null (unless already changed)
-            if ($picture->getMeal() === $this) {
-                $picture->setMeal(null);
+            if ($media->getMeal() === $this) {
+                $media->setMeal(null);
             }
         }
 
@@ -117,7 +122,7 @@ class Meal
 
     public function getTrip(): ?Trip
     {
-        return $this->pictures?->first->getTrip();
+        return $this->medias?->first->getTrip();
     }
 
     /**

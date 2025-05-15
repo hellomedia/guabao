@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Country;
 use App\Entity\Food;
 use App\Repository\CountryRepository;
-use App\Repository\PictureRepository;
+use App\Repository\MediaRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -5,7 +5,7 @@
 {% block content %}
 
     <div id="cover">
-        <img src="{{ vich_uploader_asset(trip.cover)|imagine_filter('thumb_large') }}"/>
+        <img src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_large') }}"/>
     </div>
 
     <div id="description">
@@ -14,7 +14,7 @@
 
     <div id="highlights">
         {% for highlight in trip.highlights %}
-            <img src="{{ vich_uploader_asset(highlight)|imagine_filter('thumb_card') }}" />
+            <img src="{{ uploaded_asset(highlight)|imagine_filter('thumb_card') }}" />
         {% endfor %}
     </div>
 
@@ -23,6 +23,5 @@
             {{ country|trans }}
         {% endfor %}
     </div>
-
 
 {% endblock %}

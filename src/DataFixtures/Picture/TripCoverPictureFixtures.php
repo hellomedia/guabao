@@ -3,21 +3,25 @@
 namespace App\DataFixtures\Picture;
 
 use App\DataFixtures\TripFixtures;
-use App\Entity\Picture;
+use App\Entity\Media;
 use App\Entity\Trip;
-use App\Helper\PictureAutoFillHelper;
+use App\Enum\MediaType;
+use App\Helper\MediaAutoFillHelper;
+use App\Pack\Media\Helper\ExifExtractor;
+use App\Pack\Media\Helper\UploadHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterface
 {
 
     public function __construct(
-        private PictureAutoFillHelper $autoFillHelper,
+        private MediaAutoFillHelper $autoFillHelper,
+        private UploadHelper $uploadHelper,
+        private ExifExtractor $exifExtractor,
     )
     {   
     }
@@ -35,60 +39,48 @@ class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterf
         
         foreach (TripFixtures::TRIPS as $trip) {
 
-            $key = $trip['key'];
+            $media = new Media();
 
-            $originalPath = __DIR__ . '/../image/trips/' . $key . '/cover.jpg';
+            $media->setType(MediaType::IMAGE);
+            
+            $originalPath = __DIR__ . '/../image/trips/' . $trip['key'] . '/cover.jpg';
 
-            // Copy to a temporary file (unique filename each time)
-            // so that original file is not moved by upload process and still avaialable for next time
-            $tempPath = sys_get_temp_dir() . '/' . uniqid('upload_', true) . '.jpg';
-            copy($originalPath, $tempPath);
+            $uploadedFile = $this->uploadHelper->createUploadedFileForFixtures($originalPath);
 
-            $uploadedFile = new UploadedFile(
-                $tempPath,
-                'cover.jpg',
-                null,
-                null,
-                true // true = test mode, skips file upload checks
-            );
+            $exif = $this->exifExtractor->extractExifData($uploadedFile);
 
-            $picture = new Picture();
+            $this->uploadHelper->uploadImage($media, $uploadedFile);
 
-            $picture->setImageFile($uploadedFile);
-            $picture->setUpdatedAt(new \DateTimeImmutable()); // Required by Vich to trigger update
+            $trip = $this->getReference($trip['key'], Trip::class);
 
-            $trip = $this->getReference($key, Trip::class);
+            $media->setTrip($trip);
 
-            $picture->setTrip($trip);
+            $trip->setCover($media);
 
-            $trip->setCover($picture);
-
-            $this->_updateAutoFields($picture);
+            $this->_updateAutoFields($media, $exif);
     
-            $manager->persist($picture);
+            $manager->persist($media);
         }
 
         $manager->flush();
     }
 
-    private function _updateAutoFields(Picture $picture)
+    private function _updateAutoFields(Media $media, array|false $exif)
     {
-        $exif = $this->autoFillHelper->_extractExifData($picture);
+        $this->autoFillHelper->_setTakenAt($media, $exif);
 
-        $this->autoFillHelper->_setTakenAt($picture, $exif);
-
-        $this->autoFillHelper->_setCoordinates($picture, $exif);
+        $this->autoFillHelper->_setCoordinates($media, $exif);
 
         // currently no place fixtures, so nothing in the DB to link to,
         // but if we do add place fixtures
         // we could query the DB  as long as PlaceFixtures is added to the dependencies
-        $this->autoFillHelper->_autoAssignPlace($picture);
+        $this->autoFillHelper->_autoAssignPlace($media);
     }
 
     private function _removeOldFiles()
     {
         $filesystem = new Filesystem();
-        $uploadDir = __DIR__ . '/../../../public/uploads/pictures';
+        $uploadDir = __DIR__ . '/../../../public/uploads/media';
 
         // Delete all files in the upload directory (but not the directory itself)
         if ($filesystem->exists($uploadDir)) {

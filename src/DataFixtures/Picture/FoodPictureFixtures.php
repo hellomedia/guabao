@@ -3,18 +3,22 @@
 namespace App\DataFixtures\Picture;
 
 use App\DataFixtures\FoodFixtures;
-use App\DataFixtures\Tag\PictureTagFixtures;
+use App\DataFixtures\Tag\MediaTagFixtures;
 use App\DataFixtures\Tag\PlaceTagFixtures;
 use App\DataFixtures\TripFixtures;
 use App\Entity\Food;
-use App\Entity\Picture;
-use App\Entity\Tag\PictureTag;
+use App\Entity\Media;
+use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
-use App\Helper\PictureAutoFillHelper;
+use App\Enum\MediaType;
+use App\Helper\MediaAutoFillHelper;
+use App\Pack\Media\Helper\ExifExtractor;
+use App\Pack\Media\Helper\UploadHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Naming\OrignameNamer;
 
 class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -22,7 +26,7 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
         [
             'filename' => 'belgian_tomato',
             'food' => FoodFixtures::TOMATO,
-            'tags' => [PictureTagFixtures::HOME_COOKING],
+            'tags' => [MediaTagFixtures::HOME_COOKING],
             'isMeal' => false,
             'placeTags' => ['Liege']
         ],
@@ -43,7 +47,9 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
     ];
 
     public function __construct(
-        private PictureAutoFillHelper $autoFillHelper,
+        private MediaAutoFillHelper $autoFillHelper,
+        private UploadHelper $uploadHelper,
+        private ExifExtractor $exifExtractor,
     ) {}
 
     public function getDependencies(): array
@@ -52,7 +58,7 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
             PlaceTagFixtures::class,
             TripFixtures::class,
             FoodFixtures::class,
-            TripCoverPictureFixtures::class, // force TripCoverPicture first because it removes old files
+            TripCoverPictureFixtures::class, // force TripCoverMedia first because it removes old files
         ];
     }
 
@@ -60,65 +66,54 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
     {
         foreach (self::FOOD_PICTURES as $item) {
 
+            $media = new Media();
+            
+            $media->setType(MediaType::IMAGE);
+            
             $originalPath = __DIR__ . '/../image/food/' . $item['filename']. '.jpg';
 
-            // Copy to a temporary file (unique filename each time)
-            // so that original file is not moved by upload process and still avaialable for next time
-            $tempPath = sys_get_temp_dir() . '/' . uniqid('upload_', true) . '.jpg';
-            copy($originalPath, $tempPath);
+            $uploadedFile = $this->uploadHelper->createUploadedFileForFixtures($originalPath);
 
-            $uploadedFile = new UploadedFile(
-                $tempPath,
-                $item['filename'] . '.jpg',
-                null,
-                null,
-                true // true = test mode, skips file upload checks
-            );
+            // extract exif before converting to avif (exif lost in conversion)
+            $exif = $this->exifExtractor->extractExifData($uploadedFile);
 
-            $picture = new Picture;
+            $this->uploadHelper->uploadImage($media, $uploadedFile);
 
-            $picture->setImageFile($uploadedFile);
-            $picture->setUpdatedAt(new \DateTimeImmutable()); // Required by Vich to trigger update
-
-            $picture->setIsMeal($item['isMeal']);
+            $media->setIsMeal($item['isMeal']);
             
             foreach ($item['tags'] as $tag) {
-                $picture->addTag($this->getReference('pictureTag-' . $tag, PictureTag::class));
+                $media->addTag($this->getReference('mediaTag-' . $tag, MediaTag::class));
             }
 
             foreach ($item['placeTags'] as $tag) {
-                $picture->addPlaceTag($this->getReference('placeTag-' . $tag, PlaceTag::class));
+                $media->addPlaceTag($this->getReference('placeTag-' . $tag, PlaceTag::class));
             }
 
-            $this->_updateAutoFields($picture);
+            $this->_updateAutoFields($media, $exif);
 
-            $picture->setFood($this->getReference('food-' . $item['food'], Food::class));
+            $media->setFood($this->getReference('food-' . $item['food'], Food::class));
 
-            $this->setReference('picture-'. $item['filename'], $picture);
+            $this->setReference('media-'. $item['filename'], $media);
 
-            $manager->persist($picture);
+            $manager->persist($media);
 
-            // flush each item 
-            // new meals need to be flushed to be detectable for following items
             $manager->flush();
         }
     }
 
-    private function _updateAutoFields(Picture $picture)
+    private function _updateAutoFields(Media $media, array|false $exif)
     {
-        $exif = $this->autoFillHelper->_extractExifData($picture);
+        $this->autoFillHelper->_setTakenAt($media, $exif);
 
-        $this->autoFillHelper->_setTakenAt($picture, $exif);
-
-        $this->autoFillHelper->_setCoordinates($picture, $exif);
+        $this->autoFillHelper->_setCoordinates($media, $exif);
 
         // currently no place fixtures, so nothing in the DB to link to,
         // but if we do add place fixtures
         // we could query the DB  as long as PlaceFixtures is added to the dependencies
-        $this->autoFillHelper->_autoAssignPlace($picture);
+        $this->autoFillHelper->_autoAssignPlace($media);
 
-        $this->autoFillHelper->_setTrip($picture);
+        $this->autoFillHelper->_setTrip($media);
 
-        $this->autoFillHelper->_setMeal($picture);
+        $this->autoFillHelper->_setMeal($media);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Country;
 use App\Entity\Food;
 use App\Repository\CountryRepository;
-use App\Repository\PictureRepository;
+use App\Repository\MediaRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,15 +32,15 @@ class FoodByCountryController extends BaseController
     }
 
     #[Route('/food/country/{slugEn:country}', name: 'food_by_country_country')]
-    public function country(Country $country, PictureRepository $pictureRepository, Request $request): Response
+    public function country(Country $country, MediaRepository $mediaRepository, Request $request): Response
     {
-        $pictures = $pictureRepository->findFoodPicturesByCountry($country);
+        $medias = $mediaRepository->findFoodMediasByCountry($country);
 
         $this->addBreadcrumb('food.by_country', 'food_by_country_index');
         $this->addBreadcrumb($country->getName($request->getLocale()));
 
         return $this->render('food/country/country.html.twig', [
-            'pictures' => $pictures,
+            'medias' => $medias,
             'country' => $country,
         ]);
     }

@@ -20,18 +20,17 @@ html {
 
 /** IMAGES **/
 .ea {
-    .image-thumb-list {
+    .thumb-list {
         display: flex;
-        gap: 5px;
-        flex-wrap: wrap;
+        gap: 3px;
     }
 }
 .ea-index {
-    .thumb-small {
-            max-height: 70px;
-            width: auto;
-        }
-    .thumb-list {
+    .thumbnail {
+        max-height: 70px;
+        width: auto;
+    }
+    .thumb-list {  
         img {
             max-height: 70px;
             width: auto;

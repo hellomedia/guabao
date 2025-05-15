@@ -1,9 +1,0 @@
-{% if field %}
-    {% set picture = attribute(entity.instance, 'cover') ?? entity.instance %}
-	<img
-        src="{{ vich_uploader_asset(picture)|imagine_filter('thumb_small') }}"
-        class="thumb-small"
-    />
-{% else %}
-    <span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
-{% endif %}

@@ -1,11 +1,11 @@
 <div class="card card-trip">
     {% if trip.cover %}
         <a href="{{ path(trip) }}" class="card-image-wrapper">
-            <img src="{{ vich_uploader_asset(trip.cover)|imagine_filter('thumb_card') }}"/>
+            <img src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_card') }}"/>
         </a>
     {% else %}
         <a href="{{ path(trip) }}" class="card-image-wrapper">
-            {% include 'picture/_placeholder_image.html.twig' %}
+            {% include 'media/_placeholder_image.html.twig' %}
         </a>
     {% endif %}
 

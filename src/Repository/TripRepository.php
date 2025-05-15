@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Picture;
+use App\Entity\Media;
 use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
 use DateTimeImmutable;
@@ -78,23 +78,23 @@ class TripRepository extends ServiceEntityRepository
         ]);
     }
 
-    public function findOneByPictureDate(DateTimeImmutable $pictureTakenAt)
+    public function findOneByMediaDate(DateTimeImmutable $mediaTakenAt)
     {
         
         return $this->createQueryBuilder('t')
-            ->andWhere('t.startedAt < :pictureTakenAt')
-            ->andWhere('t.endedAt > :pictureTakenAt')
-            ->setParameter('pictureTakenAt', $pictureTakenAt)
+            ->andWhere('t.startedAt < :mediaTakenAt')
+            ->andWhere('t.endedAt > :mediaTakenAt')
+            ->setParameter('mediaTakenAt', $mediaTakenAt)
             ->getQuery()
             ->getOneOrNullResult();
     }
 
-    public function findPictures(Trip $trip): Collection
+    public function findMedias(Trip $trip): Collection
     {
         $query = $this->getEntityManager()
             ->createQueryBuilder()
-            ->select('pic')
-            ->from(Picture::class, 'pic')
+            ->select('media')
+            ->from(Media::class, 'media')
             ->where('pic.trip = :trip')
             ->setParameter('trip', $trip)
             ->getQuery()
@@ -107,7 +107,7 @@ class TripRepository extends ServiceEntityRepository
     {
         $dql = <<<DQL
             SELECT DISTINCT pt, pic
-            FROM App\Entity\Picture pic
+            FROM App\Entity\Media pic
             JOIN pic.placeTags pt
             WHERE pic.trip = :trip
         DQL;

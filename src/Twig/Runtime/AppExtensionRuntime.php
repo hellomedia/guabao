@@ -4,9 +4,9 @@ namespace App\Twig\Runtime;
 
 use App\Entity\Food;
 use App\Entity\Interface\LocalizedNameInterface;
-use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
-use App\Helper\Upload\UploadHelper;
+use App\Pack\Media\Entity\Interface\UploadedAssetEntityInterface;
+use App\Pack\Media\Helper\UploadHelper;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -38,9 +38,9 @@ class AppExtensionRuntime implements RuntimeExtensionInterface
         return $this->translator->trans($item, $parameters, $domain, $locale);
     }
 
-    public function getUploadedAssetPath(string $path): string
+    public function getUploadedAssetPath(UploadedAssetEntityInterface $uploadedAsset): string
     {
-        return $this->uploadHelper->getPublicPath($path);
+        return $this->uploadHelper->getPublicPath($uploadedAsset);
     }
 
     public function getAbsoluteUrl(mixed $item, array $parameters = []): string

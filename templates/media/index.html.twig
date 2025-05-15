@@ -1,0 +1,17 @@
+{% extends 'layout/default.html.twig' %}
+
+{% block title %}
+	{{ 'Medias'|trans }}
+{% endblock %}
+
+{% block content %}
+	
+    <div id="medias" class="cards">
+        {% for media in medias %}
+            <div class="card media">
+                <img src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}" />
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

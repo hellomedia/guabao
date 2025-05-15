@@ -43,10 +43,10 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     private ?Month $seasonEnd = null;
 
     /**
-     * @var Collection<int, Picture>
+     * @var Collection<int, Media>
      */
-    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'food')]
-    private Collection $pictures;
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'food')]
+    private Collection $medias;
 
     /**
      * @var Collection<int, Tag>
@@ -65,7 +65,7 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
 
     public function __construct()
     {
-        $this->pictures = new ArrayCollection();
+        $this->medias = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->ingredients = new ArrayCollection();
     }
@@ -136,29 +136,29 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     }
 
     /**
-     * @return Collection<int, Picture>
+     * @return Collection<int, Media>
      */
-    public function getPictures(): Collection
+    public function getMedias(): Collection
     {
-        return $this->pictures;
+        return $this->medias;
     }
 
-    public function addPicture(Picture $picture): static
+    public function addMedia(Media $media): static
     {
-        if (!$this->pictures->contains($picture)) {
-            $this->pictures->add($picture);
-            $picture->setFood($this);
+        if (!$this->medias->contains($media)) {
+            $this->medias->add($media);
+            $media->setFood($this);
         }
 
         return $this;
     }
 
-    public function removePicture(Picture $picture): static
+    public function removeMedia(Media $media): static
     {
-        if ($this->pictures->removeElement($picture)) {
+        if ($this->medias->removeElement($media)) {
             // set the owning side to null (unless already changed)
-            if ($picture->getFood() === $this) {
-                $picture->setFood(null);
+            if ($media->getFood() === $this) {
+                $media->setFood(null);
             }
         }
 
@@ -229,8 +229,8 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     {
         $meals = [];
 
-        foreach($this->pictures as $picture) {
-            $meal = $picture->getMeal();
+        foreach($this->medias as $media) {
+            $meal = $media->getMeal();
             if ($meal instanceof Meal && !isset($seen[$meal->getId()])) {
                 $seen[$meal->getId()] = true;
                 $meals[] = $meal;

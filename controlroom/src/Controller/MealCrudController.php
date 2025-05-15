@@ -50,16 +50,16 @@ class MealCrudController extends AbstractCrudController
 
         yield AssociationField::new('place');
         
-        yield AssociationField::new('pictures')
-            ->setTemplatePath('@controlroom/field/picture_collection_thumbnails.html.twig')
+        yield AssociationField::new('medias')
+            ->setTemplatePath('@media/easyadmin/field/thumbnail_list.html.twig')
             ->hideOnForm();
     }
 
     public function configureActions(Actions $actions): Actions
     {
-        $viewPictures = Action::new('viewPictures', 'Pictures')
+        $viewMedias = Action::new('viewMedias', 'Medias')
             ->linkToUrl(function (Meal $meal) {
-                return $this->urlGenerator->generate('controlroom_picture_index', [
+                return $this->urlGenerator->generate('controlroom_media_index', [
                     'filters' => [
                         'meal' => [
                             'comparison' => '=',
@@ -71,15 +71,15 @@ class MealCrudController extends AbstractCrudController
             ->setIcon('fa fa-images')
             ->addCssClass('btn btn-outline-primary');
 
-        return $actions->add(Action::DETAIL, $viewPictures);
+        return $actions->add(Action::DETAIL, $viewMedias);
     }
 
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
 
-        $qb->leftJoin('entity.pictures', 'p')
-            ->addSelect('p');
+        $qb->leftJoin('entity.medias', 'md')
+            ->addSelect('md');
 
         return $qb;
     }

@@ -1,0 +1,12 @@
+{% if field.value|length > 0 %}
+	<div class="thumb-list">
+		{% for media in field.value %}
+			<img
+                src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+                alt=""
+            />
+		{% endfor %}
+	</div>
+{% else %}
+	<span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
+{% endif %}

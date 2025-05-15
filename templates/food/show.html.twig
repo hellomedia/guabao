@@ -5,19 +5,19 @@
 {% endblock %}
 
 {% block content %}
-	{% for picture in food.pictures %}
-		<img src="{{ vich_uploader_asset(picture)|imagine_filter('thumb_card') }}"/>
+	{% for media in food.medias %}
+		<img src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"/>
 
-		{% for tags in picture.tags %}
+		{% for tags in media.tags %}
 			{{ tags|trans }}
 		{% endfor %}
 
 		<div>
-			{{ picture.takenAt|format('Y-m-D') }}
+			{{ media.takenAt|format('Y-m-D') }}
 		</div>
 
 		<div>
-			{{ picture.place }}
+			{{ media.place }}
 		</div>
 	{% endfor %}
 

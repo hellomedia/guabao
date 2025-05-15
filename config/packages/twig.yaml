@@ -6,6 +6,7 @@ twig:
         src/Twig/Components: 'components'
         src/Security/templates: 'security'
         templates/bundles/TwigBundle/Exception: 'exception'
+        src/Pack/Media/templates: 'media'
         controlroom/templates: 'controlroom'
 
     form_themes:

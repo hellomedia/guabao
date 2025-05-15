@@ -3,9 +3,12 @@
 namespace App\DataFixtures\Picture;
 
 use App\DataFixtures\TripFixtures;
-use App\Entity\Picture;
+use App\Entity\Media;
 use App\Entity\Trip;
-use App\Helper\PictureAutoFillHelper;
+use App\Enum\MediaType;
+use App\Helper\MediaAutoFillHelper;
+use App\Pack\Media\Helper\ExifExtractor;
+use App\Pack\Media\Helper\UploadHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -14,7 +17,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class HighlightedPictureFixtures extends Fixture implements DependentFixtureInterface
 {
     public function __construct(
-        private PictureAutoFillHelper $autoFillHelper
+        private MediaAutoFillHelper $autoFillHelper,
+        private UploadHelper $uploadHelper,
+        private ExifExtractor $exifExtractor,
     )
     {   
     }
@@ -23,7 +28,7 @@ class HighlightedPictureFixtures extends Fixture implements DependentFixtureInte
     {
         return [
             TripFixtures::class,
-            TripCoverPictureFixtures::class, // force TripCoverPicture first because it removes old files
+            TripCoverPictureFixtures::class, // force TripCoverMedia first because it removes old files
         ];
     }
 
@@ -37,47 +42,39 @@ class HighlightedPictureFixtures extends Fixture implements DependentFixtureInte
 
             foreach (glob($dir . '*.jpg') as $originalPath) {
 
-                // Copy to temp
-                $tempPath = sys_get_temp_dir() . '/' . uniqid('upload_', true) . '.jpg';
-                copy($originalPath, $tempPath);
+                $media = new Media();
+                
+                $media->setType(MediaType::IMAGE);
+                
+                $uploadedFile = $this->uploadHelper->createUploadedFileForFixtures($originalPath);
+                
+                // extract exif before converting to avif (exif lost in conversion)
+                $exif = $this->exifExtractor->extractExifData($uploadedFile);
 
-                $uploadedFile = new UploadedFile(
-                    $tempPath,
-                    basename($originalPath),
-                    null,
-                    null,
-                    true
-                );
-
-                $picture = new Picture();
-
-                $picture->setImageFile($uploadedFile);
-                $picture->setUpdatedAt(new \DateTimeImmutable()); // Required by Vich to trigger update
+                $this->uploadHelper->uploadImage($media, $uploadedFile);
 
                 $trip = $this->getReference($key, Trip::class);
-                $picture->setTrip($trip);
-                $picture->setHighlight(true);
+                $media->setTrip($trip);
+                $media->setHighlight(true);
 
-                $this->_updateAutoFields($picture);
+                $this->_updateAutoFields($media, $exif);
         
-                $manager->persist($picture);
+                $manager->persist($media);
             }
         }
 
         $manager->flush();
     }
 
-    private function _updateAutoFields(Picture $picture)
+    private function _updateAutoFields(Media $media, array|false $exif)
     {
-        $exif = $this->autoFillHelper->_extractExifData($picture);
+        $this->autoFillHelper->_setTakenAt($media, $exif);
 
-        $this->autoFillHelper->_setTakenAt($picture, $exif);
-
-        $this->autoFillHelper->_setCoordinates($picture, $exif);
+        $this->autoFillHelper->_setCoordinates($media, $exif);
 
         // currently no place fixtures, so nothing in the DB to link to,
         // but if we do add place fixtures
         // we could query the DB  as long as PlaceFixtures is added to the dependencies
-        $this->autoFillHelper->_autoAssignPlace($picture);
+        $this->autoFillHelper->_autoAssignPlace($media);
     }
 }

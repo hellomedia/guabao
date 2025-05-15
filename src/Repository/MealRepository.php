@@ -17,12 +17,12 @@ class MealRepository extends ServiceEntityRepository
         parent::__construct($registry, Meal::class);
     }
 
-    public function findOneByPictureDate(DateTimeImmutable $pictureTakenAt)
+    public function findOneByMediaDate(DateTimeImmutable $mediaTakenAt)
     {
         $interval = new \DateInterval('PT10M');
 
-        $start = $pictureTakenAt->sub($interval);
-        $end = $pictureTakenAt->add($interval);
+        $start = $mediaTakenAt->sub($interval);
+        $end = $mediaTakenAt->add($interval);
 
         return $this->createQueryBuilder('m')
             ->andWhere('m.enjoyedAt BETWEEN :start AND :end')

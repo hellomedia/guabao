@@ -4,7 +4,7 @@
     {% if image %}
 		<img
 			class="listing-card-image"
-			src="{{ uploaded_asset(image.path)|imagine_filter('thumb_card') }}"
+			src="{{ uploaded_asset(image)|imagine_filter('thumb_card') }}"
 			alt="" 
 		/>
 	{% else %}
