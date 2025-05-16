@@ -1,0 +1,43 @@
+<div data-controller="fancybox" class="gallery grid grid-cols-2 md:grid-cols-3 gap-4">
+
+	{% for media in medias %}
+		
+		{% if media.isImage %}
+			{% if media.is360 %}
+				<a 
+					data-fancybox="gallery"
+					data-src="#viewer-{{ media.id }}"
+					data-caption="{{ media.description(app.request.locale) }}"
+				>
+					<img src="{{ uploaded_asset(media) }}" class="rounded shadow-sm"/>
+				</a>
+
+				<div style="display: none;" id="viewer-{{ media.id }}">
+					<div 
+						class="panorama-viewer" 
+						data-src="{{ uploaded_asset(media) }}"
+						style="width: 90vw; height: 85vh;"
+					></div>
+				</div>
+
+			{% else %}
+				<a 
+					data-fancybox="gallery"
+					href="{{ uploaded_asset(media) }}"
+					data-caption="{{ media.description(app.request.locale) }}"
+				>
+					<img src="{{ uploaded_asset(media) }}" class="rounded shadow-sm"/>
+				</a>
+			{% endif %}
+
+		{% elseif media.isVideo %}
+			<a data-fancybox="gallery"
+				data-caption="{{ media.description(app.request.locale) }}"
+				href="{{ media.videoUrl }}"
+			>
+				<img src="{{ asset('images/video-placeholder.jpg') }}" class="rounded shadow-sm"/>
+			</a>
+		{% endif %}
+	{% endfor %}
+</div>
+

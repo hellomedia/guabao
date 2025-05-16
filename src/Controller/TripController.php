@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\DataFixtures\Tag\TripTagFixtures;
 use App\Entity\Trip;
+use App\Repository\MediaRepository;
 use App\Repository\TripRepository;
 use App\Repository\TripTagRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
@@ -61,6 +62,22 @@ class TripController extends BaseController
 
         return $this->render('trip/show.html.twig', [
             'trip' => $trip
+        ]);
+    }
+
+    #[Route('/trip/{slug}/gallery', name: 'trip_gallery')]
+    public function gallery(
+        #[MapEntity(expr: 'repository.findOneBySlug(slug)')] Trip $trip,
+        MediaRepository $mediaRepository,
+    ): Response
+    {
+        $this->addBreadcrumb($trip);
+
+        $medias = $mediaRepository->findByTrip($trip);
+
+        return $this->render('trip/gallery.html.twig', [
+            'trip' => $trip,
+            'medias' => $medias,
         ]);
     }
 }

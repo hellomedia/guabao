@@ -13,7 +13,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class HighlightedPictureFixtures extends Fixture implements DependentFixtureInterface
+class Pano360Fixtures extends Fixture implements DependentFixtureInterface
 {
     public function __construct(
         private MediaAutoFillHelper $autoFillHelper,
@@ -37,7 +37,7 @@ class HighlightedPictureFixtures extends Fixture implements DependentFixtureInte
 
             $key = $trip['key'];
 
-            $dir = __DIR__ . '/../image/trips/' . $key . '/highlights/';
+            $dir = __DIR__ . '/../image/trips/' . $key . '/360/';
 
             foreach (glob($dir . '*.jpg') as $originalPath) {
 
@@ -45,15 +45,15 @@ class HighlightedPictureFixtures extends Fixture implements DependentFixtureInte
                 
                 $media->setType(MediaType::IMAGE);
                 
-                $media->setHighlight(true);
+                $media->setIs360(true);
                 
                 $uploadedFile = $this->uploadHelper->createUploadedFileForFixtures($originalPath);
                 
                 // extract exif before converting to avif (exif lost in conversion)
                 $exif = $this->exifExtractor->extractExifData($uploadedFile);
-                
+
                 $this->uploadHelper->uploadImage($media, $uploadedFile);
-                
+
                 $trip = $this->getReference($key, Trip::class);
                 
                 $media->setTrip($trip);

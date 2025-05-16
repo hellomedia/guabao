@@ -12,27 +12,7 @@
 			{% endfor %}
 		</h3>
 
-
-{% dump meal.medias %}
-
-{% include 'food/_gallery.html.twig' with {medias: meal.medias } %}
-
-
-{% dump meal.medias %}
-
-	{% for media in meal.medias %}
-
-
-		<img src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"/>
-
-		{% for tags in media.tags %}
-			{{ tags|trans }}
-		{% endfor %}
-
-	{% endfor %}
-
-
-
+		{% include 'food/_gallery.html.twig' with {medias: meal.medias } %}
 
 	{% endfor %}
 

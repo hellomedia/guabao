@@ -13,7 +13,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class HighlightedPictureFixtures extends Fixture implements DependentFixtureInterface
+class PanoFixtures extends Fixture implements DependentFixtureInterface
 {
     public function __construct(
         private MediaAutoFillHelper $autoFillHelper,
@@ -37,27 +37,26 @@ class HighlightedPictureFixtures extends Fixture implements DependentFixtureInte
 
             $key = $trip['key'];
 
-            $dir = __DIR__ . '/../image/trips/' . $key . '/highlights/';
+            $dir = __DIR__ . '/../image/trips/' . $key . '/pano/';
 
             foreach (glob($dir . '*.jpg') as $originalPath) {
 
                 $media = new Media();
                 
                 $media->setType(MediaType::IMAGE);
-                
-                $media->setHighlight(true);
+                $media->setIsPano(true);
                 
                 $uploadedFile = $this->uploadHelper->createUploadedFileForFixtures($originalPath);
                 
                 // extract exif before converting to avif (exif lost in conversion)
                 $exif = $this->exifExtractor->extractExifData($uploadedFile);
-                
+
                 $this->uploadHelper->uploadImage($media, $uploadedFile);
-                
+
                 $trip = $this->getReference($key, Trip::class);
                 
                 $media->setTrip($trip);
-
+                
                 $this->_updateAutoFields($media, $exif);
         
                 $manager->persist($media);

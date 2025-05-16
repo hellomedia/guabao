@@ -8,6 +8,14 @@
         <img src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_large') }}"/>
     </div>
 
+    <div>
+        <a class="btn btn-default" 
+            href="{{ path('trip_gallery', {slug: trip.slug(app.locale)}) }}"
+        >
+            Show gallery
+        </a>
+    </div>
+
     <div id="description">
         {{ trip.description(app.locale)|nl2br }}
     </div>

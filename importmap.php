@@ -44,4 +44,20 @@ return [
     'lodash/debounce' => [
         'version' => '4.17.21',
     ],
+    'three' => [
+        'version' => '0.175.0',
+    ],
+    'uevent' => [
+        'version' => '2.2.0',
+    ],
+    '@fancyapps/ui' => [
+        'version' => '5.0.36',
+    ],
+    '@photo-sphere-viewer/core' => [
+        'version' => '5.13.2',
+    ],
+    '@photo-sphere-viewer/core/index.min.css' => [
+        'version' => '5.13.2',
+        'type' => 'css',
+    ],
 ];
