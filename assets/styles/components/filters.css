@@ -6,9 +6,8 @@
         margin-bottom: 15px;
 
         a {
-            border: 1px solid var(--color-secondary-background);
+            border: 1px solid var(--color-gray-300);
             border-radius: var(--radius-3xl);
-            background-color: var(--color-secondary-background);
             padding: 10px 15px;
 
             &.current {
@@ -16,6 +15,17 @@
                 border: var(--color-theme);
                 color: white;
             }
+        }
+    }
+
+    .with-cards #top-filters a {
+        border: 1px solid var(--color-secondary-background);
+        background-color: var(--color-secondary-background);
+
+        &.current {
+            background-color: var(--color-theme);
+            border: var(--color-theme);
+            color: white;
         }
     }
  }

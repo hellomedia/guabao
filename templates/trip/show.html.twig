@@ -4,16 +4,10 @@
 
 {% block content %}
 
+    {% include 'trip/_top_filters.html.twig' %}
+
     <div id="cover">
         <img src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_large') }}"/>
-    </div>
-
-    <div>
-        <a class="btn btn-default" 
-            href="{{ path('trip_gallery', {slug: trip.slug(app.locale)}) }}"
-        >
-            Show gallery
-        </a>
     </div>
 
     <div id="description">
@@ -24,6 +18,12 @@
         {% for highlight in trip.highlights %}
             <img src="{{ uploaded_asset(highlight)|imagine_filter('thumb_card') }}" />
         {% endfor %}
+    </div>
+
+    <div>
+        <a class="btn btn-default" href="{{ path('trip_gallery', {slug: trip.slug(app.locale)}) }}">
+            Show gallery
+        </a>
     </div>
 
     <div id="countries">

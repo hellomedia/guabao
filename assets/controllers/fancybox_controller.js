@@ -14,13 +14,10 @@ export default class extends Controller {
 
             on: {
                 reveal: (fancybox, slide) => {
+
+                    // init photosphere viewer
                     const viewerContainer = slide.contentEl?.querySelector('.panorama-viewer')
                     const src = viewerContainer?.dataset.src
-
-                    console.log('loaded');
-                    console.log(slide)
-                    console.log(slide.contentEl);
-                    console.log(src);
 
                     if (viewerContainer && src && !viewerContainer.dataset.initiated) {
                         new Viewer({

@@ -32,7 +32,7 @@ class TripPictureFixtures extends Fixture implements DependentFixtureInterface
     }
 
     public function load(ObjectManager $manager): void
-    {        
+    {     
         foreach (TripFixtures::TRIPS as $trip) {
 
             $key = $trip['key'];

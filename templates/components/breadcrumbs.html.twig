@@ -29,7 +29,7 @@
                         {% if breadcrumb.route %}
                             <a
                                 href="{{ path(breadcrumb.route, breadcrumb.routeParams) }}"
-                                class="breadcrumb-item breadcrumb-link-hover"
+                                class="breadcrumb-item breadcrumb-link-hover {{ breadcrumb.large ? 'breadcrumb-large' }}"
                             >
                                 {{ breadcrumb.item|trans(domain: 'breadcrumbs') }}
                             </a>

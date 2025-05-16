@@ -1,0 +1,8 @@
+<div id="top-filters">
+	<a href="{{ path(trip) }}" class="{{ app.current_route in ['trip_show'] ? 'current' }}">
+		{{ 'Overview'|trans }}
+	</a>
+	<a href="{{ path('trip_gallery', {slug: trip.slug(app.locale)}) }}" class="{{ app.current_route == 'trip_gallery' ? 'current' }}">
+		{{ 'Gallery'|trans }}
+	</a>
+</div>

@@ -71,7 +71,8 @@ class TripController extends BaseController
         MediaRepository $mediaRepository,
     ): Response
     {
-        $this->addBreadcrumb($trip);
+        $this->addBreadcrumb($trip, isLarge: true);
+        $this->addBreadcrumb('trip.gallery');
 
         $medias = $mediaRepository->findByTrip($trip);
 

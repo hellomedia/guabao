@@ -32,9 +32,9 @@ abstract class BaseController extends AbstractController
         protected BreadcrumbsHelper $breadcrumbsHelper,
     ) {}
 
-    protected function addBreadcrumb(mixed $item, $route = null, $routeParams = [], ?bool $isAdmin = null)
+    protected function addBreadcrumb(mixed $item, $route = null, $routeParams = [], ?bool $isLarge = null, ?bool $isAdmin = null)
     {
-        return $this->breadcrumbsHelper->addBreadcrumb($item, $route, $routeParams, $isAdmin);
+        return $this->breadcrumbsHelper->addBreadcrumb($item, $route, $routeParams, $isLarge, $isAdmin);
     }
 
     /**

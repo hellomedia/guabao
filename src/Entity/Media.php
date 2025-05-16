@@ -28,7 +28,7 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $takenAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'medias')]
@@ -162,6 +162,11 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     {
         $this->trip = $trip;
 
+        // auto set highlightedTrip convenience property
+        if ($this->highlight) {
+            $this->highlightedTrip = $trip;
+        }
+
         return $this;
     }
 
@@ -173,9 +178,9 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     public function setHighlight(?bool $highlight): static
     {
         $this->highlight = $highlight;
-
+        
         // auto set highlightedTrip convenience property
-        $this->highlightedTrip = $highlight ? $this->trip : null;
+        $this->highlightedTrip = ($highlight ? $this->trip : null);
 
         return $this;
     }

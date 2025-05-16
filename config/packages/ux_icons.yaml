@@ -18,3 +18,4 @@ ux_icons:
         language: 'mdi:language'
         login: 'material-symbols:login'
         logout: 'material-symbols:logout'
+        sphere: 'icomoon-free:sphere'

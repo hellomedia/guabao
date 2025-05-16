@@ -1,4 +1,4 @@
-<div data-controller="fancybox" class="gallery grid grid-cols-2 md:grid-cols-3 gap-4">
+<div data-controller="fancybox" class="gallery">
 
 	{% for media in medias %}
 		
@@ -9,7 +9,8 @@
 					data-src="#viewer-{{ media.id }}"
 					data-caption="{{ media.description(app.request.locale) }}"
 				>
-					<img src="{{ uploaded_asset(media) }}" class="rounded shadow-sm"/>
+					<twig:ux:icon name="sphere" />
+					<img src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}" class="rounded shadow-sm"/>
 				</a>
 
 				<div style="display: none;" id="viewer-{{ media.id }}">
@@ -26,7 +27,7 @@
 					href="{{ uploaded_asset(media) }}"
 					data-caption="{{ media.description(app.request.locale) }}"
 				>
-					<img src="{{ uploaded_asset(media) }}" class="rounded shadow-sm"/>
+					<img src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}" class="rounded shadow-sm"/>
 				</a>
 			{% endif %}
 

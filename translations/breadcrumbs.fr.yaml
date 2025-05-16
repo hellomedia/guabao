@@ -7,3 +7,5 @@ food:
     by_cuisine: Par cuisine
     by_tag: Par type
     by_ingredient: Par ingrédient
+trip:
+    gallery: Gallerie

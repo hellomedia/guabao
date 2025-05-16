@@ -7,6 +7,7 @@ use App\Entity\Media;
 use App\Repository\MealRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\TripRepository;
+use DateTimeZone;
 use Doctrine\ORM\EntityManager;
 
 class MediaAutoFillHelper
@@ -29,12 +30,21 @@ class MediaAutoFillHelper
             return; // already set manually
         }
 
+        // avoid dealing with timezones here. It creates the following issue in easyadmin:
+        // Date is displayed as UTC in js date widget, but recorded as php/server timezone.
+        // So when the form is submitted, even if the date was not changed, it is modified by
+        // the time difference between UTC and php/server timezone.
+
         if (!empty($exif['DateTimeOriginal'])) {
-            $date = \DateTimeImmutable::createFromFormat('Y:m:d H:i:s', $exif['DateTimeOriginal']);
-            if ($date) {
+            $date = \DateTimeImmutable::createFromFormat(
+                'Y:m:d H:i:s',
+                $exif['DateTimeOriginal'],            
+            );
+
+            if ($date !== false) {
                 $media->setTakenAt($date);
             }
-        }
+        }   
     }
 
     public function _setTrip(Media $media)

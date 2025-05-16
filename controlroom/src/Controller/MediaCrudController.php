@@ -25,6 +25,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -51,6 +52,7 @@ class MediaCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Media')
             ->setEntityLabelInPlural('Medias')
+            ->setDefaultSort(['takenAt' => 'ASC'])
         ;
     }
 
@@ -105,33 +107,34 @@ class MediaCrudController extends AbstractCrudController
         yield DateTimeField::new('takenAt')
             ->setHelp('Leave empty for auto-fill from exif data');
 
+        yield FormField::addFieldset('Trip');
+        yield AssociationField::new('trip')
+            ->setHelp('Leave empty for auto-fill from exif data');
+
+        yield BooleanField::new('highlight');
+        yield AssociationField::new('highlightedTrip')->onlyOnDetail(); // !! not on forms -- buggy because overrides logic in setHighlight()
+        yield BooleanField::new('isPano', 'Pano');
+        yield BooleanField::new('is360', '360');
+
         yield FormField::addFieldset('Food');
         yield AssociationField::new('food');
         yield BooleanField::new('isMeal');
         yield AssociationField::new('meal')
             ->setHelp('Leave empty, will be auto-filled if isMeal set to true');
 
-        yield FormField::addFieldset('Trip');
-        yield AssociationField::new('trip')
-            ->setHelp('Leave empty for auto-fill from exif data');
-        
-        yield BooleanField::new('highlight');
-        yield BooleanField::new('isPano', 'Pano');
-        yield BooleanField::new('is360', '360');
-
         yield FormField::addFieldset('Place');
         yield AssociationField::new('place');
         yield NumberField::new('latitude', 'lat')->setFormTypeOption('scale', 7);
         yield NumberField::new('longitude', 'long')->setFormTypeOption('scale', 7);
         yield TextField::new('googleMapsLink')
-            ->setLabel('Google Maps')
+            ->setLabel('Maps')
             ->renderAsHtml()
             ->hideWhenCreating()
             ->hideWhenUpdating();
 
         yield FormField::addFieldset('Text');
-        yield TextField::new('descriptionFr');
-        yield TextField::new('descriptionEn');
+        yield TextareaField::new('descriptionFr', 'Desc FR');
+        yield TextareaField::new('descriptionEn', 'Desc EN');
 
         yield FormField::addFieldset('Tags');
         
@@ -146,7 +149,7 @@ class MediaCrudController extends AbstractCrudController
             ->setTemplatePath('@controlroom/field/tags.html.twig')
             ->setHelp('Hold Ctrl (or Cmd) to select multiple tags');
         
-        yield AssociationField::new('placeTags')
+        yield AssociationField::new('placeTags', 'Places')
             ->setFormTypeOptions([
                 'by_reference' => false, // important for ManyToMany when using add/remove methods
                 'choice_label' => function (PlaceTag $tag) {

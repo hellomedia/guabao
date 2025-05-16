@@ -16,7 +16,6 @@ class FoodByCountryController extends BaseController
     public function preExecute()
     {
         $this->addBreadcrumb('homepage', 'homepage');
-        $this->addBreadcrumb('food.index', 'food_index');
     }
 
     #[Route('/food/country', name: 'food_by_country_index')]
@@ -52,7 +51,11 @@ class FoodByCountryController extends BaseController
         Request $request
     ): Response {
         $this->addBreadcrumb('food.by_country', 'food_by_country_index');
-        $this->addBreadcrumb($country->getName($request->getLocale()), 'food_by_country_country', ['slugEn' => $country->getSlugEn()]);
+        $this->addBreadcrumb($country->getName(
+            $request->getLocale()), 'food_by_country_country',
+            ['slugEn' => $country->getSlugEn()],
+            isLarge: true
+        );
         $this->addBreadcrumb($food->getName($request->getLocale()));
 
         return $this->render('food/food.html.twig', [

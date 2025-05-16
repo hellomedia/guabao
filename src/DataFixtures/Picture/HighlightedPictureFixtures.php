@@ -44,8 +44,15 @@ class HighlightedPictureFixtures extends Fixture implements DependentFixtureInte
                 $media = new Media();
                 
                 $media->setType(MediaType::IMAGE);
-                
+
+                // important: set trip first, then highlight
+                $trip = $this->getReference($key, Trip::class);
+                $media->setTrip($trip);
                 $media->setHighlight(true);
+
+                if (str_contains($originalPath, 'PANO')) {
+                    $media->setIsPano(true);
+                }
                 
                 $uploadedFile = $this->uploadHelper->createUploadedFileForFixtures($originalPath);
                 
@@ -53,8 +60,6 @@ class HighlightedPictureFixtures extends Fixture implements DependentFixtureInte
                 $exif = $this->exifExtractor->extractExifData($uploadedFile);
                 
                 $this->uploadHelper->uploadImage($media, $uploadedFile);
-                
-                $trip = $this->getReference($key, Trip::class);
                 
                 $media->setTrip($trip);
 

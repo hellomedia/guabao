@@ -3,7 +3,9 @@ dashboard: Dashboard
 trips: Trips
 food:
     index: Food
-    by_country: By country
-    by_cuisine: By cuisine
-    by_tag: By type
-    by_ingredient: By ingredient
+    by_country: Food by country
+    by_cuisine: Food by cuisine
+    by_tag: Food by type
+    by_ingredient: Food by ingredient
+trip:
+    gallery: Gallery

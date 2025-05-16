@@ -44,7 +44,8 @@
         @apply dark:text-gray-400;
     }
 
-    h1.breadcrumb-item {
+    h1.breadcrumb-item,
+    .breadcrumb-large {
         font-family: 'Poppins', 'Inter Variable', sans-serif;
         @apply text-xl;
         color: var(--color-page-title);

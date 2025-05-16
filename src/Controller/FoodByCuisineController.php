@@ -16,7 +16,6 @@ class FoodByCuisineController extends BaseController
     public function preExecute()
     {
         $this->addBreadcrumb('homepage', 'homepage');
-        $this->addBreadcrumb('food.index', 'food_index');
     }
 
     #[Route('/food/cuisine', name: 'food_by_cuisine_index')]
@@ -53,7 +52,11 @@ class FoodByCuisineController extends BaseController
         ): Response
     {
         $this->addBreadcrumb('food.by_cuisine', 'food_by_cuisine_index');
-        $this->addBreadcrumb($cuisine->getName($request->getLocale()), 'food_by_cuisine_cuisine', ['slugEn' => $cuisine->getSlugEn()]);
+        $this->addBreadcrumb(
+            $cuisine->getName($request->getLocale()), 'food_by_cuisine_cuisine',
+            ['slugEn' => $cuisine->getSlugEn()],
+            isLarge: true
+        );
         $this->addBreadcrumb($food->getName($request->getLocale()));
 
         return $this->render('food/food.html.twig', [
