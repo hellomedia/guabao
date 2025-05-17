@@ -1,7 +1,11 @@
 <div class="card card-food">
     {% if food.medias is not empty %}
         <a href="{{ url }}" class="card-image-wrapper">
-            <img src="{{ uploaded_asset(food.medias.first)|imagine_filter('thumb_card') }}"/>
+            <img 
+                src="{{ uploaded_asset(food.medias.first)|imagine_filter('thumb_card') }}"
+                width="700"
+                height="700"
+            />
         </a>
     {% else %}
         <a href="{{ url }}" class="card-image-wrapper">

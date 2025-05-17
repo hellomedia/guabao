@@ -50,7 +50,7 @@ class TripPictureFixtures extends Fixture implements DependentFixtureInterface
                 // extract exif before converting to avif (exif lost in conversion)
                 $exif = $this->exifExtractor->extractExifData($uploadedFile);
 
-                $this->uploadHelper->uploadImage($media, $uploadedFile);
+                $this->uploadHelper->uploadImage($media, $uploadedFile, resize: true);
 
                 $trip = $this->getReference($key, Trip::class);
                 

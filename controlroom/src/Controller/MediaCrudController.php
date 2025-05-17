@@ -115,6 +115,7 @@ class MediaCrudController extends AbstractCrudController
         yield AssociationField::new('highlightedTrip')->onlyOnDetail(); // !! not on forms -- buggy because overrides logic in setHighlight()
         yield BooleanField::new('isPano', 'Pano');
         yield BooleanField::new('is360', '360');
+        yield BooleanField::new('isTripCover', 'Cover');
 
         yield FormField::addFieldset('Food');
         yield AssociationField::new('food');
@@ -198,10 +199,31 @@ class MediaCrudController extends AbstractCrudController
             $exif = $this->exifExtractor->extractExifData($uploadedFile);
 
             // upload and convert to avif
-            $this->uploadHelper->uploadImage($media, $uploadedFile);
+            $this->uploadHelper->uploadImage($media, $uploadedFile, resize: $this->_shouldBeResized($media));
 
             $this->_updateAutoFields($media, $entityManager, $exif);
         }
+    }
+
+    private function _shouldBeResized(Media $image): bool
+    {
+        if ($image->is360()) {
+            return false;
+        }
+
+        if ($image->isPano()) {
+            return false;
+        }
+
+        if ($image->isHighlight()) {
+            return false;
+        }
+
+        if ($image->isTripCover()) {
+            return false;
+        }
+
+        return true;
     }
 
     private function _updateAutoFields(Media $media, EntityManagerInterface $entityManager, array|false $exif)

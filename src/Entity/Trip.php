@@ -138,8 +138,8 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
         return $this->cover;
     }
 
-    public function setCover(Media $cover): static
-    {
+    public function setCover(?Media $cover): static
+    { 
         $this->cover = $cover;
 
         return $this;

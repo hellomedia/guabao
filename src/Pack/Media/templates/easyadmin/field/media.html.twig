@@ -4,14 +4,20 @@
         <img
             src="{{ uploaded_asset(media)|imagine_filter('thumb_large') }}"
             class="thumb-large"
+            width="{{ media.width }}"
+            height="{{ media.height }}"
         />
         <img
             src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
             class="thumb-card"
+            width="700"
+            height="700"
         />
         <img
             src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
             class="thumb-small"
+            width="200"
+            height="200"
         />
     </div>
 {% else %}

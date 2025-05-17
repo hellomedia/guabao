@@ -13,10 +13,12 @@ class MediaTagFixtures extends Fixture
     const SELF_SUPPORTED_HIKE = 'selfsupported';
     const WORKING_PLACE = 'workingplace';
     const LIBRARY = 'library';
-    CONST STRANGERS = 'strangers';
-    CONST KIDS = 'kids';
-    CONST HOME_COOKING = 'homecooking';
-    CONST FOOD_COURT = 'foodcourt';
+    const STRANGERS = 'strangers';
+    const KIDS = 'kids';
+    const HOME_COOKING = 'homecooking';
+    const FOOD_COURT = 'foodcourt';
+    const FUNKY = 'funky';
+    const COLOR = 'color';
 
     private const array PICTURE_TAGS = [
         [
@@ -63,6 +65,16 @@ class MediaTagFixtures extends Fixture
             'key' => self::FOOD_COURT,
             'nameFr' => 'Food court',
             'nameEn' => 'Food court',
+        ],
+        [
+            'key' => self::FUNKY,
+            'nameFr' => 'Funky',
+            'nameEn' => 'Funky',
+        ],
+        [
+            'key' => self::COLOR,
+            'nameFr' => 'Couleurs',
+            'nameEn' => 'Color',
         ],
     ];
 

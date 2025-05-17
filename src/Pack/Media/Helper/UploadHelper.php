@@ -3,7 +3,6 @@
 namespace App\Pack\Media\Helper;
 
 use App\Pack\Media\Entity\Interface\UploadedAssetEntityInterface;
-use App\Pack\Media\Helper\ImageConverter;
 use App\Pack\Media\Helper\ImageManipulator;
 use Symfony\Component\Asset\Context\RequestStackContext;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -30,16 +29,15 @@ class UploadHelper
         private string $uploadsPath,
         private string $uploadedAssetsBaseUrl,
         private ImageManipulator $imageManipulator,
-        private ImageConverter $imageConverter,
         private TranslatorInterface $translator,
         private SluggerInterface $slugger,
     ) {}
 
-    public function uploadImage(UploadedAssetEntityInterface $image, UploadedFile $file)
+    public function uploadImage(UploadedAssetEntityInterface $image, UploadedFile $file, ?bool $resize = false, ?bool $convert = true)
     {
         $this->_uploadAndSavePath($image, $file);
 
-        $this->_optimizeImage($image);
+        $this->_optimizeImage($image, resize: $resize, convert: $convert);
     }
 
     public function createUploadedFileForFixtures(string $originalPath): UploadedFile
@@ -94,11 +92,11 @@ class UploadHelper
         $file->move($destination, $newFilename);
     }
 
-    private function _optimizeImage(UploadedAssetEntityInterface $image): void
+    private function _optimizeImage(UploadedAssetEntityInterface $image, ?bool $resize = false, ?bool $convert = true): void
     {
-        // $this->imageManipulator->resizeImage($image);
-
-        $this->imageConverter->convertToAvif($image);
+        // more efficient to do all image manipulation in 1 go
+        // for CPU and for image quality
+        $this->imageManipulator->handleImageSizing($image, resize: $resize, convert: $convert);
     }
 
     /**

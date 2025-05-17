@@ -7,7 +7,13 @@
     {% include 'trip/_top_filters.html.twig' %}
 
     <div id="cover">
-        <img src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_large') }}"/>
+        {% if trip.cover %}
+            <img
+                src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_large') }}"
+                width="{{ trip.cover.width }}"
+                height="{{ trip.cover.height }}"
+            />
+        {% endif %}
     </div>
 
     <div id="description">
@@ -16,7 +22,11 @@
 
     <div id="highlights">
         {% for highlight in trip.highlights %}
-            <img src="{{ uploaded_asset(highlight)|imagine_filter('thumb_card') }}" />
+            <img 
+                src="{{ uploaded_asset(highlight)|imagine_filter('thumb_card') }}"
+                width="700"
+                height="700"
+            />
         {% endfor %}
     </div>
 

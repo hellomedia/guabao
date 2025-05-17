@@ -88,6 +88,13 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     #[ORM\Column(nullable: true)]
     private ?bool $isPano = null;
 
+    // Un-mapped
+    // Attn, do not call "isCover", it creates a confusion with trip->getCover() in twig when we use this:
+    //  {% set media = attribute(entity.instance, 'cover') ?? entity.instance %}
+    // because the attribute 'cover' triggers calls for getCover and isCover
+    // In the twig snippet above, media is evaluated to isCover, which returns a boolean, not the expected Media entity
+    private ?bool $isTripCover = null;
+
     #[ORM\Column(nullable: true)]
     private ?bool $is360 = null;
 
@@ -165,6 +172,10 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
         // auto set highlightedTrip convenience property
         if ($this->highlight) {
             $this->highlightedTrip = $trip;
+        }
+
+        if ($this->isTripCover) {
+            $trip->setCover($this);
         }
 
         return $this;
@@ -302,6 +313,20 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     public function setIsPano(?bool $isPano): static
     {
         $this->isPano = $isPano;
+
+        return $this;
+    }
+
+    public function isTripCover(): ?bool
+    {
+        return $this->trip?->getCover() === $this;
+    }
+
+    public function setIsTripCover(?bool $isTripCover): static
+    {
+        if ($this->trip instanceof Trip) {
+            $this->trip->setCover($isTripCover ? $this : null);
+        }
 
         return $this;
     }

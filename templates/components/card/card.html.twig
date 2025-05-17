@@ -1,7 +1,11 @@
 <div class="card card-trip" id="card-{{ trip.id }}">
 	{% if trip.cover %}
 		<a href="{{ path('trip_show', {'id': trip.id}) }}" class="card-image-wrapper">
-			<img src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_small') }}" />
+			<img
+				src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_small') }}"
+				width="200"
+				height="200"
+			/>
 		</a>
 	{% else %}
 		<a href="{{ path('trip_show', {'id': trip.id}) }}" class="card-image-wrapper">

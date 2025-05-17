@@ -6,6 +6,10 @@
 
 {% block content %}
 	
-    <img src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}" />
+    <img
+        src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+        width="200"
+        height="200"
+    />
 
 {% endblock %}

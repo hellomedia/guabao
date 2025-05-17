@@ -10,7 +10,12 @@
 					data-caption="{{ media.description(app.request.locale) }}"
 				>
 					<twig:ux:icon name="sphere" />
-					<img src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}" class="rounded shadow-sm"/>
+					<img 
+						src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
+						class="rounded shadow-sm"
+						width="700"
+						height="700"
+					/>
 				</a>
 
 				<div style="display: none;" id="viewer-{{ media.id }}">
@@ -27,7 +32,12 @@
 					href="{{ uploaded_asset(media) }}"
 					data-caption="{{ media.description(app.request.locale) }}"
 				>
-					<img src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}" class="rounded shadow-sm"/>
+					<img 
+						src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
+						class="rounded shadow-sm"
+						width="700"
+						height="700"
+					/>
 				</a>
 			{% endif %}
 

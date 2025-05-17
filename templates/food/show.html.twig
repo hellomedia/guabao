@@ -6,7 +6,11 @@
 
 {% block content %}
 	{% for media in food.medias %}
-		<img src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"/>
+		<img
+			src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
+			width="700"
+			height="700"
+		/>
 
 		{% for tags in media.tags %}
 			{{ tags|trans }}

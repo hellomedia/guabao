@@ -5,7 +5,9 @@
 		<img
 			class="listing-card-image"
 			src="{{ uploaded_asset(image)|imagine_filter('thumb_card') }}"
-			alt="" 
+			alt=""
+			width="700"
+			height="700"
 		/>
 	{% else %}
 		{% include 'listing/_placeholder_image.html.twig' %}

@@ -1,9 +1,13 @@
 {% if field %}
     {% set media = attribute(entity.instance, 'cover') ?? entity.instance %}
-	<img
-        src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
-        class="thumbnail"
-    />
+    {% if media is instanceof('App\\Pack\\Media\\Entity\\Interface\\UploadedAssetEntityInterface') %}
+        <img
+            src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+            class="thumbnail"
+            width="200"
+            height="200"
+        />
+    {% endif %}
 {% else %}
     <span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
 {% endif %}

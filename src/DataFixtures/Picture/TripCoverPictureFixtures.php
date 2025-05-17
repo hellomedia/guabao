@@ -36,7 +36,7 @@ class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterf
     public function load(ObjectManager $manager): void
     {
         $this->_removeOldFiles();
-        
+                
         foreach (TripFixtures::TRIPS as $trip) {
 
             $media = new Media();
@@ -55,6 +55,7 @@ class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterf
 
             $media->setTrip($trip);
 
+            $media->setIsTripCover(true);
             $trip->setCover($media);
 
             $this->_updateAutoFields($media, $exif);

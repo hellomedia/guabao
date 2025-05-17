@@ -5,7 +5,12 @@
 		{% if media.isImage %}
 			{% if media.is360 %}
 				<a data-fancybox data-src="#viewer-{{ media.id }}" data-caption="{{ media.description(app.request.locale) }}">
-					<img src="{{ uploaded_asset(media) }}" class="rounded shadow-sm"/>
+					<img 
+						src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
+						class="rounded shadow-sm"
+						width="700"
+						height="700"
+					/>
 				</a>
 
 				<div style="display: none;" id="viewer-{{ media.id }}">
@@ -18,7 +23,12 @@
 	
 			{% else %}
 				<a data-fancybox="gallery" href="{{ uploaded_asset(media) }}" data-caption="{{ media.description(app.request.locale) }}">
-					<img src="{{ uploaded_asset(media) }}" class="rounded shadow-sm"/>
+					<img 
+						src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
+						class="rounded shadow-sm"
+						width="700"
+						height="700"
+					/>
 				</a>
 			{% endif %}
 

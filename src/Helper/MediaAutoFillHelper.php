@@ -4,6 +4,7 @@ namespace App\Helper;
 
 use App\Entity\Meal;
 use App\Entity\Media;
+use App\Entity\Trip;
 use App\Repository\MealRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\TripRepository;
@@ -31,7 +32,7 @@ class MediaAutoFillHelper
         }
 
         // avoid dealing with timezones here. It creates the following issue in easyadmin:
-        // Date is displayed as UTC in js date widget, but recorded as php/server timezone.
+        // Date is handled as UTC in js date widget, but interpreted as php/server timezone by php.
         // So when the form is submitted, even if the date was not changed, it is modified by
         // the time difference between UTC and php/server timezone.
 
@@ -54,6 +55,8 @@ class MediaAutoFillHelper
         }
 
         $trip = $this->tripRepository->findOneByMediaDate($media->getTakenAt());
+
+        \assert($trip instanceof Trip);
 
         if ($trip) {
             $media->setTrip($trip);
