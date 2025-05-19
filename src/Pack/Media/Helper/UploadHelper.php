@@ -96,7 +96,7 @@ class UploadHelper
     {
         // more efficient to do all image manipulation in 1 go
         // for CPU and for image quality
-        $this->imageManipulator->handleImageSizing($image, resize: $resize, convert: $convert);
+        $this->imageManipulator->optimize($image, resize: $resize, convert: $convert);
     }
 
     /**

@@ -34,7 +34,7 @@ class ImageManipulator
      * 
      * instead of resizing (or saving withtout resizing but still degrading the image quality), then converting
      */
-    public function handleImageSizing(Media $image, ?bool $resize = false, ?bool $convert = true, int $maxWidth = self::MAX_WIDTH, int $maxHeight = self::MAX_HEIGHT)
+    public function optimize(Media $image, ?bool $resize = false, ?bool $convert = true, int $maxWidth = self::MAX_WIDTH, int $maxHeight = self::MAX_HEIGHT)
     {
         try {
             $imagick = new \Imagick();
