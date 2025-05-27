@@ -94,8 +94,8 @@ class TripFixtures extends Fixture implements DependentFixtureInterface
         ],
         [
             'key' => self::TRIP_MARTELANGE_21,
-            'nameFr' => 'Martelange',
-            'nameEn' => 'Martelange (Belgium)',
+            'nameFr' => 'Forêt d\'Anlier',
+            'nameEn' => 'Anlier (Belgium)',
             'startedAt' => '29/05/2021',
             'endedAt' => '30/05/2021',
             'countries' => ['Belgium'],
