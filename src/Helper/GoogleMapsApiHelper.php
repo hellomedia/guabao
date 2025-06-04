@@ -14,7 +14,7 @@ class GoogleMapsApiHelper
     /**
      * Geocoding API
      * does not have businesses (more administrative buildings etc)
-     * API call returns a list of nearby places (around 20), ordered by proximlity
+     * API call returns a list of nearby places (around 20), ordered by proximity
      * We return the first / closest result
      */
     public function reverseGeocode(float $lat, float $lng): ?array
@@ -38,6 +38,34 @@ class GoogleMapsApiHelper
             'formatted_address' => $data['results'][0]['formatted_address'] ?? null,
             'address_components' => $data['results'][0]['address_components'] ?? [],
         ];
+    }
+
+    /**
+     * Geocoding API
+     * API call returns a list of nearby places (around 20), ordered by proximity
+     * We return the first country code we see in the results
+     */
+    public function getCountryCode(float $lat, float $lng): ?string
+    {
+        $url = sprintf(
+            'https://maps.googleapis.com/maps/api/geocode/json?latlng=%F,%F&key=%s',
+            $lat,
+            $lng,
+            $this->googleBackendApiKey
+        );
+
+        $response = $this->httpClient->request('GET', $url);
+        $data = $response->toArray();
+
+        foreach ($data['results'] ?? [] as $result) {
+            foreach ($result['address_components'] as $component) {
+                if (in_array('country', $component['types'], true)) {
+                    return $component['short_name']; // e.g. 'BE'
+                }
+            }
+        }
+
+        return null;
     }
 
     /**
