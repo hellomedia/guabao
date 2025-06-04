@@ -61,13 +61,9 @@ fi
 # live ==> no dev dependencies
 # staging ==> all dependencies - since we load DoctrineFixturesBundle and WebProfilerBundle in bundles.php
 case $TRACK in
-    bkup)
+    live)
     BUILD_APP_ENV=prod
     COMPOSER_INSTALL_ARGS="--no-scripts --no-dev"
-    ;;
-    live)
-    BUILD_APP_ENV=dev
-    COMPOSER_INSTALL_ARGS="--no-scripts"
     ;;
     staging)
     BUILD_APP_ENV=dev
