@@ -12,7 +12,7 @@ parameters:
     .container.dumper.inline_factories: true
 
     site_name: 'Guabao'
-    email_domain: 'guabao.be'
+    email_domain: 'guabao.me'
     host: '%env(HOST)%'
     host_controlroom: '%env(HOST_CONTROLROOM)%'
 

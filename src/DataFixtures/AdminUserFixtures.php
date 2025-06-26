@@ -12,9 +12,9 @@ class AdminUserFixtures extends Fixture
     {
         UserFactory::createOne([
             'name' => 'Admin',
-            'email' => 'admin@guabao.be',
+            'email' => 'admin@guabao.me',
             'roles' => ['ROLE_SUPER_ADMIN'],
-            'password' => 'test',
+            'password' => 'changeme',
         ]);
     }
 }
