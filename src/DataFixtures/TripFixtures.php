@@ -183,13 +183,13 @@ A ce jour, ma rando la plus immersive et sans doute la plus belle!",
 
 In the largest natural reserve in France, my friend David and I lost contact with civilization for 5 days.
 
-Our first night was cold and humid, as we had no experience with hamock camping and didn't know about underquilt.
+On our first night we realized sleeping in a hammock at this altitude without a proper underquilt was cold.
 
 The following nights, we used our survival kit to keep us warm.
 
-Managing water was a challenge, as the water points were rare in the reserve.
+The water points were rare and managing water was a challenge every day.
 
-One evening, our camp was encircled by a herd of sheep and visited by a large animal (probably a deer) in the middle of the night.
+One evening, our camp was encircled by a herd of sheep and, in the middle of night, visited by a large animal.
 
 We finished the trek without a way to cook our food.
 
