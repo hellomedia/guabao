@@ -68,13 +68,13 @@ class PanoFixtures extends Fixture implements DependentFixtureInterface
 
     private function _updateAutoFields(Media $media, array|false $exif)
     {
-        $this->autoFillHelper->_setTakenAt($media, $exif);
+        $this->autoFillHelper->setTakenAt($media, $exif);
 
-        $this->autoFillHelper->_setCoordinates($media, $exif);
+        $this->autoFillHelper->setCoordinates($media, $exif);
 
         // currently no place fixtures, so nothing in the DB to link to,
         // but if we do add place fixtures
         // we could query the DB  as long as PlaceFixtures is added to the dependencies
-        $this->autoFillHelper->_autoAssignPlace($media);
+        $this->autoFillHelper->autoAssignPlace($media);
     }
 }

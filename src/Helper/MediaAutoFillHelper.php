@@ -8,7 +8,6 @@ use App\Entity\Trip;
 use App\Repository\MealRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\TripRepository;
-use DateTimeZone;
 use Doctrine\ORM\EntityManager;
 
 class MediaAutoFillHelper
@@ -25,7 +24,7 @@ class MediaAutoFillHelper
     { 
     }
 
-    public function _setTakenAt(Media $media, array|false $exif)
+    public function setTakenAt(Media $media, array|false $exif)
     {
         if ($media->getTakenAt() !== null) {
             return; // already set manually
@@ -48,7 +47,7 @@ class MediaAutoFillHelper
         }   
     }
 
-    public function _setTrip(Media $media)
+    public function setTrip(Media $media)
     {
         if ($media->getTrip() !== null) {
             return; // already set manually
@@ -63,7 +62,7 @@ class MediaAutoFillHelper
         }
     }
 
-    public function _setCoordinates(Media $media, array|false $exif)
+    public function setCoordinates(Media $media, array|false $exif)
     {
         if (!empty($exif['GPSLatitude']) && !empty($exif['GPSLongitude'])) {
             $lat = $this->gpsParsingHelper->getGpsDecimal($exif['GPSLatitude'], $exif['GPSLatitudeRef']);
@@ -74,7 +73,7 @@ class MediaAutoFillHelper
         }
     }
 
-    public function _autoAssignPlace(Media $media): void
+    public function autoAssignPlace(Media $media): void
     {
         if ($media->getPlace() !== null) {
             return; // already set manually
@@ -94,7 +93,7 @@ class MediaAutoFillHelper
         }
     }
 
-    public function _setMeal(Media $media): void
+    public function setMeal(Media $media): void
     {
         // only if meal flag is true
         if ($media->isMeal() == false) {
