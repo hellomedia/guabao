@@ -43,11 +43,30 @@
 
 		{% elseif media.isVideo %}
 			<a data-fancybox="gallery"
+				data-src="#vimeo-embed-{{ media.id }}"
 				data-caption="{{ media.description(app.request.locale) }}"
-				href="{{ media.vimeoUrl }}"
+				href="javascript:;" 
 			>
 				<img src="{{ asset('images/placeholder-video.png') }}" class="rounded shadow-sm"/>
 			</a>
+
+			<div style="display: none;">
+				<div 
+					id="vimeo-embed-{{ media.id }}" 
+					style="width: 90vw; height: 85vh; max-width: 1280px; max-height: 720px;"
+				>
+					<div style="position:relative; width:100%; height:100%; padding-top:56.25%;">
+						<iframe 
+							src="https://player.vimeo.com/video/{{ media.vimeoId }}?badge=0&autopause=0&player_id=0&app_id=58479"
+							frameborder="0"
+							allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media;"
+							style="position:absolute;top:0;left:0;width:100%;height:100%;"
+							title="yoo"
+						></iframe>
+					</div>
+				</div>
+			</div>
+
 		{% endif %}
 	{% endfor %}
 </div>
