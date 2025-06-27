@@ -23,6 +23,27 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
 
     use LocalizedDescriptionTrait;
 
+    /**
+     * Override image trait properties and mappging
+     * Because we want to make everything nullable
+     * Since Media can also be a video
+     */
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $filename = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $originalFilename = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $token = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $path = null;
+
+    /**
+     * END Override image trait properties and mapping
+     */
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -101,8 +122,11 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     #[ORM\Column(enumType: MediaType::class)]
     private ?MediaType $type = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?string $vimeoId = null;
+
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $videoUrl = null;
+    private ?string $takenAtHint = null;
 
     public function __construct()
     {
@@ -365,14 +389,31 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
         return $this->type == MediaType::VIDEO;
     }
 
-    public function getVideoUrl(): ?string
+    public function getVimeoUrl(): ?string
     {
-        return $this->videoUrl;
+        return "https://vimeo.com/{$this->vimeoId}";
     }
 
-    public function setVideoUrl(?string $videoUrl): static
+    public function getVimeoId(): ?string
     {
-        $this->videoUrl = $videoUrl;
+        return $this->vimeoId;
+    }
+
+    public function setVimeoId(?string $vimeoId): static
+    {
+        $this->vimeoId = $vimeoId;
+
+        return $this;
+    }
+
+    public function getTakenAtHint(): ?string
+    {
+        return $this->takenAtHint;
+    }
+
+    public function setTakenAtHint(?string $takenAtHint): static
+    {
+        $this->takenAtHint = $takenAtHint;
 
         return $this;
     }

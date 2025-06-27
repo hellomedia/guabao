@@ -10,6 +10,7 @@ use App\Helper\GoogleMapsApiHelper;
 use App\Helper\MediaAutoFillHelper;
 use App\Pack\Media\Helper\ExifExtractor;
 use App\Pack\Media\Helper\UploadHelper;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -104,9 +105,23 @@ class MediaCrudController extends AbstractCrudController
          * ================
          */
 
+        // VIDEO
+        yield FormField::addFieldset('Video');
+
+        yield TextField::new('takenAtHint')
+            ->onlyOnForms()
+            ->setHelp('String formatted as \'Ymd_His\' used to extract takenAt. eg: 20170816_190356');
+        
+        yield TextField::new('vimeoId')
+                ->onlyOnForms();
+
+        // SHARED
+        yield FormField::addFieldset('Shared');
+
         yield DateTimeField::new('takenAt')
             ->setHelp('Leave empty for auto-fill from exif data');
 
+        // TRIP
         yield FormField::addFieldset('Trip');
         yield AssociationField::new('trip')
             ->setHelp('Leave empty for auto-fill from exif data');
@@ -117,12 +132,14 @@ class MediaCrudController extends AbstractCrudController
         yield BooleanField::new('is360', '360');
         yield BooleanField::new('isTripCover', 'Cover');
 
+        // FOOD
         yield FormField::addFieldset('Food');
         yield AssociationField::new('food');
         yield BooleanField::new('isMeal');
         yield AssociationField::new('meal')
             ->setHelp('Leave empty, will be auto-filled if isMeal set to true');
 
+        // PLACE
         yield FormField::addFieldset('Place');
         yield AssociationField::new('place');
         yield NumberField::new('latitude', 'lat')->setFormTypeOption('scale', 7);
@@ -133,10 +150,12 @@ class MediaCrudController extends AbstractCrudController
             ->hideWhenCreating()
             ->hideWhenUpdating();
 
+        // TEXT
         yield FormField::addFieldset('Text');
         yield TextareaField::new('descriptionFr', 'Desc FR');
         yield TextareaField::new('descriptionEn', 'Desc EN');
 
+        // TAGS
         yield FormField::addFieldset('Tags');
         
         yield AssociationField::new('tags')
@@ -203,6 +222,21 @@ class MediaCrudController extends AbstractCrudController
 
             $this->_updateAutoFields($media, $entityManager, $exif);
         }
+
+        // Video from Vimeo
+        if ($media->getVimeoId() != null) {
+
+            $media->setType(MediaType::VIDEO);
+            
+            // set takenAt from hint
+            if ($media->getTakenAtHint() != null) {
+                $takenAt = DateTimeImmutable::createFromFormat('Ymd_His', $media->getTakenAtHint());
+                $media->setTakenAt($takenAt);
+                $media->setTakenAtHint(null);
+            }
+            
+            $this->autoFillHelper->setTrip($media);
+        }
     }
 
     private function _shouldBeResized(Media $image): bool
@@ -228,19 +262,19 @@ class MediaCrudController extends AbstractCrudController
 
     private function _updateAutoFields(Media $media, EntityManagerInterface $entityManager, array|false $exif)
     {
-        $this->autoFillHelper->_setTakenAt($media, $exif);
+        $this->autoFillHelper->setTakenAt($media, $exif);
 
-        $this->autoFillHelper->_setCoordinates($media, $exif);
+        $this->autoFillHelper->setCoordinates($media, $exif);
 
-        $this->autoFillHelper->_autoAssignPlace($media, $entityManager);
+        $this->autoFillHelper->autoAssignPlace($media, $entityManager);
 
         if ($media->getPlace() == null) {
             $this->_suggestPlace($media);
         }
 
-        $this->autoFillHelper->_setTrip($media);
+        $this->autoFillHelper->setTrip($media);
 
-        $this->autoFillHelper->_setMeal($media);
+        $this->autoFillHelper->setMeal($media);
     }
 
     private function _suggestPlace(Media $media)

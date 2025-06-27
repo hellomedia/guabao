@@ -44,9 +44,9 @@
 		{% elseif media.isVideo %}
 			<a data-fancybox="gallery"
 				data-caption="{{ media.description(app.request.locale) }}"
-				href="{{ media.videoUrl }}"
+				href="{{ media.vimeoUrl }}"
 			>
-				<img src="{{ asset('images/video-placeholder.jpg') }}" class="rounded shadow-sm"/>
+				<img src="{{ asset('images/placeholder-video.png') }}" class="rounded shadow-sm"/>
 			</a>
 		{% endif %}
 	{% endfor %}
