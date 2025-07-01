@@ -7,7 +7,7 @@
 				<a 
 					data-fancybox="gallery"
 					data-src="#viewer-{{ media.id }}"
-					data-caption="{{ media.description(app.request.locale) }}"
+					data-caption="{{ media.description(app.request.locale)|nl2br }}"
 				>
 					<twig:ux:icon name="sphere" />
 					<img 
@@ -30,7 +30,7 @@
 				<a 
 					data-fancybox="gallery"
 					href="{{ uploaded_asset(media) }}"
-					data-caption="{{ media.description(app.request.locale) }}"
+					data-caption="{{ media.description(app.request.locale)|nl2br }}"
 				>
 					<img 
 						src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
@@ -44,7 +44,7 @@
 		{% elseif media.isVideo %}
 			<a data-fancybox="gallery"
 				data-src="#vimeo-embed-{{ media.id }}"
-				data-caption="{{ media.description(app.request.locale) }}"
+				data-caption="{{ media.description(app.request.locale)|nl2br }}"
 				href="javascript:;" 
 			>
 				<img src="{{ asset('images/placeholder-video.png') }}" class="rounded shadow-sm"/>
