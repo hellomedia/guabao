@@ -1,0 +1,22 @@
+<div id="media_{{ media.id }}" data-controller="media-description" data-media-description-target="container">
+    <form
+		name="media_description_{{ media.id }}"
+        data-media-description-target="form"
+        data-action="submit->media-description#submit"
+        action="{{ path('admin_media_description_edit', {id: media.id}) }}"
+        method="post"
+        style="margin-bottom: 20px"
+    >
+        <img
+            style="height: 400px; width: auto;" 
+            src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
+        />
+        <div style="margin-top: 15px; margin-bottom: 10px">
+            {{ form_row(form.descriptionEn) }}
+            {{ form_row(form.descriptionFr) }}
+        </div>
+		{{ form_rest(form) }}
+        <button type="submit" class="btn btn-primary btn-lg">Save</button>
+    </form>
+</div>
+

@@ -1,0 +1,20 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}Descriptions for {{ trip }}{% endblock %}
+
+{% block main %}
+
+    {% for media in medias %}
+        {% include '@controlroom/media/_description_form.html.twig'
+            with { form: forms[media.id] }
+        %}
+    {% endfor %}
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+{% endblock %}
+
+    
+

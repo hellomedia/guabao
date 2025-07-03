@@ -98,9 +98,20 @@ class TripCrudController extends AbstractCrudController
             })
             ->setIcon('fa fa-images');
 
+        $mediaDescriptions = Action::new('mediaDescriptions', 'Media descriptions')
+            ->linkToUrl(function (Trip $trip) {
+                return $this->urlGenerator->generate('admin_media_descriptions', [
+                    'id' => $trip->getId(),
+                ]);
+            })
+            ->setIcon('fa fa-edit');
+
         return $actions
             ->add(Action::DETAIL, $viewMedias)
-            ->add(Action::INDEX, $viewMedias);
+            ->add(Action::INDEX, $viewMedias)
+            ->add(Action::DETAIL, $mediaDescriptions)
+            ->add(Action::INDEX, $mediaDescriptions)
+        ;
     }
 
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder

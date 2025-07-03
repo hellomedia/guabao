@@ -95,21 +95,21 @@ class TripRepository extends ServiceEntityRepository
             ->createQueryBuilder()
             ->select('media')
             ->from(Media::class, 'media')
-            ->where('pic.trip = :trip')
+            ->where('media.trip = :trip')
             ->setParameter('trip', $trip)
-            ->getQuery()
-            ->getResult();
-
+            ->orderBy('media.takenAt', 'ASC')
+            ->getQuery();
+        
         return new ArrayCollection($query->getResult());
     }
 
     public function findPlaceTags(Trip $trip): Collection
     {
         $dql = <<<DQL
-            SELECT DISTINCT pt, pic
-            FROM App\Entity\Media pic
-            JOIN pic.placeTags pt
-            WHERE pic.trip = :trip
+            SELECT DISTINCT pt, media
+            FROM App\Entity\Media media
+            JOIN media.placeTags pt
+            WHERE media.trip = :trip
         DQL;
 
         /* root entity (pic) not selected first, so result is an array of [pt, pic] items */
