@@ -19,3 +19,6 @@ ux_icons:
         login: 'material-symbols:login'
         logout: 'material-symbols:logout'
         sphere: 'icomoon-free:sphere'
+        trips: 'streamline-block:travel-map'
+        food: 'mdi:food-ramen'
+        medias: 'lucide:image'
