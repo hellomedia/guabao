@@ -74,8 +74,12 @@ class GoogleMapsApiHelper
      * API call returns a list of nearby places (around 20), ordered by proximlity
      * We return the first / closest result
      */
-    public function findNearbyPlace(float $lat, float $lng, int $radius = 50): ?array
+    public function findNearbyPlace(?float $lat, ?float $lng, ?int $radius = 50): ?array
     {
+        if (!$lat || !$lng) {
+            return null;
+        }
+    
         $url = sprintf(
             'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=%d&key=%s',
             $lat,
