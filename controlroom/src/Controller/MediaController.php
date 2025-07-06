@@ -1,0 +1,131 @@
+<?php
+
+namespace Controlroom\Controller;
+
+use App\Controller\BaseController;
+use App\Entity\Media;
+use App\Entity\Trip;
+use App\Enum\MediaType;
+use App\Helper\MediaAutoFillHelper;
+use App\Pack\Media\Helper\ExifExtractor;
+use App\Pack\Media\Helper\UploadHelper;
+use Controlroom\Form\Type\MediaDescriptionType;
+use Controlroom\Form\Type\MediaMultipleType;
+use Doctrine\ORM\EntityManager;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class MediaController extends BaseController
+{
+    public function __construct(
+        private UploadHelper $uploadHelper,
+        private ExifExtractor $exifExtractor,
+        private MediaAutoFillHelper $autoFillHelper,
+        private EntityManager $entityManager,
+    )
+    {
+    }
+
+    // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
+    // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
+    // NB: this was not necessary with the old ea routing strategy
+    #[Route('/media/trip/{id:trip}/descriptions', name: 'admin_media_descriptions', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    public function editDescriptions(Trip $trip, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    {
+        $medias = $entityManager->getRepository(Trip::class)->findMedias($trip);
+
+        $forms = [];
+        foreach ($medias as $media) {
+            $forms[$media->getId()] = $formFactory->createNamed('media_description_' . $media->getId(), MediaDescriptionType::class, $media)->createView();
+        }
+
+        return $this->render('@controlroom/media/edit_descriptions.html.twig', [
+            'forms' => $forms,
+            'medias' => $medias,
+            'trip' => $trip,
+        ]);
+
+    }
+
+    #[Route('/media/{id:media}/description', name: 'admin_media_description_edit', methods: ['POST'])]
+    public function editDescription(Request $request, Media $media, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    {
+        // form name must match name above
+        $form = $formFactory->createNamed('media_description_' . $media->getId(), MediaDescriptionType::class, $media);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($media);
+            $entityManager->flush();
+        }
+
+        // Return just the frame content so Turbo can replace it
+        return $this->render('@controlroom/media/_description_form.html.twig', [
+            'form' => $form,
+            'media' => $media,
+        ]);
+    }
+
+    #[Route('/media/add-multiple', name: 'admin_media_add_multiple', methods: ['GET', 'POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    public function addMultiple(Request $request): Response
+    {
+        $form = $this->createForm(MediaMultipleType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $files = $form['files']->getData();
+            $trip = $form['trip']->getData();
+
+            $this->_importImages($files, $trip);
+
+            return $this->redirectToRoute('controlroom_media_index');
+        }
+
+        return $this->render('@controlroom/media/add_multiple.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    private function _importImages(array $uploadedFiles, Trip $trip)
+    {
+        foreach ($uploadedFiles as $uploadedFile) {
+
+            $media = new Media();
+
+            $media->setType(MediaType::IMAGE);
+
+            // extract exif before converting to avif (exif lost in conversion)
+            $exif = $this->exifExtractor->extractExifData($uploadedFile);
+
+            $this->uploadHelper->uploadImage($media, $uploadedFile, resize: true);
+
+            $media->setTrip($trip);
+
+            $this->_updateAutoFields($media, $exif);
+
+            $this->entityManager->persist($media);
+            $this->entityManager->flush();
+            
+            $this->addFlash('success', 'Image successfully imported');
+        }
+    }
+
+    private function _updateAutoFields(Media $media, array|false $exif)
+    {
+        $this->autoFillHelper->setTakenAt($media, $exif);
+
+        $this->autoFillHelper->setCoordinates($media, $exif);
+
+        // currently no place fixtures, so nothing in the DB to link to,
+        // but if we do add place fixtures
+        // we could query the DB  as long as PlaceFixtures is added to the dependencies
+        $this->autoFillHelper->autoAssignPlace($media);
+    }
+
+}

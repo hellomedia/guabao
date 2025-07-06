@@ -1,0 +1,18 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% form_theme form '@EasyAdmin/crud/form_theme.html.twig' %}
+
+{% block content_title %}Add multiple images for a trip{% endblock %}
+
+{% block main %}
+
+    {{ form(form) }}
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+{% endblock %}
+
+    
+

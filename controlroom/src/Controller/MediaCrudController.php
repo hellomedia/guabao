@@ -15,6 +15,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -31,6 +33,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MediaCrudController extends AbstractCrudController
 {
@@ -39,6 +42,7 @@ class MediaCrudController extends AbstractCrudController
         private GoogleMapsApiHelper $mapsApiHelper,
         private ExifExtractor $exifExtractor,
         private UploadHelper $uploadHelper,
+        private UrlGeneratorInterface $urlGenerator,
     )
     {
     }
@@ -54,6 +58,19 @@ class MediaCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Media')
             ->setEntityLabelInPlural('Medias')
             ->setDefaultSort(['takenAt' => 'ASC'])
+        ;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $addMutiple = Action::new('addMultiple', 'Add multiple')
+            ->linkToUrl($this->urlGenerator->generate('admin_media_add_multiple'))
+            ->setIcon('fa fa-images')
+            ->createAsGlobalAction()
+        ;
+
+        return $actions
+            ->add(Action::INDEX, $addMutiple)
         ;
     }
 
@@ -152,8 +169,8 @@ class MediaCrudController extends AbstractCrudController
 
         // TEXT
         yield FormField::addFieldset('Text');
-        yield TextareaField::new('descriptionFr', 'Desc FR');
-        yield TextareaField::new('descriptionEn', 'Desc EN');
+        yield TextareaField::new('descriptionFr', 'Desc FR')->hideOnIndex();
+        yield TextareaField::new('descriptionEn', 'Desc EN')->hideOnIndex();
 
         // TAGS
         yield FormField::addFieldset('Tags');
