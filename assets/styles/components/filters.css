@@ -28,4 +28,9 @@
             color: white;
         }
     }
+
+    #top-filters .order {
+        margin-left: auto;
+        padding: 10px;
+    }
  }

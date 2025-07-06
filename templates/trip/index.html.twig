@@ -4,6 +4,10 @@
 
 {% block content %}
 	
+    {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+
+    {% set currentSort = app.request.query.has('s') ? app.request.query.get('s') : 'd' %}
+
     <div id="top-filters">
         <a 
             href="{{ path('trip_index') }}"
@@ -23,7 +27,16 @@
         >
             {{ 'Hiking trips'|trans }}
         </a>
+
+        <div class="order">
+            <twig:ux:icon name="sort" style="display: inline; height: 33px; margin-right: 7px; margin-top: -9px; margin-bottom: -9px" />
+            <a href="{{ currentPath ~ '?s=d' }}" class="{{ currentSort == 'd' ? 'current' }}">🗓️</a>
+            <a href="{{ currentPath ~ '?s=u' }}" class="{{ currentSort == 'u' ? 'current' }}">⏳</a>
+            <a href="{{ currentPath ~ '?s=i' }}" class="{{ currentSort == 'i' ? 'current' }}">🔥</a>
+            <a href="{{ currentPath ~ '?s=a' }}" class="{{ currentSort == 'a' ? 'current' }}">✨</a>
+        </div>
     </div>
+
     <div id="trips" class="cards cards-horizontal">
         {% for trip in trips %}
             {% include 'trip/_card.html.twig' %}

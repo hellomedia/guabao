@@ -50,20 +50,36 @@ class TripRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    public function findAll(): array
+    public function findAll(?string $sort = null): array
     {
+        $sortField = match ($sort) {
+            'd' => 't.startedAt',
+            'u' => 't.durationRating',
+            'i' => 't.difficultyRating',
+            'a' => 't.adventureRating',
+            default => 't.startedAt',
+        };
+    
         return $this->createQueryBuilder('t')
-            ->orderBy('t.startedAt', 'DESC')
+            ->orderBy($sortField, 'DESC')
             ->getQuery()
             ->getResult();
     }
 
-    public function findAllByTag(TripTag $tag): array
+    public function findAllByTag(TripTag $tag, ?string $sort): array
     {
+        $sortField = match($sort) {
+            'd' => 't.startedAt',
+            'u' => 't.durationRating',
+            'i' => 't.difficultyRating',
+            'a' => 't.adventureRating',
+            default => 't.startedAt',
+        };
+
         return $this->createQueryBuilder('t')
             ->join('t.tags', 'tt')
             ->where('tt.slugEn = :slugEn')
-            ->orderBy('t.startedAt', 'DESC')
+            ->orderBy($sortField, 'DESC')
             ->setParameter('slugEn', $tag->getSlugEn())
             ->getQuery()
             ->getResult();

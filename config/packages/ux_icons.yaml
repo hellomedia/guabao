@@ -22,3 +22,4 @@ ux_icons:
         trips: 'streamline-block:travel-map'
         food: 'mdi:food-ramen'
         medias: 'lucide:image'
+        sort: 'iconoir:sort'

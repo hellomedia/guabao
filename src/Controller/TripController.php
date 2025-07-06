@@ -8,6 +8,7 @@ use App\Repository\MediaRepository;
 use App\Repository\TripRepository;
 use App\Repository\TripTagRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -20,9 +21,9 @@ class TripController extends BaseController
     }
 
     #[Route('/trip', name: 'trip_index')]
-    public function index(TripRepository $tripRepository): Response
+    public function index(TripRepository $tripRepository, Request $request): Response
     {
-        $trips = $tripRepository->findAll();
+        $trips = $tripRepository->findAll(sort: $request->query->get('s'));
         
         return $this->render('trip/index.html.twig', [
             'trips' => $trips,
@@ -30,11 +31,11 @@ class TripController extends BaseController
     }
 
     #[Route('/trip/t/hiking', name: 'trip_index_hiking')]
-    public function indexByHiking(TripRepository $tripRepository, TripTagRepository $tripTagRepository): Response
+    public function indexByHiking(TripRepository $tripRepository, TripTagRepository $tripTagRepository, Request $request): Response
     {
         $hikingTripTag = $tripTagRepository->findOneByKey(TripTagFixtures::HIKING);
 
-        $trips = $tripRepository->findAllByTag($hikingTripTag);
+        $trips = $tripRepository->findAllByTag($hikingTripTag, sort: $request->query->get('s'));
 
         return $this->render('trip/index.html.twig', [
             'trips' => $trips,
@@ -42,11 +43,11 @@ class TripController extends BaseController
     }
 
     #[Route('/trip/t/slow-travel', name: 'trip_index_slow_travel')]
-    public function indexBySlowTravel(TripRepository $tripRepository, TripTagRepository $tripTagRepository): Response
+    public function indexBySlowTravel(TripRepository $tripRepository, TripTagRepository $tripTagRepository, Request $request): Response
     {
         $slowTravelTripTag = $tripTagRepository->findOneByKey(TripTagFixtures::SLOW_TRAVEL);
 
-        $trips = $tripRepository->findAllByTag($slowTravelTripTag);
+        $trips = $tripRepository->findAllByTag($slowTravelTripTag, sort: $request->query->get('s'));
 
         return $this->render('trip/index.html.twig', [
             'trips' => $trips,
