@@ -24,7 +24,7 @@
             {{ 'Hiking trips'|trans }}
         </a>
     </div>
-    <div id="trips" class="cards">
+    <div id="trips" class="cards cards-horizontal">
         {% for trip in trips %}
             {% include 'trip/_card.html.twig' %}
         {% endfor %}

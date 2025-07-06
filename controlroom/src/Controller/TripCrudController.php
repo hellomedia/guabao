@@ -16,6 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -78,6 +79,10 @@ class TripCrudController extends AbstractCrudController
 
         yield TextareaField::new('descriptionFr', 'Description FR')->hideOnIndex();
         yield TextareaField::new('descriptionEn', 'Description EN')->hideOnIndex();
+
+        yield IntegerField::new('durationRating', 'Duration');
+        yield IntegerField::new('adventureRating', 'Adventure');
+        yield IntegerField::new('difficultyRating', 'Difficulty');
 
         yield AssociationField::new('countries')
             ->setTemplatePath('@controlroom/field/countries.html.twig');

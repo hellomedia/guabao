@@ -1,0 +1,26 @@
+<table class="ratings">
+    <tr class="rating">
+        <td class="rating-label">{{ 'Duration'|trans }}</td>
+        <td class="rating-value">
+            {% for duration in 1..trip.durationRating %}
+                <span class="ranking-icon">⏳</span>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr class="rating">
+        <td class="rating-label">{{ 'Difficulty'|trans }}</td>
+        <td class="rating-value">
+            {% for duration in 1..trip.difficultyRating %}
+                <span class="ranking-icon">🔥</span>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr class="rating">
+        <td class="rating-label">{{ 'Adventure'|trans }}</td>
+        <td class="rating-value">
+            {% for duration in 1..trip.adventureRating %}
+                <span class="ranking-icon">✨</span>
+            {% endfor %}
+        </td>
+    </tr>
+</table>

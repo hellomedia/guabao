@@ -1,0 +1,16 @@
+@layer components {
+  
+    .ratings {
+        border-collapse: separate;
+        border-spacing: 2px;
+    }
+    .rating-label {
+        color: var(--color-secondary-text);
+    }
+    .rating-value {
+        white-space: nowrap;
+        padding-left: 5px;
+        min-width: 125px; /* constant width no matter the rating, useful for card layout */
+    }
+
+}

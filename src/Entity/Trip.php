@@ -18,6 +18,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 #[ORM\Entity(repositoryClass: TripRepository::class)]
 class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodInterface, EntityInterface
 {
@@ -66,6 +69,21 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
      */
     #[ORM\ManyToMany(targetEntity: TripTag::class)]
     private Collection $tags;
+
+    #[Assert\GreaterThanOrEqual(1)]
+    #[Assert\LessThanOrEqual(5)]
+    #[ORM\Column(nullable: true)]
+    private ?int $adventureRating = null;
+
+    #[Assert\GreaterThanOrEqual(1)]
+    #[Assert\LessThanOrEqual(5)]
+    #[ORM\Column(nullable: true)]
+    private ?int $durationRating = null;
+
+    #[Assert\GreaterThanOrEqual(1)]
+    #[Assert\LessThanOrEqual(5)]
+    #[ORM\Column(nullable: true)]
+    private ?int $difficultyRating = null;
 
     public function __construct()
     {
@@ -177,6 +195,42 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     public function removeTag(TripTag $tag): static
     {
         $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getAdventureRating(): ?int
+    {
+        return $this->adventureRating;
+    }
+
+    public function setAdventureRating(?int $adventureRating): static
+    {
+        $this->adventureRating = $adventureRating;
+
+        return $this;
+    }
+
+    public function getDurationRating(): ?int
+    {
+        return $this->durationRating;
+    }
+
+    public function setDurationRating(?int $durationRating): static
+    {
+        $this->durationRating = $durationRating;
+
+        return $this;
+    }
+
+    public function getDifficultyRating(): ?int
+    {
+        return $this->difficultyRating;
+    }
+
+    public function setDifficultyRating(?int $difficultyRating): static
+    {
+        $this->difficultyRating = $difficultyRating;
 
         return $this;
     }
