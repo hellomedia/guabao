@@ -15,15 +15,17 @@
         }
 
         .tag-slow-travel {
-            /* background-color: var(--color-purple-dark);
+            background-color: #d29576;
             color: white;
-            border-color: white; */
+            border-color: white;
         }
     
         .tag-hiking-trip {
-            /* background-color: var(--color-green-600);
+            background-color: #5b451e;
+            background-color: #967c59;
+            background-color: #76884b;
             color: white;
-            border-color: white; */
+            border-color: white;
         }
     }
 
