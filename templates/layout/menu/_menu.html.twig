@@ -33,9 +33,12 @@
 			</div>
 
 			<div class="flex">
-				<div class="hidden md:flex md:mr-5 md:items-center">
-					{% include "layout/menu/_language_switcher.html.twig" %}
-				</div>
+                {% set show_language_switcher = (exclude_language_switcher ?? false) == false %}
+                {% if show_language_switcher %}
+                    <div class="hidden md:flex md:mr-5 md:items-center">
+                        {% include "layout/menu/_language_switcher.html.twig" %}
+                    </div>
+                {% endif %}
 
 				<div class="hidden md:flex md:mr-5 md:items-center">
 					{% include "layout/menu/_theme_switcher.html.twig" %}

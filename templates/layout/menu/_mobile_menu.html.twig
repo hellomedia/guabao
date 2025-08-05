@@ -55,17 +55,18 @@
 
 	</div>
 
-	<hr>
-
-	<div class="pt-1 pb-2">
-		<a href="{{ attribute(i18nUrls, 'en') }}" class="mobile-menu-item" data-action="mobile-menu#toggle">
-			<twig:ux:icon name="language" class="mobile-menu-item-icon"/>
-			English
-		</a>
-		<a href="{{ attribute(i18nUrls, 'fr') }}" class="mobile-menu-item" data-action="mobile-menu#toggle">
-			<twig:ux:icon name="language" class="mobile-menu-item-icon"/>
-			Français
-		</a>
-	</div>
+    {% if show_language_switcher ?? true %}
+        <hr>
+        <div class="pt-1 pb-2">
+            <a href="{{ attribute(i18nUrls, 'en') }}" class="mobile-menu-item" data-action="mobile-menu#toggle">
+                <twig:ux:icon name="language" class="mobile-menu-item-icon"/>
+                English
+            </a>
+            <a href="{{ attribute(i18nUrls, 'fr') }}" class="mobile-menu-item" data-action="mobile-menu#toggle">
+                <twig:ux:icon name="language" class="mobile-menu-item-icon"/>
+                Français
+            </a>
+        </div>
+    {% endif %}
 
 </div>

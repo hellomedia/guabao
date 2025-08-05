@@ -80,6 +80,8 @@ server_error:
     message: >-
         <p style="font-size: 16px">There was a server error.</p>
         <p style="font-size: 16px">If it happens again, don't hesitate to <a href="%url%">contact us</a>.</p>
+    message_without_contact: >-
+        <p style="font-size: 16px">There was a server error.</p>
 bad_request:
     title: Bad Request
     message: >-

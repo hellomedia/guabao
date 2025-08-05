@@ -83,6 +83,8 @@ server_error:
     message: >-
         <p style="font-size: 16px">Nous avons rencontré une erreur.</p>
         <p style="font-size: 16px">Si cela se reproduit, n'hésite pas à <a href="%url%">nous contacter</a>.</p>
+    message_without_contact: >-
+        <p style="font-size: 16px">Nous avons rencontré une erreur.</p>
 bad_request:
     title: Mauvaise Requête
     message: >-
