@@ -70,6 +70,9 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     #[ORM\ManyToMany(targetEntity: TripTag::class)]
     private Collection $tags;
 
+    #[ORM\ManyToOne]
+    private ?Trip $parentTrip = null;
+
     #[Assert\GreaterThanOrEqual(1)]
     #[Assert\LessThanOrEqual(5)]
     #[ORM\Column(nullable: true)]
@@ -79,11 +82,6 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     #[Assert\LessThanOrEqual(5)]
     #[ORM\Column(nullable: true)]
     private ?int $durationRating = null;
-
-    #[Assert\GreaterThanOrEqual(1)]
-    #[Assert\LessThanOrEqual(5)]
-    #[ORM\Column(nullable: true)]
-    private ?int $difficultyRating = null;
 
     public function __construct()
     {
@@ -175,6 +173,28 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
         return $this;
     }
 
+    public function isTripLeg(): bool
+    {
+        return $this->parentTrip != null;
+    }
+
+    public function hasParentTrip(): bool
+    {
+        return $this->parentTrip != null;
+    }
+
+    public function getParentTrip(): ?Trip
+    {
+        return $this->parentTrip;
+    }
+
+    public function setParentTrip(Trip $parentTrip): static
+    {
+        $this->parentTrip = $parentTrip;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, TripTag>
      */
@@ -219,18 +239,6 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     public function setDurationRating(?int $durationRating): static
     {
         $this->durationRating = $durationRating;
-
-        return $this;
-    }
-
-    public function getDifficultyRating(): ?int
-    {
-        return $this->difficultyRating;
-    }
-
-    public function setDifficultyRating(?int $difficultyRating): static
-    {
-        $this->difficultyRating = $difficultyRating;
 
         return $this;
     }

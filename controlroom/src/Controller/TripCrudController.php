@@ -45,6 +45,8 @@ class TripCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        yield AssociationField::new('parentTrip');
+
         yield Field::new('cover.path', 'Cover')
             ->setTemplatePath('@media/easyadmin/field/thumbnail.html.twig')
             ->onlyOnIndex();
@@ -65,8 +67,7 @@ class TripCrudController extends AbstractCrudController
                     return $tag->getName($locale);
                 }
             ])
-            ->setTemplatePath('@controlroom/field/tags.html.twig')
-            ->setHelp('Hold Ctrl (or Cmd) to select multiple tags');
+            ->setTemplatePath('@controlroom/field/tags.html.twig');
         
         yield TextField::new('nameFr', 'Name FR');
         yield TextField::new('nameEn', 'Name EN');
@@ -82,7 +83,6 @@ class TripCrudController extends AbstractCrudController
 
         yield IntegerField::new('durationRating', 'Duration');
         yield IntegerField::new('adventureRating', 'Adventure');
-        yield IntegerField::new('difficultyRating', 'Difficulty');
 
         yield AssociationField::new('countries')
             ->setTemplatePath('@controlroom/field/countries.html.twig');

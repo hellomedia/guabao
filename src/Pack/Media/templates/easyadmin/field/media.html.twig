@@ -1,25 +1,30 @@
 {% if field %}
-    {% set media = attribute(entity.instance, 'cover') ?? entity.instance %}
-    <div class="thumb-versions">
-        <img
-            src="{{ uploaded_asset(media)|imagine_filter('thumb_large') }}"
-            class="thumb-large"
-            width="{{ media.width }}"
-            height="{{ media.height }}"
-        />
-        <img
-            src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
-            class="thumb-card"
-            width="700"
-            height="700"
-        />
-        <img
-            src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
-            class="thumb-small"
-            width="200"
-            height="200"
-        />
-    </div>
+
+    {% set media = attribute(entity.instance, 'cover') ?? entity.instance is instanceof('App\Entity\Media') ? entity.instance : null %}
+
+    {% if media %}
+        <div class="thumb-versions">
+            <img
+                src="{{ uploaded_asset(media)|imagine_filter('thumb_large') }}"
+                class="thumb-large"
+                width="{{ media.width }}"
+                height="{{ media.height }}"
+            />
+            <img
+                src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
+                class="thumb-card"
+                width="700"
+                height="700"
+            />
+            <img
+                src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+                class="thumb-small"
+                width="200"
+                height="200"
+            />
+        </div>
+    {% endif %}
+
 {% else %}
     <span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
 {% endif %}
