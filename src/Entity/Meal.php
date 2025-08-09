@@ -46,7 +46,7 @@ class Meal
 
     public function __toString()
     {
-        return 'Meal ' . $this->id;
+        return ($this->place ?: $this->placeTags ?: null)?->first() . ' - ' . $this->enjoyedAt->format('d M Y H\h');
     }
 
     public function getId(): ?int
