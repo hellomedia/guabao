@@ -290,7 +290,7 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
 
     public function getCountry(): ?Country
     {
-        return $this->placeTags->first()?->getCountry();
+        return ($this->placeTags->first() ?: null)?->getCountry();
     }
 
     public function getHighlightedTrip(): ?Trip

@@ -189,7 +189,7 @@ class Place implements EntityInterface
 
     public function getCountry(): ?Country
     {
-        return $this->placeTags->first()?->getCountry();
+        return ($this->placeTags->first() ?: null)?->getCountry();
     }
 
     /**
