@@ -4,46 +4,14 @@
 
 {% block content %}
 
-    {% include 'trip/_top_filters.html.twig' %}
+    {% if trip.hasChildTrips %}
+    
+        {% include "/trip/_show_multi_leg_trip.html.twig" %}
+    
+    {% else %}
 
-    <div id="cover">
-        {% if trip.cover %}
-            <img
-                src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_large') }}"
-                width="{{ trip.cover.width }}"
-                height="{{ trip.cover.height }}"
-            />
-        {% endif %}
-    </div>
+        {% include "/trip/_show_standalone_trip.html.twig" %}
 
-    <div id="rating">
-        {% include 'trip/_rating.html.twig' %}
-    </div>
-
-    <div id="description">
-        {{ trip.description(app.locale)|nl2br }}
-    </div>
-
-    <div id="highlights">
-        {% for highlight in trip.highlights %}
-            <img 
-                src="{{ uploaded_asset(highlight)|imagine_filter('thumb_card') }}"
-                width="700"
-                height="700"
-            />
-        {% endfor %}
-    </div>
-
-    <div>
-        <a class="btn btn-default" href="{{ path('trip_gallery', {slug: trip.slug(app.locale)}) }}">
-            Show gallery
-        </a>
-    </div>
-
-    <div id="countries">
-        {% for country in trip.countries %}
-            {{ country|trans }}
-        {% endfor %}
-    </div>
-
+    {% endif %}
+    
 {% endblock %}

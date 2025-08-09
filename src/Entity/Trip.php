@@ -76,6 +76,9 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     #[ORM\ManyToOne]
     private ?Trip $parentTrip = null;
 
+    #[ORM\OneToMany(targetEntity: Trip::class, mappedBy: 'parentTrip')]
+    private Collection $childTrips;
+
     #[Assert\GreaterThanOrEqual(1)]
     #[Assert\LessThanOrEqual(5)]
     #[ORM\Column(nullable: true)]
@@ -91,6 +94,7 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
         $this->countries = new ArrayCollection();
         $this->highlights = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->childTrips = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -178,7 +182,7 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
 
     public function isTripLeg(): bool
     {
-        return $this->parentTrip != null;
+        return $this->hasParentTrip();
     }
 
     public function hasParentTrip(): bool
@@ -186,16 +190,45 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
         return $this->parentTrip != null;
     }
 
+    public function isTopLevelTrip(): bool
+    {
+        return $this->parentTrip == null;
+    }
+
+    public function hasChildTrips(): bool
+    {
+        return !$this->childTrips->isEmpty();
+    }
+
     public function getParentTrip(): ?Trip
     {
         return $this->parentTrip;
     }
 
-    public function setParentTrip(Trip $parentTrip): static
+    public function setParentTrip(?Trip $parentTrip): self
     {
         $this->parentTrip = $parentTrip;
 
+        if ($parentTrip !== null) {
+            $parentTrip->addChildTrip($this);
+        }
+
         return $this;
+    }
+
+    public function addChildTrip(Trip $childTrip): void
+    {
+        if (!$this->childTrips->contains($childTrip)) {
+            $this->childTrips[] = $childTrip;
+        }
+    }
+
+    /**
+     * @return Collection<int, Trip>
+     */
+    public function getChildTrips(): Collection
+    {
+        return $this->childTrips;
     }
 
     /**

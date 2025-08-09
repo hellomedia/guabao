@@ -1,0 +1,11 @@
+<div id="top-filters">
+	<a href="{{ path(trip) }}" class="{{ app.current_route in ['trip_show'] ? 'current' }}">
+		{{ 'Overview'|trans }}
+	</a>
+    {% for childTrip in trip.childTrips %}
+        <a href="{{ path(childTrip) }}" class="{{ app.current_route == 'child_trip_show' ? 'current' }}"
+        >
+            {{ childTrip|trans }}
+        </a>
+    {% endfor %}
+</div>

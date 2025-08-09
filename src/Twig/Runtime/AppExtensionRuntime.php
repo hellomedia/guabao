@@ -51,7 +51,13 @@ class AppExtensionRuntime implements RuntimeExtensionInterface
     public function getPath(mixed $item, array $parameters = [], ?int $referenceType = Router::ABSOLUTE_PATH): string
     {
         if ($item instanceof Trip) {
-            return $this->_getTripPath($item, $parameters, $referenceType);
+            if ($item->isTopLevelTrip()) {
+                return $this->_getTopLevelTripPath($item, $parameters, $referenceType);
+            }
+            if ($item->isTripLeg()) {
+                return $this->_getTripLegPath($item, $parameters, $referenceType);
+            }
+
         }
 
         if ($item instanceof Food) {
@@ -61,12 +67,23 @@ class AppExtensionRuntime implements RuntimeExtensionInterface
         return $this->router->generate($item, $parameters, $referenceType);
     }
 
-    private function _getTripPath(Trip $trip, array $parameters, int $referenceType): string
+    private function _getTopLevelTripPath(Trip $trip, array $parameters, int $referenceType): string
     {
         $locale = $parameters['_locale'] ?? $this->requestStack->getCurrentRequest()->getLocale();
 
         return $this->router->generate('trip_show', [
             'slug' => $trip->getSlug($locale),
+            '_locale' => $locale,
+        ], $referenceType);
+    }
+
+    private function _getTripLegPath(Trip $trip, array $parameters, int $referenceType): string
+    {
+        $locale = $parameters['_locale'] ?? $this->requestStack->getCurrentRequest()->getLocale();
+
+        return $this->router->generate('child_trip_show', [
+            'parent' => $trip->getParentTrip()->getSlug($locale),
+            'trip' => $trip->getSlug($locale),
             '_locale' => $locale,
         ], $referenceType);
     }

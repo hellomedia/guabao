@@ -1,0 +1,11 @@
+{% include 'trip/_top_filters_multi_leg.html.twig' %}
+
+<div id="description">
+    {{ trip.description(app.locale)|nl2br }}
+</div>
+
+<div id="trips" class="cards cards-horizontal">
+	{% for childTrip in trip.childTrips %}
+		{% include 'trip/_card.html.twig' with {trip: childTrip} %}
+	{% endfor %}
+</div>

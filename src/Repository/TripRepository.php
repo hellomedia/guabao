@@ -60,6 +60,7 @@ class TripRepository extends ServiceEntityRepository
         };
     
         return $this->createQueryBuilder('t')
+            ->where('t.parentTrip IS NULL')
             ->orderBy($sortField, 'DESC')
             ->getQuery()
             ->getResult();
@@ -76,7 +77,8 @@ class TripRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('t')
             ->join('t.tags', 'tt')
-            ->where('tt.slugEn = :slugEn')
+            ->where('t.parentTrip IS NULL')
+            ->andWhere('tt.slugEn = :slugEn')
             ->orderBy($sortField, 'DESC')
             ->setParameter('slugEn', $tag->getSlugEn())
             ->getQuery()
@@ -94,11 +96,15 @@ class TripRepository extends ServiceEntityRepository
 
     public function findOneByMediaDate(DateTimeImmutable $mediaTakenAt)
     {
-        
+        // if there are multiple trips for hte date, it is lifely to be a leg and a parent trip.
+        // If that is the case, we want to retrieve the leg ===> ORDER BY t.parentTrip DESC NULLS LAST
+        // and setMaxResults(1)
         return $this->createQueryBuilder('t')
             ->andWhere('t.startedAt < :mediaTakenAt')
             ->andWhere('t.endedAt > :mediaTakenAt')
             ->setParameter('mediaTakenAt', $mediaTakenAt)
+            ->orderBy('t.parentTrip DESC NULLS LAST') // default is NULLS FIRST for DESC !
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
     }

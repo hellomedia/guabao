@@ -66,6 +66,24 @@ class TripController extends BaseController
         ]);
     }
 
+    #[Route('/trip/{parent}/{trip}', name: 'child_trip_show')]
+    public function showChildTrip(
+        #[MapEntity(expr: 'repository.findOneBySlug(parent)')] Trip $parent,
+        #[MapEntity(expr: 'repository.findOneBySlug(trip)')] Trip $trip,
+        MediaRepository $mediaRepository,
+    ): Response
+    {
+        $this->addBreadcrumb($parent);
+        $this->addBreadcrumb($trip);
+
+        $medias = $mediaRepository->findByTrip($trip);
+
+        return $this->render('trip/show_child_trip.html.twig', [
+            'trip' => $trip,
+            'medias' => $medias,
+        ]);
+    }
+
     #[Route('/trip/{slug}/gallery', name: 'trip_gallery')]
     public function gallery(
         #[MapEntity(expr: 'repository.findOneBySlug(slug)')] Trip $trip,
