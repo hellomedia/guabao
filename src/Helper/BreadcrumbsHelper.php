@@ -25,7 +25,7 @@ class BreadcrumbsHelper
             $routeParams = [
                 'slug' => $item->getSlug($locale)
             ];
-            $item = $item->getName($locale) . ' ' . $item->getPeriod();
+            $item = $item->getShortName($locale) ?? $item->getName($locale) . ($item->isTopLevelTrip() ? ' ' . $item->getPeriod() : '' );
         }
     
         if ($item instanceof Ingredient) {

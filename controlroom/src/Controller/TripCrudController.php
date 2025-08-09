@@ -72,6 +72,9 @@ class TripCrudController extends AbstractCrudController
         yield TextField::new('nameFr', 'Name FR');
         yield TextField::new('nameEn', 'Name EN');
 
+        yield TextField::new('shortNameFr', 'Short FR');
+        yield TextField::new('shortNameEn', 'Short EN');
+
         yield DateField::new('startedAt');
         yield DateField::new('endedAt');
 

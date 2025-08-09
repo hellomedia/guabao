@@ -13,6 +13,7 @@ use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedHeadlineTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
+use App\Entity\Trait\ShortNameTrait;
 use App\Repository\TripRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -25,6 +26,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodInterface, EntityInterface
 {
     use LocalizedNameTrait;
+
+    use ShortNameTrait;
 
     use LocalizedSlugTrait;
 
