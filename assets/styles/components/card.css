@@ -107,10 +107,6 @@
         .card-ratings {
             border-collapse: 2px;
         }
-
-        .rating-difficulty {
-            /* display: none; */
-        }
     }
 
     .cards-horizontal .card {
