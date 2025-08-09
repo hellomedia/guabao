@@ -57,6 +57,7 @@ class Place implements EntityInterface
     {
         $this->medias = new ArrayCollection();
         $this->meals = new ArrayCollection();
+        $this->placeTags = new ArrayCollection();
     }
 
     public function __toString()
