@@ -1,0 +1,32 @@
+
+
+<div id="top-filters" class="multi-trip">
+
+	<a href="{{ path(trip.parentTrip) }}"
+        style="margin-right: 10px"
+    >
+		{{ trip.parentTrip.shortName(app.locale) }}
+	</a>
+
+	{% for childTrip in trip.parentTrip.childTrips %}
+		<a href="{{ path(childTrip) }}" class="{{ childTrip == trip ? 'current' }}">
+			{{ childTrip|trans }}
+		</a>
+        {% if not loop.last %}
+            <span class="trip-leg-divider"></span>
+        {% endif %}
+	{% endfor %}
+</div>
+
+<div id="top-filters">
+	<a href="{{ path(trip) }}" class="{{ app.current_route in ['trip_show'] ? 'current' }}">
+		{{ 'Overview'|trans }}
+	</a>
+	<a href="{{ path('trip_gallery', {slug: trip.slug(app.locale)}) }}" class="{{ app.current_route == 'trip_gallery' ? 'current' }}">
+		{{ 'Gallery'|trans }}
+	</a>
+</div>
+
+
+
+

@@ -1,9 +1,12 @@
  @layer components {
     #top-filters {
         display: flex;
-        gap: 15px;
+        gap: 10px;
         flex-wrap: wrap;
         margin-bottom: 15px;
+        &.multi-trip {
+            gap: 3px;
+        }
 
         a {
             border: 1px solid var(--color-gray-300);
@@ -15,6 +18,13 @@
                 border: var(--color-theme);
                 color: white;
             }
+        }
+
+        .trip-leg-divider {
+            padding: 10px 0;
+        }
+        .trip-leg-divider::after {
+            content: '·····';
         }
     }
 
