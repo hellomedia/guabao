@@ -74,7 +74,8 @@ class TripController extends BaseController
     ): Response
     {
         $this->addBreadcrumb($parent);
-        $this->addBreadcrumb($trip);
+        // no need for this one since we have the top links serving as title
+        // $this->addBreadcrumb($trip);
 
         $medias = $mediaRepository->findByTrip($trip);
 
