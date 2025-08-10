@@ -54,8 +54,14 @@ class DateHelper
         $translator = $this->translator;
         $days = $interval->days;
 
-        if ($days > 62) {
-            return $translator->trans('interval.months', ['%count%' => $interval->m], domain: 'duration');
+        if ($days > 380) {
+            return 'more than 1 year';
+        }
+        if ($days > 350 && $days <= 380) {
+            return $translator->trans('interval.months', ['%count%' => 12], domain: 'duration');
+        }
+        if ($days > 62 && $days <= 350) {
+            return $translator->trans('interval.months', ['%count%' => $interval->format('%m')], domain: 'duration');
         }
         if ($days > 50 && $days <= 62) {
             return $translator->trans('interval.months', ['%count%' => 2], domain: 'duration');
