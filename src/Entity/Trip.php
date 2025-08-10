@@ -77,6 +77,7 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     private ?Trip $parentTrip = null;
 
     #[ORM\OneToMany(targetEntity: Trip::class, mappedBy: 'parentTrip')]
+    #[ORM\OrderBy(["startedAt" => "ASC"])]
     private Collection $childTrips;
 
     #[Assert\GreaterThanOrEqual(1)]
