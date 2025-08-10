@@ -2,7 +2,6 @@
     #top-filters {
         display: flex;
         gap: 10px;
-        flex-wrap: wrap;
         margin-bottom: 15px;
         &.multi-trip {
             gap: 3px;
@@ -20,12 +19,36 @@
             }
         }
 
+        .trip-leg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            @apply text-sm;
+        }
+
         .trip-leg-divider {
             padding: 10px 0;
         }
         .trip-leg-divider::after {
-            content: '·····';
+            content: '····';
         }
+    }
+
+    .invisible-scroll {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -ms-overflow-style: none;
+        /* IE/Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+    .invisible-scroll > * {
+        white-space: nowrap;
+    }
+
+    .invisible-scroll::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari */
     }
 
     .with-cards #top-filters a {

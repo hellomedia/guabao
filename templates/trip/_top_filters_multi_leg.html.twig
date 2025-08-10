@@ -1,14 +1,15 @@
-<div id="top-filters" class="multi-trip">
+<div id="top-filters" class="multi-trip invisible-scroll">
+
 	<a href="{{ path(trip) }}" class="current">
 		{{ trip.shortName(app.locale) }}
 	</a>
     {% for childTrip in trip.childTrips %}
-        <a href="{{ path(childTrip) }}">
+        <a href="{{ path(childTrip) }}" class="trip-leg">
             {{ childTrip|trans }}
-            {% if not loop.last %}
-                <span class="trip-leg-divider"></span>
-            {% endif %}
         </a>
+        {% if not loop.last %}
+            <span class="trip-leg-divider"></span>
+        {% endif %}
     {% endfor %}
 </div>
 
