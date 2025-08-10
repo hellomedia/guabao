@@ -7,12 +7,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait ShortNameTrait
 {
-    #[Assert\Length(max:25)]
-    #[ORM\Column(length: 25, nullable: true)]
+    #[Assert\Length(max:35)]
+    #[ORM\Column(length: 35, nullable: true)]
     private ?string $shortNameFr = null;
 
-    #[Assert\Length(max: 25)]
-    #[ORM\Column(length: 25, nullable: true)]
+    #[Assert\Length(max: 35)]
+    #[ORM\Column(length: 35, nullable: true)]
     private ?string $shortNameEn = null;
 
     public function getShortName(?string $locale = null): ?string
