@@ -69,6 +69,12 @@ class DateHelper
         if ($days > 12 && $days <= 25) {
             return $translator->trans('interval.weeks', ['%count%' => intdiv($days, 7)], domain: 'duration');
         }
+        if ($days > 8 && $days <= 12) {
+            return $translator->trans('interval.days', ['%count%' => 10], domain: 'duration');
+        }
+        if ($days > 5 && $days <= 8) {
+            return $translator->trans('interval.weeks', ['%count%' => 1], domain: 'duration');
+        }
         if ($interval->d) {
             return $translator->trans('interval.days', ['%count%' => $interval->d], domain: 'duration');
         }
