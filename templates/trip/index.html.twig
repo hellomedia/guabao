@@ -29,10 +29,9 @@
         </a>
 
         <div class="order">
-            <twig:ux:icon name="sort" style="display: inline; height: 33px; margin-right: 7px; margin-top: -9px; margin-bottom: -9px" />
+            <twig:ux:icon name="sort" style="display: inline; height: 33px; margin-right: 5px;" />
             <a href="{{ currentPath ~ '?s=d' }}" class="{{ currentSort == 'd' ? 'current' }}">🗓️</a>
             <a href="{{ currentPath ~ '?s=u' }}" class="{{ currentSort == 'u' ? 'current' }}">⏳</a>
-            {# <a href="{{ currentPath ~ '?s=i' }}" class="{{ currentSort == 'i' ? 'current' }}">🔥</a> #}
             <a href="{{ currentPath ~ '?s=a' }}" class="{{ currentSort == 'a' ? 'current' }}">✨</a>
         </div>
     </div>
