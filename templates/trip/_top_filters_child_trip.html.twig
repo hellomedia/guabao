@@ -1,13 +1,102 @@
 
 
-<div id="top-filters" class="multi-trip invisible-scroll">
-
-	<a href="{{ path(trip.parentTrip) }}"
-        style="margin-right: 10px"
-    >
+<div id="top-filters"
+    class="multi-trip invisible-scroll"
+    data-controller="restore-x-scroll"
+    data-restore-x-scroll-key-value="trip-{{ trip.parentTrip.id }}" 
+>
+	<a href="{{ path(trip.parentTrip) }}" style="margin-right: 10px">
 		{{ trip.parentTrip.shortName(app.locale) }}
 	</a>
 
+	{% for childTrip in trip.parentTrip.childTrips %}
+		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
+			{{ childTrip|trans }}
+		</a>
+        {% if not loop.last %}
+            <span class="trip-leg-divider"></span>
+        {% endif %}
+	{% endfor %}
+	{% for childTrip in trip.parentTrip.childTrips %}
+		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
+			{{ childTrip|trans }}
+		</a>
+        {% if not loop.last %}
+            <span class="trip-leg-divider"></span>
+        {% endif %}
+	{% endfor %}
+	{% for childTrip in trip.parentTrip.childTrips %}
+		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
+			{{ childTrip|trans }}
+		</a>
+        {% if not loop.last %}
+            <span class="trip-leg-divider"></span>
+        {% endif %}
+	{% endfor %}
+	{% for childTrip in trip.parentTrip.childTrips %}
+		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
+			{{ childTrip|trans }}
+		</a>
+        {% if not loop.last %}
+            <span class="trip-leg-divider"></span>
+        {% endif %}
+	{% endfor %}
+	{% for childTrip in trip.parentTrip.childTrips %}
+		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
+			{{ childTrip|trans }}
+		</a>
+        {% if not loop.last %}
+            <span class="trip-leg-divider"></span>
+        {% endif %}
+	{% endfor %}
+	{% for childTrip in trip.parentTrip.childTrips %}
+		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
+			{{ childTrip|trans }}
+		</a>
+        {% if not loop.last %}
+            <span class="trip-leg-divider"></span>
+        {% endif %}
+	{% endfor %}
+	{% for childTrip in trip.parentTrip.childTrips %}
+		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
+			{{ childTrip|trans }}
+		</a>
+        {% if not loop.last %}
+            <span class="trip-leg-divider"></span>
+        {% endif %}
+	{% endfor %}
+	{% for childTrip in trip.parentTrip.childTrips %}
+		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
+			{{ childTrip|trans }}
+		</a>
+        {% if not loop.last %}
+            <span class="trip-leg-divider"></span>
+        {% endif %}
+	{% endfor %}
+	{% for childTrip in trip.parentTrip.childTrips %}
+		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
+			{{ childTrip|trans }}
+		</a>
+        {% if not loop.last %}
+            <span class="trip-leg-divider"></span>
+        {% endif %}
+	{% endfor %}
+	{% for childTrip in trip.parentTrip.childTrips %}
+		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
+			{{ childTrip|trans }}
+		</a>
+        {% if not loop.last %}
+            <span class="trip-leg-divider"></span>
+        {% endif %}
+	{% endfor %}
+	{% for childTrip in trip.parentTrip.childTrips %}
+		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
+			{{ childTrip|trans }}
+		</a>
+        {% if not loop.last %}
+            <span class="trip-leg-divider"></span>
+        {% endif %}
+	{% endfor %}
 	{% for childTrip in trip.parentTrip.childTrips %}
 		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
 			{{ childTrip|trans }}

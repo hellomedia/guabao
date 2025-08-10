@@ -1,6 +1,9 @@
-<div id="top-filters" class="multi-trip invisible-scroll">
-
-	<a href="{{ path(trip) }}" class="current">
+<div id="top-filters"
+    class="multi-trip invisible-scroll"
+    data-controller="restore-x-scroll"
+    data-restore-x-scroll-key-value="trip-{{ trip.id }}" 
+>
+	<a href="{{ path(trip) }}" class="current" style="margin-right: 10px">
 		{{ trip.shortName(app.locale) }}
 	</a>
     {% for childTrip in trip.childTrips %}
