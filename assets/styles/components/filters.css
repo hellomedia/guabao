@@ -52,23 +52,6 @@
         }
     }
 
-    .invisible-scroll {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -ms-overflow-style: none;
-        /* IE/Edge */
-        scrollbar-width: none;
-        /* Firefox */
-    }
-    .invisible-scroll > * {
-        white-space: nowrap;
-    }
-
-    .invisible-scroll::-webkit-scrollbar {
-        display: none;
-        /* Chrome, Safari */
-    }
-
     .with-cards #top-filters a {
         border: 1px solid var(--color-secondary-background);
         background-color: var(--color-secondary-background);
