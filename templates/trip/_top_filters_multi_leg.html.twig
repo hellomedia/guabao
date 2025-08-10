@@ -4,12 +4,13 @@
     data-restore-x-scroll-key-value="trip-{{ trip.id }}" 
 >
 	<a href="{{ path(trip) }}" class="current" style="margin-right: 10px">
-		{{ trip.shortNameWithFallback(app.locale) }}
+        <span class="trip-name">{{ trip.shortNameWithFallback(app.locale) }}</span>
+        <span class="trip-duration">{{ trip|tripDuration }}</span>
 	</a>
     {% for childTrip in trip.childTrips %}
         <a href="{{ path(childTrip) }}" class="trip-leg">
-            <span class="trip-leg-name">{{ childTrip|trans }}</span>
-            <span class="trip-leg-duration">{{ childTrip|tripDuration }}</span>
+            <span class="trip-name">{{ childTrip|trans }}</span>
+            <span class="trip-duration">{{ childTrip|tripDuration }}</span>
         </a>
         {% if not loop.last %}
             <span class="trip-leg-divider"></span>

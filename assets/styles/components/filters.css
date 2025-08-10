@@ -32,12 +32,13 @@
             white-space: wrap !important;
         }
 
-        .trip-leg-name {
+        .trip-name {
             white-space: nowrap !important;
         }
-        .trip-leg-duration {
+        .trip-duration {
             font-style: italic;
             white-space: nowrap !important;
+            @apply text-sm;
         }
 
         .trip-leg-divider {
