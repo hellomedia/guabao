@@ -1,5 +1,5 @@
 {% if field %}
-{% set media = attribute(entity.instance, 'cover') ?? entity.instance is instanceof('App\Entity\Media') ? entity.instance : null %}
+{% set media = attribute(entity.instance, 'cover') ?? (entity.instance is instanceof('App\\Entity\\Media') ? entity.instance : null) %}
 
     {% if media %}
     
