@@ -25,6 +25,10 @@
             {{ trip.period }}   
         </div>
 
+        <div class="card-duration">
+            {{ trip|tripDuration }}   
+        </div>
+
         <div class="card-bottom">
             <div class="card-ratings">
                 {% include 'trip/_rating.html.twig' %}
