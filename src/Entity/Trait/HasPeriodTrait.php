@@ -43,6 +43,10 @@ trait HasPeriodTrait
         if ($this->startedAt->format('m-Y') == $this->endedAt->format('m-Y')) {
             return $this->startedAt->format('M Y');
         }
+
+        if ($this->startedAt->format('Y') == $this->endedAt->format('Y')) {
+            return $this->startedAt->format('M') . ' - ' . $this->endedAt->format('M Y');
+        }
     
         return $this->startedAt->format('M Y') . ' - ' . $this->endedAt->format('M Y');
     }
