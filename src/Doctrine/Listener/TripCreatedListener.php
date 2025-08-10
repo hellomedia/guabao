@@ -28,6 +28,6 @@ class TripCreatedListener
             return;
         }
 
-        $trip->setKey($this->slugger->slug(\mb_strtolower($trip->getNameEn())));
+        $trip->setKey($this->slugger->slug(\mb_strtolower($trip->getNameEn() . ' ' . $trip->getPeriod())));
     }
 }
