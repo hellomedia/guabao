@@ -82,7 +82,7 @@ class DateHelper
             return $translator->trans('interval.weeks', ['%count%' => 1], domain: 'duration');
         }
         if ($interval->d) {
-            return $translator->trans('interval.days', ['%count%' => $interval->d], domain: 'duration');
+            return $translator->trans('interval.days', ['%count%' => $interval->d + 1], domain: 'duration');
         }
 
         return $translator->trans('interval.days', ['%count%' => 1]);
