@@ -1,6 +1,7 @@
 interval:
     years:  "%count% an|%count% ans"
     months: "%count% mois|%count% mois"
+    weeks: "%count% semaines|%count% semaine"
     days:   "%count% jour|%count% jours"
     hours:  "%count% heure|%count% heures"
     minutes: "%count% minute|%count% minutes"
