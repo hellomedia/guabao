@@ -13,7 +13,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
  * Example of EntityListener
  * Already covered by SluggableListener which applies to all entities
  */
-#[AsEntityListener(event: Events::prePersist, method: 'createKey', entity: Trip::class, lazy: true)]
+#[AsEntityListener(event: Events::prePersist, method: 'preCreate', entity: Trip::class, lazy: true)]
 class TripCreatedListener
 {
     public function __construct(
@@ -22,8 +22,12 @@ class TripCreatedListener
     {
     }
 
-    public function createKey(Trip $trip, PrePersistEventArgs $args)
+    public function preCreate(Trip $trip, PrePersistEventArgs $args)
     {
+        $interval = $trip->getEndedAt()->diff($trip->getStartedAt());
+
+        $trip->setDuration($interval->days);
+
         if ($trip->getKey() != null) {
             return;
         }

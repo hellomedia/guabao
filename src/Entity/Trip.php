@@ -90,6 +90,10 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     #[ORM\Column(nullable: true)]
     private ?int $durationRating = null;
 
+    // Duration in days (used for sorting by duration)
+    #[ORM\Column(nullable: true)]
+    private ?int $duration = null;
+
     public function __construct()
     {
         $this->countries = new ArrayCollection();
@@ -288,5 +292,17 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     public function getShortNameFallback(string $locale): string
     {
         return $this->getName($locale) . ($this->isTopLevelTrip() ? ' ' . $this->getPeriod() : '');
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(?int $duration): static
+    {
+        $this->duration = $duration;
+
+        return $this;
     }
 }

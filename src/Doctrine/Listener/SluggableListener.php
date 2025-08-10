@@ -34,6 +34,7 @@ class SluggableListener
         $this->_setLocalizedSlugs($entity);
     }
 
+    // NB: only goes through here if something else is updated
     public function preUpdate(PreUpdateEventArgs $args): void
     {
         $entity = $args->getObject();

@@ -13,6 +13,7 @@ use Doctrine\ORM\Events;
 #[AsEntityListener(event: Events::preUpdate, method: 'update', entity: User::class, lazy: true)]
 class UserUpdatedListener
 {
+    // NB: only goes through here if something else is updated
     public function update(User $user, PreUpdateEventArgs $args)
     {
         $user->setUpdatedAt();

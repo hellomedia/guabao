@@ -54,7 +54,7 @@ class TripRepository extends ServiceEntityRepository
     {
         $sortField = match ($sort) {
             'd' => 't.startedAt',
-            'u' => 't.durationRating',
+            'u' => 't.duration',
             'a' => 't.adventureRating',
             default => 't.startedAt',
         };
@@ -70,7 +70,7 @@ class TripRepository extends ServiceEntityRepository
     {
         $sortField = match($sort) {
             'd' => 't.startedAt',
-            'u' => 't.durationRating',
+            'u' => 't.duration',
             'a' => 't.adventureRating',
             default => 't.startedAt',
         };

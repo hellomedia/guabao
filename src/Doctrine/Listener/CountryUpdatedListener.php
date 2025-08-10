@@ -22,6 +22,7 @@ class CountryUpdatedListener
     {
     }
 
+    // NB: only goes through here if something else is updated
     public function update(Country $country, PreUpdateEventArgs $args)
     {
         $this->_updateSlugs($country);
