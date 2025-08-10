@@ -4,7 +4,7 @@
     data-restore-x-scroll-key-value="trip-{{ trip.id }}" 
 >
 	<a href="{{ path(trip) }}" class="current" style="margin-right: 10px">
-		{{ trip.shortName(app.locale) }}
+		{{ trip.shortNameWithFallback(app.locale) }}
 	</a>
     {% for childTrip in trip.childTrips %}
         <a href="{{ path(childTrip) }}" class="trip-leg">
