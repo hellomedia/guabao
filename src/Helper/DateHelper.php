@@ -6,9 +6,16 @@ use App\Enum\DateIntervalType;
 use DateInterval;
 use DateTime;
 use DateTimeImmutable;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DateHelper
 {
+    public function __construct(
+        private TranslatorInterface $translator,
+    )
+    {
+        
+    }
     public static function calculateExpirationDate(DateIntervalType $intervalType, int $duration, ?DateTimeImmutable $start = new DateTimeImmutable()): DateTimeImmutable
     {
         // https://www.php.net/manual/en/dateinterval.construct.php
@@ -34,6 +41,39 @@ class DateHelper
         }
 
         return (int) $origin->diff($target)->format('%a');
+    }
+
+    /**
+     * Returns approximate duration in months, weeks, days
+     * between start date and end date
+     */
+    public function getApproximateDuration(DateTimeImmutable $start, DateTimeImmutable $end): string
+    {
+        $interval = $end->diff($start);
+
+        $translator = $this->translator;
+        $days = $interval->days;
+
+        if ($days > 62) {
+            return $translator->trans('interval.months', ['%count%' => $interval->m], domain: 'duration');
+        }
+        if ($days > 50 && $days <= 62) {
+            return $translator->trans('interval.months', ['%count%' => 2], domain: 'duration');
+        }
+        if ($days > 35 && $days <= 50) {
+            return $translator->trans('interval.weeks', ['%count%' => intdiv($days, 7)], domain: 'duration');
+        }
+        if ($days > 25 && $days <= 35) {
+            return $translator->trans('interval.months', ['%count%' => 1], domain: 'duration');
+        }
+        if ($days > 12 && $days <= 25) {
+            return $translator->trans('interval.weeks', ['%count%' => intdiv($days, 7)], domain: 'duration');
+        }
+        if ($interval->d) {
+            return $translator->trans('interval.days', ['%count%' => $interval->d], domain: 'duration');
+        }
+
+        return $translator->trans('interval.days', ['%count%' => 1]);
     }
 
     public static function isPast(DateTimeImmutable $date): bool

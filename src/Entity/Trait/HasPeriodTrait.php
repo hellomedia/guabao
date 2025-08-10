@@ -50,5 +50,4 @@ trait HasPeriodTrait
     
         return $this->startedAt->format('M Y') . ' - ' . $this->endedAt->format('M Y');
     }
-
 }

@@ -11,7 +11,8 @@
 
 	{% for childTrip in trip.parentTrip.childTrips %}
 		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
-			{{ childTrip|trans }}
+            <span class="trip-leg-name">{{ childTrip|trans }}</span>
+            <span class="trip-leg-duration">{{ childTrip|tripDuration }}</span>
 		</a>
         {% if not loop.last %}
             <span class="trip-leg-divider"></span>

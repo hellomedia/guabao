@@ -2,6 +2,8 @@
 
 namespace App\Twig\Extension;
 
+use App\Entity\Trip;
+use App\Helper\DateHelper;
 use IntlDateFormatter;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Environment as TwigEnvironment;
@@ -13,6 +15,7 @@ class DateExtension extends AbstractExtension
 {
     public function __construct(
         private RequestStack $requestStack,
+        private DateHelper $dateHelpler,
     ) {}
 
     public function getFilters(): array
@@ -25,6 +28,7 @@ class DateExtension extends AbstractExtension
             new TwigFilter('day_and_month_with_day_of_week', [$this, 'dayAndMonthWithDayOfWeek']),
             new TwigFilter('month_and_year', [$this, 'monthAndYear']),
             new TwigFilter('time', [$this, 'time']),
+            new TwigFilter('tripDuration', [$this, 'tripDuration']),
         ];
     }
 
@@ -264,6 +268,11 @@ class DateExtension extends AbstractExtension
         $formatter = new \IntlDateFormatter($lang, IntlDateFormatter::NONE, IntlDateFormatter::SHORT);
 
         return $formatter->format($datetime);
+    }
+
+    public function tripDuration(Trip $trip) 
+    {
+        return $this->dateHelpler->getApproximateDuration($trip->getStartedAt(), $trip->getEndedAt());
     }
 
     private function _removeYear(string $date, string $lang): string

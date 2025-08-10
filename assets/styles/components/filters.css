@@ -8,6 +8,10 @@
         }
 
         a {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             border: 1px solid var(--color-gray-300);
             border-radius: var(--radius-3xl);
             padding: 10px 15px;
@@ -21,13 +25,26 @@
 
         .trip-leg {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             @apply text-sm;
+            white-space: wrap !important;
+        }
+
+        .trip-leg-name {
+            white-space: nowrap !important;
+        }
+        .trip-leg-duration {
+            font-style: italic;
+            white-space: nowrap !important;
         }
 
         .trip-leg-divider {
-            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         .trip-leg-divider::after {
             content: '····';
