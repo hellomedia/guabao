@@ -69,20 +69,20 @@ class TripCrudController extends AbstractCrudController
             ])
             ->setTemplatePath('@controlroom/field/tags.html.twig');
         
-        yield TextField::new('nameFr', 'Name FR');
         yield TextField::new('nameEn', 'Name EN');
+        yield TextField::new('nameFr', 'Name FR');
 
-        yield TextField::new('shortNameFr', 'Short FR');
         yield TextField::new('shortNameEn', 'Short EN');
+        yield TextField::new('shortNameFr', 'Short FR');
 
         yield DateField::new('startedAt');
         yield DateField::new('endedAt');
 
-        yield TextareaField::new('headlineFr', 'Headline FR');
         yield TextareaField::new('headlineEn', 'Headline EN');
+        yield TextareaField::new('headlineFr', 'Headline FR');
 
-        yield TextareaField::new('descriptionFr', 'Description FR')->hideOnIndex();
         yield TextareaField::new('descriptionEn', 'Description EN')->hideOnIndex();
+        yield TextareaField::new('descriptionFr', 'Description FR')->hideOnIndex();
 
         yield IntegerField::new('durationRating', 'Duration');
         yield IntegerField::new('adventureRating', 'Adventure');
