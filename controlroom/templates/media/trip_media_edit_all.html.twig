@@ -1,12 +1,12 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block content_title %}Descriptions for {{ trip }}{% endblock %}
+{% block content_title %}Edit Medias for {{ trip }}{% endblock %}
 
 {% block main %}
 
     {% for media in medias %}
 
-        {% include '@controlroom/media/_description_form.html.twig'
+        {% include '@controlroom/media/_trip_media_edit_form.html.twig'
             with { form: forms[media.id] }
         %}
 

@@ -8,19 +8,21 @@
     h1 {
         font-family: 'Poppins', 'Inter Variable', sans-serif;
         @apply text-2xl;
-        @apply mt-6;
-        @apply mb-6;
+        margin-top: calc(var(--spacing) * 6);
+        margin-bottom: calc(var(--spacing) * 6);
         color: var(--color-page-title);
     }
 
     h2 {
         font-family: 'Poppins', 'Inter Variable', sans-serif;
         @apply text-2xl;
+        margin-bottom: calc(var(--spacing) * 5);
     }
 
     h3 {
         font-family: 'Poppins', 'Inter Variable', sans-serif;
         @apply text-xl;
+        margin-bottom: calc(var(--spacing) * 3);
     }
 
     h3:not(nav h3, footer h3) {

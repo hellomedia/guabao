@@ -10,12 +10,14 @@ use App\Entity\Interface\EntityInterface;
 use App\Entity\Meal;
 use App\Entity\Media;
 use App\Entity\Place;
+use App\Entity\SiteHighlight;
 use App\Entity\Tag\FoodTag;
 use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
 use App\Entity\Tag\Tag;
 use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
+use App\Entity\TripHighlight;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -84,6 +86,8 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-dashboard');
 
+        yield MenuItem::linkToCrud('Site Highlights', 'fa fa-star', SiteHighlight::class);
+
         yield MenuItem::section('Food');
         yield MenuItem::linkToCrud('Food', 'fa fa-lemon', Food::class);
         yield MenuItem::linkToCrud('Meal', 'fa fa-meal', Meal::class);
@@ -93,6 +97,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Trips');
         yield MenuItem::linkToCrud('Trip', 'fa fa-globe', Trip::class);
+        yield MenuItem::linkToCrud('Trip Highlights', 'fa fa-star', TripHighlight::class);
         yield MenuItem::linkToCrud('Trip Tag', 'fa fa-tag', TripTag::class);
 
         yield MenuItem::section('Medias');

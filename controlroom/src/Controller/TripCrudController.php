@@ -89,7 +89,7 @@ class TripCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $viewMedias = Action::new('viewMedias', 'Medias')
+        $viewMedias = Action::new('viewMedias', 'View Medias')
             ->linkToUrl(function (Trip $trip) {
                 return $this->urlGenerator->generate('controlroom_media_index', [
                     'filters' => [
@@ -102,19 +102,26 @@ class TripCrudController extends AbstractCrudController
             })
             ->setIcon('fa fa-images');
 
-        $mediaDescriptions = Action::new('mediaDescriptions', 'Media descriptions')
+        $editMedias = Action::new('editMedias', 'Edit Medias')
             ->linkToUrl(function (Trip $trip) {
-                return $this->urlGenerator->generate('admin_media_descriptions', [
+                return $this->urlGenerator->generate('admin_trip_media_edit_all', [
                     'id' => $trip->getId(),
                 ]);
             })
             ->setIcon('fa fa-edit');
 
+        $addMedias = Action::new('addMedias', 'Add medias')
+            ->linkToUrl($this->urlGenerator->generate('admin_media_add_multiple'))
+            ->setIcon('fa fa-images')
+        ;
+
         return $actions
+            ->add(Action::DETAIL, $addMedias)
+            ->add(Action::DETAIL, $editMedias)
             ->add(Action::DETAIL, $viewMedias)
+            ->add(Action::INDEX, $addMedias)
+            ->add(Action::INDEX, $editMedias)
             ->add(Action::INDEX, $viewMedias)
-            ->add(Action::DETAIL, $mediaDescriptions)
-            ->add(Action::INDEX, $mediaDescriptions)
         ;
     }
 

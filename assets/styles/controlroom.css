@@ -17,6 +17,13 @@ html {
     }
 }
 
+table.datagrid td.actions {
+    /* adjust as needed */
+    /* prevent wrapping of action buttons */
+    a { 
+        white-space: nowrap;
+    }
+}
 
 /** IMAGES **/
 .ea {

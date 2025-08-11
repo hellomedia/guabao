@@ -16,5 +16,16 @@
             margin-bottom: 30px;
             @apply text-xl;
         }
+
+        #highlights {
+            margin-top: 50px;
+            margin-bottom: 100px;
+            .highlight {
+                margin-bottom: calc(var(--spacing) * 8);            
+            }
+            .highlight-description {
+                @apply text-lg;
+                margin-bottom: calc(var(--spacing) * 6);            }
+        }
     }
 }

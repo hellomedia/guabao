@@ -5,7 +5,7 @@
 		{% if media.isImage %}
 			{% if media.is360 %}
 				<a 
-					data-fancybox="gallery"
+					data-fancybox="{{ gallery ?? 'default' }}"
 					data-src="#viewer-{{ media.id }}"
 					data-caption="{{ media.description(app.request.locale)|nl2br }}"
 				>
@@ -28,7 +28,7 @@
 
 			{% else %}
 				<a 
-					data-fancybox="gallery"
+					data-fancybox="{{ gallery ?? 'default' }}"
 					href="{{ uploaded_asset(media) }}"
 					data-caption="{{ media.description(app.request.locale)|nl2br }}"
 				>
@@ -42,7 +42,7 @@
 			{% endif %}
 
 		{% elseif media.isVideo %}
-			<a data-fancybox="gallery"
+			<a data-fancybox="{{ gallery ?? 'default' }}"
 				data-src="#vimeo-embed-{{ media.id }}"
 				data-caption="{{ media.description(app.request.locale)|nl2br }}"
 				href="javascript:;" 

@@ -9,8 +9,8 @@ use App\Enum\MediaType;
 use App\Helper\MediaAutoFillHelper;
 use App\Pack\Media\Helper\ExifExtractor;
 use App\Pack\Media\Helper\UploadHelper;
-use Controlroom\Form\Type\MediaDescriptionType;
 use Controlroom\Form\Type\MediaMultipleType;
+use Controlroom\Form\Type\TripMediaType;
 use Doctrine\ORM\EntityManager;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -32,17 +32,22 @@ class MediaController extends BaseController
     // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
     // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
     // NB: this was not necessary with the old ea routing strategy
-    #[Route('/media/trip/{id:trip}/descriptions', name: 'admin_media_descriptions', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function editDescriptions(Trip $trip, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[Route('/media/trip/{id:trip}/descriptions', name: 'admin_trip_media_edit_all', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    public function editAllTripMedias(Trip $trip, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         $medias = $entityManager->getRepository(Trip::class)->findMedias($trip);
 
         $forms = [];
         foreach ($medias as $media) {
-            $forms[$media->getId()] = $formFactory->createNamed('media_description_' . $media->getId(), MediaDescriptionType::class, $media)->createView();
+            $forms[$media->getId()] = $formFactory->createNamed(
+                name: 'trip_media_edit_form_' . $media->getId(),
+                type: TripMediaType::class,
+                data: $media,
+                options: ['trip' => $trip]
+            )->createView();
         }
 
-        return $this->render('@controlroom/media/edit_descriptions.html.twig', [
+        return $this->render('@controlroom/media/trip_media_edit_all.html.twig', [
             'forms' => $forms,
             'medias' => $medias,
             'trip' => $trip,
@@ -50,11 +55,16 @@ class MediaController extends BaseController
 
     }
 
-    #[Route('/media/{id:media}/description', name: 'admin_media_description_edit', methods: ['POST'])]
-    public function editDescription(Request $request, Media $media, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[Route('/media/{id:media}/description', name: 'admin_trip_media_edit', methods: ['POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    public function editTripMedia(Request $request, Media $media, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         // form name must match name above
-        $form = $formFactory->createNamed('media_description_' . $media->getId(), MediaDescriptionType::class, $media);
+        $form = $formFactory->createNamed(
+            name: 'trip_media_edit_form_' . $media->getId(),
+            type: TripMediaType::class,
+            data: $media,
+            options: ['trip' => $media->getTrip()]
+        );
 
         $form->handleRequest($request);
 
@@ -63,8 +73,7 @@ class MediaController extends BaseController
             $entityManager->flush();
         }
 
-        // Return just the frame content so Turbo can replace it
-        return $this->render('@controlroom/media/_description_form.html.twig', [
+        return $this->render('@controlroom/media/_trip_media_edit_form.html.twig', [
             'form' => $form,
             'media' => $media,
         ]);

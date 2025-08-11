@@ -118,6 +118,12 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $takenAtHint = null;
 
+    #[ORM\ManyToOne(inversedBy: 'medias')]
+    private ?TripHighlight $tripHighlight = null;
+
+    #[ORM\ManyToOne(inversedBy: 'medias')]
+    private ?SiteHighlight $siteHighlight = null;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -372,6 +378,30 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     public function setTakenAtHint(?string $takenAtHint): static
     {
         $this->takenAtHint = $takenAtHint;
+
+        return $this;
+    }
+
+    public function getTripHighlight(): ?TripHighlight
+    {
+        return $this->tripHighlight;
+    }
+
+    public function setTripHighlight(?TripHighlight $tripHighlight): static
+    {
+        $this->tripHighlight = $tripHighlight;
+
+        return $this;
+    }
+
+    public function getSiteHighlight(): ?SiteHighlight
+    {
+        return $this->siteHighlight;
+    }
+
+    public function setSiteHighlight(?SiteHighlight $siteHighlight): static
+    {
+        $this->siteHighlight = $siteHighlight;
 
         return $this;
     }

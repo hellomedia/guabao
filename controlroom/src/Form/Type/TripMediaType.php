@@ -8,6 +8,7 @@ use App\Entity\Media;
 use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
 use App\Entity\Trip;
+use App\Entity\TripHighlight;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -17,22 +18,35 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MediaDescriptionType extends AbstractType
+class TripMediaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $currentTrip = $options['trip'];
+
         $builder
             ->add('trip', EntityType::class, [
                 'class' => Trip::class,
-                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
                     return $repo->createQueryBuilder('t')
+                        ->where('t.parentTrip = :trip')
+                        ->setParameter('trip', $currentTrip)
+                        ->orWhere('t.id = :tripId')
+                        ->setParameter('tripId', $currentTrip->getId())
                         ->orderBy('t.startedAt', 'DESC');
                 },
-                'choice_label' => function (Trip $trip): string {
-                    if ($trip->hasParentTrip()) {
-                        return $trip->getParentTrip()->getShortNameWithFallback() . ' ' . $trip->getName();
-                    }
-                    return $trip->getShortNameWithFallback();
+                'multiple' => false,
+                'autocomplete' => true,
+            ])
+            ->add('tripHighlight', EntityType::class, [
+                'label' => 'Highlight',
+                'class' => TripHighlight::class,
+                'required' => false,
+                'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
+                    return $repo->createQueryBuilder('h')
+                        ->where('h.trip = :trip')
+                        ->setParameter('trip', $currentTrip)
+                        ->orderBy('h.nameEn', 'ASC');
                 },
                 'multiple' => false,
                 'autocomplete' => true,
@@ -41,16 +55,14 @@ class MediaDescriptionType extends AbstractType
                 'label' => "EN",
                 'required' => false,
                 'attr' => [
-                    'rows' => 6,      // taller
-                    'cols' => 80,     // wider (optional)
+                    'rows' => 4,      // taller
                 ],
             ])
             ->add('descriptionFr', TextareaType::class, [
                 'label' => "FR",
                 'required' => false,
                 'attr' => [
-                    'rows' => 6,      // taller
-                    'cols' => 80,     // wider (optional)
+                    'rows' => 4,      // taller
                 ],
             ])
             ->add('placeTags', EntityType::class, [
@@ -104,6 +116,7 @@ class MediaDescriptionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Media::class,
+            'trip' => null,
         ]);
     }
 }

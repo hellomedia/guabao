@@ -1,17 +1,17 @@
 {% form_theme form '@EasyAdmin/crud/form_theme.html.twig' %}
 
-<div id="media_{{ media.id }}" data-controller="media-description" data-media-description-target="container">
+<div id="media_{{ media.id }}" data-controller="trip-media-edit-form" data-trip-media-edit-form-target="container">
 
     <form
-		name="media_description_{{ media.id }}"
-        data-media-description-target="form"
-        data-action="submit->media-description#submit"
-        action="{{ path('admin_media_description_edit', {id: media.id}) }}"
+		name="trip_media_edit_form_{{ media.id }}"
+        data-trip-media-edit-form-target="form"
+        data-action="submit->trip-media-edit-form#submit"
+        action="{{ path('admin_trip_media_edit', {id: media.id}) }}"
         method="post"
         style="margin-bottom: 20px"
     >
         <img
-            style="height: 400px; width: auto;" 
+            style="height: 300px; width: auto;" 
             src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
         />
         <div style="margin-top: 15px; margin-bottom: 10px">

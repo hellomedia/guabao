@@ -89,11 +89,18 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     #[ORM\Column(nullable: true)]
     private ?int $duration = null;
 
+    /**
+     * @var Collection<int, TripHighlight>
+     */
+    #[ORM\OneToMany(targetEntity: TripHighlight::class, mappedBy: 'trip')]
+    private Collection $highlights;
+
     public function __construct()
     {
         $this->countries = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->childTrips = new ArrayCollection();
+        $this->highlights = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -266,6 +273,36 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     public function setDuration(?int $duration): static
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TripHighlight>
+     */
+    public function getHighlights(): Collection
+    {
+        return $this->highlights;
+    }
+
+    public function addHighlight(TripHighlight $highlight): static
+    {
+        if (!$this->highlights->contains($highlight)) {
+            $this->highlights->add($highlight);
+            $highlight->setTrip($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHighlight(TripHighlight $highlight): static
+    {
+        if ($this->highlights->removeElement($highlight)) {
+            // set the owning side to null (unless already changed)
+            if ($highlight->getTrip() === $this) {
+                $highlight->setTrip(null);
+            }
+        }
 
         return $this;
     }
