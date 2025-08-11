@@ -31,7 +31,7 @@ trait LocalizedNameTrait
         return match ($locale) {
             'fr' => $this->nameFr ?? $this->nameEn,
             'en' => $this->nameEn ?? $this->nameFr,
-            default => $this->nameFr ?? $this->nameEn,
+            default => $this->nameEn ?? $this->nameFr,
         };
     }
 
