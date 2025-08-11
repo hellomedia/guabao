@@ -37,16 +37,16 @@ class MediaDescriptionType extends AbstractType
                 'multiple' => false,
                 'autocomplete' => true,
             ])
-            ->add('descriptionFr', TextareaType::class, [
-                'label' => "FR",
+            ->add('descriptionEn', TextareaType::class, [
+                'label' => "EN",
                 'required' => false,
                 'attr' => [
                     'rows' => 6,      // taller
                     'cols' => 80,     // wider (optional)
                 ],
             ])
-            ->add('descriptionEn', TextareaType::class, [
-                'label' => "EN",
+            ->add('descriptionFr', TextareaType::class, [
+                'label' => "FR",
                 'required' => false,
                 'attr' => [
                     'rows' => 6,      // taller

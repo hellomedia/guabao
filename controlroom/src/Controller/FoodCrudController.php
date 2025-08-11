@@ -52,8 +52,8 @@ class FoodCrudController extends AbstractCrudController
             ->setTemplatePath('@media/easyadmin/field/thumbnail_list.html.twig')
             ->hideOnForm();
 
-        yield TextField::new('nameFr');
         yield TextField::new('nameEn');
+        yield TextField::new('nameFr');
 
         yield AssociationField::new('cuisine');
 
