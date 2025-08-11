@@ -19,15 +19,18 @@ class MediaTagCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Media Tag')
             ->setEntityLabelInPlural('Media Tags')
+            ->setDefaultSort([
+                'nameEn' => 'ASC'
+            ])
         ;
     }
 
     public function configureFields(string $pageName): iterable
     {
-        yield TextField::new('nameFr', 'Name FR');
         yield TextField::new('nameEn', 'Name EN');
+        yield TextField::new('nameFr', 'Name FR');
 
-        yield TextField::new('descriptionFr', 'Description FR');
         yield TextField::new('descriptionEn', 'Description EN');
+        yield TextField::new('descriptionFr', 'Description FR');
     }
 }
