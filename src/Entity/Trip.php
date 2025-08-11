@@ -21,7 +21,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-
+#[ORM\Index('trip_started_at_idx', ['started_at'])]
+#[ORM\Index('trip_duration_idx', ['duration'])]
 #[ORM\Entity(repositoryClass: TripRepository::class)]
 class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodInterface, EntityInterface
 {

@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Index('media_taken_at_idx', ['taken_at'])]
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
 class Media implements EntityInterface, UploadedAssetEntityInterface
 {
