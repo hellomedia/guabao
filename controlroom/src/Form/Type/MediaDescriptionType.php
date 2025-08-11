@@ -7,6 +7,9 @@ use App\Entity\Meal;
 use App\Entity\Media;
 use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
+use App\Entity\Trip;
+use App\Repository\TripRepository;
+use Doctrine\ORM\QueryBuilder;
 use phpDocumentor\Reflection\DocBlock\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -20,6 +23,21 @@ class MediaDescriptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('trip', EntityType::class, [
+                'class' => Trip::class,
+                'query_builder' => function (TripRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('t')
+                        ->orderBy('t.startedAt', 'DESC');
+                },
+                'choice_label' => function (Trip $trip): string {
+                    if ($trip->hasParentTrip()) {
+                        return $trip->getParentTrip()->getShortNameWithFallback() . ' ' . $trip->getName();
+                    }
+                    return $trip->getShortNameWithFallback();
+                },
+                'multiple' => false,
+                'autocomplete' => true,
+            ])
             ->add('descriptionFr', TextareaType::class, [
                 'label' => "FR",
                 'required' => false,

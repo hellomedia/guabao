@@ -284,12 +284,12 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
         return $this;
     }
 
-    public function getShortNameWithFallback(string $locale): string
+    public function getShortNameWithFallback(?string $locale = null): string
     {
         return $this->getShortName($locale) ?? $this->getShortNameFallback($locale);
     }
 
-    public function getShortNameFallback(string $locale): string
+    public function getShortNameFallback(?string $locale = null): string
     {
         return $this->getName($locale) . ($this->isTopLevelTrip() ? ' ' . $this->getPeriod() : '');
     }
