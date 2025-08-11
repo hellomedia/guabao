@@ -56,21 +56,25 @@ class MediaDescriptionType extends AbstractType
             ])
             ->add('placeTags', EntityType::class, [
                 'class' => PlaceTag::class,
+                'required' => false,
                 'multiple' => true,
                 'autocomplete' => true,
             ])
             ->add('tags', EntityType::class, [
                 'class' => MediaTag::class,
+                'required' => false,
                 'multiple' => true,
                 'autocomplete' => true,
             ])
             ->add('food', EntityType::class, [
                 'class' => Food::class,
+                'required' => false,
                 'multiple' => false,
                 'autocomplete' => true,
             ])
             ->add('meal', EntityType::class, [
                 'class' => Meal::class,
+                'required' => false,
                 'multiple' => false,
                 'autocomplete' => true,
             ])
