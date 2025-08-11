@@ -5,6 +5,7 @@ namespace Controlroom\Controller;
 use App\Entity\Tag\TripTag;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class TripTagCrudController extends AbstractCrudController
@@ -35,7 +36,7 @@ class TripTagCrudController extends AbstractCrudController
         yield TextField::new('slugEn', 'Slug EN')->hideOnForm();
         yield TextField::new('slugFr', 'Slug FR')->hideOnForm();
 
-        yield TextField::new('descriptionEn', 'Description EN');
-        yield TextField::new('descriptionFr', 'Description FR');
+        yield TextareaField::new('descriptionEn', 'Description EN');
+        yield TextareaField::new('descriptionFr', 'Description FR');
     }
 }
