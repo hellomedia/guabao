@@ -2,16 +2,13 @@
 
     .trip-page {
 
-        #countries {
-            margin-bottom: 20px;
-        }
-
         #cover {
             margin-bottom: 30px;
         }
 
         #rating {
             @apply text-lg;
+            margin-bottom: 30px;
         }
 
         #description {
