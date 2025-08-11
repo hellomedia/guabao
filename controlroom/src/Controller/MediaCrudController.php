@@ -143,11 +143,11 @@ class MediaCrudController extends AbstractCrudController
         yield AssociationField::new('trip')
             ->setHelp('Leave empty for auto-fill from exif data');
 
+        yield BooleanField::new('isTripCover', 'Cover');
         yield BooleanField::new('highlight');
         yield AssociationField::new('highlightedTrip')->onlyOnDetail(); // !! not on forms -- buggy because overrides logic in setHighlight()
         yield BooleanField::new('isPano', 'Pano');
         yield BooleanField::new('is360', '360');
-        yield BooleanField::new('isTripCover', 'Cover');
 
         // FOOD
         yield FormField::addFieldset('Food');
