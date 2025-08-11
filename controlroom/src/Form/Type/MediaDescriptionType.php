@@ -8,9 +8,8 @@ use App\Entity\Media;
 use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
 use App\Entity\Trip;
-use App\Repository\TripRepository;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
-use phpDocumentor\Reflection\DocBlock\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -25,7 +24,7 @@ class MediaDescriptionType extends AbstractType
         $builder
             ->add('trip', EntityType::class, [
                 'class' => Trip::class,
-                'query_builder' => function (TripRepository $repo): QueryBuilder {
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
                         ->orderBy('t.startedAt', 'DESC');
                 },
@@ -56,24 +55,40 @@ class MediaDescriptionType extends AbstractType
             ])
             ->add('placeTags', EntityType::class, [
                 'class' => PlaceTag::class,
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('t')
+                        ->orderBy('t.nameEn', 'ASC');
+                },
                 'required' => false,
                 'multiple' => true,
                 'autocomplete' => true,
             ])
             ->add('tags', EntityType::class, [
                 'class' => MediaTag::class,
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('t')
+                        ->orderBy('t.nameEn', 'ASC');
+                },
                 'required' => false,
                 'multiple' => true,
                 'autocomplete' => true,
             ])
             ->add('food', EntityType::class, [
                 'class' => Food::class,
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('f')
+                        ->orderBy('f.nameEn', 'ASC');
+                },
                 'required' => false,
                 'multiple' => false,
                 'autocomplete' => true,
             ])
             ->add('meal', EntityType::class, [
                 'class' => Meal::class,
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('m')
+                        ->orderBy('m.enjoyedAt', 'ASC');
+                },
                 'required' => false,
                 'multiple' => false,
                 'autocomplete' => true,
