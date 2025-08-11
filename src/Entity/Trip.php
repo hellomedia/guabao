@@ -63,12 +63,6 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     private ?Media $foodCover = null;
 
     /**
-     * @var Collection<int, Media>
-     */
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'highlightedTrip')]
-    private Collection $highlights;
-
-    /**
      * @var Collection<int, TripTag>
      */
     #[ORM\ManyToMany(targetEntity: TripTag::class)]
@@ -98,7 +92,6 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     public function __construct()
     {
         $this->countries = new ArrayCollection();
-        $this->highlights = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->childTrips = new ArrayCollection();
     }
@@ -128,36 +121,6 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     public function removeCountry(Country $country): static
     {
         $this->countries->removeElement($country);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Media>
-     */
-    public function getHighlights(): Collection
-    {
-        return $this->highlights;
-    }
-
-    public function addHighlight(Media $highlight): static
-    {
-        if (!$this->highlights->contains($highlight)) {
-            $this->highlights->add($highlight);
-            $highlight->setHighlightedTrip($this);
-        }
-
-        return $this;
-    }
-
-    public function removeHighlight(Media $highlight): static
-    {
-        if ($this->highlights->removeElement($highlight)) {
-            // set the owning side to null (unless already changed)
-            if ($highlight->getHighlightedTrip() === $this) {
-                $highlight->setHighlightedTrip(null);
-            }
-        }
 
         return $this;
     }

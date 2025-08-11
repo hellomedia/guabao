@@ -61,17 +61,6 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Trip $trip = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $highlight = null;
-    
-    // highlightedTrip below is redundant with trip above
-    // but it allows doctrine to have a trip#highlights association
-    // which is convenient for queries and easyadmin
-    // highligthedTrip is handled inside setHighlight
-    #[ORM\ManyToOne(inversedBy: 'highlights')]
-    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private ?Trip $highlightedTrip = null;
-
     #[ORM\ManyToOne(inversedBy: 'medias')]
     private ?Place $place = null;
 
@@ -194,29 +183,9 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     {
         $this->trip = $trip;
 
-        // auto set highlightedTrip convenience property
-        if ($this->highlight) {
-            $this->highlightedTrip = $trip;
-        }
-
         if ($this->isTripCover) {
             $trip->setCover($this);
         }
-
-        return $this;
-    }
-
-    public function isHighlight(): ?bool
-    {
-        return $this->highlight;
-    }
-
-    public function setHighlight(?bool $highlight): static
-    {
-        $this->highlight = $highlight;
-        
-        // auto set highlightedTrip convenience property
-        $this->highlightedTrip = ($highlight ? $this->trip : null);
 
         return $this;
     }
@@ -292,18 +261,6 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     public function getCountry(): ?Country
     {
         return ($this->placeTags->first() ?: null)?->getCountry();
-    }
-
-    public function getHighlightedTrip(): ?Trip
-    {
-        return $this->highlightedTrip;
-    }
-
-    public function setHighlightedTrip(?Trip $highlightedTrip): static
-    {
-        $this->highlightedTrip = $highlightedTrip;
-
-        return $this;
     }
 
     public function getMeal(): ?Meal

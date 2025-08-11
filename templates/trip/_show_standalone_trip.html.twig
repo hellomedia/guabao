@@ -1,6 +1,14 @@
 {% include 'trip/_top_filters_standalone.html.twig' %}
 
-<div id="cover">
+<div id="description">
+	{{ trip.description(app.locale)|nl2br }}
+</div>
+
+<div id="rating">
+	{% include 'trip/_rating.html.twig' %}
+</div>
+
+{# <div id="cover">
     {% if trip.cover %}
         <img
             src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_large') }}"
@@ -8,34 +16,16 @@
             height="{{ trip.cover.height }}"
         />
     {% endif %}
-</div>
+</div> #}
 
-<div id="rating">
-    {% include 'trip/_rating.html.twig' %}
-</div>
-
-<div id="description">
-    {{ trip.description(app.locale)|nl2br }}
-</div>
-
-<div id="highlights">
-    {% for highlight in trip.highlights %}
-        <img 
-            src="{{ uploaded_asset(highlight)|imagine_filter('thumb_card') }}"
-            width="700"
-            height="700"
-        />
-    {% endfor %}
-</div>
-
-<div>
-    <a class="btn btn-default" href="{{ path('trip_gallery', {slug: trip.slug(app.locale)}) }}">
-        Show gallery
-    </a>
-</div>
-
-<div id="countries">
-    {% for country in trip.countries %}
-        {{ country|trans }}
-    {% endfor %}
-</div>
+{% if trip.highlights is defined and trip.highlights is not empty %}
+    <div id="highlights">
+        {% for highlight in trip.highlights %}
+            <img 
+                src="{{ uploaded_asset(highlight)|imagine_filter('thumb_card') }}"
+                width="700"
+                height="700"
+            />
+        {% endfor %}
+    </div>
+{% endif %}

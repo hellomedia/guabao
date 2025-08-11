@@ -12,11 +12,14 @@
 
 {% if trip.cover %}
 	<div id="cover">
-		<img src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_large') }}" width="{{ trip.cover.width }}" height="{{ trip.cover.height }}"/>
+		<img src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_large') }}"
+            width="{{ trip.cover.width }}"
+            height="{{ trip.cover.height }}"
+        />
 	</div>
 {% endif %}
 
-{% if trip.highlights is not empty %}
+{% if trip.highlights is defined and trip.highlights is not empty %}
     <div id="highlights">
         {% for highlight in trip.highlights %}
             <img 

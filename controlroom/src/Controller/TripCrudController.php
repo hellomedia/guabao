@@ -54,10 +54,6 @@ class TripCrudController extends AbstractCrudController
         yield Field::new('cover.path', 'Cover')
             ->setTemplatePath('@media/easyadmin/field/media.html.twig')
             ->onlyOnDetail();
-
-        yield AssociationField::new('highlights')
-            ->setTemplatePath('@media/easyadmin/field/thumbnail_list.html.twig')
-            ->onlyOnDetail();
     
         yield AssociationField::new('tags')
             ->setFormTypeOptions([
