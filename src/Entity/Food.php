@@ -6,6 +6,7 @@ use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
 use App\Entity\Tag\FoodTag;
+use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
 use App\Enum\Level;
@@ -21,6 +22,8 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     use LocalizedNameTrait;
 
     use LocalizedSlugTrait;
+
+    use LocalizedDescriptionTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

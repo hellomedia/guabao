@@ -16,6 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -54,6 +55,9 @@ class FoodCrudController extends AbstractCrudController
 
         yield TextField::new('nameEn');
         yield TextField::new('nameFr');
+
+        yield TextareaField::new('descriptionEn');
+        yield TextareaField::new('descriptionFr');
 
         yield AssociationField::new('cuisine');
 
