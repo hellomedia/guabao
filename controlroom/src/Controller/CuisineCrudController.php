@@ -19,6 +19,9 @@ class CuisineCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Cuisine')
             ->setEntityLabelInPlural('Cuisines')
+            ->setDefaultSort([
+                'nameEn' => 'ASC'
+            ])
         ;
     }
 

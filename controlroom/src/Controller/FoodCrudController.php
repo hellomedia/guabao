@@ -35,6 +35,9 @@ class FoodCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Food')
             ->setEntityLabelInPlural('Food')
+            ->setDefaultSort([
+                'nameEn' => 'ASC'
+            ])
             ->setSearchFields([
                 'name',
             ])

@@ -30,6 +30,9 @@ class PlaceCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Place')
             ->setEntityLabelInPlural('Places')
+            ->setDefaultSort([
+                'nameEn' => 'ASC'
+            ])
             ->setFormOptions([
                 'attr' => [
                     'data-controller' => 'map-picker',
@@ -75,7 +78,7 @@ class PlaceCrudController extends AbstractCrudController
             ])
             ->setTemplatePath('@controlroom/field/tags.html.twig')
         ;
-        
+
         yield TextField::new('country')
             ->hideOnForm();
 

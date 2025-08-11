@@ -19,6 +19,9 @@ class TripTagCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Trip Tag')
             ->setEntityLabelInPlural('Trip Tags')
+            ->setDefaultSort([
+                'nameEn' => 'ASC'
+            ])
         ;
     }
 

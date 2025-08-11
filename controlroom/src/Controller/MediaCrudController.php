@@ -57,7 +57,7 @@ class MediaCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Media')
             ->setEntityLabelInPlural('Medias')
-            ->setDefaultSort(['takenAt' => 'ASC'])
+            ->setDefaultSort(['takenAt' => 'DESC'])
         ;
     }
 

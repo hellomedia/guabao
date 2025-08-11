@@ -20,6 +20,9 @@ class PlaceTagCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Place Tag')
             ->setEntityLabelInPlural('Place Tags')
+            ->setDefaultSort([
+                'nameEn' => 'ASC'
+            ])
         ;
     }
 
