@@ -184,7 +184,7 @@ class MediaCrudController extends AbstractCrudController
                 }
             ])
             ->setTemplatePath('@controlroom/field/tags.html.twig')
-            ->setHelp('Hold Ctrl (or Cmd) to select multiple tags');
+        ;
         
         yield AssociationField::new('placeTags', 'Places')
             ->setFormTypeOptions([
@@ -195,7 +195,7 @@ class MediaCrudController extends AbstractCrudController
                 }
             ])
             ->setTemplatePath('@controlroom/field/tags.html.twig')
-            ->setHelp('Hold Ctrl (or Cmd) to select multiple tags');
+        ;
     }
 
     public function configureFilters(Filters $filters): Filters

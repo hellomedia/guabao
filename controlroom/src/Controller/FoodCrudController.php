@@ -63,7 +63,7 @@ class FoodCrudController extends AbstractCrudController
                 }
             ])
             ->setTemplatePath('@controlroom/field/tags.html.twig')
-            ->setHelp('Hold Ctrl (or Cmd) to select multiple tags');
+        ;
 
         yield ChoiceField::new('loveLevel');
         yield ChoiceField::new('healthyLevel');

@@ -74,8 +74,8 @@ class PlaceCrudController extends AbstractCrudController
                 }
             ])
             ->setTemplatePath('@controlroom/field/tags.html.twig')
-            ->setHelp('Hold Ctrl (or Cmd) to select multiple tags');
-
+        ;
+        
         yield TextField::new('country')
             ->hideOnForm();
 
