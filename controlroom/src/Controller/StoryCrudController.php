@@ -25,7 +25,8 @@ class StoryCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Story')
             ->setEntityLabelInPlural('Stories')
             ->setDefaultSort([
-                'nameEn' => 'ASC'
+                'trip' => 'ASC',
+                'displayOrder' => 'ASC',
             ])
         ;
     }
