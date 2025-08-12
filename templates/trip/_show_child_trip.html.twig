@@ -21,11 +21,9 @@
 
 {% if trip.highlights is not empty %}
 <div id="highlights">
-    <h2>{{ 'My highlights'|trans }}</h2>
-
     {% for highlight in trip.highlights %}
         <div class="highlight">
-            <h3>{{ highlight }}</h3>
+            <h2>{{ highlight }}</h2>
             <div class="highlight-description">
                 {{ highlight.description(app.locale)|nl2br }}
             </div>

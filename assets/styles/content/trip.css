@@ -19,13 +19,13 @@
 
         #highlights {
             margin-top: 50px;
-            margin-bottom: 100px;
+            margin-bottom: 150px;
             .highlight {
-                margin-bottom: calc(var(--spacing) * 8);            
+                margin-bottom: 80px;            
             }
             .highlight-description {
                 @apply text-lg;
-                margin-bottom: calc(var(--spacing) * 6);            }
+                margin-bottom: calc(var(--spacing) * 8);            }
         }
     }
 }
