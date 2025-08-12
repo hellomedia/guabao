@@ -19,23 +19,23 @@
 	</div>
 {% endif %} #}
 
-{% if trip.highlights is not empty %}
-<div id="highlights">
-    {% for highlight in trip.highlights %}
-        <div class="highlight">
-            <h2>{{ highlight }}</h2>
-            <div class="highlight-description">
-                {{ highlight.description(app.locale)|nl2br }}
+{% if trip.stories is not empty %}
+    <div id="stories">
+        {% for story in trip.stories %}
+            <div class="story">
+                <h2>{{ story }}</h2>
+                <div class="story-description">
+                    {{ story.description(app.locale)|nl2br }}
+                </div>
+                <div class="story-medias">
+                    {% include "trip/_gallery.html.twig" with {
+                        medias: story.medias,
+                        gallery: 'story' ~ story.id
+                    } %}
+                </div>
             </div>
-            <div class="highlight-medias">
-                {% include "trip/_gallery.html.twig" with {
-                    medias: highlight.medias,
-                    gallery: 'highlight' ~ highlight.id
-                } %}
-            </div>
-        </div>
-    {% endfor %}
-</div>
+        {% endfor %}
+    </div>
 {% endif %}
 
 

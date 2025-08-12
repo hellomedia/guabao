@@ -18,14 +18,21 @@
     {% endif %}
 </div> #}
 
-{% if trip.highlights is defined and trip.highlights is not empty %}
-    <div id="highlights">
-        {% for highlight in trip.highlights %}
-            <img 
-                src="{{ uploaded_asset(highlight)|imagine_filter('thumb_card') }}"
-                width="700"
-                height="700"
-            />
+{% if trip.stories is not empty %}
+    <div id="stories">
+        {% for story in trip.stories %}
+            <div class="story">
+                <h2>{{ story }}</h2>
+                <div class="story-description">
+                    {{ story.description(app.locale)|nl2br }}
+                </div>
+                <div class="story-medias">
+                    {% include "trip/_gallery.html.twig" with {
+                        medias: story.medias,
+                        gallery: 'story' ~ story.id
+                    } %}
+                </div>
+            </div>
         {% endfor %}
     </div>
 {% endif %}
