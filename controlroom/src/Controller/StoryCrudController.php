@@ -2,27 +2,28 @@
 
 namespace Controlroom\Controller;
 
+use App\Entity\Story;
 use App\Entity\Trip;
-use App\Entity\TripHighlight;
 use Doctrine\ORM\EntityRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class TripHighlightCrudController extends AbstractCrudController
+class StoryCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return TripHighlight::class;
+        return Story::class;
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Trip Highlight')
-            ->setEntityLabelInPlural('Trip Highlights')
+            ->setEntityLabelInSingular('Story')
+            ->setEntityLabelInPlural('Stories')
             ->setDefaultSort([
                 'nameEn' => 'ASC'
             ])
@@ -45,6 +46,8 @@ class TripHighlightCrudController extends AbstractCrudController
                 }
             ]);
         
+        yield NumberField::new('displayOrder');
+
         yield TextField::new('nameEn', 'Name EN');
         yield TextField::new('nameFr', 'Name FR');
 

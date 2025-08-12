@@ -11,6 +11,7 @@ use App\Entity\Meal;
 use App\Entity\Media;
 use App\Entity\Place;
 use App\Entity\SiteHighlight;
+use App\Entity\Story;
 use App\Entity\Tag\FoodTag;
 use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
@@ -97,7 +98,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Trips');
         yield MenuItem::linkToCrud('Trip', 'fa fa-globe', Trip::class);
-        yield MenuItem::linkToCrud('Trip Highlights', 'fa fa-star', TripHighlight::class);
+        yield MenuItem::linkToCrud('Stories', 'fa fa-star', Story::class);
         yield MenuItem::linkToCrud('Trip Tag', 'fa fa-tag', TripTag::class);
 
         yield MenuItem::section('Medias');

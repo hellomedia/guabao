@@ -6,13 +6,13 @@ use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
-use App\Repository\TripHighlightRepository;
+use App\Repository\StoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: TripHighlightRepository::class)]
-class TripHighlight implements LocalizedNameInterface, EntityInterface
+#[ORM\Entity(repositoryClass: StoryRepository::class)]
+class Story implements LocalizedNameInterface, EntityInterface
 {
     use LocalizedNameTrait;
 
@@ -23,15 +23,19 @@ class TripHighlight implements LocalizedNameInterface, EntityInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'highlights')]
+    #[ORM\ManyToOne(inversedBy: 'stories')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Trip $trip = null;
 
     /**
      * @var Collection<int, Media>
      */
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'tripHighlight', fetch:'EAGER')]
+    #[ORM\OrderBy(['takenAt' => 'ASC'])]
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'tripHighlight', fetch: 'EAGER')]
     private Collection $medias;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $displayOrder = null;
 
     public function __construct()
     {
@@ -67,7 +71,7 @@ class TripHighlight implements LocalizedNameInterface, EntityInterface
     {
         if (!$this->medias->contains($media)) {
             $this->medias->add($media);
-            $media->setTripHighlight($this);
+            $media->setStory($this);
         }
 
         return $this;
@@ -77,10 +81,22 @@ class TripHighlight implements LocalizedNameInterface, EntityInterface
     {
         if ($this->medias->removeElement($media)) {
             // set the owning side to null (unless already changed)
-            if ($media->getTripHighlight() === $this) {
-                $media->setTripHighlight(null);
+            if ($media->getStory() === $this) {
+                $media->setStory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDisplayOrder(): ?int
+    {
+        return $this->displayOrder;
+    }
+
+    public function setDisplayOrder(int $displayOrder): static
+    {
+        $this->displayOrder = $displayOrder;
 
         return $this;
     }

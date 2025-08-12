@@ -119,7 +119,8 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     private ?string $takenAtHint = null;
 
     #[ORM\ManyToOne(inversedBy: 'medias')]
-    private ?TripHighlight $tripHighlight = null;
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?Story $story = null;
 
     #[ORM\ManyToOne(inversedBy: 'medias')]
     private ?SiteHighlight $siteHighlight = null;
@@ -382,14 +383,14 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
         return $this;
     }
 
-    public function getTripHighlight(): ?TripHighlight
+    public function getStory(): ?Story
     {
-        return $this->tripHighlight;
+        return $this->story;
     }
 
-    public function setTripHighlight(?TripHighlight $tripHighlight): static
+    public function setStory(?Story $story): static
     {
-        $this->tripHighlight = $tripHighlight;
+        $this->story = $story;
 
         return $this;
     }

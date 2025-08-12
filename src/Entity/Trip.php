@@ -90,17 +90,17 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     private ?int $duration = null;
 
     /**
-     * @var Collection<int, TripHighlight>
+     * @var Collection<int, Story>
      */
-    #[ORM\OneToMany(targetEntity: TripHighlight::class, mappedBy: 'trip')]
-    private Collection $highlights;
+    #[ORM\OneToMany(targetEntity: Story::class, mappedBy: 'trip')]
+    private Collection $stories;
 
     public function __construct()
     {
         $this->countries = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->childTrips = new ArrayCollection();
-        $this->highlights = new ArrayCollection();
+        $this->stories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -278,29 +278,29 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     }
 
     /**
-     * @return Collection<int, TripHighlight>
+     * @return Collection<int, Story>
      */
-    public function getHighlights(): Collection
+    public function getStories(): Collection
     {
-        return $this->highlights;
+        return $this->stories;
     }
 
-    public function addHighlight(TripHighlight $highlight): static
+    public function addStory(Story $story): static
     {
-        if (!$this->highlights->contains($highlight)) {
-            $this->highlights->add($highlight);
-            $highlight->setTrip($this);
+        if (!$this->stories->contains($story)) {
+            $this->stories->add($story);
+            $story->setTrip($this);
         }
 
         return $this;
     }
 
-    public function removeHighlight(TripHighlight $highlight): static
+    public function removeStory(Story $story): static
     {
-        if ($this->highlights->removeElement($highlight)) {
+        if ($this->stories->removeElement($story)) {
             // set the owning side to null (unless already changed)
-            if ($highlight->getTrip() === $this) {
-                $highlight->setTrip(null);
+            if ($story->getTrip() === $this) {
+                $story->setTrip(null);
             }
         }
 
