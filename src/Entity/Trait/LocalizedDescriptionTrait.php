@@ -8,11 +8,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait LocalizedDescriptionTrait
 {
-    #[Assert\Length(max: 2000)]
+    #[Assert\Length(max: 5000)]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $descriptionFr = null;
 
-    #[Assert\Length(max: 2000)]
+    #[Assert\Length(max: 5000)]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $descriptionEn = null;
 
