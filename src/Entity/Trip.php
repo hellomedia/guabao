@@ -92,6 +92,7 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     /**
      * @var Collection<int, Story>
      */
+    #[ORM\OrderBy(['displayOrder' => 'ASC'])]
     #[ORM\OneToMany(targetEntity: Story::class, mappedBy: 'trip')]
     private Collection $stories;
 
