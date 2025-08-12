@@ -31,7 +31,7 @@ class Story implements LocalizedNameInterface, EntityInterface
      * @var Collection<int, Media>
      */
     #[ORM\OrderBy(['takenAt' => 'ASC'])]
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'tripHighlight', fetch: 'EAGER')]
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'story', fetch: 'EAGER')]
     private Collection $medias;
 
     #[ORM\Column(nullable: true)]

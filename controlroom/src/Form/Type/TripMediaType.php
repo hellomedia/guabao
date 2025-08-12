@@ -5,10 +5,10 @@ namespace Controlroom\Form\Type;
 use App\Entity\Food;
 use App\Entity\Meal;
 use App\Entity\Media;
+use App\Entity\Story;
 use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
 use App\Entity\Trip;
-use App\Entity\TripHighlight;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -38,15 +38,15 @@ class TripMediaType extends AbstractType
                 'multiple' => false,
                 'autocomplete' => true,
             ])
-            ->add('tripHighlight', EntityType::class, [
-                'label' => 'Highlight',
-                'class' => TripHighlight::class,
+            ->add('story', EntityType::class, [
+                'label' => 'Story',
+                'class' => Story::class,
                 'required' => false,
                 'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
-                    return $repo->createQueryBuilder('h')
-                        ->where('h.trip = :trip')
+                    return $repo->createQueryBuilder('s')
+                        ->where('s.trip = :trip')
                         ->setParameter('trip', $currentTrip)
-                        ->orderBy('h.nameEn', 'ASC');
+                        ->orderBy('s.nameEn', 'ASC');
                 },
                 'multiple' => false,
                 'autocomplete' => true,
