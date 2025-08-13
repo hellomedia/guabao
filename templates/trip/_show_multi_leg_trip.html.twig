@@ -4,8 +4,15 @@
     {{ trip.description(app.locale)|nl2br }}
 </div>
 
-<div id="trips" class="cards cards-horizontal">
+<div id="trips" class="cards cards-horizontal cards-trip-legs">
 	{% for childTrip in trip.children %}
 		{% include 'trip/_card.html.twig' with {trip: childTrip} %}
+        <div class="trip-leg-separator">
+            <span>·</span>
+            <span>·</span>
+            <span>·</span>
+            <span>·</span>
+            <span>·</span>
+        </div>
 	{% endfor %}
 </div>
