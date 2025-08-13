@@ -11,7 +11,7 @@
 				>
 					<twig:ux:icon name="sphere" />
 					<img 
-						src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
+						src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
 						class="rounded shadow-sm"
 						width="700"
 						height="700"
@@ -33,7 +33,7 @@
 					data-caption="{{ media.description(app.request.locale)|nl2br }}"
 				>
 					<img 
-						src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
+						src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
 						class="rounded shadow-sm"
 						width="700"
 						height="700"

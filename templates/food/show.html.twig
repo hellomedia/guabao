@@ -7,9 +7,9 @@
 {% block content %}
 	{% for media in food.medias %}
 		<img
-			src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
-			width="700"
-			height="700"
+			src="{{ uploaded_asset(media)|imagine_filter('thumb_card_4_3') }}"
+			width="800"
+			height="600"
 		/>
 
 		{% for tags in media.tags %}

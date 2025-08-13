@@ -43,7 +43,7 @@ liip_imagine:
         # it makes for 250px cards which seems too small
         # NB: we don't want to make the thumb too big either since we allow_upscale.
         # If we used 800x800, it would upscale up all original images < 800px.
-        thumb_card:
+        thumb_card_square:
             quality: 75
             filters:
                 #  'outbound' to force sqare image aspect ratio. easier for card layouts to have consistent sizes.
@@ -55,6 +55,12 @@ liip_imagine:
                     size: [700, 700]
                     color: '#DDDDDD'  # gray for background fill color
                     position: 'center'
+        thumb_card_4_3:
+            quality: 75
+            filters: 
+                thumbnail:
+                    size: [800, 600]
+                    mode: outbound
         thumb_large:
             quality: 75
             filters:

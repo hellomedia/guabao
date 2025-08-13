@@ -11,7 +11,13 @@
                 height="{{ media.height }}"
             />
             <img
-                src="{{ uploaded_asset(media)|imagine_filter('thumb_card') }}"
+                src="{{ uploaded_asset(media)|imagine_filter('thumb_card_4_3') }}"
+                class="thumb-card"
+                width="800"
+                height="600"
+            />
+            <img
+                src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
                 class="thumb-card"
                 width="700"
                 height="700"
