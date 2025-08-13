@@ -1,25 +1,27 @@
 {% if field %}
 {% set media = attribute(entity.instance, 'cover') ?? (entity.instance is instanceof('App\\Entity\\Media') ? entity.instance : null) %}
-
+{% set isTrip = entity.instance is instanceof('App\\Entity\\Trip') %}
     {% if media %}
     
-        {% if media.type.name == "IMAGE" %}
-            <img
-                src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
-                class="thumbnail"
-                width="200"
-                height="200"
-            />
-        {% endif %}
-        {% if media.type.name == "VIDEO" %}
-            <img
-                src="{{ asset('images/placeholder-video.png') }}"
-                class="thumbnail"
-                width="200"
-                height="200"
-                style="aspect-ratio: 1"
-            />
-        {% endif %}
+        {% if isTrip %}<a href="{{ path('controlroom_trip_detail', {entityId: entity.instance.id}) }}">{% endif %}
+            {% if media.type.name == "IMAGE" %}
+                <img
+                    src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+                    class="thumbnail"
+                    width="200"
+                    height="200"
+                />
+            {% endif %}
+            {% if media.type.name == "VIDEO" %}
+                <img
+                    src="{{ asset('images/placeholder-video.png') }}"
+                    class="thumbnail"
+                    width="200"
+                    height="200"
+                    style="aspect-ratio: 1"
+                />
+            {% endif %}
+        {% if isTrip %}</a>{% endif %}
     {% endif %}
 
 {% else %}

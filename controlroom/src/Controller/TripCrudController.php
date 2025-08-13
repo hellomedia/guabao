@@ -45,8 +45,6 @@ class TripCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield AssociationField::new('parentTrip');
-
         yield Field::new('cover.path', 'Cover')
             ->setTemplatePath('@media/easyadmin/field/thumbnail.html.twig')
             ->onlyOnIndex();
@@ -55,6 +53,19 @@ class TripCrudController extends AbstractCrudController
             ->setTemplatePath('@media/easyadmin/field/media.html.twig')
             ->onlyOnDetail();
     
+        yield TextField::new('nameEn', 'Name EN');
+        yield TextField::new('nameFr', 'Name FR');
+
+        yield AssociationField::new('parentTrip');
+        yield AssociationField::new('childTrips')
+            ->setTemplatePath('@controlroom/field/trips.html.twig');
+
+        yield TextField::new('shortNameEn', 'Short EN');
+        yield TextField::new('shortNameFr', 'Short FR');
+
+        yield DateField::new('startedAt');
+        yield DateField::new('endedAt');
+
         yield AssociationField::new('tags')
             ->setFormTypeOptions([
                 'by_reference' => false, // important for ManyToMany when using add/remove methods
@@ -64,15 +75,6 @@ class TripCrudController extends AbstractCrudController
                 }
             ])
             ->setTemplatePath('@controlroom/field/tags.html.twig');
-        
-        yield TextField::new('nameEn', 'Name EN');
-        yield TextField::new('nameFr', 'Name FR');
-
-        yield TextField::new('shortNameEn', 'Short EN');
-        yield TextField::new('shortNameFr', 'Short FR');
-
-        yield DateField::new('startedAt');
-        yield DateField::new('endedAt');
 
         yield TextareaField::new('headlineEn', 'Headline EN');
         yield TextareaField::new('headlineFr', 'Headline FR');
