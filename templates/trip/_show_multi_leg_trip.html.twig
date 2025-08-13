@@ -7,12 +7,14 @@
 <div id="trips" class="cards cards-horizontal cards-trip-legs">
 	{% for childTrip in trip.children %}
 		{% include 'trip/_card.html.twig' with {trip: childTrip} %}
-        <div class="trip-leg-separator">
-            <span>·</span>
-            <span>·</span>
-            <span>·</span>
-            <span>·</span>
-            <span>·</span>
-        </div>
+        {% if not loop.last %}
+            <div class="trip-leg-separator">
+                <span>·</span>
+                <span>·</span>
+                <span>·</span>
+                <span>·</span>
+                <span>·</span>
+            </div>
+        {% endif %}
 	{% endfor %}
 </div>
