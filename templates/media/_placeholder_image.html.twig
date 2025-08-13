@@ -3,12 +3,12 @@ Since the placeholder is 800x800 anyway, which is close to the thumb_size,
 and we use object-fit:cover on the image anyway, we can just serve the image without thumb processing #}
 <media>
     <source
-        srcset="{{ asset('images/placeholder-800x800.webp') }}"
+        srcset="{{ asset('images/placeholder-800x600.webp') }}"
         media="(max-width: 600px)">
     <source
-        srcset="{{ asset('images/placeholder-400x400.webp') }}"
+        srcset="{{ asset('images/placeholder-800x600.webp') }}"
         media="(min-width: 601px)">
     <img
         class="listing-card-image"
-        src="{{ asset('images/placeholder-800x800.webp') }}" alt="" />
+        src="{{ asset('images/placeholder-800x600.webp') }}" alt="" />
 </media>
