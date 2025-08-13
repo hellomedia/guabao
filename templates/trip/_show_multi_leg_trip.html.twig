@@ -5,7 +5,7 @@
 </div>
 
 <div id="trips" class="cards cards-horizontal">
-	{% for childTrip in trip.childTrips %}
+	{% for childTrip in trip.children %}
 		{% include 'trip/_card.html.twig' with {trip: childTrip} %}
 	{% endfor %}
 </div>

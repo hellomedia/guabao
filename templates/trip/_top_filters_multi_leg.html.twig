@@ -7,7 +7,7 @@
         <span class="trip-name">{{ trip.shortNameWithFallback(app.locale) }}</span>
         <span class="trip-duration">{{ trip|tripDuration }}</span>
 	</a>
-    {% for childTrip in trip.childTrips %}
+    {% for childTrip in trip.children %}
         <a href="{{ path(childTrip) }}" class="trip-leg">
             <span class="trip-name">{{ childTrip|trans }}</span>
             <span class="trip-duration">{{ childTrip|tripDuration }}</span>

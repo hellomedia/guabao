@@ -69,11 +69,11 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     private Collection $tags;
 
     #[ORM\ManyToOne]
-    private ?Trip $parentTrip = null;
+    private ?Trip $parent = null;
 
-    #[ORM\OneToMany(targetEntity: Trip::class, mappedBy: 'parentTrip')]
+    #[ORM\OneToMany(targetEntity: Trip::class, mappedBy: 'parent')]
     #[ORM\OrderBy(["startedAt" => "ASC"])]
-    private Collection $childTrips;
+    private Collection $children;
 
     #[Assert\GreaterThanOrEqual(1)]
     #[Assert\LessThanOrEqual(5)]
@@ -100,7 +100,7 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     {
         $this->countries = new ArrayCollection();
         $this->tags = new ArrayCollection();
-        $this->childTrips = new ArrayCollection();
+        $this->children = new ArrayCollection();
         $this->stories = new ArrayCollection();
     }
 
@@ -159,35 +159,35 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
 
     public function isTripLeg(): bool
     {
-        return $this->hasParentTrip();
+        return $this->hasParent();
     }
 
-    public function hasParentTrip(): bool
+    public function hasParent(): bool
     {
-        return $this->parentTrip != null;
+        return $this->parent != null;
     }
 
     public function isTopLevelTrip(): bool
     {
-        return $this->parentTrip == null;
+        return $this->parent == null;
     }
 
-    public function hasChildTrips(): bool
+    public function hasChildren(): bool
     {
-        return !$this->childTrips->isEmpty();
+        return !$this->children->isEmpty();
     }
 
-    public function getParentTrip(): ?Trip
+    public function getParent(): ?Trip
     {
-        return $this->parentTrip;
+        return $this->parent;
     }
 
-    public function setParentTrip(?Trip $parentTrip): self
+    public function setParent(?Trip $parent): self
     {
-        $this->parentTrip = $parentTrip;
+        $this->parent = $parent;
 
-        if ($parentTrip !== null) {
-            $parentTrip->addChildTrip($this);
+        if ($parent !== null) {
+            $parent->addChildTrip($this);
         }
 
         return $this;
@@ -195,17 +195,17 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
 
     public function addChildTrip(Trip $childTrip): void
     {
-        if (!$this->childTrips->contains($childTrip)) {
-            $this->childTrips[] = $childTrip;
+        if (!$this->children->contains($childTrip)) {
+            $this->children[] = $childTrip;
         }
     }
 
     /**
      * @return Collection<int, Trip>
      */
-    public function getChildTrips(): Collection
+    public function getChildren(): Collection
     {
-        return $this->childTrips;
+        return $this->children;
     }
 
     /**

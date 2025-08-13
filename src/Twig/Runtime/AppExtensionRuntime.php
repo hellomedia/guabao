@@ -82,7 +82,7 @@ class AppExtensionRuntime implements RuntimeExtensionInterface
         $locale = $parameters['_locale'] ?? $this->requestStack->getCurrentRequest()->getLocale();
 
         return $this->router->generate('child_trip_show', [
-            'parent' => $trip->getParentTrip()->getSlug($locale),
+            'parent' => $trip->getParent()->getSlug($locale),
             'trip' => $trip->getSlug($locale),
             '_locale' => $locale,
         ], $referenceType);

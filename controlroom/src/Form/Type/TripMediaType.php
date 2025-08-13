@@ -29,7 +29,7 @@ class TripMediaType extends AbstractType
                 'class' => Trip::class,
                 'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
                     return $repo->createQueryBuilder('t')
-                        ->where('t.parentTrip = :trip')
+                        ->where('t.parent = :trip')
                         ->setParameter('trip', $currentTrip)
                         ->orWhere('t.id = :tripId')
                         ->setParameter('tripId', $currentTrip->getId())

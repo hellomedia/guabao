@@ -1,16 +1,16 @@
-{% set parentTrip = trip.parentTrip %}
+{% set parent = trip.parent %}
 
 <div id="top-filters"
     class="multi-trip invisible-scroll"
     data-controller="restore-x-scroll"
-    data-restore-x-scroll-key-value="trip-{{ parentTrip.id }}" 
+    data-restore-x-scroll-key-value="trip-{{ parent.id }}" 
 >
-	<a href="{{ path(parentTrip) }}" style="margin-right: 10px">
-        <span class="trip-name">{{ parentTrip.shortNameWithFallback(app.locale) }}</span>
-        <span class="trip-duration">{{ parentTrip|tripDuration }}</span>
+	<a href="{{ path(parent) }}" style="margin-right: 10px">
+        <span class="trip-name">{{ parent.shortNameWithFallback(app.locale) }}</span>
+        <span class="trip-duration">{{ parent|tripDuration }}</span>
 	</a>
 
-	{% for childTrip in trip.parentTrip.childTrips %}
+	{% for childTrip in trip.parent.children %}
 		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
             <span class="trip-name">{{ childTrip|trans }}</span>
             <span class="trip-duration">{{ childTrip|tripDuration }}</span>

@@ -40,8 +40,8 @@ class StoryCrudController extends AbstractCrudController
                         ->orderBy('t.startedAt', 'DESC'); // change to the field you want
                 },
                 'choice_label' => function (Trip $trip): string {
-                    if ($trip->hasParentTrip()) {
-                        return $trip->getParentTrip()->getShortNameWithFallback() . ' ' . $trip->getName();
+                    if ($trip->hasParent()) {
+                        return $trip->getParent()->getShortNameWithFallback() . ' ' . $trip->getName();
                     }
                     return $trip->getName();
                 }

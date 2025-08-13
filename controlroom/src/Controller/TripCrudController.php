@@ -4,6 +4,7 @@ namespace Controlroom\Controller;
 
 use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
@@ -56,8 +57,18 @@ class TripCrudController extends AbstractCrudController
         yield TextField::new('nameEn', 'Name EN');
         yield TextField::new('nameFr', 'Name FR');
 
-        yield AssociationField::new('parentTrip');
-        yield AssociationField::new('childTrips')
+        yield AssociationField::new('parent')
+            ->setFormTypeOptions([
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('t')
+                        ->where('t.parent IS NULL')
+                        ->orderBy('t.startedAt', 'DESC'); // change to the field you want
+                },
+                'choice_label' => function (Trip $trip): string {
+                    return $trip->getPeriod() . ' ' . $trip->getName();
+                }
+            ]);
+        yield AssociationField::new('children')
             ->setTemplatePath('@controlroom/field/trips.html.twig');
 
         yield TextField::new('shortNameEn', 'Short EN');
