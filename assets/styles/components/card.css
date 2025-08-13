@@ -34,16 +34,31 @@
         }
     }
 
-    .cards-trip-legs {
-        margin-inline: 30px;
-        gap: 0;
+    .cards.cards-trip-legs {
+        max-width: 400px;
+        margin-inline: auto;
+        display:grid;
+        grid-template-columns: minmax(0, 400px);
+        grid-auto-rows: max-content;
+        gap: 7px;
+
         .card {
+            flex-direction: column;
+ 
             border: 1px solid var(--color-border);
             border-radius: var(--radius-sm);
             overflow: hidden;
+
+            .card-info {
+                gap: 5px;
+            }
+            .card-tags {
+                margin-top: 5px;
+            }
         }
+
         .trip-leg-separator {
-            font-size: 20px;
+            font-size: 25px;
             line-height: 10px;
             display: flex;
             flex-direction: column;
@@ -51,13 +66,36 @@
             justify-content: center;
         }
 
-        @media (width >=theme(--breakpoint-sm)) {
-            margin-inline: 0;
+        @media (width >= theme(--breakpoint-sm)) {
+            max-width: 600px;
+            margin-inline: auto;
+            grid-template-columns: minmax(0, 600px);
+            gap: 5px;
+            .card {
+                flex-direction: row;
+                .card-image-wrapper,
+                .card-info {
+                    flex: 0 0 50%;
+                }
+            }
+        }
+        @media (width >= theme(--breakpoint-lg)) {
+            max-width: max-content;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: calc(var(--spacing) * 5);
+            .card {
+                flex-direction: row;
+                .card-image-wrapper,
+                .card-info {
+                    flex: 0 0 50%;
+                }
+            }
             .trip-leg-separator {
                 display: none;
             }
         }
+
+
     }
 
     .card {
@@ -141,7 +179,7 @@
             flex-direction: column;
             align-items: start;
             margin-top: auto;
-            padding-top: 5px;
+            padding-top: 10px;
             gap: 5px; 
             @media (width >=theme(--breakpoint-sm)) {
                 padding-top: 10px;
@@ -166,7 +204,7 @@
         @media (width >=theme(--breakpoint-lg)) {
             flex-direction: row;
             .card-info {
-                width: 130%;
+                width: 130%; /* force grid to make column larger compared to pic */
             }
         }
         .card-tags {
