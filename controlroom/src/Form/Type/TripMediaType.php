@@ -51,6 +51,10 @@ class TripMediaType extends AbstractType
                 'multiple' => false,
                 'autocomplete' => true,
             ])
+            ->add('inDefaultGallery', CheckboxType::class, [
+                'label'    => '',
+                'required' => false,
+            ])
             ->add('descriptionEn', TextareaType::class, [
                 'label' => "EN",
                 'required' => false,

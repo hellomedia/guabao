@@ -63,6 +63,7 @@ class MediaRepository extends ServiceEntityRepository
             ->leftJoin('m.food', 'f')
             ->addSelect('f')
             ->where('m.trip = :trip')
+            ->andWhere('m.inDefaultGallery = TRUE')
             ->orderBy('m.takenAt', 'ASC')
             ->setParameter('trip', $trip)
             ->getQuery()

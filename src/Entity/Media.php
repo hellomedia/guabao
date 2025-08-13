@@ -122,6 +122,9 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Story $story = null;
 
+    #[ORM\Column(options: ['default' => true])]
+    private ?bool $inDefaultGallery = true;
+
     #[ORM\ManyToOne(inversedBy: 'medias')]
     private ?SiteHighlight $siteHighlight = null;
 
@@ -290,6 +293,18 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     public function setIsMeal(?bool $isMeal): static
     {
         $this->isMeal = $isMeal;
+
+        return $this;
+    }
+
+    public function isInDefaultGallery(): ?bool
+    {
+        return $this->inDefaultGallery;
+    }
+
+    public function setInDefaultGallery(?bool $inDefaultGallery): static
+    {
+        $this->inDefaultGallery = $inDefaultGallery;
 
         return $this;
     }
