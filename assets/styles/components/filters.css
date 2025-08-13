@@ -2,7 +2,7 @@
     #top-filters {
         display: flex;
         gap: 10px;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         &.multi-trip {
             gap: 3px;
         }
