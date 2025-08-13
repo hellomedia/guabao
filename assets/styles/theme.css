@@ -1,7 +1,26 @@
 @theme {
 
     --container-7xl: 80rem; /* default: 80rem */
+    
+    --page-margin-xs: calc(theme(--spacing) * 6);
+    --page-margin-breakpoint-sm: calc(theme(--spacing) * 8);
+    --page-margin-breakpoint-lg: calc(theme(--spacing) * 10);
+    --page-margin-max-container-width: 300px;
 
+    /* breakpoint-sm = 40rem = 640px = breakpoint for most phones */
+    /* NB: var() here does not work */
+    --breakpoint-phone-end: theme(--breakpoint-sm);
+    /* breakpoint-md = 48rem = 768px = breakpoint for mobile */
+    --breakpoint-bottom-menu: theme(--breakpoint-md);
+    --breakpoint-mobile-end: theme(--breakpoint-md);
+    /* breakpoint-lg =  64rem = 1024px = breakpoint for tablets */
+    --breakpoint-contextual-menu: theme(--breakpoint-lg);
+
+    /* below 600px (phones) ==> regular cards (image on top, content below) */
+    /* above 600px (tablets) ==> horizontal cards (image on the left, content on the right) */
+    /* see listing-grid.css and listing-card-admin.css */
+    --breakpoint-horizontal-cards: 600px;
+    
     --color-blue-1: #226b80;
     --color-blue-2: #2d8da8;
     --color-blue-3: #174958;
@@ -54,18 +73,4 @@
     --color-gray-350: oklch(0.7895 0.016 259.8315);
 
     --bezier-easing: cubic-bezier(0.2, 0.6, 0.4, 1);
-
-    /* breakpoint-sm = 40rem = 640px = breakpoint for most phones */
-    /* NB: var() here does not work */
-    --breakpoint-phone-end: theme(--breakpoint-sm);
-    /* breakpoint-md = 48rem = 768px = breakpoint for mobile */
-    --breakpoint-bottom-menu: theme(--breakpoint-md);
-    --breakpoint-mobile-end: theme(--breakpoint-md);
-    /* breakpoint-lg =  64rem = 1024px = breakpoint for tablets */
-    --breakpoint-contextual-menu: theme(--breakpoint-lg);
-
-    /* below 600px (phones) ==> regular cards (image on top, content below) */
-    /* above 600px (tablets) ==> horizontal cards (image on the left, content on the right) */
-    /* see listing-grid.css and listing-card-admin.css */
-    --breakpoint-horizontal-cards: 600px;
 }
