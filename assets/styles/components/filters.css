@@ -66,6 +66,7 @@
     #top-filters .order {
         margin-left: auto; /* position at the end */
         padding: 0;
+        padding-left: 15px;
         display: flex;
         align-items: center;
         gap: 5px;

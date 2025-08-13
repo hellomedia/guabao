@@ -8,7 +8,11 @@
 
     {% set currentSort = app.request.query.has('s') ? app.request.query.get('s') : 'd' %}
 
-    <div id="top-filters">
+    <div id="top-filters"
+        class="invisible-scroll"
+        data-controller="restore-x-scroll"
+        data-restore-x-scroll-key-value="trip-index" 
+    >
         <a 
             href="{{ path('trip_index') }}"
             class="{{ app.current_route == 'trip_index' ? 'current' }}"

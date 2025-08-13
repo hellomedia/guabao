@@ -1,4 +1,8 @@
-<div id="top-filters">
+<div id="top-filters"
+    class="invisible-scroll"
+    data-controller="restore-x-scroll"
+    data-restore-x-scroll-key-value="food"
+>
 	<a href="{{ path('food_by_country_index') }}" class="{{ app.current_route in ['food_by_country_index', 'food_index'] ? 'current' }}">
 		{{ 'Food by country'|trans }}
 	</a>

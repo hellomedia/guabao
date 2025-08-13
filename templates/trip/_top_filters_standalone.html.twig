@@ -1,4 +1,8 @@
-<div id="top-filters">
+<div id="top-filters"
+    class="invisible-scroll"
+    data-controller="restore-x-scroll"
+    data-restore-x-scroll-key-value="trip-{{ trip.id }}"
+>
 	<a href="{{ path(trip) }}" class="{{ app.current_route in ['trip_show'] ? 'current' }}">
 		{{ 'Overview'|trans }}
 	</a>
