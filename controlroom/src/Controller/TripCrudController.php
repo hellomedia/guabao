@@ -71,6 +71,9 @@ class TripCrudController extends AbstractCrudController
         yield AssociationField::new('children')
             ->setTemplatePath('@controlroom/field/trips.html.twig');
 
+        yield AssociationField::new('stories')
+            ->setTemplatePath('@controlroom/field/stories.html.twig');
+
         yield TextField::new('shortNameEn', 'Short EN');
         yield TextField::new('shortNameFr', 'Short FR');
 

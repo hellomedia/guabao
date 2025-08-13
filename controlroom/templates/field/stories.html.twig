@@ -1,0 +1,14 @@
+{% if field.value|length > 0 %}
+    {% for story in field.value %}
+        <div style="white-space: nowrap;text-align: left;">
+            <a href="{{ path('controlroom_story_detail', {entityId: story.id}) }}">
+                {{ story|trans }}
+            </a>
+        </div>
+    {% endfor %}
+{% else %}
+    <div style="text-align: left;">
+        <span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
+    </div>
+{% endif %}
+
