@@ -50,7 +50,7 @@
             overflow: hidden;
 
             .card-info {
-                gap: 5px;
+                gap: 3px;
             }
             .card-tags {
                 margin-top: 5px;
@@ -147,9 +147,9 @@
             flex-direction: column;
             justify-content: start;
             align-items: center;
-            gap: 5px;
+            gap: 3px;
             @media (width >=theme(--breakpoint-sm)) {
-                gap: 10px;
+                gap: 3px;
             }
         }
 
@@ -173,10 +173,10 @@
         }
 
         .card-duration {
-            display: none;
+            /* display: none;
             @media (width >= theme(--breakpoint-lg)) {
                 display: block;
-            }
+            } */
         }
 
         .card-bottom {

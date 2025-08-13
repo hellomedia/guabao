@@ -39,7 +39,7 @@
 {% endif %}
 
 
-<h2>The rest</h2>
-
-{% include "trip/_gallery.html.twig" %}
-
+{% if medias is not empty %}
+    <h2>The rest</h2>
+    {% include "trip/_gallery.html.twig" %}
+{% endif %}

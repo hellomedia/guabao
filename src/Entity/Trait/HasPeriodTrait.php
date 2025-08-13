@@ -44,10 +44,14 @@ trait HasPeriodTrait
             return $this->startedAt->format('M Y');
         }
 
+        // Use En dash (–) for range
+        // no space between simple ranges like Jan–Feb
         if ($this->startedAt->format('Y') == $this->endedAt->format('Y')) {
-            return $this->startedAt->format('M') . ' - ' . $this->endedAt->format('M Y');
+            return $this->startedAt->format('M') . '–' . $this->endedAt->format('M Y');
         }
-    
-        return $this->startedAt->format('M Y') . ' - ' . $this->endedAt->format('M Y');
+
+        // Use En dash (–) for range
+        // Add space between complex dates like Dec 2023 – Jan 2024
+        return $this->startedAt->format('M Y') . ' – ' . $this->endedAt->format('M Y');
     }
 }
