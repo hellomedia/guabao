@@ -1,5 +1,6 @@
-{# use this syntax to apply easdyadmin form theme ONLY ! 
- ie:  it disables the global form theme set in twig.yaml, which can conflict #}
+{# Important: Note the syntax with [] and only #}
+{# Ignore global themes; use only EasyAdmin #}
+{# important to avoid theme conflicts #}
 {% form_theme form with ['@EasyAdmin/crud/form_theme.html.twig'] only %}
 
 <div id="media_{{ media.id }}" data-controller="trip-media-edit-form" data-trip-media-edit-form-target="container">
