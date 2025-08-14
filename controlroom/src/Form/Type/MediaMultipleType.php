@@ -20,10 +20,10 @@ class MediaMultipleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $constraints = [
-            new Count(['max' => 20]),
+            new Count(['max' => 20]), // same as server max_file_uploads  
             new All([
                 new File([
-                    'maxSize' => '20M',
+                    'maxSize' => '50M', // same as server upload_max_filesize
                     'mimeTypes' => ['image/jpeg', 'image/jpg'],
                 ]),
             ]),
