@@ -3,28 +3,48 @@
 {# important to avoid theme conflicts #}
 {% form_theme form with ['@EasyAdmin/crud/form_theme.html.twig'] only %}
 
-<div id="media_{{ media.id }}" data-controller="trip-media-edit-form" data-trip-media-edit-form-target="container">
+<div id="media_{{ media.id }}" data-controller="ajax">
 
     <form
-		name="trip_media_edit_form_{{ media.id }}"
-        data-trip-media-edit-form-target="form"
-        data-action="submit->trip-media-edit-form#submit"
+        name="trip_media_edit_form_{{ media.id }}"
+        data-ajax-target="form"
+        data-action="submit->ajax#submit"
         action="{{ path('admin_trip_media_edit', {id: media.id}) }}"
         method="post"
         style="margin-bottom: 20px"
     >
-        <img
-            style="height: 300px; width: auto;" 
-            src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
-        />
-        <div style="margin-top: 15px; margin-bottom: 10px">
-            {{ form_row(form.descriptionEn) }}
-            {{ form_row(form.descriptionFr) }}
-        </div>
-        
-		{{ form_rest(form) }}
 
-        <button type="submit" style="margin-top: 30px; padding: 10px 40px;font-size: 16px;" class="btn btn-primary btn-lg">Save</button>
+        {# container for form content replaced in ajax #}
+        <div data-ajax-target="container">
+
+            <img
+                style="height: 300px; width: auto;" 
+                src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
+            />
+            <div style="margin-top: 15px; margin-bottom: 10px">
+                {{ form_row(form.descriptionEn) }}
+                {{ form_row(form.descriptionFr) }}
+            </div>
+            
+            {{ form_rest(form) }}
+        
+        </div>
+
+        {# button and spinner live outside of container replaced in ajax #}
+        <div style="position: relative; display: inline-block; margin-top: 30px;">
+            <button type="submit" style="padding: 10px 40px;font-size: 16px;"
+                class="btn btn-primary btn-lg"
+                data-ajax-target="submitBtn"
+            >
+                Save
+            </button>
+            
+            <div data-ajax-target="spinner" class="spinner-wrapper hidden">
+                <div class="spinner" aria-hidden="true"></div>
+            </div>
+        </div>
+
     </form>
+
 </div>
 

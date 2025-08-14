@@ -4,6 +4,28 @@
 
 {% block main %}
 
+    <style>
+        .spinner-wrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .spinner {
+            width: 22px; height: 22px;
+            border: 3px solid currentColor;
+            border-right-color: transparent;
+            border-radius: 9999px;
+            animation: spin .6s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .hidden { display: none; }
+    </style>
+
     {% for media in medias %}
 
         {% include '@controlroom/media/_trip_media_edit_form.html.twig'
