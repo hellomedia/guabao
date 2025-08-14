@@ -3,6 +3,8 @@
 namespace Controlroom\Form\Type;
 
 use App\Entity\Trip;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -33,6 +35,12 @@ class MediaMultipleType extends AbstractType
         $builder
             ->add('trip', EntityType::class, [
                 'class' => Trip::class,
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('t')
+                        ->orderBy('t.startedAt', 'DESC');
+                },
+                'multiple' => false,
+                'autocomplete' => true,
             ])
             ->add('files', FileType::class, [
                     'label' => 'images',
