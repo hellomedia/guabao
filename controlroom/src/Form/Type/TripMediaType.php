@@ -25,6 +25,27 @@ class TripMediaType extends AbstractType
         $currentTrip = $options['trip'];
 
         $builder
+            ->add('descriptionEn', TextareaType::class, [
+                'label' => "EN",
+                'required' => false,
+                'attr' => [
+                    'rows' => 4,      // taller
+                ],
+            ])
+            ->add('descriptionFr', TextareaType::class, [
+                'label' => "FR",
+                'required' => false,
+                'attr' => [
+                    'rows' => 4,      // taller
+                ],
+            ])
+            ->add('inDefaultGallery', CheckboxType::class, [
+                'label'    => 'In default gallery',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
+            ->add('takenAt')
             ->add('trip', EntityType::class, [
                 'class' => Trip::class,
                 'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
@@ -53,26 +74,8 @@ class TripMediaType extends AbstractType
                 'multiple' => false,
                 'autocomplete' => true,
             ])
-            ->add('inDefaultGallery', CheckboxType::class, [
-                'label'    => 'In default gallery',
-                'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
-            ])
-            ->add('descriptionEn', TextareaType::class, [
-                'label' => "EN",
-                'required' => false,
-                'attr' => [
-                    'rows' => 4,      // taller
-                ],
-            ])
-            ->add('descriptionFr', TextareaType::class, [
-                'label' => "FR",
-                'required' => false,
-                'attr' => [
-                    'rows' => 4,      // taller
-                ],
-            ])
+
+
             ->add('placeTags', EntityType::class, [
                 'class' => PlaceTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
