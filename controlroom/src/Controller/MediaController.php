@@ -94,7 +94,7 @@ class MediaController extends BaseController
             $this->_importImages($files, $trip);
 
             return $this->redirectToRoute('admin_trip_media_edit_all', [
-                'trip' => $trip,
+                'id' => $trip->getId(),
             ]);
         }
 
