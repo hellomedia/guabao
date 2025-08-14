@@ -39,12 +39,7 @@ class TripMediaType extends AbstractType
                     'rows' => 4,      // taller
                 ],
             ])
-            ->add('inDefaultGallery', CheckboxType::class, [
-                'label'    => 'In default gallery',
-                'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
-            ])
+
             ->add('takenAt')
             ->add('trip', EntityType::class, [
                 'class' => Trip::class,
@@ -118,6 +113,18 @@ class TripMediaType extends AbstractType
             ])
             ->add('isMeal', CheckboxType::class, [
                 'label' => 'Is meal',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
+            ->add('inDefaultGallery', CheckboxType::class, [
+                'label'    => 'In default gallery',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
+            ->add('isTripCover', CheckboxType::class, [
+                'label'    => 'cover',
                 'required' => false,
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
