@@ -9,6 +9,9 @@ twig:
         src/Pack/Media/templates: 'media'
         controlroom/templates: 'controlroom'
 
+    # NB: for custom forms in easy admin, to avoid conflict
+    # with global theme defined below, use this in template
+    # {% form_theme form with ['@EasyAdmin/crud/form_theme.html.twig'] only %}
     form_themes:
         - 'form/form_theme.html.twig'
     

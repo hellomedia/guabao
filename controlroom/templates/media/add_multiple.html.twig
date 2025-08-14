@@ -1,6 +1,8 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% form_theme form '@EasyAdmin/crud/form_theme.html.twig' %}
+{# use this syntax to apply easdyadmin form theme ONLY ! 
+ ie:  it disables the global form theme set in twig.yaml, which can conflict #}
+{% form_theme form with ['@EasyAdmin/crud/form_theme.html.twig'] only %}
 
 {% block content_title %}Add multiple images for a trip{% endblock %}
 
