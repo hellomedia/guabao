@@ -29,8 +29,12 @@ class TripMediaType extends AbstractType
                 'class' => Trip::class,
                 'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
                     return $repo->createQueryBuilder('t')
+                        // show other trip legs in the trip
                         ->where('t.parent = :parent')
                         ->setParameter('parent', $currentTrip->getParent())
+                        // or if top level trip, only show current trip
+                        ->orWhere('t.id = :tripId')
+                        ->setParameter('tripId', $currentTrip->getId())
                         ->orderBy('t.startedAt', 'DESC');
                 },
                 'multiple' => false,
