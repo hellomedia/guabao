@@ -85,6 +85,14 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-dashboard');
 
+        yield MenuItem::subMenu('Status', 'fa fa-dashboard')
+            ->setSubItems([
+                MenuItem::linkToRoute('Opcache', 'fa fa-dashboard', 'controlroom_status_opcache'),
+                MenuItem::linkToRoute('Realpath cache', 'fa fa-dashboard', 'controlroom_status_realpath_cache'),
+                MenuItem::linkToUrl('Php-fpm', 'fa fa-dashboard', '/status/php-fpm'),
+                MenuItem::linkToRoute('Php info', 'fa fa-info', 'controlroom_status_phpinfo'),
+            ]);
+
         yield MenuItem::linkToCrud('Site Highlights', 'fa fa-star', SiteHighlight::class);
 
         yield MenuItem::section('Food');

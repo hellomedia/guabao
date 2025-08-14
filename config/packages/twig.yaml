@@ -7,6 +7,7 @@ twig:
         src/Security/templates: 'security'
         templates/bundles/TwigBundle/Exception: 'exception'
         src/Pack/Media/templates: 'media'
+        src/Pack/Status/templates: 'status'
         controlroom/templates: 'controlroom'
 
     # NB: for custom forms in easy admin, to avoid conflict

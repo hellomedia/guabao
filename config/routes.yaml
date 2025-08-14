@@ -11,3 +11,8 @@ security_controllers:
     prefix:
         fr: '/fr'
         en: ''
+
+status_controllers:
+    host: '%host_controlroom%' # use parameter instead of env var : https://github.com/symfony/symfony/issues/20682
+    resource: '../src/Pack/Status/Controller/'
+    type: attribute

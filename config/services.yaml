@@ -10,6 +10,7 @@ services:
             $siteName: '%site_name%'
             $emailDomain: '%email_domain%'
             $environment: '%env(string:APP_ENV)%'
+            $projectDir: '%kernel.project_dir%'
             $uploadsPath: '%kernel.project_dir%/public/%uploads_dir%'
             $uploadedAssetsBaseUrl: '%uploads_base_url%'
             $deliverabilityIssues: '%deliverability_issues%'
