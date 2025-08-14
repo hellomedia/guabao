@@ -32,7 +32,7 @@ class PlaceCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Place')
             ->setEntityLabelInPlural('Places')
             ->setDefaultSort([
-                'nameEn' => 'ASC'
+                'name' => 'ASC'
             ])
             ->setFormOptions([
                 'attr' => [

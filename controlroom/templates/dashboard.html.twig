@@ -4,6 +4,63 @@
 
 {% block main %}
 
-    
+<style>
+    #shortcuts {
+        max-width: 500px;
+        margin-inline: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-group-lg {
+        margin-top: 50px;
+        display: flex;
+        gap: 20px
+    }
+</style>
+
+<div id="shortcuts">
+    <div class="btn-group-lg">
+        <a class="btn btn-lg" href="{{ path('admin_media_add_multiple') }}">
+            Add medias
+        </a>
+    </div>
+    <div class="btn-group-lg">
+        <a class="btn btn-lg" href="{{ path('controlroom_trip_index') }}">
+            Trips
+        </a>
+
+        <a class="btn btn-lg" href="{{ path('controlroom_story_index') }}">
+            Stories
+        </a>
+
+        <a class="btn btn-lg" href="{{ path('controlroom_media_tag_index') }}">
+            Tags
+        </a>
+    </div>
+    <div class="btn-group-lg">
+        <a class="btn btn-lg" href="{{ path('controlroom_place_index') }}">
+            Places
+        </a>
+
+        <a class="btn btn-lg" href="{{ path('controlroom_place_tag_index') }}">
+            Place tags
+        </a>
+    </div>
+
+    <div class="btn-group-lg">
+        <a class="btn btn-lg" href="{{ path('controlroom_food_index') }}">
+            Food
+        </a>
+
+        <a class="btn btn-lg" href="{{ path('controlroom_cuisine_index') }}">
+            Cuisine
+        </a>
+
+        <a class="btn btn-lg" href="{{ path('controlroom_ingredient_index') }}">
+            Ingredients
+        </a>
+    </div>
+</div>
 
 {% endblock %}
