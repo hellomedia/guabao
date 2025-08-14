@@ -29,10 +29,8 @@ class TripMediaType extends AbstractType
                 'class' => Trip::class,
                 'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
                     return $repo->createQueryBuilder('t')
-                        ->where('t.parent = :trip')
-                        ->setParameter('trip', $currentTrip)
-                        ->orWhere('t.id = :tripId')
-                        ->setParameter('tripId', $currentTrip->getId())
+                        ->where('t.parent = :parent')
+                        ->setParameter('parent', $currentTrip->getParent())
                         ->orderBy('t.startedAt', 'DESC');
                 },
                 'multiple' => false,
@@ -52,8 +50,10 @@ class TripMediaType extends AbstractType
                 'autocomplete' => true,
             ])
             ->add('inDefaultGallery', CheckboxType::class, [
-                'label'    => '',
+                'label'    => 'In default gallery',
                 'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
             ])
             ->add('descriptionEn', TextareaType::class, [
                 'label' => "EN",
@@ -110,8 +110,10 @@ class TripMediaType extends AbstractType
                 'autocomplete' => true,
             ])
             ->add('isMeal', CheckboxType::class, [
-                'label'    => '',
+                'label' => 'Is meal',
                 'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
             ])
         ;
     }

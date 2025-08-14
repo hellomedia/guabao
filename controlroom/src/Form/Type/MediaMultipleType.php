@@ -41,6 +41,12 @@ class MediaMultipleType extends AbstractType
                 },
                 'multiple' => false,
                 'autocomplete' => true,
+                'group_by' => function (Trip $trip, $key, $value) {
+                    if ($trip->hasParent()) {
+                        return $trip->getParent()->getNameEn();
+                    }
+                    return $trip->getNameEn();
+                },
             ])
             ->add('files', FileType::class, [
                     'label' => 'images',
