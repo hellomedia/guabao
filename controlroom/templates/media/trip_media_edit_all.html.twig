@@ -2,6 +2,37 @@
 
 {% block content_title %}Edit Medias for {{ trip }}{% endblock %}
 
+{% block page_actions %}
+    <a class="btn" href="{{ path('admin_media_add_multiple') }}">
+        + Add medias
+    </a>
+    <a class="btn" href="{{ path('controlroom_trip_index') }}">
+        Trips
+    </a>
+    <a class="btn" href="{{ path('controlroom_story_index') }}">
+        Stories
+    </a>
+    <a class="btn" href="{{ path('controlroom_media_tag_index') }}">
+        Tags
+    </a>
+    <a class="btn" href="{{ path('controlroom_place_index') }}">
+        Places
+    </a>
+    <a class="btn" href="{{ path('controlroom_place_tag_index') }}">
+        Place tags
+    </a>
+    <a class="btn" href="{{ path('controlroom_food_index') }}">
+        Food
+    </a>
+    <a class="btn" href="{{ path('controlroom_cuisine_index') }}">
+        Cuisine
+    </a>
+    <a class="btn" href="{{ path('controlroom_ingredient_index') }}">
+        Ingredients
+    </a>
+{% endblock %}
+
+
 {% block main %}
 
     <style>
@@ -26,18 +57,12 @@
         .hidden { display: none; }
     </style>
     
-    <div class="btn-group" style="margin-bottom: 30px">
-        <a class="btn" href="{{ path('admin_media_add_multiple') }}">
-            + Add medias
-        </a>
-    </div>
+    <br/>
 
     {% for media in medias %}
-
         {% include '@controlroom/media/_trip_media_edit_form.html.twig'
             with { form: forms[media.id] }
         %}
-
         <hr style="margin-top: 40px; margin-bottom: 30px;">
     {% endfor %}
 
