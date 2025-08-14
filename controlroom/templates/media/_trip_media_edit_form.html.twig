@@ -15,12 +15,13 @@
     >
 
         {# container for form content replaced in ajax #}
-        <div data-ajax-target="container">
+        <div data-ajax-target="container" style="columns: 400px 2;column-gap: 50px;">
 
             <img
                 style="height: 300px; width: auto;" 
                 src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
             />
+
             <div style="margin-top: 15px; margin-bottom: 10px">
                 {{ form_row(form.descriptionEn) }}
                 {{ form_row(form.descriptionFr) }}
