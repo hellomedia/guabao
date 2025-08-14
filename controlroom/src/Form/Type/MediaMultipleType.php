@@ -47,6 +47,7 @@ class MediaMultipleType extends AbstractType
                     }
                     return $trip->getNameEn();
                 },
+                'placeholder' => '', // add an empty placeholder instead of a default trip selected
             ])
             ->add('files', FileType::class, [
                     'label' => 'images',
