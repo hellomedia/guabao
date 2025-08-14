@@ -25,6 +25,12 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         .hidden { display: none; }
     </style>
+    
+    <div class="btn-group" style="margin-bottom: 30px">
+        <a class="btn" href="{{ path('admin_media_add_multiple') }}">
+            + Add medias
+        </a>
+    </div>
 
     {% for media in medias %}
 
