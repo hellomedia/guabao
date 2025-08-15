@@ -68,7 +68,7 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     #[ORM\ManyToMany(targetEntity: TripTag::class)]
     private Collection $tags;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'children')]
     private ?Trip $parent = null;
 
     #[ORM\OneToMany(targetEntity: Trip::class, mappedBy: 'parent')]
