@@ -31,10 +31,11 @@ table.datagrid td.actions {
 
 .tag-list {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 5px;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    flex-wrap: wrap;
 }
 .entity-list {
     display: flex;
