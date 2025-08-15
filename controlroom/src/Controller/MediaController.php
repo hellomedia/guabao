@@ -13,6 +13,8 @@ use Controlroom\Form\Type\MediaMultipleType;
 use Controlroom\Form\Type\TripMediaType;
 use Doctrine\ORM\EntityManager;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,13 +34,19 @@ class MediaController extends BaseController
     // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
     // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
     // NB: this was not necessary with the old ea routing strategy
-    #[Route('/media/trip/{id:trip}/descriptions', name: 'admin_trip_media_edit_all', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function editAllTripMedias(Trip $trip, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[Route('/media/trip/{id:trip}/descriptions/{page<\d+>?1}', name: 'admin_trip_media_edit_all', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    public function editAllTripMedias(Trip $trip, int $page, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
-        $medias = $entityManager->getRepository(Trip::class)->findMedias($trip);
+        $queryBuilder = $entityManager->getRepository(Trip::class)->getFindMediasQueryBuilder($trip);
+
+        $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
+            adapter: new QueryAdapter($queryBuilder),
+            currentPage: $page,
+            maxPerPage: 10,
+        );
 
         $forms = [];
-        foreach ($medias as $media) {
+        foreach ($pager as $media) {
             $forms[$media->getId()] = $formFactory->createNamed(
                 name: 'trip_media_edit_form_' . $media->getId(),
                 type: TripMediaType::class,
@@ -49,7 +57,7 @@ class MediaController extends BaseController
 
         return $this->render('@controlroom/media/trip_media_edit_all.html.twig', [
             'forms' => $forms,
-            'medias' => $medias,
+            'pager' => $pager,
             'trip' => $trip,
         ]);
 
