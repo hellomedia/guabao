@@ -122,7 +122,7 @@ class TripCrudController extends AbstractCrudController
 
         $editMedias = Action::new('editMedias', 'Edit Medias')
             ->linkToUrl(function (Trip $trip) {
-                return $this->urlGenerator->generate('admin_trip_media_edit_all', [
+                return $this->urlGenerator->generate('admin_trip_media_batch_edit', [
                     'id' => $trip->getId(),
                 ]);
             })

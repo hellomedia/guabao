@@ -4,6 +4,7 @@ namespace Controlroom\Controller;
 
 use App\Controller\BaseController;
 use App\Entity\Media;
+use App\Entity\Story;
 use App\Entity\Trip;
 use App\Enum\MediaType;
 use App\Helper\MediaAutoFillHelper;
@@ -34,20 +35,22 @@ class MediaController extends BaseController
     // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
     // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
     // NB: this was not necessary with the old ea routing strategy
-    #[Route('/media/trip/{id:trip}/descriptions/{page<\d+>?1}', name: 'admin_trip_media_edit_all', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function editAllTripMedias(Trip $trip, int $page, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[Route('/media/trip/{id:trip}/edit/{page<\d+>?1}', name: 'admin_trip_media_batch_edit', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    public function batchEditTripMedias(Trip $trip, int $page, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
-        $queryBuilder = $entityManager->getRepository(Trip::class)->getFindMediasQueryBuilder($trip);
+        $queryBuilder = $entityManager->getRepository(Media::class)
+            ->getFindByTripQueryBuilder($trip, onlyDefaultGallery: true);
 
         $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
             adapter: new QueryAdapter($queryBuilder),
             currentPage: $page,
-            maxPerPage: 10,
+            maxPerPage: 50,
         );
 
         $forms = [];
         foreach ($pager as $media) {
             $forms[$media->getId()] = $formFactory->createNamed(
+                // form names must match between batch edit forms and ajax edit form
                 name: 'trip_media_edit_form_' . $media->getId(),
                 type: TripMediaType::class,
                 data: $media,
@@ -55,7 +58,7 @@ class MediaController extends BaseController
             )->createView();
         }
 
-        return $this->render('@controlroom/media/trip_media_edit_all.html.twig', [
+        return $this->render('@controlroom/media/trip_media_batch_edit.html.twig', [
             'forms' => $forms,
             'pager' => $pager,
             'trip' => $trip,
@@ -63,10 +66,45 @@ class MediaController extends BaseController
 
     }
 
-    #[Route('/media/{id:media}/description', name: 'admin_trip_media_edit', methods: ['POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function editTripMedia(Request $request, Media $media, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
+    // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
+    // NB: this was not necessary with the old ea routing strategy
+    #[Route('/media/story/{id:story}/batch-edit/{page<\d+>?1}', name: 'admin_story_media_batch_edit', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    public function batchEditStoryMedias(Story $story, int $page, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
-        // form name must match name above
+        $queryBuilder = $entityManager->getRepository(Media::class)->getFindByStoryQueryBuilder($story);
+
+        $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
+            adapter: new QueryAdapter($queryBuilder),
+            currentPage: $page,
+            maxPerPage: 50,
+        );
+
+        $forms = [];
+        foreach ($pager as $media) {
+            $forms[$media->getId()] = $formFactory->createNamed(
+                // form names must match between batch edit forms and ajax edit form
+                name: 'trip_media_edit_form_' . $media->getId(),
+                type: TripMediaType::class,
+                data: $media,
+                options: ['trip' => $story->getTrip()]
+            )->createView();
+        }
+
+        return $this->render('@controlroom/media/story_media_batch_edit.html.twig', [
+            'forms' => $forms,
+            'pager' => $pager,
+            'story' => $story,
+        ]);
+    }
+
+    /**
+     * Route must not conflict with easyadmin /media/{id}/edit
+     */
+    #[Route('/media/{id:media}/batch-edit/edit', name: 'admin_trip_media_edit', methods: ['POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    public function customEditMedia(Request $request, Media $media, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    {
+        // form names must match between batch edit forms and ajax edit form
         $form = $formFactory->createNamed(
             name: 'trip_media_edit_form_' . $media->getId(),
             type: TripMediaType::class,
@@ -81,7 +119,7 @@ class MediaController extends BaseController
             $entityManager->flush();
         }
 
-        return $this->render('@controlroom/media/_trip_media_edit_form.html.twig', [
+        return $this->render('@controlroom/media/_batch_media_edit_form.html.twig', [
             'form' => $form,
             'media' => $media,
         ]);
@@ -101,7 +139,7 @@ class MediaController extends BaseController
 
             $this->_importImages($files, $trip);
 
-            return $this->redirectToRoute('admin_trip_media_edit_all', [
+            return $this->redirectToRoute('admin_trip_media_batch_edit', [
                 'id' => $trip->getId(),
             ]);
         }

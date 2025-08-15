@@ -22,7 +22,7 @@ USAGE
 
     <div id="infinite-scroll"
         data-controller="infinite-scroll"
-        data-infinite-scroll-next-page-url-value="{{ pager.hasNextPage ? path('admin_trip_media_edit_all', { id: trip.id, page: pager.nextPage }) }}"
+        data-infinite-scroll-next-page-url-value="{{ pager.hasNextPage ? path('path_to_page', { id: trip.id, page: pager.nextPage }) }}"
     >
         <div class="current-page">
             {% for items in pager %} {{ item }} {% endfor %}

@@ -110,26 +110,6 @@ class TripRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    public function getFindMediasQueryBuilder(Trip $trip): QueryBuilder
-    {
-        return $this->getEntityManager()
-            ->createQueryBuilder()
-            ->select('media')
-            ->from(Media::class, 'media')
-            ->where('media.trip = :trip')
-            ->setParameter('trip', $trip)
-            ->orderBy('media.takenAt', 'ASC')
-        ;
-    }
-
-    public function findMedias(Trip $trip): Collection
-    {
-        $query = $this->getFindMediasQueryBuilder($trip)
-            ->getQuery();
-        
-        return new ArrayCollection($query->getResult());
-    }
-
     public function findPlaceTags(Trip $trip): Collection
     {
         $dql = <<<DQL

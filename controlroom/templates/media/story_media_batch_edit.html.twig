@@ -1,6 +1,8 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block content_title %}Edit Medias for {{ trip }}{% endblock %}
+{% block content_title %}
+    Edit Medias - {{ story }}
+{% endblock %}
 
 {% block page_actions %}
     <a class="btn" href="{{ path('admin_media_add_multiple') }}">
@@ -39,6 +41,9 @@
 {% block main %}
 
     <style>
+        #trip-stories {
+            margin-bottom: 40px;
+        }
         .spinner-wrapper {
             position: absolute;
             top: 0;
@@ -59,16 +64,19 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         .hidden { display: none; }
     </style>
-    
-    <br/>
+
+    <div style="margin-top: 15px; margin-bottom: 30px; font-size: 18px;">
+        Trip:
+        <a href="{{ path('admin_trip_media_batch_edit', {id: story.trip.id}) }}">{{ story.trip }}</a>
+    </div>
 
     <div id="infinite-scroll" 
         data-controller="infinite-scroll"
-        data-infinite-scroll-next-page-url-value="{{ pager.hasNextPage ? path('admin_trip_media_edit_all', { id: trip.id, page: pager.nextPage }) }}"
+        data-infinite-scroll-next-page-url-value="{{ pager.hasNextPage ? path('admin_story_media_batch_edit', { id: story.id, page: pager.nextPage }) }}"
     >
         <div class="current-page">
             {% for media in pager %}
-                {% include '@controlroom/media/_trip_media_edit_form.html.twig'
+                {% include '@controlroom/media/_batch_media_edit_form.html.twig'
                     with { form: forms[media.id] }
                 %}
                 <hr style="margin-top: 40px; margin-bottom: 30px;">
