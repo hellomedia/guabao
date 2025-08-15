@@ -1,8 +1,38 @@
 import { Controller } from "@hotwired/stimulus"
 
 /** 
- * Infinite scroll WITOUT TURBO 
+ * Infinite scroll WITOUT TURBO
  */
+
+/*
+USAGE
+=====
+
+    #[Route('/foo/{page<\d+>?1}')]
+    public function myControllerAction(int $page): Response
+    {
+        $queryBuilder = $entityManager->getRepository(Foo::class)->getQueryBuilder();
+
+        $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
+            adapter: new QueryAdapter($queryBuilder),
+            currentPage: $page,
+            maxPerPage: 10,
+        );
+    }
+
+    <div id="infinite-scroll"
+        data-controller="infinite-scroll"
+        data-infinite-scroll-next-page-url-value="{{ pager.hasNextPage ? path('admin_trip_media_edit_all', { id: trip.id, page: pager.nextPage }) }}"
+    >
+        <div class="current-page">
+            {% for items in pager %} {{ item }} {% endfor %}
+            {% if not pager.hasNextPage %}
+                <div data-infinite-scroll-end style="display:none"></div>
+            {% endif %}
+        </div>
+        <div data-infinite-scroll-target="nextPage"></div>
+    </div>
+*/
 export default class extends Controller {
 
     static targets = ["nextPage"];
