@@ -20,11 +20,32 @@ html {
 table.datagrid td.actions {
     /* adjust as needed */
     /* prevent wrapping of action buttons */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* useless because td with display flex does not extend to full height */
+    gap: 5px;
     a { 
         white-space: nowrap;
     }
 }
 
+.tag-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+.entity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: start;
+    justify-content: center;
+    a {
+        white-space: nowrap;
+    }
+}
 /** IMAGES **/
 .ea {
     .thumb-list {

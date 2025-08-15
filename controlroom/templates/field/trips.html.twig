@@ -1,13 +1,11 @@
-{% if field.value|length > 0 %}
-    {% for trip in field.value %}
-        <div style="white-space: nowrap;text-align: left;">
+<div class="entity-list">
+    {% if field.value|length > 0 %}
+        {% for trip in field.value %}
             <a href="{{ path('controlroom_trip_detail', {entityId: trip.id}) }}">
                 {{ trip|trans }}
             </a>
-        </div>
-    {% endfor %}
-{% else %}
-    <div style="text-align: left;">
-	    <span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
-    </div>
-{% endif %}
+        {% endfor %}
+    {% else %}
+        <span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
+    {% endif %}
+</div>

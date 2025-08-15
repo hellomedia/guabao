@@ -58,6 +58,7 @@ class MediaCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Media')
             ->setEntityLabelInPlural('Medias')
             ->setDefaultSort(['takenAt' => 'DESC'])
+            ->setPaginatorPageSize(20)
         ;
     }
 

@@ -1,9 +1,28 @@
-{% if field.value|length > 0 %}
-	<div class="thumb-list">
-		{% for tag in field.value %}
-			{{ tag|trans }}
-		{% endfor %}
-	</div>
-{% else %}
-	<span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
-{% endif %}
+<div class="tag-list">
+    {% if field.value|length > 0 %}
+        {% for tag in field.value %}
+            {% if tag is instanceof('App\\Entity\\Tag\\TripTag') %}
+                <a href="{{ path('controlroom_trip_tag_detail', {entityId: tag.id}) }}">
+                    <span class="badge badge-outline">{{ tag|trans }}</span>
+                </a>
+            {% endif %}
+            {% if tag is instanceof('App\\Entity\\Tag\\MediaTag') %}
+                <a href="{{ path('controlroom_media_tag_detail', {entityId: tag.id}) }}">
+                    <span class="badge badge-outline">{{ tag|trans }}</span>
+                </a>
+            {% endif %}
+            {% if tag is instanceof('App\\Entity\\Tag\\FoodTag') %}
+                <a href="{{ path('controlroom_food_tag_detail', {entityId: tag.id}) }}">
+                    <span class="badge badge-outline">{{ tag|trans }}</span>
+                </a>
+            {% endif %}
+            {% if tag is instanceof('App\\Entity\\Tag\\PlaceTag') %}
+                <a href="{{ path('controlroom_place_tag_detail', {entityId: tag.id}) }}">
+                    <span class="badge badge-outline">{{ tag|trans }}</span>
+                </a>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
+    {% endif %}
+</div>

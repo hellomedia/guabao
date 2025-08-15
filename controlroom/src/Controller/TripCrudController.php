@@ -58,6 +58,7 @@ class TripCrudController extends AbstractCrudController
         yield TextField::new('nameFr', 'Name FR');
 
         yield AssociationField::new('parent')
+            ->hideOnIndex()
             ->setFormTypeOptions([
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('t')
@@ -72,6 +73,7 @@ class TripCrudController extends AbstractCrudController
             ->setTemplatePath('@controlroom/field/trips.html.twig');
 
         yield AssociationField::new('stories')
+            ->hideOnIndex()
             ->setTemplatePath('@controlroom/field/stories.html.twig');
 
         yield TextField::new('shortNameEn', 'Short EN');
@@ -90,8 +92,8 @@ class TripCrudController extends AbstractCrudController
             ])
             ->setTemplatePath('@controlroom/field/tags.html.twig');
 
-        yield TextareaField::new('headlineEn', 'Headline EN');
-        yield TextareaField::new('headlineFr', 'Headline FR');
+        yield TextareaField::new('headlineEn', 'Headline EN')->hideOnIndex();
+        yield TextareaField::new('headlineFr', 'Headline FR')->hideOnIndex();
 
         yield TextareaField::new('descriptionEn', 'Description EN')->hideOnIndex();
         yield TextareaField::new('descriptionFr', 'Description FR')->hideOnIndex();
@@ -105,7 +107,7 @@ class TripCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $viewMedias = Action::new('viewMedias', 'View Medias')
+        $viewMedias = Action::new('viewMedias', 'Medias')
             ->linkToUrl(function (Trip $trip) {
                 return $this->urlGenerator->generate('controlroom_media_index', [
                     'filters' => [
@@ -129,15 +131,16 @@ class TripCrudController extends AbstractCrudController
         $addMedias = Action::new('addMedias', 'Add medias')
             ->linkToUrl($this->urlGenerator->generate('admin_media_add_multiple'))
             ->setIcon('fa fa-images')
+            ->createAsGlobalAction()
         ;
 
         return $actions
-            ->add(Action::DETAIL, $addMedias)
             ->add(Action::DETAIL, $editMedias)
+            ->add(Action::DETAIL, $addMedias)
             ->add(Action::DETAIL, $viewMedias)
             ->add(Action::INDEX, $addMedias)
-            ->add(Action::INDEX, $editMedias)
             ->add(Action::INDEX, $viewMedias)
+            ->add(Action::INDEX, $editMedias)
         ;
     }
 
@@ -149,6 +152,7 @@ class TripCrudController extends AbstractCrudController
             ->addSelect('c')
             ->leftJoin('entity.cover', 'cover')
             ->addSelect('cover')
+            ->andWhere('entity.parent IS NULL')
         ;
 
         return $qb;
