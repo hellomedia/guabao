@@ -24,7 +24,7 @@ class MediaMultipleType extends AbstractType
             new All([
                 new File([
                     'maxSize' => '50M', // same as server upload_max_filesize
-                    'mimeTypes' => ['image/jpeg', 'image/jpg'],
+                    'mimeTypes' => ['image/jpeg', 'image/jpg', 'image/avif'],
                 ]),
             ]),
             new NotNull([
