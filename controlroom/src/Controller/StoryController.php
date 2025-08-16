@@ -28,7 +28,7 @@ class StoryController extends BaseController
     {
         // form names must match between batch edit forms and ajax edit form
         $form = $formFactory->createNamed(
-            name: 'story_quick_edit_form',
+            name: 'story_quick_edit_form_' . $story->getId(),
             type: StoryQuickEditType::class,
             data: $story,
         );
