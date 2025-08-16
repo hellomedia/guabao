@@ -95,6 +95,14 @@ table.datagrid td.actions {
     }
 }
 
+/* add bottom margin to avoid last select input being cramped */
+.ea-edit .main-content form,
+.ea-new .main-content form {
+    margin-bottom: 100px;
+    
+}
+
+/* btn lg */
 .btn-lg {
     --bs-btn-padding-y: 0.5rem;
     --bs-btn-padding-x: 1rem;
