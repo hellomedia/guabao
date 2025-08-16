@@ -60,7 +60,7 @@ class DashboardController extends AbstractDashboardController
             ->setDefaultSort(['id' => 'DESC'])
             ->setAutofocusSearch()
             ->showEntityActionsInlined()
-            ->setFormThemes(['@controlroom/form/form_theme.html.twig',  '@EasyAdmin/crud/form_theme.html.twig'])
+            ->setFormThemes(['@controlroom/form/form_theme.html.twig'])
             ->setPageTitle(Crud::PAGE_DETAIL, static function (EntityInterface $entity) {
                 return $entity;
             })
