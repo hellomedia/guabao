@@ -3,7 +3,7 @@
 {% set isTrip = entity.instance is instanceof('App\\Entity\\Trip') %}
     {% if media %}
     
-        {% if isTrip %}<a href="{{ path('controlroom_trip_detail', {entityId: entity.instance.id}) }}">{% endif %}
+        {% if isTrip %}<a href="{{ path('admin_media_bulk_edit_by_trip', {id: entity.instance.id}) }}">{% endif %}
             {% if media.type.name == "IMAGE" %}
                 <img
                     src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
