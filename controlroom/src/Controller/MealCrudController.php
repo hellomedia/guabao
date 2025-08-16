@@ -14,7 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -44,7 +44,7 @@ class MealCrudController extends AbstractCrudController
     {
         yield IdField::new('id')->hideOnForm();
 
-        yield DateField::new('enjoyedAt');
+        yield DateTimeField::new('enjoyedAt');
 
         yield ChoiceField::new('type');
 
