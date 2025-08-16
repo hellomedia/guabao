@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Interface\EntityInterface;
 use App\Entity\Tag\PlaceTag;
 use App\Enum\MealType;
 use App\Repository\MealRepository;
@@ -10,7 +11,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MealRepository::class)]
-class Meal
+class Meal implements EntityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
