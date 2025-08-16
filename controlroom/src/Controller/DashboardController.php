@@ -31,6 +31,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+// For localized easyadmin, use routePath: '/{_locale}/'
+// setting locale prefix in easyadmin.yaml does not seem to work
 #[AdminDashboard(routePath: '/', routeName: 'controlroom')]
 class DashboardController extends AbstractDashboardController
 {

@@ -1,8 +1,11 @@
+# easy admin auto generated routes
+# for custom admin routes set in attributes, see controlroom/config/routes.yaml
 easyadmin:
     host: '%host_controlroom%' # use parameter instead of env var : https://github.com/symfony/symfony/issues/20682
     resource: .
     type: easyadmin.routes
-    prefix:
-        fr: /
-        en: /en/
-        nl: /nl/
+# setting locale prefix here does not seem to work
+    # prefix:
+    #     fr: /fr/
+    #     en: /
+    #     nl: /nl/

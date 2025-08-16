@@ -16,7 +16,7 @@ parameters:
     host: '%env(HOST)%'
     host_controlroom: '%env(HOST_CONTROLROOM)%'
 
-    default_locale: 'fr'
+    default_locale: 'en'
     locales: ['fr', 'en']
 
     uploads_dir: 'uploads'
