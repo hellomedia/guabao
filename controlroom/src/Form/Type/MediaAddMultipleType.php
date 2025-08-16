@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotNull;
 
-class MediaMultipleType extends AbstractType
+class MediaAddMultipleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

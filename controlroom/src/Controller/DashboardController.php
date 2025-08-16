@@ -58,7 +58,7 @@ class DashboardController extends AbstractDashboardController
             ->setDefaultSort(['id' => 'DESC'])
             ->setAutofocusSearch()
             ->showEntityActionsInlined()
-            ->setFormThemes(['@controlroom/form_theme.html.twig',  '@EasyAdmin/crud/form_theme.html.twig'])
+            ->setFormThemes(['@controlroom/form/form_theme.html.twig',  '@EasyAdmin/crud/form_theme.html.twig'])
             ->setPageTitle(Crud::PAGE_DETAIL, static function (EntityInterface $entity) {
                 return $entity;
             })
@@ -93,19 +93,20 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToRoute('Php info', 'fa fa-info', 'controlroom_status_phpinfo'),
             ]);
 
-        yield MenuItem::linkToCrud('Site Highlights', 'fa fa-star', SiteHighlight::class);
-
-        yield MenuItem::section('Food');
-        yield MenuItem::linkToCrud('Food', 'fa fa-lemon', Food::class);
-        yield MenuItem::linkToCrud('Meal', 'fa fa-meal', Meal::class);
-        yield MenuItem::linkToCrud('Ingredient', 'fa fa-lemon', Ingredient::class);
-        yield MenuItem::linkToCrud('Food Tag', 'fa fa-tag', FoodTag::class);
-        yield MenuItem::linkToCrud('Cuisine', 'fa fa-tag', Cuisine::class);
+        yield MenuItem::section('Site');
+        yield MenuItem::linkToCrud('Highlights', 'fa fa-star', SiteHighlight::class);
 
         yield MenuItem::section('Trips');
         yield MenuItem::linkToCrud('Trip', 'fa fa-globe', Trip::class);
-        yield MenuItem::linkToCrud('Stories', 'fa fa-star', Story::class);
+        yield MenuItem::linkToCrud('Stories', 'fa fa-comment-dots', Story::class);
         yield MenuItem::linkToCrud('Trip Tag', 'fa fa-tag', TripTag::class);
+
+        yield MenuItem::section('Food');
+        yield MenuItem::linkToCrud('Food', 'fa fa-pizza-slice', Food::class);
+        yield MenuItem::linkToCrud('Meal', 'fa fa-utensils', Meal::class);
+        yield MenuItem::linkToCrud('Ingredient', 'fa fa-carrot', Ingredient::class);
+        yield MenuItem::linkToCrud('Food Tag', 'fa fa-tag', FoodTag::class);
+        yield MenuItem::linkToCrud('Cuisine', 'fa fa-tag', Cuisine::class);
 
         yield MenuItem::section('Medias');
         yield MenuItem::linkToCrud('Media', 'fa fa-photo', Media::class);

@@ -1,0 +1,29 @@
+{# Important: Note the syntax with [] and only #}
+{# Ignore global themes; use only EasyAdmin #}
+{# important to avoid theme conflicts #}
+{% form_theme form with ['@EasyAdmin/crud/form_theme.html.twig'] only %}
+
+<div id="story_{{ story.id }}" data-controller="ajax">
+
+    <form
+        name="story_quick_edit_form_{{ story.id }}"
+        data-ajax-target="form"
+        data-action="submit->ajax#submit"
+        action="{{ path('admin_story_quick_edit', {id: story.id}) }}"
+        method="post"
+        style="margin-bottom: 20px"
+    >
+
+        {# container for form content replaced in ajax #}
+        <div data-ajax-target="container" style="columns: 400px 2;column-gap: 50px;">
+            
+            {{ form_rest(form) }}
+        
+        </div>
+
+        {% include '@controlroom/form/_ajax_button.html.twig' %}
+
+    </form>
+
+</div>
+

@@ -6,10 +6,10 @@
 <div id="media_{{ media.id }}" data-controller="ajax">
 
     <form
-        name="trip_media_edit_form_{{ media.id }}"
+        name="media_quick_edit_form_{{ media.id }}"
         data-ajax-target="form"
         data-action="submit->ajax#submit"
-        action="{{ path('admin_trip_media_edit', {id: media.id}) }}"
+        action="{{ path('admin_media_quick_edit', {id: media.id}) }}"
         method="post"
         style="margin-bottom: 20px"
     >
@@ -33,19 +33,7 @@
         
         </div>
 
-        {# button and spinner live outside of container replaced in ajax #}
-        <div style="position: relative; display: inline-block; margin-top: 30px;">
-            <button type="submit"
-                class="btn btn-primary btn-lg"
-                data-ajax-target="submitBtn"
-            >
-                Save
-            </button>
-            
-            <div data-ajax-target="spinner" class="spinner-wrapper hidden">
-                <div class="spinner" aria-hidden="true"></div>
-            </div>
-        </div>
+        {% include '@controlroom/form/_ajax_button.html.twig' %}
 
     </form>
 

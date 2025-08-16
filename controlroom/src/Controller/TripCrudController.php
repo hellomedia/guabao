@@ -120,30 +120,30 @@ class TripCrudController extends AbstractCrudController
             })
             ->setIcon('fa fa-images');
 
-        $editMedias = Action::new('editMedias', 'Edit Medias')
+        $bulkEditMedias = Action::new('editMedias', 'Bulk edit')
             ->linkToUrl(function (Trip $trip) {
-                return $this->urlGenerator->generate('admin_trip_media_batch_edit', [
+                return $this->urlGenerator->generate('admin_media_bulk_edit_by_trip', [
                     'id' => $trip->getId(),
                 ]);
             })
             ->setIcon('fa fa-edit');
 
-        $addMedias = Action::new('addMedias', '+ Add pictures')
+        $addPictures = Action::new('addMedias', '+ Add pictures')
             ->linkToUrl($this->urlGenerator->generate('admin_media_add_multiple'))
         ;
 
-        $globalAddMedias = Action::new('addMedias', '+ Add pictures')
+        $globalAdPictures = Action::new('addMedias', '+ Add pictures')
             ->linkToUrl($this->urlGenerator->generate('admin_media_add_multiple'))
             ->createAsGlobalAction()
         ;
 
         return $actions
             ->add(Action::DETAIL, $viewMedias)
-            ->add(Action::DETAIL, $editMedias)
-            ->add(Action::DETAIL, $addMedias)
-            ->add(Action::INDEX, $globalAddMedias)
+            ->add(Action::DETAIL, $bulkEditMedias)
+            ->add(Action::DETAIL, $addPictures)
+            ->add(Action::INDEX, $globalAdPictures)
             ->add(Action::INDEX, $viewMedias)
-            ->add(Action::INDEX, $editMedias)
+            ->add(Action::INDEX, $bulkEditMedias)
         ;
     }
 
