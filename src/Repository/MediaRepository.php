@@ -65,7 +65,7 @@ class MediaRepository extends ServiceEntityRepository
         return new ArrayCollection($query->getResult());
     }
 
-    public function getFindByTripQueryBuilder(Trip $trip, ?bool $gallery = false, ?bool $adminList): QueryBuilder
+    public function getFindByTripQueryBuilder(Trip $trip, ?bool $gallery = false, ?bool $adminList = false): QueryBuilder
     {
         $qb = $this->createQueryBuilder('m')
             ->leftJoin('m.story', 's')
