@@ -31,7 +31,7 @@ class MediaBulkEditController extends BaseController
     public function bulkEditByTrip(Trip $trip, int $page, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         $queryBuilder = $entityManager->getRepository(Media::class)
-            ->getFindByTripQueryBuilder($trip, onlyDefaultGallery: true);
+            ->getFindByTripQueryBuilder($trip, adminList: true);
 
         $pager = Pagerfanta::createForCurrentPageWithMaxPerPage(
             adapter: new QueryAdapter($queryBuilder),

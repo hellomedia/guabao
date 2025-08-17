@@ -74,7 +74,7 @@ class TripController extends BaseController
         $this->addBreadcrumb($trip, isLarge: true);
         $this->addBreadcrumb('trip.gallery');
 
-        $medias = $mediaRepository->findByTrip($trip, onlyDefaultGallery: true);
+        $medias = $mediaRepository->findByTrip($trip, gallery: true);
 
         return $this->render('trip/gallery.html.twig', [
             'trip' => $trip,
@@ -93,7 +93,7 @@ class TripController extends BaseController
         // no need for this one since we have the top links serving as title
         // $this->addBreadcrumb($trip);
 
-        $medias = $mediaRepository->findByTrip($trip, onlyDefaultGallery: true);
+        $medias = $mediaRepository->findByTrip($trip, gallery: true);
 
         return $this->render('trip/show_child_trip.html.twig', [
             'trip' => $trip,

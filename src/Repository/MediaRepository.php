@@ -57,15 +57,15 @@ class MediaRepository extends ServiceEntityRepository
         return $filtered;
     }
 
-    public function findByTrip(Trip $trip, ?bool $onlyDefaultGallery = false): Collection
+    public function findByTrip(Trip $trip, ?bool $gallery = false, ?bool $adminList = false): Collection
     {
-        $query = $this->getFindByTripQueryBuilder($trip, $onlyDefaultGallery)
+        $query = $this->getFindByTripQueryBuilder($trip, $gallery, $adminList)
             ->getQuery();
 
         return new ArrayCollection($query->getResult());
     }
 
-    public function getFindByTripQueryBuilder(Trip $trip, ?bool $onlyDefaultGallery = false): QueryBuilder
+    public function getFindByTripQueryBuilder(Trip $trip, ?bool $gallery = false, ?bool $adminList): QueryBuilder
     {
         $qb = $this->createQueryBuilder('m')
             ->leftJoin('m.story', 's')
@@ -85,10 +85,12 @@ class MediaRepository extends ServiceEntityRepository
             ->orderBy('m.takenAt', 'ASC')
         ;
 
-        if ($onlyDefaultGallery) {
-            // do not display media who should not display
-            // in default gallery if they belong to a story
-            $qb->andWhere('m.inDefaultGallery = TRUE OR m.story IS NULL');
+        if ($gallery) {
+            $qb->andWhere('m.inDefaultGallery = TRUE');
+        }
+
+        if ($adminList) {
+            $qb->andWhere('m.story IS NULL');
         }
 
         return $qb;
