@@ -12,9 +12,18 @@
 {% block head_stylesheets %}
     {{ parent() }}
 	<style>
-		#stories, #gallery {
+		#parent, #children, #stories, #gallery {
 			margin-bottom: 40px;
 		}
+        #parent, #children {
+            font-size: 18px;
+        }
+        #children-list {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+
+        }
         .story-medias {
             display: flex;
             flex-wrap: wrap;
@@ -32,6 +41,25 @@
 {% endblock %}
 
 {% block main %}
+
+{% if trip.parent %}
+    <div id="parent">
+        Parent:
+        <a href="{{ path('admin_media_bulk_edit_by_trip', {id: trip.parent.id}) }}">{{ trip.parent }}</a>
+    </div>
+{% endif %}
+
+{% if trip.children is not empty %}
+    <div id="children">
+        Children:
+        {% for child in trip.children %}
+            <div id="children-list">
+                <a href="{{ path('admin_media_bulk_edit_by_trip', {id: child.id}) }}">{{ child }}</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
     <h3>Stories</h3>
 
     <div id="stories">
@@ -54,7 +82,7 @@
 
     </div>
 
-    <h3>Default gallery</h3>
+    <h3>Gallery</h3>
 
     <p style="margin-top: 15px; margin-bottom: 30px">
         Note: Medias who do not belong to a story or have
