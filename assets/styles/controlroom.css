@@ -110,3 +110,15 @@ table.datagrid td.actions {
     --bs-btn-border-radius: var(--bs-border-radius-lg);
     padding: 10px 40px;
 }
+
+#admin-top-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    max-width: 600px;
+    justify-content: flex-end;
+}
+
+.content-header-title {
+    white-space: nowrap;
+}
