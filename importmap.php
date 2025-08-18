@@ -85,4 +85,10 @@ return [
         'version' => '2.4.3',
         'type' => 'css',
     ],
+    '@stimulus-components/sortable' => [
+        'version' => '5.0.2',
+    ],
+    'sortablejs' => [
+        'version' => '1.15.6',
+    ],
 ];

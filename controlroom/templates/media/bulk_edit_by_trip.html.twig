@@ -24,6 +24,10 @@
             gap: 5px;
 
         }
+        .sortable-item {
+            border: 0;
+            padding: 0;
+        }
         .story-medias {
             display: flex;
             flex-wrap: wrap;
@@ -64,21 +68,30 @@
 
     <div id="stories">
 
-        {% for story in trip.stories %}
-            <h5>
-                {{ story }}
-            </h5>
-            
-            <a href="{{ path('admin_media_bulk_edit_by_story', { id: story.id}) }}">
-                <div class="story-medias">
-                    {% for media in story.medias %}
-                        <img src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}" alt="" width="200" height="200"/>
-                    {% endfor %}
-                </div>
-            </a>
-
-            <br>
-        {% endfor %} 
+        <ul class="sortable" style="margin-top: 20px;padding-left: 0;{# bootstrap css override needed because of css layers #}"
+            data-controller="sortable"
+            data-sortable-url-value="{{ path('admin_story_reorder') }}"
+            data-sortable-param-value="story_ids"
+            data-sortable-animation-value="150"
+        >
+            {% for story in trip.stories %}
+                <li class="sortable-item" data-id="{{ story.id }}">
+                    <svg style="width:25px" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path>
+                    </svg>
+                    <div>
+                        <h5>{{ story }}</h5>
+                        <a href="{{ path('admin_media_bulk_edit_by_story', { id: story.id}) }}">
+                            <div class="story-medias">
+                                {% for media in story.medias %}
+                                    <img src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}" alt="" width="200" height="200"/>
+                                {% endfor %}
+                            </div>
+                        </a>
+                    </div>
+                </li>
+            {% endfor %} 
+        </ul>
 
     </div>
 

@@ -1,0 +1,25 @@
+@layer components {
+
+    .sortable {
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+    .sortable-item {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+        cursor: grab;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        background: var(--color-primary-background);
+    }
+
+    .sortable-chosen {
+        opacity: 0.5;
+        border: 1px dashed #aaa;
+        background-color: var(--color-theme);
+    }
+}
