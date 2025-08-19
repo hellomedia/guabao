@@ -201,8 +201,6 @@ class MediaCrudController extends AbstractCrudController
     {
         return $filters
             ->add(EntityFilter::new('trip'))
-            ->add(EntityFilter::new('food'))
-            ->add(EntityFilter::new('meal'))
         ;
     }
 
