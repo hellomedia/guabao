@@ -5,7 +5,7 @@
     data-controller="restore-x-scroll"
     data-restore-x-scroll-key-value="trip-{{ parent.id }}" 
 >
-	<a href="{{ path(parent) }}" style="margin-right: 10px">
+	<a href="{{ path(parent) }}" class="top-level-trip" style="margin-right: 10px">
         <span class="trip-name">{{ parent.shortNameWithFallback(app.locale) }}</span>
         <span class="trip-duration">{{ parent|tripDuration }}</span>
 	</a>

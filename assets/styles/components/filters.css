@@ -12,7 +12,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border: 1px solid var(--color-gray-300);
+            border: 2px dashed var(--color-gray-300);
             border-radius: var(--radius-3xl);
             padding: 10px 15px;
 
@@ -20,6 +20,14 @@
                 background-color: var(--color-theme);
                 border: var(--color-theme);
                 color: white;
+            }
+        }
+
+        .top-level-trip {
+            border-radius: var(--radius-3xl);
+            border: 1px solid var(--color-gray-300);
+            .trip-name {
+                font-weight: 500;
             }
         }
 
@@ -48,6 +56,7 @@
             align-items: center;
         }
         .trip-leg-divider::after {
+            color: var(--color-gray400);
             content: '····';
         }
     }
