@@ -1,14 +1,14 @@
 {% include 'trip/_top_filters_child_trip.html.twig' %}
 
+<div id="rating">
+	{% include 'trip/_rating.html.twig' %}
+</div>
+
 {% if trip.description(app.locale) is not empty %}
     <div id="description">
         {{ trip.description(app.locale)|nl2br }}
     </div>
 {% endif %}
-
-<div id="rating">
-	{% include 'trip/_rating.html.twig' %}
-</div>
 
 {# {% if trip.cover %}
 	<div id="cover">

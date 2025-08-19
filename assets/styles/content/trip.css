@@ -9,10 +9,11 @@
         #rating {
             @apply text-lg;
             margin-bottom: 30px;
+            margin-top: 30px;
         }
 
         #description {
-            margin-top: 40px;
+            margin-top: 30px;
             margin-bottom: 50px;
             @apply text-xl;
         }

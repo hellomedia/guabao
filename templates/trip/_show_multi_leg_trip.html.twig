@@ -1,5 +1,9 @@
 {% include 'trip/_top_filters_multi_leg.html.twig' %}
 
+<div id="rating">
+	{% include 'trip/_rating.html.twig' %}
+</div>
+
 <div id="description">
     {{ trip.description(app.locale)|nl2br }}
 </div>
