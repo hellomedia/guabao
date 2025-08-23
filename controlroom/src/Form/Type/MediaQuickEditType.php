@@ -127,19 +127,19 @@ class MediaQuickEditType extends AbstractType
                 'required' => false,
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
-                'help' => 'set to true to auto-fill with existing meal or auto-create meal based on taken_at time +- 10 minutes'
+                'help' => 'Set to true to auto-create meal or auto-fill with existing meal based on taken_at time +- 10 minutes'
             ])
-            // ->add('meal', EntityType::class, [
-            //     'class' => Meal::class,
-            //     'query_builder' => function (EntityRepository $repo): QueryBuilder {
-            //         return $repo->createQueryBuilder('m')
-            //             ->orderBy('m.enjoyedAt', 'ASC');
-            //     },
-            //     'required' => false,
-            //     'multiple' => false,
-            //     'autocomplete' => true,
-            //     'help' => "leave empty if using the 'set meal' flag to auto-fill or auto-create meal", 
-            // ])
+            ->add('meal', EntityType::class, [
+                'class' => Meal::class,
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('m')
+                        ->orderBy('m.enjoyedAt', 'ASC');
+                },
+                'required' => false,
+                'multiple' => false,
+                'autocomplete' => true,
+                'help' => "Leave empty if using the 'set meal' flag to auto-fill or auto-create meal", 
+            ])
         ;
     }
 
