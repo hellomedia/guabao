@@ -41,7 +41,7 @@
         {% include "@controlroom/story/_quick_edit_form.html.twig" with { form: story_form, story: story } %}
     </div>
 
-    <div id="medias">
+    <div id="medias" data-controller="fancybox">
         <h3>Medias</h3>
         {% for media in medias %}
             {% include '@controlroom/media/_quick_edit_form.html.twig'

@@ -119,7 +119,7 @@
     </p>
 
     <div id="gallery" 
-        data-controller="infinite-scroll"
+        data-controller="infinite-scroll fancybox"
         data-infinite-scroll-next-page-url-value="{{ pager.hasNextPage ? path('admin_media_bulk_edit_by_trip', { id: trip.id, page: pager.nextPage }) }}"
     >
         <div class="current-page">
