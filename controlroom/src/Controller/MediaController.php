@@ -67,13 +67,20 @@ class MediaController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $files = $form['files']->getData();
-            $trip = $form['trip']->getData();
+            $submitBtn = $form->get('submit');
+            assert($submitBtn instanceof ClickableInterface);
 
-            $this->_importImages($files, $trip);
+            if (!$submitBtn->isClicked()) {
+                // on change event for dependent field
+                return $this->render('@controlroom/media/add_multiple.html.twig', [
+                    'form' => $form,
+                ]);
+            }
+    
+            $this->_importImages($form);
 
             return $this->redirectToRoute('admin_media_bulk_edit_by_trip', [
-                'id' => $trip->getId(),
+                'id' => $form['trip']->getData()->getId(),
             ]);
         }
 
@@ -82,8 +89,11 @@ class MediaController extends BaseController
         ]);
     }
 
-    private function _importImages(array $uploadedFiles, Trip $trip)
+    private function _importImages(FormInterface $form)
     {
+        $uploadedFiles = $form['files']->getData();
+        $trip = $form['trip']->getData();
+        $story = $form['story']->getData();
         foreach ($uploadedFiles as $uploadedFile) {
 
             $media = new Media();
@@ -96,6 +106,10 @@ class MediaController extends BaseController
             $this->uploadHelper->uploadImage($media, $uploadedFile, resize: true);
 
             $media->setTrip($trip);
+            if ($story !== null && $trip === $story->getTrip()) {
+                $media->setStory($story);
+                $media->setShowInStory($showInStory);
+            }
 
             $this->_updateAutoFields($media, $exif);
 

@@ -5,11 +5,41 @@
 {# important to avoid theme conflicts #}
 {% form_theme form with ['@controlroom/form/form_theme.html.twig'] only %}
 
-{% block content_title %}Add multiple images for a trip{% endblock %}
+{% block content_title %}Add multiple images for a trip / story{% endblock %}
 
 {% block main %}
 
-    {{ form(form) }}
+    <div
+        data-controller="dependent-form"
+        data-dependent-form-debounce-value="250"
+    >
+
+        {{ form_start(form, {
+            attr: { 'novalidate': 'true', 'data-dependent-form-target': 'form', 'data-turbo-frame': 'dependent_fields' }
+        }) }}
+
+            {{ form_row(form.files) }}
+
+            <turbo-frame
+                id="dependent_fields"
+                data-action="turbo:frame-load->dependent-form#restoreFocus"
+            >
+                {# Driver field(s) — changing these triggers a submit that refreshes only the frame #}
+                {{ form_row(form.trip, {
+                    attr: {
+                        'data-dependent-form-target': 'trigger',
+                        'data-action': 'change->dependent-form#onChange'
+                    }
+                }) }}
+
+                {# Dependent field(s) refreshed by server #}
+                {% if form.story is defined %}
+                    {{ form_row(form.story) }}
+                {% endif %}
+                
+            </turbo-frame>
+
+    {{ form_end(form) }}
 
 {% endblock %}
 

@@ -2,6 +2,7 @@
 
 namespace Controlroom\Form\Type;
 
+use App\Entity\Story;
 use App\Entity\Trip;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -14,11 +15,15 @@ use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Symfonycasts\DynamicForms\DependentField;
+use Symfonycasts\DynamicForms\DynamicFormBuilder;
 
 class MediaAddMultipleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder = new DynamicFormBuilder($builder);
+
         $constraints = [
             new Count(['max' => 20]), // same as server max_file_uploads  
             new All([
@@ -33,22 +38,6 @@ class MediaAddMultipleType extends AbstractType
         ];
 
         $builder
-            ->add('trip', EntityType::class, [
-                'class' => Trip::class,
-                'query_builder' => function (EntityRepository $repo): QueryBuilder {
-                    return $repo->createQueryBuilder('t')
-                        ->orderBy('t.startedAt', 'DESC');
-                },
-                'multiple' => false,
-                'autocomplete' => true,
-                'group_by' => function (Trip $trip, $key, $value) {
-                    if ($trip->hasParent()) {
-                        return $trip->getParent()->getNameEn();
-                    }
-                    return $trip->getNameEn();
-                },
-                'placeholder' => '', // add an empty placeholder instead of a default trip selected
-            ])
             ->add('files', FileType::class, [
                     'label' => 'images',
                     'multiple' => true,
@@ -59,6 +48,41 @@ class MediaAddMultipleType extends AbstractType
                     ],
                 ]
             )
+            ->add('trip', EntityType::class, [
+                'class' => Trip::class,
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('t')
+                        ->orderBy('t.startedAt', 'DESC');
+                },
+                'required' => true,
+                'multiple' => false,
+                'autocomplete' => true,
+                'group_by' => function (Trip $trip, $key, $value) {
+                    if ($trip->hasParent()) {
+                        return $trip->getParent()->getNameEn();
+                    }
+                    return $trip->getNameEn();
+                },
+                'placeholder' => '', // add an empty placeholder instead of a default trip selected
+            ])
+            ->addDependent('story', 'trip', function(DependentField $field, ?Trip $trip) {
+                if ($trip === null) {
+                    return;
+                }
+                $field->add(EntityType::class, [
+                    'required' => false,
+                    'class' => Story::class,
+                    'query_builder' => function (EntityRepository $repo) use ($trip): QueryBuilder {
+                        return $repo->createQueryBuilder('s')
+                            ->where('s.trip = :trip')
+                            ->setParameter('trip', $trip)
+                            ->orderBy('s.displayOrder', 'ASC');
+                    },
+                    'multiple' => false,
+                    'autocomplete' => true,
+                    'placeholder' => '', // add an empty placeholder instead of a default trip selected
+                ]);
+            })
             ->add('submit', SubmitType::class)
         ;
     }
