@@ -131,7 +131,8 @@ RUN echo 'date.timezone=Europe/Brussels' >> /etc/php/8.3/fpm/php.ini && \
     echo 'date.timezone=Europe/Brussels' >> /etc/php/8.3/cli/php.ini && \
     echo 'short_open_tag=off' >> /etc/php/8.3/fpm/php.ini && \
     echo 'upload_max_filesize=50M' >> /etc/php/8.3/fpm/php.ini && \
-    echo 'post_max_size=100M' >> /etc/php/8.3/fpm/php.ini && \
+    echo 'post_max_size=200M' >> /etc/php/8.3/fpm/php.ini && \
+    echo 'max_execution_time=180' >> /etc/php/8.3/fpm/php.ini && \
     echo 'memory_limit=1024M' >> /etc/php/8.3/fpm/php.ini
 
 ADD docker/php/php-fpm.conf /etc/php/8.3/fpm/pool.d/www.conf
