@@ -4,6 +4,7 @@ namespace Controlroom\Controller;
 
 use App\Controller\BaseController;
 use App\Entity\Media;
+use App\Entity\Story;
 use App\Entity\Trip;
 use App\Enum\MediaType;
 use App\Helper\MediaAutoFillHelper;
@@ -11,9 +12,13 @@ use App\Pack\Media\Helper\ExifExtractor;
 use App\Pack\Media\Helper\UploadHelper;
 use Controlroom\Form\Type\MediaAddMultipleType;
 use Controlroom\Form\Type\MediaQuickEditType;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
+use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -96,6 +101,12 @@ class MediaController extends BaseController
         $uploadedFiles = $form['files']->getData();
         $trip = $form['trip']->getData();
         $story = $form['story']->getData();
+        $tags = $form['tags']->getData();
+        $placeTags = $form['placeTags']->getData();
+        $showInTrip = $form['showInTrip']->getData();
+        $showInStory = $form['showInStory']->getData();
+        $showInFood = $form['showInFood']->getData();
+
         foreach ($uploadedFiles as $uploadedFile) {
 
             $media = new Media();
@@ -108,10 +119,22 @@ class MediaController extends BaseController
             $this->uploadHelper->uploadImage($media, $uploadedFile, resize: true);
 
             $media->setTrip($trip);
+            $media->setShowInTrip($showInTrip);
+
             if ($story !== null && $trip === $story->getTrip()) {
                 $media->setStory($story);
                 $media->setShowInStory($showInStory);
             }
+
+            foreach ($tags as $tag) {
+                $media->addTag($tag);
+            }
+
+            foreach ($placeTags as $placeTag) {
+                $media->addPlaceTag($placeTag);
+            }
+
+            $media->setShowInFood($showInFood);
 
             $this->_updateAutoFields($media, $exif);
 

@@ -122,3 +122,9 @@ table.datagrid td.actions {
 .content-header-title {
     white-space: nowrap;
 }
+
+.quick-edit-item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 50px;
+}

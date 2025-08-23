@@ -28,7 +28,7 @@
                 </div>
                 <div class="story-medias">
                     {% include "trip/_gallery.html.twig" with {
-                        medias: story.medias,
+                        medias: story.displayableMedias,
                         gallery: 'story' ~ story.id
                     } %}
                 </div>

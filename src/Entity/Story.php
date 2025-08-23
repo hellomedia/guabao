@@ -67,6 +67,16 @@ class Story implements LocalizedNameInterface, EntityInterface
         return $this->medias;
     }
 
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getDisplayableMedias(): Collection
+    {
+        return $this->medias->filter(function($media) {
+            return $media->getShowInStory();
+        });
+    }
+
     public function addMedia(Media $media): static
     {
         if (!$this->medias->contains($media)) {

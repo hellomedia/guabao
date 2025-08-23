@@ -3,11 +3,14 @@
 namespace Controlroom\Form\Type;
 
 use App\Entity\Story;
+use App\Entity\Tag\MediaTag;
+use App\Entity\Tag\PlaceTag;
 use App\Entity\Trip;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -65,6 +68,12 @@ class MediaAddMultipleType extends AbstractType
                 },
                 'placeholder' => '', // add an empty placeholder instead of a default trip selected
             ])
+            ->add('showInTrip', CheckboxType::class, [
+                'label'    => 'show in trip',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
             ->addDependent('story', 'trip', function(DependentField $field, ?Trip $trip) {
                 if ($trip === null) {
                     return;
@@ -83,6 +92,38 @@ class MediaAddMultipleType extends AbstractType
                     'placeholder' => '', // add an empty placeholder instead of a default trip selected
                 ]);
             })
+            ->add('showInStory', CheckboxType::class, [
+                'label'    => 'show in story',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
+            ->add('placeTags', EntityType::class, [
+                'class' => PlaceTag::class,
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('t')
+                        ->orderBy('t.nameEn', 'ASC');
+                },
+                'required' => false,
+                'multiple' => true,
+                'autocomplete' => true,
+            ])
+            ->add('tags', EntityType::class, [
+                'class' => MediaTag::class,
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('t')
+                        ->orderBy('t.nameEn', 'ASC');
+                },
+                'required' => false,
+                'multiple' => true,
+                'autocomplete' => true,
+            ])
+            ->add('showInFood', CheckboxType::class, [
+                'label'    => 'show in food',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
             ->add('submit', SubmitType::class)
         ;
     }

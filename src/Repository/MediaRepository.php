@@ -86,7 +86,7 @@ class MediaRepository extends ServiceEntityRepository
         ;
 
         if ($gallery) {
-            $qb->andWhere('m.inDefaultGallery = TRUE');
+            $qb->andWhere('m.showInTrip = TRUE');
         }
 
         if ($adminList) {

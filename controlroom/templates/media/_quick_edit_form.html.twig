@@ -15,20 +15,43 @@
     >
 
         {# container for form content replaced in ajax #}
-        <div data-ajax-target="container" style="columns: 400px 2;column-gap: 50px;">
+        <div data-ajax-target="container" class="quick-edit-item-grid">
 
-            <img
-                style="height: 300px; width: auto;" 
-                src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
-                width="300"
-                height="300"
-            />
+            <div class="column-1">
+                <img    
+                    style="height: 220px; width: auto;margin-bottom: 15px;" 
+                    src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+                    width="300"
+                    height="300"
+                />
 
-            <div style="margin-top: 15px; margin-bottom: 10px">
-                {{ form_row(form.descriptionEn) }}
-                {{ form_row(form.descriptionFr) }}
+                <div style="margin-bottom: 0">
+                    {{ form_row(form.descriptionEn) }}
+                    {{ form_row(form.descriptionFr) }}
+                </div>
             </div>
-            
+
+            <div class="column-2">
+                {{ form_row(form.trip) }}
+                {{ form_row(form.isTripCover) }}
+                {{ form_row(form.showInTrip) }}
+
+                {{ form_row(form.story) }}
+                {{ form_row(form.showInStory) }}
+                
+                {{ form_row(form.tags) }}
+                {{ form_row(form.placeTags) }}
+
+            </div>
+
+            <div class="column-3">
+
+                {{ form_row(form.food) }}
+                {{ form_row(form.showInFood) }}
+                {{ form_row(form.isMeal) }}
+                {{ form_row(form.takenAt) }}
+            </div>
+
             {{ form_rest(form) }}
         
         </div>

@@ -17,6 +17,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Index('media_taken_at_idx', ['taken_at'])]
+#[ORM\Index('media_show_in_trip_idx', ['show_in_trip'])]
+#[ORM\Index('media_show_in_story_idx', ['show_in_story'])]
+#[ORM\Index('media_show_in_food_idx', ['show_in_food'])]
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
 class Media implements EntityInterface, UploadedAssetEntityInterface
 {
@@ -122,11 +125,17 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Story $story = null;
 
-    #[ORM\Column(options: ['default' => true])]
-    private ?bool $inDefaultGallery = true;
-
     #[ORM\ManyToOne(inversedBy: 'medias')]
     private ?SiteHighlight $siteHighlight = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $showInTrip = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $showInStory = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $showInFood = null;
 
     public function __construct()
     {
@@ -297,18 +306,6 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
         return $this;
     }
 
-    public function isInDefaultGallery(): ?bool
-    {
-        return $this->inDefaultGallery;
-    }
-
-    public function setInDefaultGallery(?bool $inDefaultGallery): static
-    {
-        $this->inDefaultGallery = $inDefaultGallery;
-
-        return $this;
-    }
-
     public function isPano(): ?bool
     {
         return $this->isPano;
@@ -418,6 +415,42 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     public function setSiteHighlight(?SiteHighlight $siteHighlight): static
     {
         $this->siteHighlight = $siteHighlight;
+
+        return $this;
+    }
+
+    public function getShowInTrip(): ?bool
+    {
+        return $this->showInTrip;
+    }
+
+    public function setShowInTrip(?bool $showInTrip): static
+    {
+        $this->showInTrip = $showInTrip;
+
+        return $this;
+    }
+
+    public function getShowInStory(): ?bool
+    {
+        return $this->showInStory;
+    }
+
+    public function setShowInStory(?bool $showInStory): static
+    {
+        $this->showInStory = $showInStory;
+
+        return $this;
+    }
+
+    public function getShowInFood(): ?bool
+    {
+        return $this->showInFood;
+    }
+
+    public function setShowInFood(?bool $showInFood): static
+    {
+        $this->showInFood = $showInFood;
 
         return $this;
     }
