@@ -23,6 +23,7 @@
                     src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
                     width="300"
                     height="300"
+                    class="{{ media.story is not null and not media.showInStory ? 'faded' }}"
                 />
 
                 <div style="margin-bottom: 0">

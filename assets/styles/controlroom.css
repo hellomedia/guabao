@@ -131,3 +131,7 @@ table.datagrid td.actions {
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 50px;
 }
+
+.faded {
+    opacity: 0.5;
+}
