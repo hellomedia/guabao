@@ -140,6 +140,12 @@ class MediaQuickEditType extends AbstractType
                 'autocomplete' => true,
                 'help' => "Leave empty if using the 'set meal' flag to auto-fill or auto-create meal", 
             ])
+            ->add('is360', CheckboxType::class, [
+                'label' => '360',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
         ;
     }
 
