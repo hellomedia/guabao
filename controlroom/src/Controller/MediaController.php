@@ -48,6 +48,8 @@ class MediaController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->_updateAutoFieldsAtQuickEdit($media);
+            
             $entityManager->persist($media);
             $entityManager->flush();
         }
@@ -130,6 +132,18 @@ class MediaController extends BaseController
         // but if we do add place fixtures
         // we could query the DB  as long as PlaceFixtures is added to the dependencies
         $this->autoFillHelper->autoAssignPlace($media);
+
+        $this->autoFillHelper->setMeal($media);
+    }
+
+    private function _updateAutoFieldsAtQuickEdit(Media $media)
+    {
+        // currently no place fixtures, so nothing in the DB to link to,
+        // but if we do add place fixtures
+        // we could query the DB  as long as PlaceFixtures is added to the dependencies
+        $this->autoFillHelper->autoAssignPlace($media);
+
+        $this->autoFillHelper->setMeal($media);
     }
 
 }

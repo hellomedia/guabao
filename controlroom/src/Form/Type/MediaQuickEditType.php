@@ -39,7 +39,6 @@ class MediaQuickEditType extends AbstractType
                     'rows' => 4,      // taller
                 ],
             ])
-
             ->add('takenAt')
             ->add('trip', EntityType::class, [
                 'class' => Trip::class,
@@ -56,6 +55,12 @@ class MediaQuickEditType extends AbstractType
                 'multiple' => false,
                 'autocomplete' => true,
             ])
+            ->add('isTripCover', CheckboxType::class, [
+                'label' => 'trip cover',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
             ->add('story', EntityType::class, [
                 'label' => 'Story',
                 'class' => Story::class,
@@ -69,8 +74,6 @@ class MediaQuickEditType extends AbstractType
                 'multiple' => false,
                 'autocomplete' => true,
             ])
-
-
             ->add('placeTags', EntityType::class, [
                 'class' => PlaceTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
@@ -101,6 +104,19 @@ class MediaQuickEditType extends AbstractType
                 'multiple' => false,
                 'autocomplete' => true,
             ])
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
+            ->add('inDefaultGallery', CheckboxType::class, [
+                'label'    => 'In default gallery',
+            ->add('isMeal', CheckboxType::class, [
+                'label' => 'Is meal',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+                'help' => 'set to true to auto-fill with existing meal or auto-create meal based on taken_at time +- 10 minutes'
+            ])
             ->add('meal', EntityType::class, [
                 'class' => Meal::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
@@ -110,24 +126,7 @@ class MediaQuickEditType extends AbstractType
                 'required' => false,
                 'multiple' => false,
                 'autocomplete' => true,
-            ])
-            ->add('isMeal', CheckboxType::class, [
-                'label' => 'Is meal',
-                'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
-            ])
-            ->add('inDefaultGallery', CheckboxType::class, [
-                'label'    => 'In default gallery',
-                'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
-            ])
-            ->add('isTripCover', CheckboxType::class, [
-                'label'    => 'cover',
-                'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'help' => "leave empty if using the 'set meal' flag to auto-fill or auto-create meal", 
             ])
         ;
     }

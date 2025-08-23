@@ -45,9 +45,13 @@ class Meal implements EntityInterface
         $this->placeTags = new ArrayCollection();
     }
 
+    /**
+     * Meals are created automatically from a food media 
+     * in MediaAutoFillHelper::setMeal when isMeal flag is set to true
+     */
     public function __toString()
     {
-        return ($this->place ?: $this->placeTags ?: null)?->first() . ' - ' . $this->enjoyedAt->format('d M Y H\h');
+        return $this->type?->value ?: 'meal ' . (($this->place ?: $this->placeTags ?: null)?->first()) . ' - ' . $this->enjoyedAt->format('d M Y H\h');
     }
 
     public function getId(): ?int

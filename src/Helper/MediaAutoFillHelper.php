@@ -27,7 +27,7 @@ class MediaAutoFillHelper
     public function setTakenAt(Media $media, array|false $exif)
     {
         if ($media->getTakenAt() !== null) {
-            return; // already set manually
+            return; // already set
         }
 
         // avoid dealing with timezones here. It creates the following issue in easyadmin:
@@ -50,7 +50,7 @@ class MediaAutoFillHelper
     public function setTrip(Media $media)
     {
         if ($media->getTrip() !== null) {
-            return; // already set manually
+            return; // already set
         }
 
         $trip = $this->tripRepository->findOneByMediaDate($media->getTakenAt());
@@ -64,6 +64,10 @@ class MediaAutoFillHelper
 
     public function setCoordinates(Media $media, array|false $exif)
     {
+        if ($media->getLatitude() !== null) {
+            return; // already set
+        }
+
         if (!empty($exif['GPSLatitude']) && !empty($exif['GPSLongitude'])) {
             $lat = $this->gpsParsingHelper->getGpsDecimal($exif['GPSLatitude'], $exif['GPSLatitudeRef']);
             $lng = $this->gpsParsingHelper->getGpsDecimal($exif['GPSLongitude'], $exif['GPSLongitudeRef']);
@@ -76,7 +80,7 @@ class MediaAutoFillHelper
     public function autoAssignPlace(Media $media): void
     {
         if ($media->getPlace() !== null) {
-            return; // already set manually
+            return; // already set
         }
 
         $lat = $media->getLatitude();
