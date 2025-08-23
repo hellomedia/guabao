@@ -5,7 +5,13 @@
 {% endblock %}
 
 {% block page_actions %}
-    {% include '@controlroom/_top_links.html.twig' %}
+	{% embed '@controlroom/_top_links.html.twig' %}
+		{% block add_pictures %}
+			<a class="btn" href="{{ path('admin_media_add_multiple', {'trip': story.trip.id, 'story': story.id}) }}">
+				+ Pictures
+			</a>
+		{% endblock %}
+	{% endembed %}
 {% endblock %}
 
 {% block head_stylesheets %}

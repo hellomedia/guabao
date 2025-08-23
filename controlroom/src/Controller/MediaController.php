@@ -66,9 +66,17 @@ class MediaController extends BaseController
     }
 
     #[Route('/media/add-multiple', name: 'admin_media_add_multiple', methods: ['GET', 'POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function addMultiple(Request $request): Response
+    public function addMultiple(Request $request, EntityManager $entityManager): Response
     {
-        $form = $this->createForm(MediaAddMultipleType::class);
+        if ($request->query->has('trip')) {
+            $trip = $entityManager->getRepository(Trip::class)->find($request->query->get('trip'));
+        }
+
+        if ($request->query->has('story')) {
+            $story = $entityManager->getRepository(Story::class)->find($request->query->get('story'));
+        }
+
+        $form = $this->createForm(MediaAddMultipleType::class, options: ['trip' => $trip ?? null, 'story' => $story ?? null]);
 
         $form->handleRequest($request);
 

@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\File;
@@ -25,6 +26,9 @@ class MediaAddMultipleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $tripFromQueryString = $options['trip'] ?? null;
+        $storyFromQueryString = $options['story'] ?? null;
+
         $builder = new DynamicFormBuilder($builder);
 
         $constraints = [
@@ -66,6 +70,7 @@ class MediaAddMultipleType extends AbstractType
                     }
                     return $trip->getNameEn();
                 },
+                'data' => $tripFromQueryString,
                 'placeholder' => '', // add an empty placeholder instead of a default trip selected
             ])
             ->add('showInTrip', CheckboxType::class, [
@@ -74,7 +79,7 @@ class MediaAddMultipleType extends AbstractType
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
             ])
-            ->addDependent('story', 'trip', function(DependentField $field, ?Trip $trip) {
+            ->addDependent('story', 'trip', function(DependentField $field, ?Trip $trip) use ($storyFromQueryString) {
                 if ($trip === null) {
                     return;
                 }
@@ -89,15 +94,22 @@ class MediaAddMultipleType extends AbstractType
                     },
                     'multiple' => false,
                     'autocomplete' => true,
+                    'data' => $storyFromQueryString,
                     'placeholder' => '', // add an empty placeholder instead of a default trip selected
                 ]);
             })
-            ->add('showInStory', CheckboxType::class, [
-                'label'    => 'show in story',
-                'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
-            ])
+            ->addDependent('showInStory', 'trip', function (DependentField $field, ?Trip $trip) use ($storyFromQueryString){
+                if ($trip === null) {
+                    return;
+                }
+                $field->add(CheckboxType::class, [
+                    'label'    => 'show in story',
+                    'required' => false,
+                    'data' => $storyFromQueryString !== null,
+                    'row_attr' => ['class' => 'form-switch'], // for switch
+                    'attr'     => ['class' => 'form-check-input'], // for switch
+                ]);
+            })
             ->add('placeTags', EntityType::class, [
                 'class' => PlaceTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
@@ -126,5 +138,13 @@ class MediaAddMultipleType extends AbstractType
             ])
             ->add('submit', SubmitType::class)
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'trip' => null,
+            'story' => null,
+        ]);
     }
 }

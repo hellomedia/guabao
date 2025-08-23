@@ -32,9 +32,15 @@
                     }
                 }) }}
 
+                {{ form_row(form.showInTrip) }}
+
                 {# Dependent field(s) refreshed by server #}
                 {% if form.story is defined %}
                     {{ form_row(form.story) }}
+                {% endif %}
+
+                {% if form.showInStory is defined %}
+                    {{ form_row(form.showInStory) }}
                 {% endif %}
                 
             </turbo-frame>
