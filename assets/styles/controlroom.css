@@ -104,11 +104,14 @@ table.datagrid td.actions {
 
 /* btn lg */
 .btn-lg {
-    --bs-btn-padding-y: 0.5rem;
-    --bs-btn-padding-x: 1rem;
     --bs-btn-font-size: 1.25rem;
     --bs-btn-border-radius: var(--bs-border-radius-lg);
     padding: 10px 40px;
+}
+.btn-sm {
+    --bs-btn-font-size: 0.8rem;
+    --bs-btn-border-radius: var(--bs-border-radius);
+    padding: 3px 7px;
 }
 
 #admin-top-links {
