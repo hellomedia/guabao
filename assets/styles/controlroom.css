@@ -59,7 +59,10 @@ table.datagrid td.actions {
         max-height: 100px;
         width: auto;
     }
-    .thumb-list {  
+    .thumb-list {
+        max-width: calc(80px * 4);
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr; 
         img {
             max-height: 70px;
             width: auto;
