@@ -44,15 +44,16 @@ class MealCrudController extends AbstractCrudController
     {
         yield IdField::new('id')->hideOnForm();
 
+        yield AssociationField::new('medias')
+            ->setTemplatePath('@media/easyadmin/field/thumbnail_list.html.twig')
+            ->hideOnForm();
+
         yield DateTimeField::new('enjoyedAt');
 
         yield ChoiceField::new('type');
 
         yield AssociationField::new('place');
         
-        yield AssociationField::new('medias')
-            ->setTemplatePath('@media/easyadmin/field/thumbnail_list.html.twig')
-            ->hideOnForm();
     }
 
     public function configureActions(Actions $actions): Actions

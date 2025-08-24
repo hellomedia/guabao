@@ -1,6 +1,6 @@
 {% if field.value|length > 0 %}
 	<div class="thumb-list">
-		{% for media in field.value %}
+		 {% for media in field.value[:12] %} {# max 12 items #}
 			<img
                 src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
                 alt=""
