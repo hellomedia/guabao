@@ -49,10 +49,7 @@ table.datagrid td.actions {
 }
 /** IMAGES **/
 .ea {
-    .thumb-list {
-        display: flex;
-        gap: 3px;
-    }
+
 }
 .ea-index {
     .thumbnail {
@@ -62,7 +59,7 @@ table.datagrid td.actions {
     .thumb-list {
         max-width: calc(70px * 4);
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: repeat(4, 1fr);
         gap: 5px;
         img {
             max-height: 70px;
@@ -92,7 +89,9 @@ table.datagrid td.actions {
         width: auto;
     }
     .thumb-list {
-        img {
+        display: flex;
+        gap: 5px;
+        a {
             flex-wrap: wrap;
             max-height: 150px;
             width: auto;
