@@ -153,6 +153,7 @@ class MediaCrudController extends AbstractCrudController
         yield AssociationField::new('food');
         yield BooleanField::new('isMeal');
         yield AssociationField::new('meal')
+            ->hideOnIndex()
             ->setHelp('Leave empty, will be auto-filled if isMeal set to true');
 
         // PLACE

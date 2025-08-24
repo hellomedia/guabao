@@ -6,11 +6,13 @@ use App\Entity\Story;
 use App\Entity\Trip;
 use Doctrine\ORM\EntityRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 
 class StoryCrudController extends AbstractCrudController
 {
@@ -28,6 +30,17 @@ class StoryCrudController extends AbstractCrudController
                 'trip' => 'ASC',
                 'displayOrder' => 'ASC',
             ])
+            ->setSearchFields([
+                'nameEn',
+                'NameFr',
+            ])
+        ;
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add(EntityFilter::new('trip'))
         ;
     }
 

@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
@@ -21,6 +22,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MealCrudController extends AbstractCrudController
@@ -41,9 +43,20 @@ class MealCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Meal')
             ->setEntityLabelInPlural('Meals')
+            ->setDefaultSort([
+                'enjoyedAt' => 'DESC'
+            ])
             ->setSearchFields([
                 'name',
             ])
+        ;
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add(EntityFilter::new('place'))
+            ->add(EntityFilter::new('placeTags'))
         ;
     }
 

@@ -23,6 +23,10 @@ class MediaTagCrudController extends AbstractCrudController
             ->setDefaultSort([
                 'nameEn' => 'ASC'
             ])
+            ->setSearchFields([
+                'nameEn',
+                'nameFr'
+            ])
         ;
     }
 
