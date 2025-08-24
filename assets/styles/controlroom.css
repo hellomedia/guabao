@@ -93,6 +93,7 @@ table.datagrid td.actions {
     }
     .thumb-list {
         img {
+            flex-wrap: wrap;
             max-height: 150px;
             width: auto;
         }
