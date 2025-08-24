@@ -66,8 +66,17 @@ class PlaceCrudController extends AbstractCrudController
         yield TextField::new('address')->setFormTypeOption('attr', ['data-map-picker-target' => 'address']);
         yield TextField::new('googlePlaceId')->setFormTypeOption('attr', ['data-map-picker-target' => 'placeId']);
 
-        yield NumberField::new('latitude')->setFormTypeOption('attr', ['data-map-picker-target' => 'lat']);
-        yield NumberField::new('longitude')->setFormTypeOption('attr', ['data-map-picker-target' => 'lng']);
+        yield NumberField::new('latitude')
+            ->setNumDecimals(4)
+            ->setFormTypeOption('scale', 7)
+            ->setFormTypeOption('attr', ['data-map-picker-target' => 'lat'])
+        ;
+
+        yield NumberField::new('longitude')
+            ->setNumDecimals(4)
+            ->setFormTypeOption('scale', 7)
+            ->setFormTypeOption('attr', ['data-map-picker-target' => 'lng'])
+        ;
 
         yield AssociationField::new('placeTags')
             ->setFormTypeOptions([

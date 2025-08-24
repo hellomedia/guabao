@@ -32,10 +32,9 @@
                     />
                 </a>
 
-                <div style="margin-bottom: 0">
-                    {{ form_row(form.descriptionEn) }}
-                    {{ form_row(form.descriptionFr) }}
-                </div>
+                {{ form_row(form.is360) }}
+                {{ form_row(form.descriptionEn) }}
+                {{ form_row(form.descriptionFr) }}
             </div>
 
             <div class="column-2">
@@ -46,8 +45,8 @@
                 {{ form_row(form.story) }}
                 {{ form_row(form.showInStory) }}
                 
-                {{ form_row(form.tags) }}
                 {{ form_row(form.placeTags) }}
+                {{ form_row(form.place) }}
 
             </div>
 
@@ -58,7 +57,8 @@
                 {{ form_row(form.meal) }}
                 {{ form_row(form.isMeal) }}
                 {{ form_row(form.takenAt) }}
-                {{ form_row(form.is360) }}
+                {{ form_row(form.tags) }}
+                
             </div>
 
             {{ form_rest(form) }}

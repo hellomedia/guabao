@@ -1,12 +1,14 @@
 {% if field.value|length > 0 %}
 	<div class="thumb-list">
 		 {% for media in field.value[:12] %} {# max 12 items #}
-			<img
-                src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
-                alt=""
-				width="200"
-				height="200"
-            />
+			<a href="{{ path('controlroom_media_detail', {'entityId': media.id}) }}">
+                <img
+                    src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+                    alt=""
+                    width="200"
+                    height="200"
+                />
+            </a>
 		{% endfor %}
 	</div>
 {% else %}

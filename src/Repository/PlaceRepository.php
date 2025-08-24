@@ -16,7 +16,12 @@ class PlaceRepository extends ServiceEntityRepository
         parent::__construct($registry, Place::class);
     }
 
-    public function findNearby(float $lat, float $lng, float $tolerance = 0.0010): ?Place
+    /**
+     * Tolerance 0.0005 :
+     * Latitude: 0.0005∘ ≈ 50 meters (nearly constant everywhere)
+     * Longitude: 0.0005∘ ≈ 30 to 50 meters (depends on position)
+     */
+    public function findNearby(float $lat, float $lng, float $tolerance = 0.0005): ?Place
     {
         return $this->createQueryBuilder('p')
             ->where('ABS(p.latitude - :lat) < :tolerance')

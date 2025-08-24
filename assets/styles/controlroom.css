@@ -60,9 +60,10 @@ table.datagrid td.actions {
         width: auto;
     }
     .thumb-list {
-        max-width: calc(80px * 4);
+        max-width: calc(70px * 4);
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr; 
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 5px;
         img {
             max-height: 70px;
             width: auto;

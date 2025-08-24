@@ -112,8 +112,8 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
         // we could query the DB  as long as PlaceFixtures is added to the dependencies
         $this->autoFillHelper->autoAssignPlace($media);
 
-        $this->autoFillHelper->setTrip($media);
+        $this->autoFillHelper->autoAssignTrip($media);
 
-        $this->autoFillHelper->setMeal($media);
+        $this->autoFillHelper->autoAssignMeal($media);
     }
 }

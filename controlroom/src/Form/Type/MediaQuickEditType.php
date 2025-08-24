@@ -5,6 +5,7 @@ namespace Controlroom\Form\Type;
 use App\Entity\Food;
 use App\Entity\Meal;
 use App\Entity\Media;
+use App\Entity\Place;
 use App\Entity\Story;
 use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
@@ -145,6 +146,12 @@ class MediaQuickEditType extends AbstractType
                 'required' => false,
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
+            ->add('place', EntityType::class, [
+                'class' => Place::class,
+                'required' => false,
+                'multiple' => false,
+                'autocomplete' => true,
             ])
         ;
     }

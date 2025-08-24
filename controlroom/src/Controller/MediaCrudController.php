@@ -158,8 +158,14 @@ class MediaCrudController extends AbstractCrudController
         // PLACE
         yield FormField::addFieldset('Place');
         yield AssociationField::new('place');
-        yield NumberField::new('latitude', 'lat')->setFormTypeOption('scale', 7);
-        yield NumberField::new('longitude', 'long')->setFormTypeOption('scale', 7);
+        yield NumberField::new('latitude', 'lat')
+            ->setNumDecimals(4)
+            ->setFormTypeOption('scale', 7)
+        ;
+        yield NumberField::new('longitude', 'long')
+            ->setNumDecimals(4)
+            ->setFormTypeOption('scale', 7)
+        ;
         yield TextField::new('googleMapsLink')
             ->setLabel('Maps')
             ->renderAsHtml()
@@ -207,19 +213,19 @@ class MediaCrudController extends AbstractCrudController
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        $this->_customFormProcessing($entityManager, $entityInstance);
+        $this->_customFormProcessing($entityInstance);
 
         parent::persistEntity($entityManager, $entityInstance);
     }
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        $this->_customFormProcessing($entityManager, $entityInstance);
+        $this->_customFormProcessing($entityInstance);
 
         parent::updateEntity($entityManager, $entityInstance);
     }
 
-    private function _customFormProcessing(EntityManagerInterface $entityManager, Media $media): void 
+    private function _customFormProcessing(Media $media): void 
     {
         // 'Media' = entity name
         // 'imageFile' = name of field with FileType form type
@@ -234,9 +240,9 @@ class MediaCrudController extends AbstractCrudController
 
             // upload and convert to avif
             $this->uploadHelper->uploadImage($media, $uploadedFile, resize: $this->_shouldBeResized($media));
-
-            $this->_updateAutoFields($media, $entityManager, $exif);
         }
+
+        $this->_updateAutoFields($media, $exif ?? false);
 
         // Video from Vimeo
         if ($media->getVimeoId() != null) {
@@ -250,7 +256,7 @@ class MediaCrudController extends AbstractCrudController
                 $media->setTakenAtHint(null);
             }
             
-            $this->autoFillHelper->setTrip($media);
+            $this->autoFillHelper->autoAssignTrip($media);
         }
     }
 
@@ -271,61 +277,25 @@ class MediaCrudController extends AbstractCrudController
         return true;
     }
 
-    private function _updateAutoFields(Media $media, EntityManagerInterface $entityManager, array|false $exif)
+    private function _updateAutoFields(Media $media, array|false $exif)
     {
-        $this->autoFillHelper->setTakenAt($media, $exif);
+        if ($exif) {
+            $this->autoFillHelper->setTakenAt($media, $exif);
+            $this->autoFillHelper->setCoordinates($media, $exif);
+        }
 
-        $this->autoFillHelper->setCoordinates($media, $exif);
-
-        $this->autoFillHelper->autoAssignPlace($media, $entityManager);
+        $this->autoFillHelper->autoAssignPlace($media);
 
         if ($media->getPlace() == null) {
-            $this->_suggestPlace($media);
+            $suggestion = $this->autoFillHelper->suggestPlace($media);
+
+            if ($suggestion) {
+                $this->addFlash('info', $suggestion);
+            }
         }
 
-        $this->autoFillHelper->setTrip($media);
-
-        $this->autoFillHelper->setMeal($media);
-    }
-
-    private function _suggestPlace(Media $media)
-    {
-        $lat = $media->getLatitude();
-        $lng = $media->getLongitude();
-
-        // No nearby match, suggest new place
-        // Suggestion only — don't persist
-        $suggestion = $this->mapsApiHelper->findNearbyPlace($lat, $lng);
-
-        if ($suggestion !== null) {
-            $name = $suggestion['name'] ?? 'Unknown';
-            $address = $suggestion['vicinity'] ?? 'Unknown address';
-            $placeId = $suggestion['place_id'] ?? null;
-            $location = $suggestion['geometry']['location'] ?? [];
-
-            $placeUrl = $placeId
-                ? 'https://www.google.com/maps/place/?q=place_id=' . urlencode($placeId)
-                : null;
-
-            $coordUrl = isset($location['lat'], $location['lng'])
-                ? sprintf('https://www.google.com/maps/search/?api=1&query=%f,%f', $location['lat'], $location['lng'])
-                : null;
-
-            $linkParts = [];
-            if ($placeUrl) {
-                $linkParts[] = sprintf('<a href="%s" target="_blank">Google Maps (place)</a>', $placeUrl);
-            }
-            if ($coordUrl) {
-                $linkParts[] = sprintf('<a href="%s" target="_blank">By coordinates</a>', $coordUrl);
-            }
-
-            $this->addFlash('info', sprintf(
-                '📍 Suggested place: <strong>%s</strong><br><small>%s</small><br>%s',
-                htmlspecialchars($name),
-                htmlspecialchars($address),
-                implode(' | ', $linkParts)
-            ));
-        }
+        $this->autoFillHelper->autoAssignTrip($media);
+        $this->autoFillHelper->autoAssignMeal($media);
     }
 
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder

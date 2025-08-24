@@ -3,6 +3,10 @@
 namespace Controlroom\Controller;
 
 use App\Entity\Meal;
+use App\Entity\Tag\PlaceTag;
+use App\Helper\GoogleMapsApiHelper;
+use App\Helper\MealAutoFillHelper;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
@@ -16,12 +20,15 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MealCrudController extends AbstractCrudController
 {
     public function __construct(
-        private UrlGeneratorInterface $urlGenerator
+        private UrlGeneratorInterface $urlGenerator,
+        private MealAutoFillHelper $autoFillHelper,
+        private GoogleMapsApiHelper $mapsApiHelper,
     ) {}
 
     public static function getEntityFqcn(): string
@@ -48,11 +55,25 @@ class MealCrudController extends AbstractCrudController
             ->setTemplatePath('@media/easyadmin/field/thumbnail_list.html.twig')
             ->hideOnForm();
 
+        yield TextField::new('name')->onlyOnIndex();
+
         yield DateTimeField::new('enjoyedAt');
 
         yield ChoiceField::new('type');
 
-        yield AssociationField::new('place');
+        yield AssociationField::new('place')
+            ->setFormTypeOption('help', 'Leave null for autofill with existing place within 100m of meal medias')
+        ;
+
+        yield AssociationField::new('placeTags', 'Place tags')
+            ->setFormTypeOptions([
+                'by_reference' => false, // important for ManyToMany when using add/remove methods
+                'choice_label' => function (PlaceTag $tag) {
+                    $locale = $this->getContext()?->getRequest()?->getLocale() ?? 'fr';
+                    return $tag->getName($locale);
+                }
+            ])
+            ->setTemplatePath('@controlroom/field/tags.html.twig');
         
     }
 
@@ -85,4 +106,30 @@ class MealCrudController extends AbstractCrudController
         return $qb;
     }
 
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        $this->_customFormProcessing($entityInstance);
+
+        parent::persistEntity($entityManager, $entityInstance);
+    }
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        $this->_customFormProcessing($entityInstance);
+
+        parent::updateEntity($entityManager, $entityInstance);
+    }
+
+    private function _customFormProcessing(Meal $meal): void
+    {
+        $this->autoFillHelper->autoAssignPlace($meal);
+
+        if ($meal->getPlace() == null) {
+            $suggestion = $this->autoFillHelper->suggestPlace($meal);
+
+            if ($suggestion) {
+                $this->addFlash('info', $suggestion);
+            }
+        }
+    }
 }

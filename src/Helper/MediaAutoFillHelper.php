@@ -47,7 +47,7 @@ class MediaAutoFillHelper
         }   
     }
 
-    public function setTrip(Media $media)
+    public function autoAssignTrip(Media $media)
     {
         if ($media->getTrip() !== null) {
             return; // already set
@@ -97,33 +97,91 @@ class MediaAutoFillHelper
         }
     }
 
-    public function setMeal(Media $media): void
+    public function autoAssignMeal(Media $media): void
     {
-        // only if meal flag is true
-        if ($media->isMeal() == false) {
-            return;
-        }
-
-        // only if meal not set 
         if ($media->getMeal() !== null) {
             return; // already set
+        }
+
+        if ($media->isMeal() == false) {
+            return;
         }
 
         $meal = $this->mealRepository->findOneByMediaDate($media->getTakenAt());
 
         if (!$meal) {
-            $meal = new Meal;
-            $meal->setEnjoyedAt($media->getTakenAt());
-            // meal place : will be set when it's set for a meal media
-            
-            // place tag, let's auto-fill
-            foreach ($media->getPlaceTags() as $placeTag) {
-                $meal->addPlaceTag($placeTag);
-            }
-           
-            $this->entityManager->persist($meal);
+            $this->_autoCreateMeal($media);
         }
 
         $media->setMeal($meal);
+    }
+
+    private function _autoCreateMeal(Media $media): Meal
+    {
+        $meal = new Meal;
+
+        $meal->setEnjoyedAt($media->getTakenAt());
+
+        if ($media->getPlace() == null) {
+            $this->autoAssignPlace($media);
+        }
+
+        if ($media->getPlace()) {
+            $meal->setPlace($media->getPlace());
+        }
+
+        foreach ($media->getPlaceTags() as $placeTag) {
+            $meal->addPlaceTag($placeTag);
+        }
+
+        $this->entityManager->persist($meal);
+
+        return $meal;
+    }
+
+    public function suggestPlace(Media $media): ?string
+    {
+        if ($media->getPlace() != null) {
+            return null;
+        }
+    
+        $lat = $media->getLatitude();
+        $lng = $media->getLongitude();
+
+        // No nearby match, suggest new place
+        // Suggestion only — don't persist
+        $suggestion = $this->mapsApiHelper->findNearbyPlace($lat, $lng);
+
+        if ($suggestion == null) {
+            return null;
+        }
+
+        $name = $suggestion['name'] ?? 'Unknown';
+        $address = $suggestion['vicinity'] ?? 'Unknown address';
+        $placeId = $suggestion['place_id'] ?? null;
+        $location = $suggestion['geometry']['location'] ?? [];
+
+        $placeUrl = $placeId
+            ? 'https://www.google.com/maps/place/?q=place_id=' . urlencode($placeId)
+            : null;
+
+        $coordUrl = isset($location['lat'], $location['lng'])
+            ? sprintf('https://www.google.com/maps/search/?api=1&query=%f,%f', $location['lat'], $location['lng'])
+            : null;
+
+        $linkParts = [];
+        if ($placeUrl) {
+            $linkParts[] = sprintf('<a href="%s" target="_blank">Google Maps (place)</a>', $placeUrl);
+        }
+        if ($coordUrl) {
+            $linkParts[] = sprintf('<a href="%s" target="_blank">By coordinates</a>', $coordUrl);
+        }
+
+        return sprintf(
+            '📍 Suggested place: <strong>%s</strong><br><small>%s</small><br>%s',
+            htmlspecialchars($name),
+            htmlspecialchars($address),
+            implode(' | ', $linkParts)
+        );
     }
 }

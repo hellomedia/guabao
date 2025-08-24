@@ -12,13 +12,11 @@ use App\Pack\Media\Helper\ExifExtractor;
 use App\Pack\Media\Helper\UploadHelper;
 use Controlroom\Form\Type\MediaAddMultipleType;
 use Controlroom\Form\Type\MediaQuickEditType;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -57,6 +55,14 @@ class MediaController extends BaseController
             
             $entityManager->persist($media);
             $entityManager->flush();
+
+            // recreate form to include modifications for auto-updates above
+            $form = $formFactory->createNamed(
+                name: 'media_quick_edit_form_' . $media->getId(),
+                type: MediaQuickEditType::class,
+                data: $media,
+                options: ['trip' => $media->getTrip()]
+            );
         }
 
         return $this->render('@controlroom/media/_quick_edit_form.html.twig', [
@@ -164,17 +170,14 @@ class MediaController extends BaseController
         // we could query the DB  as long as PlaceFixtures is added to the dependencies
         $this->autoFillHelper->autoAssignPlace($media);
 
-        $this->autoFillHelper->setMeal($media);
+        $this->autoFillHelper->autoAssignMeal($media);
     }
 
     private function _updateAutoFieldsAtQuickEdit(Media $media)
     {
-        // currently no place fixtures, so nothing in the DB to link to,
-        // but if we do add place fixtures
-        // we could query the DB  as long as PlaceFixtures is added to the dependencies
         $this->autoFillHelper->autoAssignPlace($media);
 
-        $this->autoFillHelper->setMeal($media);
+        $this->autoFillHelper->autoAssignMeal($media);
     }
 
 }
