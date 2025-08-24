@@ -22,6 +22,7 @@ class PlaceTagCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Place Tag')
             ->setEntityLabelInPlural('Place Tags')
             ->setDefaultSort([
+                'country' => 'ASC',
                 'nameEn' => 'ASC'
             ])
         ;

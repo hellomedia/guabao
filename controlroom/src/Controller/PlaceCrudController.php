@@ -4,7 +4,9 @@ namespace Controlroom\Controller;
 
 use App\Entity\Place;
 use App\Entity\Tag\PlaceTag;
+use App\Helper\PlaceAutoFillHelper;
 use Controlroom\Field\MapPickerField;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Asset;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -19,6 +21,7 @@ class PlaceCrudController extends AbstractCrudController
     public function __construct(
         private string $googleBackendApiKey,
         private string $googleMapsJsApiKey,
+        private PlaceAutoFillHelper $autoFillHelper,
     ) {}
 
     public static function getEntityFqcn(): string
@@ -32,6 +35,7 @@ class PlaceCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Place')
             ->setEntityLabelInPlural('Places')
             ->setDefaultSort([
+                'country' => 'ASC',
                 'name' => 'ASC'
             ])
             ->setFormOptions([
@@ -89,10 +93,30 @@ class PlaceCrudController extends AbstractCrudController
             ->setTemplatePath('@controlroom/field/tags.html.twig')
         ;
 
-        yield TextField::new('country')
-            ->hideOnForm();
-            
+        yield AssociationField::new('country')
+                ->setFormTypeOption('help', 'Leave blank for autofill from place tag')
+        ;
+                    
         yield TextareaField::new('descriptionEn', 'Description EN');
         yield TextareaField::new('descriptionFr', 'Description FR');
+    }
+
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        $this->_customFormProcessing($entityInstance);
+
+        parent::persistEntity($entityManager, $entityInstance);
+    }
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        $this->_customFormProcessing($entityInstance);
+
+        parent::updateEntity($entityManager, $entityInstance);
+    }
+
+    private function _customFormProcessing(Place $place): void
+    {
+        $this->autoFillHelper->autoAssignCountry($place);
     }
 }

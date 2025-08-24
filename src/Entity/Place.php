@@ -26,6 +26,10 @@ class Place implements EntityInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $address = null; // e.g. "123 Rue de Rivoli, 75001 Paris"
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Country $country = null;
+
     #[ORM\Column(length: 64, nullable: true)]
     private ?string $googlePlaceId = null;
 
@@ -190,7 +194,14 @@ class Place implements EntityInterface
 
     public function getCountry(): ?Country
     {
-        return ($this->placeTags->first() ?: null)?->getCountry();
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): static
+    {
+        $this->country = $country;
+
+        return $this;
     }
 
     /**
