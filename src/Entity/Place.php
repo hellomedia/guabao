@@ -62,7 +62,7 @@ class Place implements EntityInterface
 
     public function __toString()
     {
-        return $this->name;
+        return $this->name ?? ($this->latitude . ' / ' . $this->longitude);
     }
 
     public function getId(): int
