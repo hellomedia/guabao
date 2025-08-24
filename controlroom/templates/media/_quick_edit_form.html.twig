@@ -19,20 +19,32 @@
 
             <div class="column-1">
     
-                <a data-fancybox="quick-edit-gallery"
-                    href="{{ uploaded_asset(media) }}" 
-                    data-caption="{{ media.description(app.request.locale)|nl2br }}"
-                >
-                    <img    
-                        style="height: 220px; width: auto;margin-bottom: 15px;" 
-                        src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
-                        width="300"
-                        height="300"
-                        class="{{ media.story is not null and not media.showInStory ? 'faded' }}"
-                    />
-                </a>
+                <div style="display:flex;gap:15px;align-items:start">
+                    <a data-fancybox="quick-edit-gallery"
+                        href="{{ uploaded_asset(media) }}" 
+                        data-caption="{{ media.description(app.request.locale)|nl2br }}"
+                    >
+                        <img    
+                            style="height: 220px; width: auto;margin-bottom: 15px;" 
+                            src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+                            width="300"
+                            height="300"
+                            class="{{ media.story is not null and not media.showInStory ? 'faded' }}"
+                        />
+                    </a>
 
-                {{ form_row(form.is360) }}
+                    <div style="display:flex;flex-direction:column;gap:15px">
+                        <a target="_blank" 
+                            href="{{ path('controlroom_media_detail', {'entityId': media.id}) }}"
+                        >
+                            See details
+                        </a>
+
+                        {{ form_row(form.is360) }}
+                    </div>
+
+                </div>
+
                 {{ form_row(form.descriptionEn) }}
                 {{ form_row(form.descriptionFr) }}
             </div>
@@ -59,9 +71,11 @@
                 {{ form_row(form.takenAt) }}
                 {{ form_row(form.tags) }}
                 
+                
             </div>
 
             {{ form_rest(form) }}
+
         
         </div>
 
