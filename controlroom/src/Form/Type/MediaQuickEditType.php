@@ -127,7 +127,7 @@ class MediaQuickEditType extends AbstractType
                 'required' => false,
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
-                'help' => 'Set to true to auto-create meal or auto-fill with existing meal based on taken_at time +- 10 minutes'
+                'help' => 'Set to true to auto-create meal or auto-fill with existing meal based on taken_at time +- 30 minutes'
             ])
             ->add('meal', EntityType::class, [
                 'class' => Meal::class,

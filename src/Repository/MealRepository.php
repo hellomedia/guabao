@@ -19,7 +19,7 @@ class MealRepository extends ServiceEntityRepository
 
     public function findOneByMediaDate(DateTimeImmutable $mediaTakenAt)
     {
-        $interval = new \DateInterval('PT10M');
+        $interval = new \DateInterval('PT30M');
 
         $start = $mediaTakenAt->sub($interval);
         $end = $mediaTakenAt->add($interval);
