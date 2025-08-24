@@ -110,7 +110,7 @@ class MediaAutoFillHelper
         $meal = $this->mealRepository->findOneByMediaDate($media->getTakenAt());
 
         if (!$meal) {
-            $this->_autoCreateMeal($media);
+            $meal = $this->_autoCreateMeal($media);
         }
 
         $media->setMeal($meal);
