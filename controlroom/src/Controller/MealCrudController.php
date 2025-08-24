@@ -47,7 +47,7 @@ class MealCrudController extends AbstractCrudController
                 'enjoyedAt' => 'DESC'
             ])
             ->setSearchFields([
-                'name',
+                'place.name',
             ])
         ;
     }

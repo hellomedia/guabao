@@ -43,7 +43,8 @@ class FoodCrudController extends AbstractCrudController
                 'nameEn' => 'ASC'
             ])
             ->setSearchFields([
-                'name',
+                'nameEn',
+                'nameFr'
             ])
         ;
     }
