@@ -128,11 +128,11 @@ class TripCrudController extends AbstractCrudController
             })
             ->setIcon('fa fa-edit');
 
-        $addPictures = Action::new('addMedias', '+ Add pictures')
+        $addImages = Action::new('addImages', '+ Add images')
             ->linkToUrl($this->urlGenerator->generate('admin_media_add_multiple'))
         ;
 
-        $globalAdPictures = Action::new('addMedias', '+ Add pictures')
+        $globalAddImages = Action::new('addImages', '+ Add images')
             ->linkToUrl($this->urlGenerator->generate('admin_media_add_multiple'))
             ->createAsGlobalAction()
         ;
@@ -140,8 +140,8 @@ class TripCrudController extends AbstractCrudController
         return $actions
             ->add(Action::DETAIL, $viewMedias)
             ->add(Action::DETAIL, $bulkEditMedias)
-            ->add(Action::DETAIL, $addPictures)
-            ->add(Action::INDEX, $globalAdPictures)
+            ->add(Action::DETAIL, $addImages)
+            ->add(Action::INDEX, $globalAddImages)
             ->add(Action::INDEX, $viewMedias)
             ->add(Action::INDEX, $bulkEditMedias)
         ;
