@@ -99,28 +99,31 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Highlights', 'fa fa-star', SiteHighlight::class);
 
         yield MenuItem::section('Trips');
-        yield MenuItem::linkToCrud('Trip', 'fa fa-globe', Trip::class);
+        yield MenuItem::linkToCrud('Trips', 'fa fa-globe', Trip::class);
         yield MenuItem::linkToCrud('Stories', 'fa fa-comment-dots', Story::class);
-        yield MenuItem::linkToCrud('Trip Tag', 'fa fa-tag', TripTag::class);
+        yield MenuItem::linkToCrud('Trip Tags', 'fa fa-tag', TripTag::class);
 
         yield MenuItem::section('Food');
         yield MenuItem::linkToCrud('Food', 'fa fa-pizza-slice', Food::class);
-        yield MenuItem::linkToCrud('Meal', 'fa fa-utensils', Meal::class);
-        yield MenuItem::linkToCrud('Ingredient', 'fa fa-carrot', Ingredient::class);
-        yield MenuItem::linkToCrud('Food Tag', 'fa fa-tag', FoodTag::class);
-        yield MenuItem::linkToCrud('Cuisine', 'fa fa-tag', Cuisine::class);
+        yield MenuItem::linkToCrud('Meals', 'fa fa-utensils', Meal::class);
+        yield MenuItem::linkToCrud('Ingredients', 'fa fa-carrot', Ingredient::class);
+        yield MenuItem::linkToCrud('Food Tags', 'fa fa-tag', FoodTag::class);
+        yield MenuItem::linkToCrud('Cuisines', 'fa fa-tag', Cuisine::class);
 
         yield MenuItem::section('Medias');
-        yield MenuItem::linkToCrud('Media', 'fa fa-photo', Media::class);
-        yield MenuItem::linkToCrud('Media Tag', 'fa fa-tag', MediaTag::class);
+        yield MenuItem::linkToCrud('Images', 'fa fa-photo', Media::class)
+            ->setController(ImageCrudController::class);
+        yield MenuItem::linkToCrud('Videos', 'fa fa-video', Media::class)
+            ->setController(VideoCrudController::class);
+        yield MenuItem::linkToCrud('Media Tags', 'fa fa-tag', MediaTag::class);
 
         yield MenuItem::section('Places');
-        yield MenuItem::linkToCrud('Place', 'fa fa-map-marker', Place::class);
-        yield MenuItem::linkToCrud('Place Tag', 'fa fa-tag', PlaceTag::class);
-        yield MenuItem::linkToCrud('Country', 'fa fa-map-marker', Country::class);
+        yield MenuItem::linkToCrud('Places', 'fa fa-map-marker', Place::class);
+        yield MenuItem::linkToCrud('Place Tags', 'fa fa-tag', PlaceTag::class);
+        yield MenuItem::linkToCrud('Countries', 'fa fa-map-marker', Country::class);
 
         yield MenuItem::section('Users');
-        yield MenuItem::linkToCrud('User', 'fa fa-user', User::class);
+        yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class);
     }
 
     public function configureActions(): Actions

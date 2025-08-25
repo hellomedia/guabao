@@ -3,6 +3,7 @@
 namespace App\Pack\Media\Doctrine\Listener;
 
 use App\Entity\Media;
+use App\Enum\MediaType;
 use App\Pack\Media\Helper\UploadHelper;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PostRemoveEventArgs;
@@ -21,11 +22,15 @@ class MediaRemovedListener
     {
     }
 
-    public function removeFileFromDisk(Media $image, PostRemoveEventArgs $args)
+    public function removeFileFromDisk(Media $media, PostRemoveEventArgs $args)
     {
-        $file = $this->uploadsPath . '/' . $image->getPath();
+        if ($media->getType() !== MediaType::IMAGE) {
+            return;
+        }
 
-        if ($file && file_exists($file)) {
+        $file = $this->uploadsPath . '/' . $media->getPath();
+
+        if ($file && file_exists($file) && is_file($file)) {
             unlink($file);
         }
     }
