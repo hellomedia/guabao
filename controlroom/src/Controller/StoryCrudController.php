@@ -32,7 +32,7 @@ class StoryCrudController extends AbstractCrudController
             ])
             ->setSearchFields([
                 'nameEn',
-                'NameFr',
+                'nameFr',
             ])
         ;
     }

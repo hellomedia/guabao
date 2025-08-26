@@ -21,7 +21,7 @@ class StoryQuickEditType extends AbstractType
                     'rows' => 4,      // taller
                 ],
              ])
-            ->add('NameFr')
+            ->add('nameFr')
             ->add('descriptionFr', TextareaType::class, [
                 'label' => "FR",
                 'required' => false,
