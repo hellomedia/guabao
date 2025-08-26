@@ -1,0 +1,30 @@
+{% if stories is not empty %}
+<style>
+    .story-video {
+        margin-top: 30px;
+    }
+</style>
+	<div id="stories">
+		{% for story in stories %}
+			<div class="story">
+				<h2>{{ story }}</h2>
+				<div class="story-description">
+					{{ story.description(app.locale)|nl2br }}
+				</div>
+				<div class="story-images">
+					{% include "trip/_gallery.html.twig" with {
+                        medias: story.displayableImages,
+                        gallery: 'story' ~ story.id
+                    } %}
+				</div>
+				{% if story.displayableVideo %}
+					<div class="story-video">
+						{% include "media/_video.html.twig" with {
+                            video: story.displayableVideo,
+                        } %}
+					</div>
+				{% endif %}
+			</div>
+		{% endfor %}
+	</div>
+{% endif %}

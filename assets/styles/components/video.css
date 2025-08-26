@@ -1,0 +1,46 @@
+@layer components {
+
+    .video-wrapper {
+
+        width: 100%; /* for mobile, OK to let height adapt to width 100% */
+
+        .video-container {
+            padding: 0;
+            position:relative;
+
+            iframe { /* iframe positionned absolutely at same size as video-container */
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        &.landscape {
+            .video-container {
+                padding-top: 56.25%; /* ==> height = 56.25%% of width (landscape aspect ratio) */
+            }
+        }
+        &.portrait {
+            .video-container {
+                padding-top: 177.78%; /* ==> height = 177.78% of width (portrait aspect ratio) */
+            }
+        }
+    }
+
+    @media (width > theme(--breakpoint-mobile-end)) {
+        .video-wrapper {
+            &.landscape {
+                height: auto; /* height defined by containing element */
+                width: 100%; /* width 100% ok */
+            }
+    
+            &.portrait {
+                height: 60vh; /* restrict to 60vh */
+                width: calc(60vh / 1.7778); /* width set to restrict for 60vh height */
+                margin-inline: auto;
+            }
+        }
+    }
+}

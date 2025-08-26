@@ -18,21 +18,4 @@
     {% endif %}
 </div> #}
 
-{% if trip.stories is not empty %}
-    <div id="stories">
-        {% for story in trip.stories %}
-            <div class="story">
-                <h2>{{ story }}</h2>
-                <div class="story-description">
-                    {{ story.description(app.locale)|nl2br }}
-                </div>
-                <div class="story-medias">
-                    {% include "trip/_gallery.html.twig" with {
-                        medias: story.displayableMedias,
-                        gallery: 'story' ~ story.id
-                    } %}
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-{% endif %}
+{% include "trip/_stories.html.twig" with {'stories': trip.stories} %}

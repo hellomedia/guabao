@@ -7,6 +7,7 @@ use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
 use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Enum\MediaType;
+use App\Enum\VideoOrientation;
 use App\Pack\Media\Entity\Interface\UploadedAssetEntityInterface;
 use App\Pack\Media\Entity\Trait\ImageTrait;
 use App\Repository\MediaRepository;
@@ -120,6 +121,9 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $takenAtHint = null;
+
+    #[ORM\Column(enumType: VideoOrientation::class, nullable: true)]
+    private ?VideoOrientation $videoOrientation = null;
 
     #[ORM\ManyToOne(inversedBy: 'medias')]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
@@ -391,6 +395,23 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     public function setTakenAtHint(?string $takenAtHint): static
     {
         $this->takenAtHint = $takenAtHint;
+
+        return $this;
+    }
+
+    public function getVideoOrientation(): ?VideoOrientation
+    {
+        return $this->videoOrientation;
+    }
+
+    public function getOrientation(): ?VideoOrientation
+    {
+        return $this->videoOrientation;
+    }
+
+    public function setVideoOrientation(?VideoOrientation $videoOrientation): static
+    {
+        $this->videoOrientation = $videoOrientation;
 
         return $this;
     }

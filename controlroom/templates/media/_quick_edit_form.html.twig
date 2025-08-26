@@ -24,21 +24,47 @@
                         href="{{ uploaded_asset(media) }}" 
                         data-caption="{{ media.description(app.request.locale)|nl2br }}"
                     >
-                        <img    
-                            style="height: 220px; width: auto;margin-bottom: 15px;" 
-                            src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
-                            width="300"
-                            height="300"
-                            class="{{ media.story is not null and not media.showInStory ? 'faded' }}"
-                        />
+                        {% if media.isImage %}
+                            <img    
+                                style="height: 220px; width: auto;margin-bottom: 15px;" 
+                                src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+                                width="300"
+                                height="300"
+                                class="{{ media.story is not null and not media.showInStory ? 'faded' }}"
+                            />
+                        {% endif %}
+
+                        {% if media.isVideo %}
+                            {% if media.orientation == enum('App\\Enum\\VideoOrientation').LANDSCAPE %}
+                                <div style="padding:56.25% 0 0 0;position:relative;width:280px;">
+                                    <iframe src="https://player.vimeo.com/video/{{ media.vimeoId }}?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="VID_20170815_180837"></iframe>
+                                </div>
+                            {% endif %}
+
+                            {% if media.orientation == enum('App\\Enum\\VideoOrientation').PORTRAIT %}
+                                <div style="padding:177.78% 0 0 0;position:relative;width:200px;">
+                                    <iframe src="https://player.vimeo.com/video/{{ media.vimeoId }}?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title=""></iframe>
+                                </div>
+                            {% endif %}
+
+                        {% endif %}
                     </a>
 
                     <div style="display:flex;flex-direction:column;gap:15px">
-                        <a target="_blank" 
-                            href="{{ path('controlroom_media_detail', {'entityId': media.id}) }}"
-                        >
-                            See details
-                        </a>
+                        {% if media.isImage %}
+                            <a target="_blank"
+                                href="{{ path('controlroom_image_detail', {'entityId': media.id}) }}"
+                            >
+                                See details
+                            </a>
+                        {% endif %}
+                        {% if media.isVideo %}
+                            <a target="_blank"
+                                href="{{ path('controlroom_video_detail', {'entityId': media.id}) }}"
+                            >
+                                See details
+                            </a>
+                        {% endif %}
 
                         {{ form_row(form.is360) }}
                     </div>

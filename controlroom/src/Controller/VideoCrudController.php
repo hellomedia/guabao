@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -33,72 +34,30 @@ class VideoCrudController extends MediaCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield FormField::addFieldset('Image');
 
-        /**
-         * Image fields
-         * ============
-         */
 
-        // INDEX
-        yield TextField::new('path', 'Image')
-            ->setTemplatePath('@media/easyadmin/field/thumbnail.html.twig')
-            ->onlyOnIndex();
-
-        // DETAIL
-        yield TextField::new('path', 'Thumbs')
-            ->setTemplatePath('@media/easyadmin/field/media.html.twig')
-            ->onlyOnDetail();
-        
-        // CREATE
-        yield Field::new('imageFile')
-            ->setFormType(FileType::class)
-            ->setFormTypeOptions([
-                'mapped' => false,
-                'required' => false,
-                'label' => 'New image',
-            ])
-            ->onlyWhenCreating();
-
-        // UPDATE
-        $entity = $this->getContext()?->getEntity()?->getInstance();
-        $filename = $entity?->getFilename();
-
-        yield Field::new('imageFile')
-            ->setFormType(FileType::class)
-            ->setFormTypeOptions([
-                'mapped' => false,
-                'required' => false,
-                'label' => 'Replace image',
-                'help' => 'Existing image: ' . $filename ?? ' - ',
-            ])
-            ->onlyWhenUpdating();
-        
-        /**
-         * End Image fields
-         * ================
-         */
-
-        // VIDEO
         yield FormField::addFieldset('Video');
+
+        yield TextField::new('vimeoId')
+            ->setTemplatePath('@media/easyadmin/field/video_preview.html.twig')
+            ->hideOnForm();
 
         yield TextField::new('takenAtHint')
             ->onlyOnForms()
             ->setHelp('String formatted as \'Ymd_His\' used to extract takenAt. eg: 20170816_190356');
         
-        yield TextField::new('vimeoId')
-                ->onlyOnForms();
-
-        // SHARED
-        yield FormField::addFieldset('Shared');
-
         yield DateTimeField::new('takenAt')
             ->setHelp('Leave empty for auto-fill from exif data');
+        
+        yield TextField::new('vimeoId');
+
+        yield ChoiceField::new('videoOrientation');
 
         // TRIP
         yield FormField::addFieldset('Trip');
         yield AssociationField::new('trip')
             ->setHelp('Leave empty for auto-fill from exif data');
+        yield AssociationField::new('story');
 
         // PLACE
         yield FormField::addFieldset('Place');
