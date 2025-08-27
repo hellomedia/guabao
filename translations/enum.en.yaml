@@ -23,3 +23,16 @@ meal:
     dinner: Dinner
     snack: Snack
     drink: Drink
+food:
+    chocolate: Chocolate
+    dairy: Dairy
+    eggs: Eggs
+    fish: Fish
+    fruit: Fruit
+    grains: Grains and cereals
+    herbs: Herbs and spices
+    legumes: Legumes
+    meat: Meat
+    nuts: Nuts and seeds
+    sweetners: Sweetners
+    vegetable: Vegatable

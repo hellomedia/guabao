@@ -7,6 +7,7 @@ use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
+use App\Enum\FoodType;
 use App\Enum\Month;
 use App\Repository\IngredientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -40,6 +41,9 @@ class Ingredient implements LocalizedNameInterface, LocalizedSlugInterface, Enti
 
     #[ORM\Column(enumType: Month::class, nullable: true)]
     private ?Month $seasonEnd = null;
+
+    #[ORM\Column(nullable: true, enumType: FoodType::class)]
+    private ?FoodType $foodType = null;
 
     public function __construct()
     {
@@ -110,6 +114,18 @@ class Ingredient implements LocalizedNameInterface, LocalizedSlugInterface, Enti
         if ($this->food->removeElement($food)) {
             $food->removeIngredient($this);
         }
+
+        return $this;
+    }
+
+    public function getFoodType(): ?FoodType
+    {
+        return $this->foodType;
+    }
+
+    public function setFoodType(?FoodType $foodType): static
+    {
+        $this->foodType = $foodType;
 
         return $this;
     }

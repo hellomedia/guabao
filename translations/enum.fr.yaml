@@ -23,3 +23,16 @@ meal:
     dinner: Souper
     snack: Snack
     drink: Drink
+food:
+    chocolate: Chocolat
+    dairy: Produits laitiers
+    eggs: Oeufs
+    fish: Poisson
+    fruit: Fruit
+    grains: Graines and céréales
+    herbs: Herbes and épices
+    legumes: Legumineuses
+    meat: Viande
+    nuts: Noix et graines
+    sweetners: Sucres
+    vegetable: Légume
