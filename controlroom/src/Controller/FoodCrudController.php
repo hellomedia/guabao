@@ -121,7 +121,17 @@ class FoodCrudController extends AbstractCrudController
             ->setIcon('fa fa-images')
             ->addCssClass('btn btn-outline-primary');
 
-        return $actions->add(Action::DETAIL, $viewMedias);
+        $bulkEdit = Action::new('bulkEdit', 'Bulk edit')
+            ->linkToRoute('admin_food_bulk_edit')
+            ->setIcon('fa fa-edit')
+            ->createAsGlobalAction();
+
+        $actions
+            ->add(Action::INDEX, $bulkEdit)
+            ->add(Action::DETAIL, $viewMedias)
+        ;
+
+        return $actions;
     }
 
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder

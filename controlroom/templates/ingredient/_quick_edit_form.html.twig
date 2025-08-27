@@ -1,0 +1,39 @@
+{# Important: Note the syntax with [] and only #}
+{# Ignore global themes; use only EasyAdmin #}
+{# important to avoid theme conflicts #}
+{% form_theme form with ['@controlroom/form/form_theme.html.twig'] only %}
+
+<div id="ingredient_{{ ingredient.id }}" data-controller="ajax">
+
+    <form
+        name="ingredient_quick_edit_form_{{ ingredient.id }}"
+        data-ajax-target="form"
+        data-action="submit->ajax#submit"
+        action="{{ path('admin_ingredient_quick_edit', {id: ingredient.id}) }}"
+        method="post"
+        style="margin-bottom: 20px"
+    >
+
+        {# container for form content replaced in ajax #}
+        <div data-ajax-target="container" class="quick-edit-item-grid">
+
+            <div class="column-1">
+                {{ form_row(form.nameEn) }}
+                {{ form_row(form.nameFr) }}
+            </div>
+            <div class="column-2">
+                {{ form_row(form.foodType) }}
+            </div>
+            <div class="column-3">
+            </div>
+            
+            {{ form_rest(form) }}
+
+        </div>
+
+        {% include '@controlroom/form/_ajax_button.html.twig' %}
+
+    </form>
+
+</div>
+

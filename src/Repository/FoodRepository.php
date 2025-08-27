@@ -22,6 +22,16 @@ class FoodRepository extends ServiceEntityRepository
         parent::__construct($registry, Food::class);
     }
 
+    public function findAll(): array
+    {
+        $locale = $this->requestStack->getCurrentRequest()->getLocale();
+
+        return $this->createQueryBuilder('i')
+            ->orderBy('i.name' . \ucfirst($locale), 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    
     public function findOneBySlug(string $slug): ?Food
     {
         $locale = $this->requestStack->getCurrentRequest()->getLocale();

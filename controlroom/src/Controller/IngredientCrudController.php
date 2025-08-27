@@ -3,6 +3,8 @@
 namespace Controlroom\Controller;
 
 use App\Entity\Ingredient;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -26,6 +28,20 @@ class IngredientCrudController extends AbstractCrudController
                 'nameEn' => 'ASC'
             ])
         ;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $bulkEdit = Action::new('bulkEdit', 'Bulk edit')
+            ->linkToRoute('admin_ingredient_bulk_edit')
+            ->setIcon('fa fa-edit')
+            ->createAsGlobalAction();
+
+        $actions
+            ->add(Action::INDEX, $bulkEdit)
+        ;
+
+        return $actions;
     }
 
     public function configureFields(string $pageName): iterable
