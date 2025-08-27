@@ -83,13 +83,7 @@ class TripCrudController extends AbstractCrudController
         yield DateField::new('endedAt');
 
         yield AssociationField::new('tags')
-            ->setFormTypeOptions([
-                'by_reference' => false, // important for ManyToMany when using add/remove methods
-                'choice_label' => function (TripTag $tag) {
-                    $locale = $this->getContext()?->getRequest()?->getLocale() ?? 'fr';
-                    return $tag->getName($locale);
-                }
-            ])
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@controlroom/field/tags.html.twig');
 
         yield TextareaField::new('headlineEn', 'Headline EN')->hideOnIndex();

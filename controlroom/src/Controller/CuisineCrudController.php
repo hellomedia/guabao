@@ -5,6 +5,7 @@ namespace Controlroom\Controller;
 use App\Entity\Cuisine;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CuisineCrudController extends AbstractCrudController
@@ -29,5 +30,9 @@ class CuisineCrudController extends AbstractCrudController
     {
         yield TextField::new('nameEn', 'Name EN');
         yield TextField::new('nameFr', 'Name FR');
+
+        yield AssociationField::new('food')
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
+            ->setTemplatePath('@controlroom/field/food_list.html.twig');
     }
 }

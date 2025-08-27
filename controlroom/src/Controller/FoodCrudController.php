@@ -4,6 +4,7 @@ namespace Controlroom\Controller;
 
 use App\Entity\Food;
 use App\Entity\Tag\FoodTag;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
@@ -54,39 +55,54 @@ class FoodCrudController extends AbstractCrudController
         return $filters
             ->add(EntityFilter::new('cuisine'))
             ->add(EntityFilter::new('tags'))
+            ->add(EntityFilter::new('parent'))
         ;
     }
 
     public function configureFields(string $pageName): iterable
     {
-        yield IdField::new('id')->hideOnForm();
+        yield IdField::new('id')->onlyOnDetail();
 
         yield AssociationField::new('medias')
             ->setTemplatePath('@media/easyadmin/field/thumbnail_list.html.twig')
             ->hideOnForm();
-
+            
         yield TextField::new('nameEn');
         yield TextField::new('nameFr');
 
+        yield AssociationField::new('parent')
+            ->setFormTypeOptions([
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('f')
+                    ->where('f.parent IS NULL')
+                    ->orderBy('f.nameEn', 'ASC'); // change to the field you want
+            },
+        ]);
+
+        yield AssociationField::new('children')
+            ->setTemplatePath('@controlroom/field/food_list.html.twig');
+
         yield TextareaField::new('descriptionEn');
-        yield TextareaField::new('descriptionFr');
+        yield TextareaField::new('descriptionFr')->hideOnIndex();
 
         yield AssociationField::new('cuisine');
+        yield AssociationField::new('cuisines')
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
+            ->setTemplatePath('@controlroom/field/cuisines.html.twig');
 
         yield AssociationField::new('tags')
-            ->setFormTypeOptions([
-                'by_reference' => false, // important for ManyToMany when using add/remove methods
-                'choice_label' => function (FoodTag $tag) {
-                    $locale = $this->getContext()?->getRequest()?->getLocale() ?? 'fr';
-                    return $tag->getName($locale);
-                }
-            ])
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@controlroom/field/tags.html.twig')
         ;
 
-        yield ChoiceField::new('loveLevel');
-        yield ChoiceField::new('healthyLevel');
-        yield ChoiceField::new('localLevel');
+        yield AssociationField::new('ingredients')
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
+            ->setTemplatePath('@controlroom/field/ingredients.html.twig');
+
+        yield ChoiceField::new('loveLevel',' Love');
+        yield ChoiceField::new('healthyLevel', 'Healthy');
+        yield ChoiceField::new('localLevel', 'Local');
+
     }
 
     public function configureActions(Actions $actions): Actions

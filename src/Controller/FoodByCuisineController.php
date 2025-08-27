@@ -33,13 +33,13 @@ class FoodByCuisineController extends BaseController
     #[Route('/food/cuisine/{slugEn:cuisine}', name: 'food_by_cuisine_cuisine')]
     public function cuisine(Cuisine $cuisine, FoodRepository $foodRepository, Request $request): Response
     {
-        $foods = $foodRepository->findByCuisine($cuisine);
+        $foodList = $foodRepository->findByCuisine($cuisine);
 
         $this->addBreadcrumb('food.by_cuisine', 'food_by_cuisine_index');
         $this->addBreadcrumb($cuisine->getName($request->getLocale()));
 
         return $this->render('food/cuisine/cuisine.html.twig', [
-            'foods' => $foods,
+            'foodList' => $foodList,
             'cuisine' => $cuisine,
         ]);
     }

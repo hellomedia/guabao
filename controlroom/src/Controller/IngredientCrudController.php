@@ -5,6 +5,7 @@ namespace Controlroom\Controller;
 use App\Entity\Ingredient;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -30,6 +31,10 @@ class IngredientCrudController extends AbstractCrudController
     {
         yield TextField::new('nameEn', 'Name EN');
         yield TextField::new('nameFr', 'Name FR');
+
+        yield AssociationField::new('food')
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
+            ->setTemplatePath('@controlroom/field/ingredients.html.twig');
 
         yield BooleanField::new('favourite');
     }

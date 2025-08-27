@@ -1,0 +1,11 @@
+<div class="entity-list">
+    {% if field.value|length > 0 %}
+        {% for ingredient in field.value %}
+            <a href="{{ path('controlroom_ingredient_detail', {entityId: ingredient.id}) }}">
+                {{ ingredient|trans }}
+            </a>
+        {% endfor %}
+    {% else %}
+        <span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
+    {% endif %}
+</div>

@@ -1,0 +1,11 @@
+<div class="tag-list">
+	{% if field.value|length > 0 %}
+        {% for cuisine in field.value %}
+            <a href="{{ path('controlroom_cuisine_detail', {entityId: cuisine.id}) }}">
+                <span class="badge badge-outline">{{ cuisine|trans }}</span>
+            </a>
+        {% endfor %}
+    {% else %}
+        <span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>
+    {% endif %}
+</div>

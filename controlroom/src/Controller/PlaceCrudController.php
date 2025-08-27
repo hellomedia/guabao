@@ -83,13 +83,7 @@ class PlaceCrudController extends AbstractCrudController
         ;
 
         yield AssociationField::new('placeTags')
-            ->setFormTypeOptions([
-                'by_reference' => false, // important for ManyToMany when using add/remove methods
-                'choice_label' => function (PlaceTag $placeTag) {
-                    $locale = $this->getContext()?->getRequest()?->getLocale() ?? 'fr';
-                    return $placeTag->getName($locale);
-                }
-            ])
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@controlroom/field/tags.html.twig')
         ;
 

@@ -3,6 +3,7 @@
 namespace Controlroom\Controller;
 
 use App\Entity\Story;
+use App\Entity\Tag\MediaTag;
 use App\Entity\Trip;
 use Doctrine\ORM\EntityRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -59,6 +60,10 @@ class StoryCrudController extends AbstractCrudController
                     return $trip->getName();
                 }
             ]);
+
+        yield AssociationField::new('tags')
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
+            ->setTemplatePath('@controlroom/field/tags.html.twig');
         
         yield NumberField::new('displayOrder');
 

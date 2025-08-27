@@ -57,10 +57,6 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $takenAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'medias')]
-    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private ?Food $food = null;
-
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Trip $trip = null;
@@ -141,10 +137,17 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     #[ORM\Column(nullable: true)]
     private ?bool $showInFood = null;
 
+    /**
+     * @var Collection<int, Food>
+     */
+    #[ORM\ManyToMany(targetEntity: Food::class, inversedBy: 'media')]
+    private Collection $food;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
         $this->placeTags = new ArrayCollection();
+        $this->food = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -165,18 +168,6 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     public function setTakenAt(?\DateTimeImmutable $takenAt): static
     {
         $this->takenAt = $takenAt;
-
-        return $this;
-    }
-
-    public function getFood(): ?Food
-    {
-        return $this->food;
-    }
-
-    public function setFood(?Food $food): static
-    {
-        $this->food = $food;
 
         return $this;
     }
@@ -472,6 +463,30 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     public function setShowInFood(?bool $showInFood): static
     {
         $this->showInFood = $showInFood;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Food>
+     */
+    public function getFood(): Collection
+    {
+        return $this->food;
+    }
+
+    public function addFood(Food $food): static
+    {
+        if (!$this->food->contains($food)) {
+            $this->food->add($food);
+        }
+
+        return $this;
+    }
+
+    public function removeFood(Food $food): static
+    {
+        $this->food->removeElement($food);
 
         return $this;
     }

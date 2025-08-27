@@ -33,13 +33,13 @@ class FoodByTagController extends BaseController
     #[Route('/food/tag/{slugEn:tag}', name: 'food_by_tag_tag')]
     public function tag(FoodTag $tag, FoodRepository $foodRepository, Request $request): Response
     {
-        $foods = $foodRepository->findByFoodTag($tag);
+        $foodList = $foodRepository->findByFoodTag($tag);
 
         $this->addBreadcrumb('food.by_tag', 'food_by_tag_index');
         $this->addBreadcrumb($tag->getName($request->getLocale()));
 
         return $this->render('food/tag/tag.html.twig', [
-            'foods' => $foods,
+            'foodList' => $foodList,
             'tag' => $tag,
         ]);
     }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
+use App\Entity\Tag\MediaTag;
 use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Repository\StoryRepository;
@@ -34,12 +35,19 @@ class Story implements LocalizedNameInterface, EntityInterface
     #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'story', fetch: 'EAGER')]
     private Collection $medias;
 
+    /**
+     * @var Collection<int, MediaTag>
+     */
+    #[ORM\ManyToMany(targetEntity: MediaTag::class)]
+    private Collection $tags;
+
     #[ORM\Column(nullable: true)]
     private ?int $displayOrder = null;
 
     public function __construct()
     {
         $this->medias = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -126,6 +134,30 @@ class Story implements LocalizedNameInterface, EntityInterface
     public function setDisplayOrder(int $displayOrder): static
     {
         $this->displayOrder = $displayOrder;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MediaTag>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(MediaTag $tag): static
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(MediaTag $tag): static
+    {
+        $this->tags->removeElement($tag);
 
         return $this;
     }

@@ -132,6 +132,12 @@ table.datagrid td.actions {
     gap: 50px;
 }
 
+.story-quick-edit-item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+    gap: 50px;
+}
+
 .faded {
     opacity: 0.5;
 }

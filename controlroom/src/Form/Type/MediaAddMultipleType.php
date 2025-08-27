@@ -119,7 +119,8 @@ class MediaAddMultipleType extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'autocomplete' => true,
-            ])
+                // 'by_reference' => false, // not needed here. Form is not tied to a class, we handle it by hand in mediaController::_importImages
+        ])
             ->add('tags', EntityType::class, [
                 'class' => MediaTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
@@ -129,7 +130,8 @@ class MediaAddMultipleType extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'autocomplete' => true,
-            ])
+                // 'by_reference' => false, // not needed here. Form is not tied to a class, we handle it by hand in mediaController::_importImages
+        ])
             ->add('showInFood', CheckboxType::class, [
                 'label'    => 'show in food',
                 'required' => false,

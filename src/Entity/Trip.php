@@ -187,16 +187,16 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
         $this->parent = $parent;
 
         if ($parent !== null) {
-            $parent->addChildTrip($this);
+            $parent->addChild($this);
         }
 
         return $this;
     }
 
-    public function addChildTrip(Trip $childTrip): void
+    public function addChild(Trip $trip): void
     {
-        if (!$this->children->contains($childTrip)) {
-            $this->children[] = $childTrip;
+        if (!$this->children->contains($trip)) {
+            $this->children[] = $trip;
         }
     }
 

@@ -10,7 +10,6 @@ use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
 use App\Enum\Level;
-use App\Enum\Month;
 use App\Repository\FoodRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -30,6 +29,12 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     #[ORM\Column(type: 'integer')]
     protected int $id;
 
+    #[ORM\ManyToOne(inversedBy: 'children')]
+    private ?Food $parent = null;
+
+    #[ORM\OneToMany(targetEntity: Food::class, mappedBy: 'parent')]
+    private Collection $children;
+
     #[ORM\Column(enumType: Level::class, nullable: true)]
     protected ?Level $loveLevel = null;
 
@@ -38,18 +43,6 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
 
     #[ORM\Column(enumType: Level::class, nullable: true)]
     protected ?Level $healthyLevel = null;
-
-    #[ORM\Column(enumType: Month::class, nullable: true)]
-    private ?Month $seasonStart = null;
-
-    #[ORM\Column(enumType: Month::class, nullable: true)]
-    private ?Month $seasonEnd = null;
-
-    /**
-     * @var Collection<int, Media>
-     */
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'food')]
-    private Collection $medias;
 
     /**
      * @var Collection<int, Tag>
@@ -61,16 +54,30 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     private ?Cuisine $cuisine = null;
 
     /**
+     * @var Collection<int, cuisine>
+     */
+    #[ORM\ManyToMany(targetEntity: cuisine::class, inversedBy: 'food')]
+    private Collection $cuisines;
+
+    /**
      * @var Collection<int, Ingredient>
      */
-    #[ORM\ManyToMany(targetEntity: Ingredient::class)]
+    #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'food')]
     private Collection $ingredients;
+
+    /**
+     * @var Collection<int, Media>
+     */
+    #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'food')]
+    private Collection $medias;
 
     public function __construct()
     {
-        $this->medias = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->ingredients = new ArrayCollection();
+        $this->children = new ArrayCollection();
+        $this->cuisines = new ArrayCollection();
+        $this->medias = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,60 +117,6 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     public function setHealthyLevel(Level $healthyLevel): static
     {
         $this->healthyLevel = $healthyLevel;
-
-        return $this;
-    }
-
-    public function getSeasonStart(): ?Month
-    {
-        return $this->seasonStart;
-    }
-
-    public function setSeasonStart(?Month $seasonStart): static
-    {
-        $this->seasonStart = $seasonStart;
-
-        return $this;
-    }
-
-    public function getSeasonEnd(): ?Month
-    {
-        return $this->seasonEnd;
-    }
-
-    public function setSeasonEnd(?Month $seasonEnd): static
-    {
-        $this->seasonEnd = $seasonEnd;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Media>
-     */
-    public function getMedias(): Collection
-    {
-        return $this->medias;
-    }
-
-    public function addMedia(Media $media): static
-    {
-        if (!$this->medias->contains($media)) {
-            $this->medias->add($media);
-            $media->setFood($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMedia(Media $media): static
-    {
-        if ($this->medias->removeElement($media)) {
-            // set the owning side to null (unless already changed)
-            if ($media->getFood() === $this) {
-                $media->setFood(null);
-            }
-        }
 
         return $this;
     }
@@ -241,5 +194,98 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
         }
 
         return $meals;
+    }
+
+
+    public function isTopLevelFood(): bool
+    {
+        return $this->parent == null;
+    }
+
+    public function hasChildren(): bool
+    {
+        return !$this->children->isEmpty();
+    }
+
+    public function getParent(): ?Food
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?Food $parent): self
+    {
+        $this->parent = $parent;
+
+        if ($parent !== null) {
+            $parent->addChild($this);
+        }
+
+        return $this;
+    }
+
+    public function addChild(Food $food): void
+    {
+        if (!$this->children->contains($food)) {
+            $this->children[] = $food;
+        }
+    }
+
+    /**
+     * @return Collection<int, Trip>
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    /**
+     * @return Collection<int, cuisine>
+     */
+    public function getCuisines(): Collection
+    {
+        return $this->cuisines;
+    }
+
+    public function addCuisine(cuisine $cuisine): static
+    {
+        if (!$this->cuisines->contains($cuisine)) {
+            $this->cuisines->add($cuisine);
+        }
+
+        return $this;
+    }
+
+    public function removeCuisine(cuisine $cuisine): static
+    {
+        $this->cuisines->removeElement($cuisine);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getMedias(): Collection
+    {
+        return $this->medias;
+    }
+
+    public function addMedia(Media $media): static
+    {
+        if (!$this->medias->contains($media)) {
+            $this->medias->add($media);
+            $media->addFood($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedia(Media $media): static
+    {
+        if ($this->medias->removeElement($media)) {
+            $media->removeFood($this);
+        }
+
+        return $this;
     }
 }

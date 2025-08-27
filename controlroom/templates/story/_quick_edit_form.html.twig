@@ -15,9 +15,19 @@
     >
 
         {# container for form content replaced in ajax #}
-        <div data-ajax-target="container" style="columns: 400px 2;column-gap: 50px;">
+        <div data-ajax-target="container" class="story-quick-edit-item-grid">
             
-            {{ form_rest(form) }}
+            <div class="column-1">
+
+                {{ form_row(form.nameEn) }}
+                {{ form_row(form.descriptionEn) }}
+                {{ form_row(form.tags) }}
+            </div>
+            <div class="column-1">
+                {{ form_row(form.nameFr) }}
+                {{ form_row(form.descriptionFr) }}
+                {{ form_rest(form) }}
+            </div>
         
         </div>
 

@@ -96,6 +96,7 @@ class MediaQuickEditType extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'autocomplete' => true,
+                'by_reference' => false, // important for ManyToMany when using add/remove methods
             ])
             ->add('tags', EntityType::class, [
                 'class' => MediaTag::class,
@@ -106,6 +107,7 @@ class MediaQuickEditType extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'autocomplete' => true,
+                'by_reference' => false, // important for ManyToMany when using add/remove methods
             ])
             ->add('food', EntityType::class, [
                 'class' => Food::class,
@@ -114,8 +116,9 @@ class MediaQuickEditType extends AbstractType
                         ->orderBy('f.nameEn', 'ASC');
                 },
                 'required' => false,
-                'multiple' => false,
+                'multiple' => true,
                 'autocomplete' => true,
+                'by_reference' => false, // important for ManyToMany when using add/remove methods
             ])
             ->add('showInFood', CheckboxType::class, [
                 'label'    => 'show in food',

@@ -110,7 +110,10 @@ class ImageCrudController extends MediaCrudController
 
         // FOOD
         yield FormField::addFieldset('Food');
-        yield AssociationField::new('food');
+        yield AssociationField::new('food')
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
+            ->setTemplatePath('@controlroom/field/food_list.html.twig');
+        
         yield BooleanField::new('isMeal');
         yield AssociationField::new('meal')
             ->hideOnIndex()
@@ -142,24 +145,12 @@ class ImageCrudController extends MediaCrudController
         yield FormField::addFieldset('Tags');
         
         yield AssociationField::new('tags')
-            ->setFormTypeOptions([
-                'by_reference' => false, // important for ManyToMany when using add/remove methods
-                'choice_label' => function (MediaTag $tag) {
-                    $locale = $this->getContext()?->getRequest()?->getLocale() ?? 'fr';
-                    return $tag->getName($locale);
-                }
-            ])
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@controlroom/field/tags.html.twig')
         ;
         
         yield AssociationField::new('placeTags', 'Places')
-            ->setFormTypeOptions([
-                'by_reference' => false, // important for ManyToMany when using add/remove methods
-                'choice_label' => function (PlaceTag $tag) {
-                    $locale = $this->getContext()?->getRequest()?->getLocale() ?? 'fr';
-                    return $tag->getName($locale);
-                }
-            ])
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@controlroom/field/tags.html.twig')
         ;
     }
