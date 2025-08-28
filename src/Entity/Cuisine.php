@@ -31,6 +31,9 @@ class Cuisine implements LocalizedNameInterface, LocalizedSlugInterface, EntityI
     #[ORM\ManyToMany(targetEntity: Food::class, mappedBy: 'cuisines')]
     private Collection $food;
 
+    #[ORM\ManyToOne]
+    private ?Country $country = null;
+
     public function __construct()
     {
         $this->food = new ArrayCollection();
@@ -64,6 +67,18 @@ class Cuisine implements LocalizedNameInterface, LocalizedSlugInterface, EntityI
         if ($this->food->removeElement($food)) {
             $food->removeCuisine($this);
         }
+
+        return $this;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): static
+    {
+        $this->country = $country;
 
         return $this;
     }
