@@ -46,9 +46,10 @@ class FoodRepository extends ServiceEntityRepository
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
         return $this->createQueryBuilder('f')
-            ->where('f.cuisine = :cuisine')
-            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
+            ->join('f.cuisines', 'c')
+            ->where('c = :cuisine')
             ->setParameter('cuisine', $cuisine)
+            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
             ->getQuery()
             ->getResult();
     }
@@ -60,8 +61,8 @@ class FoodRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('f')
             ->join('f.tags', 'ft')
             ->where('ft = :tag')
-            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
             ->setParameter('tag', $tag)
+            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
             ->getQuery()
             ->getResult();
     }
@@ -73,8 +74,8 @@ class FoodRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('f')
             ->join('f.ingredients', 'i')
             ->where('i = :ingredient')
-            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
             ->setParameter('ingredient', $ingredient)
+            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
             ->getQuery()
             ->getResult();
     }
