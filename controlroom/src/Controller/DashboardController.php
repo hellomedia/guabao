@@ -108,7 +108,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Meals', 'fa fa-utensils', Meal::class);
         yield MenuItem::linkToCrud('Ingredients', 'fa fa-carrot', Ingredient::class);
         yield MenuItem::linkToCrud('Food Tags', 'fa fa-tag', FoodTag::class);
-        yield MenuItem::linkToCrud('Cuisines', 'fa fa-tag', Cuisine::class);
+        yield MenuItem::linkToCrud('Cuisines', 'fa fa-utensils', Cuisine::class);
 
         yield MenuItem::section('Medias');
         yield MenuItem::linkToCrud('Images', 'fa fa-photo', Media::class)
@@ -120,7 +120,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Places');
         yield MenuItem::linkToCrud('Places', 'fa fa-map-marker', Place::class);
         yield MenuItem::linkToCrud('Place Tags', 'fa fa-tag', PlaceTag::class);
-        yield MenuItem::linkToCrud('Countries', 'fa fa-map-marker', Country::class);
+        yield MenuItem::linkToCrud('Countries', 'fa fa-flag', Country::class);
 
         yield MenuItem::section('Users');
         yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class);
