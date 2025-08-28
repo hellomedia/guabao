@@ -22,6 +22,7 @@ enum FoodType: string implements TranslatableInterface
     case LEGUMES = 'Legumes';
     case MEAT = 'Meat';
     case NUTS_SEEDS = 'Nuts and seeds';
+    case PASTA_NOODLES = 'Pasta and noodles';
     case SWEETNERS = 'Sweetners';
     case VEGETABLE = 'Vegetable';
 
@@ -38,6 +39,7 @@ enum FoodType: string implements TranslatableInterface
             self::LEGUMES  => $translator->trans('food.legumes', domain: 'enum', locale: $locale),
             self::MEAT  => $translator->trans('food.meat', domain: 'enum', locale: $locale),
             self::NUTS_SEEDS  => $translator->trans('food.nuts', domain: 'enum', locale: $locale),
+            self::PASTA_NOODLES  => $translator->trans('food.pasta', domain: 'enum', locale: $locale),
             self::SWEETNERS  => $translator->trans('food.sweetners', domain: 'enum', locale: $locale),
             self::VEGETABLE  => $translator->trans('food.vegetable', domain: 'enum', locale: $locale), 
         };
