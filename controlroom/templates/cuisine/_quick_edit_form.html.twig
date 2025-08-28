@@ -8,7 +8,7 @@
     <form
         name="cuisine_quick_edit_form_{{ cuisine.id }}"
         data-ajax-target="form"
-        data-action="submit->ajax#submit"
+        data-action="submit->ajax#submit change->ajax#submitOnChange"
         action="{{ path('admin_cuisine_quick_edit', {id: cuisine.id}) }}"
         method="post"
         style="margin-bottom: 20px"

@@ -8,7 +8,7 @@
     <form
         name="story_quick_edit_form_{{ story.id }}"
         data-ajax-target="form"
-        data-action="submit->ajax#submit"
+        data-action="submit->ajax#submit change->ajax#submitOnChange"
         action="{{ path('admin_story_quick_edit', {id: story.id}) }}"
         method="post"
         style="margin-bottom: 20px"
