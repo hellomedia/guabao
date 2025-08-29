@@ -1,7 +1,7 @@
 <div class="entity-list">
 	{% if field.value|length > 0 %}
         {% for place in field.value %}
-            <a href="{{ path('controlroom_place_detail', {entityId: story.id}) }}">
+            <a href="{{ path('controlroom_place_detail', {entityId: place.id}) }}">
                 {{ place }}
             </a>
         {% endfor %}
