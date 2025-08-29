@@ -2,6 +2,7 @@
 
 namespace Controlroom\Form\Type;
 
+use App\Entity\SiteHighlight;
 use App\Entity\Story;
 use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
@@ -25,7 +26,7 @@ class StoryQuickEditType extends AbstractType
                 'label' => "EN",
                 'required' => false,
                 'attr' => [
-                    'rows' => 4,      // taller
+                    'rows' => 3,
                 ],
              ])
             ->add('nameFr')
@@ -33,7 +34,7 @@ class StoryQuickEditType extends AbstractType
                 'label' => "FR",
                 'required' => false,
                 'attr' => [
-                    'rows' => 4,      // taller
+                    'rows' => 3,
                 ],
             ])
             ->add('tags', EntityType::class, [
@@ -56,6 +57,18 @@ class StoryQuickEditType extends AbstractType
                         ->orderBy('pt.nameEn', 'ASC');
                 },
                 'required' => false,
+                'multiple' => true,
+                'autocomplete' => true,
+                'by_reference' => false, // important for ManyToMany when using add/remove methods
+            ])
+            ->add('siteHighlights', EntityType::class, [
+                'label' => 'Highlights',
+                'class' => SiteHighlight::class,
+                'required' => false,
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('h')
+                        ->orderBy('h.nameEn', 'ASC');
+                },
                 'multiple' => true,
                 'autocomplete' => true,
                 'by_reference' => false, // important for ManyToMany when using add/remove methods

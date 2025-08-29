@@ -73,6 +73,7 @@
 
                 {{ form_row(form.descriptionEn) }}
                 {{ form_row(form.descriptionFr) }}
+                {{ form_row(form.tags) }}
             </div>
 
             <div class="column-2">
@@ -89,15 +90,12 @@
             </div>
 
             <div class="column-3">
-
                 {{ form_row(form.food) }}
                 {{ form_row(form.showInFood) }}
                 {{ form_row(form.meal) }}
                 {{ form_row(form.isMeal) }}
                 {{ form_row(form.takenAt) }}
-                {{ form_row(form.tags) }}
-                
-                
+                {{ form_row(form.siteHighlights) }}
             </div>
 
             {{ form_rest(form) }}

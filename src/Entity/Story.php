@@ -51,11 +51,18 @@ class Story implements LocalizedNameInterface, EntityInterface
     #[ORM\Column(nullable: true)]
     private ?int $displayOrder = null;
 
+    /**
+     * @var Collection<int, SiteHighlight>
+     */
+    #[ORM\ManyToMany(targetEntity: SiteHighlight::class, mappedBy: 'stories')]
+    private Collection $siteHighlights;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->placeTags = new ArrayCollection();
+        $this->siteHighlights = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -190,6 +197,33 @@ class Story implements LocalizedNameInterface, EntityInterface
     public function removePlaceTag(PlaceTag $placeTag): static
     {
         $this->placeTags->removeElement($placeTag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SiteHighlight>
+     */
+    public function getSiteHighlights(): Collection
+    {
+        return $this->siteHighlights;
+    }
+
+    public function addSiteHighlight(SiteHighlight $siteHighlight): static
+    {
+        if (!$this->siteHighlights->contains($siteHighlight)) {
+            $this->siteHighlights->add($siteHighlight);
+            $siteHighlight->addStory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSiteHighlight(SiteHighlight $siteHighlight): static
+    {
+        if ($this->siteHighlights->removeElement($siteHighlight)) {
+            $siteHighlight->removeStory($this);
+        }
 
         return $this;
     }

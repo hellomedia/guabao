@@ -26,12 +26,26 @@ class SiteHighlight implements LocalizedNameInterface, EntityInterface
     /**
      * @var Collection<int, Media>
      */
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'siteHighlight')]
+    #[ORM\ManyToMany(targetEntity: Media::class, inversedBy: 'siteHighlights')]
     private Collection $medias;
+
+    /**
+     * @var Collection<int, Story>
+     */
+    #[ORM\ManyToMany(targetEntity: Story::class, inversedBy: 'siteHighlights')]
+    private Collection $stories;
+
+    /**
+     * @var Collection<int, Trip>
+     */
+    #[ORM\ManyToMany(targetEntity: Trip::class, inversedBy: 'siteHighlights')]
+    private Collection $trips;
 
     public function __construct()
     {
         $this->medias = new ArrayCollection();
+        $this->stories = new ArrayCollection();
+        $this->trips = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,7 +65,6 @@ class SiteHighlight implements LocalizedNameInterface, EntityInterface
     {
         if (!$this->medias->contains($media)) {
             $this->medias->add($media);
-            $media->setSiteHighlight($this);
         }
 
         return $this;
@@ -59,13 +72,57 @@ class SiteHighlight implements LocalizedNameInterface, EntityInterface
 
     public function removeMedia(Media $media): static
     {
-        if ($this->medias->removeElement($media)) {
-            // set the owning side to null (unless already changed)
-            if ($media->getSiteHighlight() === $this) {
-                $media->setSiteHighlight(null);
-            }
+        $this->medias->removeElement($media);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Story>
+     */
+    public function getStories(): Collection
+    {
+        return $this->stories;
+    }
+
+    public function addStory(Story $story): static
+    {
+        if (!$this->stories->contains($story)) {
+            $this->stories->add($story);
         }
 
         return $this;
     }
+
+    public function removeStory(Story $story): static
+    {
+        $this->stories->removeElement($story);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Trip>
+     */
+    public function getTrips(): Collection
+    {
+        return $this->trips;
+    }
+
+    public function addTrip(Trip $trip): static
+    {
+        if (!$this->trips->contains($trip)) {
+            $this->trips->add($trip);
+        }
+
+        return $this;
+    }
+
+    public function removeTrip(Trip $trip): static
+    {
+        $this->trips->removeElement($trip);
+
+        return $this;
+    }
+
 }

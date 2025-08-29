@@ -3,6 +3,7 @@
 namespace Controlroom\Form\Type;
 
 use App\Entity\Country;
+use App\Entity\SiteHighlight;
 use App\Entity\Tag\MediaTag;
 use App\Entity\Trip;
 use Doctrine\ORM\EntityRepository;
@@ -54,6 +55,18 @@ class TripQuickEditType extends AbstractType
                         ->orderBy('c.nameEn', 'ASC');
                 },
                 'required' => false,
+                'multiple' => true,
+                'autocomplete' => true,
+                'by_reference' => false, // important for ManyToMany when using add/remove methods
+            ])
+            ->add('siteHighlights', EntityType::class, [
+                'label' => 'Highlights',
+                'class' => SiteHighlight::class,
+                'required' => false,
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('h')
+                        ->orderBy('h.nameEn', 'ASC');
+                },
                 'multiple' => true,
                 'autocomplete' => true,
                 'by_reference' => false, // important for ManyToMany when using add/remove methods

@@ -125,9 +125,6 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Story $story = null;
 
-    #[ORM\ManyToOne(inversedBy: 'medias')]
-    private ?SiteHighlight $siteHighlight = null;
-
     #[ORM\Column(nullable: true)]
     private ?bool $showInTrip = null;
 
@@ -143,11 +140,18 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     #[ORM\ManyToMany(targetEntity: Food::class, inversedBy: 'medias')]
     private Collection $food;
 
+    /**
+     * @var Collection<int, SiteHighlight>
+     */
+    #[ORM\ManyToMany(targetEntity: SiteHighlight::class, mappedBy: 'medias')]
+    private Collection $siteHighlights;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
         $this->placeTags = new ArrayCollection();
         $this->food = new ArrayCollection();
+        $this->siteHighlights = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -419,18 +423,6 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
         return $this;
     }
 
-    public function getSiteHighlight(): ?SiteHighlight
-    {
-        return $this->siteHighlight;
-    }
-
-    public function setSiteHighlight(?SiteHighlight $siteHighlight): static
-    {
-        $this->siteHighlight = $siteHighlight;
-
-        return $this;
-    }
-
     public function getShowInTrip(): ?bool
     {
         return $this->showInTrip;
@@ -487,6 +479,33 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     public function removeFood(Food $food): static
     {
         $this->food->removeElement($food);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SiteHighlight>
+     */
+    public function getSiteHighlights(): Collection
+    {
+        return $this->siteHighlights;
+    }
+
+    public function addSiteHighlight(SiteHighlight $siteHighlight): static
+    {
+        if (!$this->siteHighlights->contains($siteHighlight)) {
+            $this->siteHighlights->add($siteHighlight);
+            $siteHighlight->addMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSiteHighlight(SiteHighlight $siteHighlight): static
+    {
+        if ($this->siteHighlights->removeElement($siteHighlight)) {
+            $siteHighlight->removeMedia($this);
+        }
 
         return $this;
     }

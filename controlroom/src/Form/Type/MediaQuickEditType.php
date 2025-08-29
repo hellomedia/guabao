@@ -6,6 +6,7 @@ use App\Entity\Food;
 use App\Entity\Meal;
 use App\Entity\Media;
 use App\Entity\Place;
+use App\Entity\SiteHighlight;
 use App\Entity\Story;
 use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
@@ -30,14 +31,14 @@ class MediaQuickEditType extends AbstractType
                 'label' => "EN",
                 'required' => false,
                 'attr' => [
-                    'rows' => 4,      // taller
+                    'rows' => 3,
                 ],
             ])
             ->add('descriptionFr', TextareaType::class, [
                 'label' => "FR",
                 'required' => false,
                 'attr' => [
-                    'rows' => 4,      // taller
+                    'rows' => 3,
                 ],
             ])
             ->add('takenAt')
@@ -86,6 +87,18 @@ class MediaQuickEditType extends AbstractType
                 'required' => false,
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
+                ])
+            ->add('siteHighlights', EntityType::class, [
+                'label' => 'Highlights',
+                'class' => SiteHighlight::class,
+                'required' => false,
+                'query_builder' => function (EntityRepository $repo) : QueryBuilder {
+                    return $repo->createQueryBuilder('h')
+                        ->orderBy('h.nameEn', 'ASC');
+                },
+                'multiple' => true,
+                'autocomplete' => true,
+                'by_reference' => false, // important for ManyToMany when using add/remove methods
             ])
             ->add('placeTags', EntityType::class, [
                 'class' => PlaceTag::class,
