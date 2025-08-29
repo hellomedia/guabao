@@ -7,7 +7,7 @@
 {% block page_actions %}
 	{% embed '@controlroom/_top_links.html.twig' %}
 		{% block add_pictures %}
-			<a class="btn" href="{{ path('admin_media_add_multiple', {'trip': story.trip.id, 'story': story.id}) }}">
+			<a class="btn" href="{{ path('admin_media_add_multiple', {'story': story.id}) }}">
 				+ Pictures
 			</a>
 		{% endblock %}

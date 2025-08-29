@@ -126,7 +126,7 @@ table.datagrid td.actions {
     white-space: nowrap;
 }
 
-.quick-edit-item-grid {
+.quick-edit {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 50px;
