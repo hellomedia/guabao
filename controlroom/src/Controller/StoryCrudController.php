@@ -79,14 +79,14 @@ class StoryCrudController extends AbstractCrudController
 
         $addImages = Action::new('addImages', '+ Bulk add images')
             ->linkToUrl(function (Story $story) {
-                return $this->urlGenerator->generate('admin_media_add_multiple', [
+                return $this->urlGenerator->generate('admin_media_bulk_add', [
                     'story' => $story->getId(),
                 ]);
             })
         ;
     
         $globalAddImages = Action::new('addImages', '+ Bulk add images')
-            ->linkToUrl($this->urlGenerator->generate('admin_media_add_multiple'))
+            ->linkToUrl($this->urlGenerator->generate('admin_media_bulk_add'))
             ->createAsGlobalAction();
 
         return $actions

@@ -1,0 +1,21 @@
+{# Important: Note the syntax with [] and only #}
+{# Ignore global themes; use only EasyAdmin #}
+{# important to avoid theme conflicts #}
+{% form_theme form with ['@controlroom/form/form_theme.html.twig'] only %}
+
+<div>
+    <h5 style="margin-bottom: 15px">Remove tags</h5>
+    <form
+        name="media_bulk_remove_tags_form_{{ story.id }}"
+        action="{{ path('admin_media_bulk_remove_tags_by_story', {id: story.id}) }}"
+        method="post"
+        style="margin-bottom: 20px"
+    >
+        {{ form_row(form.tags) }}
+        {{ form_row(form.placeTags) }}
+        {{ form_rest(form) }}
+
+        {% include '@controlroom/form/_ajax_button.html.twig' %}
+    </form>
+</div>
+

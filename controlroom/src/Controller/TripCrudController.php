@@ -124,14 +124,14 @@ class TripCrudController extends AbstractCrudController
 
         $addImages = Action::new('addImages', '+ Bulk add images')
             ->linkToUrl(function (Trip $trip) {
-                return $this->urlGenerator->generate('admin_media_add_multiple', [
+                return $this->urlGenerator->generate('admin_media_bulk_add', [
                     'trip' => $trip->getId(),
                 ]);
             })
         ;
 
         $globalAddImages = Action::new('addImages', '+ Bulk add images')
-            ->linkToUrl($this->urlGenerator->generate('admin_media_add_multiple'))
+            ->linkToUrl($this->urlGenerator->generate('admin_media_bulk_add'))
             ->createAsGlobalAction()
         ;
 

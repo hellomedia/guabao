@@ -42,7 +42,7 @@ class Place implements EntityInterface
     /**
      * @var Collection<int, PlaceTag>
      */
-    #[ORM\ManyToMany(targetEntity: PlaceTag::class)]
+    #[ORM\ManyToMany(targetEntity: PlaceTag::class, inversedBy: 'places')]
     private Collection $placeTags;
 
     /**

@@ -4,7 +4,9 @@ namespace Controlroom\Controller;
 
 use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
+use App\Entity\Trip;
 use App\Enum\MediaType;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
@@ -38,7 +40,7 @@ class ImageCrudController extends MediaCrudController
     public function configureActions(Actions $actions): Actions
     {
         $addMutiple = Action::new('addMultiple', 'Add multiple')
-            ->linkToUrl($this->urlGenerator->generate('admin_media_add_multiple'))
+            ->linkToUrl($this->urlGenerator->generate('admin_media_bulk_add'))
             ->setIcon('fa fa-images')
             ->createAsGlobalAction()
         ;
@@ -102,7 +104,18 @@ class ImageCrudController extends MediaCrudController
         // TRIP
         yield FormField::addFieldset('Trip');
         yield AssociationField::new('trip')
-            ->setHelp('Leave empty for auto-fill from exif data');
+            ->setHelp('Leave empty for auto-fill from exif data')
+            ->setFormTypeOption('query_builder', function (EntityRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('t')
+                        ->orderBy('t.startedAt', 'DESC');
+                })
+            ->setFormTypeOption('group_by', function (Trip $trip, $key, $value) {
+                    if ($trip->hasParent()) {
+                        return $trip->getParent()->getNameEn();
+                    }
+                    return $trip->getNameEn();
+                })
+        ;
 
         yield BooleanField::new('isTripCover', 'Cover');
         yield BooleanField::new('isPano', 'Pano');

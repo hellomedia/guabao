@@ -140,7 +140,7 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     /**
      * @var Collection<int, Food>
      */
-    #[ORM\ManyToMany(targetEntity: Food::class, inversedBy: 'media')]
+    #[ORM\ManyToMany(targetEntity: Food::class, inversedBy: 'medias')]
     private Collection $food;
 
     public function __construct()

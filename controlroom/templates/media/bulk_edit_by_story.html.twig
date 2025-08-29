@@ -7,7 +7,7 @@
 {% block page_actions %}
 	{% embed '@controlroom/_top_links.html.twig' %}
 		{% block add_pictures %}
-			<a class="btn" href="{{ path('admin_media_add_multiple', {'story': story.id}) }}">
+			<a class="btn" href="{{ path('admin_media_bulk_add', {'story': story.id}) }}">
 				+ Pictures
 			</a>
 		{% endblock %}
@@ -20,9 +20,12 @@
         #trip, #story, #medias {
             margin-bottom: 40px;
         }
-        #story {
+        #story, #bulk-edit {
             border: 1px solid lightgray;
             padding: 30px;
+        }
+        #bulk-edit {
+            margin-bottom: 60px;
         }
         #trip {
             margin-top: 15px;
@@ -33,12 +36,26 @@
 
 {% block main %}
     <div id="trip">
-        Trip: <a href="{{ path('admin_media_bulk_edit_by_trip', {id: story.trip.id}) }}">{{ story.trip }}</a>
+        Trip: <a href="{{ path('admin_media_bulk_edit_by_trip', { id: story.trip.id }) }}">{{ story.trip }}</a>
     </div>
 
     <div id="story">
         <h3>{{ story }}</h3>
         {% include "@controlroom/story/_quick_edit_form.html.twig" with { form: story_form, story: story } %}
+    </div>
+
+    <div id="bulk-edit">
+        <p style="margin-top: 10px; margin-bottom: 20px">
+            Add or remove tags for all medias in this story
+        </p>
+        <div class="quick-edit-2rows">
+            <div class="column-1">
+                {% include '@controlroom/media/_bulk_add_tags_form.html.twig' with { form: bulk_add_tags_form } %}
+            </div>
+            <div class="column-2">
+                {% include '@controlroom/media/_bulk_remove_tags_form.html.twig' with { form: bulk_remove_tags_form } %}
+            </div>
+        </div>
     </div>
 
     <div id="medias" data-controller="fancybox">

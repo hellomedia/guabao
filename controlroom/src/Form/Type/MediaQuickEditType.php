@@ -89,9 +89,15 @@ class MediaQuickEditType extends AbstractType
             ])
             ->add('placeTags', EntityType::class, [
                 'class' => PlaceTag::class,
-                'query_builder' => function (EntityRepository $repo): QueryBuilder {
-                    return $repo->createQueryBuilder('t')
-                        ->orderBy('t.nameEn', 'ASC');
+                'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
+                    if ($currentTrip) {
+                        return $repo->createQueryBuilder('pt')
+                            ->where('pt.country IN (:countries)')
+                            ->setParameter('countries', $currentTrip->getCountries())
+                            ->orderBy('pt.nameEn', 'ASC');
+                    }
+                    return $repo->createQueryBuilder('pt')
+                        ->orderBy('pt.nameEn', 'ASC');
                 },
                 'required' => false,
                 'multiple' => true,
@@ -135,7 +141,14 @@ class MediaQuickEditType extends AbstractType
             ])
             ->add('meal', EntityType::class, [
                 'class' => Meal::class,
-                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
+                    if ($currentTrip) {
+                        return $repo->createQueryBuilder('m')
+                            ->join('m.placeTags', 'pt')
+                            ->where('pt.country IN (:countries)')
+                            ->setParameter('countries', $currentTrip->getCountries())
+                            ->orderBy('m.enjoyedAt', 'ASC');
+                    }
                     return $repo->createQueryBuilder('m')
                         ->orderBy('m.enjoyedAt', 'ASC');
                 },
@@ -152,6 +165,16 @@ class MediaQuickEditType extends AbstractType
             ])
             ->add('place', EntityType::class, [
                 'class' => Place::class,
+                'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
+                    if ($currentTrip) {
+                        return $repo->createQueryBuilder('p')
+                            ->where('p.country IN (:countries)')
+                            ->setParameter('countries', $currentTrip->getCountries())
+                            ->orderBy('p.name', 'ASC');
+                    }
+                    return $repo->createQueryBuilder('p')
+                        ->orderBy('pt.name', 'ASC');
+                },           
                 'required' => false,
                 'multiple' => false,
                 'autocomplete' => true,

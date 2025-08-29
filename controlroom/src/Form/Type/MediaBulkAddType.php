@@ -22,12 +22,12 @@ use Symfony\Component\Validator\Constraints\NotNull;
 use Symfonycasts\DynamicForms\DependentField;
 use Symfonycasts\DynamicForms\DynamicFormBuilder;
 
-class MediaAddMultipleType extends AbstractType
+class MediaBulkAddType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $storyFromQueryString = $options['story'] ?? null;
-        $tripFromQueryString = $storyFromQueryString?->getTrip() ?? $options['trip'] ?? null;
+        $story = $options['story'] ?? null;
+        $trip = $story?->getTrip() ?? $options['trip'] ?? null;
 
         $builder = new DynamicFormBuilder($builder);
 
@@ -70,7 +70,7 @@ class MediaAddMultipleType extends AbstractType
                     }
                     return $trip->getNameEn();
                 },
-                'data' => $tripFromQueryString,
+                'data' => $trip,
                 'placeholder' => '', // add an empty placeholder instead of a default trip selected
             ])
             ->add('showInTrip', CheckboxType::class, [
@@ -79,42 +79,48 @@ class MediaAddMultipleType extends AbstractType
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
             ])
-            ->addDependent('story', 'trip', function(DependentField $field, ?Trip $trip) use ($storyFromQueryString) {
-                if ($trip === null) {
+            ->addDependent('story', 'trip', function(DependentField $field, ?Trip $selectedTrip) use ($story) {
+                if ($selectedTrip === null) {
                     return;
                 }
                 $field->add(EntityType::class, [
                     'required' => false,
                     'class' => Story::class,
-                    'query_builder' => function (EntityRepository $repo) use ($trip): QueryBuilder {
+                    'query_builder' => function (EntityRepository $repo) use ($selectedTrip): QueryBuilder {
                         return $repo->createQueryBuilder('s')
                             ->where('s.trip = :trip')
-                            ->setParameter('trip', $trip)
+                            ->setParameter('trip', $selectedTrip)
                             ->orderBy('s.displayOrder', 'ASC');
                     },
                     'multiple' => false,
                     'autocomplete' => true,
-                    'data' => $storyFromQueryString,
+                    'data' => $story,
                     'placeholder' => '', // add an empty placeholder instead of a default trip selected
                 ]);
             })
-            ->addDependent('showInStory', 'trip', function (DependentField $field, ?Trip $trip) use ($storyFromQueryString){
-                if ($trip === null) {
+            ->addDependent('showInStory', 'trip', function (DependentField $field, ?Trip $selectedTrip) use ($story){
+                if ($selectedTrip === null) {
                     return;
                 }
                 $field->add(CheckboxType::class, [
-                    'label'    => 'show in story',
+                    'label' => 'show in story',
                     'required' => false,
-                    'data' => $storyFromQueryString !== null,
+                    'data' => $story !== null,
                     'row_attr' => ['class' => 'form-switch'], // for switch
-                    'attr'     => ['class' => 'form-check-input'], // for switch
+                    'attr' => ['class' => 'form-check-input'], // for switch
                 ]);
             })
             ->add('placeTags', EntityType::class, [
                 'class' => PlaceTag::class,
-                'query_builder' => function (EntityRepository $repo): QueryBuilder {
-                    return $repo->createQueryBuilder('t')
-                        ->orderBy('t.nameEn', 'ASC');
+                'query_builder' => function (EntityRepository $repo) use ($trip): QueryBuilder {
+                    if ($trip) {
+                        return $repo->createQueryBuilder('pt')
+                            ->where('pt.country IN (:countries)')
+                            ->setParameter('countries', $trip->getCountries())
+                            ->orderBy('pt.nameEn', 'ASC');
+                    }
+                    return $repo->createQueryBuilder('pt')
+                        ->orderBy('pt.nameEn', 'ASC');
                 },
                 'required' => false,
                 'multiple' => true,

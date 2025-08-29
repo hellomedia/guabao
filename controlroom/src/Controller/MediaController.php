@@ -10,7 +10,7 @@ use App\Enum\MediaType;
 use App\Helper\MediaAutoFillHelper;
 use App\Pack\Media\Helper\ExifExtractor;
 use App\Pack\Media\Helper\UploadHelper;
-use Controlroom\Form\Type\MediaAddMultipleType;
+use Controlroom\Form\Type\MediaBulkAddType;
 use Controlroom\Form\Type\MediaQuickEditType;
 use Doctrine\ORM\EntityManager;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
@@ -71,8 +71,8 @@ class MediaController extends BaseController
         ]);
     }
 
-    #[Route('/media/add-multiple', name: 'admin_media_add_multiple', methods: ['GET', 'POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function addMultiple(Request $request, EntityManager $entityManager): Response
+    #[Route('/media/bulk-add', name: 'admin_media_bulk_add', methods: ['GET', 'POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    public function bulkAdd(Request $request, EntityManager $entityManager): Response
     {
         if ($request->query->has('trip')) {
             $trip = $entityManager->getRepository(Trip::class)->find($request->query->get('trip'));
@@ -82,7 +82,7 @@ class MediaController extends BaseController
             $story = $entityManager->getRepository(Story::class)->find($request->query->get('story'));
         }
 
-        $form = $this->createForm(MediaAddMultipleType::class, options: ['trip' => $trip ?? null, 'story' => $story ?? null]);
+        $form = $this->createForm(MediaBulkAddType::class, options: ['trip' => $trip ?? null, 'story' => $story ?? null]);
 
         $form->handleRequest($request);
 
@@ -93,7 +93,7 @@ class MediaController extends BaseController
 
             if (!$submitBtn->isClicked()) {
                 // on change event for dependent field
-                return $this->render('@controlroom/media/add_multiple.html.twig', [
+                return $this->render('@controlroom/media/bulk_add.html.twig', [
                     'form' => $form,
                 ]);
             }
@@ -105,7 +105,7 @@ class MediaController extends BaseController
             ]);
         }
 
-        return $this->render('@controlroom/media/add_multiple.html.twig', [
+        return $this->render('@controlroom/media/bulk_add.html.twig', [
             'form' => $form,
         ]);
     }
