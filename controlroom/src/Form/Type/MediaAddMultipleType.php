@@ -26,8 +26,8 @@ class MediaAddMultipleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $tripFromQueryString = $options['trip'] ?? null;
         $storyFromQueryString = $options['story'] ?? null;
+        $tripFromQueryString = $storyFromQueryString?->getTrip() ?? $options['trip'] ?? null;
 
         $builder = new DynamicFormBuilder($builder);
 

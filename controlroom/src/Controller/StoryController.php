@@ -48,7 +48,7 @@ class StoryController extends BaseController
     }
 
     #[Route('/story/reorder', name: 'admin_story_reorder', methods: ['POST'])]
-    public function reorderStories(Request $request, EntityManager $entityManager): JsonResponse
+    public function reorder(Request $request, EntityManager $entityManager): JsonResponse
     {
         $storyIds = $request->getPayload()->all('story_ids') ?? [];
 
