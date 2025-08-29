@@ -58,7 +58,7 @@ class Meal implements EntityInterface
      */
     public function __toString()
     {
-        return  'Meal' . ' ' . ($this->place ?: ($this->placeTags ?: null)?->first()) . ' - ' . $this->enjoyedAt->format('d M Y H\h');
+        return  'Meal' . ' ' . ($this->place ?: $this->placeTags?->first()) . ' - ' . $this->enjoyedAt->format('d M Y H\h');
     }
 
     public function getName(): string
