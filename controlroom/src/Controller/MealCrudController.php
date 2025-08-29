@@ -83,11 +83,10 @@ class MealCrudController extends AbstractCrudController
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
         ;
 
-        yield AssociationField::new('siteHighlights')
+        yield AssociationField::new('siteHighlights', 'Highlights')
             ->setTemplatePath('@controlroom/field/highlights.html.twig')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
         ;
-        
     }
 
     public function configureActions(Actions $actions): Actions

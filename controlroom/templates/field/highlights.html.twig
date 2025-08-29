@@ -1,7 +1,7 @@
 <div class="entity-list">
 	{% if field.value|length > 0 %}
         {% for highlight in field.value %}
-            <a href="{{ path('controlroom_highlight_detail', {entityId: highlight.id}) }}">
+            <a href="{{ path('controlroom_site_highlight_detail', {entityId: highlight.id}) }}">
                 {{ highlight }}
             </a>
         {% endfor %}
