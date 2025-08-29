@@ -8,6 +8,7 @@ use App\Entity\Story;
 use App\Entity\Trip;
 use Controlroom\Form\Type\MediaQuickEditType;
 use Controlroom\Form\Type\StoryQuickEditType;
+use Controlroom\Form\Type\TripQuickEditType;
 use Doctrine\ORM\EntityManager;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
@@ -50,7 +51,15 @@ class MediaBulkEditController extends BaseController
             )->createView();
         }
 
+        $tripForm = $formFactory->createNamed(
+            // form names must match with story quick edit form
+            name: 'trip_quick_edit_form_' . $trip->getId(),
+            type: TripQuickEditType::class,
+            data: $trip,
+        );
+
         return $this->render('@controlroom/media/bulk_edit_by_trip.html.twig', [
+            'trip_form' => $tripForm,
             'forms' => $forms,
             'pager' => $pager,
             'trip' => $trip,

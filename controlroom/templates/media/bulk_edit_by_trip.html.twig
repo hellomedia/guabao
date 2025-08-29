@@ -18,9 +18,13 @@
 {% block head_stylesheets %}
     {{ parent() }}
 	<style>
-		#parent, #children, #stories, #gallery {
+		#parent, #children, #trip, #stories, #gallery {
 			margin-bottom: 40px;
 		}
+        #trip {
+            border: 1px solid lightgray;
+            padding: 30px;
+        }
         #parent, #children {
             font-size: 18px;
         }
@@ -55,27 +59,32 @@
 
 {% block main %}
 
-{% if trip.parent %}
-    <div id="parent">
-        Parent:
-        <a href="{{ path('admin_media_bulk_edit_by_trip', {id: trip.parent.id}) }}">{{ trip.parent }}</a>
-    </div>
-{% endif %}
+    {% if trip.parent %}
+        <div id="parent">
+            Parent:
+            <a href="{{ path('admin_media_bulk_edit_by_trip', {id: trip.parent.id}) }}">{{ trip.parent }}</a>
+        </div>
+    {% endif %}
 
-{% if trip.children is not empty %}
-    <div id="children">
-        Children:
-        {% for child in trip.children %}
-            <div id="children-list">
-                <a href="{{ path('admin_media_bulk_edit_by_trip', {id: child.id}) }}">{{ child }}</a>
-            </div>
-        {% endfor %}
-    </div>
-{% endif %}
+    {% if trip.children is not empty %}
+        <div id="children">
+            Children:
+            {% for child in trip.children %}
+                <div id="children-list">
+                    <a href="{{ path('admin_media_bulk_edit_by_trip', {id: child.id}) }}">{{ child }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
-    <h3>Stories</h3>
+    <div id="trip">
+        <h3>Trip</h3>
+        {% include "@controlroom/trip/_quick_edit_form.html.twig" with { form: trip_form, trip: trip } %}
+    </div>
+
 
     <div id="stories">
+        <h3>Stories</h3>
 
         <ul class="sortable" style="margin-top: 20px;padding-left: 0;{# bootstrap css override needed because of css layers #}"
             data-controller="sortable"
