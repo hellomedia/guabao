@@ -2,6 +2,8 @@
 
 namespace Controlroom\Controller;
 
+use App\Entity\Meal;
+use App\Entity\Place;
 use App\Entity\SiteHighlight;
 use App\Entity\Story;
 use App\Entity\Trip;
@@ -64,6 +66,36 @@ class SiteHighlightCrudController extends AbstractCrudController
             })
             ->setFormTypeOption('group_by', function (Story $story, $key, $value) {
                 return $story->getTrip()->getNameEn();
+            })
+        ;
+    
+        yield AssociationField::new('places')
+            ->setTemplatePath('@controlroom/field/places.html.twig')
+            ->setFormTypeOption('query_builder', function (EntityRepository $repo): QueryBuilder {
+                return $repo->createQueryBuilder('p')
+                    ->join('p.placeTags', 'pt')
+                    ->join('p.country', 'c')
+                    ->addOrderBy('c.nameEn', 'ASC')
+                    ->addOrderBy('pt.nameEn', 'ASC')
+                    ->addOrderBy('p.name', 'ASC');
+            })
+            ->setFormTypeOption('group_by', function (Place $place, $key, $value) {
+                return $place->getPlaceTags()->first()->getNameEn();
+            })
+        ;
+
+        yield AssociationField::new('meals')
+            ->setTemplatePath('@controlroom/field/meals.html.twig')
+            ->setFormTypeOption('query_builder', function (EntityRepository $repo): QueryBuilder {
+                return $repo->createQueryBuilder('m')
+                    ->join('m.placeTags', 'pt')
+                    ->join('pt.country', 'c')
+                    ->addOrderBy('c.nameEn', 'ASC')
+                    ->addOrderBy('pt.nameEn', 'ASC')
+                    ->addOrderBy('m.enjoyedAt', 'DESC');
+            })
+            ->setFormTypeOption('group_by', function (Meal $meal, $key, $value) {
+                return $meal->getPlaceTags()->first()->getNameEn();
             })
         ;
 

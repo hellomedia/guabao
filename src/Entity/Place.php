@@ -57,11 +57,18 @@ class Place implements EntityInterface
     #[ORM\OneToMany(targetEntity: Meal::class, mappedBy: 'place')]
     private Collection $meals;
 
+    /**
+     * @var Collection<int, SiteHighlight>
+     */
+    #[ORM\ManyToMany(targetEntity: SiteHighlight::class, mappedBy: 'places')]
+    private Collection $siteHighlights;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
         $this->meals = new ArrayCollection();
         $this->placeTags = new ArrayCollection();
+        $this->siteHighlights = new ArrayCollection();
     }
 
     public function __toString()
@@ -229,6 +236,33 @@ class Place implements EntityInterface
             if ($meal->getPlace() === $this) {
                 $meal->setPlace(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SiteHighlight>
+     */
+    public function getSiteHighlights(): Collection
+    {
+        return $this->siteHighlights;
+    }
+
+    public function addSiteHighlight(SiteHighlight $siteHighlight): static
+    {
+        if (!$this->siteHighlights->contains($siteHighlight)) {
+            $this->siteHighlights->add($siteHighlight);
+            $siteHighlight->addPlace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSiteHighlight(SiteHighlight $siteHighlight): static
+    {
+        if ($this->siteHighlights->removeElement($siteHighlight)) {
+            $siteHighlight->removePlace($this);
         }
 
         return $this;

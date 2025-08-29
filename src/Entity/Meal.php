@@ -39,10 +39,17 @@ class Meal implements EntityInterface
     #[ORM\ManyToMany(targetEntity: PlaceTag::class)]
     private Collection $placeTags;
 
+    /**
+     * @var Collection<int, SiteHighlight>
+     */
+    #[ORM\ManyToMany(targetEntity: SiteHighlight::class, mappedBy: 'meals')]
+    private Collection $siteHighlights;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
         $this->placeTags = new ArrayCollection();
+        $this->siteHighlights = new ArrayCollection();
     }
 
     /**
@@ -155,6 +162,33 @@ class Meal implements EntityInterface
     public function removePlaceTag(PlaceTag $placeTag): static
     {
         $this->placeTags->removeElement($placeTag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SiteHighlight>
+     */
+    public function getSiteHighlights(): Collection
+    {
+        return $this->siteHighlights;
+    }
+
+    public function addSiteHighlight(SiteHighlight $siteHighlight): static
+    {
+        if (!$this->siteHighlights->contains($siteHighlight)) {
+            $this->siteHighlights->add($siteHighlight);
+            $siteHighlight->addMeal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSiteHighlight(SiteHighlight $siteHighlight): static
+    {
+        if ($this->siteHighlights->removeElement($siteHighlight)) {
+            $siteHighlight->removeMeal($this);
+        }
 
         return $this;
     }

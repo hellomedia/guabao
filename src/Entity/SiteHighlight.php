@@ -41,11 +41,25 @@ class SiteHighlight implements LocalizedNameInterface, EntityInterface
     #[ORM\ManyToMany(targetEntity: Trip::class, inversedBy: 'siteHighlights')]
     private Collection $trips;
 
+    /**
+     * @var Collection<int, Place>
+     */
+    #[ORM\ManyToMany(targetEntity: Place::class, inversedBy: 'siteHighlights')]
+    private Collection $places;
+
+    /**
+     * @var Collection<int, Meal>
+     */
+    #[ORM\ManyToMany(targetEntity: Meal::class, inversedBy: 'siteHighlights')]
+    private Collection $meals;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
         $this->stories = new ArrayCollection();
         $this->trips = new ArrayCollection();
+        $this->places = new ArrayCollection();
+        $this->meals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -121,6 +135,54 @@ class SiteHighlight implements LocalizedNameInterface, EntityInterface
     public function removeTrip(Trip $trip): static
     {
         $this->trips->removeElement($trip);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Place>
+     */
+    public function getPlaces(): Collection
+    {
+        return $this->places;
+    }
+
+    public function addPlace(Place $place): static
+    {
+        if (!$this->places->contains($place)) {
+            $this->places->add($place);
+        }
+
+        return $this;
+    }
+
+    public function removePlace(Place $place): static
+    {
+        $this->places->removeElement($place);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Meal>
+     */
+    public function getMeals(): Collection
+    {
+        return $this->meals;
+    }
+
+    public function addMeal(Meal $meal): static
+    {
+        if (!$this->meals->contains($meal)) {
+            $this->meals->add($meal);
+        }
+
+        return $this;
+    }
+
+    public function removeMeal(Meal $meal): static
+    {
+        $this->meals->removeElement($meal);
 
         return $this;
     }

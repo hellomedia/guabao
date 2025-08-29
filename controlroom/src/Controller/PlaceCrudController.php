@@ -93,6 +93,11 @@ class PlaceCrudController extends AbstractCrudController
                     
         yield TextareaField::new('descriptionEn', 'Description EN');
         yield TextareaField::new('descriptionFr', 'Description FR');
+
+        yield AssociationField::new('siteHighlights')
+            ->setTemplatePath('@controlroom/field/highlights.html.twig')
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
+        ;
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void

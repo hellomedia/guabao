@@ -79,8 +79,14 @@ class MealCrudController extends AbstractCrudController
         ;
 
         yield AssociationField::new('placeTags', 'Place tags')
+            ->setTemplatePath('@controlroom/field/tags.html.twig')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
-            ->setTemplatePath('@controlroom/field/tags.html.twig');
+        ;
+
+        yield AssociationField::new('siteHighlights')
+            ->setTemplatePath('@controlroom/field/highlights.html.twig')
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
+        ;
         
     }
 
