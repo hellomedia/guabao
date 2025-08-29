@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Tag\MediaTag;
+use App\Entity\Tag\PlaceTag;
 use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Repository\StoryRepository;
@@ -41,6 +42,12 @@ class Story implements LocalizedNameInterface, EntityInterface
     #[ORM\ManyToMany(targetEntity: MediaTag::class)]
     private Collection $tags;
 
+    /**
+     * @var Collection<int, PlaceTag>
+     */
+    #[ORM\ManyToMany(targetEntity: PlaceTag::class)]
+    private Collection $placeTags;
+
     #[ORM\Column(nullable: true)]
     private ?int $displayOrder = null;
 
@@ -48,6 +55,7 @@ class Story implements LocalizedNameInterface, EntityInterface
     {
         $this->medias = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->placeTags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -158,6 +166,30 @@ class Story implements LocalizedNameInterface, EntityInterface
     public function removeTag(MediaTag $tag): static
     {
         $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PlaceTag>
+     */
+    public function getPlaceTags(): Collection
+    {
+        return $this->placeTags;
+    }
+
+    public function addPlaceTag(PlaceTag $placeTag): static
+    {
+        if (!$this->placeTags->contains($placeTag)) {
+            $this->placeTags->add($placeTag);
+        }
+
+        return $this;
+    }
+
+    public function removePlaceTag(PlaceTag $placeTag): static
+    {
+        $this->placeTags->removeElement($placeTag);
 
         return $this;
     }

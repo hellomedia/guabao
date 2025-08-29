@@ -4,6 +4,7 @@ namespace Controlroom\Form\Type;
 
 use App\Entity\Story;
 use App\Entity\Tag\MediaTag;
+use App\Entity\Tag\PlaceTag;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -16,6 +17,8 @@ class StoryQuickEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $story = $builder->getData();
+
         $builder
             ->add('nameEn')
             ->add('descriptionEn', TextareaType::class, [
@@ -38,6 +41,19 @@ class StoryQuickEditType extends AbstractType
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
                         ->orderBy('t.nameEn', 'ASC');
+                },
+                'required' => false,
+                'multiple' => true,
+                'autocomplete' => true,
+                'by_reference' => false, // important for ManyToMany when using add/remove methods
+            ])
+            ->add('placeTags', EntityType::class, [
+                'class' => PlaceTag::class,
+                'query_builder' => function (EntityRepository $repo) use ($story): QueryBuilder {
+                    return $repo->createQueryBuilder('pt')
+                        ->where('pt.country IN (:countries)')
+                        ->setParameter('countries', $story->getTrip()->getCountries())
+                        ->orderBy('pt.nameEn', 'ASC');
                 },
                 'required' => false,
                 'multiple' => true,

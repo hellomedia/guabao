@@ -15,7 +15,7 @@
     >
 
         {# container for form content replaced in ajax #}
-        <div data-ajax-target="container" class="story-quick-edit-item-grid">
+        <div data-ajax-target="container" class="quick-edit-2rows">
             
             <div class="column-1">
 
@@ -26,6 +26,7 @@
             <div class="column-1">
                 {{ form_row(form.nameFr) }}
                 {{ form_row(form.descriptionFr) }}
+                {{ form_row(form.placeTags) }}
                 {{ form_rest(form) }}
             </div>
         

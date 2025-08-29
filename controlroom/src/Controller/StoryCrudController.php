@@ -61,14 +61,19 @@ class StoryCrudController extends AbstractCrudController
                 }
             ]);
 
-        yield AssociationField::new('tags')
-            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
-            ->setTemplatePath('@controlroom/field/tags.html.twig');
-        
         yield NumberField::new('displayOrder');
 
         yield TextField::new('nameEn', 'Name EN');
         yield TextField::new('nameFr', 'Name FR');
+
+        yield AssociationField::new('tags')
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
+            ->setTemplatePath('@controlroom/field/tags.html.twig');
+
+        yield AssociationField::new('placeTags')
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
+            ->setTemplatePath('@controlroom/field/tags.html.twig');
+
 
         yield TextareaField::new('descriptionEn', 'Description EN');
         yield TextareaField::new('descriptionFr', 'Description FR');
