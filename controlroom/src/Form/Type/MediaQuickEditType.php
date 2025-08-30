@@ -49,9 +49,12 @@ class MediaQuickEditType extends AbstractType
                         // show other trip legs in the trip
                         ->where('t.parent = :parent')
                         ->setParameter('parent', $currentTrip->getParent())
-                        // or if top level trip, only show current trip
+                        // or if top level trip show current trip
                         ->orWhere('t.id = :tripId')
                         ->setParameter('tripId', $currentTrip->getId())
+                        // of show children
+                        ->orWhere('t.id IN (:children)')
+                        ->setParameter('children', $currentTrip->getChildren())
                         ->orderBy('t.startedAt', 'DESC');
                 },
                 'multiple' => false,
