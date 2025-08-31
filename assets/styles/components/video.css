@@ -33,7 +33,9 @@
         .video-wrapper {
             &.landscape {
                 height: auto; /* height defined by containing element */
-                width: 100%; /* width 100% ok */
+                /* width: 100%; */ /* width 100% ok */
+                max-width: 600px;
+                margin-inline: auto;
             }
     
             &.portrait {
