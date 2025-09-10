@@ -3,7 +3,6 @@
 namespace Controlroom\Controller;
 
 use App\Entity\Food;
-use App\Entity\Tag\FoodTag;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
