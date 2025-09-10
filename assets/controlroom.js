@@ -21,3 +21,5 @@ import "./styles/components/modal-variables-controlroom.css";
 import "./styles/components/modal.css";
 import "./styles/components/modal-icon.css";
 import "./styles/components/modal-animation.css";
+
+import "./styles/form/ajax-submit.css";

@@ -23,7 +23,7 @@
 @import "./form/radio.css";
 @import "./form/select.css";
 @import "./form/textarea.css";
-
+@import "./form/ajax-submit.css";
 
 @import "./components/card.css";
 @import "./components/header.css";
