@@ -31,7 +31,11 @@
 {%- endblock checkbox_row -%}
 
 {% block textarea_widget %}
-    {%- set attr = attr|merge({'data-controller': 'autogrow', 'data-action': 'input->autogrow#resize'}) -%}
+    {%- set attr = attr|merge({
+        'data-controller': ('autogrow' ~ ' ' ~ attr['data-controller']|default(''))|trim,
+        'data-action': ('input->autogrow#resize' ~ ' ' ~ attr['data-action']|default(''))|trim,
+    })
+    -%}
 	{{ parent() }}
 {% endblock %}
 
