@@ -1,17 +1,17 @@
-{% set parent = trip.parent %}
+{% set parent = trip.parent ?? trip %}
 
-<div id="top-filters"
-    class="multi-trip invisible-scroll"
+<div
+    class="trip-overview-menu multi-trip invisible-scroll {{ position ?? 'top' }}"
     data-controller="restore-x-scroll"
     data-restore-x-scroll-key-value="trip-{{ parent.id }}" 
 >
-	<a href="{{ path(parent) }}" class="top-level-trip" style="margin-right: 10px">
+	<a href="{{ path(parent) }}" class="top-level-trip {{ trip == parent ? 'current' }}" style="margin-right: 10px">
         <span class="trip-name">{{ parent.shortNameWithFallback(app.locale) }}</span>
         <span class="trip-duration">{{ parent|tripDuration }}</span>
 	</a>
 
-	{% for childTrip in trip.parent.children %}
-		<a href="{{ path(childTrip) }}" class="trip-leg {{ childTrip == trip ? 'current' }}">
+	{% for childTrip in parent.children %}
+		<a href="{{ path(childTrip) }}" class="trip-leg {{ trip == childTrip ? 'current' }}">
             <span class="trip-name">{{ childTrip|trans }}</span>
             <span class="trip-duration">{{ childTrip|tripDuration }}</span>
 		</a>

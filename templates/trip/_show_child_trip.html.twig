@@ -1,4 +1,4 @@
-{% include 'trip/_top_filters_child_trip.html.twig' %}
+{% include 'trip/_trip_overview_menu.html.twig' %}
 
 <div id="rating">
 	{% include 'trip/_rating.html.twig' %}
@@ -26,3 +26,6 @@
     <h2>The rest</h2>
     {% include "trip/_gallery.html.twig" %}
 {% endif %}
+
+{% include 'trip/_trip_overview_menu.html.twig' with { position: 'bottom' } %}
+
