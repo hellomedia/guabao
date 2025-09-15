@@ -16,7 +16,7 @@ unconfirmed:
     title: Confirme ton compte
     default_message: >
         Confirme ton compte en cliquant sur le lien de validation
-        qui vous a été envoyé par email.
+        envoyé par email.
         <br/><br/>
         Tu peux obtenir un nouveau via le bouton ci-dessous.
     request_new_validation_link: Obtenir un nouveau lien de validation
@@ -37,16 +37,17 @@ registration:
             Un e-mail a été envoyé à l'adresse <b>%email%</b>.
             <br><br>
             Il contient un lien de validation sur lequel il faut cliquer
-            pour activer ton compte.
+            pour activer le compte.
     validation_email:
         subject: Confirmation d'inscription
-        click_link: Pour valider ton compte, merci de suivre le lien ci-dessous
+        click_link: Pour valider le compte, suivre le lien ci-dessous
         button: Confirmer mon compte
         fallback_link: Ou copier-coller l'url ci-dessous dans la barre d'adresse du navigateur
     account_created:
         success: Compte confirmé avec succès!
 # Password Reset
 password_reset:
+    lost_password: Mot de passe perdu ?
     title: Réinitialisation du mot de passe
     submit: Réinitialiser le mot de passe
     check_email: >
@@ -56,11 +57,12 @@ password_reset:
         pour réinitialiser le mot de passe.
     email:
         subject: Réinitialisation du mot de passe
-        click_link: Pour réinitialiser le mot de passe, merci de suivre le lien ci-dessous
+        click_link: Pour réinitialiser le mot de passe, suivre le lien ci-dessous
         button: Réinitialiser le mot de passe
         validity: Ce lien expire dans
+resetting.flash.success: Mot de passe modifié avec succès
 force_full_authentication:
-    info: Pour accéder à cette page, merci d'encoder le mot de passe.
+    info: Pour accéder à cette page, encoder le mot de passe.
 access_denied:
     title: Accès Refusé
     message: >-

@@ -3,4 +3,8 @@ framework:
     enabled_locales: '%locales%'
     translator:
         default_path: '%kernel.project_dir%/translations'
+        # additional paths
+        paths:
+            - '%kernel.project_dir%/src/Security/translations'
         fallbacks: ['%default_locale%']
+

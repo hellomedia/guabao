@@ -1,10 +1,10 @@
 # SYMFONY INTERNALS OVERRIDE
 # key from symfony security component (with final dot)
 Username could not be found.: >
-    <b>Email not found</b>.
+    <b>Verkeerde e-mail</b>.
 # key from symfony security component (with final dot)
 Invalid credentials.: >
-    <b>Wrong Password</b>.
+    <b>Verkeerde wachtwoord</b>.
     <br/><br/>
     You can reset your password using the link below.
 # HELLO KOT
@@ -25,7 +25,7 @@ registration:
     not_yet_registered: Not registered yet?
     signup: Register
     email_already_used: An account already exists for this email
-    email_already_verified: Email is already verified
+    email_already_verified: Email already verified
     register:
         title: Registration
     check_email:
@@ -39,11 +39,13 @@ registration:
         subject: Registration confirmation
         click_link: To confirm your account, follow the link below
         button: Confirm my account
-        fallback_link: Or copy paste the url below in the address bar of your browser
+        fallback_link: Of kopieer en plak onderstaande url in de adresbalk van uw browser
     account_created:
         success: Account created successfully!
+resetting.flash.success: __Password changed successfully
 # Password Reset
 password_reset:
+    lost_password: __Lost password?
     title: Password reset
     submit: Reset password
     check_email: >
