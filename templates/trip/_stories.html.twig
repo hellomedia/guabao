@@ -18,13 +18,11 @@
                             gallery: 'story' ~ story.id
                         } %}
                     </div>
-                    {% if story.displayableVideo %}
+                    {% for video in story.displayableVideos %}
                         <div class="story-video">
-                            {% include "media/_video.html.twig" with {
-                                video: story.displayableVideo,
-                            } %}
+                            {% include "media/_video.html.twig" %}
                         </div>
-                    {% endif %}
+                    {% endfor %}
                 </div>
             {% endif %}
 		{% endfor %}
