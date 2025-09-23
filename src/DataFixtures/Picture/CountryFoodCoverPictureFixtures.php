@@ -4,8 +4,8 @@ namespace App\DataFixtures\Picture;
 
 use App\DataFixtures\TripFixtures;
 use App\Helper\MediaAutoFillHelper;
-use App\Pack\Media\Helper\ExifExtractor;
-use App\Pack\Media\Helper\UploadHelper;
+use Pack\Media\Helper\ExifExtractor;
+use Pack\Media\Helper\UploadHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;

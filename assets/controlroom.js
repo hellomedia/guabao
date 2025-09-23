@@ -17,9 +17,9 @@ import './bootstrap.js';
 // So in the end, 2nd level imports are not recognized in a file other than app.css
 import './styles/controlroom.css';
 
-import "./styles/components/modal-variables-controlroom.css";
-import "./styles/components/modal.css";
-import "./styles/components/modal-icon.css";
-import "./styles/components/modal-animation.css";
+import "./styles/component/modal-variables-controlroom.css";
+import "./styles/component/modal.css";
+import "./styles/component/modal-icon.css";
+import "./styles/component/modal-animation.css";
 
 import "./styles/form/ajax-submit.css";

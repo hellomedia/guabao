@@ -6,7 +6,7 @@ controllers:
         en: ''
 
 security_controllers:
-    resource: '../src/Security/Controller/'
+    resource: '../pack/Security/Controller/'
     type: attribute
     prefix:
         fr: '/fr'
@@ -14,5 +14,5 @@ security_controllers:
 
 status_controllers:
     host: '%host_controlroom%' # use parameter instead of env var : https://github.com/symfony/symfony/issues/20682
-    resource: '../src/Pack/Status/Controller/'
+    resource: '../pack/Status/Controller/'
     type: attribute
