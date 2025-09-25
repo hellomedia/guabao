@@ -4,9 +4,9 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     paths:
         src/Twig/Component: 'component'
-        pack/Security/templates: 'security'
-        pack/Media/templates: 'media'
-        pack/Status/templates: 'status'
+        packs/Security/templates: 'security'
+        packs/Media/templates: 'media'
+        packs/Status/templates: 'status'
         controlroom/templates: 'controlroom'
 
     # NB: for custom forms in easy admin, to avoid conflict
