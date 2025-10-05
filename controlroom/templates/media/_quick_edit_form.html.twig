@@ -3,6 +3,16 @@
 {# important to avoid theme conflicts #}
 {% form_theme form with ['@controlroom/form/form_theme.html.twig'] only %}
 
+<style>
+    .thumb-side {
+        display:flex;
+        flex-direction:column;
+        gap: 5px;
+        .form-group {
+            padding: 0;
+        }
+    }
+</style>
 <div id="media_{{ media.id }}" data-controller="ajax">
 
     <form
@@ -50,7 +60,7 @@
                         {% endif %}
                     </a>
 
-                    <div style="display:flex;flex-direction:column;gap:15px">
+                    <div class="thumb-side">
                         {% if media.isImage %}
                             <a target="_blank"
                                 href="{{ path('controlroom_image_detail', {'entityId': media.id}) }}"
@@ -66,7 +76,12 @@
                             </a>
                         {% endif %}
 
+                        {# added to be mimic easyadmin form_row behaviour #}
+                        <div class="flex-fill"></div>
+                        
                         {{ form_row(form.is360) }}
+                        {{ form_row(form.size2) }}
+                        {{ form_row(form.size3) }}
                     </div>
 
                 </div>

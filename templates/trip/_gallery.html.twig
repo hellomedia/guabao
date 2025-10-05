@@ -1,4 +1,5 @@
-<div data-controller="fancybox" class="gallery">
+<div data-controller="fancybox"
+    class="gallery media-count-{{ medias|length }}">
 
 	{% for media in medias %}
 		
@@ -31,17 +32,22 @@
 					data-fancybox="{{ gallery ?? 'default' }}"
 					href="{{ uploaded_asset(media) }}"
 					data-caption="{{ media.description(app.request.locale)|nl2br }}"
+                    class="{{ media.size2 ? 'size2' }}{{ media.size3 ? 'size3' }}"
 				>
-					<img 
-						src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
-						class="rounded shadow-sm"
-						width="700"
-						height="700"
-					/>
+                    <img 
+                        src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
+                        class="rounded shadow-sm"
+                        width="700"
+                        height="700"
+                    />
 				</a>
 			{% endif %}
 
-		{% elseif media.isVideo %}
+		{# 
+
+        ======= Videos are displayed separately =======
+        
+        {% elseif media.isVideo %}
 			<a data-fancybox="{{ gallery ?? 'default' }}"
 				data-src="#vimeo-embed-{{ media.id }}"
 				data-caption="{{ media.description(app.request.locale)|nl2br }}"
@@ -65,7 +71,7 @@
 						></iframe>
 					</div>
 				</div>
-			</div>
+			</div> #}
 
 		{% endif %}
 	{% endfor %}

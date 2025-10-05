@@ -146,6 +146,14 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     #[ORM\ManyToMany(targetEntity: SiteHighlight::class, mappedBy: 'medias')]
     private Collection $siteHighlights;
 
+    /* useful for highlighting single photo in story */
+    #[ORM\Column(options: ['default' => false])]
+    private ?bool $size2 = null;
+
+    /* useful for highlighting single photo in story */
+    #[ORM\Column(options: ['default' => false])]
+    private ?bool $size3 = null;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -506,6 +514,30 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
         if ($this->siteHighlights->removeElement($siteHighlight)) {
             $siteHighlight->removeMedia($this);
         }
+
+        return $this;
+    }
+
+    public function isSize2(): ?bool
+    {
+        return $this->size2;
+    }
+
+    public function setSize2(bool $size2): static
+    {
+        $this->size2 = $size2;
+
+        return $this;
+    }
+
+    public function isSize3(): ?bool
+    {
+        return $this->size3;
+    }
+
+    public function setSize3(bool $size3): static
+    {
+        $this->size3 = $size3;
 
         return $this;
     }

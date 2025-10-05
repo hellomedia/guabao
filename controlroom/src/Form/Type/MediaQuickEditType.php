@@ -179,6 +179,18 @@ class MediaQuickEditType extends AbstractType
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
             ])
+            ->add('size2', CheckboxType::class, [
+                'label'    => 'size 2',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
+            ->add('size3', CheckboxType::class, [
+                'label'    => 'size 3',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
             ->add('place', EntityType::class, [
                 'class' => Place::class,
                 'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
