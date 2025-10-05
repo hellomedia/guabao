@@ -12,15 +12,19 @@
                     {% if story.showTitle %}
                         <h2>{{ story }}</h2>
                     {% endif %}
-                    <div class="story-description">
-                        {{ story.description(app.locale)|nl2br }}
-                    </div>
-                    <div class="story-images story-image-count-{{ story.displayableImages|length }}">
-                        {% include "trip/_gallery.html.twig" with {
-                            medias: story.displayableImages,
-                            gallery: 'story' ~ story.id
-                        } %}
-                    </div>
+                    {% if story.description is not empty %}
+                        <div class="story-description">
+                            {{ story.description(app.locale)|nl2br }}
+                        </div>
+                    {% endif %}
+                    {% if story.displaybleImages is not empty %}
+                        <div class="story-images story-image-count-{{ story.displayableImages|length }}">
+                            {% include "trip/_gallery.html.twig" with {
+                                medias: story.displayableImages,
+                                gallery: 'story' ~ story.id
+                            } %}
+                        </div>
+                    {% endif %}
                     {% for video in story.displayableVideos %}
                         <div class="story-video">
                             {% include "media/_video.html.twig" %}
