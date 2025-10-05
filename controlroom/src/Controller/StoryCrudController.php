@@ -106,7 +106,7 @@ class StoryCrudController extends AbstractCrudController
             ->setFormTypeOptions([
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('t')
-                        ->orderBy('t.startedAt', 'DESC'); // change to the field you want
+                        ->orderBy('t.startedAt', 'DESC');
                 },
                 'choice_label' => function (Trip $trip): string {
                     if ($trip->hasParent()) {
