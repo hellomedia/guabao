@@ -95,8 +95,12 @@ class TripRepository extends ServiceEntityRepository
         ]);
     }
 
-    public function findOneByMediaDate(DateTimeImmutable $mediaTakenAt)
+    public function findOneByMediaDate(?DateTimeImmutable $mediaTakenAt): ?Trip
     {
+        if ($mediaTakenAt == null) {
+            return null;
+        }
+
         // if there are multiple trips for the date, it is lifely to be a leg and a parent trip.
         // If that is the case, we want to retrieve the leg ===> ORDER BY t.parent ASC NULLS LAST
         // and setMaxResults(1)
