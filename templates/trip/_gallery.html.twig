@@ -52,6 +52,26 @@
                                 {# variable aspect-ratio set in CSS #}
                             />
                         </picture>
+                    {% elseif media.isPano %}
+                        <picture>
+                            <source 
+                                src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
+                                media="(max-width: 600px)"
+                            />
+                            <source 
+                                src="{{ uploaded_asset(media)|imagine_filter('thumb_large') }}"
+                                media="(min-width: 901px)"
+                            />
+                            <source 
+                                src="{{ uploaded_asset(media)|imagine_filter('thumb_card_4_3') }}"
+                                media="(min-width: 601px)"
+                            />
+                            <img 
+                                src="{{ uploaded_asset(media)|imagine_filter('thumb_large') }}"
+                                class="rounded shadow-sm"
+                                {# variable aspect-ratio set in CSS #}
+                            />
+                        </picture> 
                     {% else %}
                         <img 
                             src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
