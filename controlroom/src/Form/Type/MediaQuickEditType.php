@@ -80,7 +80,7 @@ class MediaQuickEditType extends AbstractType
                     return $repo->createQueryBuilder('s')
                         ->where('s.trip = :trip')
                         ->setParameter('trip', $currentTrip)
-                        ->orderBy('s.nameEn', 'ASC');
+                        ->orderBy('s.displayOrder', 'ASC');
                 },
                 'multiple' => false,
                 'autocomplete' => true,
