@@ -21,7 +21,10 @@
         #stories {
             margin-top: 50px;
             .story {
-                margin-bottom: 80px;            
+                margin-bottom: 80px;
+                &.no-title {
+                    margin-top: -35px;
+                }          
             }
             .story-description {
                 @apply text-lg;
