@@ -45,7 +45,7 @@
             }
         }
     }
-    @media (width > 600px) {
+    @media (width > 900px) {
         .gallery a {
             &.pano {
                 grid-column: span 6;
