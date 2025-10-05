@@ -33,7 +33,7 @@
 					data-fancybox="{{ gallery ?? 'default' }}"
 					href="{{ uploaded_asset(media) }}"
 					data-caption="{{ media.description(app.request.locale)|nl2br }}"
-                    class="{{ media.size2 ? 'size2' }}{{ media.size3 ? 'size3' }}"
+                    class="{{ media.size2 ? 'size2' }}{{ media.size3 ? 'size3' }}{{ media.isPano ? 'pano' }}"
 				>
                     {% if media.size2 or media.size3 %}
                         <picture>
