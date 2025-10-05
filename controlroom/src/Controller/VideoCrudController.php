@@ -34,8 +34,6 @@ class VideoCrudController extends MediaCrudController
 
     public function configureFields(string $pageName): iterable
     {
-
-
         yield FormField::addFieldset('Video');
 
         yield TextField::new('vimeoId')
