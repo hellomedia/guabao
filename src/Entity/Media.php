@@ -148,11 +148,11 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
 
     /* useful for highlighting single photo in story */
     #[ORM\Column(options: ['default' => false])]
-    private ?bool $size2 = null;
+    private ?bool $size2 = false;
 
     /* useful for highlighting single photo in story */
     #[ORM\Column(options: ['default' => false])]
-    private ?bool $size3 = null;
+    private ?bool $size3 = false;
 
     public function __construct()
     {

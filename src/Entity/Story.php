@@ -58,7 +58,7 @@ class Story implements LocalizedNameInterface, EntityInterface
     private Collection $siteHighlights;
 
     #[ORM\Column(options: ['default' => true])]
-    private ?bool $showTitle = null;
+    private ?bool $showTitle = true;
 
     public function __construct()
     {
