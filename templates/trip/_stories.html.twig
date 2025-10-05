@@ -17,7 +17,7 @@
                             {{ story.description(app.locale)|nl2br }}
                         </div>
                     {% endif %}
-                    {% if story.displaybleImages is not empty %}
+                    {% if story.displayableImages is not empty %}
                         <div class="story-images story-image-count-{{ story.displayableImages|length }}">
                             {% include "trip/_gallery.html.twig" with {
                                 medias: story.displayableImages,
