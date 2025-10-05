@@ -105,6 +105,11 @@
                                 href="{{ path('admin_media_bulk_add', {'trip': story.trip.id, 'story': story.id}) }}">
                                 + Pictures
                             </a>
+                            <a class="btn btn-sm" style="margin-left: 10px;"
+                                target="_blank"
+                                href="{{ path('controlroom_story_edit', {entityId: story.id}) }}">
+                                Edit
+                            </a>
                         </h5>
 
                         <a href="{{ path('admin_media_bulk_edit_by_story', { id: story.id}) }}">
