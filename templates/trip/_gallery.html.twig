@@ -9,6 +9,7 @@
 					data-fancybox="{{ gallery ?? 'default' }}"
 					data-src="#viewer-{{ media.id }}"
 					data-caption="{{ media.description(app.request.locale)|nl2br }}"
+                    class="{{ media.size2 ? 'size2' }}{{ media.size3 ? 'size3' }}"
 				>
 					<twig:ux:icon name="sphere" />
 					<img 
