@@ -179,6 +179,12 @@ class MediaQuickEditType extends AbstractType
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
             ])
+            ->add('isPano', CheckboxType::class, [
+                'label' => 'Pano',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
             ->add('size2', CheckboxType::class, [
                 'label'    => 'size 2',
                 'required' => false,
