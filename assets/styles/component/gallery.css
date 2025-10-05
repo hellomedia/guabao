@@ -19,6 +19,9 @@
         position: relative;
         aspect-ratio: 1/1; /* set aspect-ratio on grid-item => set item height. Then use height=100% + object-fit on img inside */
 
+        &:hover {
+            cursor: pointer; /* useful when no href (pano) */
+        }
         svg {
             position: absolute;
             top: 25%;
