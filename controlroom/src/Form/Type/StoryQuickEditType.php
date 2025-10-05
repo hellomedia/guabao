@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -36,6 +37,12 @@ class StoryQuickEditType extends AbstractType
                 'attr' => [
                     'rows' => 3,
                 ],
+            ])
+            ->add('showTitle', CheckboxType::class, [
+                'label'    => 'show title',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
             ])
             ->add('tags', EntityType::class, [
                 'class' => MediaTag::class,

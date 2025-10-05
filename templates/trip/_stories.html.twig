@@ -6,13 +6,15 @@
 </style>
 	<div id="stories">
 		{% for story in stories %}
-            {% if story.displayableImages is not empty or story.displayableVideo or story.description is not empty %}
+            {% if story.displayableImages is not empty or story.displayableVideos is not empty or story.description is not empty %}
                 <div class="story">
-                    <h2>{{ story }}</h2>
+                    {% if story.showTitle %}
+                        <h2>{{ story }}</h2>
+                    {% endif %}
                     <div class="story-description">
                         {{ story.description(app.locale)|nl2br }}
                     </div>
-                    <div class="story-images">
+                    <div class="story-images story-image-count-{{ story.displayableImages|length }}">
                         {% include "trip/_gallery.html.twig" with {
                             medias: story.displayableImages,
                             gallery: 'story' ~ story.id

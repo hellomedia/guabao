@@ -57,6 +57,9 @@ class Story implements LocalizedNameInterface, EntityInterface
     #[ORM\ManyToMany(targetEntity: SiteHighlight::class, mappedBy: 'stories')]
     private Collection $siteHighlights;
 
+    #[ORM\Column(options: ['default' => true])]
+    private ?bool $showTitle = null;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
@@ -225,6 +228,18 @@ class Story implements LocalizedNameInterface, EntityInterface
         if ($this->siteHighlights->removeElement($siteHighlight)) {
             $siteHighlight->removeStory($this);
         }
+
+        return $this;
+    }
+
+    public function isShowTitle(): ?bool
+    {
+        return $this->showTitle;
+    }
+
+    public function setShowTitle(bool $showTitle): static
+    {
+        $this->showTitle = $showTitle;
 
         return $this;
     }
