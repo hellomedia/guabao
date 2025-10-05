@@ -34,12 +34,32 @@
 					data-caption="{{ media.description(app.request.locale)|nl2br }}"
                     class="{{ media.size2 ? 'size2' }}{{ media.size3 ? 'size3' }}"
 				>
-                    <img 
-                        src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
-                        class="rounded shadow-sm"
-                        width="700"
-                        height="700"
-                    />
+                    {% if media.size2 or media.size3 %}
+                        <picture>
+                            <source 
+                                src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
+                                media="(max-width: 600px)"
+                            />
+                            <source 
+                                src="{{ uploaded_asset(media)|imagine_filter('thumb_card_4_3') }}"
+                                media="(min-width: 601px)"
+                            />
+                            <img 
+                                {# set default src to 4_3 thumb. If default is square thumb, 4_3 is scaled up #}
+                                src="{{ uploaded_asset(media)|imagine_filter('thumb_card_4_3') }}"
+                                class="rounded shadow-sm"
+                                {# variable aspect-ratio set in CSS #}
+                            />
+                        </picture>
+                    {% else %}
+                        <img 
+                            src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
+                            media="(max-width: 600px)"
+                            class="rounded shadow-sm"
+                            width="700"
+                            height="700"
+                        />
+                    {% endif %}
 				</a>
 			{% endif %}
 
