@@ -7,9 +7,32 @@
         grid-auto-rows: 1fr;
     }
 
+    /* NB: increment the grid manually -- instead of repeat(auto-fill, minmax(180px, 1fr)
+        so we can handle aspect-ratio manually too,
+        useful for handling varying aspect ratios items inside a grid */
     @media (width > 480px) {
         .gallery {
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (width > 600px) {
+        .gallery {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    @media (width > 800px) {
+        .gallery {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    @media (width > 1000px) {
+        .gallery {
+            grid-template-columns: repeat(5, 1fr);
+        }
+    }
+    @media (width > 1200px) {
+        .gallery {
+            grid-template-columns: repeat(6, 1fr);
         }
     }
         
