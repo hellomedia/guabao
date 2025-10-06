@@ -1,10 +1,10 @@
 {% if stories is not empty %}
-<style>
-    .story-video {
-        margin-top: 100px;
-        margin-bottom: 100px;
-    }
-</style>
+    <style>
+        .story-video {
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+    </style>
 	<div id="stories">
 		{% for story in stories %}
             {% if story.displayableImages is not empty or story.displayableVideos is not empty or story.description is not empty %}
@@ -22,6 +22,14 @@
                             {% include "trip/_gallery.html.twig" with {
                                 medias: story.displayableImages,
                                 gallery: 'story' ~ story.id
+                            } %}
+                        </div>
+                    {% endif %}
+                    {% if story.displayable360s is not empty %}
+                        <div class="story-360s story-360-count-{{ story.displayable360s|length }}">
+                            {% include "trip/_pano360s.html.twig" with {
+                                pano360s: story.displayable360s,
+                                gallery: 'story' ~ story.id ~ '-360'
                             } %}
                         </div>
                     {% endif %}

@@ -1,96 +1,19 @@
 <div data-controller="fancybox"
-
     class="gallery media-count-{{ medias|length }}">
 
 	{% for media in medias %}
 		
 		{% if media.isImage %}
-			{% if media.is360 %}
-				<a 
-					data-fancybox="{{ gallery ?? 'default' }}"
-					data-src="#viewer-{{ media.id }}"
-					data-caption="{{ media.description(app.request.locale)|nl2br }}"
-				>
-					<twig:ux:icon name="sphere" />
-					<img 
-						src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}"
-						class="rounded shadow-sm"
-						width="700"
-						height="700"
-					/>
-				</a>
 
-				<div style="display: none;" id="viewer-{{ media.id }}">
-					<div 
-						class="panorama-viewer" 
-						data-src="{{ uploaded_asset(media) }}"
-						style="width: 90vw; height: 85vh;"
-					></div>
-				</div>
-
-			{% else %}
-				<a 
-					data-fancybox="{{ gallery ?? 'default' }}"
-					href="{{ uploaded_asset(media) }}"
-					data-caption="{{ media.description(app.request.locale)|nl2br }}"
-                    class="{{ media.size2 ? 'size2' }}{{ media.size3 ? 'size3' }}{{ media.isPano ? 'pano' }}"
-				>
-                    {% if media.size2 or media.size3 %}
-                        <picture>
-                            <source 
-                                src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}"
-                                srcset="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }} 432w,
-                                    {{ uploaded_asset(media)|imagine_filter('thumb_square_640') }} 640w,
-                                    {{ uploaded_asset(media)|imagine_filter('thumb_square_864') }} 864w"
-                                sizes="(max-width: 480px) 90vw, {# phone screen width minus margins #}
-                                    (min-width: 1200px) 207px, {# final grid item width with 6 columns #}
-                                    432px" {# default #}
-                                media="(max-width: 600px)"
-                            />
-                            <source 
-                                src="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }}"
-                                srcset="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }} 640w,
-                                    {{ uploaded_asset(media)|imagine_filter('thumb_4_3_1280') }} 1280w"
-                                sizes="(max-width: 480px) 90vw, {# 100% - margins #}
-                                    (min-width: 1200px) 621px, {# span 3 => 207 * 3 #}
-                                    621px" {# default #}
-                                media="(min-width: 601px)"
-                            />
-                            <img 
-                                {# set default src to 4_3 thumb. If default is square thumb, 4_3 is scaled up #}
-                                src="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }}"
-                                class="rounded shadow-sm"
-                                {# aspect-ratio set in CSS #}
-                            />
-                        </picture>
-                    {% elseif media.isPano %}
-                        <picture>
-                            <source 
-                                src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}"
-                                srcset="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }} 432w,
-                                    {{ uploaded_asset(media)|imagine_filter('thumb_square_640') }} 640w,
-                                    {{ uploaded_asset(media)|imagine_filter('thumb_square_864') }} 864w"
-                                sizes="(max-width: 480px) 90vw, {# phone screen width minus margins #}
-                                    (min-width: 1200px) 207px, {# final grid item width with 6 columns #}
-                                    432px" {# default #}
-                                media="(width <= 600px)"
-                            />
-                            <source 
-                                src="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }}"
-                                media="(width > 600px)"
-                            />
-                            <source 
-                                src="{{ uploaded_asset(media)|imagine_filter('thumb_large') }}"
-                                media="(width > 900px)"
-                            />
-                            <img 
-                                src="{{ uploaded_asset(media)|imagine_filter('thumb_large') }}"
-                                class="rounded shadow-sm"
-                                {# aspect-ratio set in CSS #}
-                            />
-                        </picture> 
-                    {% else %}
-                        <img 
+            <a 
+                data-fancybox="{{ gallery ?? 'default' }}"
+                href="{{ uploaded_asset(media) }}"
+                data-caption="{{ media.description(app.request.locale)|nl2br }}"
+                class="{{ media.size2 ? 'size2' }}{{ media.size3 ? 'size3' }}{{ media.isPano ? 'pano' }}"
+            >
+                {% if media.size2 or media.size3 %}
+                    <picture>
+                        <source 
                             src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}"
                             srcset="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }} 432w,
                                 {{ uploaded_asset(media)|imagine_filter('thumb_square_640') }} 640w,
@@ -98,42 +21,64 @@
                             sizes="(max-width: 480px) 90vw, {# phone screen width minus margins #}
                                 (min-width: 1200px) 207px, {# final grid item width with 6 columns #}
                                 432px" {# default #}
+                            media="(max-width: 600px)"
+                        />
+                        <source 
+                            src="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }}"
+                            srcset="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }} 640w,
+                                {{ uploaded_asset(media)|imagine_filter('thumb_4_3_1280') }} 1280w"
+                            sizes="(max-width: 480px) 90vw, {# 100% - margins #}
+                                (min-width: 1200px) 621px, {# span 3 => 207 * 3 #}
+                                621px" {# default #}
+                            media="(min-width: 601px)"
+                        />
+                        <img 
+                            {# set default src to 4_3 thumb. If default is square thumb, 4_3 is scaled up #}
+                            src="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }}"
                             class="rounded shadow-sm"
                             {# aspect-ratio set in CSS #}
                         />
-                    {% endif %}
-				</a>
-			{% endif %}
-
-		{# 
-
-        ======= Videos are displayed separately =======
-        
-        {% elseif media.isVideo %}
-			<a data-fancybox="{{ gallery ?? 'default' }}"
-				data-src="#vimeo-embed-{{ media.id }}"
-				data-caption="{{ media.description(app.request.locale)|nl2br }}"
-				href="javascript:;" 
-			>
-				<img src="{{ asset('images/placeholder-video.png') }}" class="rounded shadow-sm"/>
-			</a>
-
-			<div style="display: none;">
-				<div 
-					id="vimeo-embed-{{ media.id }}" 
-					style="width: 90vw; height: 85vh; max-width: 1280px; max-height: 720px;"
-				>
-					<div style="position:relative; width:100%; height:100%; padding-top:56.25%;">
-						<iframe 
-							src="https://player.vimeo.com/video/{{ media.vimeoId }}?badge=0&autopause=0&player_id=0&app_id=58479"
-							frameborder="0"
-							allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media;"
-							style="position:absolute;top:0;left:0;width:100%;height:100%;"
-							title="yoo"
-						></iframe>
-					</div>
-				</div>
-			</div> #}
+                    </picture>
+                {% elseif media.isPano %} {# not a photosphere 360 pano, just a wide image #}
+                    <picture>
+                        <source 
+                            src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}"
+                            srcset="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }} 432w,
+                                {{ uploaded_asset(media)|imagine_filter('thumb_square_640') }} 640w,
+                                {{ uploaded_asset(media)|imagine_filter('thumb_square_864') }} 864w"
+                            sizes="(max-width: 480px) 90vw, {# phone screen width minus margins #}
+                                (min-width: 1200px) 207px, {# final grid item width with 6 columns #}
+                                432px" {# default #}
+                            media="(width <= 600px)"
+                        />
+                        <source 
+                            src="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }}"
+                            media="(width > 600px)"
+                        />
+                        <source 
+                            src="{{ uploaded_asset(media)|imagine_filter('thumb_large') }}"
+                            media="(width > 900px)"
+                        />
+                        <img 
+                            src="{{ uploaded_asset(media)|imagine_filter('thumb_large') }}"
+                            class="rounded shadow-sm"
+                            {# aspect-ratio set in CSS #}
+                        />
+                    </picture> 
+                {% else %}
+                    <img 
+                        src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}"
+                        srcset="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }} 432w,
+                            {{ uploaded_asset(media)|imagine_filter('thumb_square_640') }} 640w,
+                            {{ uploaded_asset(media)|imagine_filter('thumb_square_864') }} 864w"
+                        sizes="(max-width: 480px) 90vw, {# phone screen width minus margins #}
+                            (min-width: 1200px) 207px, {# final grid item width with 6 columns #}
+                            432px" {# default #}
+                        class="rounded shadow-sm"
+                        {# aspect-ratio set in CSS #}
+                    />
+                {% endif %}
+            </a>
 
 		{% endif %}
 	{% endfor %}

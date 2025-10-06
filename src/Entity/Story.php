@@ -108,8 +108,18 @@ class Story implements LocalizedNameInterface, EntityInterface
      */
     public function getDisplayableImages(): Collection
     {
-        return $this->medias->filter(function($media) {
-            return $media->getShowInStory() && $media->isImage();
+        return $this->medias->filter(function(Media $media) {
+            return $media->getShowInStory() && $media->isImage() && !$media->is360();
+        });
+    }
+
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getDisplayable360s(): Collection
+    {
+        return $this->medias->filter(function(Media $media) {
+            return $media->getShowInStory() && $media->is360();
         });
     }
 

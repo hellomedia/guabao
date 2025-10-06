@@ -24,7 +24,10 @@
                 margin-bottom: 80px;
                 &.no-title {
                     margin-top: -35px;
-                }          
+                }   
+                > * :not(:last-child) {
+                    margin-bottom: 30px;
+                }    
             }
             .story-description {
                 @apply text-lg;

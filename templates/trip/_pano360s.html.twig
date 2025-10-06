@@ -1,0 +1,21 @@
+<div class="gallery media-count-{{ pano360s|length }}">
+
+	{% for pano360 in pano360s %}
+            <a 
+                href="{{ uploaded_asset(pano360) }}"
+                data-controller="photosphere"
+                data-action="click->photosphere#open"
+                data-photosphere-src-value="{{ uploaded_asset(pano360) }}"
+            >
+                <twig:ux:icon name="sphere" />
+                <img 
+                    src="{{ uploaded_asset(pano360)|imagine_filter('thumb_square_432') }}"
+                    class="rounded shadow-sm"
+                    width="700"
+                    height="700"
+                />
+            </a>
+
+	{% endfor %}
+</div>
+
