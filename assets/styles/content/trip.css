@@ -25,13 +25,13 @@
                 &.no-title {
                     margin-top: -35px;
                 }   
-                > * :not(:last-child) {
-                    margin-bottom: 30px;
-                }    
             }
             .story-description {
                 @apply text-lg;
-                margin-bottom: calc(var(--spacing) * 8);
+                margin-bottom: calc(var(--spacing) * 11);
+            }
+            .story-images:not(:last-child) {
+                margin-bottom: calc(var(--spacing) * 11);
             }
         }
 
