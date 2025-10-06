@@ -4,7 +4,7 @@ namespace Controlroom\Form\Type;
 
 use App\Entity\Country;
 use App\Entity\SiteHighlight;
-use App\Entity\Tag\MediaTag;
+use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -38,7 +38,7 @@ class TripQuickEditType extends AbstractType
                 ],
             ])
             ->add('tags', EntityType::class, [
-                'class' => MediaTag::class,
+                'class' => TripTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
                         ->orderBy('t.nameEn', 'ASC');
