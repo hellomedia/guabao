@@ -11,16 +11,34 @@
                 height="{{ media.height }}"
             />
             <img
-                src="{{ uploaded_asset(media)|imagine_filter('thumb_card_4_3') }}"
+                src="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_1280') }}"
                 class="thumb-card"
-                width="800"
-                height="600"
+                width="1280"
+                height="920"
             />
             <img
-                src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
+                src="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }}"
                 class="thumb-card"
-                width="700"
-                height="700"
+                width="640"
+                height="480"
+            />
+            <img
+                src="{{ uploaded_asset(media)|imagine_filter('thumb_square_864') }}"
+                class="thumb-card"
+                width="864"
+                height="864"
+            />
+            <img
+                src="{{ uploaded_asset(media)|imagine_filter('thumb_square_640') }}"
+                class="thumb-card"
+                width="640"
+                height="640"
+            />
+            <img
+                src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}"
+                class="thumb-card"
+                width="432"
+                height="432"
             />
             <img
                 src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"

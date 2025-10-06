@@ -22,7 +22,9 @@ liip_imagine:
         thumb_small:
             quality: 75
             filters:
-                thumbnail: { size: [300, 300], mode: outbound } # forces square aspect ratio
+                thumbnail:
+                    size: [300, 300]
+                    mode: outbound # forces square aspect ratio
         # thumb_card Size and cropping logic ***
         # use 'outbound' to force the image aspect ratio, which makes the card grid layout easier to handle
         # Note about grid layout:
@@ -36,33 +38,57 @@ liip_imagine:
         # (additional space is filled with background)
         # 600x600 logic: phones are supposed to go up to 480px (logical/CSS pixels, not real pixels)
         # devices up to 768px include large phones and small tablets
-        # we can probably keep cards < 600px,
-        # by making grid-template-rows min of 300px 
-        # -- so that a width of 599px would generate 1 card, and 601px would generate 2 cards.
-        # if we go down to grid-template-columns min of 250px (so card of max 500px),
-        # it makes for 250px cards which seems too small
-        # NB: we don't want to make the thumb too big either since we allow_upscale.
-        # If we used 800x800, it would upscale up all original images < 800px.
-        thumb_card_square:
+
+        # FIXED SIZES
+        # ===========
+        # mode 'outbound' forces aspect-ratio to size[] array
+
+        # Square
+        thumb_square_432: # max size for 1x pixel density for phone
             quality: 75
             filters:
-                #  'outbound' to force sqare image aspect ratio. easier for card layouts to have consistent sizes.
                 thumbnail: 
-                    size: [700, 700]
+                    size: [432, 432]
                     mode: outbound
-                    allow_upscale: true
-                background:
-                    size: [700, 700]
-                    color: '#DDDDDD'  # gray for background fill color
-                    position: 'center'
-        thumb_card_4_3:
+        thumb_square_640: # intermediate size, can be picked by browser when useful
+            quality: 75
+            filters:
+                thumbnail: 
+                    size: [640, 640]
+                    mode: outbound
+        thumb_square_864: # max size for 2x pixel density
+            quality: 75
+            filters:
+                thumbnail: 
+                    size: [864, 864]
+                    mode: outbound
+        # 4/3
+        thumb_4_3_800: # max size for 1x pixel density
             quality: 75
             filters: 
                 thumbnail:
                     size: [800, 600]
                     mode: outbound
+        thumb_4_3_640: # max size for 1x pixel density
+            quality: 75
+            filters: 
+                thumbnail:
+                    size: [640, 480]
+                    mode: outbound
+        thumb_4_3_1280: # max size for 2x pixel density
+            quality: 75
+            filters: 
+                thumbnail:
+                    size: [1280, 920]
+                    mode: outbound
+        
+        # VARYING SIZE
+        # ============
+        # mode 'inset' keeps original aspect ratio, bound by size[] array
+
         thumb_large:
             quality: 75
             filters:
-                # 'inset' respects the aspect ratio of original image
-                thumbnail: { size: [2000, 1300], mode: inset }
+                thumbnail:
+                    size: [2000, 1300]
+                    mode: inset

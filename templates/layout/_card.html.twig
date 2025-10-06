@@ -3,11 +3,15 @@
 	
     {% if image %}
 		<img
-			class="listing-card-image"
-			src="{{ uploaded_asset(image)|imagine_filter('thumb_card_4_3') }}"
-			alt=""
-			width="800"
-			height="600"
+            class="card-image"
+            src="{{ uploaded_asset(image)|imagine_filter('thumb_4_3_640') }}"
+            srcset="{{ uploaded_asset(image)|imagine_filter('thumb_4_3_640') }} 640w,
+                {{ uploaded_asset(image)|imagine_filter('thumb_4_3_1280') }} 1280w"
+            sizes="(max-width: 480px) 100vw,
+                (max-width: 900px) 50vw,
+                320px"
+            width="800" {# keep 800x600. flex sizing depends on those values #}
+            height="600"
 		/>
 	{% else %}
 		{% include 'listing/_placeholder_image.html.twig' %}

@@ -3,40 +3,22 @@
 	{% for media in medias %}
 		
 		{% if media.isImage %}
-			{% if media.is360 %}
-				<a data-fancybox data-src="#viewer-{{ media.id }}" data-caption="{{ media.description(app.request.locale) }}">
-					<img 
-						src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
-						class="rounded shadow-sm"
-						width="700"
-						height="700"
-					/>
-				</a>
 
-				<div style="display: none;" id="viewer-{{ media.id }}">
-					<div 
-						class="panorama-viewer" 
-						data-src="{{ uploaded_asset(media) }}"
-						style="width: 100%; height: 500px;"
-					></div>
-				</div>
-	
-			{% else %}
-				<a data-fancybox="gallery" href="{{ uploaded_asset(media) }}" data-caption="{{ media.description(app.request.locale) }}">
-					<img 
-						src="{{ uploaded_asset(media)|imagine_filter('thumb_card_square') }}"
-						class="rounded shadow-sm"
-						width="700"
-						height="700"
-					/>
-				</a>
-			{% endif %}
-
-		{% elseif media.isVideo %}
-			<a data-fancybox data-caption="{{ media.description(app.request.locale) }}" href="{{ media.videoUrl }}">
-				<img src="{{ asset('images/video-placeholder.jpg') }}" class="rounded shadow-sm"/>
-			</a>
+            <a data-fancybox="gallery" href="{{ uploaded_asset(media) }}" data-caption="{{ media.description(app.request.locale) }}">
+                <img 
+                    src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}"
+                    srcset="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }} 432w,
+                        {{ uploaded_asset(media)|imagine_filter('thumb_square_640') }} 640w,
+                        {{ uploaded_asset(media)|imagine_filter('thumb_square_864') }} 864w"
+                    sizes="(max-width: 480px) 90vw, {# phone screen width minus margins #}
+                        (min-width: 1200px) 207px, {# final grid item width with 6 columns #}
+                        432px" {# default #}
+                    class="rounded shadow-sm"
+                    {# aspect-ratio set in CSS #}
+                />
+            </a>
 		{% endif %}
+
 	{% endfor %}
 </div>
 

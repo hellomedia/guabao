@@ -2,8 +2,14 @@
     {% if media %}
         <a href="{{ url }}" class="card-image-wrapper">
             <img
-                src="{{ uploaded_asset(media)|imagine_filter('thumb_card_4_3') }}"
-                width="800"
+                class="card-image"
+                src="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }}"
+                srcset="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }} 640w,
+                    {{ uploaded_asset(media)|imagine_filter('thumb_4_3_1280') }} 1280w"
+                sizes="(max-width: 480px) 100vw,
+                    (max-width: 900px) 50vw,
+                    320px"
+                width="800" {# keep 800x600. flex sizing depends on those values #}
                 height="600"
             />
         </a>
