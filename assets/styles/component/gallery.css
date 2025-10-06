@@ -71,11 +71,21 @@
             }
         }
     }
-    @media (width > 900px) {
+    @media (width > 1000px) {
+        .gallery a {
+            &.pano {
+                grid-column: span 5;
+                aspect-ratio: 20/9; /* 4/3 , divided by 3, times 5 */
+                /* set aspect-ratio on grid-item => set item height. Then use height=100% + object-fit on img inside */
+            }
+        }
+    }
+    @media (width > 1200px) {
         .gallery a {
             &.pano {
                 grid-column: span 6;
-                aspect-ratio: 8/3; /* set aspect-ratio on grid-item => set item height. Then use height=100% + object-fit on img inside */
+                aspect-ratio: 8/3; /* 4/3 , divided by 3, times 6 */
+                /* set aspect-ratio on grid-item => set item height. Then use height=100% + object-fit on img inside */
             }
         }
     }
