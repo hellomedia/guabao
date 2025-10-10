@@ -24,6 +24,9 @@
                 margin-bottom: 80px;
                 &.no-title {
                     margin-top: -35px;
+                    & > .story-images {
+                        margin-top: -70px;
+                    }
                 }   
             }
             .story-description {
