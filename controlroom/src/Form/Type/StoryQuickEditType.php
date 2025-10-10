@@ -13,6 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class StoryQuickEditType extends AbstractType
@@ -22,17 +23,35 @@ class StoryQuickEditType extends AbstractType
         $story = $builder->getData();
 
         $builder
-            ->add('nameEn')
+            ->add('nameEn', TextType::class, [
+                'label' => 'Name EN',
+            ])
             ->add('descriptionEn', TextareaType::class, [
-                'label' => "EN",
+                'label' => "Text above gallery EN",
                 'required' => false,
                 'attr' => [
                     'rows' => 3,
                 ],
              ])
-            ->add('nameFr')
+            ->add('textBelowGalleryEn', TextareaType::class, [
+                'label' => "Text below gallery EN",
+                'required' => false,
+                'attr' => [
+                    'rows' => 3,
+                ],
+            ])
+            ->add('nameFr', TextType::class, [
+                'label' => 'Name FR',
+            ])
             ->add('descriptionFr', TextareaType::class, [
-                'label' => "FR",
+                'label' => "Text above gallery FR",
+                'required' => false,
+                'attr' => [
+                    'rows' => 3,
+                ],
+            ])
+            ->add('textBelowGalleryFr', TextareaType::class, [
+                'label' => "Text below gallery FR",
                 'required' => false,
                 'attr' => [
                     'rows' => 3,

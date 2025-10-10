@@ -21,7 +21,7 @@ trait LocalizedDescriptionTrait
         return match ($locale) {
             'fr' => $this->descriptionFr,
             'en' => $this->descriptionEn,
-            default => $this->descriptionFr ?? $this->descriptionEn,
+            default => $this->descriptionEn ?? $this->descriptionFr,
         };
     }
 

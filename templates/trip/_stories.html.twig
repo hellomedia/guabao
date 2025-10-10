@@ -25,6 +25,11 @@
                             } %}
                         </div>
                     {% endif %}
+                    {% if story.textBelowGallery is not empty %}
+                        <div class="story-description">
+                            {{ story.textBelowGallery(app.locale)|nl2br }}
+                        </div>
+                    {% endif %}
                     {% if story.displayable360s is not empty %}
                         <div class="story-360s story-360-count-{{ story.displayable360s|length }}">
                             {% include "trip/_pano360s.html.twig" with {

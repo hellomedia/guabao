@@ -134,5 +134,8 @@ class StoryCrudController extends AbstractCrudController
 
         yield TextareaField::new('descriptionEn', 'Description EN');
         yield TextareaField::new('descriptionFr', 'Description FR');
+
+        yield TextareaField::new('textBelowGalleryEn', 'Text below EN');
+        yield TextareaField::new('textBelowGalleryFr', 'Text below FR');
     }
 }

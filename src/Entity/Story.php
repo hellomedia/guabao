@@ -12,6 +12,8 @@ use App\Repository\StoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: StoryRepository::class)]
 class Story implements LocalizedNameInterface, EntityInterface
@@ -24,6 +26,14 @@ class Story implements LocalizedNameInterface, EntityInterface
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[Assert\Length(max: 5000)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $textBelowGalleryFr = null;
+
+    #[Assert\Length(max: 5000)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $textBelowGalleryEn = null;
 
     #[ORM\ManyToOne(inversedBy: 'stories')]
     #[ORM\JoinColumn(nullable: false)]
@@ -71,6 +81,39 @@ class Story implements LocalizedNameInterface, EntityInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTextBelowGallery(?string $locale = null): ?string
+    {
+        return match ($locale) {
+            'fr' => $this->textBelowGalleryFr,
+            'en' => $this->textBelowGalleryEn,
+            default => $this->textBelowGalleryEn ?? $this->textBelowGalleryFr,
+        };
+    }
+
+    public function getTextBelowGalleryFr(): ?string
+    {
+        return $this->textBelowGalleryFr;
+    }
+
+    public function setTextBelowGalleryFr(?string $textBelowGalleryFr): static
+    {
+        $this->textBelowGalleryFr = $textBelowGalleryFr;
+
+        return $this;
+    }
+
+    public function getTextBelowGalleryEn(): ?string
+    {
+        return $this->textBelowGalleryEn;
+    }
+
+    public function setTextBelowGalleryEn(?string $textBelowGalleryEn): static
+    {
+        $this->textBelowGalleryEn = $textBelowGalleryEn;
+
+        return $this;
     }
 
     public function getTrip(): ?Trip
