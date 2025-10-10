@@ -1,11 +1,11 @@
 {% include 'trip/_top_filters_standalone.html.twig' %}
 
-<div id="description">
-	{{ trip.description(app.locale)|nl2br }}
-</div>
-
 <div id="rating">
 	{% include 'trip/_rating.html.twig' %}
+</div>
+
+<div id="description">
+	{{ trip.description(app.locale)|nl2br }}
 </div>
 
 {# <div id="cover">
