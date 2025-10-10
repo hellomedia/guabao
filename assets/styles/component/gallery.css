@@ -62,14 +62,44 @@
                 aspect-ratio: 4/3; /* set aspect-ratio on grid-item => set item height. Then use height=100% + object-fit on img inside */
             }
             &.size3 {
-                grid-column: span 3;
+                grid-column: span 2;
                 aspect-ratio: 4/3; /* set aspect-ratio on grid-item => set item height. Then use height=100% + object-fit on img inside */
             }
             &.pano {
-                grid-column: span 3;
+                grid-column: span 2;
                 aspect-ratio: 4/3; /* set aspect-ratio on grid-item => set item height. Then use height=100% + object-fit on img inside */
             }
         }
+    }
+    @media (width > 600px) {
+        .gallery a {
+                &.size2 {
+                    grid-column: span 2;
+                    aspect-ratio: 4/3;
+                    /* set aspect-ratio on grid-item => set item height. Then use height=100% + object-fit on img inside */
+                }
+        
+                &.size3 {
+                    grid-column: span 3;
+                    aspect-ratio: 4/3;
+                    /* set aspect-ratio on grid-item => set item height. Then use height=100% + object-fit on img inside */
+                }
+        
+                &.pano {
+                    grid-column: span 3;
+                    aspect-ratio: 16/9;
+                    /* set aspect-ratio on grid-item => set item height. Then use height=100% + object-fit on img inside */
+                }
+            }
+    }
+    @media (width > 800px) {
+        .gallery a { 
+                &.pano {
+                    grid-column: span 4;
+                    aspect-ratio: 16/9;
+                    /* set aspect-ratio on grid-item => set item height. Then use height=100% + object-fit on img inside */
+                }
+            }
     }
     @media (width > 1000px) {
         .gallery a {
