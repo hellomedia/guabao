@@ -132,10 +132,12 @@ table.datagrid td.actions {
     gap: 50px;
 }
 
-.quick-edit-2rows {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
-    gap: 50px;
+@media (min-width: 900px) {
+    .quick-edit-2cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
 }
 
 .faded {
