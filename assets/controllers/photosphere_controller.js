@@ -49,8 +49,17 @@ export default class extends Controller {
             panorama: this.srcValue,
             defaultZoomLvl: 0,
             navbar: [
-                "zoom",
-                "fullscreen",
+                'zoom', 'fullscreen',
+                {
+                    id: 'close',
+                    title: 'Close',
+                    // simple X (use an SVG for nicer look)
+                    content: 'X',
+                    className: 'psv-close-btn',
+                    onClick: (v) => {
+                        this.close();                        // your Stimulus method to hide overlay/dialog
+                    },
+                },
             ],
         });
 

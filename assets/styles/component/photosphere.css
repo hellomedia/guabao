@@ -65,3 +65,8 @@
 .photosphere-close:hover {
     background: rgba(0, 0, 0, .75);
 }
+
+/* custom btn */
+.psv-close-btn {
+    font-size: 19px;
+}
