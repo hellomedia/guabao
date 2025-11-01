@@ -1,32 +1,14 @@
-{% autoescape 'html' %}
-
-{% set language = language is defined ? language : app.locale %}
-
-{% block header %}
-{{ 'Hello'|trans(locale=language)}} {{ name }},
-
-{% endblock %}
-
-{% block content '' %}
+{% set language = language ?? app.locale %}
 
 
-{% block footer %}
-
-{# {{ 'email.signature.line1'|trans({'%site%': siteName}, locale=language)
-     }}
-
-{{ 'email.signature.line2'|trans({'%site%': siteUrl}, locale=language)
-     }}
+{% block content %}{% endblock %}
 
 
-=====
+============
 
-{{ 'email.signature.line3'|trans({
-     '%date%': "now"|format_datetime('full', 'none', locale=language),
-     '%time%': "now"|format_datetime('none', 'short', locale=language)},
-     locale=language)
-}} #}
+Kot Market
 
-{% endblock %}
+{{ 'footer.text'|trans(domain='email', locale=language) }}
 
-{% endautoescape %}
+https://www.kotmarket.be
+
