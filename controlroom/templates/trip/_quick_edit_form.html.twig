@@ -3,18 +3,17 @@
 {# important to avoid theme conflicts #}
 {% form_theme form with ['@admin/form/form_theme.html.twig'] only %}
 
-<div id="trip_{{ trip.id }}" data-controller="ajax">
+<div id="trip_{{ trip.id }}">
 
     <form
         name="trip_quick_edit_form_{{ trip.id }}"
-        data-ajax-target="form"
-        data-action="submit->ajax#submit change->ajax#submitOnChange"
         action="{{ path('admin_trip_quick_edit', {id: trip.id}) }}"
         method="post"
         style="margin-bottom: 20px"
+        data-controller="ajax"
+        data-action="submit->ajax#submit change->ajax#submitOnChange"
     >
 
-        {# container for form content replaced in ajax #}
         <div data-ajax-target="container" class="quick-edit-2cols">
             
             <div class="column-1">

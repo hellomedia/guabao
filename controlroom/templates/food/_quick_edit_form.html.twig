@@ -3,15 +3,15 @@
 {# important to avoid theme conflicts #}
 {% form_theme form with ['@admin/form/form_theme.html.twig'] only %}
 
-<div id="food_{{ food.id }}" data-controller="ajax">
+<div id="food_{{ food.id }}">
 
     <form
         name="food_quick_edit_form_{{ food.id }}"
-        data-ajax-target="form"
-        data-action="submit->ajax#submit change->ajax#submitOnChange"
         action="{{ path('admin_food_quick_edit', {id: food.id}) }}"
         method="post"
         style="margin-bottom: 20px"
+        data-controller="ajax"
+        data-action="submit->ajax#submit change->ajax#submitOnChange"
     >
 
         {# container for form content replaced in ajax #}

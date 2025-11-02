@@ -12,13 +12,16 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 100%; /* user-agent override */
+    max-width: 100%;
+    /* user-agent override */
     height: 100%;
-    max-height: 100%; /* user-agent override */
+    max-height: 100%;
+    /* user-agent override */
     padding: 0;
     background: transparent;
     border: none;
     margin: 0;
+    overflow: hidden;
 }
 
 .modal-container[open] {
@@ -41,6 +44,8 @@
     padding: 2rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
 
     /* breakpoint-md without tailwind theme -- for portability */
     @media (width >=48rem) {
@@ -77,6 +82,13 @@ dialog::backdrop {
     padding: 0.8em 1em 0;
 }
 
+.modal-details {
+    p {
+        font-size: 16px;
+        margin-top: 20px;
+    }
+}
+
 .modal-form {
     align-self: stretch;
 }
@@ -85,6 +97,7 @@ dialog::backdrop {
     margin-top: calc(var(--spacing) * 7);
     display: flex;
     justify-content: center;
+
     .btn {
         margin-block: 0;
     }

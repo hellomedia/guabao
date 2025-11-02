@@ -143,3 +143,10 @@ table.datagrid td.actions {
 .faded {
     opacity: 0.5;
 }
+
+.hk-admin {
+    .form-actions {
+        margin-top: 20px;
+        justify-content: start;
+    }
+}

@@ -13,15 +13,15 @@
         }
     }
 </style>
-<div id="media_{{ media.id }}" data-controller="ajax">
+<div id="media_{{ media.id }}">
 
     <form
         name="media_quick_edit_form_{{ media.id }}"
-        data-ajax-target="form"
-        data-action="submit->ajax#submit change->ajax#submitOnChange"
         action="{{ path('admin_media_quick_edit', {id: media.id}) }}"
         method="post"
         style="margin-bottom: 20px"
+        data-controller="ajax"
+        data-action="submit->ajax#submit change->ajax#submitOnChange"
     >
 
         {# container for form content replaced in ajax #}

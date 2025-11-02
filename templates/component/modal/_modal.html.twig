@@ -6,25 +6,26 @@
 	>
 		{# visible modal #}
 		<div 
-			class="modal {{ (css_override ?? false) ? 'hk-override' }}"
+			class="modal hk-override"
 			data-modal-target="modal"
 			role="dialog" aria-modal="true"
 		>
-			
-			<turbo-frame id="confirm-modal-frame">
+            {# In Easydamin, Turbo is disabled on <html> element ==> add data-turbo="true" #}
+			<turbo-frame id="modal-frame" data-turbo="true">
 
-				{# turbo expects a form submission to return a redirect unless it is inside a turbo-frame #}
+				{# Turbo expects a form submission to return a redirect unless it is inside a turbo-frame #}
 				{# so submitting the original form in the page throws a js error #}
-				{# so add a form here and submit this one when the submit button is clicked #}
+				{# ==> add a form here and submit this one when the submit button is clicked #}
 				<form class="modal-inner-layout" method="POST">
 
-					<div data-modal-target="icon" class="modal-icon-container"></div>
+					<div data-modal-confirm-target="icon" class="modal-icon-container"></div>
 
-					<h2 data-modal-target="title" class="modal-title"></h2>
+					<h2 data-modal-confirm-target="title" class="modal-title"></h2>
 
-					<div data-modal-target="details" class="modal-details"></div>
+					<div data-modal-confirm-target="details" class="modal-details"></div>
 
 					<input type="hidden" name="from_route" value="{{ app.current_route }}" />
+					<input data-modal-confirm-target="token" type="hidden" name="token" value="" />
 
 					{% embed "component/modal/_actions.html.twig" %}
 						{% block submit_attributes %}
@@ -40,3 +41,4 @@
 
 	</dialog>
 </template>
+
