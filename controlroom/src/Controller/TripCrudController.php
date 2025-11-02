@@ -70,11 +70,11 @@ class TripCrudController extends AbstractCrudController
                 }
             ]);
         yield AssociationField::new('children')
-            ->setTemplatePath('@controlroom/field/trips.html.twig');
+            ->setTemplatePath('@admin/field/trips.html.twig');
 
         yield AssociationField::new('stories')
             ->hideOnIndex()
-            ->setTemplatePath('@controlroom/field/stories.html.twig');
+            ->setTemplatePath('@admin/field/stories.html.twig');
 
         yield TextField::new('shortNameEn', 'Short EN');
         yield TextField::new('shortNameFr', 'Short FR');
@@ -84,7 +84,7 @@ class TripCrudController extends AbstractCrudController
 
         yield AssociationField::new('tags')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
-            ->setTemplatePath('@controlroom/field/tags.html.twig');
+            ->setTemplatePath('@admin/field/tags.html.twig');
 
         yield TextareaField::new('headlineEn', 'Headline EN')->hideOnIndex();
         yield TextareaField::new('headlineFr', 'Headline FR')->hideOnIndex();
@@ -96,7 +96,7 @@ class TripCrudController extends AbstractCrudController
         yield IntegerField::new('adventureRating', 'Adventure');
 
         yield AssociationField::new('countries')
-            ->setTemplatePath('@controlroom/field/countries.html.twig');
+            ->setTemplatePath('@admin/field/countries.html.twig');
     }
 
     public function configureActions(Actions $actions): Actions

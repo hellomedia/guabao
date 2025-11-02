@@ -84,7 +84,7 @@ class PlaceCrudController extends AbstractCrudController
 
         yield AssociationField::new('placeTags')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
-            ->setTemplatePath('@controlroom/field/tags.html.twig')
+            ->setTemplatePath('@admin/field/tags.html.twig')
         ;
 
         yield AssociationField::new('country')
@@ -95,7 +95,7 @@ class PlaceCrudController extends AbstractCrudController
         yield TextareaField::new('descriptionFr', 'Description FR');
 
         yield AssociationField::new('siteHighlights', 'Highlights')
-            ->setTemplatePath('@controlroom/field/highlights.html.twig')
+            ->setTemplatePath('@admin/field/highlights.html.twig')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
         ;
     }

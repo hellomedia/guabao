@@ -7,11 +7,11 @@ twig:
         packs/Security/templates: 'security'
         packs/Media/templates: 'media'
         packs/Status/templates: 'status'
-        controlroom/templates: 'controlroom'
+        controlroom/templates: 'admin'
 
     # NB: for custom forms in easy admin, to avoid conflict
     # with global theme defined below, use this in template
-    # {% form_theme form with ['@controlroom/form/form_theme.html.twig'] only %}
+    # {% form_theme form with ['@admin/form/form_theme.html.twig'] only %}
     form_themes:
         - 'form/form_theme.html.twig'
     

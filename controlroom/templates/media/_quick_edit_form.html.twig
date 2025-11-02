@@ -1,7 +1,7 @@
 {# Important: Note the syntax with [] and only #}
 {# Ignore global themes; use only EasyAdmin #}
 {# important to avoid theme conflicts #}
-{% form_theme form with ['@controlroom/form/form_theme.html.twig'] only %}
+{% form_theme form with ['@admin/form/form_theme.html.twig'] only %}
 
 <style>
     .thumb-side {
@@ -119,7 +119,7 @@
         
         </div>
 
-        {% include '@controlroom/form/_ajax_button.html.twig' %}
+        {% include '@admin/form/_ajax_button.html.twig' %}
 
     </form>
 

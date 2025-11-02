@@ -65,7 +65,7 @@ class MediaController extends BaseController
             );
         }
 
-        return $this->render('@controlroom/media/_quick_edit_form.html.twig', [
+        return $this->render('@admin/media/_quick_edit_form.html.twig', [
             'form' => $form,
             'media' => $media,
         ]);
@@ -93,7 +93,7 @@ class MediaController extends BaseController
 
             if (!$submitBtn->isClicked()) {
                 // on change event for dependent field
-                return $this->render('@controlroom/media/bulk_add.html.twig', [
+                return $this->render('@admin/media/bulk_add.html.twig', [
                     'form' => $form,
                 ]);
             }
@@ -105,7 +105,7 @@ class MediaController extends BaseController
             ]);
         }
 
-        return $this->render('@controlroom/media/bulk_add.html.twig', [
+        return $this->render('@admin/media/bulk_add.html.twig', [
             'form' => $form,
         ]);
     }

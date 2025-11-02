@@ -41,7 +41,7 @@ class DashboardController extends AbstractDashboardController
     #[Route('/', name: 'controlroom_dashboard')]
     public function index(): Response
     {
-        return $this->render('@controlroom/dashboard.html.twig', [
+        return $this->render('@admin/dashboard.html.twig', [
         ]);
     }
 
@@ -60,7 +60,7 @@ class DashboardController extends AbstractDashboardController
             ->setDefaultSort(['id' => 'DESC'])
             ->setAutofocusSearch()
             ->showEntityActionsInlined()
-            ->setFormThemes(['@controlroom/form/form_theme.html.twig'])
+            ->setFormThemes(['@admin/form/form_theme.html.twig'])
             ->setPageTitle(Crud::PAGE_DETAIL, static function (EntityInterface $entity) {
                 return $entity;
             })

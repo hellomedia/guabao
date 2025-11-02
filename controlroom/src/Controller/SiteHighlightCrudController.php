@@ -43,7 +43,7 @@ class SiteHighlightCrudController extends AbstractCrudController
             ->hideOnForm();
 
         yield AssociationField::new('trips')
-            ->setTemplatePath('@controlroom/field/trips.html.twig')
+            ->setTemplatePath('@admin/field/trips.html.twig')
             ->setFormTypeOption('query_builder', function (EntityRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('t')
                     ->orderBy('t.startedAt', 'DESC');
@@ -57,7 +57,7 @@ class SiteHighlightCrudController extends AbstractCrudController
         ;
 
         yield AssociationField::new('stories')
-            ->setTemplatePath('@controlroom/field/stories.html.twig')
+            ->setTemplatePath('@admin/field/stories.html.twig')
             ->setFormTypeOption('query_builder', function (EntityRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('s')
                     ->join('s.trip', 't')
@@ -70,7 +70,7 @@ class SiteHighlightCrudController extends AbstractCrudController
         ;
     
         yield AssociationField::new('places')
-            ->setTemplatePath('@controlroom/field/places.html.twig')
+            ->setTemplatePath('@admin/field/places.html.twig')
             ->setFormTypeOption('query_builder', function (EntityRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('p')
                     ->join('p.placeTags', 'pt')
@@ -85,7 +85,7 @@ class SiteHighlightCrudController extends AbstractCrudController
         ;
 
         yield AssociationField::new('meals')
-            ->setTemplatePath('@controlroom/field/meals.html.twig')
+            ->setTemplatePath('@admin/field/meals.html.twig')
             ->setFormTypeOption('query_builder', function (EntityRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('m')
                     ->join('m.placeTags', 'pt')

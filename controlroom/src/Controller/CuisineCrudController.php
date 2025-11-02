@@ -50,6 +50,6 @@ class CuisineCrudController extends AbstractCrudController
 
         yield AssociationField::new('food')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
-            ->setTemplatePath('@controlroom/field/food_list.html.twig');
+            ->setTemplatePath('@admin/field/food_list.html.twig');
     }
 }

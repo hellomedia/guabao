@@ -1,4 +1,4 @@
-{% extends '@EasyAdmin/page/content.html.twig' %}
+{% extends '@admin/base.html.twig' %}
 
 {% block content_title %}
     Cuisines bulk edit
@@ -14,7 +14,7 @@
 
     <div id="cuisines">
         {% for cuisine in cuisines %}
-            {% include '@controlroom/cuisine/_quick_edit_form.html.twig'
+            {% include '@admin/cuisine/_quick_edit_form.html.twig'
                 with { form: forms[cuisine.id] }
             %}
             <hr style="margin-top: 40px; margin-bottom: 30px;">

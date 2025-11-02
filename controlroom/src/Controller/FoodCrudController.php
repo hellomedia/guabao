@@ -79,7 +79,7 @@ class FoodCrudController extends AbstractCrudController
         ]);
 
         yield AssociationField::new('children')
-            ->setTemplatePath('@controlroom/field/food_list.html.twig');
+            ->setTemplatePath('@admin/field/food_list.html.twig');
 
         yield TextareaField::new('descriptionEn');
         yield TextareaField::new('descriptionFr')->hideOnIndex();
@@ -87,16 +87,16 @@ class FoodCrudController extends AbstractCrudController
         yield AssociationField::new('cuisine');
         yield AssociationField::new('cuisines')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
-            ->setTemplatePath('@controlroom/field/cuisines.html.twig');
+            ->setTemplatePath('@admin/field/cuisines.html.twig');
 
         yield AssociationField::new('tags')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
-            ->setTemplatePath('@controlroom/field/tags.html.twig')
+            ->setTemplatePath('@admin/field/tags.html.twig')
         ;
 
         yield AssociationField::new('ingredients')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
-            ->setTemplatePath('@controlroom/field/ingredients.html.twig');
+            ->setTemplatePath('@admin/field/ingredients.html.twig');
 
         yield ChoiceField::new('loveLevel',' Love');
         yield ChoiceField::new('healthyLevel', 'Healthy');

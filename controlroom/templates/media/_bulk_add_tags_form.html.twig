@@ -1,7 +1,7 @@
 {# Important: Note the syntax with [] and only #}
 {# Ignore global themes; use only EasyAdmin #}
 {# important to avoid theme conflicts #}
-{% form_theme form with ['@controlroom/form/form_theme.html.twig'] only %}
+{% form_theme form with ['@admin/form/form_theme.html.twig'] only %}
 
 <div>
     <h5 style="margin-bottom: 15px">Add tags</h5>
@@ -15,7 +15,7 @@
         {{ form_row(form.placeTags) }}
         {{ form_rest(form) }}
 
-        {% include '@controlroom/form/_ajax_button.html.twig' %}
+        {% include '@admin/form/_ajax_button.html.twig' %}
     </form>
 </div>
 

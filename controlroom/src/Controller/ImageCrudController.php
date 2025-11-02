@@ -125,7 +125,7 @@ class ImageCrudController extends MediaCrudController
         yield FormField::addFieldset('Food');
         yield AssociationField::new('food')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
-            ->setTemplatePath('@controlroom/field/food_list.html.twig');
+            ->setTemplatePath('@admin/field/food_list.html.twig');
         
         yield BooleanField::new('isMeal');
         yield AssociationField::new('meal')
@@ -159,12 +159,12 @@ class ImageCrudController extends MediaCrudController
         
         yield AssociationField::new('tags')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
-            ->setTemplatePath('@controlroom/field/tags.html.twig')
+            ->setTemplatePath('@admin/field/tags.html.twig')
         ;
         
         yield AssociationField::new('placeTags', 'Places')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
-            ->setTemplatePath('@controlroom/field/tags.html.twig')
+            ->setTemplatePath('@admin/field/tags.html.twig')
         ;
     }
 

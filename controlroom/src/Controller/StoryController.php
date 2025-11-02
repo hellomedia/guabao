@@ -41,7 +41,7 @@ class StoryController extends BaseController
             $entityManager->flush();
         }
 
-        return $this->render('@controlroom/story/_quick_edit_form.html.twig', [
+        return $this->render('@admin/story/_quick_edit_form.html.twig', [
             'form' => $form,
             'story' => $story,
         ]);

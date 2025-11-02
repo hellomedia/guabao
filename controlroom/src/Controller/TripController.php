@@ -40,7 +40,7 @@ class TripController extends BaseController
             $entityManager->flush();
         }
 
-        return $this->render('@controlroom/trip/_quick_edit_form.html.twig', [
+        return $this->render('@admin/trip/_quick_edit_form.html.twig', [
             'form' => $form,
             'trip' => $trip,
         ]);

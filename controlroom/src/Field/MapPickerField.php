@@ -16,7 +16,7 @@ final class MapPickerField implements FieldInterface
             ->setProperty($propertyName)
             ->setLabel($label)
             ->setFormType(MapPickerType::class)
-            ->addFormTheme('@controlroom/form/map_picker_form_theme.html.twig')
+            ->addFormTheme('@admin/form/map_picker_form_theme.html.twig')
             ->onlyOnForms()
         ;
     }

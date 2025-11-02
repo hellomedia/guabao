@@ -71,12 +71,12 @@ class VideoCrudController extends MediaCrudController
         
         yield AssociationField::new('tags')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
-            ->setTemplatePath('@controlroom/field/tags.html.twig')
+            ->setTemplatePath('@admin/field/tags.html.twig')
         ;
         
         yield AssociationField::new('placeTags', 'Place tags')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
-            ->setTemplatePath('@controlroom/field/tags.html.twig')
+            ->setTemplatePath('@admin/field/tags.html.twig')
         ;
     }
 

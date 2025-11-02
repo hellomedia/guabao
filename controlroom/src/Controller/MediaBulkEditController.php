@@ -63,7 +63,7 @@ class MediaBulkEditController extends BaseController
             data: $trip,
         );
 
-        return $this->render('@controlroom/media/bulk_edit_by_trip.html.twig', [
+        return $this->render('@admin/media/bulk_edit_by_trip.html.twig', [
             'trip_form' => $tripForm,
             'forms' => $forms,
             'pager' => $pager,
@@ -111,7 +111,7 @@ class MediaBulkEditController extends BaseController
             )->createView();
         }
 
-        return $this->render('@controlroom/media/bulk_edit_by_story.html.twig', [
+        return $this->render('@admin/media/bulk_edit_by_story.html.twig', [
             'story_form' => $storyForm,
             'bulk_add_tags_form' => $bulkAddTagsForm,
             'bulk_remove_tags_form' => $bulkRemoveTagsForm,

@@ -1,11 +1,11 @@
-{% extends '@EasyAdmin/page/content.html.twig' %}
+{% extends '@admin/base.html.twig' %}
 
 {% block content_title %}
     Story: {{ story }}
 {% endblock %}
 
 {% block page_actions %}
-	{% embed '@controlroom/_top_links.html.twig' %}
+	{% embed '@admin/_top_links.html.twig' %}
 		{% block add_pictures %}
 			<a class="btn" href="{{ path('admin_media_bulk_add', {'story': story.id}) }}">
 				+ Pictures
@@ -41,7 +41,7 @@
 
     <div id="story">
         <h3>{{ story }}</h3>
-        {% include "@controlroom/story/_quick_edit_form.html.twig" with { form: story_form, story: story } %}
+        {% include "@admin/story/_quick_edit_form.html.twig" with { form: story_form, story: story } %}
     </div>
 
     <div id="bulk-edit">
@@ -50,17 +50,17 @@
         </p>
         <div class="quick-edit-2cols">
             <div class="column-1">
-                {% include '@controlroom/media/_bulk_add_tags_form.html.twig' with { form: bulk_add_tags_form } %}
+                {% include '@admin/media/_bulk_add_tags_form.html.twig' with { form: bulk_add_tags_form } %}
             </div>
             <div class="column-2">
-                {% include '@controlroom/media/_bulk_remove_tags_form.html.twig' with { form: bulk_remove_tags_form } %}
+                {% include '@admin/media/_bulk_remove_tags_form.html.twig' with { form: bulk_remove_tags_form } %}
             </div>
         </div>
     </div>
 
     <div id="medias" data-controller="fancybox">
         {% for media in medias %}
-            {% include '@controlroom/media/_quick_edit_form.html.twig'
+            {% include '@admin/media/_quick_edit_form.html.twig'
                 with { form: forms[media.id] }
             %}
             <hr style="margin-top: 40px; margin-bottom: 30px;">

@@ -38,7 +38,7 @@ class FoodBulkEditController extends BaseController
             )->createView();
         }
 
-        return $this->render('@controlroom/food/bulk_edit.html.twig', [
+        return $this->render('@admin/food/bulk_edit.html.twig', [
             'forms' => $forms,
             'foodList' => $foodList,
         ]);
@@ -66,7 +66,7 @@ class FoodBulkEditController extends BaseController
             $entityManager->flush();
         }
 
-        return $this->render('@controlroom/food/_quick_edit_form.html.twig', [
+        return $this->render('@admin/food/_quick_edit_form.html.twig', [
             'form' => $form,
             'food' => $food,
         ]);
