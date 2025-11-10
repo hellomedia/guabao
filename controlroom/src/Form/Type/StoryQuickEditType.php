@@ -57,6 +57,12 @@ class StoryQuickEditType extends AbstractType
                     'rows' => 3,
                 ],
             ])
+            ->add('show', CheckboxType::class, [
+                'label'    => 'show',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
             ->add('showTitle', CheckboxType::class, [
                 'label'    => 'show title',
                 'required' => false,

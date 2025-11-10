@@ -7,7 +7,7 @@
     </style>
 	<div id="stories">
 		{% for story in stories %}
-            {% if story.displayableImages is not empty or story.displayableVideos is not empty or story.description is not empty %}
+            {% if story.display %}
                 <div class="story {{ not story.showTitle ? 'no-title' }}">
                     {% if story.showTitle %}
                         <h2>{{ story }}</h2>

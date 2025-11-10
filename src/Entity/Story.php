@@ -70,6 +70,9 @@ class Story implements LocalizedNameInterface, EntityInterface
     #[ORM\Column(options: ['default' => true])]
     private ?bool $showTitle = true;
 
+    #[ORM\Column(options: ['default' => true])]
+    private ?bool $show = true;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
@@ -285,6 +288,11 @@ class Story implements LocalizedNameInterface, EntityInterface
         return $this;
     }
 
+    public function showTitle(): ?bool
+    {
+        return $this->showTitle;
+    }
+
     public function isShowTitle(): ?bool
     {
         return $this->showTitle;
@@ -295,5 +303,43 @@ class Story implements LocalizedNameInterface, EntityInterface
         $this->showTitle = $showTitle;
 
         return $this;
+    }
+
+    public function show(): ?bool
+    {
+        return $this->show;
+    }
+
+    public function isShow(): ?bool
+    {
+        return $this->show;
+    }
+
+    public function setShow(bool $show): static
+    {
+        $this->show = $show;
+
+        return $this;
+    }
+
+    public function display(): bool
+    {
+        if (!$this->show) {
+            return false;
+        }
+
+        if ($this->getDisplayableImages()->count() > 0) {
+            return true;
+        }
+
+        if ($this->getDisplayableVideos()->count() > 0) {
+            return true;
+        }
+
+        if (!empty($this->getDescription())) {
+            return true;
+        }
+
+        return false;
     }
 }
