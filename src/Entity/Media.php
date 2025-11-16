@@ -106,6 +106,11 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     // In the twig snippet above, media is evaluated to isCover, which returns a boolean, not the expected Media entity
     private ?bool $isTripCover = null;
 
+    // food cover does not make sense here
+    // since food is a ManyToMany relationship
+    // private ?bool $isFoodCover = null;
+    // Food cover should be handled strictly inside the Food entity
+
     #[ORM\Column(nullable: true)]
     private ?bool $is360 = null;
 

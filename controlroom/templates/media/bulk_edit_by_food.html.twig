@@ -1,0 +1,48 @@
+{% extends '@admin/base.html.twig' %}
+
+{% block content_title %}
+    Food: {{ food }}
+{% endblock %}
+
+{% block page_actions %}
+
+{% endblock %}
+
+{% block head_stylesheets %}
+    {{ parent() }}
+    <style>
+        #story, #medias {
+            margin-bottom: 40px;
+        }
+        #story, #bulk-edit {
+            border: 1px solid lightgray;
+            padding: 30px;
+        }
+        #bulk-edit {
+            margin-bottom: 60px;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+
+    <div id="story">
+        <h3>{{ food }}</h3>
+        {% include "@admin/food/_quick_edit_form.html.twig" with { form: food_form } %}
+    </div>
+
+    <div id="medias" data-controller="fancybox">
+        {% for media in medias %}
+            {% include '@admin/media/_quick_edit_form.html.twig'
+                with { form: forms[media.id] }
+            %}
+            <hr style="margin-top: 40px; margin-bottom: 30px;">
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+{% endblock %}
+

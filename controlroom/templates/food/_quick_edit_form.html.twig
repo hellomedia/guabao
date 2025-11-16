@@ -3,6 +3,50 @@
 {# important to avoid theme conflicts #}
 {% form_theme form with ['@admin/form/form_theme.html.twig'] only %}
 
+<style>
+
+    .cover-picker {
+        --accent-color: #0d6efd;
+        --accent-color-light: rgba(13, 110, 253, 0.08);
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+
+    .cover-picker div {
+        border: 1px solid var(--border-color);
+        padding: 4px;
+        border-radius: 4px;
+        text-align: center;
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .cover-picker div:hover {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 3px var(--accent-color);
+    }
+
+    .cover-picker div.selected {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 4px var(--accent-color);
+        background: var(--accent-color-light);
+    }
+
+    .cover-picker img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+    }
+
+</style>
+
 <div id="food_{{ food.id }}">
 
     <form
@@ -20,19 +64,34 @@
             <div class="column-1">
                 {{ form_row(form.nameEn) }}
                 {{ form_row(form.nameFr) }}
-                {{ form_row(form.tags) }}
+                {{ form_row(form.descriptionEn) }}
+                {{ form_row(form.descriptionFr) }}
             </div>
 
             <div class="column-2">
-                {{ form_row(form.cuisine) }}
                 {{ form_row(form.cuisines) }}
                 {{ form_row(form.ingredients) }}
-            </div>
-
-            <div class="column-3">
+                {{ form_row(form.tags) }}
                 {{ form_row(form.loveLevel) }}
                 {{ form_row(form.healthyLevel) }}
                 {{ form_row(form.localLevel) }}
+            </div>
+
+            <div class="column-3">
+
+                <div data-controller="cover-picker">
+
+                    {{ form_row(form.cover) }}
+
+                    <div class="cover-picker">
+                        {% for media in form.vars.data.medias %}
+                            <div data-cover-picker-target="item" data-id="{{ media.id }}">
+                                <img src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
             </div>
 
             {{ form_rest(form) }}

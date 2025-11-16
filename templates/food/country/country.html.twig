@@ -9,7 +9,6 @@
 		{% for media in medias %}
 			
 			{% include 'food/_gallery.html.twig' with {
-				url: path('food_by_country_food', { slugCountry: country.slugEn, slugEn: media.food.slugEn}) 
 			} %}
 		{% endfor %}
 	</div>

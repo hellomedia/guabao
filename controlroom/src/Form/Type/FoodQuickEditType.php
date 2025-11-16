@@ -4,6 +4,7 @@ namespace Controlroom\Form\Type;
 
 use App\Entity\Cuisine;
 use App\Entity\Food;
+use App\Entity\Media;
 use App\Entity\Tag\FoodTag;
 use App\Enum\Level;
 use Controlroom\Form\Field\IngredientAutocompleteField;
@@ -12,6 +13,8 @@ use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,6 +25,26 @@ class FoodQuickEditType extends AbstractType
         $builder
             ->add('nameEn')
             ->add('nameFr')
+            ->add('descriptionEn', TextareaType::class, [
+                'label' => "EN",
+                'required' => false,
+                'attr' => [
+                    'rows' => 3,
+                ],
+            ])
+            ->add('descriptionFr', TextareaType::class, [
+                'label' => "FR",
+                'required' => false,
+                'attr' => [
+                    'rows' => 3,
+                ],
+            ])
+            ->add('cover', EntityType::class, [
+                'class' => Media::class,
+                'attr' => [
+                    'data-cover-picker-target' => "input",
+                ],
+            ])
             ->add('tags', EntityType::class, [
                 'class' => FoodTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
@@ -33,7 +56,6 @@ class FoodQuickEditType extends AbstractType
                 'autocomplete' => true,
                 'by_reference' => false, // important for ManyToMany when using add/remove methods
             ])
-            ->add('cuisine')
             ->add('cuisines', EntityType::class, [
                 'class' => Cuisine::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {

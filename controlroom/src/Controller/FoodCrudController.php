@@ -39,7 +39,7 @@ class FoodCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Food')
             ->setEntityLabelInPlural('Food')
             ->setDefaultSort([
-                'cuisine' => 'ASC',
+                'cuisines' => 'ASC',
                 'nameEn' => 'ASC'
             ])
             ->setSearchFields([
@@ -52,7 +52,7 @@ class FoodCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
-            ->add(EntityFilter::new('cuisine'))
+            ->add(EntityFilter::new('cuisines'))
             ->add(EntityFilter::new('tags'))
             ->add(EntityFilter::new('parent'))
         ;
@@ -84,7 +84,6 @@ class FoodCrudController extends AbstractCrudController
         yield TextareaField::new('descriptionEn');
         yield TextareaField::new('descriptionFr')->hideOnIndex();
 
-        yield AssociationField::new('cuisine');
         yield AssociationField::new('cuisines')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@admin/field/cuisines.html.twig');
@@ -120,14 +119,18 @@ class FoodCrudController extends AbstractCrudController
             ->setIcon('fa fa-images')
             ->addCssClass('btn btn-outline-primary');
 
-        $bulkEdit = Action::new('bulkEdit', 'Bulk edit')
-            ->linkToRoute('admin_food_bulk_edit')
-            ->setIcon('fa fa-edit')
-            ->createAsGlobalAction();
+        $bulkEditMedias = Action::new('editMedias', 'Bulk edit')
+            ->linkToUrl(function (Food $food) {
+                return $this->urlGenerator->generate('admin_media_bulk_edit_by_food', [
+                    'id' => $food->getId(),
+                ]);
+            })
+            ->setIcon('fa fa-edit');
 
         $actions
-            ->add(Action::INDEX, $bulkEdit)
             ->add(Action::DETAIL, $viewMedias)
+            ->add(Action::DETAIL, $bulkEditMedias)
+            ->add(Action::INDEX, $bulkEditMedias)
         ;
 
         return $actions;
@@ -139,7 +142,7 @@ class FoodCrudController extends AbstractCrudController
 
         $qb->leftJoin('entity.medias', 'md')
             ->addSelect('md')
-            ->leftJoin('entity.cuisine', 'c')
+            ->leftJoin('entity.cuisines', 'c')
             ->addSelect('c')
             ->leftJoin('entity.tags', 't')
             ->addSelect('t');

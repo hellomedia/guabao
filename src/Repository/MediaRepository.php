@@ -80,9 +80,9 @@ class MediaRepository extends ServiceEntityRepository
             ->addSelect('f')
             ->leftJoin('m.meal', 'meal')
             ->addSelect('meal')
-            ->leftJoin('m.trip', 'trip')
+            ->innerJoin('m.trip', 'trip')
             ->addSelect('trip')
-            ->where('m.trip = :trip')
+            ->where('trip = :trip')
             ->setParameter('trip', $trip)
             ->orderBy('m.takenAt', 'ASC')
         ;
@@ -119,10 +119,39 @@ class MediaRepository extends ServiceEntityRepository
             ->addSelect('f')
             ->leftJoin('m.meal', 'meal')
             ->addSelect('meal')
+            ->innerJoin('m.story', 'story')
+            ->addSelect('story')
+            ->where('story = :story')
+            ->setParameter('story', $story)
+            ->orderBy('m.takenAt', 'ASC')
+        ;
+    }
+
+    public function findByFood(Food $food): Collection
+    {
+        $query = $this->getFindByFoodQueryBuilder($food)
+            ->getQuery();
+
+        return new ArrayCollection($query->getResult());
+    }
+
+    public function getFindByFoodQueryBuilder(Food $food): QueryBuilder
+    {
+        return $this->createQueryBuilder('m')
+            ->leftJoin('m.trip', 'trip')
+            ->addSelect('trip')
+            ->leftJoin('m.placeTags', 'pt')
+            ->addSelect('pt')
+            ->leftJoin('m.tags', 't')
+            ->addSelect('t')
+            ->innerJoin('m.food', 'f')
+            ->addSelect('f')
+            ->where('f = :food') // 'where f = :food', not 'where m.food = food' . m.food is a collection. f is the linked food item
+            ->setParameter('food', $food)
+            ->leftJoin('m.meal', 'meal')
+            ->addSelect('meal')
             ->leftJoin('m.story', 'story')
             ->addSelect('story')
-            ->where('m.story = :story')
-            ->setParameter('story', $story)
             ->orderBy('m.takenAt', 'ASC')
         ;
     }

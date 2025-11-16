@@ -16,7 +16,7 @@ class IngredientAutocompleteField extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'label' => 'Ingredient',
+            'label' => 'Ingredients',
             'class' => Ingredient::class,
             'placeholder' => '',
             // choose which fields to use in the search
@@ -24,7 +24,7 @@ class IngredientAutocompleteField extends AbstractType
             'searchable_fields' => ['nameEn', 'nameFr'],
             'query_builder' => function (IngredientRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('i')
-                    ->addOrderBy('f.nameEn', 'ASC')
+                    ->addOrderBy('i.nameEn', 'ASC')
                 ;
             },
             'multiple' => true,

@@ -3,9 +3,11 @@
 namespace Controlroom\Controller;
 
 use App\Controller\BaseController;
+use App\Entity\Food;
 use App\Entity\Media;
 use App\Entity\Story;
 use App\Entity\Trip;
+use Controlroom\Form\Type\FoodQuickEditType;
 use Controlroom\Form\Type\MediaBulkEditTagsType;
 use Controlroom\Form\Type\MediaQuickEditType;
 use Controlroom\Form\Type\StoryQuickEditType;
@@ -172,6 +174,40 @@ class MediaBulkEditController extends BaseController
 
         return $this->redirectToRoute('admin_media_bulk_edit_by_story', [
             'id' => $story->getId(),
+        ]);
+    }
+
+    // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
+    // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
+    // NB: this was not necessary with the old ea routing strategy
+    #[Route('/food/{id:food}/media/bulk-edit', name: 'admin_media_bulk_edit_by_food', methods: ['GET', 'POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    public function bulkEditByFood(Food $food, Request $request, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    {
+        $foodForm = $formFactory->createNamed(
+            // form names must match with story quick edit form
+            name: 'food_quick_edit_form_' . $food->getId(),
+            type: FoodQuickEditType::class,
+            data: $food,
+        );
+
+        $medias = $entityManager->getRepository(Media::class)->findByFood($food);
+
+        $forms = [];
+        foreach ($medias as $media) {
+            $forms[$media->getId()] = $formFactory->createNamed(
+                // form names must match with media quick edit form
+                name: 'media_quick_edit_form_' . $media->getId(),
+                type: MediaQuickEditType::class,
+                data: $media,
+                options: ['trip' => $media->getTrip()]
+            )->createView();
+        }
+
+        return $this->render('@admin/media/bulk_edit_by_food.html.twig', [
+            'food_form' => $foodForm,
+            'forms' => $forms,
+            'medias' => $medias,
+            'food' => $food,
         ]);
     }
 

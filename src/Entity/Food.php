@@ -44,19 +44,19 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     #[ORM\Column(enumType: Level::class, nullable: true)]
     protected ?Level $healthyLevel = null;
 
+    #[ORM\ManyToOne]
+    private ?Media $cover = null;
+
     /**
      * @var Collection<int, Tag>
      */
     #[ORM\ManyToMany(targetEntity: FoodTag::class)]
     private Collection $tags;
 
-    #[ORM\ManyToOne]
-    private ?Cuisine $cuisine = null;
-
     /**
      * @var Collection<int, cuisine>
      */
-    #[ORM\ManyToMany(targetEntity: cuisine::class, inversedBy: 'food')]
+    #[ORM\ManyToMany(targetEntity: Cuisine::class, inversedBy: 'food')]
     private Collection $cuisines;
 
     /**
@@ -141,18 +141,6 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     public function removeTag(FoodTag $tag): static
     {
         $this->tags->removeElement($tag);
-
-        return $this;
-    }
-
-    public function getCuisine(): ?Cuisine
-    {
-        return $this->cuisine;
-    }
-
-    public function setCuisine(?Cuisine $cuisine): static
-    {
-        $this->cuisine = $cuisine;
 
         return $this;
     }
@@ -285,6 +273,18 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
         if ($this->medias->removeElement($media)) {
             $media->removeFood($this);
         }
+
+        return $this;
+    }
+
+    public function getCover(): ?Media
+    {
+        return $this->cover;
+    }
+
+    public function setCover(?Media $cover): static
+    {
+        $this->cover = $cover;
 
         return $this;
     }
