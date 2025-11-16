@@ -148,11 +148,14 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
 
     /* useful for highlighting single photo in story */
     #[ORM\Column(options: ['default' => false])]
-    private ?bool $size2 = false;
+    private bool $size2 = false;
 
     /* useful for highlighting single photo in story */
     #[ORM\Column(options: ['default' => false])]
-    private ?bool $size3 = false;
+    private bool $size3 = false;
+
+    #[ORM\Column(options: ['default' => false])]
+    private bool $isPrimaryVideo = false;
 
     public function __construct()
     {
@@ -518,7 +521,7 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
         return $this;
     }
 
-    public function isSize2(): ?bool
+    public function isSize2(): bool
     {
         return $this->size2;
     }
@@ -530,7 +533,7 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
         return $this;
     }
 
-    public function isSize3(): ?bool
+    public function isSize3(): bool
     {
         return $this->size3;
     }
@@ -538,6 +541,18 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     public function setSize3(bool $size3): static
     {
         $this->size3 = $size3;
+
+        return $this;
+    }
+
+    public function isPrimaryVideo(): bool
+    {
+        return $this->isPrimaryVideo;
+    }
+
+    public function setIsPrimaryVideo(bool $isPrimaryVideo): static
+    {
+        $this->isPrimaryVideo = $isPrimaryVideo;
 
         return $this;
     }

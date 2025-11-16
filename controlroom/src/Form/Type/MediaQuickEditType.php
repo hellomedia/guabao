@@ -156,6 +156,12 @@ class MediaQuickEditType extends AbstractType
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
             ])
+            ->add('isPrimaryVideo', CheckboxType::class, [
+                'label'    => 'Primary vid',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
             ->add('place', PlaceAutocompleteField::class, [
                 // Passing extra options to ajax query builder
                 // https://symfony.com/bundles/ux-autocomplete/current/index.html#passing-extra-options-to-the-ajax-powered-autocomplete
