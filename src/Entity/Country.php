@@ -26,10 +26,6 @@ class Country implements LocalizedNameInterface, LocalizedSlugInterface, EntityI
     #[ORM\Column(length: 2, nullable: true)]
     private ?string $code = null;
 
-    #[ORM\OneToOne]
-    #[ORM\JoinColumn(nullable: true)] // nullable for fixtures
-    private ?Media $foodCover = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -43,18 +39,6 @@ class Country implements LocalizedNameInterface, LocalizedSlugInterface, EntityI
     public function setCode(?string $code): static
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    public function getFoodCover(): ?Media
-    {
-        return $this->foodCover;
-    }
-
-    public function setFoodCover(Media $foodCover): static
-    {
-        $this->foodCover = $foodCover;
 
         return $this;
     }
