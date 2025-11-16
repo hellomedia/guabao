@@ -49,6 +49,8 @@ class FoodRepository extends ServiceEntityRepository
             ->join('f.cuisines', 'c')
             ->where('c = :cuisine')
             ->setParameter('cuisine', $cuisine)
+            ->join('f.cover', 'cover')
+            ->addSelect('cover')
             ->orderBy('f.name' . \ucfirst($locale), 'ASC')
             ->getQuery()
             ->getResult();

@@ -7,13 +7,14 @@ use App\Entity\Food;
 use App\Entity\Media;
 use App\Entity\Tag\FoodTag;
 use App\Enum\Level;
+use App\Repository\FoodRepository;
+use App\Repository\MediaRepository;
 use Controlroom\Form\Field\IngredientAutocompleteField;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,6 +23,9 @@ class FoodQuickEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $food = $builder->getData();
+        \assert($food instanceof Food);
+
         $builder
             ->add('nameEn')
             ->add('nameFr')
@@ -44,6 +48,13 @@ class FoodQuickEditType extends AbstractType
                 'attr' => [
                     'data-cover-picker-target' => "input",
                 ],
+                'query_builder' => function (MediaRepository $repo) use ($food): QueryBuilder {
+                    return $repo->createQueryBuilder('m')
+                        ->innerJoin('m.food', 'f')
+                        ->andWhere('f = :food')
+                        ->setParameter('food', $food)
+                        ->orderBy('m.id', 'ASC');
+                },
             ])
             ->add('tags', EntityType::class, [
                 'class' => FoodTag::class,

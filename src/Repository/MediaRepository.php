@@ -127,12 +127,12 @@ class MediaRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findByFood(Food $food): Collection
+    public function findByFood(Food $food): array
     {
         $query = $this->getFindByFoodQueryBuilder($food)
             ->getQuery();
 
-        return new ArrayCollection($query->getResult());
+        return $query->getResult();
     }
 
     public function getFindByFoodQueryBuilder(Food $food): QueryBuilder
