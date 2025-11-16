@@ -58,10 +58,6 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')] // nullable for fixtures
     private ?Media $cover = null;
 
-    #[ORM\OneToOne]
-    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')] // nullable for fixtures
-    private ?Media $foodCover = null;
-
     /**
      * @var Collection<int, TripTag>
      */
@@ -148,18 +144,6 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     public function setCover(?Media $cover): static
     { 
         $this->cover = $cover;
-
-        return $this;
-    }
-
-    public function getFoodCover(): ?Media
-    {
-        return $this->foodCover;
-    }
-
-    public function setFoodCover(Media $foodCover): static
-    {
-        $this->foodCover = $foodCover;
 
         return $this;
     }
