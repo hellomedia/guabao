@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Country;
+use App\Entity\Food;
 use App\Entity\Media;
 use App\Entity\Story;
 use App\Entity\Trip;
@@ -42,11 +43,12 @@ class MediaRepository extends ServiceEntityRepository
         $seen = [];
         $filtered = [];
 
-        // remove dupliplcate pics of same food on same day
+        // remove duplicate pics of same food on same day
         foreach ($medias as $media) {
-            $foodId = $media->getFood()->getId();
+            assert($media instanceof Media);
+            $foodIds = $media->getFood()->map(fn(Food $food) => $food->getId());
             $dateKey = $media->getTakenAt()->format('Y-m-d');
-            $groupKey = $foodId . '_' . $dateKey;
+            $groupKey = implode('_', $foodIds->toArray()) . '_' . $dateKey;
 
             if (!isset($seen[$groupKey])) {
                 $seen[$groupKey] = true;
