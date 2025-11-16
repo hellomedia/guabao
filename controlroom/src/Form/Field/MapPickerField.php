@@ -1,6 +1,6 @@
 <?php
 
-namespace Controlroom\Field;
+namespace Controlroom\Form\Field;
 
 use Controlroom\Form\Type\MapPickerType;
 use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldInterface;

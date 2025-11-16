@@ -10,12 +10,13 @@ use App\Entity\Place;
 use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
+use App\Repository\PlaceTagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'place_tag')]
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: PlaceTagRepository::class)]
 class PlaceTag implements LocalizedNameInterface, LocalizedSlugInterface, EntityInterface
 {
     use LocalizedNameTrait;

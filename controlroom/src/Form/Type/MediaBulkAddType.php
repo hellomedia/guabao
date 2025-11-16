@@ -83,6 +83,7 @@ class MediaBulkAddType extends AbstractType
                 if ($selectedTrip === null) {
                     return;
                 }
+                // Add **non-ajax** autocomplete since this is already a dependent field with ajax update
                 $field->add(EntityType::class, [
                     'required' => false,
                     'class' => Story::class,
@@ -95,7 +96,6 @@ class MediaBulkAddType extends AbstractType
                     'multiple' => false,
                     'autocomplete' => true,
                     'data' => $story,
-                    'placeholder' => '', // add an empty placeholder instead of a default trip selected
                 ]);
             })
             ->addDependent('showInStory', 'trip', function (DependentField $field, ?Trip $selectedTrip) use ($story){

@@ -4,9 +4,9 @@ namespace Controlroom\Form\Type;
 
 use App\Entity\Cuisine;
 use App\Entity\Food;
-use App\Entity\Ingredient;
 use App\Entity\Tag\FoodTag;
 use App\Enum\Level;
+use Controlroom\Form\Field\IngredientAutocompleteField;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -45,16 +45,8 @@ class FoodQuickEditType extends AbstractType
                 'autocomplete' => true,
                 'by_reference' => false, // important for ManyToMany when using add/remove methods
             ])
-            ->add('ingredients', EntityType::class, [
-                'class' => Ingredient::class,
-                'query_builder' => function (EntityRepository $repo): QueryBuilder {
-                    return $repo->createQueryBuilder('i')
-                        ->orderBy('i.nameEn', 'ASC');
-                },
+            ->add('ingredients', IngredientAutocompleteField::class, [
                 'required' => false,
-                'multiple' => true,
-                'autocomplete' => true,
-                'by_reference' => false, // important for ManyToMany when using add/remove methods
             ])
             ->add('loveLevel', EnumType::class,  [
                 'class' => Level::class,

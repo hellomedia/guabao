@@ -2,15 +2,16 @@
 
 namespace Controlroom\Form\Type;
 
-use App\Entity\Food;
-use App\Entity\Meal;
+use App\Entity\Country;
 use App\Entity\Media;
-use App\Entity\Place;
 use App\Entity\SiteHighlight;
-use App\Entity\Story;
-use App\Entity\Tag\MediaTag;
-use App\Entity\Tag\PlaceTag;
 use App\Entity\Trip;
+use Controlroom\Form\Field\FoodAutocompleteField;
+use Controlroom\Form\Field\MealAutocompleteField;
+use Controlroom\Form\Field\MediaTagAutocompleteField;
+use Controlroom\Form\Field\PlaceAutocompleteField;
+use Controlroom\Form\Field\PlaceTagAutocompleteField;
+use Controlroom\Form\Field\StoryAutocompleteField;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -25,6 +26,8 @@ class MediaQuickEditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $currentTrip = $options['trip'];
+        \assert($currentTrip instanceof Trip);
+        $countries = $currentTrip->getCountries();
 
         $builder
             ->add('descriptionEn', TextareaType::class, [
@@ -72,18 +75,13 @@ class MediaQuickEditType extends AbstractType
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
             ])
-            ->add('story', EntityType::class, [
-                'label' => 'Story',
-                'class' => Story::class,
+            ->add('story', StoryAutocompleteField::class, [
                 'required' => false,
-                'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
-                    return $repo->createQueryBuilder('s')
-                        ->where('s.trip = :trip')
-                        ->setParameter('trip', $currentTrip)
-                        ->orderBy('s.displayOrder', 'ASC');
-                },
-                'multiple' => false,
-                'autocomplete' => true,
+                // Passing extra options to ajax query builder
+                // https://symfony.com/bundles/ux-autocomplete/current/index.html#passing-extra-options-to-the-ajax-powered-autocomplete
+                'extra_options' => [
+                    'current_trip' => $currentTrip->getId(), // only scalar values and arrays of scalars
+            ],
             ])
             ->add('showInStory', CheckboxType::class, [
                 'label'    => 'show in story',
@@ -103,45 +101,15 @@ class MediaQuickEditType extends AbstractType
                 'autocomplete' => true,
                 'by_reference' => false, // important for ManyToMany when using add/remove methods
             ])
-            ->add('placeTags', EntityType::class, [
-                'class' => PlaceTag::class,
-                'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
-                    if ($currentTrip) {
-                        return $repo->createQueryBuilder('pt')
-                            ->where('pt.country IN (:countries)')
-                            ->setParameter('countries', $currentTrip->getCountries())
-                            ->orderBy('pt.nameEn', 'ASC');
-                    }
-                    return $repo->createQueryBuilder('pt')
-                        ->orderBy('pt.nameEn', 'ASC');
-                },
-                'required' => false,
-                'multiple' => true,
-                'autocomplete' => true,
-                'by_reference' => false, // important for ManyToMany when using add/remove methods
+            ->add('placeTags', PlaceTagAutocompleteField::class, [
+                // Passing extra options to ajax query builder
+                // https://symfony.com/bundles/ux-autocomplete/current/index.html#passing-extra-options-to-the-ajax-powered-autocomplete
+                'extra_options' => [
+                    'countries' => $countries->map(fn(Country $country) => $country->getId())->toArray(), // only scalar values and arrays of scalars
+            ],
             ])
-            ->add('tags', EntityType::class, [
-                'class' => MediaTag::class,
-                'query_builder' => function (EntityRepository $repo): QueryBuilder {
-                    return $repo->createQueryBuilder('t')
-                        ->orderBy('t.nameEn', 'ASC');
-                },
-                'required' => false,
-                'multiple' => true,
-                'autocomplete' => true,
-                'by_reference' => false, // important for ManyToMany when using add/remove methods
-            ])
-            ->add('food', EntityType::class, [
-                'class' => Food::class,
-                'query_builder' => function (EntityRepository $repo): QueryBuilder {
-                    return $repo->createQueryBuilder('f')
-                        ->orderBy('f.nameEn', 'ASC');
-                },
-                'required' => false,
-                'multiple' => true,
-                'autocomplete' => true,
-                'by_reference' => false, // important for ManyToMany when using add/remove methods
-            ])
+            ->add('tags', MediaTagAutocompleteField::class)
+            ->add('food', FoodAutocompleteField::class)
             ->add('showInFood', CheckboxType::class, [
                 'label'    => 'show in food',
                 'required' => false,
@@ -155,22 +123,13 @@ class MediaQuickEditType extends AbstractType
                 'attr'     => ['class' => 'form-check-input'], // for switch
                 'help' => 'Set to true to auto-create meal or auto-fill with existing meal based on taken_at time +- 30 minutes'
             ])
-            ->add('meal', EntityType::class, [
-                'class' => Meal::class,
-                'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
-                    if ($currentTrip) {
-                        return $repo->createQueryBuilder('m')
-                            ->join('m.placeTags', 'pt')
-                            ->where('pt.country IN (:countries)')
-                            ->setParameter('countries', $currentTrip->getCountries())
-                            ->orderBy('m.enjoyedAt', 'ASC');
-                    }
-                    return $repo->createQueryBuilder('m')
-                        ->orderBy('m.enjoyedAt', 'ASC');
-                },
+            ->add('meal', MealAutocompleteField::class, [
                 'required' => false,
-                'multiple' => false,
-                'autocomplete' => true,
+                // Passing extra options to ajax query builder
+                // https://symfony.com/bundles/ux-autocomplete/current/index.html#passing-extra-options-to-the-ajax-powered-autocomplete
+                'extra_options' => [
+                    'current_trip' => $currentTrip->getId(), // only scalar values and arrays of scalars
+                ],
                 'help' => "Leave empty if using the 'set meal' flag to auto-fill or auto-create meal", 
             ])
             ->add('is360', CheckboxType::class, [
@@ -197,21 +156,12 @@ class MediaQuickEditType extends AbstractType
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
             ])
-            ->add('place', EntityType::class, [
-                'class' => Place::class,
-                'query_builder' => function (EntityRepository $repo) use ($currentTrip): QueryBuilder {
-                    if ($currentTrip) {
-                        return $repo->createQueryBuilder('p')
-                            ->where('p.country IN (:countries)')
-                            ->setParameter('countries', $currentTrip->getCountries())
-                            ->orderBy('p.name', 'ASC');
-                    }
-                    return $repo->createQueryBuilder('p')
-                        ->orderBy('pt.name', 'ASC');
-                },           
-                'required' => false,
-                'multiple' => false,
-                'autocomplete' => true,
+            ->add('place', PlaceAutocompleteField::class, [
+                // Passing extra options to ajax query builder
+                // https://symfony.com/bundles/ux-autocomplete/current/index.html#passing-extra-options-to-the-ajax-powered-autocomplete
+                'extra_options' => [
+                    'countries' => $countries->map(fn(Country $country) => $country->getId())->toArray(), // only scalar values and arrays of scalars
+                ],
             ])
         ;
     }

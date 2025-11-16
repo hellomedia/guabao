@@ -5,7 +5,7 @@ namespace Controlroom\Controller;
 use App\Entity\Place;
 use App\Entity\Tag\PlaceTag;
 use App\Helper\PlaceAutoFillHelper;
-use Controlroom\Field\MapPickerField;
+use Controlroom\Form\Field\MapPickerField;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Asset;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
