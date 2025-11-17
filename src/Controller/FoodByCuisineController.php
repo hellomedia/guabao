@@ -61,7 +61,7 @@ class FoodByCuisineController extends BaseController
 
         return $this->render('food/food.html.twig', [
             'food' => $food,
-            'mediaGroups' => $food->getMediaGroups(),
+            'media_groups' => $food->getMediaGroups(),
         ]);
     }
 }
