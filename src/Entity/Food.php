@@ -304,7 +304,7 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
      *     sort: int
      * }>
      */
-    public function getImageGroups(): array
+    public function getMediaGroups(): array
     {
         $groups = [];
 
