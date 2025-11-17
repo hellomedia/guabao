@@ -1,5 +1,4 @@
 {% if field.value is not null %}
-    {% dump %}
     {% set cover = field.value %}
         <a href="{{ path('admin_media_bulk_edit_by_food', {'id': entity.instance.id}) }}">
             <img src="{{ uploaded_asset(cover)|imagine_filter('thumb_small') }}" alt="" width="150" height="150"/>
