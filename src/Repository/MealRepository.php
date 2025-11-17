@@ -17,7 +17,7 @@ class MealRepository extends ServiceEntityRepository
         parent::__construct($registry, Meal::class);
     }
 
-    public function findOneByMediaDate(DateTimeImmutable $mediaTakenAt)
+    public function findOneByMediaDate(DateTimeImmutable $mediaTakenAt): ?Meal
     {
         $interval = new \DateInterval('PT30M');
 

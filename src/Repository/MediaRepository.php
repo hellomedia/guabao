@@ -59,12 +59,11 @@ class MediaRepository extends ServiceEntityRepository
         return $filtered;
     }
 
-    public function findByTrip(Trip $trip, ?bool $gallery = false, ?bool $adminList = false): Collection
+    public function findByTrip(Trip $trip, ?bool $gallery = false, ?bool $adminList = false): array
     {
-        $query = $this->getFindByTripQueryBuilder($trip, $gallery, $adminList)
-            ->getQuery();
-
-        return new ArrayCollection($query->getResult());
+        return $this->getFindByTripQueryBuilder($trip, $gallery, $adminList)
+            ->getQuery()
+            ->getResult();
     }
 
     public function getFindByTripQueryBuilder(Trip $trip, ?bool $gallery = false, ?bool $adminList = false): QueryBuilder
@@ -98,12 +97,11 @@ class MediaRepository extends ServiceEntityRepository
         return $qb;
     }
 
-    public function findByStory(Story $story): Collection
+    public function findByStory(Story $story): array
     {
-        $query = $this->getFindByStoryQueryBuilder($story)
-            ->getQuery();
-
-        return new ArrayCollection($query->getResult());
+        return $this->getFindByStoryQueryBuilder($story)
+            ->getQuery()
+            ->getResult();
     }
 
     public function getFindByStoryQueryBuilder(Story $story): QueryBuilder
@@ -129,10 +127,9 @@ class MediaRepository extends ServiceEntityRepository
 
     public function findByFood(Food $food): array
     {
-        $query = $this->getFindByFoodQueryBuilder($food)
-            ->getQuery();
-
-        return $query->getResult();
+        return $this->getFindByFoodQueryBuilder($food)
+            ->getQuery()
+            ->getResult();
     }
 
     public function getFindByFoodQueryBuilder(Food $food): QueryBuilder
