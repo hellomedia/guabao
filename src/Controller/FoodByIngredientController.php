@@ -62,7 +62,7 @@ class FoodByIngredientController extends BaseController
 
         return $this->render('food/food.html.twig', [
             'food' => $food,
-            'meals' => $food->getMeals(),
+            'mediaGroups' => $food->getMediaGroups(),
         ]);
     }
 }

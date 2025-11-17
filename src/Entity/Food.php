@@ -288,4 +288,69 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
 
         return $this;
     }
+
+    /**
+     * Grouping logic for images in the food details page
+     * 
+     * Images are group by date and by meal, with meal having precedence
+     * 
+     * @return array<int, array{
+     *     type: 'meal'|'date',
+     *     meal: ?Meal,
+     *     date: ?\DateTimeImmutable,
+     *     medias: Media[],
+     *     place: ?Place,
+     *     placeTags: PlaceTags[],
+     *     sort: int
+     * }>
+     */
+    public function getImageGroups(): array
+    {
+        $groups = [];
+
+        foreach ($this->getMedias() as $media) {
+            $meal = $media->getMeal();
+
+            if ($meal !== null) {
+                // Group by meal (takes precedence)
+                $key = 'meal_' . $meal->getId();
+                // Adjust these according to your Meal entity
+                $groupDate = $meal->getEnjoyedAt();
+                $type  = 'meal';
+                $place = $meal->getPlace();
+                $placeTags = $meal->getPlaceTags()->toArray();
+            } else {
+                // Group by date
+                $takenAt = $media->getTakenAt();
+                $dateKey = $takenAt?->format('Y-m-d') ?? 'no_date';
+                $key      = 'date_' . $dateKey;
+                $groupDate = $takenAt?->setTime(0, 0);
+                $type     = 'date';
+                $place = $media->getPlace();
+                $placeTags = $media->getPlaceTags()->toArray();
+            }
+
+            if (!isset($groups[$key])) {
+                $groups[$key] = [
+                    'type'   => $type,
+                    'meal'   => $meal ?? null,
+                    'date'   => $groupDate,
+                    'medias' => [],
+                    'place'  => $place,
+                    'placeTags' => $placeTags,
+                    'sort'   => $groupDate?->getTimestamp() ?? 0,
+                ];
+            }
+
+            $groups[$key]['medias'][] = $media;
+        }
+
+        // Sort groups chronologically (change <=> to >=> if you want newest first)
+        $groups = array_values($groups);
+        usort($groups, static function (array $a, array $b): int {
+            return $a['sort'] <=> $b['sort'];
+        });
+
+        return $groups;
+    }
 }

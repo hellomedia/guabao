@@ -2,17 +2,21 @@
 
 {% block content %}
 
-	{% for meal in meals %}
+	{% for group in mediaGroups %}
 
-		<h3>
-			{{ meal.enjoyedAt|format_date('long') }}
-			-
-			{% for placeTag in meal.placeTags %}
-				{{ placeTag|trans }}
-			{% endfor %}
-		</h3>
+        <h3>
+            {% if group.type == 'meal' %}
+                {{ group.meal }}
+            {% else %}
+                {{ group.date|format_date('long') }}
+            {% endif %}
+            --
+            {% for placeTag in group.placeTags %}
+                {{ placeTag|trans }}
+            {% endfor %}
+        </h3>
 
-		{% include 'food/_gallery.html.twig' with {medias: meal.medias } %}
+        {% include 'food/_gallery.html.twig' with {medias: group.medias } %}
 
 	{% endfor %}
 
