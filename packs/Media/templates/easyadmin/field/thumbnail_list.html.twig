@@ -1,7 +1,7 @@
 {% if field.value|length > 0 %}
 	<div class="thumb-list">
-		 {% for media in field.value[:12] %} {# max 12 items #}
-			<a href="{{ path('controlroom_media_detail', {'entityId': media.id}) }}">
+		 {% for media in field.value[:8] %} {# max 9 items #}
+			<a href="{{ path('controlroom_image_detail', {'entityId': media.id}) }}">
                 <img
                     src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
                     alt=""

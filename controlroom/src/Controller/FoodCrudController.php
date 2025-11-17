@@ -62,6 +62,10 @@ class FoodCrudController extends AbstractCrudController
     {
         yield IdField::new('id')->onlyOnDetail();
 
+        yield AssociationField::new('cover')
+            ->setTemplatePath('@media/easyadmin/field/food_cover.html.twig')
+            ->hideOnForm();
+    
         yield AssociationField::new('medias')
             ->setTemplatePath('@media/easyadmin/field/thumbnail_list.html.twig')
             ->hideOnForm();
