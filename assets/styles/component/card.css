@@ -16,11 +16,12 @@
         grid-auto-rows: minmax(80px, auto);
         /* make all grid items match the tallest item's height */
         
-        &.cards-ingredient,
-        &.cards-country,
-        &.cards-cuisine,
-        &.cards-tag {
+        &.cards-menu {
             gap: calc(var(--spacing) * 3);
+            h3 {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
         }
     }
 
@@ -124,6 +125,7 @@
         flex-direction: column;
         justify-content: start;
 
+        &.cards-menu,
         &.card-ingredient,
         &.card-country,
         &.card-cuisine,

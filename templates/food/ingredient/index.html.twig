@@ -7,14 +7,14 @@
 	{% include 'food/_top_filters.html.twig' %}
 	
 	<h3 style="margin-bottom: 15px">Favourites</h3>
-	<div class="cards cards-ingredient">
+	<div class="cards cards-menu">
 		{% for ingredient in favourites %}
 			{% include 'food/ingredient/_card.html.twig' %}
 		{% endfor %}
 	</div>
 
 	<h3 style="margin-top: 30px;margin-bottom: 15px;">All</h3>
-	<div class="cards cards-ingredient">
+	<div class="cards cards-menu">
 		{% for ingredient in others %}
 			{% include 'food/ingredient/_card.html.twig' %}
 		{% endfor %}
