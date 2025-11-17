@@ -345,10 +345,12 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
             $groups[$key]['medias'][] = $media;
         }
 
-        // Sort groups chronologically (change <=> to >=> if you want newest first)
+        // Sort groups chronologically
         $groups = array_values($groups);
         usort($groups, static function (array $a, array $b): int {
-            return $a['sort'] <=> $b['sort'];
+            // b <=> a for newest first 
+            // a <=> b for oldest first
+            return $b['sort'] <=> $a['sort'];
         });
 
         return $groups;

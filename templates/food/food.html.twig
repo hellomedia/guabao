@@ -10,7 +10,7 @@
             {% else %}
                 {{ group.date|format_date('long') }}
             {% endif %}
-            --
+            -
             {% for placeTag in group.placeTags %}
                 {{ placeTag|trans }}
             {% endfor %}
