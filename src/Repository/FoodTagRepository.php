@@ -28,4 +28,22 @@ class FoodTagRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllWithFoodCount(): array
+    {
+        $locale = $this->requestStack->getCurrentRequest()->getLocale();
+
+        $result = $this->createQueryBuilder('ft')
+            ->leftJoin('ft.food', 'f')
+            ->addSelect('COUNT(DISTINCT f.id) AS foodCount')
+            ->groupBy('ft.id')
+            ->orderBy('ft.name' . \ucfirst($locale), 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        return array_map(fn($row) => [
+            'tag'    => $row[0],
+            'food_count'  => (int)$row['foodCount'],
+        ], $result);
+    }
 }

@@ -21,12 +21,12 @@ class FoodByTagController extends BaseController
     #[Route('/food/tag', name: 'food_by_tag_index')]
     public function index(FoodTagRepository $foodTagRepository): Response
     {
-        $tags = $foodTagRepository->findAll();
+        $tagsWithCounts = $foodTagRepository->findAllWithFoodCount();
 
         $this->addBreadcrumb('food.by_tag');
 
         return $this->render('food/tag/index.html.twig', [
-            'tags' => $tags
+            'tags_with_counts' => $tagsWithCounts
         ]);
     }
 

@@ -29,6 +29,24 @@ class IngredientRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllWithFoodCount(): array
+    {
+        $locale = $this->requestStack->getCurrentRequest()->getLocale();
+
+        $result = $this->createQueryBuilder('i')
+            ->leftJoin('i.food', 'f')
+            ->addSelect('COUNT(DISTINCT f.id) AS foodCount')
+            ->groupBy('i.id')
+            ->orderBy('i.name' . \ucfirst($locale), 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        return array_map(fn($row) => [
+            'ingredient'    => $row[0],
+            'food_count'  => (int)$row['foodCount'],
+        ], $result);
+    }
+
     public function findFavourites(): array
     {
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
@@ -40,6 +58,25 @@ class IngredientRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findFavouritesWithFoodCount(): array
+    {
+        $locale = $this->requestStack->getCurrentRequest()->getLocale();
+
+        $result = $this->createQueryBuilder('i')
+            ->where('i.favourite = true')
+            ->leftJoin('i.food', 'f')
+            ->addSelect('COUNT(DISTINCT f.id) AS foodCount')
+            ->groupBy('i.id')
+            ->orderBy('i.name' . \ucfirst($locale), 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        return array_map(fn($row) => [
+            'ingredient'    => $row[0],
+            'food_count'  => (int)$row['foodCount'],
+        ], $result);
+    }
+
     public function findNonFavourites(): array
     {
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
@@ -49,5 +86,24 @@ class IngredientRepository extends ServiceEntityRepository
             ->orderBy('i.name' . \ucfirst($locale), 'ASC')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findNonFavouritesWithFoodCount(): array
+    {
+        $locale = $this->requestStack->getCurrentRequest()->getLocale();
+
+        $result = $this->createQueryBuilder('i')
+            ->where('i.favourite != true')
+            ->leftJoin('i.food', 'f')
+            ->addSelect('COUNT(DISTINCT f.id) AS foodCount')
+            ->groupBy('i.id')
+            ->orderBy('i.name' . \ucfirst($locale), 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        return array_map(fn($row) => [
+            'ingredient'    => $row[0],
+            'food_count'  => (int)$row['foodCount'],
+        ], $result);
     }
 }

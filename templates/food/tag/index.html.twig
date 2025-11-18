@@ -4,11 +4,17 @@
 
 {% block content %}
 
+    <style>
+        .count {
+            font-size: 16px;
+        }
+    </style>
+
 	{% include 'food/_top_filters.html.twig' %}
 	
 	<div id="food-list" class="cards cards-menu">
-		{% for tag in tags %}
-			{% include 'food/tag/_card.html.twig' %}
+		{% for item in tags_with_counts %}
+			{% include 'food/tag/_card.html.twig' with {'tag': item.tag, 'food_count': item.food_count} %}
 		{% endfor %}
 	</div>
 

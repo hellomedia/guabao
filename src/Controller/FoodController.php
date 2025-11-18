@@ -20,12 +20,12 @@ class FoodController extends BaseController
     #[Route('/food', name: 'food_index')]
     public function index(CuisineRepository $cuisineRepository): Response
     {
-        $cuisines = $cuisineRepository->findAll();
+        $cuisinesWithCounts = $cuisineRepository->findAllWithFoodCount();
 
         $this->addBreadcrumb('food.by_cuisine');
-        
+
         return $this->render('food/cuisine/index.html.twig', [
-            'cuisines' => $cuisines
+            'cuisines_with_counts' => $cuisinesWithCounts
         ]);
     }
 

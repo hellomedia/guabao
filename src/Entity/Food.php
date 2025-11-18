@@ -50,7 +50,7 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     /**
      * @var Collection<int, Tag>
      */
-    #[ORM\ManyToMany(targetEntity: FoodTag::class)]
+    #[ORM\ManyToMany(targetEntity: FoodTag::class, inversedBy: 'food')]
     private Collection $tags;
 
     /**

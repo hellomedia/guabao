@@ -4,19 +4,25 @@
 
 {% block content %}
 
+    <style>
+        .count {
+            font-size: 16px;
+        }
+    </style>
+
 	{% include 'food/_top_filters.html.twig' %}
 	
 	<h3 style="margin-bottom: 15px">Favourites</h3>
 	<div class="cards cards-menu">
-		{% for ingredient in favourites %}
-			{% include 'food/ingredient/_card.html.twig' %}
+		{% for item in favourites_with_counts %}
+			{% include 'food/ingredient/_card.html.twig' with {'ingredient': item.ingredient, 'food_count': item.food_count} %}
 		{% endfor %}
 	</div>
 
 	<h3 style="margin-top: 30px;margin-bottom: 15px;">All</h3>
 	<div class="cards cards-menu">
-		{% for ingredient in others %}
-			{% include 'food/ingredient/_card.html.twig' %}
+		{% for item in others_with_counts %}
+			{% include 'food/ingredient/_card.html.twig' with {'ingredient': item.ingredient, 'food_count': item.food_count} %}
 		{% endfor %}
 	</div>
 

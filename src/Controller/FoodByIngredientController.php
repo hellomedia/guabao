@@ -21,14 +21,15 @@ class FoodByIngredientController extends BaseController
     #[Route('/food/ingredient', name: 'food_by_ingredient_index')]
     public function index(IngredientRepository $ingredientRepository): Response
     {
-        $favourites = $ingredientRepository->findFavourites();
-        $others = $ingredientRepository->findNonFavourites();
+        $favouritesWithCounts = $ingredientRepository->findFavouritesWithFoodCount();
+        $othersWithCounts = $ingredientRepository->findNonFavouritesWithFoodCount();
 
         $this->addBreadcrumb('food.by_ingredient');
 
         return $this->render('food/ingredient/index.html.twig', [
-            'favourites' => $favourites,
-            'others' => $others,        ]);
+            'favourites_with_counts' => $favouritesWithCounts,
+            'others_with_counts' => $othersWithCounts,   
+        ]);
     }
 
     #[Route('/food/ingredient/{slugEn:ingredient}', name: 'food_by_ingredient_ingredient')]
