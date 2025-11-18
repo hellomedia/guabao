@@ -7,8 +7,9 @@ use App\Entity\Food;
 use App\Entity\Media;
 use App\Entity\Tag\FoodTag;
 use App\Enum\Level;
-use App\Repository\FoodRepository;
 use App\Repository\MediaRepository;
+use Controlroom\Form\Field\CuisinesAutocompleteField;
+use Controlroom\Form\Field\FoodTagAutocompleteField;
 use Controlroom\Form\Field\IngredientAutocompleteField;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -23,6 +24,7 @@ class FoodQuickEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // Not best practise but OK for quickEditForm
         $food = $builder->getData();
         \assert($food instanceof Food);
 
@@ -56,31 +58,9 @@ class FoodQuickEditType extends AbstractType
                         ->orderBy('m.id', 'ASC');
                 },
             ])
-            ->add('tags', EntityType::class, [
-                'class' => FoodTag::class,
-                'query_builder' => function (EntityRepository $repo): QueryBuilder {
-                    return $repo->createQueryBuilder('t')
-                        ->orderBy('t.nameEn', 'ASC');
-                },
-                'required' => false,
-                'multiple' => true,
-                'autocomplete' => true,
-                'by_reference' => false, // important for ManyToMany when using add/remove methods
-            ])
-            ->add('cuisines', EntityType::class, [
-                'class' => Cuisine::class,
-                'query_builder' => function (EntityRepository $repo): QueryBuilder {
-                    return $repo->createQueryBuilder('c')
-                        ->orderBy('c.nameEn', 'ASC');
-                },
-                'required' => false,
-                'multiple' => true,
-                'autocomplete' => true,
-                'by_reference' => false, // important for ManyToMany when using add/remove methods
-            ])
-            ->add('ingredients', IngredientAutocompleteField::class, [
-                'required' => false,
-            ])
+            ->add('tags', FoodTagAutocompleteField::class)
+            ->add('cuisines', CuisinesAutocompleteField::class)
+            ->add('ingredients', IngredientAutocompleteField::class)
             ->add('loveLevel', EnumType::class,  [
                 'class' => Level::class,
                 'required' => false,

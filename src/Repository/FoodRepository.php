@@ -26,10 +26,10 @@ class FoodRepository extends ServiceEntityRepository
     {
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
-        return $this->createQueryBuilder('i')
+        return $this->createQueryBuilder('f')
             ->leftJoin('f.cover', 'cover')
             ->addSelect('cover')
-            ->orderBy('i.name' . \ucfirst($locale), 'ASC')
+            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
             ->getQuery()
             ->getResult();
     }

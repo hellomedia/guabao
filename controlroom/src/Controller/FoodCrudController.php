@@ -107,34 +107,30 @@ class FoodCrudController extends AbstractCrudController
 
     }
 
+    /**
+     * NB: use linkToUrl instead of linkToRoute to get clean urls
+     * as opposed to /?routeName=...
+     */
     public function configureActions(Actions $actions): Actions
     {
-        $viewMedias = Action::new('viewMedias', 'Medias')
-            ->linkToUrl(function (Food $food) {
-                return $this->urlGenerator->generate('controlroom_media_index', [
-                    'filters' => [
-                        'food' => [
-                            'comparison' => '=',
-                            'value' => $food->getId(),
-                        ]
-                    ]
-                ]);
-            })
-            ->setIcon('fa fa-images')
-            ->addCssClass('btn btn-outline-primary');
+        $bulkEdit = Action::new('bulkEdit', 'Bulk edit')
+            ->linkToUrl($this->urlGenerator->generate('admin_food_bulk_edit'))
+            ->createAsGlobalAction()
+        ;
 
-        $bulkEditMedias = Action::new('editMedias', 'Bulk edit')
+        $bulkEditMedias = Action::new('bulkEditMedias', 'Bulk edit')
             ->linkToUrl(function (Food $food) {
                 return $this->urlGenerator->generate('admin_media_bulk_edit_by_food', [
                     'id' => $food->getId(),
                 ]);
             })
-            ->setIcon('fa fa-edit');
+            ->setIcon('fa fa-edit')
+        ;
 
         $actions
-            ->add(Action::DETAIL, $viewMedias)
-            ->add(Action::DETAIL, $bulkEditMedias)
-            ->add(Action::INDEX, $bulkEditMedias)
+            ->add(Crud::PAGE_INDEX, $bulkEdit)
+            ->add(Crud::PAGE_INDEX, $bulkEditMedias)
+            ->add(Crud::PAGE_DETAIL, $bulkEditMedias)
         ;
 
         return $actions;
