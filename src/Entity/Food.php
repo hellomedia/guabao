@@ -71,6 +71,19 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'food')]
     private Collection $medias;
 
+    /**
+     * @var Collection<int, Food>
+     */
+    #[ORM\ManyToMany(targetEntity: Food::class, inversedBy: 'similarTo')]
+    #[ORM\JoinTable(name: 'food_similar')]
+    private Collection $similar;
+
+    /**
+     * @var Collection<int, Food>
+     */
+    #[ORM\ManyToMany(targetEntity: Food::class, mappedBy: 'similar')]
+    private Collection $similarTo;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -78,6 +91,8 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
         $this->children = new ArrayCollection();
         $this->cuisines = new ArrayCollection();
         $this->medias = new ArrayCollection();
+        $this->similar = new ArrayCollection();
+        $this->similarTo = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -287,6 +302,29 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
         $this->cover = $cover;
 
         return $this;
+    }
+
+    public function addSimilar(Food $food): void
+    {
+        if (!$this->similar->contains($food)) {
+            $this->similar->add($food);
+            $food->addSimilar($this); // keep in sync
+        }
+    }
+
+    public function removeSimilar(Food $food): void
+    {
+        if ($this->similar->removeElement($food)) {
+            $food->removeSimilar($this); // keep in sync
+        }
+    }
+
+    /**
+     * @return Collection<int, Food>
+     */
+    public function getSimilar(): Collection
+    {
+        return $this->similar;
     }
 
     /**

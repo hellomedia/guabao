@@ -97,6 +97,11 @@ class FoodCrudController extends AbstractCrudController
             ->setTemplatePath('@admin/field/tags.html.twig')
         ;
 
+        yield AssociationField::new('similar')
+            ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
+            ->setTemplatePath('@admin/field/food_list.html.twig');
+
+
         yield AssociationField::new('ingredients')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@admin/field/ingredients.html.twig');

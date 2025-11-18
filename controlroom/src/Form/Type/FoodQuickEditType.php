@@ -11,6 +11,7 @@ use App\Repository\MediaRepository;
 use Controlroom\Form\Field\CuisinesAutocompleteField;
 use Controlroom\Form\Field\FoodTagAutocompleteField;
 use Controlroom\Form\Field\IngredientAutocompleteField;
+use Controlroom\Form\Field\SimilarFoodAutocompleteField;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -61,6 +62,7 @@ class FoodQuickEditType extends AbstractType
             ->add('tags', FoodTagAutocompleteField::class)
             ->add('cuisines', CuisinesAutocompleteField::class)
             ->add('ingredients', IngredientAutocompleteField::class)
+            ->add('similar', SimilarFoodAutocompleteField::class)
             ->add('loveLevel', EnumType::class,  [
                 'class' => Level::class,
                 'required' => false,
