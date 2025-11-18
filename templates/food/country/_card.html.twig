@@ -2,7 +2,7 @@
 
 	<h3 class="card-title">
 		<a href="{{ path('food_by_country_country', {slugEn: country.slugEn}) }}">
-			{{ country|trans }}
+			{{ country|trans }} <span class="count">({{ food_count }})</span>
 		</a>
 	</h3>
 

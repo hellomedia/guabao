@@ -3,9 +3,11 @@
 namespace App\Entity\Tag;
 
 use App\Entity\Country;
+use App\Entity\Food;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
+use App\Entity\Media;
 use App\Entity\Place;
 use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
@@ -30,7 +32,7 @@ class PlaceTag implements LocalizedNameInterface, LocalizedSlugInterface, Entity
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'placeTags')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Country $country = null;
 
@@ -40,9 +42,16 @@ class PlaceTag implements LocalizedNameInterface, LocalizedSlugInterface, Entity
     #[ORM\ManyToMany(targetEntity: Place::class, mappedBy: 'placeTags')]
     private Collection $places;
 
+    /**
+     * @var Collection<int, Media>
+     */
+    #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'placeTags')]
+    private Collection $medias;
+
     public function __construct()
     {
         $this->places = new ArrayCollection();
+        $this->medias = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,6 +93,33 @@ class PlaceTag implements LocalizedNameInterface, LocalizedSlugInterface, Entity
     {
         if ($this->places->removeElement($place)) {
             $place->removePlaceTag($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getMedias(): Collection
+    {
+        return $this->medias;
+    }
+
+    public function addMedia(Media $media): static
+    {
+        if (!$this->medias->contains($media)) {
+            $this->medias->add($media);
+            $media->addPlaceTag($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedia(Media $media): static
+    {
+        if ($this->medias->removeElement($media)) {
+            $media->removePlaceTag($this);
         }
 
         return $this;

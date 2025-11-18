@@ -21,12 +21,12 @@ class FoodByCountryController extends BaseController
     #[Route('/food/country', name: 'food_by_country_index')]
     public function index(CountryRepository $countryRepository): Response
     {
-        $countries = $countryRepository->findAll();
+        $countriesWithCounts = $countryRepository->findAllWithFoodCount();
 
         $this->addBreadcrumb('food.by_country');
 
         return $this->render('food/country/index.html.twig', [
-            'countries' => $countries
+            'countries_with_counts' => $countriesWithCounts
         ]);
     }
 

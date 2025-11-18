@@ -71,7 +71,7 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
      * It is also the safe link to country.
      * @var Collection<int, PlaceTag>
      */
-    #[ORM\ManyToMany(targetEntity: PlaceTag::class)]
+    #[ORM\ManyToMany(targetEntity: PlaceTag::class, inversedBy:'medias')]
     private Collection $placeTags;
 
     /**
