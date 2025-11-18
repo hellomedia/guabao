@@ -45,9 +45,24 @@ class Ingredient implements LocalizedNameInterface, LocalizedSlugInterface, Enti
     #[ORM\Column(nullable: true, enumType: FoodType::class)]
     private ?FoodType $foodType = null;
 
+    /**
+     * @var Collection<int, Ingredient>
+     */
+    #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'similarTo')]
+    #[ORM\JoinTable(name: 'ingredient_similar')]
+    private Collection $similar;
+
+    /**
+     * @var Collection<int, Ingredient>
+     */
+    #[ORM\ManyToMany(targetEntity: Ingredient::class, mappedBy: 'similar')]
+    private Collection $similarTo;
+
     public function __construct()
     {
         $this->food = new ArrayCollection();
+        $this->similar = new ArrayCollection();
+        $this->similarTo = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,4 +144,28 @@ class Ingredient implements LocalizedNameInterface, LocalizedSlugInterface, Enti
 
         return $this;
     }
+
+    public function addSimilar(Ingredient $ingredient): void
+    {
+        if (!$this->similar->contains($ingredient)) {
+            $this->similar->add($ingredient);
+            $ingredient->addSimilar($this); // keep in sync
+        }
+    }
+
+    public function removeSimilar(Ingredient $ingredient): void
+    {
+        if ($this->similar->removeElement($ingredient)) {
+            $ingredient->removeSimilar($this); // keep in sync
+        }
+    }
+
+    /**
+     * @return Collection<int, Ingredient>
+     */
+    public function getSimilar(): Collection
+    {
+        return $this->similar;
+    }
+
 }
