@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Country;
 use App\Entity\Cuisine;
 use App\Entity\Food;
 use App\Entity\Ingredient;
@@ -81,6 +82,23 @@ class FoodRepository extends ServiceEntityRepository
             ->join('f.ingredients', 'i')
             ->where('i = :ingredient')
             ->setParameter('ingredient', $ingredient)
+            ->leftJoin('f.cover', 'cover')
+            ->addSelect('cover')
+            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByCountry(Country $country): array
+    {
+        $locale = $this->requestStack->getCurrentRequest()->getLocale();
+
+        return $this->createQueryBuilder('f')
+            ->innerJoin('f.medias', 'm')
+            ->innerJoin('m.placeTags', 'pt')
+            ->innerJoin('pt.country', 'c')
+            ->where('c = :country')
+            ->setParameter('country', $country)
             ->leftJoin('f.cover', 'cover')
             ->addSelect('cover')
             ->orderBy('f.name' . \ucfirst($locale), 'ASC')

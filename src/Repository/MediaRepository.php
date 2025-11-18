@@ -8,8 +8,6 @@ use App\Entity\Media;
 use App\Entity\Story;
 use App\Entity\Trip;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -32,31 +30,85 @@ class MediaRepository extends ServiceEntityRepository
 
         // contains duplicate food pics (2 food pics of the same food taken during a meal)
         $medias = $this->createQueryBuilder('m')
-            ->innerJoin('m.food', 'f')
-            ->join('m.placeTags', 'pt')
+            ->innerJoin('m.food', 'food')->addSelect('food')
+            ->innerJoin('m.placeTags', 'pt')->addSelect('pt')
+            ->leftJoin('m.place', 'place')->addSelect('place')
             ->where('pt.country = :country')
-            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
             ->setParameter('country', $country)
+            ->leftJoin('m.meal', 'meal')->addSelect('meal')
+            ->orderBy('m.takenAt', 'DESC')
             ->getQuery()
             ->getResult();
 
         $seen = [];
         $filtered = [];
 
-        // remove duplicate pics of same food on same day
-        foreach ($medias as $media) {
-            assert($media instanceof Media);
-            $foodIds = $media->getFood()->map(fn(Food $food) => $food->getId());
-            $dateKey = $media->getTakenAt()->format('Y-m-d');
-            $groupKey = implode('_', $foodIds->toArray()) . '_' . $dateKey;
+        // return $medias;
 
-            if (!isset($seen[$groupKey])) {
-                $seen[$groupKey] = true;
-                $filtered[] = $media;
+        // // remove duplicate pics of same food on same day
+        // foreach ($medias as $media) {
+        //     assert($media instanceof Media);
+        //     $foodIds = $media->getFood()->map(fn(Food $food) => $food->getId());
+        //     $dateKey = $media->getTakenAt()->format('Y-m-d');
+        //     $groupKey = implode('_', $foodIds->toArray()) . '_' . $dateKey;
+
+        //     if (!isset($seen[$groupKey])) {
+        //         $seen[$groupKey] = true;
+        //         $filtered[] = $media;
+        //     }
+        // }
+
+        // return $filtered;
+
+
+        $groups = [];
+
+        foreach ($medias as $media) {
+            $meal = $media->getMeal();
+
+            if ($meal !== null) {
+                // Group by meal (takes precedence)
+                $key = 'meal_' . $meal->getId();
+                // Adjust these according to your Meal entity
+                $groupDate = $meal->getEnjoyedAt();
+                $type  = 'meal';
+                $place = $meal->getPlace();
+                $placeTags = $meal->getPlaceTags()->toArray();
+            } else {
+                // Group by date
+                $takenAt = $media->getTakenAt();
+                $dateKey = $takenAt?->format('Y-m-d') ?? 'no_date';
+                $key      = 'date_' . $dateKey;
+                $groupDate = $takenAt?->setTime(0, 0);
+                $type     = 'date';
+                $place = $media->getPlace();
+                $placeTags = $media->getPlaceTags()->toArray();
             }
+
+            if (!isset($groups[$key])) {
+                $groups[$key] = [
+                    'type'   => $type,
+                    'meal'   => $meal ?? null,
+                    'date'   => $groupDate,
+                    'medias' => [],
+                    'place'  => $place,
+                    'placeTags' => $placeTags,
+                    'sort'   => $groupDate?->getTimestamp() ?? 0,
+                ];
+            }
+
+            $groups[$key]['medias'][] = $media;
         }
 
-        return $filtered;
+        // Sort groups chronologically
+        $groups = array_values($groups);
+        usort($groups, static function (array $a, array $b): int {
+            // b <=> a for newest first 
+            // a <=> b for oldest first
+            return $b['sort'] <=> $a['sort'];
+        });
+
+        return $groups;
     }
 
     public function findByTrip(Trip $trip, ?bool $gallery = false, ?bool $adminList = false): array
