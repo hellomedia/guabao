@@ -42,26 +42,25 @@
         </div>
     {% endif %}
 
+    <div id="media-groups">
+        {% for group in media_groups %}
 
-    
+            <h3>
+                {% if group.type == 'meal' %}
+                    {{ group.meal }}
+                {% else %}
+                    {{ group.date|format_date('long') }}
+                {% endif %}
+                -
+                {% for placeTag in group.placeTags %}
+                    {{ placeTag|trans }}
+                {% endfor %}
+            </h3>
 
-    {% for group in media_groups %}
+            {% include 'food/_gallery.html.twig' with {medias: group.medias } %}
 
-        <h3>
-            {% if group.type == 'meal' %}
-                {{ group.meal }}
-            {% else %}
-                {{ group.date|format_date('long') }}
-            {% endif %}
-            -
-            {% for placeTag in group.placeTags %}
-                {{ placeTag|trans }}
-            {% endfor %}
-        </h3>
-
-        {% include 'food/_gallery.html.twig' with {medias: group.medias } %}
-
-	{% endfor %}
+        {% endfor %}
+    </div>
 
 {% endblock %}
 

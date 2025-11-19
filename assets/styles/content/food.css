@@ -31,7 +31,10 @@
             background-color: lavender;
             padding: 40px 50px;
             border-radius: 5px;
-            margin-bottom: 50px;
+        }
+
+        #media-groups {
+            margin-top: 50px;
         }
     }
 }
