@@ -5,22 +5,64 @@
 
 {% block content %}
 
+    <style>
+        .food-page {
+            .media-group-title {
+                background: lavender;
+                padding: 20px 30px;
+                border-radius: 5px;
+                display: inline-flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 20px;
+                h3, h4 {
+                    margin: 0;
+                }
+            }
+            .date-location {
+                display: inline-flex;
+                gap: 20px;
+                align-items: end;
+                justify-content: space-between;
+                svg {
+                    color: white;
+                    width: 30px;
+                }
+            }
+            .gallery {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+
     <div id="rating">
         {% include 'food/_full_rating.html.twig' %}
     </div>
 
     <div id="tags" class="card-tags tags">
         {% for cuisine in food.cuisines %}
-            <span class="tag food-tag">{{ cuisine|trans }}</span>
+            <a class="tag food-tag"
+                href="{{ path('food_cuisines_cuisine', {slugEn: cuisine.slugEn}) }}"
+            >
+                {{ cuisine|trans }}
+            </a>
         {% endfor %}
         {% for tag in food.tags %}
-            <span class="tag food-tag">{{ tag|trans }}</span>
+            <a class="tag food-tag"
+                href="{{ path('food_tags_tag', {slugEn: tag.slugEn}) }}"
+            >
+                {{ tag|trans }}
+            </a>
         {% endfor %}
     </div>
 
     <div id="ingredients" class="card-tags tags">
         {% for ingredient in food.ingredients %}
-            <span class="tag food-tag">{{ ingredient|trans }}</span>
+            <a class="tag food-tag"
+                href="{{ path('food_ingredients_ingredient', {slugEn: ingredient.slugEn}) }}"
+            >
+                {{ ingredient|trans }}
+            </a>
         {% endfor %}
     </div>
 
@@ -45,17 +87,24 @@
     <div id="media-groups">
         {% for group in media_groups %}
 
-            <h3>
+            <div class="media-group-title">
+                <h4 class="date-location">
+                    <div>
+                        <twig:ux:icon name="calendar" />
+                        {{ group.date|format_date('long') }}
+                    </div>
+                    <div>
+                        <twig:ux:icon name="location" />
+                        {% for placeTag in group.placeTags[:1] %}
+                            {{ placeTag|trans }}, {{ placeTag.country }}
+                        {% endfor %}
+                    </div>
+                </h4>
                 {% if group.type == 'meal' %}
-                    {{ group.meal }}
-                {% else %}
-                    {{ group.date|format_date('long') }}
+                    <h3>{{ group.meal.shortName }}</h3>
                 {% endif %}
-                -
-                {% for placeTag in group.placeTags %}
-                    {{ placeTag|trans }}
-                {% endfor %}
-            </h3>
+            </div>
+            
 
             {% include 'food/_gallery.html.twig' with {medias: group.medias } %}
 

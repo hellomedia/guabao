@@ -66,6 +66,11 @@ class Meal implements EntityInterface
         return $this->__toString();
     }
 
+    public function getShortName(): string
+    {
+        return 'Meal' . ' ' . ($this->place ?: $this->placeTags?->first());
+    }
+
     public function getId(): ?int
     {
         return $this->id;

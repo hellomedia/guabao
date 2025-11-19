@@ -23,3 +23,5 @@ ux_icons:
         food: 'mdi:food-ramen'
         medias: 'lucide:image'
         sort: 'iconoir:sort'
+        location: 'mdi:location'
+        calendar: 'mdi:calendar'

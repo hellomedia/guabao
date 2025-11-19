@@ -17,26 +17,27 @@ class FoodByCountryController extends BaseController
     public function preExecute()
     {
         $this->addBreadcrumb('homepage', 'homepage');
+        $this->addBreadcrumb('food.index', 'food_index');
     }
 
-    #[Route('/food/country', name: 'food_by_country_index')]
+    #[Route('/food/country', name: 'food_countries_index')]
     public function index(CountryRepository $countryRepository): Response
     {
         $countriesWithCounts = $countryRepository->findAllWithFoodCount();
 
-        $this->addBreadcrumb('food.by_country');
+        $this->addBreadcrumb('food.countries');
 
         return $this->render('food/country/index.html.twig', [
             'countries_with_counts' => $countriesWithCounts
         ]);
     }
 
-    #[Route('/food/country/{slugEn:country}', name: 'food_by_country_country')]
+    #[Route('/food/country/{slugEn:country}', name: 'food_countries_country')]
     public function country(Country $country, MediaRepository $repository, Request $request): Response
     {
         $mediaGroups = $repository->findFoodMediasByCountry($country);
 
-        $this->addBreadcrumb('food.by_country', 'food_by_country_index');
+        $this->addBreadcrumb('food.countries', 'food_countries_index');
         $this->addBreadcrumb($country->getName($request->getLocale()));
 
         return $this->render('food/show.html.twig', [
@@ -45,15 +46,15 @@ class FoodByCountryController extends BaseController
         ]);
     }
 
-    #[Route('/food/country/{slugCountry}/{slugEn:food}', name: 'food_by_country_food')]
+    #[Route('/food/country/{slugCountry}/{slugEn:food}', name: 'food_countries_food')]
     public function food(
         #[MapEntity(expr: 'repository.findOneBySlugEn(slugCountry)')] Country $country,
         Food $food,
         Request $request
     ): Response {
-        $this->addBreadcrumb('food.by_country', 'food_by_country_index');
+        $this->addBreadcrumb('food.countries', 'food_countries_index');
         $this->addBreadcrumb($country->getName(
-            $request->getLocale()), 'food_by_country_country',
+            $request->getLocale()), 'food_countries_country',
             ['slugEn' => $country->getSlugEn()],
             isLarge: true
         );

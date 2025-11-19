@@ -28,8 +28,8 @@
 
         #description {
             @apply text-lg;
-            background-color: lavender;
             padding: 40px 50px;
+            border: 4px dashed lavender;
             border-radius: 5px;
         }
 

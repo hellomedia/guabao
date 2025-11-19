@@ -29,7 +29,7 @@ class BreadcrumbsHelper
         }
     
         if ($item instanceof Ingredient) {
-            $route = 'food_by_ingredient';
+            $route = 'food_ingredients';
             $routeParams = [
                 'slugEn' => $item->getSlugEn(),
             ];

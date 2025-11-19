@@ -39,4 +39,8 @@
         @apply mb-5;
     }
 
+    svg {
+        display: inline-block;
+    }
+
 }

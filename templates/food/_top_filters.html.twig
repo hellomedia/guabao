@@ -6,16 +6,16 @@
 	<a href="{{ path('food_index') }}" class="{{ app.current_route in ['food_index'] ? 'current' }}">
 		{{ 'All food'|trans }}
 	</a>
-	<a href="{{ path('food_by_cuisine_index') }}" class="{{ app.current_route == 'food_by_cuisine_index' ? 'current' }}">
-		{{ 'Food by cuisine'|trans }}
+	<a href="{{ path('food_cuisines_index') }}" class="{{ app.current_route == 'food_cuisines_index' ? 'current' }}">
+		{{ 'Cuisines'|trans }}
 	</a>
-	<a href="{{ path('food_by_tag_index') }}" class="{{ app.current_route == 'food_by_tag_index' ? 'current' }}">
-		{{ 'Food by type'|trans }}
+	<a href="{{ path('food_tags_index') }}" class="{{ app.current_route == 'food_tags_index' ? 'current' }}">
+		{{ 'Food types'|trans }}
 	</a>
-	<a href="{{ path('food_by_ingredient_index') }}" class="{{ app.current_route == 'food_by_ingredient_index' ? 'current' }}">
-		{{ 'Food by ingredient'|trans }}
+	<a href="{{ path('food_ingredients_index') }}" class="{{ app.current_route == 'food_ingredients_index' ? 'current' }}">
+		{{ 'Ingredients'|trans }}
 	</a>
-    <a href="{{ path('food_by_country_index') }}" class="{{ app.current_route == 'food_by_country_index' ? 'current' }}">
-		{{ 'Food by location'|trans }}
+    <a href="{{ path('food_countries_index') }}" class="{{ app.current_route == 'food_countries_index' ? 'current' }}">
+		{{ 'Countries'|trans }}
 	</a>
 </div>

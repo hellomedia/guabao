@@ -4,9 +4,9 @@ trips: Trips
 food:
     index: Food
     all: Tout
-    by_country: Par pays
-    by_cuisine: Par cuisine
-    by_tag: Par type
-    by_ingredient: Par ingrédient
+    countries: Pays
+    cuisines: Cuisines
+    tags: Types
+    ingredients: Ingrédients
 trip:
     gallery: Gallerie

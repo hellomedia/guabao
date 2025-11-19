@@ -16,26 +16,27 @@ class FoodByIngredientController extends BaseController
     public function preExecute()
     {
         $this->addBreadcrumb('homepage', 'homepage');
+        $this->addBreadcrumb('food.index', 'food_index');
     }
 
-    #[Route('/food/ingredient', name: 'food_by_ingredient_index')]
+    #[Route('/food/ingredient', name: 'food_ingredients_index')]
     public function index(IngredientRepository $ingredientRepository): Response
     {
         $ingredients = $ingredientRepository->findAllByTypeWithFoodCount();
 
-        $this->addBreadcrumb('food.by_ingredient');
+        $this->addBreadcrumb('food.ingredients');
 
         return $this->render('food/ingredient/index.html.twig', [
             'food_types' => $ingredients,
         ]);
     }
 
-    #[Route('/food/ingredient/{slugEn:ingredient}', name: 'food_by_ingredient_ingredient')]
+    #[Route('/food/ingredient/{slugEn:ingredient}', name: 'food_ingredients_ingredient')]
     public function ingredient(Ingredient $ingredient, FoodRepository $foodRepository, Request $request): Response
     {
         $foodList = $foodRepository->findByIngredient($ingredient);
 
-        $this->addBreadcrumb('food.by_ingredient', 'food_by_ingredient_index');
+        $this->addBreadcrumb('food.ingredients', 'food_ingredients_index');
         $this->addBreadcrumb($ingredient->getName($request->getLocale()));
 
         return $this->render('food/ingredient/ingredient.html.twig', [
@@ -44,17 +45,17 @@ class FoodByIngredientController extends BaseController
         ]);
     }
 
-    #[Route('/food/ingredient/{slugIngredient}/{slugEn:food}', name: 'food_by_ingredient_food')]
+    #[Route('/food/ingredient/{slugIngredient}/{slugEn:food}', name: 'food_ingredients_food')]
     public function food(
         #[MapEntity(expr: 'repository.findOneBySlugEn(slugIngredient)')] Ingredient $ingredient,
         Food $food,
         Request $request
         ): Response
     {
-        $this->addBreadcrumb('food.by_ingredient', 'food_by_cuisine_index');
+        $this->addBreadcrumb('food.ingredients', 'food_cuisines_index');
         $this->addBreadcrumb(
             $ingredient->getName($request->getLocale()),
-            'food_by_ingredient_ingredient', ['slugEn' => $ingredient->getSlugEn()],
+            'food_ingredients_ingredient', ['slugEn' => $ingredient->getSlugEn()],
             isLarge: true
         );
         $this->addBreadcrumb($food->getName($request->getLocale()));
