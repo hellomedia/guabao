@@ -33,6 +33,8 @@
             <div class="card-tags tags">
                 {% for cuisine in food.cuisines %}
                     <span class="tag food-tag tag-{{ cuisine.slugEn }}">{{ cuisine|trans }}</span>
+                {% else %}
+                    <span class="tag food-tag tag-placeholder"></span>
                 {% endfor %}
             </div>
         </div>

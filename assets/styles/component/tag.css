@@ -27,6 +27,14 @@
             border-color: #76884b;
             color: white;
         }
+
+        .tag-placeholder {
+            border: 1px solid transparent;
+            color: transparent;
+        }
+        .tag-placeholder::before {
+            content: "Placeholder";
+        }
     }
 
 }
