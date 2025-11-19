@@ -1,0 +1,25 @@
+@layer content {
+
+    .food-page {
+
+        #rating {
+            @apply text-lg;
+            margin-bottom: 25px;
+            .ranking-icon {
+                @apply text-xl;
+            }
+        }
+
+        #tags {
+            margin-bottom: 30px;
+        }
+
+        #description {
+            @apply text-lg;
+            background-color: lavender;
+            padding: 40px 50px;
+            border-radius: 5px;
+            margin-bottom: 40px;
+        }
+    }
+}

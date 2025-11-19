@@ -1,6 +1,29 @@
 {% extends 'layout/default.html.twig' %}
 
+{% block body_extra_classes %}food-page{% endblock %}
+
+
 {% block content %}
+
+    <div id="rating">
+        {% include 'food/_full_rating.html.twig' %}
+    </div>
+
+    <div id="tags" class="card-tags tags">
+        {% for cuisine in food.cuisines %}
+            <span class="tag food-tag">{{ cuisine|trans }}</span>
+        {% endfor %}
+        {% for tag in food.tags %}
+            <span class="tag food-tag">{{ tag|trans }}</span>
+        {% endfor %}
+    </div>
+
+    {% if food.description is not empty %}
+        <div id="description">
+            {{ food.description|nl2br }}
+        </div>
+    {% endif %}
+    
 
     {% for group in media_groups %}
 

@@ -10,6 +10,9 @@
             @apply text-lg;
             margin-top: 40px;
             margin-bottom: 30px;
+            .ranking-icon {
+                @apply text-xl;
+            }
         }
 
         #description {

@@ -1,0 +1,37 @@
+<table class="ratings">
+    {% if food.loveLevel is not null %}
+        <tr class="rating">
+            <td class="rating-label">{{ 'Love'|trans }}</td>
+            <td class="rating-value">
+                {% if food.isFavourite %}
+                    {% set emoji = '❤️' %}
+                {% else %}
+                    {% set emoji = '⭐' %}
+                {% endif %}
+                {% for level in 1..food.loveLevel.value %}
+                    <span class="ranking-icon">{{ emoji }}</span>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+    {% if food.healthyLevel is not null %}
+        <tr class="rating">
+            <td class="rating-label">{{ 'Healthy'|trans }}</td>
+            <td class="rating-value">
+                {% for level in 1..food.healthyLevel.value %}
+                    <span class="ranking-icon">🥦</span>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+    {% if food.localLevel is not null %}
+        <tr class="rating">
+            <td class="rating-label">{{ 'Local'|trans }}</td>
+            <td class="rating-value">
+                {% for level in 1..food.localLevel.value %}
+                    <span class="ranking-icon">🌻</span>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+</table>

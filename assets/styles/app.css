@@ -50,6 +50,7 @@
 @import "./component/video.css";
 
 @import "./content/trip.css";
+@import "./content/food.css";
 
 /* path processing only works from app.css */
 #foo-container {
