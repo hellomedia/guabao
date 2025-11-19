@@ -35,7 +35,9 @@ class MediaRepository extends ServiceEntityRepository
             ->leftJoin('m.place', 'place')->addSelect('place')
             ->where('pt.country = :country')
             ->setParameter('country', $country)
+            // optimization
             ->leftJoin('m.meal', 'meal')->addSelect('meal')
+            ->leftJoin('meal.placeTags', 'placeTags')->addSelect('placeTags')
             ->orderBy('m.takenAt', 'DESC')
             ->getQuery()
             ->getResult();

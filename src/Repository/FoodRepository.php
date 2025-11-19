@@ -30,6 +30,10 @@ class FoodRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('f')
             ->leftJoin('f.cover', 'cover')
             ->addSelect('cover')
+            ->leftJoin('f.tags', 'tag')
+            ->addSelect('tag')
+            ->leftJoin('f.cuisines', 'c')
+            ->addSelect('c')
             ->orderBy('f.name' . \ucfirst($locale), 'ASC')
             ->getQuery()
             ->getResult();
@@ -54,6 +58,8 @@ class FoodRepository extends ServiceEntityRepository
             ->setParameter('cuisine', $cuisine)
             ->leftJoin('f.cover', 'cover')
             ->addSelect('cover')
+            ->leftJoin('f.tags', 'tag')
+            ->addSelect('tag')
             ->orderBy('f.name' . \ucfirst($locale), 'ASC')
             ->getQuery()
             ->getResult();
@@ -64,9 +70,14 @@ class FoodRepository extends ServiceEntityRepository
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
         return $this->createQueryBuilder('f')
-            ->join('f.tags', 'ft')
+            // filter food on tag
+            ->innerJoin('f.tags', 'ft')
             ->where('ft = :tag')
             ->setParameter('tag', $tag)
+            // for selected food, also get other tags
+            // NB: note the different alias
+            ->leftJoin('f.tags', 'tag')
+            ->addSelect('tag')
             ->leftJoin('f.cover', 'cover')
             ->addSelect('cover')
             ->orderBy('f.name' . \ucfirst($locale), 'ASC')
@@ -82,6 +93,8 @@ class FoodRepository extends ServiceEntityRepository
             ->join('f.ingredients', 'i')
             ->where('i = :ingredient')
             ->setParameter('ingredient', $ingredient)
+            ->leftJoin('f.tags', 'tag')
+            ->addSelect('tag')
             ->leftJoin('f.cover', 'cover')
             ->addSelect('cover')
             ->orderBy('f.name' . \ucfirst($locale), 'ASC')
