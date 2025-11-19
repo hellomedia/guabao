@@ -86,6 +86,11 @@ class Place implements EntityInterface
         return $this->name;
     }
 
+    public function getShortName(): string
+    {
+        return $this->name ?: ('Place #' . $this->id);
+    }
+
     public function setName(?string $name): void
     {
         $this->name = $name;
