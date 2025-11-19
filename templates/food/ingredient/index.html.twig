@@ -12,19 +12,14 @@
 
 	{% include 'food/_top_filters.html.twig' %}
 	
-	<h3 style="margin-bottom: 15px">Favourites</h3>
-	<div class="cards cards-menu">
-		{% for item in favourites_with_counts %}
-			{% include 'food/ingredient/_card.html.twig' with {'ingredient': item.ingredient, 'food_count': item.food_count} %}
-		{% endfor %}
-	</div>
-
-	<h3 style="margin-top: 30px;margin-bottom: 15px;">All</h3>
-	<div class="cards cards-menu">
-		{% for item in others_with_counts %}
-			{% include 'food/ingredient/_card.html.twig' with {'ingredient': item.ingredient, 'food_count': item.food_count} %}
-		{% endfor %}
-	</div>
+    {% for food_type in food_types %}
+        <h3 style="margin-bottom: 15px">{{ food_type.label }}</h3>
+        <div class="cards cards-menu" style="margin-bottom: 20px">
+            {% for item in food_type.items %}
+                {% include 'food/ingredient/_card.html.twig' with {'ingredient': item.ingredient, 'food_count': item.food_count} %}
+            {% endfor %}
+        </div>
+    {% endfor %}
 
 {% endblock %}
 

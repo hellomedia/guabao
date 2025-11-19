@@ -12,19 +12,19 @@ enum FoodType: string implements TranslatableInterface
 
     // Ordering
     // Condition::cases() returns an array of cases, in order of declaration.
-    case CHOCOLATE = 'Chocolate';
+    case VEGETABLE = 'Vegetable';
+    case FRUIT = 'Fruit';
+    case LEGUMES = 'Legumes';
+    case FISH = 'Fish';
+    case MEAT = 'Meat';
     case DAIRY = 'Dairy';
     case EGGS = 'Eggs';
-    case FISH = 'Fish';
-    case FRUIT = 'Fruit';
-    case GRAINS_CEREALS = 'Grains and cereals';
     case HERBS_SPICES = 'Herbs and spices';
-    case LEGUMES = 'Legumes';
-    case MEAT = 'Meat';
+    case GRAINS_CEREALS = 'Grains and cereals';
     case NUTS_SEEDS = 'Nuts and seeds';
     case PASTA_NOODLES = 'Pasta and noodles';
     case SWEETNERS = 'Sweetners';
-    case VEGETABLE = 'Vegetable';
+    case CHOCOLATE = 'Chocolate';
 
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
@@ -42,6 +42,25 @@ enum FoodType: string implements TranslatableInterface
             self::PASTA_NOODLES  => $translator->trans('food.pasta', domain: 'enum', locale: $locale),
             self::SWEETNERS  => $translator->trans('food.sweetners', domain: 'enum', locale: $locale),
             self::VEGETABLE  => $translator->trans('food.vegetable', domain: 'enum', locale: $locale), 
+        };
+    }
+
+    public function getSortOrder(): int
+    {
+        return match ($this) {
+            self::VEGETABLE  => 1,
+            self::FRUIT  => 2,
+            self::LEGUMES  => 3,
+            self::FISH  => 4,
+            self::MEAT  => 5,
+            self::DAIRY  => 6,
+            self::EGGS  => 7,
+            self::HERBS_SPICES  => 8,
+            self::GRAINS_CEREALS  => 9,
+            self::NUTS_SEEDS  => 10,
+            self::PASTA_NOODLES  => 11,
+            self::SWEETNERS  => 12,
+            self::CHOCOLATE  => 13,
         };
     }
 }
