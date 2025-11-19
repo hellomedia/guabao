@@ -3,6 +3,7 @@ dashboard: Dashboard
 trips: Trips
 food:
     index: Food
+    all: All
     by_country: Food by location
     by_cuisine: Food by cuisine
     by_tag: Food by type

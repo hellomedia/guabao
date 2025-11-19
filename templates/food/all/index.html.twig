@@ -1,0 +1,18 @@
+{% extends 'layout/default.html.twig' %}
+
+{% block body_extra_classes %}with-cards{% endblock %}
+
+{% block content %}
+	
+    {% include 'food/_top_filters.html.twig' %}
+
+	<div id="food-list" class="cards cards-ingredient">
+		{% for food in food_list %}
+			{% include 'food/_food_card.html.twig' with {
+				url: path('food_show', {slug: food.slug}) 
+			} %}
+		{% endfor %}
+	</div>
+
+{% endblock %}
+

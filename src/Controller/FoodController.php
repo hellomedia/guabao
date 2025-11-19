@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Food;
 use App\Repository\CuisineRepository;
+use App\Repository\FoodRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,14 +19,14 @@ class FoodController extends BaseController
     }
 
     #[Route('/food', name: 'food_index')]
-    public function index(CuisineRepository $cuisineRepository): Response
+    public function index(FoodRepository $repository): Response
     {
-        $cuisinesWithCounts = $cuisineRepository->findAllWithFoodCount();
+        $foodList = $repository->findAll();
 
-        $this->addBreadcrumb('food.by_cuisine');
+        $this->addBreadcrumb('food.all');
 
-        return $this->render('food/cuisine/index.html.twig', [
-            'cuisines_with_counts' => $cuisinesWithCounts
+        return $this->render('food/all/index.html.twig', [
+            'food_list' => $foodList
         ]);
     }
 
