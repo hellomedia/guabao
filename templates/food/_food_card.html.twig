@@ -2,7 +2,6 @@
     {% set cover = food.cover %}
     {% if cover is not null %}
         <a href="{{ url }}" class="card-image-wrapper">
-            
             <img 
                 src="{{ uploaded_asset(cover)|imagine_filter('thumb_4_3_640') }}"
                 srcset="{{ uploaded_asset(cover)|imagine_filter('thumb_4_3_640') }} 640w,
@@ -28,11 +27,16 @@
         </h3>
 
         <div class="card-bottom">
+            <div class="card-ratings">
+                {% include 'food/_rating.html.twig' %}
+            </div>
             <div class="card-tags tags">
                 {% for tag in food.tags %}
-                    <span class="tag trip-tag tag-{{ tag.slugEn }}">{{ tag|trans }}</span>
+                    <span class="tag food-tag tag-{{ tag.slugEn }}">{{ tag|trans }}</span>
                 {% endfor %}
-                TODO
+                {% for cuisine in food.cuisines %}
+                    <span class="tag food-tag tag-{{ cuisine.slugEn }}">{{ cuisine|trans }}</span>
+                {% endfor %}
             </div>
         </div>
 

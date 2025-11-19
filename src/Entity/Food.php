@@ -84,6 +84,9 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     #[ORM\ManyToMany(targetEntity: Food::class, mappedBy: 'similar')]
     private Collection $similarTo;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isFavourite = null;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -392,5 +395,17 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
         });
 
         return $groups;
+    }
+
+    public function isFavourite(): ?bool
+    {
+        return $this->isFavourite;
+    }
+
+    public function setIsFavourite(?bool $isFavourite): static
+    {
+        $this->isFavourite = $isFavourite;
+
+        return $this;
     }
 }

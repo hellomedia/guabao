@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -106,6 +107,8 @@ class FoodCrudController extends AbstractCrudController
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@admin/field/ingredients.html.twig');
 
+        yield BooleanField::new('isFavourite', 'Favourite')
+            ->renderAsSwitch(false);
         yield ChoiceField::new('loveLevel',' Love');
         yield ChoiceField::new('healthyLevel', 'Healthy');
         yield ChoiceField::new('localLevel', 'Local');

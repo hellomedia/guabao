@@ -1,0 +1,10 @@
+@layer components {
+    .card-food {
+        .card-ratings {
+            margin-bottom: 10px;
+        }
+        .card-bottom {
+            padding-top: 5px;
+        }
+    }
+}

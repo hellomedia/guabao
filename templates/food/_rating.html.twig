@@ -1,0 +1,16 @@
+<table class="ratings">
+    <tr class="rating">
+        <td class="rating-value">
+            {% if food.loveLevel is not null %}
+                {% if food.isFavourite %}
+                    {% set emoji = '❤️' %}
+                {% else %}
+                    {% set emoji = '⭐' %}
+                {% endif %}
+                {% for level in 1..food.loveLevel.value %}
+                    <span class="ranking-icon">{{ emoji }}</span>
+                {% endfor %}
+            {% endif %}
+        </td>
+    </tr>
+</table>
