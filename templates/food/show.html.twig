@@ -1,31 +1,24 @@
 {% extends 'layout/default.html.twig' %}
 
-{% block title %}
-	{{ food }}
-{% endblock %}
-
 {% block content %}
-	{% for media in food.medias %}
-		<img
-            src="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }}"
-            srcset="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }} 640w,
-                {{ uploaded_asset(media)|imagine_filter('thumb_4_3_1280') }} 1280w"
-            sizes="640px"
-			width="640"
-			height="480"
-		/>
 
-		{% for tags in media.tags %}
-			{{ tags|trans }}
-		{% endfor %}
+    {% for group in media_groups %}
 
-		<div>
-			{{ media.takenAt|format('Y-m-D') }}
-		</div>
+        <h3>
+            {% if group.type == 'meal' %}
+                {{ group.meal }}
+            {% else %}
+                {{ group.date|format_date('long') }}
+            {% endif %}
+            -
+            {% for placeTag in group.placeTags %}
+                {{ placeTag|trans }}
+            {% endfor %}
+        </h3>
 
-		<div>
-			{{ media.place }}
-		</div>
+        {% include 'food/_gallery.html.twig' with {medias: group.medias } %}
+
 	{% endfor %}
 
 {% endblock %}
+

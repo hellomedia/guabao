@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Food;
-use App\Repository\CuisineRepository;
 use App\Repository\FoodRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +35,7 @@ class FoodController extends BaseController
         $this->addBreadcrumb($food->getName($request->getLocale()));
 
         return $this->render('food/show.html.twig', [
-            'food' => $food
+            'media_groups' => $food->getMediaGroups(),
         ]);
     }
 }
