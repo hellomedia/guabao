@@ -18,11 +18,31 @@
         {% endfor %}
     </div>
 
+    <div id="ingredients" class="card-tags tags">
+        {% for ingredient in food.ingredients %}
+            <span class="tag food-tag">{{ ingredient|trans }}</span>
+        {% endfor %}
+    </div>
+
+    {% if food.similar is not empty %}
+        <div id="similar-foods">
+            <span class="similar-foods-title">Similar foods:</span>
+            {% for similar_food in food.similar %}
+                <span class="similar">
+                    <a href="{{ path('food_show', {slug: similar_food.slug }) }}"/>{{ similar_food }}</a>
+                </span>
+                {{ not loop.last ? ', ' }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
     {% if food.description is not empty %}
         <div id="description">
             {{ food.description|nl2br }}
         </div>
     {% endif %}
+
+
     
 
     {% for group in media_groups %}

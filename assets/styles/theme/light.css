@@ -17,7 +17,7 @@
 
         /* BACKGROUND COLOR */
         --color-primary-background: var(--color-white);
-        --color-grid-background: var(--color-gray-200);
+        --color-grid-background: lavender; /* var(--color-gray-200); */
         --color-secondary-background: var(--color-white);
         --color-tertiary-background: var(--color-gray-100);
 
