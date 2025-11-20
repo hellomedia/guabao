@@ -147,7 +147,14 @@ class BotDetector
             return false;
         }
 
-        if ($form->get('plainPassword')->getData() === null) {
+        if ($form->get('plainPassword')->getData() == null) {
+            $this->requestStack->getSession()->set('type', 'r');
+
+            return true;
+        }
+
+        // Honeypot
+        if ($form->get('occupation')->getData() != null) {
             $this->requestStack->getSession()->set('type', 'r');
 
             return true;
