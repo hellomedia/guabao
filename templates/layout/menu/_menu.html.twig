@@ -14,7 +14,7 @@
 				</div>
 				<div id="main-menu-items">
 					<a href="{{ path('trip_index') }}"
-						class="main-menu-item {{ app.current_route starts with 'trip' ? 'current' }}"
+						class="main-menu-item {{ app.current_route starts with 'trip' or app.current_route starts with 'child_trip' ? 'current' }}"
 						data-action="mouseenter->menu-hover#enter mouseleave->menu-hover#leave">
 						{{ 'Trips'|trans }}
 					</a>
