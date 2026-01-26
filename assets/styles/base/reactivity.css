@@ -1,0 +1,25 @@
+@layer base {
+
+    html[data-turbo-preview],
+    html[data-turbo-loading] {
+        cursor: progress;
+        opacity: 0.8;
+    }
+
+    /* Make clickable elements feel reactive on mobile */
+    /* mild enough that desktop users barely notice it, but mobile users immediately feel it. */
+    :where(a, button, [role="button"], input[type="submit"], input[type="button"]) {
+        transition: transform 120ms ease, opacity 120ms ease, background-color 120ms ease;
+    }
+
+    :where(a, button, [role="button"], input[type="submit"], input[type="button"]):active {
+        transform: translateY(1px) scale(0.98);
+        opacity: 0.9;
+    }
+
+    /* On iOS Safari, avoid ugly highlight or delayed visual response if nothing changes. */
+    :where(a, button, [role="button"]) {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+}

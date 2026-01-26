@@ -18,6 +18,7 @@
 @import "./base/layout.css";
 @import "./base/mobile-focus-layout.css";
 @import "./base/view-transition.css";
+@import "./base/reactivity.css";
 
 @import "./form/form.css";
 @import "./form/alert.css";

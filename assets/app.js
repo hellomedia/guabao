@@ -19,6 +19,10 @@ import * as Turbo from '@hotwired/turbo';
 // which forces us to make the controllers eager for now.
 // Turbo.session.drive = false;
 
+
+// Lower turbo progress bar appearance delay to feel more reactive
+Turbo.setProgressBarDelay(100)
+
 // Comment id: fGroZT
 // Used for detecting session changes (login if configured so, logout, role change, server clearing sessions)
 // and triggering a full page reload - instead of partial content update - to take the new session into account
