@@ -61,42 +61,78 @@
     }
 
     .mobile-menu-item {
-        @apply flex;
-        @apply border-l-4;
-        @apply border-transparent;
-        @apply py-2;
-        @apply pr-4;
-        @apply pl-3;
-        @apply text-base;
-        @apply font-medium;
+        display: flex;
+
+        border-left-width: 4px;
+        border-left-style: solid;
+        border-left-color: transparent;
+
+        padding-top: calc(var(--spacing) * 4);  
+        padding-bottom: calc(var(--spacing) * 4);
+        padding-right: calc(var(--spacing) * 4);
+        padding-left: calc(var(--spacing) * 5); 
+
+        font-size: var(--text-base);
+        font-weight: var(--font-weight-medium);
+
         color: var(--color-mobile-menu-text);
-        @apply hover:border-gray-300;
-        @apply hover:bg-gray-50;
-        @apply hover:text-gray-800;
 
-        &.active {
-            border-color: var(--color-mobile-menu-active-border);
-            background-color: var(--color-mobile-menu-active-background);
-            color: var(--color-mobile-menu-active-text);
-        }
+        transition:
+            background-color 0.12s ease,
+            color 0.12s ease,
+            transform 0.12s ease,
+            opacity 0.12s ease,
+            border-color 0.12s ease;
     }
 
+    /* hover */
+    .mobile-menu-item:hover {
+        border-left-color: var(--color-gray-300);
+        background-color: var(--color-gray-50);
+        color: var(--color-gray-800);
+    }
+
+    /* current route */
+    .mobile-menu-item.current {
+        border-left-color: var(--color-mobile-menu-active-border);
+        background-color: var(--color-mobile-menu-active-background);
+        color: var(--color-mobile-menu-active-text);
+    }
+
+    /* press feedback */
+    .mobile-menu-item:active {
+        transform: scale(0.96);
+        opacity: 0.85;
+    }
+
+    /* keep current state dominant */
+    .mobile-menu-item.current:active {
+        transform: scale(0.98);
+        opacity: 0.9;
+    }
+
+    /* icon */
     .mobile-menu-item-icon {
-        @apply w-9;
-        @apply pr-3;
+        width: calc(var(--spacing) * 10);
+        padding-right: calc(var(--spacing) * 4);
+        /* if padding changes, change width accordingly to keep icon height */
     }
 
+    /* menu button wrapper */
     /* can have multiple buttons - one in top menu and 1 in bottom menu */
     .mobile-menu-button {
-        @apply relative;
-        @apply inline-flex;
-        @apply items-center;
-        @apply justify-center;
-        @apply rounded-md;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-md);
     }
 
+    /* svg animation */
     .mobile-menu-path {
-        transition: d 0.5s cubic-bezier(0.42, 0, 0.58, 1), transform 0.5s ease-in-out;
+        transition:
+            d 0.5s cubic-bezier(0.42, 0, 0.58, 1),
+            transform 0.5s ease-in-out;
         transform-origin: center;
         view-transition-name: mobile-menu-button;
     }

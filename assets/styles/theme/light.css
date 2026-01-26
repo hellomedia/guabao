@@ -3,10 +3,11 @@
     .light {
 
         --color-theme: var(--color-purple-dark);
-        --color-theme-lighter: #9c664a;
-        --color-theme-lighter2: var(--color-brown-light);
-        --color-theme-lightest: #dec6ba;
-        --color-theme-darker: #684431;
+        --color-theme-lighter: #ca7ad1;
+        --color-theme-lighter2: #ca8fcf;
+        --color-theme-lighter3: #dbbade;
+        --color-theme-lightest: #edd3ef;
+        --color-theme-darker: #633168;
 
         /* TEXT COLOR */
         --color-highlight-text: var(--color-gray-900);
