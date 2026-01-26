@@ -17,7 +17,7 @@ import * as Turbo from '@hotwired/turbo';
 // NB: At the moment, there seems to be a bug with turbo drive
 // with stimulus lazy controllers getting only downloaded on full page load, not on turbo navigation
 // which forces us to make the controllers eager for now.
-// Turbo.session.drive = false;
+Turbo.session.drive = false;
 
 
 // Lower turbo progress bar appearance delay to feel more reactive
