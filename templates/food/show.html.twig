@@ -41,14 +41,14 @@
 
     <div id="tags" class="card-tags tags">
         {% for cuisine in food.cuisines %}
-            <a class="tag food-tag"
+            <a class="tag4 tag--hiking-trip tag--clickable tag--large"
                 href="{{ path('food_cuisines_cuisine', {slugEn: cuisine.slugEn}) }}"
             >
                 {{ cuisine|trans }}
             </a>
         {% endfor %}
         {% for tag in food.tags %}
-            <a class="tag food-tag"
+            <a class="tag4 tag--type tag--clickable tag--large"
                 href="{{ path('food_tags_tag', {slugEn: tag.slugEn}) }}"
             >
                 {{ tag|trans }}
@@ -58,7 +58,7 @@
 
     <div id="ingredients" class="card-tags tags">
         {% for ingredient in food.ingredients %}
-            <a class="tag food-tag"
+            <a class="tag4 tag--ingredient tag--clickable tag--large"
                 href="{{ path('food_ingredients_ingredient', {slugEn: ingredient.slugEn}) }}"
             >
                 {{ ingredient|trans }}
