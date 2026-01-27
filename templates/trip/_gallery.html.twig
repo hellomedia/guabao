@@ -36,6 +36,7 @@
                             {# set default src to 4_3 thumb. If default is square thumb, 4_3 is scaled up #}
                             src="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }}"
                             class="rounded shadow-sm"
+                            {{ story_position ?? 0 > 3 ? 'loading="lazy"' }}
                             {# aspect-ratio set in CSS #}
                         />
                     </picture>
@@ -62,6 +63,7 @@
                         <img 
                             src="{{ uploaded_asset(media)|imagine_filter('thumb_large') }}"
                             class="rounded shadow-sm"
+                            {{ story_position ?? 0 > 3 ? 'loading="lazy"' }}
                             {# aspect-ratio set in CSS #}
                         />
                     </picture> 
@@ -75,6 +77,7 @@
                             (min-width: 1200px) 207px, {# final grid item width with 6 columns #}
                             432px" {# default #}
                         class="rounded shadow-sm"
+                        {{ story_position ?? 0 > 3 ? 'loading="lazy"' }}
                         {# aspect-ratio set in CSS #}
                     />
                 {% endif %}

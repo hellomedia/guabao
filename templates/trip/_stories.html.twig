@@ -7,6 +7,7 @@
     </style>
 	<div id="stories">
 		{% for story in stories %}
+            {% set story_position = loop.index %}
             {% if story.display %}
                 <div class="story {{ not story.showTitle ? 'no-title' }}">
                     {% if story.showTitle %}
