@@ -2,6 +2,7 @@
 
 namespace Controlroom\Form\Type;
 
+use App\Entity\Place;
 use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
 use Doctrine\ORM\EntityRepository;
@@ -30,7 +31,7 @@ class MediaBulkEditTagsType extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'autocomplete' => true,
-                // 'by_reference' => false, // not needed here. Form is not tied to a class, we handle it by hand in mediaController::_importImages
+                // 'by_reference' => false, // not needed here. Form is not tied to a class, we handle it by hand in MediuBulkEditController
             ])
             ->add('tags', EntityType::class, [
                 'class' => MediaTag::class,
@@ -41,7 +42,19 @@ class MediaBulkEditTagsType extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'autocomplete' => true,
-                // 'by_reference' => false, // not needed here. Form is not tied to a class, we handle it by hand in mediaController::_importImages
+                // 'by_reference' => false, // not needed here. Form is not tied to a class, we handle it by hand in MediuBulkEditController
+        ])
+            ->add('place', EntityType::class, [
+                'class' => Place::class,
+                'query_builder' => function (EntityRepository $repo) use ($trip): QueryBuilder {
+                    return $repo->createQueryBuilder('p')
+                        ->where('p.country IN (:countries)')
+                        ->setParameter('countries', $trip->getCountries())
+                        ->orderBy('p.name', 'ASC');
+                },
+                'required' => false,
+                'multiple' => false,
+                'autocomplete' => true,
             ])
         ;
     }

@@ -215,6 +215,7 @@ class MediaBulkEditController extends BaseController
     {
         $tags = $form['tags']->getData();
         $placeTags = $form['placeTags']->getData();
+        $place = $form['place']->getData();
 
         foreach ($story->getMedias() as $media) {
             foreach ($tags as $tag) {
@@ -223,6 +224,9 @@ class MediaBulkEditController extends BaseController
             foreach ($placeTags as $placeTag) {
                 $media->addPlaceTag($placeTag);
             }
+            if ($place) {
+                $media->setPlace($place);
+            }
         }
     }
 
@@ -230,6 +234,7 @@ class MediaBulkEditController extends BaseController
     {
         $tags = $form['tags']->getData();
         $placeTags = $form['placeTags']->getData();
+        $place = $form['place']->getData();
 
         foreach ($story->getMedias() as $media) {
             foreach ($tags as $tag) {
@@ -237,6 +242,9 @@ class MediaBulkEditController extends BaseController
             }
             foreach ($placeTags as $placeTag) {
                 $media->removePlaceTag($placeTag);
+            }
+            if ($place && $media->getPlace() == $place) {
+                $media->setPlace(null);
             }
         }
     }
