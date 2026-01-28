@@ -286,6 +286,16 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
         return $this;
     }
 
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getDisplayableMedias(): Collection
+    {
+        return $this->medias->filter(function ($media) {
+            return $media->getShowInFood();
+        });
+    }
+
     public function removeMedia(Media $media): static
     {
         if ($this->medias->removeElement($media)) {
@@ -333,7 +343,7 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     /**
      * Grouping logic for images in the food details page
      * 
-     * Images are group by date and by meal, with meal having precedence
+     * Images are grouped by date and by meal, with meal having precedence
      * 
      * @return array<int, array{
      *     type: 'meal'|'date',
@@ -349,7 +359,7 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     {
         $groups = [];
 
-        foreach ($this->getMedias() as $media) {
+        foreach ($this->getDisplayableMedias() as $media) {
             $meal = $media->getMeal();
 
             if ($meal !== null) {
