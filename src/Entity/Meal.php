@@ -58,7 +58,7 @@ class Meal implements EntityInterface
      */
     public function __toString()
     {
-        return  'Meal' . ' ' . ($this->place ?: $this->placeTags?->first()) . ' - ' . $this->enjoyedAt->format('d M Y H\h');
+        return  'Meal' . ' @ ' . ($this->place ?: $this->placeTags?->first()) . ' - ' . $this->enjoyedAt->format('d M Y H\h');
     }
 
     public function getName(): string
@@ -68,7 +68,7 @@ class Meal implements EntityInterface
 
     public function getShortName(): string
     {
-        return 'Meal' . ' ' . ($this->place?->getShortName() ?: $this->placeTags?->first());
+        return 'Meal' . ' @ ' . ($this->place?->getShortName() ?: $this->placeTags?->first());
     }
 
     public function getId(): ?int

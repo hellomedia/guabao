@@ -8,6 +8,7 @@
     <style>
         .food-page {
             .media-group-title {
+                width: 100%;
                 background: lavender;
                 padding: 20px 30px;
                 border-radius: 5px;
@@ -21,18 +22,24 @@
             }
             .date-location {
                 display: flex;
-                gap: 30px;
-                align-items: center;
-                justify-content: space-between;
+                gap: 10px;
+                justify-content: center;
+                flex-direction: column;
                 svg {
                     color: white;
-                    height: 35px;
+                    width: 25px;
                     flex-shrink: 0;
                 }
             }
             @media (width > 600px) {
+                .media-group-title {
+                    width: auto;
+                }
                 .date-location {
-                    gap: 50px;
+                    width: 100%;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    gap: 70px;
                     svg {
                         width: 30px;
                     }
