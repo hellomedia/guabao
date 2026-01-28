@@ -139,7 +139,7 @@ class MediaBulkAddType extends AbstractType
                 // 'by_reference' => false, // not needed here. Form is not tied to a class, we handle it by hand in mediaController::_importImages
         ])
             ->add('showInFood', CheckboxType::class, [
-                'label'    => 'show in food',
+                'label'    => 'show in food meal',
                 'required' => false,
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch

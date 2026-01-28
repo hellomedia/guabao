@@ -111,7 +111,7 @@ class MediaQuickEditType extends AbstractType
             ->add('tags', MediaTagAutocompleteField::class)
             ->add('food', FoodAutocompleteField::class)
             ->add('showInFood', CheckboxType::class, [
-                'label'    => 'show in food',
+                'label'    => 'show in food meal',
                 'required' => false,
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
