@@ -21,18 +21,28 @@
             }
             .date-location {
                 display: flex;
-                gap: 40px;
-                align-items: end;
+                gap: 30px;
+                align-items: center;
                 justify-content: space-between;
                 svg {
                     color: white;
-                    width: 30px;
+                    height: 35px;
+                    flex-shrink: 0;
+                }
+            }
+            @media (width > 600px) {
+                .date-location {
+                    gap: 50px;
+                    svg {
+                        width: 30px;
+                    }
                 }
             }
             .date-location-date, 
             .date-location-location {
                 display: flex;
                 gap: 10px;
+                align-items: center;
             }
             .gallery {
                 margin-bottom: 20px;
