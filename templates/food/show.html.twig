@@ -20,14 +20,19 @@
                 }
             }
             .date-location {
-                display: inline-flex;
-                gap: 20px;
+                display: flex;
+                gap: 40px;
                 align-items: end;
                 justify-content: space-between;
                 svg {
                     color: white;
                     width: 30px;
                 }
+            }
+            .date-location-date, 
+            .date-location-location {
+                display: flex;
+                gap: 10px;
             }
             .gallery {
                 margin-bottom: 20px;
@@ -89,15 +94,17 @@
 
             <div class="media-group-title">
                 <h4 class="date-location">
-                    <div>
+                    <div class="date-location-date">
                         <twig:ux:icon name="calendar" />
-                        {{ group.date|format_date('long') }}
+                        <div>{{ group.date|format_date('long') }}</div>
                     </div>
-                    <div>
+                    <div class="date-location-location">
                         <twig:ux:icon name="location" />
-                        {% for placeTag in group.placeTags[:1] %}
-                            {{ placeTag|trans }}, {{ placeTag.country }}
-                        {% endfor %}
+                        <div>
+                            {% for placeTag in group.placeTags[:1] %}
+                                {{ placeTag|trans }}, {{ placeTag.country }}
+                            {% endfor %}
+                        </div>
                     </div>
                 </h4>
                 {% if group.type == 'meal' %}
