@@ -400,7 +400,7 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
                 ];
 
                 // if it's a meal, when the group is created,
-                // add *all* meal medias
+                // add *all* displayable meal medias
                 // even those not tagged for this food
                 if ($type == 'meal') {
                     foreach ($meal->getDisplayableMedias() as $m) {
