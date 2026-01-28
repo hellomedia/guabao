@@ -130,6 +130,16 @@ class Meal implements EntityInterface
         return $this;
     }
 
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getDisplayableMedias(): Collection
+    {
+        return $this->medias->filter(function ($media) {
+            return $media->getShowInFood();
+        });
+    }
+
     public function getPlace(): ?Place
     {
         return $this->place;

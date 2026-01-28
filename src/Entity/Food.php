@@ -345,6 +345,13 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
      * 
      * Images are grouped by date and by meal, with meal having precedence
      * 
+     * ie: 
+     *   If a food image belongs to a meal, it is grouped in meal.
+     *   If a food image does not belong to a meal, it is grouped by date.
+     * 
+     * If a meal contains 1 image tagged with the food,
+     * all images from the meal are included, even those not tagged with the food.
+     * 
      * @return array<int, array{
      *     type: 'meal'|'date',
      *     meal: ?Meal,
@@ -391,9 +398,21 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
                     'placeTags' => $placeTags,
                     'sort'   => $groupDate?->getTimestamp() ?? 0,
                 ];
+
+                // if it's a meal, when the group is created,
+                // add *all* meal medias
+                // even those not tagged for this food
+                if ($type == 'meal') {
+                    foreach ($meal->getDisplayableMedias() as $m) {
+                        $groups[$key]['medias'][] = $m;
+                    }
+                }
             }
 
-            $groups[$key]['medias'][] = $media;
+            // if not a meal, add image one-by-one to the group
+            if ($type != 'meal') {
+                $groups[$key]['medias'][] = $media;
+            }
         }
 
         // Sort groups chronologically
