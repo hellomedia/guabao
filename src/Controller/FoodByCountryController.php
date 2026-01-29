@@ -20,7 +20,7 @@ class FoodByCountryController extends BaseController
         $this->addBreadcrumb('food.index', 'food_index');
     }
 
-    #[Route('/food/country', name: 'food_countries_index')]
+    #[Route('/food/meals', name: 'food_countries_index')]
     public function index(CountryRepository $countryRepository): Response
     {
         $countriesWithCounts = $countryRepository->findAllWithFoodCount();
@@ -32,7 +32,7 @@ class FoodByCountryController extends BaseController
         ]);
     }
 
-    #[Route('/food/country/{slugEn:country}', name: 'food_countries_country')]
+    #[Route('/food/meals/{slugEn:country}', name: 'food_countries_country')]
     public function country(Country $country, MediaRepository $repository, Request $request): Response
     {
         $mediaGroups = $repository->findFoodMediasByCountry($country);
@@ -46,7 +46,7 @@ class FoodByCountryController extends BaseController
         ]);
     }
 
-    #[Route('/food/country/{slugCountry}/{slugEn:food}', name: 'food_countries_food')]
+    #[Route('/food/meals/{slugCountry}/{slugEn:food}', name: 'food_countries_food')]
     public function food(
         #[MapEntity(expr: 'repository.findOneBySlugEn(slugCountry)')] Country $country,
         Food $food,
