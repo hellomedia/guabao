@@ -131,4 +131,30 @@ class TripRepository extends ServiceEntityRepository
         // build expected array collection of place tags
         return new ArrayCollection(array_map(fn($row) => $row['pt'], $query->getResult()));
     }
+
+    public function findTopSlowTravelTrips(): Array
+    {
+        return $this->createQueryBuilder('t')
+            ->join('t.tags', 'tt')
+            ->addSelect('tt')
+            ->join('t.siteHighlights', 'h')
+            ->where('h.nameEn = :favouriteTrips')
+            ->orderBy('t.startedAt', 'DESC')
+            ->setParameter('favouriteTrips', 'Favourite trips')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findTopHikingTrips(): Array
+    {
+        return $this->createQueryBuilder('t')
+            ->join('t.tags', 'tt')
+            ->addSelect('tt')
+            ->join('t.siteHighlights', 'h')
+            ->where('h.nameEn = :favouriteHikingTrips')
+            ->orderBy('t.startedAt', 'DESC')
+            ->setParameter('favouriteHikingTrips', 'Favourite hiking trips')
+            ->getQuery()
+            ->getResult();
+    }
 }
