@@ -153,7 +153,7 @@ class TripRepository extends ServiceEntityRepository
             ->join('t.siteHighlights', 'h')
             ->where('h.nameEn = :favouriteHikingTrips')
             ->orderBy('t.startedAt', 'DESC')
-            ->setParameter('favouriteHikingTrips', 'Favourite hiking trips')
+            ->setParameter('favouriteHikingTrips', 'Favourite hiking')
             ->getQuery()
             ->getResult();
     }
