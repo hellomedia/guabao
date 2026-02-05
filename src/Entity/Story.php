@@ -171,6 +171,22 @@ class Story implements LocalizedNameInterface, LocalizedSlugInterface, EntityInt
     }
 
     /**
+     * Auto cover = first image
+     */
+    public function getCover(): ?Media
+    {
+        $images = $this->medias->filter(function(Media $media) {
+            return $media->isImage() && !$media->is360();
+        });
+
+        if ($images->isEmpty()) {
+            return null;
+        }
+
+        return $images->first();
+    }
+
+    /**
      * @return Collection<int, Media>
      */
     public function getDisplayable360s(): Collection

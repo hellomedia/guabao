@@ -27,11 +27,9 @@
             </a>
         </h3>
 
-        {% if (short_version ?? false) == false %}
-            <div class="card-period">
-                {{ trip.period }}   
-            </div>
-        {% endif %}
+        <div class="card-period">
+            {{ trip.period }}   
+        </div>
 
         <div class="card-duration">
             {{ trip|tripDuration }}   
