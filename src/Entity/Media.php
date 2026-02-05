@@ -162,6 +162,9 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     #[ORM\Column(options: ['default' => false])]
     private bool $isPrimaryVideo = false;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isStoryCover = null;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -558,6 +561,18 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     public function setIsPrimaryVideo(bool $isPrimaryVideo): static
     {
         $this->isPrimaryVideo = $isPrimaryVideo;
+
+        return $this;
+    }
+
+    public function isStoryCover(): ?bool
+    {
+        return $this->isStoryCover;
+    }
+
+    public function setIsStoryCover(?bool $isStoryCover): static
+    {
+        $this->isStoryCover = $isStoryCover;
 
         return $this;
     }

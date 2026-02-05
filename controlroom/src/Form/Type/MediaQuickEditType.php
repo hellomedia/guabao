@@ -75,6 +75,12 @@ class MediaQuickEditType extends AbstractType
                 'row_attr' => ['class' => 'form-switch'], // for switch
                 'attr'     => ['class' => 'form-check-input'], // for switch
             ])
+            ->add('isStoryCover', CheckboxType::class, [
+                'label' => 'story cover',
+                'required' => false,
+                'row_attr' => ['class' => 'form-switch'], // for switch
+                'attr'     => ['class' => 'form-check-input'], // for switch
+            ])
             ->add('story', StoryAutocompleteField::class, [
                 'required' => false,
                 // Passing extra options to ajax query builder
