@@ -125,7 +125,7 @@ class FoodRepository extends ServiceEntityRepository
             ->join('f.siteHighlights', 'h')
             ->where('h.nameEn = :highlightName')
             ->orderBy('f.nameEn', 'ASC')
-            ->setParameter('highlightName', 'Favourite food discoveries')
+            ->setParameter('highlightName', 'Favourite discoveries')
             ->getQuery()
             ->getResult();
     }
