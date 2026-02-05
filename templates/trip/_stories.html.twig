@@ -9,7 +9,7 @@
 		{% for story in stories %}
             {% set story_position = loop.index %}
             {% if story.display %}
-                <div class="story {{ not story.showTitle ? 'no-title' }}">
+                <div id="{{ story.slugEn }}" class="story {{ not story.showTitle ? 'no-title' }}">
                     {% if story.showTitle %}
                         <h2>{{ story }}</h2>
                     {% endif %}

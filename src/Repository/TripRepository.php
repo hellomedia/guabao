@@ -138,9 +138,9 @@ class TripRepository extends ServiceEntityRepository
             ->join('t.tags', 'tt')
             ->addSelect('tt')
             ->join('t.siteHighlights', 'h')
-            ->where('h.nameEn = :favouriteTrips')
+            ->where('h.nameEn = :highlightName')
             ->orderBy('t.startedAt', 'DESC')
-            ->setParameter('favouriteTrips', 'Favourite trips')
+            ->setParameter('highlightName', 'Favourite trips')
             ->getQuery()
             ->getResult();
     }
@@ -151,9 +151,9 @@ class TripRepository extends ServiceEntityRepository
             ->join('t.tags', 'tt')
             ->addSelect('tt')
             ->join('t.siteHighlights', 'h')
-            ->where('h.nameEn = :favouriteHikingTrips')
+            ->where('h.nameEn = :highlightName')
             ->orderBy('t.startedAt', 'DESC')
-            ->setParameter('favouriteHikingTrips', 'Favourite hiking')
+            ->setParameter('highlightName', 'Favourite hiking')
             ->getQuery()
             ->getResult();
     }

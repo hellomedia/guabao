@@ -53,6 +53,12 @@ class SiteHighlight implements LocalizedNameInterface, EntityInterface
     #[ORM\ManyToMany(targetEntity: Meal::class, inversedBy: 'siteHighlights')]
     private Collection $meals;
 
+    /**
+     * @var Collection<int, Food>
+     */
+    #[ORM\ManyToMany(targetEntity: Food::class, inversedBy: 'siteHighlights')]
+    private Collection $foods;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
@@ -60,6 +66,7 @@ class SiteHighlight implements LocalizedNameInterface, EntityInterface
         $this->trips = new ArrayCollection();
         $this->places = new ArrayCollection();
         $this->meals = new ArrayCollection();
+        $this->foods = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -183,6 +190,30 @@ class SiteHighlight implements LocalizedNameInterface, EntityInterface
     public function removeMeal(Meal $meal): static
     {
         $this->meals->removeElement($meal);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Food>
+     */
+    public function getFoods(): Collection
+    {
+        return $this->foods;
+    }
+
+    public function addFood(Food $food): static
+    {
+        if (!$this->foods->contains($food)) {
+            $this->foods->add($food);
+        }
+
+        return $this;
+    }
+
+    public function removeFood(Food $food): static
+    {
+        $this->foods->removeElement($food);
 
         return $this;
     }

@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
+use App\Entity\Interface\LocalizedSlugInterface;
 use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
 use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
+use App\Entity\Trait\LocalizedSlugTrait;
 use App\Repository\StoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -16,9 +18,11 @@ use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: StoryRepository::class)]
-class Story implements LocalizedNameInterface, EntityInterface
+class Story implements LocalizedNameInterface, LocalizedSlugInterface, EntityInterface
 {
     use LocalizedNameTrait;
+
+    use LocalizedSlugTrait;
 
     use LocalizedDescriptionTrait;
 
@@ -26,6 +30,13 @@ class Story implements LocalizedNameInterface, EntityInterface
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    // Override trait to make nullable (existing data)
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $slugFr = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $slugEn = null;
 
     #[Assert\Length(max: 5000)]
     #[ORM\Column(type: Types::TEXT, nullable: true)]

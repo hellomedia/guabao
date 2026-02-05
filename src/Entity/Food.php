@@ -87,6 +87,12 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     #[ORM\Column(nullable: true)]
     private ?bool $isFavourite = null;
 
+    /**
+     * @var Collection<int, SiteHighlight>
+     */
+    #[ORM\ManyToMany(targetEntity: SiteHighlight::class, mappedBy: 'foods')]
+    private Collection $siteHighlights;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -96,6 +102,7 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
         $this->medias = new ArrayCollection();
         $this->similar = new ArrayCollection();
         $this->similarTo = new ArrayCollection();
+        $this->siteHighlights = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -434,6 +441,33 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, EntityInte
     public function setIsFavourite(?bool $isFavourite): static
     {
         $this->isFavourite = $isFavourite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SiteHighlight>
+     */
+    public function getSiteHighlights(): Collection
+    {
+        return $this->siteHighlights;
+    }
+
+    public function addSiteHighlight(SiteHighlight $siteHighlight): static
+    {
+        if (!$this->siteHighlights->contains($siteHighlight)) {
+            $this->siteHighlights->add($siteHighlight);
+            $siteHighlight->addFood($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSiteHighlight(SiteHighlight $siteHighlight): static
+    {
+        if ($this->siteHighlights->removeElement($siteHighlight)) {
+            $siteHighlight->removeFood($this);
+        }
 
         return $this;
     }

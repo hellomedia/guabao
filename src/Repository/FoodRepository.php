@@ -118,4 +118,15 @@ class FoodRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findTopDiscoveries(): array
+    {
+        return $this->createQueryBuilder('f')
+            ->join('f.siteHighlights', 'h')
+            ->where('h.nameEn = :highlightName')
+            ->orderBy('f.nameEn', 'ASC')
+            ->setParameter('highlightName', 'Favourite food discoveries')
+            ->getQuery()
+            ->getResult();
+    }
 }

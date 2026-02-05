@@ -4,6 +4,7 @@ namespace App\Twig\Runtime;
 
 use App\Entity\Food;
 use App\Entity\Interface\LocalizedNameInterface;
+use App\Entity\Story;
 use App\Entity\Trip;
 use Pack\Media\Entity\Interface\UploadedAssetEntityInterface;
 use Pack\Media\Helper\UploadHelper;
@@ -51,20 +52,28 @@ class AppExtensionRuntime implements RuntimeExtensionInterface
     public function getPath(mixed $item, array $parameters = [], ?int $referenceType = Router::ABSOLUTE_PATH): string
     {
         if ($item instanceof Trip) {
-            if ($item->isTopLevelTrip()) {
-                return $this->_getTopLevelTripPath($item, $parameters, $referenceType);
-            }
-            if ($item->isTripLeg()) {
-                return $this->_getTripLegPath($item, $parameters, $referenceType);
-            }
-
+            return $this->_getTripPath($item, $parameters, $referenceType);
         }
 
         if ($item instanceof Food) {
             return $this->_getFoodPath($item, $parameters, $referenceType);
         }
 
+        if ($item instanceof Story) {
+            return $this->_getStoryPath($item, $parameters, $referenceType);
+        }
+
         return $this->router->generate($item, $parameters, $referenceType);
+    }
+
+    private function _getTripPath(Trip $trip, array $parameters, int $referenceType): string 
+    {
+        if ($trip->isTopLevelTrip()) {
+            return $this->_getTopLevelTripPath($trip, $parameters, $referenceType);
+        }
+    
+        // trip leg
+        return $this->_getTripLegPath($trip, $parameters, $referenceType);
     }
 
     private function _getTopLevelTripPath(Trip $trip, array $parameters, int $referenceType): string
@@ -86,6 +95,13 @@ class AppExtensionRuntime implements RuntimeExtensionInterface
             'trip' => $trip->getSlug($locale),
             '_locale' => $locale,
         ], $referenceType);
+    }
+
+    private function _getStoryPath(Story $story, array $parameters, int $referenceType): string
+    {
+        $tripPath = $this->_getTripPath($story->getTrip(), $parameters, $referenceType);
+        
+        return $tripPath . '#' . $story->getSlugEn();
     }
 
     private function _getFoodPath(Food $food, array $parameters, int $referenceType): string

@@ -26,9 +26,9 @@
     <div class="homepage-section">
         <h2 class="section-title">Top Slow Travel trips</h2>
         <div class="section-content">
-            <div class="cards cards-horizontal">
+            <div class="cards">
                 {% for trip in top_slow_travel_trips %}
-                    {% include 'trip/_card.html.twig' %}
+                    {% include 'trip/_card.html.twig' with {short_version: true} %}
                 {% endfor %}
             </div>
         </div>
@@ -37,19 +37,53 @@
     <div class="homepage-section">
         <h2 class="section-title">Top Hiking trips</h2>
         <div class="section-content">
-            <div class="cards cards-horizontal">
+            <div class="cards">
                 {% for trip in top_hiking_trips %}
-                    {% include 'trip/_card.html.twig' %}
+                    {% include 'trip/_card.html.twig' with {short_version: true} %}
                 {% endfor %}
             </div>
         </div>
     </div>
 
     <div class="homepage-section">
-        <h2 class="section-title">Top Foods</h2>
+        <h2 class="section-title">Top Adventures</h2>
         <div class="section-content">
 
+            <div class="section-content">
+                <div class="cards">
+                    {% for story in top_adventures %}
+                        {% include 'story/_card.html.twig' %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="homepage-section">
+        <h2 class="section-title">Top Discoveries</h2>
+        <div class="section-content">
+
+            <div class="section-content">
+                <div class="cards">
+                    {% for story in top_discoveries %}
+                        {% include 'story/_card.html.twig' %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="homepage-section">
+        <h2 class="section-title">Top Food discoveries</h2>
+        <div class="section-content">
+
+            <div class="section-content">
+                <div class="cards">
+                    {% for food in top_food_discoveries %}
+                        {% include 'food/_card.html.twig' %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

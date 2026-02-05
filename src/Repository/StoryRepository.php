@@ -15,4 +15,28 @@ class StoryRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Story::class);
     }
+
+    public function findTopAdventures(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.trip', 't')
+            ->join('s.siteHighlights', 'h')
+            ->where('h.nameEn = :highlightName')
+            ->orderBy('t.startedAt', 'DESC')
+            ->setParameter('highlightName', 'Favourite adventures')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findTopDiscoveries(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.trip', 't')
+            ->join('s.siteHighlights', 'h')
+            ->where('h.nameEn = :highlightName')
+            ->orderBy('t.startedAt', 'DESC')
+            ->setParameter('highlightName', 'Favourite discoveries')
+            ->getQuery()
+            ->getResult();
+    }
 }
