@@ -19,6 +19,8 @@ class DefaultController extends BaseController
         $topHikingTrips = $tripRepository->findTopHikingTrips();
         $topAdventures = $storyRepository->findTopAdventures();
         $topDiscoveries = $storyRepository->findTopDiscoveries();
+        $topHistoricalPlaces = $storyRepository->findTopHistoricalPlaces();
+        $topPersonalExperiences = $storyRepository->findTopPersonalExperiences();
         $topFoodDiscoveries = $foodRepository->findTopDiscoveries();
         
         return $this->render('default/homepage.html.twig', [
@@ -26,6 +28,8 @@ class DefaultController extends BaseController
             'top_hiking_trips' => $topHikingTrips,
             'top_adventures' => $topAdventures,
             'top_discoveries' => $topDiscoveries,
+            'top_historical_places' => $topHistoricalPlaces,
+            'top_personal_experiences' => $topPersonalExperiences,
             'top_food_discoveries' => $topFoodDiscoveries,
         ]);
     }

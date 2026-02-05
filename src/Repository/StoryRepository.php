@@ -39,4 +39,28 @@ class StoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findTopHistoricalPlaces(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.trip', 't')
+            ->join('s.siteHighlights', 'h')
+            ->where('h.nameEn = :highlightName')
+            ->orderBy('t.startedAt', 'DESC')
+            ->setParameter('highlightName', 'Favourite historical places')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findTopPersonalExperiences(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.trip', 't')
+            ->join('s.siteHighlights', 'h')
+            ->where('h.nameEn = :highlightName')
+            ->orderBy('t.startedAt', 'DESC')
+            ->setParameter('highlightName', 'Favourite personal experiences')
+            ->getQuery()
+            ->getResult();
+    }
 }

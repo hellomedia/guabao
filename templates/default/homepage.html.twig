@@ -74,6 +74,33 @@
     </div>
 
     <div class="homepage-section">
+        <h2 class="section-title">Top Historical places</h2>
+        <div class="section-content">
+
+            <div class="section-content">
+                <div class="cards">
+                    {% for story in top_historical_places %}
+                        {% include 'story/_card.html.twig' %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="homepage-section">
+        <h2 class="section-title">Top Personal experiences</h2>
+        <div class="section-content">
+
+            <div class="section-content">
+                <div class="cards">
+                    {% for story in top_personal_experiences %}
+                        {% include 'story/_card.html.twig' %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="homepage-section">
         <h2 class="section-title">Top Food discoveries</h2>
         <div class="section-content">
 
