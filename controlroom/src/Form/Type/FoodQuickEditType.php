@@ -5,6 +5,7 @@ namespace Controlroom\Form\Type;
 use App\Entity\Cuisine;
 use App\Entity\Food;
 use App\Entity\Media;
+use App\Entity\SiteHighlight;
 use App\Entity\Tag\FoodTag;
 use App\Enum\Level;
 use App\Repository\MediaRepository;
@@ -90,6 +91,18 @@ class FoodQuickEditType extends AbstractType
                 'expanded' => false,
                 'multiple' => false,
                 'autocomplete' => true,
+            ])
+            ->add('siteHighlights', EntityType::class, [
+                'label' => 'Highlights',
+                'class' => SiteHighlight::class,
+                'required' => false,
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
+                    return $repo->createQueryBuilder('h')
+                        ->orderBy('h.nameEn', 'ASC');
+                },
+                'multiple' => true,
+                'autocomplete' => true,
+                'by_reference' => false, // important for ManyToMany when using add/remove methods
             ])
         ;
     }
