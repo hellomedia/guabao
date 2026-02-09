@@ -148,6 +148,11 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
         return $this;
     }
 
+    public function getNameWithoutLeadingNumbers(?string $locale): string
+    {
+        return preg_replace('/^#[1-9][0-9]*\s+/', '', $this->getName($locale));
+    }
+
     public function isTripLeg(): bool
     {
         return $this->hasParent();
