@@ -25,7 +25,6 @@
             .story {
                 padding-top: 50px; /* useful for spacing with anchor link */
                 &.no-title {
-                    margin-top: -35px;
                     & .story-images:first-child {
                         margin-top: -70px;
                     }
