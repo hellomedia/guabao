@@ -3,30 +3,33 @@
     .trip-page {
 
         #cover {
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
         }
 
         #rating {
             @apply text-lg;
             margin-top: 40px;
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
             .ranking-icon {
                 @apply text-xl;
             }
         }
 
         #description {
-            margin-top: 30px;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
             @apply text-xl;
         }
 
         #stories {
+            .story + .story {
+                margin-top: 3rem;
+            }
             .story {
-                padding-top: 50px; /* useful for spacing with anchor link */
+                scroll-margin-top: 3rem; /* useful for spacing with anchor link */
                 &.no-title {
-                    padding-top: 0;
-                    margin-top: -20px; /* cancel margin-bottom on last element of previous story */
-                }   
+                    margin-top: -3rem; /* cancel margin-bottom on last element of previous story */
+                }
             }
             .story-description {
                 @apply text-lg;
