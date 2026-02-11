@@ -17,18 +17,18 @@
 
         #description {
             margin-top: 2rem;
-            margin-bottom: 3rem;
             @apply text-xl;
         }
 
         #stories {
+            margin-top: 4rem;
             .story + .story {
-                margin-top: 3rem;
+                margin-top: 4rem;
             }
             .story {
-                scroll-margin-top: 3rem; /* useful for spacing with anchor link */
+                scroll-margin-top: 4rem; /* useful for spacing with anchor link */
                 &.no-title {
-                    margin-top: -3rem; /* cancel margin-bottom on last element of previous story */
+                    margin-top: -4rem; /* cancel margin-bottom on last element of previous story */
                 }
             }
             .story-description {
@@ -41,7 +41,7 @@
         }
 
         #trips {
-            margin-top: 60px;
+            margin-top: 3.5rem;
         }
     }
 }
