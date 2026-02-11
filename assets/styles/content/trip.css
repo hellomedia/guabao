@@ -17,18 +17,19 @@
 
         #description {
             margin-top: 2rem;
+            margin-bottom: 2.5rem;
             @apply text-xl;
         }
 
         #stories {
-            margin-top: 3rem;
+            margin-top: 2rem;
             .story + .story {
                 margin-top: 4rem;
             }
             .story {
-                scroll-margin-top: 4rem; /* useful for spacing with anchor link */
+                scroll-margin-top: 4rem; /* spacing with anchor link */
                 &.no-title {
-                    margin-top: -4rem; /* cancel margin-bottom on last element of previous story */
+                    margin-top: -5px;
                 }
             }
             .story-description {
