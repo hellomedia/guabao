@@ -29,7 +29,7 @@
             .story {
                 scroll-margin-top: 4rem; /* spacing with anchor link */
                 &.no-title {
-                    margin-top: -5px;
+                    margin-top: 0;
                 }
             }
             .story-description {
