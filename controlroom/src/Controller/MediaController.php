@@ -100,12 +100,14 @@ class MediaController extends BaseController
     
             $this->_importImages($form);
 
-            if ($form->has('trip')) {
+            // if images linked to trip, go to trip edit page
+            if ($form->get('trip')->getData()) {
                 return $this->redirectToRoute('admin_media_bulk_edit_by_trip', [
                     'id' => $form->get('trip')->getData()->getId(),
                 ]);
             }
 
+            // else go to unlinked images bulk edit
             return $this->redirectToRoute('admin_media_bulk_edit_unlinked');
         }
 
