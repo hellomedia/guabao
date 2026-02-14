@@ -136,7 +136,7 @@ class MediaBulkEditController extends BaseController
         foreach ($medias as $media) {
             $forms[$media->getId()] = $formFactory->createNamed(
                 // form names must match between bulk edit forms and ajax edit form
-                name: 'media_quick_edit_form_' . $media->getId(),
+                name: 'media_unlinked_quick_edit_form_' . $media->getId(),
                 type: MediaUnlinkedQuickEditType::class,
                 data: $media,
             )->createView();
