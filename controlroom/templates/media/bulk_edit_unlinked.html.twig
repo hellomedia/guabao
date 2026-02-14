@@ -1,0 +1,49 @@
+{% extends '@admin/base.html.twig' %}
+
+{% block content_title %}
+    Unlinked medias
+{% endblock %}
+
+{% block page_actions %}
+    {% embed '@admin/_top_links.html.twig' %}
+        {% block add_pictures %}
+            <a class="btn" href="{{ path('admin_media_bulk_add') }}">
+                + Pictures
+            </a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block head_stylesheets %}
+    {{ parent() }}
+    <style>
+        #medias {
+            margin-bottom: 40px;
+        }
+        #bulk-edit {
+            border: 1px solid lightgray;
+            padding: 30px;
+        }
+        #bulk-edit {
+            margin-bottom: 60px;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+
+    <div id="medias" data-controller="fancybox">
+        {% for media in medias %}
+            {% include '@admin/media/_quick_edit_unlinked_form.html.twig'
+                with { form: forms[media.id] }
+            %}
+            <hr style="margin-top: 40px; margin-bottom: 30px;">
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+{% endblock %}
+

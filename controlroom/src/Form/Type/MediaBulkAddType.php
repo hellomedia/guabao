@@ -61,7 +61,7 @@ class MediaBulkAddType extends AbstractType
                     return $repo->createQueryBuilder('t')
                         ->orderBy('t.startedAt', 'DESC');
                 },
-                'required' => true,
+                'required' => false,
                 'multiple' => false,
                 'autocomplete' => true,
                 'group_by' => function (Trip $trip, $key, $value) {

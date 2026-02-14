@@ -1,0 +1,98 @@
+{# Important: Note the syntax with [] and only #}
+{# Ignore global themes; use only EasyAdmin #}
+{# important to avoid theme conflicts #}
+{% form_theme form with ['@admin/form/form_theme.html.twig'] only %}
+
+<style>
+    .thumb-side {
+        display:flex;
+        flex-direction:column;
+        gap: 2px;
+        .form-group {
+            padding: 0;
+        }
+    }
+</style>
+<div id="media_{{ media.id }}">
+
+    <form
+        name="media_quick_edit_form_{{ media.id }}"
+        action="{{ path('admin_media_quick_edit', {id: media.id}) }}"
+        method="post"
+        style="margin-bottom: 20px"
+        data-controller="ajax"
+        data-action="submit->ajax#submit change->ajax#submitOnChange"
+    >
+
+        {# container for form content replaced in ajax #}
+        <div data-ajax-target="container" class="quick-edit">
+
+            <div class="column-1">
+    
+                <div style="display:flex;gap:15px;align-items:start">
+
+                    <a data-fancybox="quick-edit-gallery"
+                        href="{{ uploaded_asset(media) }}" 
+                        data-caption="{{ media.description(app.request.locale)|nl2br }}"
+                    >
+                        {% if media.isImage %}
+                            <img    
+                                style="height: 220px; width: auto;margin-bottom: 15px;" 
+                                src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+                                width="300"
+                                height="300"
+                           />
+                        {% endif %}
+
+                    </a>
+
+
+                    <div class="thumb-side">
+
+                        {% if media.isImage %}
+                            <a target="_blank" style="margin-bottom: 3px" href="{{ path('controlroom_image_detail', {'entityId': media.id}) }}">
+                                See details
+                            </a>
+                        {% endif %}
+                        {% if media.isVideo %}
+                            <a target="_blank" style="margin-bottom: 3px" href="{{ path('controlroom_video_detail', {'entityId': media.id}) }}">
+                                See details
+                            </a>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                {{ form_row(form.descriptionEn) }}
+                {{ form_row(form.descriptionFr) }}
+            </div>
+
+            <div class="column-2">
+                
+                {{ form_row(form.tags) }}
+                {{ form_row(form.placeTags) }}
+                {{ form_row(form.place) }}
+                {{ form_row(form.siteHighlights) }}
+                {{ form_row(form.takenAt) }}
+
+            </div>
+
+            <div class="column-3">
+                {{ form_row(form.food) }}
+                {{ form_row(form.isMeal) }}
+                {{ form_row(form.meal) }}
+                {{ form_row(form.showInFood) }}
+            </div>
+
+            {{ form_rest(form) }}
+
+        
+        </div>
+
+        {% include '@admin/form/_ajax_button.html.twig' %}
+
+    </form>
+
+</div>
+

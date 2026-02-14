@@ -12,6 +12,7 @@ use Controlroom\Form\Type\MediaBulkEditTagsType;
 use Controlroom\Form\Type\MediaQuickEditType;
 use Controlroom\Form\Type\StoryQuickEditType;
 use Controlroom\Form\Type\TripQuickEditType;
+use Controlroom\Form\Type\MediaUnlinkedQuickEditType;
 use Doctrine\ORM\EntityManager;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
@@ -120,6 +121,30 @@ class MediaBulkEditController extends BaseController
             'forms' => $forms,
             'medias' => $medias,
             'story' => $story,
+        ]);
+    }
+
+    // Bulk edit medias not linked to a trip or food
+    // usually medias - not linked to a trip - just uploaded, and waiting to be linked to food.
+    #[Route('/media/unlinked/bulk-edit/{page<\d+>?1}', name: 'admin_media_bulk_edit_unklinked', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    public function bulkEditUnlinked(int $page, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    {
+        $medias = $entityManager->getRepository(Media::class)->findUnliked();
+
+        // FORM 1 (array of forms): Quick edit individual medias
+        $forms = [];
+        foreach ($medias as $media) {
+            $forms[$media->getId()] = $formFactory->createNamed(
+                // form names must match between bulk edit forms and ajax edit form
+                name: 'media_quick_edit_form_' . $media->getId(),
+                type: MediaUnlinkedQuickEditType::class,
+                data: $media,
+            )->createView();
+        }
+
+        return $this->render('@admin/media/bulk_edit_unlinked.html.twig', [
+            'forms' => $forms,
+            'medias' => $medias,
         ]);
     }
 

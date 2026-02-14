@@ -207,4 +207,27 @@ class MediaRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * Media not linked to a trip / food / meal / story
+     * 
+     * Use case: upload medias not linked to a trip, for food.
+     * ===> find them and handle them (assign to food)
+     */
+    public function findUnliked(): array
+    {
+        return $this->createQueryBuilder('m')
+            ->leftJoin('m.placeTags', 'pt')
+            ->addSelect('pt')
+            ->leftJoin('m.tags', 't')
+            ->addSelect('t')
+            ->where('m.trip IS NULL')
+            ->andWhere('m.story IS NULL')
+            ->andWhere('m.food IS EMPTY') // m.food is a collection
+            ->andWhere('m.meal IS NULL')
+            ->orderBy('m.takenAt', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }

@@ -100,9 +100,13 @@ class MediaController extends BaseController
     
             $this->_importImages($form);
 
-            return $this->redirectToRoute('admin_media_bulk_edit_by_trip', [
-                'id' => $form['trip']->getData()->getId(),
-            ]);
+            if ($form->has('trip')) {
+                return $this->redirectToRoute('admin_media_bulk_edit_by_trip', [
+                    'id' => $form->get('trip')->getData()->getId(),
+                ]);
+            }
+
+            return $this->redirectToRoute('admin_media_bulk_edit_unlinked');
         }
 
         return $this->render('@admin/media/bulk_add.html.twig', [
@@ -112,14 +116,14 @@ class MediaController extends BaseController
 
     private function _importImages(FormInterface $form)
     {
-        $uploadedFiles = $form['files']->getData();
-        $trip = $form['trip']->getData();
-        $story = $form['story']->getData();
-        $tags = $form['tags']->getData();
-        $placeTags = $form['placeTags']->getData();
-        $showInTrip = $form['showInTrip']->getData();
-        $showInStory = $form['showInStory']->getData();
-        $showInFood = $form['showInFood']->getData();
+        $uploadedFiles = $form->get('files')->getData();
+        $trip = $form->get('trip')->getData();
+        $story = $form->has('story') ? $form->get('story')->getData() : null;
+        $tags = $form->get('tags')->getData();
+        $placeTags = $form->get('placeTags')->getData();
+        $showInTrip = $form->get('showInTrip')->getData();
+        $showInStory = $form->has('showInStory') ? $form->get('showInStory')->getData() : null;
+        $showInFood = $form->get('showInFood')->getData();
 
         foreach ($uploadedFiles as $uploadedFile) {
 
