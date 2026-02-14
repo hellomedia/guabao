@@ -126,7 +126,7 @@ class MediaBulkEditController extends BaseController
 
     // Bulk edit medias not linked to a trip or food
     // usually medias - not linked to a trip - just uploaded, and waiting to be linked to food.
-    #[Route('/media/unlinked/bulk-edit/{page<\d+>?1}', name: 'admin_media_bulk_edit_unklinked', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    #[Route('/media/unlinked/bulk-edit/{page<\d+>?1}', name: 'admin_media_bulk_edit_unlinked', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
     public function bulkEditUnlinked(int $page, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         $medias = $entityManager->getRepository(Media::class)->findUnliked();
