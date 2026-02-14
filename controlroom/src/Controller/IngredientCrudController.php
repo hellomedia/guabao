@@ -49,6 +49,9 @@ class IngredientCrudController extends AbstractCrudController
         yield TextField::new('nameEn', 'Name EN');
         yield TextField::new('nameFr', 'Name FR');
 
+        yield TextField::new('descriptionEn', 'Desc EN');
+        yield TextField::new('descriptionFr', 'Desc FR');
+
         yield ChoiceField::new('foodType');
 
         yield AssociationField::new('similar')
