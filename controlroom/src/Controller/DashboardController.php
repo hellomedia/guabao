@@ -30,12 +30,19 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 // For localized easyadmin, use routePath: '/{_locale}/'
 // setting locale prefix in easyadmin.yaml does not seem to work
 #[AdminDashboard(routePath: '/', routeName: 'controlroom')]
 class DashboardController extends AbstractDashboardController
 {
+    public function __construct(
+        private UrlGeneratorInterface $urlGenerator,
+    )
+    {
+    }
+
     // route attribute here is deprecated and should be removed in next version
     // but at the moment, removing it cause error: 'missing controlroom_dashboard' route
     #[Route('/', name: 'controlroom_dashboard')]
@@ -116,6 +123,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Videos', 'fa fa-video', Media::class)
             ->setController(VideoCrudController::class);
         yield MenuItem::linkToCrud('Media Tags', 'fa fa-tag', MediaTag::class);
+        yield MenuItem::linkToUrl('Unlinked images', 'fa fa-photo', $this->urlGenerator->generate('admin_media_bulk_edit_unklinked'));
 
         yield MenuItem::section('Places');
         yield MenuItem::linkToCrud('Places', 'fa fa-map-marker', Place::class);
