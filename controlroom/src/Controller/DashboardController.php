@@ -123,7 +123,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Videos', 'fa fa-video', Media::class)
             ->setController(VideoCrudController::class);
         yield MenuItem::linkToCrud('Media Tags', 'fa fa-tag', MediaTag::class);
-        yield MenuItem::linkToUrl('Unlinked images', 'fa fa-photo', $this->urlGenerator->generate('admin_media_bulk_edit_unklinked'));
+        yield MenuItem::linkToUrl('Unlinked images', 'fa fa-photo', $this->urlGenerator->generate('admin_media_bulk_edit_unlinked'));
 
         yield MenuItem::section('Places');
         yield MenuItem::linkToCrud('Places', 'fa fa-map-marker', Place::class);
