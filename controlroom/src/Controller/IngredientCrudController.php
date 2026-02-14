@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class IngredientCrudController extends AbstractCrudController
@@ -49,8 +50,8 @@ class IngredientCrudController extends AbstractCrudController
         yield TextField::new('nameEn', 'Name EN');
         yield TextField::new('nameFr', 'Name FR');
 
-        yield TextField::new('descriptionEn', 'Desc EN');
-        yield TextField::new('descriptionFr', 'Desc FR');
+        yield TextareaField::new('descriptionEn', 'Desc EN');
+        yield TextareaField::new('descriptionFr', 'Desc FR');
 
         yield ChoiceField::new('foodType');
 
