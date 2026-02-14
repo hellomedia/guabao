@@ -12,7 +12,7 @@ use Controlroom\Form\Type\MediaBulkEditTagsType;
 use Controlroom\Form\Type\MediaQuickEditType;
 use Controlroom\Form\Type\StoryQuickEditType;
 use Controlroom\Form\Type\TripQuickEditType;
-use Controlroom\Form\Type\MediaUnlinkedQuickEditType;
+use Controlroom\Form\Type\MediaFoodQuickEditType;
 use Doctrine\ORM\EntityManager;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
@@ -136,8 +136,8 @@ class MediaBulkEditController extends BaseController
         foreach ($medias as $media) {
             $forms[$media->getId()] = $formFactory->createNamed(
                 // form names must match between bulk edit forms and ajax edit form
-                name: 'media_unlinked_quick_edit_form_' . $media->getId(),
-                type: MediaUnlinkedQuickEditType::class,
+                name: 'media_food_quick_edit_form_' . $media->getId(),
+                type: MediaFoodQuickEditType::class,
                 data: $media,
             )->createView();
         }
@@ -221,10 +221,9 @@ class MediaBulkEditController extends BaseController
         foreach ($medias as $media) {
             $forms[$media->getId()] = $formFactory->createNamed(
                 // form names must match with media quick edit form
-                name: 'media_quick_edit_form_' . $media->getId(),
-                type: MediaQuickEditType::class,
+                name: 'media_food_quick_edit_form_' . $media->getId(),
+                type: MediaFoodQuickEditType::class,
                 data: $media,
-                options: ['trip' => $media->getTrip()]
             )->createView();
         }
 

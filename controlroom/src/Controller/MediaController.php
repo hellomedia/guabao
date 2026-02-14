@@ -12,7 +12,7 @@ use Pack\Media\Helper\ExifExtractor;
 use Pack\Media\Helper\UploadHelper;
 use Controlroom\Form\Type\MediaBulkAddType;
 use Controlroom\Form\Type\MediaQuickEditType;
-use Controlroom\Form\Type\MediaUnlinkedQuickEditType;
+use Controlroom\Form\Type\MediaFoodQuickEditType;
 use Doctrine\ORM\EntityManager;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Symfony\Component\Form\ClickableInterface;
@@ -72,13 +72,13 @@ class MediaController extends BaseController
         ]);
     }
 
-    #[Route('/media/{id:media}/quick-edit-unlinked', name: 'admin_media_unlinked_quick_edit', methods: ['POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function quickEditUnlinked(Request $request, Media $media, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[Route('/media/{id:media}/food-quick-edit', name: 'admin_media_food_quick_edit', methods: ['POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    public function foodQuickEdit(Request $request, Media $media, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         // form names must match with batch edit forms
         $form = $formFactory->createNamed(
-            name: 'media_unlinked_quick_edit_form_' . $media->getId(),
-            type: MediaUnlinkedQuickEditType::class,
+            name: 'media_food_quick_edit_form_' . $media->getId(),
+            type: MediaFoodQuickEditType::class,
             data: $media,
         );
 
@@ -92,13 +92,13 @@ class MediaController extends BaseController
 
             // recreate form to include modifications for auto-updates above
             $form = $formFactory->createNamed(
-                name: 'media_unlinked_quick_edit_form_' . $media->getId(),
-                type: MediaUnlinkedQuickEditType::class,
+                name: 'media_food_quick_edit_form_' . $media->getId(),
+                type: MediaFoodQuickEditType::class,
                 data: $media,
             );
         }
 
-        return $this->render('@admin/media/_quick_edit_unlinked_form.html.twig', [
+        return $this->render('@admin/media/_food_quick_edit_form.html.twig', [
             'form' => $form,
             'media' => $media,
         ]);

@@ -36,7 +36,7 @@
 
     <div id="medias" data-controller="fancybox">
         {% for media in medias %}
-            {% include '@admin/media/_quick_edit_form.html.twig'
+            {% include '@admin/media/_food_quick_edit_form.html.twig'
                 with { form: forms[media.id] }
             %}
             <hr style="margin-top: 40px; margin-bottom: 30px;">
