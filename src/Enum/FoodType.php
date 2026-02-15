@@ -23,8 +23,9 @@ enum FoodType: string implements TranslatableInterface
     case GRAINS_CEREALS = 'Grains and cereals';
     case NUTS_SEEDS = 'Nuts and seeds';
     case PASTA_NOODLES = 'Pasta and noodles';
-    case SWEETNERS = 'Sweetners';
+    case SWEETENERS = 'Sweetners'; // typo in DB left as such
     case CHOCOLATE = 'Chocolate';
+    case CONDIMENT_SAUCE = 'Condiment and sauce';
 
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
@@ -40,8 +41,9 @@ enum FoodType: string implements TranslatableInterface
             self::MEAT  => $translator->trans('food.meat', domain: 'enum', locale: $locale),
             self::NUTS_SEEDS  => $translator->trans('food.nuts', domain: 'enum', locale: $locale),
             self::PASTA_NOODLES  => $translator->trans('food.pasta', domain: 'enum', locale: $locale),
-            self::SWEETNERS  => $translator->trans('food.sweetners', domain: 'enum', locale: $locale),
-            self::VEGETABLE  => $translator->trans('food.vegetable', domain: 'enum', locale: $locale), 
+            self::SWEETENERS  => $translator->trans('food.sweeteners', domain: 'enum', locale: $locale),
+            self::VEGETABLE  => $translator->trans('food.vegetable', domain: 'enum', locale: $locale),
+            self::CONDIMENT_SAUCE  => $translator->trans('food.condiment_sauce', domain: 'enum', locale: $locale),
         };
     }
 
@@ -59,8 +61,9 @@ enum FoodType: string implements TranslatableInterface
             self::GRAINS_CEREALS  => 9,
             self::NUTS_SEEDS  => 10,
             self::PASTA_NOODLES  => 11,
-            self::SWEETNERS  => 12,
+            self::SWEETENERS  => 12,
             self::CHOCOLATE  => 13,
+            self::CONDIMENT_SAUCE  => 14,
         };
     }
 }
