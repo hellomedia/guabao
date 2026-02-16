@@ -1,6 +1,6 @@
 <div class="card card-ingredient">
 
-    <h3 class="card-title">
+    <h3 class="card-title ingredient-weight-{{ min(5, food_count // 3) }}">
         <a href="{{ path('food_ingredients_ingredient', {slugEn: ingredient.slugEn}) }}">
             {{ ingredient|trans }} <span class="count">({{ food_count }})</span>
         </a>
