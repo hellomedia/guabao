@@ -5,10 +5,10 @@
                 {% if food.isFavourite %}
                     {% set emoji = '❤️' %}
                 {% else %}
-                    {% if food.loveLevel == 1 %}
+                    {% if food.loveLevel.value == 1 %}
                         {% set emoji = '❌' %}
-                    {% elseif food.loveLevel == 2 %}
-                        {% set emoji = '🫠' %}
+                    {% elseif food.loveLevel.value == 2 %}
+                        {% set emoji = '⭐' %}
                     {% else %}
                         {% set emoji = '⭐' %}
                     {% endif %}
