@@ -6,6 +6,14 @@ use App\Enum\Trait\EnumUtilsTrait;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * Notes on food types:
+ * 
+ * Vegetable vs Legumes:
+ * If eaten fresh and green → Vegetable
+ * If dried and protein-heavy → Legume
+ * 
+ */
 enum FoodType: string implements TranslatableInterface
 {
     use EnumUtilsTrait;
@@ -14,7 +22,7 @@ enum FoodType: string implements TranslatableInterface
     // Condition::cases() returns an array of cases, in order of declaration.
     case VEGETABLE = 'Vegetable';
     case FRUIT = 'Fruit';
-    case LEGUMES = 'Legumes';
+    case LEGUMES = 'Legumes'; // not strictly botanical -- more behavorial (see comment above)
     case FISH = 'Fish';
     case MEAT = 'Meat';
     case DAIRY = 'Dairy';
