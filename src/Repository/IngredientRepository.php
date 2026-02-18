@@ -23,7 +23,8 @@ class IngredientRepository extends ServiceEntityRepository
 
     public function findAll(): array
     {
-        $locale = $this->requestStack->getCurrentRequest()->getLocale();
+        // NB: Set default for command line where currentRequest() is null
+        $locale = $this->requestStack->getCurrentRequest()?->getLocale() ?? 'en';
 
         return $this->createQueryBuilder('i')
             ->orderBy('i.name' . \ucfirst($locale), 'ASC')

@@ -5,9 +5,11 @@ namespace App\Entity;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
+use App\Entity\Interface\SearchableNameInterface;
 use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
+use App\Entity\Trait\SearchableNameTrait;
 use App\Enum\FoodType;
 use App\Enum\Month;
 use App\Repository\IngredientRepository;
@@ -16,14 +18,17 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'ingredient')]
+#[ORM\Index(name: 'ingredient_name_search_idx', columns: ['name_search'])]
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
-class Ingredient implements LocalizedNameInterface, LocalizedSlugInterface, EntityInterface
+class Ingredient implements LocalizedNameInterface, LocalizedSlugInterface, SearchableNameInterface, EntityInterface
 {
     use LocalizedNameTrait;
 
     use LocalizedDescriptionTrait;
 
     use LocalizedSlugTrait;
+
+    use SearchableNameTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

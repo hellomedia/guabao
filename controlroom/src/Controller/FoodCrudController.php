@@ -22,11 +22,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class FoodCrudController extends AbstractCrudController
 {
     public function __construct(
-        private UrlGeneratorInterface $urlGenerator
+        private UrlGeneratorInterface $urlGenerator,
+        private SluggerInterface $slugger,
     ) {}
 
     public static function getEntityFqcn(): string
@@ -43,10 +45,9 @@ class FoodCrudController extends AbstractCrudController
                 'cuisines' => 'ASC',
                 'nameEn' => 'ASC'
             ])
-            ->setSearchFields([
-                'nameEn',
-                'nameFr'
-            ])
+            // search fields implemented with custom strategy for normalizing accents
+            // in createIndexQueryBuilder()
+            ->setSearchFields([])
         ;
     }
 
@@ -155,7 +156,20 @@ class FoodCrudController extends AbstractCrudController
             ->leftJoin('entity.tags', 't')
             ->addSelect('t');
 
+        $searchTerm = trim((string) $searchDto->getQuery());
+
+        // No search: return
+        if ($searchTerm == '') {
+            return $qb;
+        }
+
+        // Search: Normalize search terms for accent-insensitive search
+        // Normalize input exactly like SearchableName listener does
+        $normalized = (string) $this->slugger->slug(mb_strtolower($searchTerm), ' ');
+        
+        $qb->andWhere('entity.nameSearch LIKE :q')
+            ->setParameter('q', '%' . $normalized . '%');
+
         return $qb;
     }
-
 }

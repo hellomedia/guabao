@@ -3,18 +3,28 @@
 namespace Controlroom\Controller;
 
 use App\Entity\Ingredient;
+use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class IngredientCrudController extends AbstractCrudController
 {
+    public function __construct(
+        private SluggerInterface $slugger,
+    ) {}
+
     public static function getEntityFqcn(): string
     {
         return Ingredient::class;
@@ -28,6 +38,9 @@ class IngredientCrudController extends AbstractCrudController
             ->setDefaultSort([
                 'nameEn' => 'ASC'
             ])
+            // search fields implemented with custom strategy for normalizing accents
+            // in createIndexQueryBuilder()
+            ->setSearchFields([])
         ;
     }
 
@@ -64,5 +77,26 @@ class IngredientCrudController extends AbstractCrudController
             ->setTemplatePath('@admin/field/food_list.html.twig');
 
         yield BooleanField::new('favourite');
+    }
+
+    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
+    {
+        $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
+
+        $searchTerm = trim((string) $searchDto->getQuery());
+
+        // No search: return
+        if ($searchTerm == '') {
+            return $qb;
+        }
+
+        // Search: Normalize search terms for accent-insensitive search
+        // Normalize input exactly like SearchableName listener does
+        $normalized = (string) $this->slugger->slug(mb_strtolower($searchTerm), ' ');
+
+        $qb->andWhere('entity.nameSearch LIKE :q')
+            ->setParameter('q', '%' . $normalized . '%');
+
+        return $qb;
     }
 }
