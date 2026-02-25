@@ -73,7 +73,7 @@ class Place implements EntityInterface
 
     public function __toString()
     {
-        return $this->name ? ($this->name . ' - ' . $this->placeTags->first() ?? '') : ('Place #' . $this->id);
+        return $this->name ? ($this->name . ' ' . $this->placeTags->first() ?? '') : ('Place #' . $this->id);
     }
 
     public function getId(): int

@@ -68,7 +68,7 @@ class Meal implements EntityInterface
 
     public function getNameAndTime(): string
     {
-        return $this->getName() . ' - ' . $this->enjoyedAt->format('d M Y H\h');
+        return $this->getName() . ' ' . $this->enjoyedAt->format('d M Y H\h');
     }
 
     public function getShortName(): string
