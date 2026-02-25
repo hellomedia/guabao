@@ -86,7 +86,7 @@ class Place implements EntityInterface
         return $this->name;
     }
 
-    public function getShortName(): string
+    public function getNameWithFallback(): string
     {
         return $this->name ?: ('Place #' . $this->id);
     }

@@ -61,19 +61,14 @@ class Meal implements EntityInterface
         return  $this->getNameAndTime();
     }
 
-    public function getName(): string
-    {
-        return 'Meal' . ' @ ' . ($this->place ?: $this->placeTags?->first());
-    }
-
     public function getNameAndTime(): string
     {
         return $this->getName() . ' ' . $this->enjoyedAt->format('d M Y H\h');
     }
 
-    public function getShortName(): string
+    public function getName(): string
     {
-        return 'Meal' . ' @ ' . ($this->place?->getShortName() ?: $this->placeTags?->first());
+        return 'Meal' . ' @ ' . ($this->place?->getName() ?: $this->placeTags?->first());
     }
 
     public function getId(): ?int
