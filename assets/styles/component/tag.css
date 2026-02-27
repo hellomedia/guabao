@@ -14,6 +14,10 @@
             border-radius: var(--radius-xl);
         }
 
+        .food-tag {
+            padding: 4px 10px;
+        }
+
         .tag-slow-travel {
             background-color: #d29576;
             border-color: #d29576;
