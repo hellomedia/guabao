@@ -64,15 +64,14 @@
             <div class="column-1">
                 {{ form_row(form.nameEn) }}
                 {{ form_row(form.nameFr) }}
+                {{ form_row(form.nameOriginal) }}
                 {{ form_row(form.descriptionEn) }}
                 {{ form_row(form.descriptionFr) }}
                 {{ form_row(form.isFavourite) }}
-                {{ form_row(form.siteHighlights) }}
             </div>
 
             <div class="column-2">
                 {{ form_row(form.cuisines) }}
-                {{ form_row(form.ingredients) }}
                 {{ form_row(form.tags) }}
                 {{ form_row(form.similar) }}
                 {{ form_row(form.loveLevel) }}
@@ -81,6 +80,9 @@
             </div>
 
             <div class="column-3">
+
+                {{ form_row(form.ingredients) }}
+                {{ form_row(form.siteHighlights) }}
 
                 <div data-controller="cover-picker">
 

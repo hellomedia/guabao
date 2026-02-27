@@ -3,6 +3,7 @@
 namespace App\Doctrine\Listener;
 
 use App\Entity\Interface\LocalizedNameInterface;
+use App\Entity\Interface\OriginalNameInterface;
 use App\Entity\Interface\SearchableNameInterface;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Event\PrePersistEventArgs;
@@ -50,7 +51,12 @@ class SearchableNameListener
         assert($entity instanceof SearchableNameInterface);
         assert($entity instanceof LocalizedNameInterface);
 
-        $text = trim(mb_strtolower($entity->getNameFr() . ' ' . $entity->getNameEn()));
+        if ($entity instanceof OriginalNameInterface) {
+            $text = trim(mb_strtolower($entity->getNameFr() . ' ' . $entity->getNameEn() . ' ' . $entity->getOriginalName()));
+        } else {
+            $text = trim(mb_strtolower($entity->getNameFr() . ' ' . $entity->getNameEn()));
+        };
+
         $normalized = (string) $this->slugger->slug($text, ' ');
 
         $entity->setNameSearch($normalized);

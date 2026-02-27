@@ -5,11 +5,13 @@ namespace App\Entity;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;
+use App\Entity\Interface\OriginalNameInterface;
 use App\Entity\Interface\SearchableNameInterface;
 use App\Entity\Tag\FoodTag;
 use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Entity\Trait\LocalizedNameTrait;
 use App\Entity\Trait\LocalizedSlugTrait;
+use App\Entity\Trait\OriginalNameTrait;
 use App\Entity\Trait\SearchableNameTrait;
 use App\Enum\Level;
 use App\Repository\FoodRepository;
@@ -19,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Index(name: 'food_name_search_idx', columns: ['name_search'])]
 #[ORM\Entity(repositoryClass: FoodRepository::class)]
-class Food implements LocalizedNameInterface, LocalizedSlugInterface, SearchableNameInterface, EntityInterface
+class Food implements LocalizedNameInterface, LocalizedSlugInterface, SearchableNameInterface, OriginalNameInterface, EntityInterface
 {
     use LocalizedNameTrait;
 
@@ -28,6 +30,8 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, Searchable
     use LocalizedDescriptionTrait;
 
     use SearchableNameTrait;
+
+    use OriginalNameTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

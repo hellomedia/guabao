@@ -34,6 +34,7 @@ class FoodQuickEditType extends AbstractType
         $builder
             ->add('nameEn')
             ->add('nameFr')
+            ->add('nameOriginal')
             ->add('descriptionEn', TextareaType::class, [
                 'label' => "EN",
                 'required' => false,

@@ -214,6 +214,8 @@
 
         .card-ratings {
             border-collapse: 2px;
+            position: relative;
+            left: -5px;
         }
     }
 

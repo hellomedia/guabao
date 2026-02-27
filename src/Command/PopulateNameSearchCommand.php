@@ -41,7 +41,7 @@ class PopulateNameSearchCommand extends Command
 
             $io->info($food->getNameEn());
 
-            $text = trim(mb_strtolower($food->getNameFr() . ' ' . $food->getNameEn()));
+            $text = trim(mb_strtolower($food->getNameFr() . ' ' . $food->getNameEn() . ' ' . $food->getOriginalName()));
             $normalized = (string) $this->slugger->slug($text, ' ');
 
             $food->setNameSearch($normalized);

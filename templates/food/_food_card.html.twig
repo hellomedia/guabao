@@ -21,11 +21,20 @@
     {% endif %}
 
     <div class="card-info">
-        <h3 class="card-title">
+        {# <h3 class="card-title">
             <a href="{{ url }}">
                 {{ food|trans }}
             </a>
+        </h3> #}
+        <h3 class="card-title">
+            {% if food.originalName %}
+                <span class="card-title-main">{{ food|trans }}</span>
+                <span class="card-title-sub">{{ food.originalName }}</span>
+            {% else %}
+                <span class="card-title-main is-only">{{ food|trans }}</span>
+            {% endif %}
         </h3>
+
 
         <div class="card-bottom invisible-scroll-force-width">
             <div class="card-ratings">
