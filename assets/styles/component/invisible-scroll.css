@@ -5,6 +5,12 @@
         overflow-x: auto;
         -ms-overflow-style: none; /* IE/Edge */
         scrollbar-width: none; /* Firefox */
+
+        &.fade-end {
+            /* fade gradient */
+            -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
+            mask-image: linear-gradient(to right, #000 85%, transparent);
+        }
     }
 
     /* hack: Force width to be constrained to parent width */

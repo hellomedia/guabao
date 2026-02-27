@@ -28,10 +28,17 @@
         </h3> #}
         <h3 class="card-title">
             {% if food.originalName %}
-                <span class="card-title-main">{{ food|trans }}</span>
-                <span class="card-title-sub">{{ food.originalName }}</span>
+                <span class="card-title-main">
+                    <a href="{{ url }}">{{ food|trans }}</a>
+                </span>
+                <span class="card-title-sub">
+                    <a href="{{ url }}">{{ food.originalName }}</a>
+                </span>
+
             {% else %}
-                <span class="card-title-main is-only">{{ food|trans }}</span>
+                <span class="card-title-main is-only">
+                    <a href="{{ url }}">{{ food|trans }}</a>
+                </span>
             {% endif %}
         </h3>
 
@@ -40,7 +47,7 @@
             <div class="card-ratings">
                 {% include 'food/_rating.html.twig' %}
             </div>
-            <div class="card-tags tags invisible-scroll invisible-scroll-force-width">
+            <div class="card-tags tags invisible-scroll invisible-scroll-force-width fade-end">
                 {% for cuisine in food.cuisines %}
                     <span class="tag food-tag tag-{{ cuisine.slugEn }}">{{ cuisine|trans }}</span>
                 {% endfor %}
