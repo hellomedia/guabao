@@ -5,12 +5,17 @@
         overflow-x: auto;
         -ms-overflow-style: none; /* IE/Edge */
         scrollbar-width: none; /* Firefox */
-        /* hack: forces width to be constrained to parent width */
-        /* In some cases of flex on parents, width might not be constrained without this */
+    }
+
+    /* hack: Force width to be constrained to parent width */
+    /* In some cases with flex **on parent**, element width might not be constrained */
+    /* When that happens, scroll does not kick in because element expands */
+    /* USE this to constrain element width to parent width */
+    /* DO NOT USE IF base width behaviour must be retained */
+    .invisible-scroll-force-width {
         width: 100%;
         min-width: 0;
-        /* end hack */
-    }
+    }             
 
     .invisible-scroll > * {
         white-space: nowrap;

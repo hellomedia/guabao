@@ -27,11 +27,11 @@
             </a>
         </h3>
 
-        <div class="card-bottom">
+        <div class="card-bottom invisible-scroll-force-width">
             <div class="card-ratings">
                 {% include 'food/_rating.html.twig' %}
             </div>
-            <div class="card-tags tags invisible-scroll">
+            <div class="card-tags tags invisible-scroll invisible-scroll-force-width">
                 {% for cuisine in food.cuisines %}
                     <span class="tag food-tag tag-{{ cuisine.slugEn }}">{{ cuisine|trans }}</span>
                 {% endfor %}
