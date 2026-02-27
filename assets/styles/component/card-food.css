@@ -1,5 +1,24 @@
 @layer components {
-    .card-food {
+    .card.card-food {
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: start;
+            gap: 3px;
+        }
+
+        .card-title {
+            text-align: start;
+            /* 4 following css lines ==> clamp the title to 2 lines */
+            /* supported across browsers */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
         .card-ratings {
             margin-bottom: 10px;
         }
