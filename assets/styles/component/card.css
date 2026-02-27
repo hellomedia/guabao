@@ -190,6 +190,12 @@
         }
 
         .card-bottom {
+            /* hack: forces width to be max of parent because */
+            /* because of flex and align-center of parent, width is not constrained without this */
+            width: 100%;
+            min-width: 0;
+            overflow: hidden;
+            /* end hack */
             align-self: start;
             display: flex;
             flex-direction: column;

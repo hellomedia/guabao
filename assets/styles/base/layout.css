@@ -97,13 +97,13 @@
         /* edge to edge */
         .edge-to-edge,
         .cards,
-        .invisible-scroll {
+        & > .invisible-scroll {
             margin-inline: calc((-1) * var(--page-margin-xs));
         }
 
         /* invisible-scroll elements strech edge to edge when scrolled horizontally
             but they are aligned with page elements at page load */
-        .invisible-scroll {
+        & > .invisible-scroll {
             padding-inline: var(--page-margin-xs);
         }
 
@@ -121,7 +121,7 @@
             }
             
             /* edge to edge continues for .invisible-scroll elements */
-            .invisible-scroll {
+            & > .invisible-scroll {
                 margin-inline: calc((-1) * var(--page-margin-breakpoint-sm));
                 padding-inline: var(--page-margin-breakpoint-sm);
             }
@@ -133,7 +133,7 @@
             padding-inline: var(--page-margin-breakpoint-lg);
 
             /* edge to edge continues for .invisible-scroll elements */
-            .invisible-scroll {
+            & > .invisible-scroll {
                 margin-inline: calc( (-1) * var(--page-margin-breakpoint-lg));
                 padding-inline: var(--page-margin-breakpoint-lg);
             }
@@ -144,7 +144,7 @@
             padding-inline: var(--page-margin-breakpoint-7xl);
 
             /* edge to edge continues for .invisible-scroll elements */
-            .invisible-scroll {
+            & > .invisible-scroll {
                 margin-inline: calc( (-1) * var(--page-margin-max-container-width));
                 padding-inline: var(--page-margin-max-container-width);
             }

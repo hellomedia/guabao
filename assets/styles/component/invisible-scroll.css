@@ -1,11 +1,15 @@
  @layer components {
     .invisible-scroll {
-        flex-wrap: nowrap;
+        display: flex;
+        flex-wrap: nowrap !important;
         overflow-x: auto;
-        -ms-overflow-style: none;
-        /* IE/Edge */
-        scrollbar-width: none;
-        /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+        scrollbar-width: none; /* Firefox */
+        /* hack: forces width to be constrained to parent width */
+        /* In some cases of flex on parents, width might not be constrained without this */
+        width: 100%;
+        min-width: 0;
+        /* end hack */
     }
 
     .invisible-scroll > * {
