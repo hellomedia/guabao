@@ -3,14 +3,14 @@
     data-controller="restore-x-scroll"
     data-restore-x-scroll-key-value="food"
 >
-	<a href="{{ path('food_index') }}" class="{{ app.current_route in ['food_index'] ? 'current' }}">
+	{# <a href="{{ path('food_index') }}" class="{{ app.current_route in ['food_index'] ? 'current' }}">
 		{{ 'All food'|trans }}
-	</a>
+	</a> #}
+    <a href="{{ path('food_index') }}" class="{{ app.current_route == 'food_index' ? 'current' }}">
+        {{ 'Food types'|trans }}
+    </a>
 	<a href="{{ path('food_cuisines_index') }}" class="{{ app.current_route == 'food_cuisines_index' ? 'current' }}">
 		{{ 'Cuisines'|trans }}
-	</a>
-	<a href="{{ path('food_tags_index') }}" class="{{ app.current_route == 'food_tags_index' ? 'current' }}">
-		{{ 'Food types'|trans }}
 	</a>
 	<a href="{{ path('food_ingredients_index') }}" class="{{ app.current_route == 'food_ingredients_index' ? 'current' }}">
 		{{ 'Ingredients'|trans }}

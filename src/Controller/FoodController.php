@@ -17,17 +17,17 @@ class FoodController extends BaseController
         $this->addBreadcrumb('food.index', 'food_index');
     }
 
-    #[Route('/food', name: 'food_index')]
-    public function index(FoodRepository $repository): Response
-    {
-        $foodList = $repository->findAll();
+    // #[Route('/food', name: 'food_index')]
+    // public function index(FoodRepository $repository): Response
+    // {
+    //     $foodList = $repository->findAll();
 
-        $this->addBreadcrumb('food.all');
+    //     $this->addBreadcrumb('food.all');
 
-        return $this->render('food/all/index.html.twig', [
-            'food_list' => $foodList
-        ]);
-    }
+    //     return $this->render('food/all/index.html.twig', [
+    //         'food_list' => $foodList
+    //     ]);
+    // }
 
     #[Route('/food/d/{slug}', name: 'food_show')]
     public function show(#[MapEntity(expr: 'repository.findOneBySlug(slug)')] Food $food, Request $request): Response

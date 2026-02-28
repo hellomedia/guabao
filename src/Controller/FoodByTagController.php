@@ -19,24 +19,24 @@ class FoodByTagController extends BaseController
         $this->addBreadcrumb('food.index', 'food_index');
     }
 
-    #[Route('/food/tag', name: 'food_tags_index')]
+    #[Route('/food', name: 'food_index')]
     public function index(FoodTagRepository $foodTagRepository): Response
     {
         $tagsWithCounts = $foodTagRepository->findAllWithFoodCount();
 
-        $this->addBreadcrumb('food.tags');
+        //$this->addBreadcrumb('food.tags');
 
         return $this->render('food/tag/index.html.twig', [
             'tags_with_counts' => $tagsWithCounts
         ]);
     }
 
-    #[Route('/food/tag/{slugEn:tag}', name: 'food_tags_tag')]
+    #[Route('/food/t/{slugEn:tag}', name: 'food_tags_tag')]
     public function tag(FoodTag $tag, FoodRepository $foodRepository, Request $request): Response
     {
         $foodList = $foodRepository->findByFoodTag($tag);
 
-        $this->addBreadcrumb('food.tags', 'food_tags_index');
+        //$this->addBreadcrumb('food.index', 'food_index');
         $this->addBreadcrumb($tag->getName($request->getLocale()));
 
         return $this->render('food/tag/tag.html.twig', [
@@ -45,7 +45,7 @@ class FoodByTagController extends BaseController
         ]);
     }
 
-    #[Route('/food/tag/{slugTag}/{slugEn:food}', name: 'food_tags_food')]
+    #[Route('/food/t/{slugTag}/{slugEn:food}', name: 'food_tags_food')]
     public function food(
         #[MapEntity(expr: 'repository.findOneBySlugEn(slugTag)')] FoodTag $tag,
         Food $food,
