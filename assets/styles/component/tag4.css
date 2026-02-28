@@ -1,0 +1,104 @@
+:root {
+    /* Food */
+    --tag-cuisine-bg: #6A8DBE;
+    --tag-cuisine-hover: #5779a4;
+
+    --tag-type-bg: #5BAA9A;
+    --tag-type-hover: #4b9082;
+
+    --tag-ingredient-bg: #D8AC3B;
+    --tag-ingredient-hover: #b3882f;
+
+    /* Trips */
+    --tag-slow-bg: #d29576;
+    --tag-slow-hover: #b6795d;
+
+    --tag-hiking-bg: #76884b;
+    --tag-hiking-hover: #65753f;
+}
+
+/* Base tag look, used by EVERY tag */
+.tag4 {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 15px;
+    font-size: 0.90rem;
+    border-radius: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    white-space: nowrap;
+
+    color: #ffffff;
+    background-color: #999;
+    /* fallback, usually overridden */
+    border: none;
+
+    text-decoration: none;
+    /* in case it's an <a> */
+    transition:
+        background-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.15s ease;
+}
+
+/* Static tag (non-clickable) */
+.tag--static {
+    cursor: default;
+}
+
+/* Clickable tag (links, filters, etc.) */
+.tag--clickable {
+    cursor: pointer;
+}
+
+.tag--clickable:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+.tag--clickable:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+/* FOOD variants */
+.tag--cuisine {
+    background-color: var(--tag-cuisine-bg);
+}
+
+.tag--cuisine.tag--clickable:hover {
+    background-color: var(--tag-cuisine-hover);
+}
+
+.tag--type {
+    background-color: var(--tag-type-bg);
+}
+
+.tag--type.tag--clickable:hover {
+    background-color: var(--tag-type-hover);
+}
+
+.tag--ingredient {
+    background-color: var(--tag-ingredient-bg);
+}
+
+.tag--ingredient.tag--clickable:hover {
+    background-color: var(--tag-ingredient-hover);
+}
+
+/* TRIP variants */
+.tag--slow-travel {
+    background-color: var(--tag-slow-bg);
+}
+
+.tag--slow-travel.tag--clickable:hover {
+    background-color: var(--tag-slow-hover);
+}
+
+.tag--hiking-trip {
+    background-color: var(--tag-hiking-bg);
+}
+
+.tag--hiking-trip.tag--clickable:hover {
+    background-color: var(--tag-hiking-hover);
+}

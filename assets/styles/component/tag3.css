@@ -1,0 +1,74 @@
+.tag3 {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 15px;
+    font-size: 0.90rem;
+    border-radius: 15px;
+    font-weight: 500;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+    border: 1px solid transparent;
+}
+
+/* Clickable */
+.tag--clickable {
+    cursor: pointer;
+}
+
+.tag--clickable:hover {
+    transform: translateY(-1px);
+}
+
+/* FOOD TAGS — dark text */
+.tag--cuisine {
+    background: #6A8DBE22;
+    border-color: #6A8DBE55;
+    color: #3b4f71;
+}
+
+.tag--type {
+    background: #5BAA9A22;
+    border-color: #5BAA9A55;
+    color: #2f5e56;
+}
+
+.tag--ingredient {
+    background: #D8AC3B22;
+    border-color: #D8AC3B55;
+    color: #7a6220;
+}
+
+.tag--cuisine:hover {
+    background: #6A8DBE33;
+    border-color: #6A8DBEAA;
+}
+
+.tag--type:hover {
+    background: #5BAA9A33;
+    border-color: #5BAA9AAA;
+}
+
+.tag--ingredient:hover {
+    background: #D8AC3B33;
+    border-color: #D8AC3BAA;
+}
+
+/* TRIP TAGS — white text */
+.tag--slow-travel {
+    background: #d29576;
+    color: #fff;
+}
+
+.tag--hiking-trip {
+    background: #76884b;
+    color: #fff;
+}
+
+.tag--slow-travel:hover {
+    background: #b87d62;
+    /* slightly darker, richer */
+}
+
+.tag--hiking-trip:hover {
+    background: #65753f;
+    /* slightly darker */
+}

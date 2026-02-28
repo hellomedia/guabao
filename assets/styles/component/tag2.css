@@ -1,0 +1,85 @@
+:root {
+    --tag-radius: 20px;
+
+    --tag-font-size: 0.75rem;
+    --tag-padding-y: 2px;
+    --tag-padding-x: 8px;
+
+    --tag-lg-font-size: 0.90rem;
+    --tag-lg-padding-y: 5px;
+    --tag-lg-padding-x: 15px;
+
+    --tag-cuisine-color: #2d6bb3;
+    --tag-cuisine-border: rgba(74, 144, 226, 0.35);
+    --tag-cuisine-bg: rgba(74, 144, 226, 0.12);
+
+    --tag-type-color: #568e19;
+    --tag-type-border: rgba(126, 211, 33, 0.35);
+    --tag-type-bg: rgba(126, 211, 33, 0.12);
+
+    --tag-ingredient-color: #b87a12;
+    --tag-ingredient-border: rgba(245, 166, 35, 0.35);
+    --tag-ingredient-bg: rgba(245, 166, 35, 0.12);
+}
+
+/* Base tag look */
+.tag2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: var(--tag-padding-y) var(--tag-padding-x);
+    font-size: var(--tag-font-size);
+    border-radius: var(--tag-radius);
+    border: 1px solid transparent;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Non-clickable (pure label) */
+.tag--static {
+    cursor: default;
+}
+
+/* Clickable version (links or buttons) */
+.tag--clickable {
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.tag--large {
+    padding: var(--tag-lg-padding-y) var(--tag-lg-padding-x);
+    font-size: var(--tag-lg-font-size);
+}
+
+.tag--clickable:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    color: var(--tag-cuisine-color);
+}
+
+.tag--clickable:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* Variants by type */
+.tag--cuisine {
+    /* color: var(--tag-cuisine-color); */
+    color: white;
+    border-color: var(--tag-cuisine-border);
+    background-color: var(--tag-cuisine-border);
+}
+
+.tag--type {
+    color: var(--tag-type-color);
+    border-color: var(--tag-type-border);
+    background-color: var(--tag-type-bg);
+}
+
+.tag--ingredient {
+    color: var(--tag-ingredient-color);
+    border-color: var(--tag-ingredient-border);
+    background-color: var(--tag-ingredient-bg);
+}
