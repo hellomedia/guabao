@@ -1,5 +1,9 @@
 @layer components {
     footer {
+
+        display: none;
+
+
         background-color: var(--color-footer-background);
         color: var(--color-footer-text);
 
@@ -7,8 +11,9 @@
         padding-bottom: 60px;
         
         @apply hidden;
+
         @media (min-width: theme(--breakpoint-bottom-menu)) {
-            display: block;
+            display: none;
         }
         
         ul {
