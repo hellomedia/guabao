@@ -50,14 +50,26 @@
                     {% include 'food/_rating.html.twig' %}
                 </div>
             {% endif %}
-            
+
             <div class="card-tags tags invisible-scroll invisible-scroll-force-width fade-end">
+
                 {% for cuisine in food.cuisines %}
-                    <span class="tag food-tag tag-{{ cuisine.slugEn }}">{{ cuisine|trans }}</span>
+                    <a
+                        class="tag food-tag"
+                        href="{{ path('food_cuisines_cuisine', {slugEn: cuisine.slugEn}) }}"
+                    >
+                        {{ cuisine|trans }}
+                    </a>
                 {% endfor %}
                 {% for tag in food.tags %}
-                    <span class="tag food-tag tag-{{ tag.slugEn }}">{{ tag|trans }}</span>
+                    <a
+                        class="tag food-tag"
+                        href="{{ path('food_tags_tag', {slugEn: tag.slugEn}) }}"
+                    >
+                        {{ tag|trans }}
+                    </a>
                 {% endfor %}
+
             </div>
         </div>
 
