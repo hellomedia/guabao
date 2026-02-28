@@ -2,6 +2,12 @@
 
 {% block body_extra_classes %}food-page{% endblock %}
 
+{% block title_wrapper %}
+	<h1 class="in-page-title">{{ food|trans }}</h1>
+    {% if food.originalName %}
+        <h2 class="in-page-subtitle">{{ food.originalName }}</h2>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
 

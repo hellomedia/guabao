@@ -58,7 +58,7 @@ class FoodByIngredientController extends BaseController
             'food_ingredients_ingredient', ['slugEn' => $ingredient->getSlugEn()],
             isLarge: true
         );
-        $this->addBreadcrumb($food->getName($request->getLocale()));
+        //$this->addBreadcrumb($food->getName($request->getLocale()));
 
         return $this->render('food/show.html.twig', [
             'food' => $food,

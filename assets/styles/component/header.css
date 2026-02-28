@@ -1,7 +1,11 @@
 @layer components {
     header h1 {
-        @apply mt-0;
-        @apply md:mt-4;
+        @apply mt-0 mb-0;
+        @apply md:mt-5;
         transition: margin 0.5s;
+    }
+    header h2 {
+        @apply mt-3;
+        opacity: 0.75;
     }
 }

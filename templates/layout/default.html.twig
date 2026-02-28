@@ -9,10 +9,14 @@
                     <twig:breadcrumbs />
                 {% endblock %}
                 
-                {# Use with caution, as h1 is included in breadcrumbs #}
-                {% if block('title') is not empty %}
-                    <h1>{% block title '' %}</h1>
-                {% endif %}
+                {# Use with caution, as h1 is usually included in breadcrumbs #}
+                {# use title block for simple h1 title #}
+                {# use title_wrapper block for multi-block titles (h1 and h2) #}
+                {% block title_wrapper %}
+                    {% if block('title') is not empty %}
+                        <h1>{% block title '' %}</h1>
+                    {% endif %}
+                {% endblock %}
 
                 {% block header_extra_content '' %}
 
