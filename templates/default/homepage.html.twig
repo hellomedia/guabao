@@ -124,7 +124,8 @@
                 <div class="cards">
                     {% for food in top_food_discoveries %}
                         {% include 'food/_food_card.html.twig' with {
-                            url: path('food_show', {slug: food.slug}) 
+                            url: path('food_show', {slug: food.slug}),
+                            short_version: true
                         } %}
                     {% endfor %}
                 </div>

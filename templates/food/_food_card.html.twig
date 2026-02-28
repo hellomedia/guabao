@@ -44,9 +44,13 @@
 
 
         <div class="card-bottom invisible-scroll-force-width">
-            <div class="card-ratings">
-                {% include 'food/_rating.html.twig' %}
-            </div>
+
+            {% if (short_version ?? false) == false %}
+                <div class="card-ratings">
+                    {% include 'food/_rating.html.twig' %}
+                </div>
+            {% endif %}
+            
             <div class="card-tags tags invisible-scroll invisible-scroll-force-width fade-end">
                 {% for cuisine in food.cuisines %}
                     <span class="tag food-tag tag-{{ cuisine.slugEn }}">{{ cuisine|trans }}</span>
