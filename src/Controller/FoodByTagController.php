@@ -52,7 +52,7 @@ class FoodByTagController extends BaseController
         Request $request
         ): Response
     {
-        $this->addBreadcrumb('food.tags', 'food_tags_index');
+        //$this->addBreadcrumb('food.tags', 'food_index');
         $this->addBreadcrumb(
             $tag->getName($request->getLocale()),
             'food_tags_tag', ['slugEn' => $tag->getSlugEn()],
