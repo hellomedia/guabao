@@ -9,11 +9,15 @@
 {% block content %}
 
 <style>
-    .homepage-section {
-        margin: 30px 0;
+    .homepage-section + .homepage-section {
+        margin: 40px 0;
     }
     .section-title {
-
+        margin-bottom: 30px;
+    }
+    .see-all {
+        margin-left: 20px;
+        font-size: smaller;
     }
     .section-content {
 
@@ -40,7 +44,12 @@
     </div> #}
 
     <div class="homepage-section">
-        <h2 class="section-title">Slow Travel</h2>
+        <h2 class="section-title">
+            <a href="{{ path('trip_index_slow_travel') }}">
+                Slow Travel
+                <span class="see-all">See all</span>
+            </a>
+        </h2>
         <div class="section-content">
             <div class="cards">
                 {% for trip in top_slow_travel_trips %}
@@ -51,7 +60,12 @@
     </div>
 
     <div class="homepage-section">
-        <h2 class="section-title">Hiking trips</h2>
+        <h2 class="section-title">
+            <a href="{{ path('trip_index_hiking') }}">
+                Hiking trips
+                <span class="see-all">See all</span>
+            </a>
+        </h2>
         <div class="section-content">
             <div class="cards">
                 {% for trip in top_hiking_trips %}
@@ -117,7 +131,13 @@
     </div>
 
     <div class="homepage-section">
-        <h2 class="section-title">Food discoveries</h2>
+        <h2 class="section-title">
+            <a class="title-link" href="{{ path('food_index') }}">
+                Food discoveries
+                <span class="see-all">See all food</span>
+            </a>
+        </h2>
+
         <div class="section-content">
 
             <div class="section-content">
