@@ -7,7 +7,14 @@
 
             <a 
                 data-fancybox="{{ gallery ?? 'default' }}"
-                href="{{ uploaded_asset(media) }}"
+                {# href instead of data-src to keep hand cursor pointer on hover #}
+                href="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }}"
+                data-srcset="
+                    {{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }} 640w,
+                    {{ uploaded_asset(media)|imagine_filter('thumb_4_3_1280') }} 1280w,
+                    {{ uploaded_asset(media)|imagine_filter('thumb_large') }} 2000w
+                "
+                data-sizes="100vw"
                 data-caption="{{ media.description(app.request.locale)|nl2br }}"
                 class="{{ media.size2 ? 'size2' }}{{ media.size3 ? 'size3' }}{{ media.isPano ? 'pano' }}"
             >
@@ -16,7 +23,6 @@
                         <source 
                             src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}"
                             srcset="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }} 432w,
-                                {{ uploaded_asset(media)|imagine_filter('thumb_square_640') }} 640w,
                                 {{ uploaded_asset(media)|imagine_filter('thumb_square_864') }} 864w"
                             sizes="(max-width: 480px) 90vw, {# phone screen width minus margins #}
                                 (min-width: 1200px) 207px, {# final grid item width with 6 columns #}
@@ -27,9 +33,7 @@
                             src="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }}"
                             srcset="{{ uploaded_asset(media)|imagine_filter('thumb_4_3_640') }} 640w,
                                 {{ uploaded_asset(media)|imagine_filter('thumb_4_3_1280') }} 1280w"
-                            sizes="(max-width: 480px) 90vw, {# 100% - margins #}
-                                (min-width: 1200px) 621px, {# span 3 => 207 * 3 #}
-                                621px" {# default #}
+                            sizes="621px{# span 3 => 207 * 3 #}"
                             media="(min-width: 601px)"
                         />
                         <img 
@@ -45,7 +49,6 @@
                         <source 
                             src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}"
                             srcset="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }} 432w,
-                                {{ uploaded_asset(media)|imagine_filter('thumb_square_640') }} 640w,
                                 {{ uploaded_asset(media)|imagine_filter('thumb_square_864') }} 864w"
                             sizes="(max-width: 480px) 90vw, {# phone screen width minus margins #}
                                 (min-width: 1200px) 207px, {# final grid item width with 6 columns #}
@@ -71,7 +74,6 @@
                     <img 
                         src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}"
                         srcset="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }} 432w,
-                            {{ uploaded_asset(media)|imagine_filter('thumb_square_640') }} 640w,
                             {{ uploaded_asset(media)|imagine_filter('thumb_square_864') }} 864w"
                         sizes="(max-width: 480px) 90vw, {# phone screen width minus margins #}
                             (min-width: 1200px) 207px, {# final grid item width with 6 columns #}

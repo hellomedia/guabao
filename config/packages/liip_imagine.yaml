@@ -19,12 +19,6 @@ liip_imagine:
         format: avif
     
     filter_sets:
-        thumb_small:
-            quality: 75
-            filters:
-                thumbnail:
-                    size: [300, 300]
-                    mode: outbound # forces square aspect ratio
         # thumb_card Size and cropping logic ***
         # use 'outbound' to force the image aspect ratio, which makes the card grid layout easier to handle
         # Note about grid layout:
@@ -45,37 +39,47 @@ liip_imagine:
 
         # Square
         thumb_square_432: # max size for 1x pixel density for phone
+            # Cache warmed up in admin lists
             quality: 75
             filters:
                 thumbnail: 
                     size: [432, 432]
                     mode: outbound
-        thumb_square_640: # intermediate size, can be picked by browser when useful
-            quality: 75
-            filters:
-                thumbnail: 
-                    size: [640, 640]
-                    mode: outbound
+        # WE DO NOT USE THIS THUMB SIZE
+        # Not worth it for an app that does not receive many hits.
+        # This is an extra thumb to generate.
+        # Thumb cache is useful when an app has a lot of hits
+        # Otherwise, the cost of generating the thumb and storing it is not worth it
+        # And it makes the first page request very slow
+        # thumb_square_640: # intermediate size, can be picked by browser when useful
+        #     quality: 75
+        #     filters:
+        #         thumbnail: 
+        #             size: [640, 640]
+        #             mode: outbound
         thumb_square_864: # max size for 2x pixel density
+            # Cache warmed up in admin media quick edit
             quality: 75
             filters:
-                thumbnail: 
+                thumbnail:
                     size: [864, 864]
                     mode: outbound
         # 4/3
-        thumb_4_3_800: # max size for 1x pixel density
-            quality: 75
-            filters: 
-                thumbnail:
-                    size: [800, 600]
-                    mode: outbound
-        thumb_4_3_640: # max size for 1x pixel density
+        thumb_4_3_640:
             quality: 75
             filters: 
                 thumbnail:
                     size: [640, 480]
                     mode: outbound
-        thumb_4_3_1280: # max size for 2x pixel density
+        # WE DO NOT USE THIS THUMB SIZE
+        # Same reason as above
+        # thumb_4_3_800:
+        #     quality: 75
+        #     filters: 
+        #         thumbnail:
+        #             size: [800, 600]
+        #             mode: outbound
+        thumb_4_3_1280:
             quality: 75
             filters: 
                 thumbnail:
@@ -85,8 +89,8 @@ liip_imagine:
         # VARYING SIZE
         # ============
         # mode 'inset' keeps original aspect ratio, bound by size[] array
-
         thumb_large:
+            # Cache warmed up in admin fancybox full image view
             quality: 75
             filters:
                 thumbnail:

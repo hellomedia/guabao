@@ -6,7 +6,7 @@
         {% if isTrip %}<a href="{{ path('admin_media_bulk_edit_by_trip', {id: entity.instance.id}) }}">{% endif %}
             {% if media.type.name == "IMAGE" %}
                 <img
-                    src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+                    src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}"
                     class="thumbnail"
                     width="200"
                     height="200"

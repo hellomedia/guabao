@@ -115,7 +115,8 @@
                             <div class="story-medias">
                                 {% for media in story.medias %}
                                     {% if media.isImage %}
-                                        <img src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+                                        {# warm up square 432 thumb #}
+                                        <img src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}"
                                             alt="" width="200" height="200"
                                             class="{{ not media.showInStory ? 'faded' }}"
                                         />

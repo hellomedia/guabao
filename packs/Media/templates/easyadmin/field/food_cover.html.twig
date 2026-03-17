@@ -1,7 +1,7 @@
 {% if field.value is not null %}
     {% set cover = field.value %}
         <a href="{{ path('admin_media_bulk_edit_by_food', {'id': entity.instance.id}) }}">
-            <img src="{{ uploaded_asset(cover)|imagine_filter('thumb_small') }}" alt="" width="150" height="150"/>
+            <img src="{{ uploaded_asset(cover)|imagine_filter('thumb_square_432') }}" alt="" width="150" height="150"/>
         </a>
 {% else %}
 	<span class="badge badge-outline">{{ 'label.null'|trans({}, 'EasyAdminBundle') }}</span>

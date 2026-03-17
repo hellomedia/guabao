@@ -31,14 +31,19 @@
     
                 <div style="display:flex;gap:15px;align-items:start">
 
-                    <a data-fancybox="quick-edit-gallery"
-                        href="{{ uploaded_asset(media) }}" 
+                    <a 
+                        data-fancybox="quick-edit-gallery"
+                        {# warm up thumb_large #}
+                        href="{{ uploaded_asset(media)|imagine_filter('thumb_large') }}"
+                        data-sizes="100vw"
                         data-caption="{{ media.description(app.request.locale)|nl2br }}"
                     >
+
                         {% if media.isImage %}
                             <img    
                                 style="height: 220px; width: auto;margin-bottom: 15px;" 
-                                src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}"
+                                {# warm up thumb_square_864 #}
+                                src="{{ uploaded_asset(media)|imagine_filter('thumb_square_864') }}"
                                 width="300"
                                 height="300"
                                 class="{{-

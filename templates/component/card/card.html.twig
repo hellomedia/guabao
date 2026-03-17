@@ -2,7 +2,7 @@
 	{% if trip.cover %}
 		<a href="{{ path('trip_show', {'id': trip.id}) }}" class="card-image-wrapper">
 			<img
-				src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_small') }}"
+				src="{{ uploaded_asset(trip.cover)|imagine_filter('thumb_square_432') }}"
 				width="200"
 				height="200"
 			/>

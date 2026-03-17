@@ -91,7 +91,8 @@
                     <div class="cover-picker">
                         {% for media in form.vars.data.medias %}
                             <div data-cover-picker-target="item" data-id="{{ media.id }}">
-                                <img src="{{ uploaded_asset(media)|imagine_filter('thumb_small') }}">
+                                {# warm up thumb_square_432 for food media #}
+                                <img src="{{ uploaded_asset(media)|imagine_filter('thumb_square_432') }}">
                             </div>
                         {% endfor %}
                     </div>
