@@ -3,10 +3,10 @@
 {% block body_extra_classes %}food-page{% endblock %}
 
 {% block title_wrapper %}
-	<h1 class="in-page-title">{{ food|trans }}</h1>
-    {% if food.originalName %}
-        <h2 class="in-page-subtitle">{{ food.originalName }}</h2>
-    {% endif %}
+
+
+
+
 {% endblock %}
 
 {% block content %}
@@ -21,7 +21,8 @@
                 display: inline-flex;
                 flex-direction: column;
                 gap: 10px;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
+                margin-top: 50px;
                 h3, h4 {
                     margin: 0;
                 }
@@ -38,17 +39,20 @@
                 }
             }
             @media (width > 600px) {
-                .media-group-title {
-                    width: auto;
-                }
                 .date-location {
                     width: 100%;
                     flex-direction: row;
                     justify-content: space-between;
-                    gap: 70px;
+                    gap: 100px;
                     svg {
                         width: 30px;
                     }
+                }
+            }
+            @media (width > 1000px) {
+                .media-group-title {
+                    width: auto;
+                    min-width: 850px; /* aligns with image grid */
                 }
             }
             .date-location-date, 
@@ -63,54 +67,205 @@
         }
     </style>
 
-    <div id="rating">
-        {% include 'food/_full_rating.html.twig' %}
+
+
+
+{% if food.description is not empty %}
+	
+<div id="food-header">
+
+    <div id="col1">
+
+        <div id="food-title-container">
+            <div>
+                <h1>{{ food|trans }}</h1>
+
+                {% if food.originalName %}
+                    <h2>{{ food.originalName }}</h2>
+                {% endif %}
+            </div>
+            <div id="rating">
+                {% include 'food/_full_rating.html.twig' %}
+            </div>
+        </div>
+
+
+        <div id="description">
+		    {{ food.description|nl2br }}
+        </div>
+
+        {% set cover = food.cover %}
+        {% if cover is not null %}
+            <img
+                id="header-image"
+                src="{{ uploaded_asset(cover)|imagine_filter('thumb_4_3_640') }}"
+                srcset="
+                    {{ uploaded_asset(cover)|imagine_filter('thumb_4_3_640') }} 640w,
+                    {{ uploaded_asset(cover)|imagine_filter('thumb_4_3_1280') }} 1280w"
+                sizes="
+                    (max-width: 480px) 100vw,
+                    (max-width: 900px) 50vw,
+                    320px"
+                width="800" {# keep 800x600. flex sizing depends on those values #} 
+                height="600"
+            />
+        {% endif %}
+
     </div>
 
-    <div id="tags" class="card-tags tags">
-        {% for cuisine in food.cuisines %}
-            <a class="tag food-tag"
-                href="{{ path('food_cuisines_cuisine', {slugEn: cuisine.slugEn}) }}"
-            >
-                {{ cuisine|trans }}
-            </a>
-        {% endfor %}
-        {% for tag in food.tags %}
-            <a class="tag food-tag"
-                href="{{ path('food_tags_tag', {slugEn: tag.slugEn}) }}"
-            >
-                {{ tag|trans }}
-            </a>
-        {% endfor %}
+    <div id="col2">
+
+        <div class="food-tags">
+            <h2 class="sr-only">Food categories</h2>
+            {# Screen reader only heading #}
+
+            <div
+                class="tags-container">
+
+                {# Cuisines #}
+                <div class="tag-group tag-group--cuisines">
+                    <div class="tag-group__header">
+                        <span class="tag-group__icon" aria-hidden="true">🍜</span>
+                        <h3 class="tag-group__title">Cuisine</h3>
+                    </div>
+                    <ul class="tag-list tags">
+                        {% for cuisine in food.cuisines %}
+                            <li class="tag-list__item">
+                                <a class="tag food-tag" href="{{ path('food_cuisines_cuisine', {slugEn: cuisine.slugEn}) }}">
+                                    {{ cuisine|trans }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="tag-list__item tag-list__item--empty">Not specified</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                {# Food Types #}
+                <div class="tag-group tag-group--types">
+                    <div class="tag-group__header">
+                        <span class="tag-group__icon" aria-hidden="true">🍽️</span>
+                        <h3 class="tag-group__title">Food Type</h3>
+                    </div>
+                    <ul class="tag-list tags">
+                        {% for tag in food.tags %}
+                            <li class="tag-list__item">
+                                <a class="tag food-tag" href="{{ path('food_tags_tag', {slugEn: tag.slugEn}) }}">
+                                    {{ tag|trans }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="tag-list__item tag-list__item--empty">Not specified</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                {# Ingredients #}
+                <div class="tag-group tag-group--ingredients">
+                    <div class="tag-group__header">
+                        <span class="tag-group__icon" aria-hidden="true">🥕</span>
+                        <h3 class="tag-group__title">Ingredients</h3>
+                    </div>
+                    <ul class="tag-list tags">
+                        {% for ingredient in food.ingredients %}
+                            <li class="tag-list__item">
+                                <a class="tag food-tag" href="{{ path('food_ingredients_ingredient', {slugEn: ingredient.slugEn}) }}">
+                                    {{ ingredient|trans }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="tag-list__item tag-list__item--empty">Not specified</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                {% if food.similar is not empty %}
+
+                <div class="tag-group tag-group--similar">
+                    <div class="tag-group__header">
+                        <span class="tag-group__icon" aria-hidden="true">👀</span>
+                        <h3 class="tag-group__title">Similar</h3>
+                    </div>
+                    <ul class="tag-list">
+                        {% for similar_food in food.similar %}
+                            <li class="tag-list__item">
+                                <a href="{{ path('food_show', {slug: similar_food.slug }) }}"/>
+                                    {{ similar_food }}
+                                </a>
+                            </li>
+                            <li class="tag-list__item">
+                                <a href="{{ path('food_show', {slug: similar_food.slug }) }}"/>
+                                    {{ similar_food }}
+                                </a>
+                            </li>
+                            <li class="tag-list__item">
+                                <a href="{{ path('food_show', {slug: similar_food.slug }) }}"/>
+                                    {{ similar_food }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="tag-list__item tag-list__item--empty">Not specified</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                {% endif %}
+
+            </div>
+        </div>
+
+
+
+
+
     </div>
 
-    <div id="ingredients" class="card-tags tags">
-        {% for ingredient in food.ingredients %}
-            <a class="tag food-tag"
-                href="{{ path('food_ingredients_ingredient', {slugEn: ingredient.slugEn}) }}"
-            >
-                {{ ingredient|trans }}
-            </a>
-        {% endfor %}
-    </div>
 
-    {% if food.similar is not empty %}
-        <div id="similar-foods">
-            <span class="similar-foods-title">Similar foods:</span>
-            {% for similar_food in food.similar %}
-                <span class="similar">
-                    <a href="{{ path('food_show', {slug: similar_food.slug }) }}"/>{{ similar_food }}</a>
-                </span>
-                {{ not loop.last ? ', ' }}
+
+
+
+	</div>
+{% endif %}
+
+
+{# templates/food/_tags.html.twig #}
+
+
+
+    {# <div id="food-detail-tags">
+        <div id="cuisines" class="card-tags tags">
+            {% for cuisine in food.cuisines %}
+                <a class="tag food-tag"
+                    href="{{ path('food_cuisines_cuisine', {slugEn: cuisine.slugEn}) }}"
+                >
+                    {{ cuisine|trans }}
+                </a>
             {% endfor %}
         </div>
-    {% endif %}
-
-    {% if food.description is not empty %}
-        <div id="description">
-            {{ food.description|nl2br }}
+        <div id="tags">
+            {% for tag in food.tags %}
+                <a class="tag food-tag"
+                    href="{{ path('food_tags_tag', {slugEn: tag.slugEn}) }}"
+                >
+                    {{ tag|trans }}
+                </a>
+            {% endfor %}
         </div>
-    {% endif %}
+
+        <div id="ingredients" class="card-tags tags">
+            {% for ingredient in food.ingredients %}
+                <a class="tag food-tag"
+                    href="{{ path('food_ingredients_ingredient', {slugEn: ingredient.slugEn}) }}"
+                >
+                    {{ ingredient|trans }}
+                </a>
+            {% endfor %}
+        </div>
+    </div> #}
+
+
+
+
 
     <div id="media-groups">
         {% for group in media_groups %}

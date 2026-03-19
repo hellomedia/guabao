@@ -15,11 +15,13 @@
     .section-title {
         margin-bottom: 30px;
     }
-    .see-all {
-        margin-left: 20px;
-        font-size: smaller;
-    }
     .section-content {
+
+    }
+    .section-footer {
+        margin-top: 20px;
+    }
+    .see-all {
 
     }
     .section-item {
@@ -57,7 +59,6 @@
         <h2 class="section-title first">
             <a href="{{ path('trip_index_slow_travel') }}">
                 Slow Travel
-                <span class="see-all">See all</span>
             </a>
         </h2>
         <div class="section-content">
@@ -67,13 +68,17 @@
                 {% endfor %}
             </div>
         </div>
+        <div class="section-footer">
+            <a class="btn btn-primary see-all" href="{{ path('trip_index_slow_travel') }}">
+                See all slow travel
+            </a>
+        </div>
     </div>
 
     <div class="homepage-section">
         <h2 class="section-title">
             <a href="{{ path('trip_index_hiking') }}">
                 Hiking trips
-                <span class="see-all">See all</span>
             </a>
         </h2>
         <div class="section-content">
@@ -83,18 +88,22 @@
                 {% endfor %}
             </div>
         </div>
+        <div class="section-footer">
+            <a class="btn btn-primary see-all" href="{{ path('trip_index_hiking') }}">
+                See all hiking trips
+            </a>
+        </div>
     </div>
 
     <div class="homepage-section">
-        <h2 class="section-title">Adventures</h2>
+        <h2 class="section-title">
+            Adventures
+        </h2>
         <div class="section-content">
-
-            <div class="section-content">
-                <div class="cards">
-                    {% for story in top_adventures %}
-                        {% include 'story/_card.html.twig' %}
-                    {% endfor %}
-                </div>
+            <div class="cards">
+                {% for story in top_adventures %}
+                    {% include 'story/_card.html.twig' %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -102,40 +111,36 @@
     <div class="homepage-section">
         <h2 class="section-title">Discoveries</h2>
         <div class="section-content">
-
-            <div class="section-content">
-                <div class="cards">
-                    {% for story in top_discoveries %}
-                        {% include 'story/_card.html.twig' %}
-                    {% endfor %}
-                </div>
+            <div class="cards">
+                {% for story in top_discoveries %}
+                    {% include 'story/_card.html.twig' %}
+                {% endfor %}
             </div>
         </div>
     </div>
 
     <div class="homepage-section">
-        <h2 class="section-title">Significant places</h2>
+        <h2 class="section-title">
+            Special places
+        </h2>
         <div class="section-content">
-
-            <div class="section-content">
-                <div class="cards">
-                    {% for story in top_historical_places %}
-                        {% include 'story/_card.html.twig' %}
-                    {% endfor %}
-                </div>
+            <div class="cards">
+                {% for story in top_historical_places %}
+                    {% include 'story/_card.html.twig' %}
+                {% endfor %}
             </div>
         </div>
     </div>
-    <div class="homepage-section">
-        <h2 class="section-title">Meaningful moments</h2>
-        <div class="section-content">
 
-            <div class="section-content">
-                <div class="cards">
-                    {% for story in top_personal_experiences %}
-                        {% include 'story/_card.html.twig' %}
-                    {% endfor %}
-                </div>
+    <div class="homepage-section">
+        <h2 class="section-title">
+            Special moments
+        </h2>
+        <div class="section-content">
+            <div class="cards">
+                {% for story in top_personal_experiences %}
+                    {% include 'story/_card.html.twig' %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -144,22 +149,22 @@
         <h2 class="section-title">
             <a class="title-link" href="{{ path('food_index') }}">
                 Food discoveries
-                <span class="see-all">See all food</span>
             </a>
         </h2>
-
         <div class="section-content">
-
-            <div class="section-content">
-                <div class="cards">
-                    {% for food in top_food_discoveries %}
-                        {% include 'food/_food_card.html.twig' with {
-                            url: path('food_show', {slug: food.slug}),
-                            short_version: true
-                        } %}
-                    {% endfor %}
-                </div>
+            <div class="cards">
+                {% for food in top_food_discoveries %}
+                    {% include 'food/_food_card.html.twig' with {
+                        url: path('food_show', {slug: food.slug}),
+                        short_version: true
+                    } %}
+                {% endfor %}
             </div>
+        </div>
+        <div class="section-footer">
+            <a class="btn btn-primary see-all" href="{{ path('food_index') }}">
+                See all food
+            </a>
         </div>
     </div>
 {% endblock %}

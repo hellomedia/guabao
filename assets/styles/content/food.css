@@ -2,20 +2,55 @@
 
     .food-page {
 
-        #rating {
-            @apply text-lg;
-            margin-bottom: 25px;
-            .ranking-icon {
-                @apply text-xl;
+        #food-header {
+            padding: 40px 50px;
+            border: 2px dashed lavender;
+            border-radius: 5px;
+
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 50px;
+
+            h1 { 
+                margin-top: 0;
+                font-weight: 600;
+                margin-bottom: 20px;
+            }
+
+            #header-image {
+                margin-top: 40px;
+            }
+        
+            #col2 {
+                max-width: 400px;
             }
         }
 
-        #tags {
-            margin-bottom: 20px;
+        @media (max-width: 850px) {
+            #food-header {
+                padding: 0;
+                border: none;
+                grid-template-columns: 1fr;
+
+                #col2 {
+                    max-width: none;
+                }
+            }
         }
 
-        #ingredients {
-            margin-bottom: 30px;
+
+        #food-title-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+    
+        #rating {
+            @apply text-lg;
+            margin-bottom: 0;
+            .ranking-icon {
+                @apply text-xl;
+            }
         }
 
         #similar-foods {
@@ -28,13 +63,133 @@
 
         #description {
             @apply text-lg;
-            padding: 40px 50px;
-            border: 4px dashed lavender;
-            border-radius: 5px;
+            margin-bottom: 30px;
         }
 
         #media-groups {
-            margin-top: 50px;
+            margin-top: 0;
         }
+
+
+
+
+                /* Base styles */
+                .food-tags {
+                    margin: 0 0 2rem 0;
+                    padding: 1.5rem;
+                    background-color: #f9f9f9;
+                    border-radius: 5px;
+                    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); */
+                }
+        
+                .tags-container {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                }
+        
+                /* Tag group styling */
+                .tag-group {
+                    flex: 1;
+                    min-width: 0;
+                    /* Prevents overflow issues */
+                }
+        
+                .tag-group__header {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    margin-bottom: 1rem;
+                    border-bottom: 2px solid #e0e0e0;
+                    padding-bottom: 0.5rem;
+                }
+        
+                .tag-group__icon {
+                    font-size: 1.5rem;
+                    line-height: 1;
+                }
+        
+                .tag-group__title {
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    margin: 0;
+                    color: #333;
+                }
+        
+                /* Distinct group colors */
+                .tag-group--cuisines .tag-group__header {
+                    border-bottom-color: #ff6b6b;
+                }
+        
+                .tag-group--types .tag-group__header {
+                    border-bottom-color: #4ecdc4;
+                }
+        
+                .tag-group--ingredients .tag-group__header {
+                    border-bottom-color: #f9ca24;
+                }
+                .tag-group--similar .tag-group__header {
+                    border-bottom-color: #3498db;
+                }
+
+                .tag-group--similar {
+                    .tag-list {
+                        flex-direction: column;
+                        gap: 15px;
+                    }
+                }
+        
+                /* Tag list styling */
+                .tag-list {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+        
+                .tag-list__item {
+                    margin: 0;
+                }
+        
+                .tag {
+                    display: inline-block;
+                    padding: 0.4rem 1rem;
+                    background-color: white;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 20px;
+                    font-size: 0.9rem;
+                    color: #333;
+                    text-decoration: none;
+                    transition: all 0.2s ease;
+                }
+        
+                .tag:hover {
+                    background-color: var(--color-theme);
+                    border-color: var(--color-theme);
+                    color: white;
+                    transform: translateY(-1px);
+                    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+                }
+        
+                /* Empty state */
+                .tag-list__item--empty {
+                    color: #999;
+                    font-style: italic;
+                    padding: 0.4rem 0;
+                }
+        
+                /* Screen reader only */
+                .sr-only {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    padding: 0;
+                    margin: -1px;
+                    overflow: hidden;
+                    clip: rect(0, 0, 0, 0);
+                    border: 0;
+                }
     }
 }
