@@ -56,14 +56,17 @@
                         {{ cuisine|trans }}
                     </a>
                 {% endfor %}
-                {% for tag in food.tags %}
-                    <a
-                        class="tag food-tag"
-                        href="{{ path('food_tags_tag', {slugEn: tag.slugEn}) }}"
-                    >
-                        {{ tag|trans }}
-                    </a>
-                {% endfor %}
+                
+                {% if (short_version ?? false) == false %}
+                    {% for tag in food.tags %}
+                        <a
+                            class="tag food-tag"
+                            href="{{ path('food_tags_tag', {slugEn: tag.slugEn}) }}"
+                        >
+                            {{ tag|trans }}
+                        </a>
+                    {% endfor %}
+                {% endif %}
 
             </div>
         </div>
