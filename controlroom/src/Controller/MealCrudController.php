@@ -18,9 +18,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -73,6 +75,11 @@ class MealCrudController extends AbstractCrudController
         yield DateTimeField::new('enjoyedAt');
 
         yield ChoiceField::new('type');
+
+        yield BooleanField::new('favourite');
+
+        yield TextareaField::new('descriptionEn');
+        yield TextareaField::new('descriptionFr')->hideOnIndex();
 
         yield AssociationField::new('place')
             ->setFormTypeOption('help', 'Leave null for autofill with existing place within 100m of meal medias')

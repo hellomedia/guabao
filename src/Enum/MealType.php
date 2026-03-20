@@ -28,4 +28,19 @@ enum MealType: string implements TranslatableInterface
             self::DRINK => $translator->trans('meal.drink', domain: 'enum', locale: $locale),
         };
     }
+
+    /**
+     * Used from getName() in Meal entity
+     * where we don't have access to the locale or the translatorInterface
+     */
+    public function toEnglish(): string
+    {
+        return match ($this) {
+            self::BREAKFAST  => 'Breakfast',
+            self::LUNCH => 'Lunch',
+            self::DINNER => 'Dinner',
+            self::SNACK => 'Snack',
+            self::DRINK => 'Drink',
+        };
+    }
 }

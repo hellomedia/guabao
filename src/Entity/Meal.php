@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Tag\PlaceTag;
+use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Enum\MealType;
 use App\Repository\MealRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: MealRepository::class)]
 class Meal implements EntityInterface
 {
+    use LocalizedDescriptionTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -45,6 +48,9 @@ class Meal implements EntityInterface
     #[ORM\ManyToMany(targetEntity: SiteHighlight::class, mappedBy: 'meals')]
     private Collection $siteHighlights;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $favourite = null;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
@@ -68,7 +74,7 @@ class Meal implements EntityInterface
 
     public function getName(): string
     {
-        return 'Meal' . ' @ ' . ($this->place?->getName() ?: $this->placeTags?->first());
+        return ($this->type?->toEnglish() ?: 'Meal') . ' @ ' . ($this->place?->getName() ?: $this->placeTags?->first());
     }
 
     public function getId(): ?int
@@ -204,6 +210,18 @@ class Meal implements EntityInterface
         if ($this->siteHighlights->removeElement($siteHighlight)) {
             $siteHighlight->removeMeal($this);
         }
+
+        return $this;
+    }
+
+    public function isFavourite(): ?bool
+    {
+        return $this->favourite;
+    }
+
+    public function setFavourite(?bool $favourite): static
+    {
+        $this->favourite = $favourite;
 
         return $this;
     }
