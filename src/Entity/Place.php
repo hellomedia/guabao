@@ -63,6 +63,9 @@ class Place implements EntityInterface
     #[ORM\ManyToMany(targetEntity: SiteHighlight::class, mappedBy: 'places')]
     private Collection $siteHighlights;
 
+    #[ORM\ManyToOne(inversedBy: 'places')]
+    private ?Chain $chain = null;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
@@ -269,6 +272,18 @@ class Place implements EntityInterface
         if ($this->siteHighlights->removeElement($siteHighlight)) {
             $siteHighlight->removePlace($this);
         }
+
+        return $this;
+    }
+
+    public function getChain(): ?Chain
+    {
+        return $this->chain;
+    }
+
+    public function setChain(?Chain $chain): static
+    {
+        $this->chain = $chain;
 
         return $this;
     }

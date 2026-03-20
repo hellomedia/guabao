@@ -82,6 +82,8 @@ class PlaceCrudController extends AbstractCrudController
             ->setFormTypeOption('attr', ['data-map-picker-target' => 'lng'])
         ;
 
+        yield AssociationField::new('chain');
+        
         yield AssociationField::new('placeTags')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@admin/field/tags.html.twig')

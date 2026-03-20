@@ -2,6 +2,7 @@
 
 namespace Controlroom\Controller;
 
+use App\Entity\Chain;
 use App\Entity\Country;
 use App\Entity\Cuisine;
 use App\Entity\Food;
@@ -127,6 +128,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Places');
         yield MenuItem::linkToCrud('Places', 'fa fa-map-marker', Place::class);
+        yield MenuItem::linkToCrud('Chains', 'fa fa-store', Chain::class);
         yield MenuItem::linkToCrud('Place Tags', 'fa fa-tag', PlaceTag::class);
         yield MenuItem::linkToCrud('Countries', 'fa fa-flag', Country::class);
 
