@@ -4,74 +4,67 @@
 
 {% block title_wrapper %}
 
-
-
-
 {% endblock %}
 
 {% block content %}
 
-    <style>
-        .food-page {
-            .media-group-title {
-                width: 100%;
-                background: lavender;
-                padding: 20px 30px;
-                border-radius: 5px;
-                display: inline-flex;
-                flex-direction: column;
-                gap: 10px;
-                margin-bottom: 10px;
-                margin-top: 50px;
-                h3, h4 {
-                    margin: 0;
-                }
-            }
-            .date-location {
-                display: flex;
-                gap: 10px;
-                justify-content: center;
-                flex-direction: column;
-                svg {
-                    color: white;
-                    width: 25px;
-                    flex-shrink: 0;
-                }
-            }
-            @media (width > 600px) {
-                .date-location {
-                    width: 100%;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    gap: 100px;
-                    svg {
-                        width: 30px;
-                    }
-                }
-            }
-            @media (width > 1000px) {
-                .media-group-title {
-                    width: auto;
-                    min-width: 850px; /* aligns with image grid */
-                }
-            }
-            .date-location-date, 
-            .date-location-location {
-                display: flex;
-                gap: 10px;
-                align-items: center;
-            }
-            .gallery {
-                margin-bottom: 20px;
+<style>
+    .food-page {
+        .media-group-title {
+            width: 100%;
+            background: lavender;
+            padding: 20px 30px;
+            border-radius: 5px;
+            display: inline-flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 10px;
+            margin-top: 50px;
+            h3, h4 {
+                margin: 0;
             }
         }
-    </style>
+        .date-location {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-direction: column;
+            svg {
+                color: white;
+                width: 25px;
+                flex-shrink: 0;
+            }
+        }
+        @media (width > 600px) {
+            .date-location {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 100px;
+                svg {
+                    width: 30px;
+                }
+            }
+        }
+        @media (width > 1000px) {
+            .media-group-title {
+                width: auto;
+                min-width: 850px; /* aligns with image grid */
+            }
+        }
+        .date-location-date, 
+        .date-location-location {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .gallery {
+            margin-bottom: 20px;
+        }
+    }
+</style>
 
 
-
-
-{% if food.description is not empty %}
-	
 <div id="food-header">
 
     <div id="col1">
@@ -89,10 +82,11 @@
             </div>
         </div>
 
-
-        <div id="description">
-		    {{ food.description|nl2br }}
-        </div>
+        {% if food.description is not empty %}
+            <div id="description">
+                {{ food.description|nl2br }}
+            </div>
+        {% endif %}
 
         {% set cover = food.cover %}
         {% if cover is not null %}
@@ -213,88 +207,38 @@
 
             </div>
         </div>
-
-
-
-
-
     </div>
+</div>
 
 
+<div id="media-groups">
+    {% for group in media_groups %}
 
-
-
-	</div>
-{% endif %}
-
-
-{# templates/food/_tags.html.twig #}
-
-
-
-    {# <div id="food-detail-tags">
-        <div id="cuisines" class="card-tags tags">
-            {% for cuisine in food.cuisines %}
-                <a class="tag food-tag"
-                    href="{{ path('food_cuisines_cuisine', {slugEn: cuisine.slugEn}) }}"
-                >
-                    {{ cuisine|trans }}
-                </a>
-            {% endfor %}
-        </div>
-        <div id="tags">
-            {% for tag in food.tags %}
-                <a class="tag food-tag"
-                    href="{{ path('food_tags_tag', {slugEn: tag.slugEn}) }}"
-                >
-                    {{ tag|trans }}
-                </a>
-            {% endfor %}
-        </div>
-
-        <div id="ingredients" class="card-tags tags">
-            {% for ingredient in food.ingredients %}
-                <a class="tag food-tag"
-                    href="{{ path('food_ingredients_ingredient', {slugEn: ingredient.slugEn}) }}"
-                >
-                    {{ ingredient|trans }}
-                </a>
-            {% endfor %}
-        </div>
-    </div> #}
-
-
-
-
-
-    <div id="media-groups">
-        {% for group in media_groups %}
-
-            <div class="media-group-title">
-                <h4 class="date-location">
-                    <div class="date-location-date">
-                        <twig:ux:icon name="calendar" />
-                        <div>{{ group.date|format_date('long') }}</div>
+        <div class="media-group-title">
+            <h4 class="date-location">
+                <div class="date-location-date">
+                    <twig:ux:icon name="calendar" />
+                    <div>{{ group.date|format_date('long') }}</div>
+                </div>
+                <div class="date-location-location">
+                    <twig:ux:icon name="location" />
+                    <div>
+                        {% for placeTag in group.placeTags[:1] %}
+                            {{ placeTag|trans }}, {{ placeTag.country }}
+                        {% endfor %}
                     </div>
-                    <div class="date-location-location">
-                        <twig:ux:icon name="location" />
-                        <div>
-                            {% for placeTag in group.placeTags[:1] %}
-                                {{ placeTag|trans }}, {{ placeTag.country }}
-                            {% endfor %}
-                        </div>
-                    </div>
-                </h4>
-                {% if group.type == 'meal' %}
-                    <h3>{{ group.meal.name }}</h3>
-                {% endif %}
-            </div>
-            
+                </div>
+            </h4>
+            {% if group.type == 'meal' %}
+                <h3>{{ group.meal.name }}</h3>
+            {% endif %}
+        </div>
+        
 
-            {% include 'food/_gallery.html.twig' with {medias: group.medias } %}
+        {% include 'food/_gallery.html.twig' with {medias: group.medias } %}
 
-        {% endfor %}
-    </div>
+    {% endfor %}
+</div>
 
 {% endblock %}
 
