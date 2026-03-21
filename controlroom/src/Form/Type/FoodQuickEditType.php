@@ -49,20 +49,6 @@ class FoodQuickEditType extends AbstractType
                     'rows' => 3,
                 ],
             ])
-            ->add('additionalTextEn', TextareaType::class, [
-                'label' => "+ EN",
-                'required' => false,
-                'attr' => [
-                    'rows' => 3,
-                ],
-            ])
-            ->add('additionalTextFr', TextareaType::class, [
-                'label' => "+ FR",
-                'required' => false,
-                'attr' => [
-                    'rows' => 3,
-                ],
-            ])
             ->add('cover', EntityType::class, [
                 'class' => Media::class,
                 'attr' => [

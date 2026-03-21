@@ -91,9 +91,6 @@ class FoodCrudController extends AbstractCrudController
         yield TextareaField::new('descriptionEn');
         yield TextareaField::new('descriptionFr')->hideOnIndex();
 
-        yield TextareaField::new('additionalTextEn');
-        yield TextareaField::new('additionalTextFr')->hideOnIndex();
-
         yield AssociationField::new('cuisines')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@admin/field/cuisines.html.twig');
