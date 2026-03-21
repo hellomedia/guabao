@@ -40,14 +40,12 @@
 
 
         #food-title-container {
-            display: flex;
-            justify-content: space-between;
             margin-bottom: 20px;
         }
     
         #rating {
             @apply text-lg;
-            margin-bottom: 0;
+            margin-bottom: 30px;
             .ranking-icon {
                 @apply text-xl;
             }
@@ -63,6 +61,12 @@
 
         #description {
             @apply text-lg;
+            margin-bottom: 30px;
+        }
+    
+        #additional-text {
+            @apply text-lg;
+            margin-top: 30px;
             margin-bottom: 30px;
         }
 

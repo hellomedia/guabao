@@ -64,22 +64,15 @@
     }
 </style>
 
-
 <div id="food-header">
 
     <div id="col1">
 
         <div id="food-title-container">
-            <div>
-                <h1>{{ food|trans }}</h1>
-
-                {% if food.originalName %}
-                    <h2>{{ food.originalName }}</h2>
-                {% endif %}
-            </div>
-            <div id="rating">
-                {% include 'food/_full_rating.html.twig' %}
-            </div>
+            <h1>{{ food|trans }}</h1>
+            {% if food.originalName %}
+                <h2>{{ food.originalName }}</h2>
+            {% endif %}
         </div>
 
         {% if food.description is not empty %}
@@ -105,11 +98,23 @@
             />
         {% endif %}
 
+        {% if food.additionalText is not empty %}
+            <div id="additional-text">
+                {{ food.additionalText|nl2br }}
+            </div>
+        {% endif %}
+
+
     </div>
 
     <div id="col2">
 
         <div class="food-tags">
+
+            <div id="rating">
+                {% include 'food/_full_rating.html.twig' %}
+            </div>
+
             <h2 class="sr-only">Food categories</h2>
             {# Screen reader only heading #}
 
@@ -182,16 +187,6 @@
                     </div>
                     <ul class="tag-list">
                         {% for similar_food in food.similar %}
-                            <li class="tag-list__item">
-                                <a href="{{ path('food_show', {slug: similar_food.slug }) }}"/>
-                                    {{ similar_food }}
-                                </a>
-                            </li>
-                            <li class="tag-list__item">
-                                <a href="{{ path('food_show', {slug: similar_food.slug }) }}"/>
-                                    {{ similar_food }}
-                                </a>
-                            </li>
                             <li class="tag-list__item">
                                 <a href="{{ path('food_show', {slug: similar_food.slug }) }}"/>
                                     {{ similar_food }}

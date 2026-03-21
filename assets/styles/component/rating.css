@@ -9,7 +9,7 @@
     }
     .rating-value {
         white-space: nowrap;
-        padding-left: 5px;
+        padding-left: 15px;
         min-width: 125px; /* constant width no matter the rating, useful for card layout */
     }
 
