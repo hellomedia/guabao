@@ -74,6 +74,7 @@ class FoodCrudController extends AbstractCrudController
             
         yield TextField::new('nameEn');
         yield TextField::new('nameFr');
+        yield TextField::new('nameOriginal');
 
         yield AssociationField::new('parent')
             ->setFormTypeOptions([
