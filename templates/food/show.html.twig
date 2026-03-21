@@ -77,13 +77,13 @@
 
         {% set cover = food.cover %}
         {% if cover is not null %}
+            {# force 4/3 ratio for layout #}
             <img
                 id="header-image"
-                src="{{ uploaded_asset(cover)|imagine_filter('thumb_4_3_640') }}"
+                src="{{ uploaded_asset(cover)|imagine_filter('thumb_4_3_1280') }}"
                 srcset="
                     {{ uploaded_asset(cover)|imagine_filter('thumb_4_3_640') }} 640w,
-                    {{ uploaded_asset(cover)|imagine_filter('thumb_4_3_1280') }} 1280w,
-                    {{ uploaded_asset(cover)|imagine_filter('thumb_large') }} 2000w
+                    {{ uploaded_asset(cover)|imagine_filter('thumb_4_3_1280') }},
                 "
             />
         {% endif %}
