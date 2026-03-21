@@ -85,6 +85,9 @@
                     {{ uploaded_asset(cover)|imagine_filter('thumb_4_3_640') }} 640w,
                     {{ uploaded_asset(cover)|imagine_filter('thumb_4_3_1280') }},
                 "
+                {# declare aspect ratio. real size does not matter  #}
+                width="800"
+                height="600"
             />
         {% endif %}
 
