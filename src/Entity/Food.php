@@ -98,14 +98,6 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, Searchable
     #[ORM\Column(nullable: true)]
     private ?bool $isFavourite = null;
 
-    #[Assert\Length(max: 5000)]
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $additionalTextFr = null;
-
-    #[Assert\Length(max: 5000)]
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $additionalTextEn = null;
-
     /**
      * @var Collection<int, SiteHighlight>
      */
@@ -487,39 +479,6 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, Searchable
         if ($this->siteHighlights->removeElement($siteHighlight)) {
             $siteHighlight->removeFood($this);
         }
-
-        return $this;
-    }
-
-    public function getAdditionalText(?string $locale = null): ?string
-    {
-        return match ($locale) {
-            'fr' => $this->additionalTextFr,
-            'en' => $this->additionalTextEn,
-            default => $this->additionalTextEn ?? $this->additionalTextFr,
-        };
-    }
-
-    public function getAdditionalTextFr(): ?string
-    {
-        return $this->additionalTextFr;
-    }
-
-    public function setAdditionalTextFr(?string $additionalTextFr): static
-    {
-        $this->additionalTextFr = $additionalTextFr;
-
-        return $this;
-    }
-
-    public function getAdditionalTextEn(): ?string
-    {
-        return $this->additionalTextEn;
-    }
-
-    public function setAdditionalTextEn(?string $additionalTextEn): static
-    {
-        $this->additionalTextEn = $additionalTextEn;
 
         return $this;
     }

@@ -75,12 +75,6 @@
             {% endif %}
         </div>
 
-        {% if food.description is not empty %}
-            <div id="description">
-                {{ food.description|nl2br }}
-            </div>
-        {% endif %}
-
         {% set cover = food.cover %}
         {% if cover is not null %}
             <img
@@ -98,12 +92,11 @@
             />
         {% endif %}
 
-        {% if food.additionalText is not empty %}
-            <div id="additional-text">
-                {{ food.additionalText|nl2br }}
+        {% if food.description is not empty %}
+            <div id="description">
+                {{ food.description|nl2br }}
             </div>
         {% endif %}
-
 
     </div>
 

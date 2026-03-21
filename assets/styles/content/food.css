@@ -61,11 +61,6 @@
 
         #description {
             @apply text-lg;
-            margin-bottom: 30px;
-        }
-    
-        #additional-text {
-            @apply text-lg;
             margin-top: 30px;
             margin-bottom: 30px;
         }
