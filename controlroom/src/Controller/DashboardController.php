@@ -12,6 +12,8 @@ use App\Entity\Meal;
 use App\Entity\Media;
 use App\Entity\Place;
 use App\Entity\SiteHighlight;
+use App\Entity\Stats\AnonymousPageView;
+use App\Entity\Stats\AnonymousVisit;
 use App\Entity\Story;
 use App\Entity\Tag\FoodTag;
 use App\Entity\Tag\MediaTag;
@@ -134,6 +136,10 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Users');
         yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class);
+
+        yield MenuItem::section('Stats');
+        yield MenuItem::linkToCrud('Visits', 'fa fa-user', AnonymousVisit::class);
+        yield MenuItem::linkToCrud('Page views', 'fa fa-user', AnonymousPageView::class);
     }
 
     public function configureActions(): Actions

@@ -29,3 +29,5 @@ parameters:
     maintenance_warning: false
     # set to true when experiencing deliverability issues
     deliverability_issues: false
+
+    geoip_database_path: '%kernel.project_dir%/var/geoip/GeoLite2-City.mmdb'
