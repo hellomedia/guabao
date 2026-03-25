@@ -140,6 +140,7 @@ final class AnonymousTrackingService
         $visit->setFirstPath($request->getPathInfo());
         $visit->setLandingReferrer($request->headers->get('referer'));
         $visit->setUserAgent($request->headers->get('user-agent'));
+        $visit->setIp($request->getClientIp());
 
         $this->entityManager->persist($visit);
         $this->entityManager->flush();

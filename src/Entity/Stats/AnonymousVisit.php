@@ -48,6 +48,12 @@ class AnonymousVisit implements EntityInterface
     #[ORM\Column(length: 512, nullable: true)]
     private ?string $userAgent = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $alias = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $ip = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -193,5 +199,29 @@ class AnonymousVisit implements EntityInterface
     public function incrementPageCount(): void
     {
         $this->pageCount++;
+    }
+
+    public function getAlias(): ?string
+    {
+        return $this->alias;
+    }
+
+    public function setAlias(?string $alias): static
+    {
+        $this->alias = $alias;
+
+        return $this;
+    }
+
+    public function getIp(): ?string
+    {
+        return $this->ip;
+    }
+
+    public function setIp(?string $ip): static
+    {
+        $this->ip = $ip;
+
+        return $this;
     }
 }
