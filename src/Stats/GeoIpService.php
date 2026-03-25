@@ -36,9 +36,9 @@ final class GeoIpService
             );
         } catch (\Throwable $e) {
 
-            throw $e;
+            //throw $e;
 
-            //return new GeoIpResult(null, null);
+            return new GeoIpResult(null, null);
         }
     }
 

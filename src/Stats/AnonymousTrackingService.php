@@ -118,8 +118,6 @@ final class AnonymousTrackingService
     ): AnonymousVisit {
         $visitId = $session->get(self::SESSION_VISIT_ID_KEY);
 
-        $geo = $this->geoIpService->locate($request);
-        
         if ($visitId) {
             $visit = $this->visitRepository->find($visitId);
 
