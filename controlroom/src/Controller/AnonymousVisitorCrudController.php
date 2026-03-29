@@ -2,7 +2,7 @@
 
 namespace Controlroom\Controller;
 
-use App\Entity\Stats\AnonymousVisit;
+use App\Entity\Stats\AnonymousVisitor;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -16,18 +16,18 @@ use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\DateTimeFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
 
-class AnonymousVisitCrudController extends AbstractCrudController
+class AnonymousVisitorCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return AnonymousVisit::class;
+        return AnonymousVisitor::class;
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Anonymous Visit')
-            ->setEntityLabelInPlural('Anonymous Visits')
+            ->setEntityLabelInSingular('Anonymous Visitor')
+            ->setEntityLabelInPlural('Anonymous Visitors')
 
         ;
     }
@@ -35,12 +35,8 @@ class AnonymousVisitCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
-            ->add('visitor')
-            ->add(TextFilter::new('ip'))
-            ->add(TextFilter::new('countryCode'))
-            ->add(TextFilter::new('cityName'))
+            ->add(BooleanFilter::new('firstSeenAt'))
             ->add(DateTimeFilter::new('lastSeenAt'))
-            ->add(BooleanFilter::new('isReturning'))
         ;
     }
 
@@ -48,14 +44,25 @@ class AnonymousVisitCrudController extends AbstractCrudController
     {
         yield IdField::new('id')->hideOnForm();
 
-        yield TextField::new('sessionId');
-        yield AssociationField::new('visitor');
-        yield TextField::new('ip');
-        yield TextField::new('countryCode', 'Country');
-        yield TextField::new('cityName', 'City');
-        yield DateTimeField::new('startedAt');
+        yield TextField::new('alias');
+        yield TextField::new('visitorId');
+
+        yield TextField::new('countryNamesAsString', 'Countries')
+            ->onlyOnIndex()
+            ->formatValue(static function ($value, $entity) {
+                return $value ?: '—';
+            });
+        
+        yield TextField::new('citiesAsString', 'Cities')
+            ->onlyOnIndex()
+            ->formatValue(static function ($value, $entity) {
+                return $value ?: '—';
+            });
+
+        yield DateTimeField::new('firstSeenAt');
         yield DateTimeField::new('lastSeenAt');
         yield IntegerField::new('pageCount');
-        yield BooleanField::new('isReturning');
+        yield AssociationField::new('visits');
+        yield IntegerField::new('userAgent');
     }
 }

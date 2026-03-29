@@ -4,6 +4,8 @@ namespace App\Stats;
 
 use App\Entity\Stats\AnonymousPageView;
 use App\Entity\Stats\AnonymousVisit;
+use App\Entity\Stats\AnonymousVisitor;
+use App\Repository\Stats\AnonymousVisitorRepository;
 use App\Repository\Stats\AnonymousVisitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -15,13 +17,20 @@ use Symfony\Component\Uid\Uuid;
 
 final class AnonymousTrackingService
 {
+    // browser cookie name -- to track a visitor between sessions
     public const VISITOR_COOKIE_NAME = 'visitor_id';
+    // key used inside symfony session
     private const SESSION_VISIT_ID_KEY = 'stats.anonymous_visit_id';
+    // This one does not live in the browser or symfony session.
+    // Only lives during current request, so the response subscriber knows it needs to set a cookie.
+    // Temporary handoff between the tracking logic during request handling
+    // and cookie-setting logic during response handling
     private const REQUEST_NEW_VISITOR_ID_ATTR = 'stats.new_visitor_id';
 
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly AnonymousVisitRepository $visitRepository,
+        private readonly AnonymousVisitorRepository $visitorRepository,
         private readonly GeoIpService $geoIpService,
         private readonly Security $security,
         private readonly RequestStack $requestStack,
@@ -83,10 +92,23 @@ final class AnonymousTrackingService
             $request->attributes->set(self::REQUEST_NEW_VISITOR_ID_ATTR, $visitorId);
         }
 
+        $visitor = $this->visitorRepository->findOneByVisitorId($visitorId);
+
+        if (!$visitor) {
+            $visitor = new AnonymousVisitor();
+            $visitor->setVisitorId($visitorId);
+            $visitor->setFirstSeenAt($now);
+            $visitor->setLastSeenAt($now); // not null in DB ==> before flush
+            $visitor->setUserAgent($request->headers->get('user-agent'));
+
+            $this->entityManager->persist($visitor);
+            $this->entityManager->flush();
+        }
+
         $visit = $this->getOrCreateVisit(
             request: $request,
             session: $session,
-            visitorId: $visitorId,
+            visitor: $visitor,
             now: $now,
         );
 
@@ -101,6 +123,9 @@ final class AnonymousTrackingService
         $visit->setLastSeenAt($now);
         $visit->incrementPageCount();
 
+        $visitor->setLastSeenAt($now);
+        $visitor->incrementPageCount();
+
         $this->entityManager->persist($pageView);
         $this->entityManager->flush();
     }
@@ -113,7 +138,7 @@ final class AnonymousTrackingService
     private function getOrCreateVisit(
         Request $request,
         SessionInterface $session,
-        string $visitorId,
+        AnonymousVisitor $visitor,
         \DateTimeImmutable $now,
     ): AnonymousVisit {
         $visitId = $session->get(self::SESSION_VISIT_ID_KEY);
@@ -130,17 +155,18 @@ final class AnonymousTrackingService
 
         $visit = new AnonymousVisit();
         $visit->setSessionId($session->getId());
-        $visit->setVisitorId($visitorId);
+        $visit->setVisitor($visitor);
         $visit->setStartedAt($now);
         $visit->setLastSeenAt($now);
         $visit->setPageCount(0);
-        $visit->setIsReturning($this->visitRepository->hasPreviousVisitForVisitorId($visitorId));
+        $visit->setIsReturning($this->visitRepository->hasPreviousVisitForVisitor($visitor));
         $visit->setCountryCode($geo->countryCode);
         $visit->setCityName($geo->cityName);
         $visit->setFirstPath($request->getPathInfo());
         $visit->setLandingReferrer($request->headers->get('referer'));
-        $visit->setUserAgent($request->headers->get('user-agent'));
         $visit->setIp($request->getClientIp());
+
+        $visitor->addVisit($visit);
 
         $this->entityManager->persist($visit);
         $this->entityManager->flush();

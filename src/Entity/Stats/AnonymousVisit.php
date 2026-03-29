@@ -6,8 +6,6 @@ use App\Entity\Interface\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Index(columns: ['visitor_id'], name: 'idx_anonymous_visit_visitor_id')]
-#[ORM\Index(columns: ['started_at'], name: 'idx_anonymous_visit_started_at')]
 class AnonymousVisit implements EntityInterface
 {
     #[ORM\Id]
@@ -18,8 +16,8 @@ class AnonymousVisit implements EntityInterface
     #[ORM\Column(length: 128, unique: true)]
     private string $sessionId;
 
-    #[ORM\Column(length: 64)]
-    private string $visitorId;
+    #[ORM\ManyToOne(inversedBy: 'visits')]
+    private ?AnonymousVisitor $visitor = null;
 
     #[ORM\Column]
     private \DateTimeImmutable $startedAt;
@@ -45,12 +43,6 @@ class AnonymousVisit implements EntityInterface
     #[ORM\Column(length: 1000, nullable: true)]
     private ?string $landingReferrer = null;
 
-    #[ORM\Column(length: 512, nullable: true)]
-    private ?string $userAgent = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $alias = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $ip = null;
 
@@ -61,7 +53,7 @@ class AnonymousVisit implements EntityInterface
 
     public function __toString()
     {
-        return 'visit ' . $this->id . ' from ' . $this->visitorId;
+        return 'visit ' . $this->id . ' from ' . $this->visitor;
     }
 
     public function getSessionId(): ?string
@@ -72,18 +64,6 @@ class AnonymousVisit implements EntityInterface
     public function setSessionId(string $sessionId): static
     {
         $this->sessionId = $sessionId;
-
-        return $this;
-    }
-
-    public function getVisitorId(): ?string
-    {
-        return $this->visitorId;
-    }
-
-    public function setVisitorId(string $visitorId): static
-    {
-        $this->visitorId = $visitorId;
 
         return $this;
     }
@@ -184,33 +164,9 @@ class AnonymousVisit implements EntityInterface
         return $this;
     }
 
-    public function getUserAgent(): ?string
-    {
-        return $this->userAgent;
-    }
-
-    public function setUserAgent(?string $userAgent): static
-    {
-        $this->userAgent = $userAgent;
-
-        return $this;
-    }
-
     public function incrementPageCount(): void
     {
         $this->pageCount++;
-    }
-
-    public function getAlias(): ?string
-    {
-        return $this->alias;
-    }
-
-    public function setAlias(?string $alias): static
-    {
-        $this->alias = $alias;
-
-        return $this;
     }
 
     public function getIp(): ?string
@@ -221,6 +177,18 @@ class AnonymousVisit implements EntityInterface
     public function setIp(?string $ip): static
     {
         $this->ip = $ip;
+
+        return $this;
+    }
+
+    public function getVisitor(): ?AnonymousVisitor
+    {
+        return $this->visitor;
+    }
+
+    public function setVisitor(?AnonymousVisitor $visitor): static
+    {
+        $this->visitor = $visitor;
 
         return $this;
     }
