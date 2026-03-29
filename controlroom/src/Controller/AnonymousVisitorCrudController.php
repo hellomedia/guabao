@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\DateTimeFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
+use Faker\Provider\Text;
 
 class AnonymousVisitorCrudController extends AbstractCrudController
 {
@@ -62,7 +63,7 @@ class AnonymousVisitorCrudController extends AbstractCrudController
         yield DateTimeField::new('firstSeenAt');
         yield DateTimeField::new('lastSeenAt');
         yield IntegerField::new('pageCount');
-        yield AssociationField::new('visits');
-        yield IntegerField::new('userAgent');
+        yield AssociationField::new('visits')->hideOnForm();
+        yield TextField::new('userAgent');
     }
 }
