@@ -14,6 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 #[ORM\Index(columns: ['first_seen_at'], name: 'idx_anonymous_visitor_first_seen_at')]
 #[ORM\Index(columns: ['last_seen_at'], name: 'idx_anonymous_visitor_last_seen_at')]
+#[ORM\Index(columns: ['visitor_id'], name: 'idx_anonymous_visitor_visitor_id')]
+#[ORM\Index(columns: ['page_count'], name: 'idx_anonymous_visitor_page_count')]
+#[ORM\Index(columns: ['alias'], name: 'idx_anonymous_visitor_alias')]
 class AnonymousVisitor implements EntityInterface
 {
     #[ORM\Id]

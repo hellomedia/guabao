@@ -6,6 +6,8 @@ use App\Entity\Interface\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
+#[ORM\Index(columns: ['country_code'], name: 'idx_anonymous_visit_country_code')]
+#[ORM\Index(columns: ['city_name'], name: 'idx_anonymous_visit_city_name')]
 class AnonymousVisit implements EntityInterface
 {
     #[ORM\Id]
