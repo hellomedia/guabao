@@ -17,6 +17,12 @@
         display: flex;
         gap: 20px
     }
+    #notable-visitors {
+        margin-top: 80px;
+        table {
+            margin-bottom: 30px;
+        }
+    }
 </style>
 
 <div id="shortcuts">
@@ -64,6 +70,64 @@
             Ingredients
         </a>
     </div>
+</div>
+
+<div id="notable-visitors">
+    <a href="{{ path('controlroom_anonymous_visitor_index') }}"><h3>Last seen visitors</h3></a>
+    <table  class="table datagrid">
+        <tr>
+            <th>Id</th>
+            <th>Last seen</th>
+            <th>Visitor Id</th>
+            <th>Alias</th>
+            <th>Pages</th>
+            <th>Visits</th>
+            <th>Countries</th>
+            <th>Cities</th>
+            <th>First seen</th>
+        </tr>
+        {% for visitor in notable_visitors_by_last_seen %}
+            <tr>
+                <td>{{ visitor.id }}</td>
+                <td>{{ visitor.lastSeenAt|date('d-m-y H:i') }}</td>
+                <td><a href="{{ path('controlroom_anonymous_visitor_detail', {entityId: visitor.id}) }}">{{ visitor.visitorId }}</a></td>
+                <td>{{ visitor.alias }}</td>
+                <td>{{ visitor.pageCount }}</td>
+                <td>{{ visitor.visitCount }}</td>
+                <td>{{ visitor.countryNamesAsString }}</td>
+                <td>{{ visitor.citiesAsString }}</td>
+                <td>{{ visitor.firstSeenAt|date('d-m-y H:i')}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{ path('controlroom_anonymous_visitor_index') }}"><h3>Most page counts visitors</h3></a>
+    <table  class="table datagrid">
+        <tr>
+            <th>Id</th>
+            <th>Pages</th>
+            <th>Visitor Id</th>
+            <th>Alias</th>
+            <th>Visits</th>
+            <th>Countries</th>
+            <th>Cities</th>
+            <th>Last seen</th>
+            <th>First seen</th>
+        </tr>
+        {% for visitor in notable_visitors_by_page_count %}
+            <tr>
+                <td>{{ visitor.id }}</td>
+                <td>{{ visitor.pageCount }}</td>
+                <td><a href="{{ path('controlroom_anonymous_visitor_detail', {entityId: visitor.id}) }}">{{ visitor.visitorId }}</a></td>
+                <td>{{ visitor.alias }}</td>
+                <td>{{ visitor.visitCount }}</td>
+                <td>{{ visitor.countryNamesAsString }}</td>
+                <td>{{ visitor.citiesAsString }}</td>
+                <td>{{ visitor.lastSeenAt|date('d-m-y H:i') }}</td>
+                <td>{{ visitor.firstSeenAt|date('d-m-y H:i') }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 </div>
 
 {% endblock %}

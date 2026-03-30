@@ -22,6 +22,7 @@ use App\Entity\Tag\PlaceTag;
 use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
 use App\Entity\User;
+use App\Repository\Stats\AnonymousVisitorRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -43,6 +44,7 @@ class DashboardController extends AbstractDashboardController
 {
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
+        private AnonymousVisitorRepository $anonymousVisitorRepository,
     )
     {
     }
@@ -52,7 +54,12 @@ class DashboardController extends AbstractDashboardController
     #[Route('/', name: 'controlroom_dashboard')]
     public function index(): Response
     {
+        $notableVisitorsOrderedByLastSeen = $this->anonymousVisitorRepository->findNotableVisitorsOrderedByLastSeen();
+        $notableVisitorsOrderedByPageCount = $this->anonymousVisitorRepository->findNotableVisitorsOrderedByPageCount();
+
         return $this->render('@admin/dashboard.html.twig', [
+            'notable_visitors_by_last_seen' => $notableVisitorsOrderedByLastSeen,
+            'notable_visitors_by_page_count' => $notableVisitorsOrderedByPageCount,
         ]);
     }
 

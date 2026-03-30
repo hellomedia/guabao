@@ -13,4 +13,23 @@ final class AnonymousVisitorRepository extends ServiceEntityRepository
         parent::__construct($registry, AnonymousVisitor::class);
     }
 
+    public function findNotableVisitorsOrderedByLastSeen(): array
+    {
+        return $this->createQueryBuilder('v')
+            ->select('v')
+            ->andWhere('v.pageCount > 2')
+            ->orderBy('v.lastSeenAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findNotableVisitorsOrderedByPageCount(): array
+    {
+        return $this->createQueryBuilder('v')
+            ->select('v')
+            ->andWhere('v.pageCount > 2')
+            ->orderBy('v.pageCount', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }
