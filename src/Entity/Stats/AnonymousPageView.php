@@ -114,4 +114,9 @@ class AnonymousPageView implements EntityInterface
 
         return $this;
     }
+
+    public function getVisitor(): ?AnonymousVisitor
+    {
+        return $this->visit->getVisitor();
+    }
 }
