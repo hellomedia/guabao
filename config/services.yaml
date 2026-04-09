@@ -37,3 +37,7 @@ services:
     # *** This makes these services autowirable ***
     Doctrine\ORM\EntityManager: '@doctrine.orm.default_entity_manager'
     Symfony\Component\Asset\Context\RequestStackContext: '@assets.context'
+    Liip\ImagineBundle\Service\FilterService: '@liip_imagine.service.filter'
+    App\Service\Media\ImageCacheWarmer:
+        arguments:
+            $filterSets: '%liip_imagine.filter_sets%'
