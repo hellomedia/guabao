@@ -106,6 +106,7 @@ final class WarmImageCacheCommand extends Command
         $warmed = 0;
         $failed = 0;
         $skipped = 0;
+        $skipReasons = [];
         $errorSamples = [];
 
         foreach ($this->iterateMedia($idFrom, $limit) as $media) {
@@ -122,9 +123,11 @@ final class WarmImageCacheCommand extends Command
 
             if ($result->skipped) {
                 ++$skipped;
+                $reason = $result->message ?? 'Unknown reason';
+                $skipReasons[$reason] = ($skipReasons[$reason] ?? 0) + 1;
             }
 
-            if (null !== $result->message && \count($errorSamples) < 10) {
+            if ($result->failed > 0 && null !== $result->message && \count($errorSamples) < 10) {
                 $errorSamples[] = sprintf(
                     'Media #%s: %s',
                     (string) $media->getId(),
@@ -151,6 +154,15 @@ final class WarmImageCacheCommand extends Command
                 ['Skipped media', (string) $skipped],
             ]
         );
+
+        if ([] !== $skipReasons) {
+            $io->section('Skipped media');
+            $io->listing(array_map(
+                fn(string $reason, int $count) => sprintf('%s: %d', $reason, $count),
+                array_keys($skipReasons),
+                $skipReasons,
+            ));
+        }
 
         if ([] !== $errorSamples) {
             $io->section('Sample errors');
