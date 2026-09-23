@@ -61,6 +61,37 @@ services:
     volumes:
       - 'db-pgadmin:/var/lib/pgadmin'
 
+
+  # Claude code in container with no ssh access
+  # ===========================================
+  # Claude commits to git locally only.
+  #
+  # First time : docker compose build claude-code
+  # Launch claude in container with a new conversation: 
+  #          docker compose run --rm claude-code claude
+  # Launch claude in container continuing previous conversation:
+  #          docker compose run --rm claude-code claude -c 
+  #
+  # NB: --rm throws the container away when you exit, leaving nothing running.
+  #
+  # Stopping and starting containers doesn't lose Claude's memory of a project.
+  # The context that matters lives in two persistent places — the CLAUDE.md, /.claude/
+  # inside your repo (on disk, survives everything) and the session transcripts 
+  # in the claude-config named volume (survives container stop/start, since named volumes persist independently of containers). 
+  # So you can shut down HELLO KOT, bring it back up, and claude -c picks up where you left off.
+  claude-code:
+    environment:
+      - CLAUDE_CONFIG_DIR=/home/node/.claude
+    build: ./docker/claude
+    working_dir: /data/www
+    profiles: ["claude"]                     # keeps it OUT of your normal "docker compose up"
+    cap_add:
+      - NET_ADMIN                            # egress allowlist firewall (docker/claude/init-firewall.sh)
+    volumes:
+      - "./:/data/www"                       # your code (Claude reads, edits, commits here)
+      - "claude-config:/home/node/.claude"   # persists your Claude login. Named volume, /home/node is **inside** container, not on host
+
+
 ###> doctrine/doctrine-bundle ###
   # database:
   #   image: postgres:${POSTGRES_VERSION:-13}-alpine
