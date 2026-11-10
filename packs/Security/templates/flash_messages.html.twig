@@ -3,9 +3,9 @@
     {% for type, flash_messages in app.session.flashbag.all() %}
         {% for flash_message in flash_messages %}
         <div class="alert alert-{{ type }}">
-            {% if flash_message is instanceOf('App\\Translation\\TranslatableHtmlMessage') %}
+            {% if flash_message is instanceof('App\\Translation\\TranslatableHtmlMessage') %}
                 {{ flash_message|trans|raw }}
-            {% elseif flash_message is instanceOf('App\\Translation\\TranslatableMessage') %}
+            {% elseif flash_message is instanceof('App\\Translation\\TranslatableMessage') %}
                 {{ flash_message|trans }}
             {% else %}
                 {{ flash_message|trans(domain='flash_messages') }}
