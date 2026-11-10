@@ -45,10 +45,10 @@ class FoodByTagController extends BaseController
         ]);
     }
 
-    #[Route('/food/t/{slugTag}/{slugEn:food}', name: 'food_tags_food')]
+    #[Route('/food/t/{slugTag}/{slugEn}', name: 'food_tags_food')]
     public function food(
         #[MapEntity(expr: 'repository.findOneBySlugEn(slugTag)')] FoodTag $tag,
-        Food $food,
+        #[MapEntity(expr: 'repository.findOneBySlugEnWithMedias(slugEn)')] Food $food,
         Request $request
         ): Response
     {

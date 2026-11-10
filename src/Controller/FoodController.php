@@ -30,7 +30,7 @@ class FoodController extends BaseController
     // }
 
     #[Route('/food/d/{slug}', name: 'food_show')]
-    public function show(#[MapEntity(expr: 'repository.findOneBySlug(slug)')] Food $food, Request $request): Response
+    public function show(#[MapEntity(expr: 'repository.findOneBySlugWithMedias(slug)')] Food $food, Request $request): Response
     {
         //$this->addBreadcrumb($food->getName($request->getLocale()));
 

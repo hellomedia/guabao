@@ -60,7 +60,7 @@ class TripRepository extends ServiceEntityRepository
             default => 't.startedAt',
         };
     
-        return $this->createQueryBuilder('t')
+        return $this->createCardQueryBuilder()
             ->where('t.parent IS NULL')
             ->orderBy($sortField, 'DESC')
             ->getQuery()
@@ -76,7 +76,10 @@ class TripRepository extends ServiceEntityRepository
             default => 't.startedAt',
         };
 
-        return $this->createQueryBuilder('t')
+        // NB: 'tt' only filters. The full tag list comes from the fetch join
+        // in createCardQueryBuilder(), under a different alias: selecting 'tt'
+        // would leave only the matching tag in each trip's collection.
+        return $this->createCardQueryBuilder()
             ->join('t.tags', 'tt')
             ->where('t.parent IS NULL')
             ->andWhere('tt.slugEn = :slugEn')
@@ -86,13 +89,35 @@ class TripRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Trip for the show pages, with the children (trip legs) and what their
+     * cards display (cover, tags) already loaded.
+     */
     public function findOneBySlug(string $slug): ?Trip
     {
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
-        return $this->findOneBy([
-            'slug' . \ucfirst($locale) => $slug
-        ]);
+        return $this->createQueryBuilder('t')
+            ->leftJoin('t.cover', 'cover')->addSelect('cover')
+            ->leftJoin('t.children', 'child')->addSelect('child')
+            ->leftJoin('child.cover', 'childCover')->addSelect('childCover')
+            ->leftJoin('child.tags', 'childTag')->addSelect('childTag')
+            ->where('t.slug' . \ucfirst($locale) . ' = :slug')
+            ->setParameter('slug', $slug)
+            ->orderBy('child.startedAt', 'ASC')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * Fetches everything trip/_card.html.twig reads (cover + tags),
+     * so a list of cards costs one query instead of 1 + 2 per trip.
+     */
+    private function createCardQueryBuilder(): QueryBuilder
+    {
+        return $this->createQueryBuilder('t')
+            ->leftJoin('t.cover', 'cover')->addSelect('cover')
+            ->leftJoin('t.tags', 'tag')->addSelect('tag');
     }
 
     public function findOneByMediaDate(?DateTimeImmutable $mediaTakenAt): ?Trip
@@ -132,28 +157,23 @@ class TripRepository extends ServiceEntityRepository
         return new ArrayCollection(array_map(fn($row) => $row['pt'], $query->getResult()));
     }
 
-    public function findTopSlowTravelTrips(): Array
+    public function findTopSlowTravelTrips(): array
     {
-        return $this->createQueryBuilder('t')
-            ->join('t.tags', 'tt')
-            ->addSelect('tt')
-            ->join('t.siteHighlights', 'h')
-            ->where('h.nameEn = :highlightName')
-            ->orderBy('t.startedAt', 'DESC')
-            ->setParameter('highlightName', 'Favourite trips')
-            ->getQuery()
-            ->getResult();
+        return $this->findTopByHighlight('Favourite trips');
     }
 
-    public function findTopHikingTrips(): Array
+    public function findTopHikingTrips(): array
     {
-        return $this->createQueryBuilder('t')
-            ->join('t.tags', 'tt')
-            ->addSelect('tt')
+        return $this->findTopByHighlight('Favourite hiking');
+    }
+
+    private function findTopByHighlight(string $highlightName): array
+    {
+        return $this->createCardQueryBuilder()
             ->join('t.siteHighlights', 'h')
             ->where('h.nameEn = :highlightName')
             ->orderBy('t.startedAt', 'DESC')
-            ->setParameter('highlightName', 'Favourite hiking')
+            ->setParameter('highlightName', $highlightName)
             ->getQuery()
             ->getResult();
     }

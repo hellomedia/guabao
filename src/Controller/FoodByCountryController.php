@@ -46,10 +46,10 @@ class FoodByCountryController extends BaseController
         ]);
     }
 
-    #[Route('/food/meals/{slugCountry}/{slugEn:food}', name: 'food_countries_food')]
+    #[Route('/food/meals/{slugCountry}/{slugEn}', name: 'food_countries_food')]
     public function food(
         #[MapEntity(expr: 'repository.findOneBySlugEn(slugCountry)')] Country $country,
-        Food $food,
+        #[MapEntity(expr: 'repository.findOneBySlugEnWithMedias(slugEn)')] Food $food,
         Request $request
     ): Response {
         $this->addBreadcrumb('food.countries', 'food_countries_index');

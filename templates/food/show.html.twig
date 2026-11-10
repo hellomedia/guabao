@@ -64,6 +64,19 @@
     }
 </style>
 
+{# The country page (food_countries_country) reuses this template with media groups only, no food #}
+{% if food is not defined %}
+
+<div id="food-header">
+    <div id="col1">
+        <div id="food-title-container">
+            <h1>{{ country|trans }}</h1>
+        </div>
+    </div>
+</div>
+
+{% else %}
+
 <div id="food-header">
 
     <div id="col1">
@@ -197,6 +210,7 @@
     </div>
 </div>
 
+{% endif %}
 
 <div id="media-groups">
     {% for group in media_groups %}
