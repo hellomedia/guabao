@@ -1,11 +1,12 @@
+# ports: To avoid port conflict, for this project, add 2 (8080 => 8082, etc)
 services:
   nginx:
     build: ./docker/nginx
     depends_on:
       - php
     ports:
-      - "127.0.0.1:80:80"
-      - "127.0.0.1:443:443"
+      - "127.0.0.1:8082:80"
+      - "127.0.0.1:8445:443"
     logging:
       driver: "json-file"
       options:
@@ -47,7 +48,7 @@ services:
       POSTGRES_PASSWORD: "000000"
       POSTGRES_DB: guabao
     ports:
-      - "127.0.0.1:5432:5432"
+      - "127.0.0.1:5434:5432"
     volumes:
       - "db-data:/var/lib/postgresql/data"
    
@@ -57,7 +58,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: "hellomedia@hellomedia.com"
       PGADMIN_DEFAULT_PASSWORD: "000000"
     ports:
-      - '127.0.0.1:5050:80'
+      - '127.0.0.1:5052:80'
     volumes:
       - 'db-pgadmin:/var/lib/pgadmin'
 
