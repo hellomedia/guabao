@@ -14,7 +14,7 @@ class AnonymousPageView implements EntityInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: AnonymousVisit::class, inversedBy: 'pageViews')]
+    #[ORM\ManyToOne(targetEntity: AnonymousVisit::class)]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private AnonymousVisit $visit;
 
