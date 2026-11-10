@@ -19,7 +19,7 @@
 #
 # If deployment breaks site, rollback:
 #
-#     $ ssh deploy@taro.hellokot.be doas /data/kotmarket/activate-release.sh live <YEAR><MONTH><DATE>-<HOUR><MINUTE><SECOND>
+#     $ ssh deploy@hopia.hellokot.be doas /data/kotmarket/activate-release.sh live <YEAR><MONTH><DATE>-<HOUR><MINUTE><SECOND>
 # 
 #     OR
 #     $ cd /www/kotmarket/prod
@@ -32,7 +32,7 @@ set -e
 set -x
 
 BRANCH=main
-HOST=taro.hellokot.be
+HOST=hopia.hellokot.be
 USER=deploy
 TRACK=${TRACK:-live}
 PREFIX=/data/guabao/www/$TRACK
@@ -72,6 +72,21 @@ case $TRACK in
 esac
 
 trap cleanup INT TERM EXIT
+
+banner () {
+    set +x
+    # Display text in a full-width colored banner
+    esc="$1"; shift
+    text="$*"
+    cols=$(( $(tput cols) - 4 ))
+    echo "$esc"
+    output=$(
+        printf " \n"
+        printf "%*s%s\n" $(( (cols-${#text})/2 )) "" "$text"
+        printf " \n"
+    )
+    echo "$esc" "$output" "\033[0m"
+}
 
 cleanup () {
     trap "" INT TERM EXIT
@@ -129,11 +144,7 @@ rsync_local () {
 remote_activate () {
     if ! $SSH -t "$USER@$HOST" "doas /data/guabao/activate-release.sh $TRACK \"$(basename $DEST)\""; then
         set +x
-        echo -e "\033[41m\033[97m"
-        echo ""
-        echo " Failed"
-        echo -e "\033[0m";
-        set -x
+        banner "\033[41;97m" "Deployment failed"
         exit 1;
     fi
 }
@@ -153,3 +164,7 @@ wait
 if [ $TRACK = "live" ]; then
     (cd "$TMP_REPO" && git push origin --tags)
 fi
+
+set +x
+banner "\033[42;97m" "Deployment successful"
+
