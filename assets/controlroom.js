@@ -6,7 +6,7 @@
  */
 
 // load stimulus controllers
-import './bootstrap.js';
+import './stimulus_bootstrap.js';
 
 // Load all CSS directly in this file
 // DO NOT USE 2nd level imports ( like... import '.styles/controlroom.css -- and then import css from there )
