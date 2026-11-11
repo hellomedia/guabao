@@ -157,6 +157,12 @@ mercure-bundle ≥ 0.6 defaults to protocol 1.0. Keep `protocol_version: '0.x'` 
 | Live updates never arrive although Mercure works | `turbo_stream_listen()` printed **inside** an element's content (it returns attributes) | `turbo_stream_from(topic)` (UX Turbo 3.1+) renders a `<turbo-mercure-stream-source>` element; `turbo_stream_listen` is deprecated and refuses Mercure protocol 1.0 |
 | A page fails only in the Claude container: `Idle timeout … api.iconify.design` | icon not locked in `assets/icons`, fetched on demand | `bin/console ux:icons:lock` on the host; UX Icons 3 recipe enables `auto_lock` in dev |
 | `ValueError: "T" is not a valid backing value for enum …` | data left over after removing an enum case | data fix / migration — not an upgrade issue |
+| `Unrecognized option "annotations" under "framework"` after the jump | `framework.annotations: false` raised **no** deprecation on 7.4 | delete it (grep your config for removed keys before the jump) |
+| Composer refuses PHP 8.4+ because of `phpspec/phpspec` | phpspec 7.x caps PHP at 8.3 and Symfony at 7 | remove it if there are no specs (*Example (Guabao):* none existed) |
+| `$defaultIndexMethod … tagged locators and iterators are deprecated (tag: "vich_uploader.namer")` (8.1) | VichUploaderBundle's own `config/factory.php`, still in 2.x and 3.0.0 | nothing to do in the app; vendor deprecation |
+| `symfonycasts/tailwind-bundle` caps Symfony at 7 | 0.6–0.11 | `^0.14` (0.12+ allows Symfony 8); binary layout `var/tailwind/<version>/tailwindcss-<platform>` unchanged |
+| Smoke shows 0 runtime deprecations, the browser log has some | old `smoke.php` without `Debug::enable()`, cache in `/tmp` stayed warm | current `smoke.php` + `SMOKE_COLD=1`; also `lint:twig --show-deprecations` and `doctrine:mapping:info` on a cold cache |
+| Every admin page 500s although composer said nothing | `easycorp/easyadmin-bundle: "*"` silently installed EA5 | never use `*` for bundles; do §4.1 |
 
 ## 9. Verification battery
 
