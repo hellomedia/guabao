@@ -8,13 +8,8 @@
 // load stimulus controllers
 import './stimulus_bootstrap.js';
 
-// Load all CSS directly in this file
-// DO NOT USE 2nd level imports ( like... import '.styles/controlroom.css -- and then import css from there )
-// 2nd level imports are not handled by asset mapper
-// They can be handled by tailwind -- as we do for assets/styles/app.css
-// BUT symfonycast/tailwind binary which builds tailwind assets only supports 1 entry point
-// ( see symfonycasts_tailwind.yaml )
-// So in the end, 2nd level imports are not recognized in a file other than app.css
+// CSS can be imported here, or with @import from controlroom.css
+// (AssetMapper rewrites CSS @import paths to their versioned URLs, as for app.css)
 import './styles/controlroom.css';
 
 import "./styles/component/modal-variables-controlroom.css";

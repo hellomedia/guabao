@@ -13,19 +13,19 @@
         position: fixed;
         right: 8px;
         bottom: 100px;
-        @media (min-width: theme(--breakpoint-bottom-menu)) {
+        @media (min-width: 48rem) { /* breakpoint-bottom-menu */
             right: 12px;
             top: 77px;
             bottom: auto;
         }
-        @media (min-width: theme(--breakpoint-contextual-menu)) {
-            @apply hidden;
+        @media (min-width: 64rem) { /* breakpoint-contextual-menu */
+            display: none;
         }
     }
 
     #mobile-filter-btn-icon {
         color: var(--color-button-primary-text);
-        @apply w-7;
+        width: calc(var(--spacing) * 7);
     }
 
     #mobile-filter-menu-container {
@@ -54,8 +54,8 @@
         height: 100%;
         top: 0;
         left: 0;
-        @apply inset-0;
-        @apply bg-black/25;
+        inset: 0;
+        background-color: rgb(0 0 0 / 0.25);
         
         /* TRANSITION */
 
@@ -78,7 +78,7 @@
         height: 100dvh;
         width: var(--container-xs);
         overflow-y: auto;
-        @apply pb-6;
+        padding-bottom: calc(var(--spacing) * 6);
 
         background-color: var(--color-drawer-background);
         color: var(--color-drawer-text);
@@ -107,8 +107,8 @@
         display: flex;
         align-items: center;
         justify-items: start;
-        @apply h-16;
-        @apply pe-4;
+        height: calc(var(--spacing) * 16);
+        padding-inline-end: calc(var(--spacing) * 4);
     }
     
     #mobile-filter-menu-grab-vertical-icon {

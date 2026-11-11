@@ -29,7 +29,7 @@
         }
     }
 
-    @media (width > theme(--breakpoint-mobile-end)) {
+    @media (width > 48rem) { /* breakpoint-mobile-end */
         .video-wrapper {
             &.landscape {
                 height: auto; /* height defined by containing element */

@@ -79,7 +79,8 @@
     }
 
     .btn-card-primary-action {
-        @apply text-base;
+        font-size: var(--text-base);
+        line-height: var(--text-base--line-height);
         color: var(--color-primary-text);
         border: none;
         background: none;

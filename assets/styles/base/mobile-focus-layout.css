@@ -1,5 +1,5 @@
 @layer base {
-    @media (max-width: theme(--breakpoint-mobile-end)) {
+    @media (max-width: 48rem) { /* breakpoint-mobile-end */
         .mobile-focus-layout {
             #main-wrapper {
                 padding-top: 0;
@@ -12,8 +12,10 @@
 
             .default-container-xpadding {
                 /* override layout.css */
-                @apply px-0;
-                @apply sm:px-0;
+                padding-inline: 0;
+                @media (width >= 40rem) {
+                    padding-inline: 0;
+                }
             }
         }
     }

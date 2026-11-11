@@ -10,22 +10,25 @@
         padding-top: 60px;
         padding-bottom: 60px;
         
-        @apply hidden;
+        display: none;
 
-        @media (min-width: theme(--breakpoint-bottom-menu)) {
+        @media (min-width: 48rem) { /* breakpoint-bottom-menu */
             display: none;
         }
         
         ul {
-            @apply text-sm;
+            font-size: var(--text-sm);
+            line-height: var(--text-sm--line-height);
         }
 
         li {
-            @apply mb-4;
+            margin-bottom: calc(var(--spacing) * 4);
         }
 
         a {
-            @apply hover:text-gray-100;
+            &:hover {
+                color: var(--color-gray-100);
+            }
         }
     }
 
@@ -50,7 +53,8 @@
 
     .footer-section-title {
         font-family: 'Inter Variable', sans-serif;
-        @apply text-base;
+        font-size: var(--text-base);
+        line-height: var(--text-base--line-height);
         color: var(--color-footer-section-title-text);
         margin-bottom: calc(var(--spacing) * 8);
     }

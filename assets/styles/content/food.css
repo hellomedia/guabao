@@ -44,23 +44,27 @@
         }
     
         #rating {
-            @apply text-lg;
+            font-size: var(--text-lg);
+            line-height: var(--text-lg--line-height);
             margin-bottom: 30px;
             .ranking-icon {
-                @apply text-xl;
+                font-size: var(--text-xl);
+                line-height: var(--text-xl--line-height);
             }
         }
 
         #similar-foods {
             margin-bottom: 30px;
             .similar-foods-title {
-                @apply text-lg;
+                font-size: var(--text-lg);
+                line-height: var(--text-lg--line-height);
                 margin-right: 10px;
             }
         }
 
         #description {
-            @apply text-lg;
+            font-size: var(--text-lg);
+            line-height: var(--text-lg--line-height);
             margin-top: 30px;
             margin-bottom: 30px;
         }

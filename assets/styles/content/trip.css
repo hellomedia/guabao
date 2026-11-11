@@ -7,18 +7,21 @@
         }
 
         #rating {
-            @apply text-lg;
+            font-size: var(--text-lg);
+            line-height: var(--text-lg--line-height);
             margin-top: 40px;
             margin-bottom: 2rem;
             .ranking-icon {
-                @apply text-xl;
+                font-size: var(--text-xl);
+                line-height: var(--text-xl--line-height);
             }
         }
 
         #description {
             margin-top: 2rem;
             margin-bottom: 2.5rem;
-            @apply text-xl;
+            font-size: var(--text-xl);
+            line-height: var(--text-xl--line-height);
         }
 
         #stories {
@@ -33,7 +36,8 @@
                 }
             }
             .story-description {
-                @apply text-lg;
+                font-size: var(--text-lg);
+                line-height: var(--text-lg--line-height);
                 margin-bottom: calc(var(--spacing) * 11);
             }
             .story-images:not(:last-child) {

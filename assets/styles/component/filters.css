@@ -40,7 +40,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            @apply text-sm;
+            font-size: var(--text-sm);
+            line-height: var(--text-sm--line-height);
             white-space: wrap !important;
         }
 
@@ -50,7 +51,8 @@
         .trip-duration {
             font-style: italic;
             white-space: nowrap !important;
-            @apply text-sm;
+            font-size: var(--text-sm);
+            line-height: var(--text-sm--line-height);
         }
 
         .trip-leg-divider {

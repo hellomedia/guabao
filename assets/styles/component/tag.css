@@ -7,7 +7,8 @@
         margin-bottom: 13px;
         
         .tag {
-            @apply text-sm;
+            font-size: var(--text-sm);
+            line-height: var(--text-sm--line-height);
             color: var(--color-secondary-text);
             border: 1px solid var(--color-secondary-text);
             padding: 5px 10px;

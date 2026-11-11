@@ -2,13 +2,13 @@
     .cards {
         display: grid;
         grid-template-columns: repeat(1, minmax(0, 1fr));
-        @media (width >= theme(--breakpoint-md)) {
+        @media (width >= 48rem) {
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
-        @media (width >= theme(--breakpoint-lg)) {
+        @media (width >= 64rem) {
             grid-template-columns: repeat(3, minmax(0, 1fr));
         }
-        @media (width >= theme(--breakpoint-xl)) {
+        @media (width >= 80rem) {
             grid-template-columns: repeat(4, minmax(0, 1fr));
         }
         gap: calc(var(--spacing) * 5);
@@ -26,11 +26,11 @@
     }
 
     .cards-horizontal {
-        @media (width >=theme(--breakpoint-lg)) {
+        @media (width >= 64rem) {
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
     
-        @media (width >=theme(--breakpoint-xl)) {
+        @media (width >= 80rem) {
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
     }
@@ -73,7 +73,7 @@
             grid-template-columns: minmax(0, 400px);
             gap: 7px;
         }
-        @media (width >= theme(--breakpoint-sm)) {
+        @media (width >= 40rem) {
             max-width: 600px;
             margin-inline: auto;
             grid-template-columns: minmax(0, 600px);
@@ -86,7 +86,7 @@
                 }
             }
         }
-        @media (width >= theme(--breakpoint-lg)) {
+        @media (width >= 64rem) {
             max-width: max-content;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: calc(var(--spacing) * 5);
@@ -114,7 +114,7 @@
         border-right: 0;
         border-radius: 0;
 
-        @media (width >=theme(--breakpoint-sm)) {
+        @media (width >= 40rem) {
             border: 1px solid var(--color-border);
             border-radius: var(--radius-sm);
             overflow: hidden;
@@ -150,7 +150,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 3px;
-            @media (width >=theme(--breakpoint-sm)) {
+            @media (width >= 40rem) {
                 gap: 3px;
             }
         }
@@ -162,7 +162,7 @@
             align-items: center;
             text-align: center;
             margin-bottom: 3px;
-            @media (width >= theme(--breakpoint-sm)) {
+            @media (width >= 40rem) {
                 margin-bottom: 5px;
             }
 
@@ -184,7 +184,7 @@
 
         .card-duration {
             /* display: none;
-            @media (width >= theme(--breakpoint-lg)) {
+            @media (width >= 64rem) {
                 display: block;
             } */
         }
@@ -198,7 +198,7 @@
             margin-top: auto;
             padding-top: 10px;
             gap: 5px; 
-            @media (width >=theme(--breakpoint-sm)) {
+            @media (width >= 40rem) {
                 padding-top: 10px;
                 gap: 5px;
             }
@@ -218,7 +218,7 @@
     }
 
     .cards-horizontal .card {
-        @media (width >=theme(--breakpoint-lg)) {
+        @media (width >= 64rem) {
             flex-direction: row;
             .card-info {
                 width: 130%; /* force grid to make column larger compared to pic */

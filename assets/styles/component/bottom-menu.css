@@ -2,7 +2,7 @@
 
     body:not(.no-bottom-menu).with-bottom-menu {
         padding-bottom: 75px; /* set to bottom menu height */
-        @media (min-width: theme(--breakpoint-bottom-menu)) {
+        @media (min-width: 48rem) { /* breakpoint-bottom-menu */
             padding-bottom: 0;
         }
     }
@@ -17,7 +17,7 @@
         bottom: 0;
         left: 0;
         width: 100vw;
-        @media (min-width: theme(--breakpoint-bottom-menu)) {
+        @media (min-width: 48rem) { /* breakpoint-bottom-menu */
             display: none;
         }
         background-color: var(--color-bottom-menu-background);
@@ -27,7 +27,7 @@
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        @apply px-2;
+        padding-inline: calc(var(--spacing) * 2);
         padding-top: 13px;
         padding-bottom: 7px;
     }
@@ -47,7 +47,8 @@
     }
 
     .bottom-menu-label {
-        @apply text-sm;
-        @apply pt-1;
+        font-size: var(--text-sm);
+        line-height: var(--text-sm--line-height);
+        padding-top: calc(var(--spacing) * 1);
     }
 }

@@ -1,15 +1,17 @@
-@layer reset, base, components;
+/*
+ * Plain CSS, served as-is by AssetMapper (no build step): each @import is
+ * fetched by the browser, using its versioned URL.
+ *
+ * Cascade layers, lowest to highest priority. Whatever layer a rule is in,
+ * it beats any rule in an earlier layer, regardless of specificity.
+ * Kept identical to the order produced by the former Tailwind build.
+ */
+@layer reset, base, components, theme, utilities, content;
 
-@import "tailwindcss";
-@source "../../templates";
-@source "../../src/Twig/**/*.twig";
-@source "../../assets";
-
-
-@variant light (&:where(.light, .light *));
-@variant dark (&:where(.dark, .dark *));
-
+@import "./tokens.css";
 @import "./theme.css";
+
+@import "./base/reset.css";
 
 @import "./theme/light.css";
 @import "./theme/dark.css";
@@ -53,7 +55,4 @@
 @import "./content/trip.css";
 @import "./content/food.css";
 
-/* path processing only works from app.css */
-#foo-container {
-    /* background-image: url('../icons/gridicons/chat.svg'); */
-}
+@import "./utilities.css";

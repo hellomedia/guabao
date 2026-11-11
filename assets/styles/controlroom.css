@@ -1,5 +1,3 @@
-/* DO NOT IMPORT CSS FILES FROM HERE
-unless we fix tailwind build for controlroom.css */
 
 table.datagrid td.actions {
     /* adjust as needed */
