@@ -24,7 +24,7 @@ class FoodTagAutocompleteField extends AbstractType
             'searchable_fields' => ['nameEn', 'nameFr'],
             'query_builder' => function (FoodTagRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('ft')
-                ->orderBy('ft.nameEn', 'ASC')
+                ->orderBy('ft.nameEn', \SortDirection::Ascending)
                 ;
             },
             'multiple' => true,

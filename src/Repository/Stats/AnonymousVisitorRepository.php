@@ -18,7 +18,7 @@ final class AnonymousVisitorRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('v')
             ->select('v')
             ->andWhere('v.pageCount > 2')
-            ->orderBy('v.lastSeenAt', 'DESC')
+            ->orderBy('v.lastSeenAt', \SortDirection::Descending)
             ->getQuery()
             ->getResult();
     }
@@ -28,7 +28,7 @@ final class AnonymousVisitorRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('v')
             ->select('v')
             ->andWhere('v.pageCount > 2')
-            ->orderBy('v.pageCount', 'DESC')
+            ->orderBy('v.pageCount', \SortDirection::Descending)
             ->getQuery()
             ->getResult();
     }

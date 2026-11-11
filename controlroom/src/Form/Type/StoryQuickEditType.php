@@ -73,7 +73,7 @@ class StoryQuickEditType extends AbstractType
                 'class' => MediaTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
-                        ->orderBy('t.nameEn', 'ASC');
+                        ->orderBy('t.nameEn', \SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -86,7 +86,7 @@ class StoryQuickEditType extends AbstractType
                     return $repo->createQueryBuilder('pt')
                         ->where('pt.country IN (:countries)')
                         ->setParameter('countries', $story->getTrip()->getCountries())
-                        ->orderBy('pt.nameEn', 'ASC');
+                        ->orderBy('pt.nameEn', \SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -99,7 +99,7 @@ class StoryQuickEditType extends AbstractType
                 'required' => false,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('h')
-                        ->orderBy('h.nameEn', 'ASC');
+                        ->orderBy('h.nameEn', \SortDirection::Ascending);
                 },
                 'multiple' => true,
                 'autocomplete' => true,

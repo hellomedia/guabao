@@ -34,7 +34,7 @@ class TripRepository extends ServiceEntityRepository
     //        return $this->createQueryBuilder('t')
     //            ->andWhere('t.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('t.id', 'ASC')
+    //            ->orderBy('t.id', \SortDirection::Ascending)
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
@@ -62,7 +62,7 @@ class TripRepository extends ServiceEntityRepository
     
         return $this->createCardQueryBuilder()
             ->where('t.parent IS NULL')
-            ->orderBy($sortField, 'DESC')
+            ->orderBy($sortField, \SortDirection::Descending)
             ->getQuery()
             ->getResult();
     }
@@ -83,7 +83,7 @@ class TripRepository extends ServiceEntityRepository
             ->join('t.tags', 'tt')
             ->where('t.parent IS NULL')
             ->andWhere('tt.slugEn = :slugEn')
-            ->orderBy($sortField, 'DESC')
+            ->orderBy($sortField, \SortDirection::Descending)
             ->setParameter('slugEn', $tag->getSlugEn())
             ->getQuery()
             ->getResult();
@@ -104,7 +104,7 @@ class TripRepository extends ServiceEntityRepository
             ->leftJoin('child.tags', 'childTag')->addSelect('childTag')
             ->where('t.slug' . \ucfirst($locale) . ' = :slug')
             ->setParameter('slug', $slug)
-            ->orderBy('child.startedAt', 'ASC')
+            ->orderBy('child.startedAt', \SortDirection::Ascending)
             ->getQuery()
             ->getOneOrNullResult();
     }
@@ -133,7 +133,7 @@ class TripRepository extends ServiceEntityRepository
             ->andWhere('t.startedAt < :mediaTakenAt')
             ->andWhere('t.endedAt > :mediaTakenAt')
             ->setParameter('mediaTakenAt', $mediaTakenAt)
-            ->orderBy('t.parent', 'ASC') // default is NULLS LAST for ASC !
+            ->orderBy('t.parent', \SortDirection::Ascending) // default is NULLS LAST for ASC !
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
@@ -172,7 +172,7 @@ class TripRepository extends ServiceEntityRepository
         return $this->createCardQueryBuilder()
             ->join('t.siteHighlights', 'h')
             ->where('h.nameEn = :highlightName')
-            ->orderBy('t.startedAt', 'DESC')
+            ->orderBy('t.startedAt', \SortDirection::Descending)
             ->setParameter('highlightName', $highlightName)
             ->getQuery()
             ->getResult();

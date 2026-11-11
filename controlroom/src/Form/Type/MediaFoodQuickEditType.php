@@ -44,7 +44,7 @@ class MediaFoodQuickEditType extends AbstractType
                 'required' => false,
                 'query_builder' => function (EntityRepository $repo) : QueryBuilder {
                     return $repo->createQueryBuilder('h')
-                        ->orderBy('h.nameEn', 'ASC');
+                        ->orderBy('h.nameEn', \SortDirection::Ascending);
                 },
                 'multiple' => true,
                 'autocomplete' => true,

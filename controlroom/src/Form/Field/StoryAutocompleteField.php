@@ -35,7 +35,7 @@ class StoryAutocompleteField extends AbstractType
                         return $repo->createQueryBuilder('s')
                             ->where('s.trip = :trip')
                             ->setParameter('trip', $currentTrip)
-                            ->orderBy('s.displayOrder', 'ASC');
+                            ->orderBy('s.displayOrder', \SortDirection::Ascending);
                     }
 
                     return $repo->createQueryBuilder('s');

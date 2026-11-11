@@ -24,7 +24,7 @@ class PlaceTagRepository extends ServiceEntityRepository
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
         return $this->createQueryBuilder('pt')
-            ->orderBy('pt.name' . \ucfirst($locale), 'ASC')
+            ->orderBy('pt.name' . \ucfirst($locale), \SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }

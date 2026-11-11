@@ -107,7 +107,7 @@ class ImageCrudController extends MediaCrudController
             ->setHelp('Leave empty for auto-fill from exif data')
             ->setFormTypeOption('query_builder', function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
-                        ->orderBy('t.startedAt', 'DESC');
+                        ->orderBy('t.startedAt', \SortDirection::Descending);
                 })
             ->setFormTypeOption('group_by', function (Trip $trip, $key, $value) {
                     if ($trip->hasParent()) {

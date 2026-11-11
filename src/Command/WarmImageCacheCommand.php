@@ -188,7 +188,7 @@ final class WarmImageCacheCommand extends Command
         $qb = $this->entityManager->createQueryBuilder()
             ->select('m')
             ->from(Media::class, 'm')
-            ->orderBy('m.id', 'ASC');
+            ->orderBy('m.id', \SortDirection::Ascending);
 
         if (null !== $idFrom) {
             $qb

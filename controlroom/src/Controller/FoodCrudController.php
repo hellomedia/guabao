@@ -81,7 +81,7 @@ class FoodCrudController extends AbstractCrudController
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('f')
                     ->where('f.parent IS NULL')
-                    ->orderBy('f.nameEn', 'ASC'); // change to the field you want
+                    ->orderBy('f.nameEn', \SortDirection::Ascending); // change to the field you want
             },
         ]);
 

@@ -33,11 +33,11 @@ class PlaceTagAutocompleteField extends AbstractType
                         return $repo->createQueryBuilder('pt')
                             ->where('pt.country IN (:countries)')
                             ->setParameter('countries', $countries)
-                            ->orderBy('pt.nameEn', 'ASC');
+                            ->orderBy('pt.nameEn', \SortDirection::Ascending);
                     }
                 
                     return $repo->createQueryBuilder('pt')
-                        ->orderBy('pt.nameEn', 'ASC');
+                        ->orderBy('pt.nameEn', \SortDirection::Ascending);
                 };
             },
             'multiple' => true,

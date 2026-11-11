@@ -24,7 +24,7 @@ class IngredientAutocompleteField extends AbstractType
             'searchable_fields' => ['nameEn', 'nameFr'],
             'query_builder' => function (IngredientRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('i')
-                    ->addOrderBy('i.nameEn', 'ASC')
+                    ->addOrderBy('i.nameEn', \SortDirection::Ascending)
                 ;
             },
             'multiple' => true,

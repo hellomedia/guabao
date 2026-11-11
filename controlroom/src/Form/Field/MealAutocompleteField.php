@@ -37,11 +37,11 @@ class MealAutocompleteField extends AbstractType
                             ->join('m.medias', 'media')
                             ->where('media.trip = :current_trip')
                             ->setParameter('current_trip', $currentTrip)
-                            ->orderBy('m.enjoyedAt', 'ASC');
+                            ->orderBy('m.enjoyedAt', \SortDirection::Ascending);
                     }
 
                     return $repo->createQueryBuilder('m')
-                        ->orderBy('m.enjoyedAt', 'ASC');
+                        ->orderBy('m.enjoyedAt', \SortDirection::Ascending);
                 };
             },
         ]);

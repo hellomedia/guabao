@@ -26,7 +26,7 @@ class MediaBulkEditTagsType extends AbstractType
                     return $repo->createQueryBuilder('pt')
                         ->where('pt.country IN (:countries)')
                         ->setParameter('countries', $trip->getCountries())
-                        ->orderBy('pt.nameEn', 'ASC');
+                        ->orderBy('pt.nameEn', \SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -37,7 +37,7 @@ class MediaBulkEditTagsType extends AbstractType
                 'class' => MediaTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
-                        ->orderBy('t.nameEn', 'ASC');
+                        ->orderBy('t.nameEn', \SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -50,7 +50,7 @@ class MediaBulkEditTagsType extends AbstractType
                     return $repo->createQueryBuilder('p')
                         ->where('p.country IN (:countries)')
                         ->setParameter('countries', $trip->getCountries())
-                        ->orderBy('p.name', 'ASC');
+                        ->orderBy('p.name', \SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => false,

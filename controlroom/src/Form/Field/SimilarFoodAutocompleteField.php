@@ -24,7 +24,7 @@ class SimilarFoodAutocompleteField extends AbstractType
             'searchable_fields' => ['nameEn', 'nameFr'],
             'query_builder' => function (FoodRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('f')
-                    ->addOrderBy('f.nameEn', 'ASC')
+                    ->addOrderBy('f.nameEn', \SortDirection::Ascending)
                 ;
             },
             'multiple' => true,

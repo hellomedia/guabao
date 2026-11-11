@@ -63,7 +63,7 @@ class TripCrudController extends AbstractCrudController
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('t')
                         ->where('t.parent IS NULL')
-                        ->orderBy('t.startedAt', 'DESC'); // change to the field you want
+                        ->orderBy('t.startedAt', \SortDirection::Descending); // change to the field you want
                 },
                 'choice_label' => function (Trip $trip): string {
                     return $trip->getPeriod() . ' ' . $trip->getName();

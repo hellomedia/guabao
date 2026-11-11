@@ -25,7 +25,7 @@ class MediaTagAutocompleteField extends AbstractType
             'searchable_fields' => ['nameEn', 'nameFr'],
             'query_builder' => function (MediaTagRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('t')
-                    ->addOrderBy('t.nameEn', 'ASC')
+                    ->addOrderBy('t.nameEn', \SortDirection::Ascending)
                 ;
             },
             'multiple' => true,

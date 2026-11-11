@@ -24,7 +24,7 @@ class CuisinesAutocompleteField extends AbstractType
             'searchable_fields' => ['nameEn', 'nameFr'],
             'query_builder' => function (CuisineRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('c')
-                    ->addOrderBy('c.nameEn', 'ASC')
+                    ->addOrderBy('c.nameEn', \SortDirection::Ascending)
                 ;
             },
             'multiple' => true,

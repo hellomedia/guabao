@@ -59,7 +59,7 @@ class MediaBulkAddType extends AbstractType
                 'class' => Trip::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
-                        ->orderBy('t.startedAt', 'DESC');
+                        ->orderBy('t.startedAt', \SortDirection::Descending);
                 },
                 'required' => false,
                 'multiple' => false,
@@ -91,7 +91,7 @@ class MediaBulkAddType extends AbstractType
                         return $repo->createQueryBuilder('s')
                             ->where('s.trip = :trip')
                             ->setParameter('trip', $selectedTrip)
-                            ->orderBy('s.displayOrder', 'ASC');
+                            ->orderBy('s.displayOrder', \SortDirection::Ascending);
                     },
                     'multiple' => false,
                     'autocomplete' => true,
@@ -117,10 +117,10 @@ class MediaBulkAddType extends AbstractType
                         return $repo->createQueryBuilder('pt')
                             ->where('pt.country IN (:countries)')
                             ->setParameter('countries', $trip->getCountries())
-                            ->orderBy('pt.nameEn', 'ASC');
+                            ->orderBy('pt.nameEn', \SortDirection::Ascending);
                     }
                     return $repo->createQueryBuilder('pt')
-                        ->orderBy('pt.nameEn', 'ASC');
+                        ->orderBy('pt.nameEn', \SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -131,7 +131,7 @@ class MediaBulkAddType extends AbstractType
                 'class' => MediaTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
-                        ->orderBy('t.nameEn', 'ASC');
+                        ->orderBy('t.nameEn', \SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,

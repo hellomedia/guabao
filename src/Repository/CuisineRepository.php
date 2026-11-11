@@ -24,7 +24,7 @@ class CuisineRepository extends ServiceEntityRepository
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
         return $this->createQueryBuilder('c')
-            ->orderBy('c.name' . \ucfirst($locale), 'ASC')
+            ->orderBy('c.name' . \ucfirst($locale), \SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }
@@ -37,7 +37,7 @@ class CuisineRepository extends ServiceEntityRepository
             ->leftJoin('c.food', 'f')
             ->addSelect('COUNT(DISTINCT f.id) AS foodCount')
             ->groupBy('c.id')
-            ->orderBy('c.name' . \ucfirst($locale), 'ASC')
+            ->orderBy('c.name' . \ucfirst($locale), \SortDirection::Ascending)
             ->getQuery()
             ->getResult();
 

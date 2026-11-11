@@ -41,7 +41,7 @@ class TripQuickEditType extends AbstractType
                 'class' => TripTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
-                        ->orderBy('t.nameEn', 'ASC');
+                        ->orderBy('t.nameEn', \SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -52,7 +52,7 @@ class TripQuickEditType extends AbstractType
                 'class' => Country::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('c')
-                        ->orderBy('c.nameEn', 'ASC');
+                        ->orderBy('c.nameEn', \SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -65,7 +65,7 @@ class TripQuickEditType extends AbstractType
                 'required' => false,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('h')
-                        ->orderBy('h.nameEn', 'ASC');
+                        ->orderBy('h.nameEn', \SortDirection::Ascending);
                 },
                 'multiple' => true,
                 'autocomplete' => true,

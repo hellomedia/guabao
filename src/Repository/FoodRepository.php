@@ -37,7 +37,7 @@ class FoodRepository extends ServiceEntityRepository
             ->addSelect('tag')
             ->leftJoin('f.cuisines', 'c')
             ->addSelect('c')
-            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
+            ->orderBy('f.name' . \ucfirst($locale), \SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }
@@ -151,7 +151,7 @@ class FoodRepository extends ServiceEntityRepository
             ->addSelect('tag')
             ->leftJoin('f.cuisines', 'cuisine')
             ->addSelect('cuisine')
-            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
+            ->orderBy('f.name' . \ucfirst($locale), \SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }
@@ -173,7 +173,7 @@ class FoodRepository extends ServiceEntityRepository
             ->addSelect('cover')
             ->leftJoin('f.cuisines', 'cuisine')
             ->addSelect('cuisine')
-            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
+            ->orderBy('f.name' . \ucfirst($locale), \SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }
@@ -192,7 +192,7 @@ class FoodRepository extends ServiceEntityRepository
             ->addSelect('cover')
             ->leftJoin('f.cuisines', 'cuisine')
             ->addSelect('cuisine')
-            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
+            ->orderBy('f.name' . \ucfirst($locale), \SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }
@@ -209,7 +209,7 @@ class FoodRepository extends ServiceEntityRepository
             ->setParameter('country', $country)
             ->leftJoin('f.cover', 'cover')
             ->addSelect('cover')
-            ->orderBy('f.name' . \ucfirst($locale), 'ASC')
+            ->orderBy('f.name' . \ucfirst($locale), \SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }
@@ -224,7 +224,7 @@ class FoodRepository extends ServiceEntityRepository
             ->addSelect('cuisine')
             ->join('f.siteHighlights', 'h')
             ->where('h.nameEn = :highlightName')
-            ->orderBy('f.nameEn', 'ASC')
+            ->orderBy('f.nameEn', \SortDirection::Ascending)
             ->setParameter('highlightName', 'Favourite discoveries')
             ->getQuery()
             ->getResult();

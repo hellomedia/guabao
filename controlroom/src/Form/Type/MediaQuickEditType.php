@@ -58,7 +58,7 @@ class MediaQuickEditType extends AbstractType
                         // of show children
                         ->orWhere('t.id IN (:children)')
                         ->setParameter('children', $currentTrip->getChildren())
-                        ->orderBy('t.startedAt', 'DESC');
+                        ->orderBy('t.startedAt', \SortDirection::Descending);
                 },
                 'multiple' => false,
                 'autocomplete' => true,
@@ -101,7 +101,7 @@ class MediaQuickEditType extends AbstractType
                 'required' => false,
                 'query_builder' => function (EntityRepository $repo) : QueryBuilder {
                     return $repo->createQueryBuilder('h')
-                        ->orderBy('h.nameEn', 'ASC');
+                        ->orderBy('h.nameEn', \SortDirection::Ascending);
                 },
                 'multiple' => true,
                 'autocomplete' => true,

@@ -59,7 +59,7 @@ class FoodQuickEditType extends AbstractType
                         ->innerJoin('m.food', 'f')
                         ->andWhere('f = :food')
                         ->setParameter('food', $food)
-                        ->orderBy('m.id', 'ASC');
+                        ->orderBy('m.id', \SortDirection::Ascending);
                 },
             ])
             ->add('tags', FoodTagAutocompleteField::class)
@@ -99,7 +99,7 @@ class FoodQuickEditType extends AbstractType
                 'required' => false,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('h')
-                        ->orderBy('h.nameEn', 'ASC');
+                        ->orderBy('h.nameEn', \SortDirection::Ascending);
                 },
                 'multiple' => true,
                 'autocomplete' => true,
