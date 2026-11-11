@@ -56,9 +56,10 @@ class DashboardController extends AbstractDashboardController
             // EasyAdmin 5.9+ design tokens: one place to restyle the whole backend
             // https://symfony.com/bundles/EasyAdminBundle/current/design.html
             ->setTheme(Theme::new()
-                // same purple as the public site (--color-theme = --color-purple-dark in assets/styles/theme/light.css);
-                // EA picks dark text on it and a dark variant where it would be text on light surfaces
-                ->primaryColor('#d193ff', dark: '#d193ff')
+                // public site purple (#d193ff, --color-theme in assets/styles/theme/light.css) deepened in OKLCH
+                // (same hue, lightness 0.76 -> 0.56) so white text works: 5.0:1 contrast both as button
+                // background with white text and as text on white surfaces (WCAG AA)
+                ->primaryColor('#9154ba', dark: '#9154ba')
                 ->grays(GrayScale::SLATE)
                 ->radius('lg')
                 ->font(Font::IbmPlexSans)
