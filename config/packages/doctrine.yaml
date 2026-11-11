@@ -31,11 +31,6 @@ doctrine:
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
-            Security:
-                type: attribute
-                is_bundle: false
-                dir: '%kernel.project_dir%/packs/Security/Entity'
-                prefix: 'Pack\Security\Entity'
         # controller_resolver.auto_mapping is always false since DoctrineBundle 3.0: map route params explicitly
         # ({id:entity} or #[MapEntity])
 

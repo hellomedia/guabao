@@ -631,118 +631,16 @@ parameters:
 			path: packs/Media/Twig/Extension/InstanceOfExtension.php
 
 		-
-			message: '#^Method Pack\\Security\\BotDetector\:\:__construct\(\) has parameter \$environment with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: packs/Security/BotDetector.php
-
-		-
-			message: '#^Method Pack\\Security\\BotDetector\:\:_isSuspiciousRegistrationForm\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
-			identifier: missingType.generics
-			count: 1
-			path: packs/Security/BotDetector.php
-
-		-
-			message: '#^Method Pack\\Security\\BotDetector\:\:detectBotOnRegistrationForm\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
-			identifier: missingType.generics
-			count: 1
-			path: packs/Security/BotDetector.php
-
-		-
 			message: '#^Negated boolean expression is always false\.$#'
 			identifier: booleanNot.alwaysFalse
 			count: 1
 			path: packs/Security/Command/ChangeUserEmailCommand.php
 
 		-
-			message: '#^Method Pack\\Security\\Controller\\LoginController\:\:showRegistrationLink\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: packs/Security/Controller/LoginController.php
-
-		-
-			message: '#^Method Pack\\Security\\Controller\\RegistrationController\:\:checkYourEmail\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: packs/Security/Controller/RegistrationController.php
-
-		-
-			message: '#^Method Pack\\Security\\Controller\\RegistrationController\:\:checkYourEmailForBots\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: packs/Security/Controller/RegistrationController.php
-
-		-
-			message: '#^Property Pack\\Security\\Entity\\ResetPasswordRequest\:\:\$user type mapping mismatch\: property can contain App\\Entity\\User\|null but database expects App\\Entity\\User\.$#'
-			identifier: doctrine.associationType
-			count: 1
-			path: packs/Security/Entity/ResetPasswordRequest.php
-
-		-
 			message: '#^Property App\\Entity\\User\:\:\$roles \(list\<string\>\) on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 2
 			path: packs/Security/Entity/Trait/UserSecurityTrait.php
-
-		-
-			message: '#^Class Pack\\Security\\Form\\ChangePasswordForm extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
-			identifier: missingType.generics
-			count: 1
-			path: packs/Security/Form/ChangePasswordForm.php
-
-		-
-			message: '#^Class Pack\\Security\\Form\\Field\\HoneypotField extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
-			identifier: missingType.generics
-			count: 1
-			path: packs/Security/Form/Field/HoneypotField.php
-
-		-
-			message: '#^Class Pack\\Security\\Form\\RegistrationForm extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
-			identifier: missingType.generics
-			count: 1
-			path: packs/Security/Form/RegistrationForm.php
-
-		-
-			message: '#^Class Pack\\Security\\Form\\ResetPasswordRequestForm extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
-			identifier: missingType.generics
-			count: 1
-			path: packs/Security/Form/ResetPasswordRequestForm.php
-
-		-
-			message: '#^Method Pack\\Security\\Mailer\\SecurityMailer\:\:sendRegistrationValidationLink\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: packs/Security/Mailer/SecurityMailer.php
-
-		-
-			message: '#^Method Pack\\Security\\Mailer\\SecurityMailer\:\:sendResetPasswordEmail\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: packs/Security/Mailer/SecurityMailer.php
-
-		-
-			message: '#^Class Pack\\Security\\Repository\\ResetPasswordRequestRepository has PHPDoc tag @method for method findBy\(\) parameter \#1 \$criteria with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: packs/Security/Repository/ResetPasswordRequestRepository.php
-
-		-
-			message: '#^Class Pack\\Security\\Repository\\ResetPasswordRequestRepository has PHPDoc tag @method for method findBy\(\) parameter \#2 \$orderBy with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: packs/Security/Repository/ResetPasswordRequestRepository.php
-
-		-
-			message: '#^Class Pack\\Security\\Repository\\ResetPasswordRequestRepository has PHPDoc tag @method for method findOneBy\(\) parameter \#1 \$criteria with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: packs/Security/Repository/ResetPasswordRequestRepository.php
-
-		-
-			message: '#^Class Pack\\Security\\Repository\\ResetPasswordRequestRepository has PHPDoc tag @method for method findOneBy\(\) parameter \#2 \$orderBy with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: packs/Security/Repository/ResetPasswordRequestRepository.php
 
 		-
 			message: '#^Class Pack\\Security\\UserProvider implements generic interface Symfony\\Component\\Security\\Core\\User\\UserProviderInterface but does not specify its types\: TUser$#'
@@ -1907,24 +1805,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Enum/VideoOrientation.php
-
-		-
-			message: '#^Property App\\EventSubscriber\\AccountCreatedSubscriber\:\:\$bus is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/EventSubscriber/AccountCreatedSubscriber.php
-
-		-
-			message: '#^Property App\\EventSubscriber\\AccountCreatedSubscriber\:\:\$environment is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/EventSubscriber/AccountCreatedSubscriber.php
-
-		-
-			message: '#^Property App\\EventSubscriber\\AccountCreatedSubscriber\:\:\$logger is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/EventSubscriber/AccountCreatedSubscriber.php
 
 		-
 			message: '#^Method App\\EventSubscriber\\ControllerSubscriber\:\:onKernelController\(\) has no return type specified\.$#'

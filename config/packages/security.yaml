@@ -50,32 +50,16 @@ security:
                 signature_properties: [password]
                 samesite: lax # 'strict' would make the remember_me useless. See commments in controlroom/config/packages/framework.yaml
 
+        # Public site: anonymous only (no public accounts since 2026-11-11, the admin logs in on the controlroom
+        # host). The firewall stays so is_granted()/app.user keep working in public templates.
         main:
             lazy: true
             pattern: ^/
             provider: app_user_provider
-            custom_authenticators:
-                - Pack\Security\LoginFormAuthenticator
-            user_checker: Pack\Security\UserChecker
-            logout:
-                path: /logout
-            switch_user: { parameter: _hk_masq }
-            login_throttling: true
-            access_denied_handler: Pack\Security\AccessDeniedHandler
-            remember_me:
-                secret: "%env(APP_SECRET)%"
-                lifetime: 5184000 # 60 days in seconds
-                path: /
-                domain: ~ # Defaults to the current domain from $_SERVER
-                user_provider: app_user_provider
-                always_remember_me: true
-                signature_properties: [password]
-                samesite: lax # 'lax' is OK for app. See commments in controlroom/config/packages/framework.yaml
 
     # First matching rule grants or denies access
     access_control:
         # User Admin (need to match both /my/ and /en/my/)
-        - { path: '^/([a-z]{2}/)?my/', role: ROLE_USER }
         # Control Room
         # Unlike for core sites, public access needs to be given specifically to login 
         # and login check, as the ROLE_ADMIN restriction applies to all controlroom urls

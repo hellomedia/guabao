@@ -5,61 +5,6 @@ Username could not be found.: >
 # key from symfony security component (with final dot)
 Invalid credentials.: >
     <b>Wrong Password</b>.
-    <br/><br/>
-    You can reset your password using the link below.
-# HELLO KOT
-# Unconfirmed Accounts
-unconfirmed:
-    title: Confirm your account
-    default_message: >
-        Please confirm your account by clicking on the link
-        sent to you in the validation email.
-        <br/><br/>
-        You can receive a new validation email using the link below.
-    request_new_validation_link: Receive a new validation link
-# Connection
-connection:
-    title: Login
-# Registration
-registration:
-    not_yet_registered: Not registered yet?
-    signup: Register
-    email_already_used: An account already exists for this email
-    email_already_verified: Email is already verified
-    register:
-        title: Registration
-    check_email:
-        title: Confirm your email
-        message: >
-            An email has been sent to <b>%email%</b>.
-            <br><br>
-            It contains a validation link on which you should
-            click to activate your account.
-    validation_email:
-        subject: Registration confirmation
-        click_link: To confirm your account, follow the link below
-        button: Confirm my account
-        fallback_link: Or copy paste the url below in the address bar of your browser
-    account_created:
-        success: Account created successfully!
-# Password Reset
-password_reset:
-    lost_password: Lost password?
-    title: Password reset
-    submit: Reset password
-    check_email: >
-        An email has been sent to your email.
-        <br><br>
-        It contains a validation link on which you should
-        click to reset your password.
-    email:
-        subject: Password reset
-        click_link: To reset your password, follow the link below
-        button: Reset password
-        validity: This link expires in
-resetting.flash.success: Password changed successfully
-force_full_authentication:
-    info: To access this page, please enter your password.
 access_denied:
     title: Access Denied
     message: >-
