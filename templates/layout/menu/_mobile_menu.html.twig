@@ -39,9 +39,7 @@
             {% set target_theme = (theme == 'light' ? 'dark' : 'light') %}
             <a href="?theme={{ target_theme }}"
                 class="mobile-menu-item"
-                data-turbo="false" {# force full page refresh to update session data (theme) #}
-                data-controller="turbo-cache"
-                data-action="mobile-menu#toggle turbo-cache#clearCache" {# clear turbo cache to avoid previous theme flash with cached pages #}
+                data-action="mobile-menu#toggle"
             >
                 <twig:ux:icon name="theme" class="mobile-menu-item-icon" />
                 Switch theme

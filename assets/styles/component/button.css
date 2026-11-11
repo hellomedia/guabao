@@ -122,65 +122,6 @@
         }
     }
 
-    .btn-swipe-back {
-
-        /* positionned relative to #main-wrapper with padding-bottom */
-        position: absolute;
-        display: flex;
-        justify-content: space-between;
-        bottom: 0;
-        left: 0;
-        right: 0;
-
-        text-decoration: none;
-        cursor: hand;
-        
-        color: var(--color-gray-400);
-        border-color: var(--color-gray-300);
-        border-width: 0px 0 0 0;
-        border-style: dashed;
-
-        @apply text-lg;
-
-        padding-block: calc(var(--spacing) * 7);
-        padding-inline: calc(var(--spacing) * 2);
-
-        @media (min-width: 400px) {
-            @apply px-3;
-        }
-        @media (min-width: 450px) {
-            @apply px-4;
-        }
-        @media (min-width: 500px) {
-            @apply px-5;
-        }
-
-        @media (min-width: theme(--breakpoint-md)) {
-            display: none;
-        }
-
-        .back, .forward {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            color: var(--color-gray-350);
-            margin-left: -18px;
-            @media (min-width: 400px) {
-                margin-left: -15px;
-            }
-            @media (min-width: 450px) {
-                margin-left: -12px;
-            }
-            @media (min-width: 500px) {
-                margin-left: -8px;
-            }
-        }
-
-        .back.first, .forward.first {
-            margin-left: 0;
-        }
-    }
-
     /* :focus should not necessarily be style */
 
     /* :focus-visible should. it is meant to be visible */
