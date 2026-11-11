@@ -1,6 +1,8 @@
 when@dev: &dev
     # See full configuration: https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#full-default-bundle-configuration;
     zenstruck_foundry:
+        # Foundry 3 default; on PHP >= 8.4 objects are auto-refreshed through native lazy objects
+        enable_auto_refresh_with_lazy_objects: true
         faker:
             locale: fr_FR
         persistence:
