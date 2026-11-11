@@ -50,7 +50,7 @@ class DateExtension extends AbstractExtension
     /**
      * Format date for calendar, with i18n.
      */
-    public function agendaDate(\DateTimeImmutable $datetime, string $variant, string $lang = null, bool $withMinutes = true): ?string
+    public function agendaDate(\DateTimeImmutable $datetime, string $variant, ?string $lang = null, bool $withMinutes = true): ?string
     {
         $formatter = null;
         if ($datetime == null) {
@@ -110,7 +110,7 @@ class DateExtension extends AbstractExtension
      * NL: "28-05-19"
      * ZH: "19/5/28" (!!)
      */
-    public function chatDate(\DateTimeImmutable $datetime, string $lang = null, array $options = []): ?string
+    public function chatDate(\DateTimeImmutable $datetime, ?string $lang = null, array $options = []): ?string
     {
         if ($datetime == null) {
             return null;
@@ -155,7 +155,7 @@ class DateExtension extends AbstractExtension
         return $date;
     }
 
-    public function shortDate(?\DateTimeImmutable $datetime, string $lang = null): ?string
+    public function shortDate(?\DateTimeImmutable $datetime, ?string $lang = null): ?string
     {
         if ($datetime == null) {
             return null;
@@ -191,7 +191,7 @@ class DateExtension extends AbstractExtension
      * 
      * So we define the pattern for our 3 backend languages and add a sensible default
      */
-    public function dayAndMonth(?\DateTimeImmutable $datetime, string $lang = null): ?string
+    public function dayAndMonth(?\DateTimeImmutable $datetime, ?string $lang = null): ?string
     {
         if ($datetime == null) {
             return null;
@@ -216,7 +216,7 @@ class DateExtension extends AbstractExtension
     /**
      * ex: Mercredi 15 janvier / Wednesday January 15
      */
-    public function dayAndMonthWithDayOfWeek(?\DateTimeImmutable $datetime, string $lang = null): ?string
+    public function dayAndMonthWithDayOfWeek(?\DateTimeImmutable $datetime, ?string $lang = null): ?string
     {
         if ($datetime == null) {
             return null;
@@ -237,7 +237,7 @@ class DateExtension extends AbstractExtension
     /**
      * ex: Janvier 2024 / January 2024
      */
-    public function monthAndYear(?\DateTimeImmutable $datetime, string $lang = null): ?string
+    public function monthAndYear(?\DateTimeImmutable $datetime, ?string $lang = null): ?string
     {
         if ($datetime == null) {
             return null;
@@ -255,7 +255,7 @@ class DateExtension extends AbstractExtension
     /**
      * ex: 9h00 / 9:00 am 
      */
-    public function time(?\DateTimeImmutable $datetime, string $lang = null): ?string
+    public function time(?\DateTimeImmutable $datetime, ?string $lang = null): ?string
     {
         if ($datetime == null) {
             return null;

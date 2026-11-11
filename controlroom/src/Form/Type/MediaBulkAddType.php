@@ -24,7 +24,7 @@ use Symfonycasts\DynamicForms\DynamicFormBuilder;
 
 class MediaBulkAddType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $story = $options['story'] ?? null;
         $trip = $story?->getTrip() ?? $options['trip'] ?? null;
@@ -32,16 +32,16 @@ class MediaBulkAddType extends AbstractType
         $builder = new DynamicFormBuilder($builder);
 
         $constraints = [
-            new Count(['max' => 20]), // same as server max_file_uploads  
-            new All([
-                new File([
-                    'maxSize' => '50M', // same as server upload_max_filesize
-                    'mimeTypes' => ['image/jpeg', 'image/jpg', 'image/avif'],
-                ]),
+            new Count(max: 20), // same as server max_file_uploads  
+            new All(constraints: [
+                new File(
+                    maxSize: '50M', // same as server upload_max_filesize
+                    mimeTypes: ['image/jpeg', 'image/jpg', 'image/avif'],
+                ),
             ]),
-            new NotNull([
-                'message' => 'Please upload (a) file(s)',
-            ]),
+            new NotNull(
+                message: 'Please upload (a) file(s)',
+            ),
         ];
 
         $builder
@@ -148,7 +148,7 @@ class MediaBulkAddType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'trip' => null,
