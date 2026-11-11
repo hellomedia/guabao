@@ -387,18 +387,12 @@ parameters:
 		-
 			message: '#^Match expression does not handle remaining value\: string$#'
 			identifier: match.unhandled
-			count: 2
+			count: 1
 			path: packs/Chart/BaseChartProvider.php
 
 		-
 			message: '#^Match expression does not handle remaining values\: string\|null$#'
 			identifier: match.unhandled
-			count: 1
-			path: packs/Chart/BaseChartProvider.php
-
-		-
-			message: '#^Method Pack\\Chart\\BaseChartProvider\:\:_convertToBytes\(\) should return int but returns string\.$#'
-			identifier: return.type
 			count: 1
 			path: packs/Chart/BaseChartProvider.php
 
@@ -611,18 +605,6 @@ parameters:
 			identifier: ternary.alwaysFalse
 			count: 1
 			path: packs/Status/Controller/OpcacheStatusController.php
-
-		-
-			message: '#^Match expression does not handle remaining value\: string$#'
-			identifier: match.unhandled
-			count: 1
-			path: packs/Status/Controller/PhpStatusController.php
-
-		-
-			message: '#^Method Pack\\Status\\Controller\\PhpStatusController\:\:_convertToBytes\(\) should return int but returns string\.$#'
-			identifier: return.type
-			count: 1
-			path: packs/Status/Controller/PhpStatusController.php
 
 		-
 			message: '#^Method Pack\\Status\\Controller\\PhpStatusController\:\:checkPhpConfig\(\) has no return type specified\.$#'

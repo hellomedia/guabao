@@ -77,7 +77,7 @@ class PhpStatusController extends BaseController
         $timezone = \ini_get('date.timezone');
         $shortOpenTag = \ini_get('short_open_tag'); // https://www.php.net/manual/en/ini.core.php#ini.short-open-tag
 
-        if ($this->_convertToBytes($uploadMaxFileSize) != $this->_convertToBytes(self::UPLOAD_MAX_FILESIZE)) {
+        if (\ini_parse_quantity($uploadMaxFileSize) != \ini_parse_quantity(self::UPLOAD_MAX_FILESIZE)) {
             $this->_addUnexpectedConfig(
                 config: 'upload_max_filesize',
                 value: $uploadMaxFileSize,
@@ -85,7 +85,7 @@ class PhpStatusController extends BaseController
             );
         }
 
-        if ($this->_convertToBytes($postMaxSize) != $this->_convertToBytes(self::POST_MAX_SIZE)) {
+        if (\ini_parse_quantity($postMaxSize) != \ini_parse_quantity(self::POST_MAX_SIZE)) {
             $this->_addUnexpectedConfig(
                 config: 'post_max_size',
                 value: $postMaxSize,
@@ -93,7 +93,7 @@ class PhpStatusController extends BaseController
             );
         }
 
-        if ($this->_convertToBytes($memoryLimit) != $this->_convertToBytes(self::MEMORY_LIMIT)) {
+        if (\ini_parse_quantity($memoryLimit) != \ini_parse_quantity(self::MEMORY_LIMIT)) {
             $this->_addUnexpectedConfig(
                 config: 'memory_limit',
                 value: $memoryLimit,
@@ -126,7 +126,7 @@ class PhpStatusController extends BaseController
         $size = \ini_get('realpath_cache_size');
         $ttl = \ini_get('realpath_cache_ttl');
 
-        if ($this->_convertToBytes($size) != $this->_convertToBytes(self::REALPATH_CACHE_SIZE)) {
+        if (\ini_parse_quantity($size) != \ini_parse_quantity(self::REALPATH_CACHE_SIZE)) {
             $this->_addUnexpectedConfig(
                 config: 'realpath_cache_size',
                 value: $size,
@@ -148,7 +148,7 @@ class PhpStatusController extends BaseController
         $size = \ini_get('realpath_cache_size');
         $usage = realpath_cache_size();
 
-        $remaining = $this->_convertToBytes($size) - $usage;
+        $remaining = \ini_parse_quantity($size) - $usage;
 
         // typical entry size is roughly 100-200 bytes
         $typicalRealpathEntrySize = 150;
@@ -166,19 +166,4 @@ class PhpStatusController extends BaseController
     /**
      * Convert human-readable size to bytes
      */
-    private function _convertToBytes(string $size): int
-    {
-        if (\is_numeric($size)) {
-            return $size;
-        }
-
-        $unit = strtoupper(substr($size, -1));
-        $size = (int) $size;
-
-        return match ($unit) {
-            'K' => $size * 1024,
-            'M' => $size * 1024 * 1024,
-            'G' => $size * 1024 * 1024 * 1024,
-        };
-    }
 }

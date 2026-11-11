@@ -11,7 +11,7 @@ class RealpathCacheChartProvider extends BaseChartProvider
     public function getRealpathCacheChart(): Chart
     {
         $sizeForHumans = \ini_get('realpath_cache_size');
-        $size = $this->_convertToBytes($sizeForHumans);
+        $size = \ini_parse_quantity($sizeForHumans);
         $used = realpath_cache_size();
 
         $free = $size - $used;

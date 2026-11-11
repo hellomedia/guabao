@@ -381,21 +381,6 @@ class BaseChartProvider
     /**
      * Convert human-readable size to bytes
      */
-    protected function _convertToBytes(string $size): int
-    {
-        if (\is_numeric($size)) {
-            return $size;
-        }
-
-        $unit = strtoupper(substr($size, -1));
-        $size = (int) $size;
-
-        return match ($unit) {
-            'K' => $size * 1024,
-            'M' => $size * 1024 * 1024,
-            'G' => $size * 1024 * 1024 * 1024,
-        };
-    }
 
     protected function _sizeForHumans(int $bytes): string
     {
