@@ -69,8 +69,7 @@ class FoodQuickEditType extends AbstractType
             ->add('isFavourite', CheckboxType::class, [
                 'label'    => 'favourite',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('loveLevel', EnumType::class,  [
                 'class' => Level::class,

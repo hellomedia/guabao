@@ -60,14 +60,12 @@ class StoryQuickEditType extends AbstractType
             ->add('show', CheckboxType::class, [
                 'label'    => 'show',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('showTitle', CheckboxType::class, [
                 'label'    => 'show title',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('tags', EntityType::class, [
                 'class' => MediaTag::class,

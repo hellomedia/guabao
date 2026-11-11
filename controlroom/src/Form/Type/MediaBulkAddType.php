@@ -76,8 +76,7 @@ class MediaBulkAddType extends AbstractType
             ->add('showInTrip', CheckboxType::class, [
                 'label'    => 'show in trip',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->addDependent('story', 'trip', function(DependentField $field, ?Trip $selectedTrip) use ($story) {
                 if ($selectedTrip === null) {
@@ -106,8 +105,7 @@ class MediaBulkAddType extends AbstractType
                     'label' => 'show in story',
                     'required' => false,
                     'data' => $story !== null,
-                    'row_attr' => ['class' => 'form-switch'], // for switch
-                    'attr' => ['class' => 'form-check-input'], // for switch
+                    'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
                 ]);
             })
             ->add('placeTags', EntityType::class, [
@@ -141,8 +139,7 @@ class MediaBulkAddType extends AbstractType
             ->add('showInFood', CheckboxType::class, [
                 'label'    => 'show in food meal',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('submit', SubmitType::class)
         ;

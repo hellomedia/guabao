@@ -66,20 +66,17 @@ class MediaQuickEditType extends AbstractType
             ->add('showInTrip', CheckboxType::class, [
                 'label'    => 'show in trip',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('isTripCover', CheckboxType::class, [
                 'label' => 'trip cover',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('isStoryCover', CheckboxType::class, [
                 'label' => 'story cover',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('story', StoryAutocompleteField::class, [
                 'required' => false,
@@ -92,8 +89,7 @@ class MediaQuickEditType extends AbstractType
             ->add('showInStory', CheckboxType::class, [
                 'label'    => 'show in story',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
                 ])
             ->add('siteHighlights', EntityType::class, [
                 'label' => 'Highlights',
@@ -119,14 +115,12 @@ class MediaQuickEditType extends AbstractType
             ->add('showInFood', CheckboxType::class, [
                 'label'    => 'show in food meal',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('isMeal', CheckboxType::class, [
                 'label' => 'Is meal',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
                 'help' => 'Set to true to auto-create meal or auto-fill with existing meal based on taken_at time +- 30 minutes'
             ])
             ->add('meal', MealAutocompleteField::class, [
@@ -141,32 +135,27 @@ class MediaQuickEditType extends AbstractType
             ->add('is360', CheckboxType::class, [
                 'label' => '360',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('isPano', CheckboxType::class, [
                 'label' => 'Pano',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('size2', CheckboxType::class, [
                 'label'    => 'size 2',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('size3', CheckboxType::class, [
                 'label'    => 'size 3',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('isPrimaryVideo', CheckboxType::class, [
                 'label'    => 'Primary vid',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('place', PlaceAutocompleteField::class, [
                 // Passing extra options to ajax query builder

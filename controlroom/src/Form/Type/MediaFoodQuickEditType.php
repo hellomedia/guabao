@@ -56,14 +56,12 @@ class MediaFoodQuickEditType extends AbstractType
             ->add('showInFood', CheckboxType::class, [
                 'label'    => 'show in food meal',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('isMeal', CheckboxType::class, [
                 'label' => 'Is meal',
                 'required' => false,
-                'row_attr' => ['class' => 'form-switch'], // for switch
-                'attr'     => ['class' => 'form-check-input'], // for switch
+                'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
                 'help' => 'Set to true to auto-create meal or auto-fill with existing meal based on taken_at time +- 30 minutes'
             ])
             ->add('meal', MealAutocompleteField::class, [
