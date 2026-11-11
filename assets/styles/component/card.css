@@ -171,6 +171,25 @@
             }
         }
 
+        /* trip name on a single line, clipped with an ellipsis */
+        &.card-trip .card-info {
+            /* flex items default to min-width: auto (= their content's min width),
+               so the unwrapped title would widen .card-info and shrink the image
+               in the horizontal layouts. 0 lets the ellipsis kick in instead. */
+            min-width: 0;
+        }
+
+        &.card-trip .card-title {
+            width: 100%;
+
+            a {
+                max-width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+
         .card-info-bottom {
             width: 100%;
             display: flex;
