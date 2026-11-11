@@ -91,7 +91,9 @@ Read `UPGRADE.md` **and** `UPGRADE-AI.md` (a version written for AI agents) in t
 - Adding an action that already exists throws (`The "detail" action already exists in the "index" page`) — e.g. the dashboard adds `DETAIL` globally and a CRUD adds it again.
 - Overridden `bundles/EasyAdminBundle/exception.html.twig` gets `exception` (`statusCode`, `publicMessage`) and `layout_template_path`, not `status_code`/`status_text`. Test it with `SMOKE_DEBUG=0` (the EA error page only renders without debug).
 - `setIcon(false)` → `setIcon(null)`; typed arguments are stricter.
-- 5.9 redesign: neutral colours, Inter font, new buttons/badges. `Theme::new()` in `configureDashboard()` can bring back an older look.
+- 5.9 redesign: neutral colours, Inter font, new buttons/badges. `Dashboard::new()->setTheme(Theme::new()->primaryColor('#hex' | ThemeColor::X, dark: …)->grays(GrayScale::SLATE)->radius('lg')->spacing('sm')->font(Font::IbmPlexSans))` restyles everything (fonts served by EA). A light brand colour gets black text: deepen it in OKLCH (same hue, lower lightness) until white reaches 4.5:1. *Example (Guabao):* `#d193ff` → `#9154ba`.
+- **Switches in custom Symfony forms look hollow/misaligned** in 5.9+: `'row_attr' => ['class' => 'form-switch']` puts the class on the row, and EA's CSS (`.form-check:not(.form-switch) .form-check-input:not(:checked)`) then treats them as checkboxes. Use `'label_attr' => ['class' => 'checkbox-switch']`: EA's form theme renders its `<twig:ea:Switch>` (same input name/value).
+- **UX Autocomplete + EasyAdmin**: the `tom-select.default.css` autoimport in `assets/controllers.json` competes with EA's own Tom Select fork (`easyadmin-theme/autocomplete.css`); set it to `false` if autocomplete is only used in the admin.
 - Smoke every CRUD: index, a detail, an edit — as admin (`smoke.php` with `SMOKE_USER` + `SMOKE_FIREWALL`).
 
 ### 4.2 Mercure protocol 1.0 + hub 1.x (optional, can wait)
