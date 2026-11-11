@@ -1,22 +1,6 @@
 /* DO NOT IMPORT CSS FILES FROM HERE
 unless we fix tailwind build for controlroom.css */
 
-html {
-    --bg-gray: red;
-    --border-color: #ddd;
-}
-
-.custom-actions {
-    border: 1px solid var(--border-color);
-    margin: 15px 0;
-    padding: 20px;
-    background-color: var(--bg-gray);
-    button {
-        padding-inline: 20px;
-        margin-right: 10px;
-    }
-}
-
 table.datagrid td.actions {
     /* adjust as needed */
     /* prevent wrapping of action buttons */
@@ -48,9 +32,6 @@ table.datagrid td.actions {
     }
 }
 /** IMAGES **/
-.ea {
-
-}
 .ea-index {
     .thumbnail {
         max-height: 100px;
