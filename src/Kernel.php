@@ -25,17 +25,17 @@ class Kernel extends BaseKernel
 
         $container->import($configDir . '/packages/*.yaml');
         // SECOND -- for session name -- last value overrides previous ones
-        if (($_SERVER['HTTP_HOST'] ?? 'undefined') == $_SERVER['HOST_CONTROLROOM']) {
+        if ($this->getRequestHost() == $_SERVER['HOST_CONTROLROOM']) {
             $container->import($controlroomConfigDir . '/packages/*.yaml');
         }
 
         $container->import($configDir . '/parameters.yaml');
-        if (($_SERVER['HTTP_HOST'] ?? 'undefined') == $_SERVER['HOST_CONTROLROOM']) {
+        if ($this->getRequestHost() == $_SERVER['HOST_CONTROLROOM']) {
             $container->import($controlroomConfigDir . '/parameters.yaml');
         }
 
         $container->import($configDir . '/services.yaml');
-        if (($_SERVER['HTTP_HOST'] ?? 'undefined') == $_SERVER['HOST_CONTROLROOM']) {
+        if ($this->getRequestHost() == $_SERVER['HOST_CONTROLROOM']) {
             $container->import($controlroomConfigDir . '/services.yaml');
         }
     }
@@ -72,7 +72,7 @@ class Kernel extends BaseKernel
      */
     public function getCacheDir(): string
     {
-        $dir = match($_SERVER['HTTP_HOST'] ?? 'undefined') {
+        $dir = match($this->getRequestHost()) {
             $_SERVER['HOST_CONTROLROOM'] => 'controlroom',
             $_SERVER['HOST'] => 'site',
             default => 'site',
@@ -83,6 +83,16 @@ class Kernel extends BaseKernel
         }
 
         return $this->getProjectDir() . '/var/cache/' . $dir . '/' . $this->environment;
+    }
+
+    /**
+     * HTTP_HOST without its port, lowercased, like Request::getHost(): browsers send "name:port" on
+     * non-standard ports (dev nginx is published on 8445), which would otherwise load the site container
+     * on the controlroom host while routing (which ignores the port) still matches controlroom routes.
+     */
+    private function getRequestHost(): string
+    {
+        return strtolower(preg_replace('/:\d+$/', '', $_SERVER['HTTP_HOST'] ?? 'undefined'));
     }
 
     /**
