@@ -37,7 +37,7 @@ class TripPictureFixtures extends Fixture implements DependentFixtureInterface
 
             $key = $trip['key'];
 
-            $dir = __DIR__ . '/../image/trips/' . $key . '/image/';
+            $dir = __DIR__ . '/../images/trips/' . $key . '/image/';
 
             foreach (glob($dir . '*.jpg') as $originalPath) {
 

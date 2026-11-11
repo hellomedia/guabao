@@ -37,7 +37,7 @@ class PanoFixtures extends Fixture implements DependentFixtureInterface
 
             $key = $trip['key'];
 
-            $dir = __DIR__ . '/../image/trips/' . $key . '/pano/';
+            $dir = __DIR__ . '/../images/trips/' . $key . '/pano/';
 
             foreach (glob($dir . '*.jpg') as $originalPath) {
 

@@ -121,7 +121,7 @@ local_build () {
 }
 
 remote_init_dir () {
-    $SSH "$USER@$HOST" "sh -c \"mkdir -p $DEST && chmod 755 $DEST && ( cd $PREFIX/current-release && find ./ \! -path './var/cache/*' | pax -pp -rw $DEST ) || true; rm -rf $DEST/src/DataFixtures/image\""
+    $SSH "$USER@$HOST" "sh -c \"mkdir -p $DEST && chmod 755 $DEST && ( cd $PREFIX/current-release && find ./ \! -path './var/cache/*' | pax -pp -rw $DEST ) || true; rm -rf $DEST/src/DataFixtures/images\""
 }
 
 rsync_local () {
@@ -131,7 +131,7 @@ rsync_local () {
         --exclude /.hg \
         --exclude /docker \
         --exclude /var/cache \
-        --exclude /src/DataFixtures/image \
+        --exclude /src/DataFixtures/images \
         --exclude /.env\*local\* \
         ./ "$USER@$HOST:$DEST/"
 }

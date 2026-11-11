@@ -43,7 +43,7 @@ class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterf
 
             $media->setType(MediaType::IMAGE);
             
-            $originalPath = __DIR__ . '/../image/trips/' . $trip['key'] . '/cover.jpg';
+            $originalPath = __DIR__ . '/../images/trips/' . $trip['key'] . '/cover.jpg';
 
             $uploadedFile = $this->uploadHelper->createUploadedFileForFixtures($originalPath);
 

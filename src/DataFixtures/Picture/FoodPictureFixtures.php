@@ -70,7 +70,7 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
             
             $media->setType(MediaType::IMAGE);
             
-            $originalPath = __DIR__ . '/../image/food/' . $item['filename']. '.jpg';
+            $originalPath = __DIR__ . '/../images/food/' . $item['filename']. '.jpg';
 
             $uploadedFile = $this->uploadHelper->createUploadedFileForFixtures($originalPath);
 
