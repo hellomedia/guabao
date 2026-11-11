@@ -68,7 +68,7 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     private ?Trip $parent = null;
 
     #[ORM\OneToMany(targetEntity: Trip::class, mappedBy: 'parent')]
-    #[ORM\OrderBy(["startedAt" => "ASC"])]
+    #[ORM\OrderBy(['startedAt' => \SortDirection::Ascending])]
     private Collection $children;
 
     #[Assert\GreaterThanOrEqual(1)]
@@ -88,7 +88,7 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     /**
      * @var Collection<int, Story>
      */
-    #[ORM\OrderBy(['displayOrder' => 'ASC'])]
+    #[ORM\OrderBy(['displayOrder' => \SortDirection::Ascending])]
     #[ORM\OneToMany(targetEntity: Story::class, mappedBy: 'trip')]
     private Collection $stories;
 

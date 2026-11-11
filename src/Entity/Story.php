@@ -53,7 +53,7 @@ class Story implements LocalizedNameInterface, LocalizedSlugInterface, EntityInt
     /**
      * @var Collection<int, Media>
      */
-    #[ORM\OrderBy(['takenAt' => 'ASC'])]
+    #[ORM\OrderBy(['takenAt' => \SortDirection::Ascending])]
     #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'story', fetch: 'EAGER')]
     private Collection $medias;
 
