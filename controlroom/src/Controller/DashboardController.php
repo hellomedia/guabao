@@ -18,7 +18,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\Font;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\GrayScale;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Option\ThemeColor;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Theme;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
@@ -57,7 +56,9 @@ class DashboardController extends AbstractDashboardController
             // EasyAdmin 5.9+ design tokens: one place to restyle the whole backend
             // https://symfony.com/bundles/EasyAdminBundle/current/design.html
             ->setTheme(Theme::new()
-                ->primaryColor(ThemeColor::Teal)
+                // same purple as the public site (--color-theme = --color-purple-dark in assets/styles/theme/light.css);
+                // EA picks dark text on it and a dark variant where it would be text on light surfaces
+                ->primaryColor('#d193ff', dark: '#d193ff')
                 ->grays(GrayScale::SLATE)
                 ->radius('lg')
                 ->font(Font::IbmPlexSans)
