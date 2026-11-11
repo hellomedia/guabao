@@ -136,6 +136,8 @@ rsync_local () {
         "$@" \
         --exclude /.git \
         --exclude /.hg \
+        --exclude '/var/tailwind/v*' \
+        --exclude /docker \
         --exclude /var/cache \
         --exclude /.env\*local\* \
         ./ "$USER@$HOST:$DEST/"
