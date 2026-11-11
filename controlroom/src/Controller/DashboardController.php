@@ -53,15 +53,15 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Guabao')
-            // EasyAdmin 5.9+ design tokens: one place to restyle the whole backend
+            // Pre-5.9 EasyAdmin look (indigo-blue accent, blueish grays, small radius, system font),
+            // as recommended by the EasyAdmin 5.9 upgrade guide ("very close" to the previous design):
+            // https://github.com/EasyCorp/EasyAdminBundle/blob/5.x/UPGRADE.md#easyadmin-590
             // https://symfony.com/bundles/EasyAdminBundle/current/design.html
             ->setTheme(Theme::new()
-                // public site purple (--color-theme in assets/styles/theme/light.css); EA computes black text on it,
-                // overridden to the site's #4e236e (5.2:1, WCAG AA) in assets/styles/controlroom.css
-                ->primaryColor('#d193ff', dark: '#d193ff')
-                ->grays(GrayScale::SLATE)
-                ->radius('lg')
-                ->font(Font::IbmPlexSans)
+                ->primaryColor('hsl(230, 61%, 58%)', dark: 'hsl(224, 84%, 49%)')
+                ->grays(GrayScale::SLATE, dark: GrayScale::NEUTRAL)
+                ->radius('xs')
+                ->font(base: Font::System, monospace: Font::System)
             )
         ;
     }
