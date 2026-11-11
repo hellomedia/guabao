@@ -1,0 +1,2098 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Class Controlroom\\Controller\\AnonymousPageViewCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/AnonymousPageViewCrudController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\AnonymousVisitCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/AnonymousVisitCrudController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\AnonymousVisitorCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/AnonymousVisitorCrudController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\ChainCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/ChainCrudController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\CountryCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/CountryCrudController.php
+
+		-
+			message: '#^Property Controlroom\\Controller\\CuisineBulkEditController\:\:\$entityManager is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: controlroom/src/Controller/CuisineBulkEditController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\CuisineCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/CuisineCrudController.php
+
+		-
+			message: '#^Parameter \#1 \$maxResultsPerPage of method EasyCorp\\Bundle\\EasyAdminBundle\\Config\\Crud\:\:setPaginatorPageSize\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: controlroom/src/Controller/DashboardController.php
+
+		-
+			message: '#^Property Controlroom\\Controller\\FoodBulkEditController\:\:\$entityManager is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: controlroom/src/Controller/FoodBulkEditController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\FoodCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/FoodCrudController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\FoodTagCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/FoodTagCrudController.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: controlroom/src/Controller/ImageCrudController.php
+
+		-
+			message: '#^Property Controlroom\\Controller\\IngredientBulkEditController\:\:\$entityManager is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: controlroom/src/Controller/IngredientBulkEditController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\IngredientCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/IngredientCrudController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\MealCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/MealCrudController.php
+
+		-
+			message: '#^Property Controlroom\\Controller\\MealCrudController\:\:\$mapsApiHelper is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: controlroom/src/Controller/MealCrudController.php
+
+		-
+			message: '#^Call to an undefined method Doctrine\\ORM\\EntityRepository\<App\\Entity\\Media\>\:\:findByFood\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: controlroom/src/Controller/MediaBulkEditController.php
+
+		-
+			message: '#^Call to an undefined method Doctrine\\ORM\\EntityRepository\<App\\Entity\\Media\>\:\:findByStory\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: controlroom/src/Controller/MediaBulkEditController.php
+
+		-
+			message: '#^Call to an undefined method Doctrine\\ORM\\EntityRepository\<App\\Entity\\Media\>\:\:findUnliked\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: controlroom/src/Controller/MediaBulkEditController.php
+
+		-
+			message: '#^Call to an undefined method Doctrine\\ORM\\EntityRepository\<App\\Entity\\Media\>\:\:getFindByTripQueryBuilder\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: controlroom/src/Controller/MediaBulkEditController.php
+
+		-
+			message: '#^Method Controlroom\\Controller\\MediaBulkEditController\:\:_processBulkAddTagsForm\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: controlroom/src/Controller/MediaBulkEditController.php
+
+		-
+			message: '#^Method Controlroom\\Controller\\MediaBulkEditController\:\:_processBulkRemoveTagsForm\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: controlroom/src/Controller/MediaBulkEditController.php
+
+		-
+			message: '#^Property Controlroom\\Controller\\MediaBulkEditController\:\:\$entityManager is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: controlroom/src/Controller/MediaBulkEditController.php
+
+		-
+			message: '#^Method Controlroom\\Controller\\MediaController\:\:_importImages\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: controlroom/src/Controller/MediaController.php
+
+		-
+			message: '#^Method Controlroom\\Controller\\MediaController\:\:_updateAutoFields\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: controlroom/src/Controller/MediaController.php
+
+		-
+			message: '#^Method Controlroom\\Controller\\MediaController\:\:_updateAutoFields\(\) has parameter \$exif with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: controlroom/src/Controller/MediaController.php
+
+		-
+			message: '#^Method Controlroom\\Controller\\MediaController\:\:_updateAutoFieldsAtQuickEdit\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: controlroom/src/Controller/MediaController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\MediaCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/MediaCrudController.php
+
+		-
+			message: '#^Method Controlroom\\Controller\\MediaCrudController\:\:_updateAutoFields\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: controlroom/src/Controller/MediaCrudController.php
+
+		-
+			message: '#^Method Controlroom\\Controller\\MediaCrudController\:\:_updateAutoFields\(\) has parameter \$exif with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: controlroom/src/Controller/MediaCrudController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\MediaTagCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/MediaTagCrudController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\PlaceCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/PlaceCrudController.php
+
+		-
+			message: '#^Property Controlroom\\Controller\\PlaceCrudController\:\:\$googleBackendApiKey is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: controlroom/src/Controller/PlaceCrudController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\PlaceTagCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/PlaceTagCrudController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\SiteHighlightCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/SiteHighlightCrudController.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: controlroom/src/Controller/StoryController.php
+
+		-
+			message: '#^Property Controlroom\\Controller\\StoryController\:\:\$entityManager is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: controlroom/src/Controller/StoryController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\StoryCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/StoryCrudController.php
+
+		-
+			message: '#^Property Controlroom\\Controller\\TripController\:\:\$entityManager is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: controlroom/src/Controller/TripController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\TripCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/TripCrudController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\TripTagCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/TripTagCrudController.php
+
+		-
+			message: '#^Class Controlroom\\Controller\\UserCrudController extends generic class EasyCorp\\Bundle\\EasyAdminBundle\\Controller\\AbstractCrudController but does not specify its types\: TEntity$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/UserCrudController.php
+
+		-
+			message: '#^Method Controlroom\\Form\\Field\\MapPickerField\:\:new\(\) has parameter \$label with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: controlroom/src/Form/Field/MapPickerField.php
+
+		-
+			message: '#^Call to method getConnectionActivity\(\) on an unknown class App\\Stats\\Provider\\ConnectionStatsProvider\.$#'
+			identifier: class.notFound
+			count: 2
+			path: packs/Chart/ActivityChartProvider.php
+
+		-
+			message: '#^Call to method getMessageActivity\(\) on an unknown class App\\Stats\\Provider\\MessageStatsProvider\.$#'
+			identifier: class.notFound
+			count: 4
+			path: packs/Chart/ActivityChartProvider.php
+
+		-
+			message: '#^Call to method getPageviewActivity\(\) on an unknown class App\\Stats\\Provider\\PageViewStatsProvider\.$#'
+			identifier: class.notFound
+			count: 2
+			path: packs/Chart/ActivityChartProvider.php
+
+		-
+			message: '#^Call to method getRegistrationActivity\(\) on an unknown class App\\Stats\\Provider\\RegistrationStatsProvider\.$#'
+			identifier: class.notFound
+			count: 3
+			path: packs/Chart/ActivityChartProvider.php
+
+		-
+			message: '#^Parameter \$connectionStats of method Pack\\Chart\\ActivityChartProvider\:\:__construct\(\) has invalid type App\\Stats\\Provider\\ConnectionStatsProvider\.$#'
+			identifier: class.notFound
+			count: 1
+			path: packs/Chart/ActivityChartProvider.php
+
+		-
+			message: '#^Parameter \$messageStats of method Pack\\Chart\\ActivityChartProvider\:\:__construct\(\) has invalid type App\\Stats\\Provider\\MessageStatsProvider\.$#'
+			identifier: class.notFound
+			count: 1
+			path: packs/Chart/ActivityChartProvider.php
+
+		-
+			message: '#^Parameter \$registrationStats of method Pack\\Chart\\ActivityChartProvider\:\:__construct\(\) has invalid type App\\Stats\\Provider\\RegistrationStatsProvider\.$#'
+			identifier: class.notFound
+			count: 1
+			path: packs/Chart/ActivityChartProvider.php
+
+		-
+			message: '#^Parameter \$viewsStats of method Pack\\Chart\\ActivityChartProvider\:\:__construct\(\) has invalid type App\\Stats\\Provider\\PageViewStatsProvider\.$#'
+			identifier: class.notFound
+			count: 1
+			path: packs/Chart/ActivityChartProvider.php
+
+		-
+			message: '#^Property Pack\\Chart\\ActivityChartProvider\:\:\$connectionStats has unknown class App\\Stats\\Provider\\ConnectionStatsProvider as its type\.$#'
+			identifier: class.notFound
+			count: 1
+			path: packs/Chart/ActivityChartProvider.php
+
+		-
+			message: '#^Property Pack\\Chart\\ActivityChartProvider\:\:\$messageStats has unknown class App\\Stats\\Provider\\MessageStatsProvider as its type\.$#'
+			identifier: class.notFound
+			count: 1
+			path: packs/Chart/ActivityChartProvider.php
+
+		-
+			message: '#^Property Pack\\Chart\\ActivityChartProvider\:\:\$registrationStats has unknown class App\\Stats\\Provider\\RegistrationStatsProvider as its type\.$#'
+			identifier: class.notFound
+			count: 1
+			path: packs/Chart/ActivityChartProvider.php
+
+		-
+			message: '#^Property Pack\\Chart\\ActivityChartProvider\:\:\$viewsStats has unknown class App\\Stats\\Provider\\PageViewStatsProvider as its type\.$#'
+			identifier: class.notFound
+			count: 1
+			path: packs/Chart/ActivityChartProvider.php
+
+		-
+			message: '#^Match expression does not handle remaining value\: non\-falsy\-string$#'
+			identifier: match.unhandled
+			count: 1
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Match expression does not handle remaining value\: string$#'
+			identifier: match.unhandled
+			count: 2
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Match expression does not handle remaining values\: string\|null$#'
+			identifier: match.unhandled
+			count: 1
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Method Pack\\Chart\\BaseChartProvider\:\:_convertToBytes\(\) should return int but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Method Pack\\Chart\\BaseChartProvider\:\:_setBarChartOptions\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Method Pack\\Chart\\BaseChartProvider\:\:_setLineChartOptions\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Method Pack\\Chart\\BaseChartProvider\:\:_setLineChartOptions\(\) has parameter \$showAxes with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Method Pack\\Chart\\BaseChartProvider\:\:beginAtZero\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Method Pack\\Chart\\BaseChartProvider\:\:createBarChart\(\) has parameter \$datasets with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Method Pack\\Chart\\BaseChartProvider\:\:createLineChart\(\) has parameter \$datasets with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Method Pack\\Chart\\BaseChartProvider\:\:createSingleDatasetBarChart\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Method Pack\\Chart\\BaseChartProvider\:\:createSingleDatasetLineChart\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Method Pack\\Chart\\BaseChartProvider\:\:getTimeScaleOptions\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Property Pack\\Chart\\BaseChartProvider\:\:\$colors type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Chart/BaseChartProvider.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: packs/Media/Doctrine/Listener/MediaRemovedListener.php
+
+		-
+			message: '#^Method Pack\\Media\\Doctrine\\Listener\\MediaRemovedListener\:\:removeFileFromDisk\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Media/Doctrine/Listener/MediaRemovedListener.php
+
+		-
+			message: '#^Property Pack\\Media\\Doctrine\\Listener\\MediaRemovedListener\:\:\$uploadHelper is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: packs/Media/Doctrine/Listener/MediaRemovedListener.php
+
+		-
+			message: '#^Method Pack\\Media\\Entity\\Interface\\UploadedAssetEntityInterface\:\:setFilename\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Media/Entity/Interface/UploadedAssetEntityInterface.php
+
+		-
+			message: '#^Method Pack\\Media\\Entity\\Interface\\UploadedAssetEntityInterface\:\:setOriginalFilename\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Media/Entity/Interface/UploadedAssetEntityInterface.php
+
+		-
+			message: '#^Method Pack\\Media\\Entity\\Interface\\UploadedAssetEntityInterface\:\:setPath\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Media/Entity/Interface/UploadedAssetEntityInterface.php
+
+		-
+			message: '#^Method Pack\\Media\\Entity\\Interface\\UploadedAssetEntityInterface\:\:setToken\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Media/Entity/Interface/UploadedAssetEntityInterface.php
+
+		-
+			message: '#^Instanceof between Symfony\\Component\\HttpFoundation\\File\\File and SplFileInfo will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: packs/Media/Helper/ExifExtractor.php
+
+		-
+			message: '#^Method Pack\\Media\\Helper\\ExifExtractor\:\:extractExifData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Media/Helper/ExifExtractor.php
+
+		-
+			message: '#^Method Pack\\Media\\Helper\\ImageManipulator\:\:_autoRotateImage\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Media/Helper/ImageManipulator.php
+
+		-
+			message: '#^Method Pack\\Media\\Helper\\ImageManipulator\:\:optimize\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Media/Helper/ImageManipulator.php
+
+		-
+			message: '#^Method Pack\\Media\\Helper\\UploadHelper\:\:_uploadAndSavePath\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Media/Helper/UploadHelper.php
+
+		-
+			message: '#^Method Pack\\Media\\Helper\\UploadHelper\:\:uploadImage\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Media/Helper/UploadHelper.php
+
+		-
+			message: '#^Parameter \#1 \$image of method Pack\\Media\\Helper\\ImageManipulator\:\:optimize\(\) expects App\\Entity\\Media, Pack\\Media\\Entity\\Interface\\UploadedAssetEntityInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: packs/Media/Helper/UploadHelper.php
+
+		-
+			message: '#^Property Pack\\Media\\Helper\\UploadHelper\:\:\$translator is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: packs/Media/Helper/UploadHelper.php
+
+		-
+			message: '#^Method Pack\\Media\\Twig\\Extension\\InstanceOfExtension\:\:isInstanceOf\(\) has parameter \$object with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: packs/Media/Twig/Extension/InstanceOfExtension.php
+
+		-
+			message: '#^Method Pack\\Security\\BotDetector\:\:__construct\(\) has parameter \$environment with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: packs/Security/BotDetector.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: packs/Security/Command/ChangeUserEmailCommand.php
+
+		-
+			message: '#^Method Pack\\Security\\Controller\\LoginController\:\:showRegistrationLink\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Security/Controller/LoginController.php
+
+		-
+			message: '#^Call to an undefined method Doctrine\\ORM\\EntityRepository\<App\\Entity\\User\>\:\:findUserByIdentifier\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: packs/Security/Controller/RegistrationController.php
+
+		-
+			message: '#^Method Pack\\Security\\Controller\\RegistrationController\:\:checkYourEmail\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Security/Controller/RegistrationController.php
+
+		-
+			message: '#^Method Pack\\Security\\Controller\\RegistrationController\:\:checkYourEmailForBots\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Security/Controller/RegistrationController.php
+
+		-
+			message: '#^Call to an undefined method Doctrine\\ORM\\EntityRepository\<App\\Entity\\User\>\:\:findUserByIdentifier\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: packs/Security/Controller/ResetPasswordController.php
+
+		-
+			message: '#^Property Pack\\Security\\Entity\\ResetPasswordRequest\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: packs/Security/Entity/ResetPasswordRequest.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$roles \(list\<string\>\) on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.property
+			count: 2
+			path: packs/Security/Entity/Trait/UserSecurityTrait.php
+
+		-
+			message: '#^Method Pack\\Security\\Mailer\\SecurityMailer\:\:sendRegistrationValidationLink\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Security/Mailer/SecurityMailer.php
+
+		-
+			message: '#^Method Pack\\Security\\Mailer\\SecurityMailer\:\:sendResetPasswordEmail\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Security/Mailer/SecurityMailer.php
+
+		-
+			message: '#^Class Pack\\Security\\Repository\\ResetPasswordRequestRepository has PHPDoc tag @method for method findBy\(\) parameter \#1 \$criteria with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Security/Repository/ResetPasswordRequestRepository.php
+
+		-
+			message: '#^Class Pack\\Security\\Repository\\ResetPasswordRequestRepository has PHPDoc tag @method for method findBy\(\) parameter \#2 \$orderBy with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Security/Repository/ResetPasswordRequestRepository.php
+
+		-
+			message: '#^Class Pack\\Security\\Repository\\ResetPasswordRequestRepository has PHPDoc tag @method for method findOneBy\(\) parameter \#1 \$criteria with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Security/Repository/ResetPasswordRequestRepository.php
+
+		-
+			message: '#^Class Pack\\Security\\Repository\\ResetPasswordRequestRepository has PHPDoc tag @method for method findOneBy\(\) parameter \#2 \$orderBy with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Security/Repository/ResetPasswordRequestRepository.php
+
+		-
+			message: '#^Class Pack\\Security\\UserProvider implements generic interface Symfony\\Component\\Security\\Core\\User\\UserProviderInterface but does not specify its types\: TUser$#'
+			identifier: missingType.generics
+			count: 1
+			path: packs/Security/UserProvider.php
+
+		-
+			message: '#^Method Pack\\Security\\UserProvider\:\:loadUserByIdentifier\(\) has parameter \$email with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: packs/Security/UserProvider.php
+
+		-
+			message: '#^Method Pack\\Security\\UserProvider\:\:supportsClass\(\) has parameter \$class with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: packs/Security/UserProvider.php
+
+		-
+			message: '#^Method Pack\\Status\\Controller\\OpcacheStatusController\:\:checkOpcache\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Status/Controller/OpcacheStatusController.php
+
+		-
+			message: '#^Property Pack\\Status\\Controller\\OpcacheStatusController\:\:\$environment is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: packs/Status/Controller/OpcacheStatusController.php
+
+		-
+			message: '#^Property Pack\\Status\\Controller\\OpcacheStatusController\:\:\$issues type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Status/Controller/OpcacheStatusController.php
+
+		-
+			message: '#^Ternary operator condition is always false\.$#'
+			identifier: ternary.alwaysFalse
+			count: 1
+			path: packs/Status/Controller/OpcacheStatusController.php
+
+		-
+			message: '#^Match expression does not handle remaining value\: string$#'
+			identifier: match.unhandled
+			count: 1
+			path: packs/Status/Controller/PhpStatusController.php
+
+		-
+			message: '#^Method Pack\\Status\\Controller\\PhpStatusController\:\:_convertToBytes\(\) should return int but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: packs/Status/Controller/PhpStatusController.php
+
+		-
+			message: '#^Method Pack\\Status\\Controller\\PhpStatusController\:\:checkPhpConfig\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Status/Controller/PhpStatusController.php
+
+		-
+			message: '#^Property Pack\\Status\\Controller\\PhpStatusController\:\:\$environment is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: packs/Status/Controller/PhpStatusController.php
+
+		-
+			message: '#^Property Pack\\Status\\Controller\\PhpStatusController\:\:\$issues type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Status/Controller/PhpStatusController.php
+
+		-
+			message: '#^Property Pack\\Status\\Controller\\PhpStatusController\:\:\$projectDir is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: packs/Status/Controller/PhpStatusController.php
+
+		-
+			message: '#^Method Pack\\Status\\Controller\\SentryCheckController\:\:checkSentryLogging\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Status/Controller/SentryCheckController.php
+
+		-
+			message: '#^Method Pack\\Status\\Entity\\TestMessageLog\:\:getId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Status/Entity/TestMessageLog.php
+
+		-
+			message: '#^Property Pack\\Status\\Entity\\TestMessageLog\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: packs/Status/Entity/TestMessageLog.php
+
+		-
+			message: '#^Method Pack\\Status\\Mailer\\StatusMailer\:\:sendTestEmail\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Status/Mailer/StatusMailer.php
+
+		-
+			message: '#^Method Pack\\Status\\Mailer\\StatusMailer\:\:sendTestHtmlEmail\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Status/Mailer/StatusMailer.php
+
+		-
+			message: '#^Method Pack\\Status\\MessageHandler\\TestEmailHandler\:\:__invoke\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Status/MessageHandler/TestEmailHandler.php
+
+		-
+			message: '#^Property Pack\\Status\\MessageHandler\\TestEmailHandler\:\:\$entityManager is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: packs/Status/MessageHandler/TestEmailHandler.php
+
+		-
+			message: '#^Method Pack\\Status\\MessageHandler\\TestErrorHandler\:\:__invoke\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Status/MessageHandler/TestErrorHandler.php
+
+		-
+			message: '#^Call to function assert\(\) with true will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: packs/Status/MessageHandler/TestMessageHandler.php
+
+		-
+			message: '#^Instanceof between Pack\\Status\\Entity\\TestMessageLog and Pack\\Status\\Entity\\TestMessageLog will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: packs/Status/MessageHandler/TestMessageHandler.php
+
+		-
+			message: '#^Method Pack\\Status\\MessageHandler\\TestMessageHandler\:\:__invoke\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Status/MessageHandler/TestMessageHandler.php
+
+		-
+			message: '#^Property Pack\\Status\\MessageHandler\\TestMessageHandler\:\:\$messengerAuditLogger is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: packs/Status/MessageHandler/TestMessageHandler.php
+
+		-
+			message: '#^Method Pack\\Status\\Model\\OpCacheStatus\:\:_arrayPset\(\) has parameter \$array with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Method Pack\\Status\\Model\\OpCacheStatus\:\:_arrayPset\(\) has parameter \$key with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Method Pack\\Status\\Model\\OpCacheStatus\:\:_arrayPset\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Method Pack\\Status\\Model\\OpCacheStatus\:\:_arrayPset\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Method Pack\\Status\\Model\\OpCacheStatus\:\:_formatValue\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Method Pack\\Status\\Model\\OpCacheStatus\:\:_processPartition\(\) has parameter \$name with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Method Pack\\Status\\Model\\OpCacheStatus\:\:_processPartition\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Method Pack\\Status\\Model\\OpCacheStatus\:\:_processPartition\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Method Pack\\Status\\Model\\OpCacheStatus\:\:getD3Scripts\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Method Pack\\Status\\Model\\OpCacheStatus\:\:getHitsStats\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Method Pack\\Status\\Model\\OpCacheStatus\:\:getKeysStats\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Method Pack\\Status\\Model\\OpCacheStatus\:\:getMemoryStats\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Method Pack\\Status\\Model\\OpCacheStatus\:\:getRestartStats\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Property Pack\\Status\\Model\\OpCacheStatus\:\:\$configuration has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Property Pack\\Status\\Model\\OpCacheStatus\:\:\$d3Scripts has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Property Pack\\Status\\Model\\OpCacheStatus\:\:\$status has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between true and true will always evaluate to true\.$#'
+			identifier: identical.alwaysTrue
+			count: 2
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Variable \$dirs might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: packs/Status/Model/OpCacheStatus.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/Command/ChangeUserEmailCommand.php
+
+		-
+			message: '#^Parameter \#1 \$message of method Symfony\\Component\\Console\\Style\\SymfonyStyle\:\:info\(\) expects array\|string, int\<0, max\> given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Command/PopulateNameSearchCommand.php
+
+		-
+			message: '#^Call to function assert\(\) with true will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Command/WarmImageCacheCommand.php
+
+		-
+			message: '#^Instanceof between App\\Entity\\Media and App\\Entity\\Media will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Command/WarmImageCacheCommand.php
+
+		-
+			message: '#^Method App\\Controller\\BaseController\:\:addBreadcrumb\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Controller/BaseController.php
+
+		-
+			message: '#^Method App\\Controller\\BaseController\:\:addBreadcrumb\(\) has parameter \$route with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Controller/BaseController.php
+
+		-
+			message: '#^Method App\\Controller\\BaseController\:\:addBreadcrumb\(\) has parameter \$routeParams with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Controller/BaseController.php
+
+		-
+			message: '#^Method App\\Controller\\BaseController\:\:addFlash\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Controller/BaseController.php
+
+		-
+			message: '#^Result of method App\\Helper\\BreadcrumbsHelper\:\:addBreadcrumb\(\) \(void\) is used\.$#'
+			identifier: method.void
+			count: 1
+			path: src/Controller/BaseController.php
+
+		-
+			message: '#^Method App\\Controller\\FoodByCountryController\:\:preExecute\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Controller/FoodByCountryController.php
+
+		-
+			message: '#^Method App\\Controller\\FoodByCuisineController\:\:preExecute\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Controller/FoodByCuisineController.php
+
+		-
+			message: '#^Method App\\Controller\\FoodByIngredientController\:\:preExecute\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Controller/FoodByIngredientController.php
+
+		-
+			message: '#^Method App\\Controller\\FoodByTagController\:\:preExecute\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Controller/FoodByTagController.php
+
+		-
+			message: '#^Method App\\Controller\\FoodController\:\:preExecute\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Controller/FoodController.php
+
+		-
+			message: '#^Call to an undefined method App\\Repository\\TripTagRepository\:\:findOneByKey\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: src/Controller/TripController.php
+
+		-
+			message: '#^Method App\\Controller\\TripController\:\:preExecute\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Controller/TripController.php
+
+		-
+			message: '#^Call to an undefined method App\\Entity\\Food\:\:setCuisine\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/DataFixtures/FoodFixtures.php
+
+		-
+			message: '#^Property App\\DataFixtures\\Picture\\CountryFoodCoverPictureFixtures\:\:\$autoFillHelper is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/DataFixtures/Picture/CountryFoodCoverPictureFixtures.php
+
+		-
+			message: '#^Property App\\DataFixtures\\Picture\\CountryFoodCoverPictureFixtures\:\:\$exifExtractor is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/DataFixtures/Picture/CountryFoodCoverPictureFixtures.php
+
+		-
+			message: '#^Property App\\DataFixtures\\Picture\\CountryFoodCoverPictureFixtures\:\:\$uploadHelper is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/DataFixtures/Picture/CountryFoodCoverPictureFixtures.php
+
+		-
+			message: '#^Call to an undefined method App\\Entity\\Media\:\:setFood\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/DataFixtures/Picture/FoodPictureFixtures.php
+
+		-
+			message: '#^Method App\\DataFixtures\\Picture\\FoodPictureFixtures\:\:_updateAutoFields\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/DataFixtures/Picture/FoodPictureFixtures.php
+
+		-
+			message: '#^Method App\\DataFixtures\\Picture\\FoodPictureFixtures\:\:_updateAutoFields\(\) has parameter \$exif with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/DataFixtures/Picture/FoodPictureFixtures.php
+
+		-
+			message: '#^Method App\\DataFixtures\\Picture\\Pano360Fixtures\:\:_updateAutoFields\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/DataFixtures/Picture/Pano360Fixtures.php
+
+		-
+			message: '#^Method App\\DataFixtures\\Picture\\Pano360Fixtures\:\:_updateAutoFields\(\) has parameter \$exif with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/DataFixtures/Picture/Pano360Fixtures.php
+
+		-
+			message: '#^Method App\\DataFixtures\\Picture\\PanoFixtures\:\:_updateAutoFields\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/DataFixtures/Picture/PanoFixtures.php
+
+		-
+			message: '#^Method App\\DataFixtures\\Picture\\PanoFixtures\:\:_updateAutoFields\(\) has parameter \$exif with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/DataFixtures/Picture/PanoFixtures.php
+
+		-
+			message: '#^Method App\\DataFixtures\\Picture\\TripCoverPictureFixtures\:\:_removeOldFiles\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/DataFixtures/Picture/TripCoverPictureFixtures.php
+
+		-
+			message: '#^Method App\\DataFixtures\\Picture\\TripCoverPictureFixtures\:\:_updateAutoFields\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/DataFixtures/Picture/TripCoverPictureFixtures.php
+
+		-
+			message: '#^Method App\\DataFixtures\\Picture\\TripCoverPictureFixtures\:\:_updateAutoFields\(\) has parameter \$exif with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/DataFixtures/Picture/TripCoverPictureFixtures.php
+
+		-
+			message: '#^Method App\\DataFixtures\\Picture\\TripPictureFixtures\:\:_updateAutoFields\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/DataFixtures/Picture/TripPictureFixtures.php
+
+		-
+			message: '#^Method App\\DataFixtures\\Picture\\TripPictureFixtures\:\:_updateAutoFields\(\) has parameter \$exif with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/DataFixtures/Picture/TripPictureFixtures.php
+
+		-
+			message: '#^Method App\\Doctrine\\Listener\\CountryCreatedListener\:\:createSlugs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Doctrine/Listener/CountryCreatedListener.php
+
+		-
+			message: '#^Property App\\Doctrine\\Listener\\CountryCreatedListener\:\:\$slugger is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Doctrine/Listener/CountryCreatedListener.php
+
+		-
+			message: '#^Call to method App\\Doctrine\\Listener\\CountryUpdatedListener\:\:_updateSlugs\(\) on a separate line has no effect\.$#'
+			identifier: method.resultUnused
+			count: 1
+			path: src/Doctrine/Listener/CountryUpdatedListener.php
+
+		-
+			message: '#^Method App\\Doctrine\\Listener\\CountryUpdatedListener\:\:_updateSlugs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Doctrine/Listener/CountryUpdatedListener.php
+
+		-
+			message: '#^Method App\\Doctrine\\Listener\\CountryUpdatedListener\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Doctrine/Listener/CountryUpdatedListener.php
+
+		-
+			message: '#^Property App\\Doctrine\\Listener\\CountryUpdatedListener\:\:\$slugger is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Doctrine/Listener/CountryUpdatedListener.php
+
+		-
+			message: '#^Call to function assert\(\) with true will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: src/Doctrine/Listener/SearchableNameListener.php
+
+		-
+			message: '#^Instanceof between App\\Entity\\Interface\\LocalizedNameInterface&App\\Entity\\Interface\\SearchableNameInterface and App\\Entity\\Interface\\LocalizedNameInterface will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Doctrine/Listener/SearchableNameListener.php
+
+		-
+			message: '#^Instanceof between App\\Entity\\Interface\\LocalizedNameInterface&App\\Entity\\Interface\\SearchableNameInterface and App\\Entity\\Interface\\SearchableNameInterface will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Doctrine/Listener/SearchableNameListener.php
+
+		-
+			message: '#^Method App\\Doctrine\\Listener\\SearchableNameListener\:\:_setNameSearch\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Doctrine/Listener/SearchableNameListener.php
+
+		-
+			message: '#^Method App\\Doctrine\\Listener\\SluggableListener\:\:_setLocalizedSlugs\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Doctrine/Listener/SluggableListener.php
+
+		-
+			message: '#^Method App\\Doctrine\\Listener\\TripCreatedListener\:\:preCreate\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Doctrine/Listener/TripCreatedListener.php
+
+		-
+			message: '#^Method App\\Doctrine\\Listener\\TripUpdatedListener\:\:preUpdate\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Doctrine/Listener/TripUpdatedListener.php
+
+		-
+			message: '#^Property App\\Doctrine\\Listener\\TripUpdatedListener\:\:\$slugger is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Doctrine/Listener/TripUpdatedListener.php
+
+		-
+			message: '#^Method App\\Doctrine\\Listener\\UserCreatedListener\:\:preCreate\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Doctrine/Listener/UserCreatedListener.php
+
+		-
+			message: '#^Method App\\Doctrine\\Listener\\UserUpdatedListener\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Doctrine/Listener/UserUpdatedListener.php
+
+		-
+			message: '#^Property App\\Entity\\Chain\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Chain.php
+
+		-
+			message: '#^Property App\\Entity\\Country\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Country.php
+
+		-
+			message: '#^Property App\\Entity\\Cuisine\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Cuisine.php
+
+		-
+			message: '#^Class App\\Entity\\Cuisine referenced with incorrect case\: App\\Entity\\cuisine\.$#'
+			identifier: class.nameCase
+			count: 4
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Method App\\Entity\\Food\:\:getMeals\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Method App\\Entity\\Food\:\:getMediaGroups\(\) has invalid return type App\\Entity\\PlaceTags\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Method App\\Entity\\Food\:\:getMediaGroups\(\) should return array\<int, array\{type\: ''date''\|''meal'', meal\: App\\Entity\\Meal\|null, date\: DateTimeImmutable\|null, medias\: array\<App\\Entity\\Media\>, place\: App\\Entity\\Place\|null, placeTags\: array\<App\\Entity\\PlaceTags\>, sort\: int\}\> but returns list\<non\-empty\-array\<''date''\|''meal''\|''medias''\|''place''\|''placeTags''\|''sort''\|''type'', ''date''\|''meal''\|App\\Entity\\Meal\|App\\Entity\\Place\|array\<int, App\\Entity\\Media\|App\\Entity\\Tag\\PlaceTag\>\|DateTimeImmutable\|int\|null\>\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Method App\\Entity\\Food\:\:getTags\(\) should return Doctrine\\Common\\Collections\\Collection\<int, App\\Entity\\Tag\\FoodTag\> but returns Doctrine\\Common\\Collections\\Collection\<int, App\\Entity\\Tag\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Parameter \#1 \$element of method Doctrine\\Common\\Collections\\Collection\<int,App\\Entity\\Tag\>\:\:add\(\) expects App\\Entity\\Tag, App\\Entity\\Tag\\FoodTag given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Parameter \#1 \$element of method Doctrine\\Common\\Collections\\Collection\<int,App\\Entity\\Tag\>\:\:removeElement\(\) expects App\\Entity\\Tag, App\\Entity\\Tag\\FoodTag given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Property App\\Entity\\Food\:\:\$children with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Property App\\Entity\\Food\:\:\$similarTo is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Property App\\Entity\\Food\:\:\$tags has unknown class App\\Entity\\Tag as its type\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Property App\\Entity\\Ingredient\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Ingredient.php
+
+		-
+			message: '#^Property App\\Entity\\Ingredient\:\:\$similarTo is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Entity/Ingredient.php
+
+		-
+			message: '#^Method App\\Entity\\Interface\\EntityInterface\:\:getId\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Entity/Interface/EntityInterface.php
+
+		-
+			message: '#^Method App\\Entity\\Interface\\LocalizedNameInterface\:\:setNameEn\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Entity/Interface/LocalizedNameInterface.php
+
+		-
+			message: '#^Method App\\Entity\\Interface\\LocalizedNameInterface\:\:setNameFr\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Entity/Interface/LocalizedNameInterface.php
+
+		-
+			message: '#^Method App\\Entity\\Interface\\LocalizedSlugInterface\:\:setSlugEn\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Entity/Interface/LocalizedSlugInterface.php
+
+		-
+			message: '#^Method App\\Entity\\Interface\\LocalizedSlugInterface\:\:setSlugFr\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Entity/Interface/LocalizedSlugInterface.php
+
+		-
+			message: '#^Method App\\Entity\\Interface\\OriginalNameInterface\:\:setOriginalName\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Entity/Interface/OriginalNameInterface.php
+
+		-
+			message: '#^Method App\\Entity\\Interface\\SearchableNameInterface\:\:setNameSearch\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Entity/Interface/SearchableNameInterface.php
+
+		-
+			message: '#^Method App\\Entity\\Interface\\TranslatableInterface\:\:getTranslations\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Interface/TranslatableInterface.php
+
+		-
+			message: '#^Method App\\Entity\\Interface\\TranslationInterface\:\:setLocale\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Entity/Interface/TranslationInterface.php
+
+		-
+			message: '#^Access to an undefined property Doctrine\\Common\\Collections\\Collection\<int, App\\Entity\\Media\>\:\:\$first\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Entity/Meal.php
+
+		-
+			message: '#^Property App\\Entity\\Meal\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Meal.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Doctrine\\Common\\Collections\\Collection\<int, App\\Entity\\Tag\\PlaceTag\>\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: src/Entity/Meal.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type Doctrine\\Common\\Collections\\Collection\<int, App\\Entity\\Media\>\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: src/Entity/Meal.php
+
+		-
+			message: '#^Method App\\Entity\\Media\:\:getExifData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Media.php
+
+		-
+			message: '#^Method App\\Entity\\Media\:\:setExifData\(\) has parameter \$exifData with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Media.php
+
+		-
+			message: '#^Property App\\Entity\\Media\:\:\$exifData type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Media.php
+
+		-
+			message: '#^Property App\\Entity\\Media\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Media.php
+
+		-
+			message: '#^Property App\\Entity\\Media\:\:\$isTripCover \(bool\|null\) is never assigned bool so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Media.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Entity/Place.php
+
+		-
+			message: '#^Property App\\Entity\\Place\:\:\$id is never written, only read\.$#'
+			identifier: property.onlyRead
+			count: 1
+			path: src/Entity/Place.php
+
+		-
+			message: '#^Property App\\Entity\\SiteHighlight\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/SiteHighlight.php
+
+		-
+			message: '#^Property App\\Entity\\Stats\\AnonymousPageView\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Stats/AnonymousPageView.php
+
+		-
+			message: '#^Property App\\Entity\\Stats\\AnonymousVisit\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Stats/AnonymousVisit.php
+
+		-
+			message: '#^Method App\\Entity\\Stats\\AnonymousVisitor\:\:getCities\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Stats/AnonymousVisitor.php
+
+		-
+			message: '#^Method App\\Entity\\Stats\\AnonymousVisitor\:\:getCountryCodes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Stats/AnonymousVisitor.php
+
+		-
+			message: '#^Method App\\Entity\\Stats\\AnonymousVisitor\:\:getCountryNames\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Entity/Stats/AnonymousVisitor.php
+
+		-
+			message: '#^Property App\\Entity\\Stats\\AnonymousVisitor\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Stats/AnonymousVisitor.php
+
+		-
+			message: '#^Property App\\Entity\\Story\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Story.php
+
+		-
+			message: '#^Property App\\Entity\\Story\:\:\$show \(bool\|null\) is never assigned null so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Story.php
+
+		-
+			message: '#^Property App\\Entity\\Story\:\:\$showTitle \(bool\|null\) is never assigned null so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Story.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\FoodTag\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Tag/FoodTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\MediaTag\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Tag/MediaTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\PlaceTag\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Tag/PlaceTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\TripTag\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Tag/TripTag.php
+
+		-
+			message: '#^Trait App\\Entity\\Trait\\TranslatableTrait is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Entity/Trait/TranslatableTrait.php
+
+		-
+			message: '#^Trait App\\Entity\\Trait\\TranslationTrait is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Entity/Trait/TranslationTrait.php
+
+		-
+			message: '#^Property App\\Entity\\Trip\:\:\$children with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Entity/Trip.php
+
+		-
+			message: '#^Property App\\Entity\\Trip\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/Trip.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:isAccountLocked\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:removeRole\(\) has parameter \$role with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Enum\\AccountLanguage\:\:getTranslatableChoices\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Enum/AccountLanguage.php
+
+		-
+			message: '#^Method App\\Enum\\FoodType\:\:getTranslatableChoices\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Enum/FoodType.php
+
+		-
+			message: '#^Method App\\Enum\\Gender\:\:getTranslatableChoices\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Enum/Gender.php
+
+		-
+			message: '#^Method App\\Enum\\Level\:\:getTranslatableChoices\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Enum/Level.php
+
+		-
+			message: '#^Method App\\Enum\\MealType\:\:getTranslatableChoices\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Enum/MealType.php
+
+		-
+			message: '#^Method App\\Enum\\MediaType\:\:getTranslatableChoices\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Enum/MediaType.php
+
+		-
+			message: '#^Method App\\Enum\\Month\:\:getTranslatableChoices\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Enum/Month.php
+
+		-
+			message: '#^Method App\\Enum\\VideoOrientation\:\:getTranslatableChoices\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Enum/VideoOrientation.php
+
+		-
+			message: '#^Property App\\EventSubscriber\\AccountCreatedSubscriber\:\:\$bus is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/EventSubscriber/AccountCreatedSubscriber.php
+
+		-
+			message: '#^Property App\\EventSubscriber\\AccountCreatedSubscriber\:\:\$environment is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/EventSubscriber/AccountCreatedSubscriber.php
+
+		-
+			message: '#^Property App\\EventSubscriber\\AccountCreatedSubscriber\:\:\$logger is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/EventSubscriber/AccountCreatedSubscriber.php
+
+		-
+			message: '#^Method App\\EventSubscriber\\ControllerSubscriber\:\:onKernelController\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/EventSubscriber/ControllerSubscriber.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/EventSubscriber/ControllerSubscriber.php
+
+		-
+			message: '#^Property App\\EventSubscriber\\ControllerSubscriber\:\:\$entityManager is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/EventSubscriber/ControllerSubscriber.php
+
+		-
+			message: '#^Property App\\EventSubscriber\\ControllerSubscriber\:\:\$requestStack is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/EventSubscriber/ControllerSubscriber.php
+
+		-
+			message: '#^Property App\\EventSubscriber\\ControllerSubscriber\:\:\$security is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/EventSubscriber/ControllerSubscriber.php
+
+		-
+			message: '#^Variable \$controller in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.variable
+			count: 1
+			path: src/EventSubscriber/ControllerSubscriber.php
+
+		-
+			message: '#^Method App\\Form\\Type\\AjaxSubmitType\:\:getParent\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/Form/Type/AjaxSubmitType.php
+
+		-
+			message: '#^Method App\\Helper\\BreadcrumbsHelper\:\:addBreadcrumb\(\) has parameter \$routeParams with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Helper/BreadcrumbsHelper.php
+
+		-
+			message: '#^Method App\\Helper\\BreadcrumbsHelper\:\:getBreadcrumbs\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Helper/BreadcrumbsHelper.php
+
+		-
+			message: '#^Property App\\Helper\\BreadcrumbsHelper\:\:\$breadcrumbs type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Helper/BreadcrumbsHelper.php
+
+		-
+			message: '#^Comparison operation "\<\=" between int\<13, 25\> and 25 is always true\.$#'
+			identifier: smallerOrEqual.alwaysTrue
+			count: 1
+			path: src/Helper/DateHelper.php
+
+		-
+			message: '#^Comparison operation "\<\=" between int\<26, 35\> and 35 is always true\.$#'
+			identifier: smallerOrEqual.alwaysTrue
+			count: 1
+			path: src/Helper/DateHelper.php
+
+		-
+			message: '#^Comparison operation "\<\=" between int\<351, 380\> and 380 is always true\.$#'
+			identifier: smallerOrEqual.alwaysTrue
+			count: 1
+			path: src/Helper/DateHelper.php
+
+		-
+			message: '#^Comparison operation "\<\=" between int\<36, 50\> and 50 is always true\.$#'
+			identifier: smallerOrEqual.alwaysTrue
+			count: 1
+			path: src/Helper/DateHelper.php
+
+		-
+			message: '#^Comparison operation "\<\=" between int\<51, 62\> and 62 is always true\.$#'
+			identifier: smallerOrEqual.alwaysTrue
+			count: 1
+			path: src/Helper/DateHelper.php
+
+		-
+			message: '#^Comparison operation "\<\=" between int\<6, 8\> and 8 is always true\.$#'
+			identifier: smallerOrEqual.alwaysTrue
+			count: 1
+			path: src/Helper/DateHelper.php
+
+		-
+			message: '#^Comparison operation "\<\=" between int\<63, 350\> and 350 is always true\.$#'
+			identifier: smallerOrEqual.alwaysTrue
+			count: 1
+			path: src/Helper/DateHelper.php
+
+		-
+			message: '#^Comparison operation "\<\=" between int\<9, 12\> and 12 is always true\.$#'
+			identifier: smallerOrEqual.alwaysTrue
+			count: 1
+			path: src/Helper/DateHelper.php
+
+		-
+			message: '''
+				#^PHPDoc tag @var has invalid value \(\$precision string \<'date'\|'time'\>
+				     'time'   \=\> 
+				        \- difference between yesterday at 4pm and today \('now'\) at 3pm is 0\.
+				        \- difference between yesterday at 4pm and today \('now'\) at 5pm is 1\.
+				     'date' \=\> 
+				        \- difference between yesterday at 4pm \(or any other time, all forced to 00\:00\:\:00\)
+				        and today \('today'\) \(which means today 00\:00\:00\) is 1\.
+				        Thus the difference between any event yesterday and 'today' is 1, when called at any time\.\)\: Unexpected token "\$precision", expected type at offset 52 on line 4$#
+			'''
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/Helper/DateHelper.php
+
+		-
+			message: '#^Method App\\Helper\\GoogleMapsApiHelper\:\:findNearbyPlace\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Helper/GoogleMapsApiHelper.php
+
+		-
+			message: '#^Method App\\Helper\\GoogleMapsApiHelper\:\:reverseGeocode\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Helper/GoogleMapsApiHelper.php
+
+		-
+			message: '#^Method App\\Helper\\GpsParsingHelper\:\:getGpsDecimal\(\) has parameter \$coord with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Helper/GpsParsingHelper.php
+
+		-
+			message: '#^Property App\\Helper\\MealAutoFillHelper\:\:\$entityManager is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Helper/MealAutoFillHelper.php
+
+		-
+			message: '#^Property App\\Helper\\MealAutoFillHelper\:\:\$mealRepository is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Helper/MealAutoFillHelper.php
+
+		-
+			message: '#^Property App\\Helper\\MealAutoFillHelper\:\:\$tripRepository is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Helper/MealAutoFillHelper.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: src/Helper/MediaAutoFillHelper.php
+
+		-
+			message: '#^Method App\\Helper\\MediaAutoFillHelper\:\:autoAssignTrip\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Helper/MediaAutoFillHelper.php
+
+		-
+			message: '#^Method App\\Helper\\MediaAutoFillHelper\:\:setCoordinates\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Helper/MediaAutoFillHelper.php
+
+		-
+			message: '#^Method App\\Helper\\MediaAutoFillHelper\:\:setCoordinates\(\) has parameter \$exif with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Helper/MediaAutoFillHelper.php
+
+		-
+			message: '#^Method App\\Helper\\MediaAutoFillHelper\:\:setTakenAt\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Helper/MediaAutoFillHelper.php
+
+		-
+			message: '#^Method App\\Helper\\MediaAutoFillHelper\:\:setTakenAt\(\) has parameter \$exif with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Helper/MediaAutoFillHelper.php
+
+		-
+			message: '#^Property App\\Helper\\MediaAutoFillHelper\:\:\$uploadsPath is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Helper/MediaAutoFillHelper.php
+
+		-
+			message: '#^Method App\\Mailer\\BaseMailer\:\:generateAbsoluteUrl\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Mailer/BaseMailer.php
+
+		-
+			message: '#^Method App\\Repository\\CountryRepository\:\:findAllWithFoodCount\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/CountryRepository.php
+
+		-
+			message: '#^Method App\\Repository\\CuisineRepository\:\:findAllWithFoodCount\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/CuisineRepository.php
+
+		-
+			message: '#^Method App\\Repository\\FoodRepository\:\:findByCountry\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/FoodRepository.php
+
+		-
+			message: '#^Method App\\Repository\\FoodRepository\:\:findByCuisine\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/FoodRepository.php
+
+		-
+			message: '#^Method App\\Repository\\FoodRepository\:\:findByFoodTag\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/FoodRepository.php
+
+		-
+			message: '#^Method App\\Repository\\FoodRepository\:\:findByIngredient\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/FoodRepository.php
+
+		-
+			message: '#^Method App\\Repository\\FoodRepository\:\:findTopDiscoveries\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/FoodRepository.php
+
+		-
+			message: '#^Method App\\Repository\\FoodTagRepository\:\:findAllWithFoodCount\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/FoodTagRepository.php
+
+		-
+			message: '#^Method App\\Repository\\IngredientRepository\:\:findAllByTypeWithFoodCount\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/IngredientRepository.php
+
+		-
+			message: '#^Method App\\Repository\\IngredientRepository\:\:findAllWithFoodCount\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/IngredientRepository.php
+
+		-
+			message: '#^Method App\\Repository\\IngredientRepository\:\:findFavourites\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/IngredientRepository.php
+
+		-
+			message: '#^Method App\\Repository\\IngredientRepository\:\:findFavouritesWithFoodCount\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/IngredientRepository.php
+
+		-
+			message: '#^Method App\\Repository\\IngredientRepository\:\:findNonFavourites\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/IngredientRepository.php
+
+		-
+			message: '#^Method App\\Repository\\IngredientRepository\:\:findNonFavouritesWithFoodCount\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/IngredientRepository.php
+
+		-
+			message: '#^Method App\\Repository\\MediaRepository\:\:findByFood\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/MediaRepository.php
+
+		-
+			message: '#^Method App\\Repository\\MediaRepository\:\:findByStory\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/MediaRepository.php
+
+		-
+			message: '#^Method App\\Repository\\MediaRepository\:\:findByTrip\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/MediaRepository.php
+
+		-
+			message: '#^Method App\\Repository\\MediaRepository\:\:findFoodMediasByCountry\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/MediaRepository.php
+
+		-
+			message: '#^Method App\\Repository\\MediaRepository\:\:findUnliked\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/MediaRepository.php
+
+		-
+			message: '#^Class App\\Repository\\Stats\\AnonymousVisitRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/Stats/AnonymousVisitRepository.php
+
+		-
+			message: '#^Class App\\Repository\\Stats\\AnonymousVisitorRepository extends generic class Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository but does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/Stats/AnonymousVisitorRepository.php
+
+		-
+			message: '#^Method App\\Repository\\Stats\\AnonymousVisitorRepository\:\:findNotableVisitorsOrderedByLastSeen\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/Stats/AnonymousVisitorRepository.php
+
+		-
+			message: '#^Method App\\Repository\\Stats\\AnonymousVisitorRepository\:\:findNotableVisitorsOrderedByPageCount\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/Stats/AnonymousVisitorRepository.php
+
+		-
+			message: '#^Method App\\Repository\\StoryRepository\:\:findTopAdventures\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/StoryRepository.php
+
+		-
+			message: '#^Method App\\Repository\\StoryRepository\:\:findTopByHighlight\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/StoryRepository.php
+
+		-
+			message: '#^Method App\\Repository\\StoryRepository\:\:findTopDiscoveries\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/StoryRepository.php
+
+		-
+			message: '#^Method App\\Repository\\StoryRepository\:\:findTopHistoricalPlaces\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/StoryRepository.php
+
+		-
+			message: '#^Method App\\Repository\\StoryRepository\:\:findTopPersonalExperiences\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/StoryRepository.php
+
+		-
+			message: '#^Trait App\\Repository\\Trait\\RepositoryTrait is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Repository/Trait/RepositoryTrait.php
+
+		-
+			message: '#^Method App\\Repository\\TripRepository\:\:findAllByTag\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/TripRepository.php
+
+		-
+			message: '#^Method App\\Repository\\TripRepository\:\:findPlaceTags\(\) return type with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Repository/TripRepository.php
+
+		-
+			message: '#^Method App\\Repository\\TripRepository\:\:findTopByHighlight\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/TripRepository.php
+
+		-
+			message: '#^Method App\\Repository\\TripRepository\:\:findTopHikingTrips\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/TripRepository.php
+
+		-
+			message: '#^Method App\\Repository\\TripRepository\:\:findTopSlowTravelTrips\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Repository/TripRepository.php
+
+		-
+			message: '#^Method App\\Service\\Media\\ImageCacheWarmer\:\:__construct\(\) has parameter \$filterSets with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Service/Media/ImageCacheWarmer.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$filters$#'
+			identifier: parameter.notFound
+			count: 1
+			path: src/Service/Media/ImageCacheWarmer.php
+
+		-
+			message: '#^Property App\\Service\\Media\\ImageCacheWarmer\:\:\$filters type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Service/Media/ImageCacheWarmer.php
+
+		-
+			message: '#^Call to function assert\(\) with true will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Service/Sentry.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 1
+			path: src/Service/Sentry.php
+
+		-
+			message: '#^Instanceof between Sentry\\ExceptionDataBag and Sentry\\ExceptionDataBag will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Service/Sentry.php
+
+		-
+			message: '#^Call to an undefined method App\\Repository\\Stats\\AnonymousVisitorRepository\:\:findOneByVisitorId\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Stats/AnonymousTrackingService.php
+
+		-
+			message: '#^Property App\\Stats\\AnonymousTrackingService\:\:\$requestStack is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Stats/AnonymousTrackingService.php
+
+		-
+			message: '#^Method App\\Twig\\Component\\Breadcrumbs\\Breadcrumbs\:\:getBreadcrumbs\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Twig/Component/Breadcrumbs/Breadcrumbs.php
+
+		-
+			message: '#^Method App\\Twig\\Extension\\DateExtension\:\:chatDate\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Twig/Extension/DateExtension.php
+
+		-
+			message: '#^Method App\\Twig\\Extension\\DateExtension\:\:dateFilter\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Twig/Extension/DateExtension.php
+
+		-
+			message: '#^Method App\\Twig\\Extension\\DateExtension\:\:dateFilter\(\) has parameter \$format with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Twig/Extension/DateExtension.php
+
+		-
+			message: '#^Method App\\Twig\\Extension\\DateExtension\:\:dateFilter\(\) has parameter \$timestamp with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Twig/Extension/DateExtension.php
+
+		-
+			message: '#^Method App\\Twig\\Extension\\DateExtension\:\:tripDuration\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Twig/Extension/DateExtension.php
+
+		-
+			message: '#^Method App\\Twig\\Runtime\\AppExtensionRuntime\:\:_getFoodPath\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Twig/Runtime/AppExtensionRuntime.php
+
+		-
+			message: '#^Method App\\Twig\\Runtime\\AppExtensionRuntime\:\:_getStoryPath\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Twig/Runtime/AppExtensionRuntime.php
+
+		-
+			message: '#^Method App\\Twig\\Runtime\\AppExtensionRuntime\:\:_getTopLevelTripPath\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Twig/Runtime/AppExtensionRuntime.php
+
+		-
+			message: '#^Method App\\Twig\\Runtime\\AppExtensionRuntime\:\:_getTripLegPath\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Twig/Runtime/AppExtensionRuntime.php
+
+		-
+			message: '#^Method App\\Twig\\Runtime\\AppExtensionRuntime\:\:_getTripPath\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Twig/Runtime/AppExtensionRuntime.php
+
+		-
+			message: '#^Method App\\Twig\\Runtime\\AppExtensionRuntime\:\:getAbsoluteUrl\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Twig/Runtime/AppExtensionRuntime.php
+
+		-
+			message: '#^Method App\\Twig\\Runtime\\AppExtensionRuntime\:\:getPath\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Twig/Runtime/AppExtensionRuntime.php
+
+		-
+			message: '#^Method App\\Twig\\Runtime\\AppExtensionRuntime\:\:isCurrentPage\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Twig/Runtime/AppExtensionRuntime.php
+
+		-
+			message: '#^Method App\\Twig\\Runtime\\AppExtensionRuntime\:\:translate\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Twig/Runtime/AppExtensionRuntime.php
