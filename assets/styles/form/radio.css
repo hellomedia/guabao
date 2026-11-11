@@ -24,7 +24,6 @@
             width: calc(var(--radio-size) * 1px);
             background-color: var(--checkbox-bg-color);
             border-radius: 50%;
-            border: 1px solid var(--checkbox-border-color);
             margin-right: 10px;
         }
 

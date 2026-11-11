@@ -62,7 +62,7 @@
             align-items: center;
         }
         .trip-leg-divider::after {
-            color: var(--color-gray400);
+            color: var(--color-gray-400);
             content: '····';
         }
     }
