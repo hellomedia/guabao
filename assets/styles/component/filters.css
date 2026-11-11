@@ -23,7 +23,7 @@
             &.current {
                 background-color: var(--color-theme);
                 border: var(--color-theme);
-                color: white;
+                color: var(--color-button-primary-text);
             }
         }
 
@@ -72,7 +72,7 @@
         &.current {
             background-color: var(--color-theme);
             border: var(--color-theme);
-            color: white;
+            color: var(--color-button-primary-text);
         }
     }
 

@@ -131,3 +131,14 @@ table.datagrid td.actions {
         justify-content: start;
     }
 }
+/* Text on primary-colored elements (buttons, badges) and primary text on surfaces (active menu, links):
+   the public site's #4e236e instead of the black EA computes for #d193ff (5.2:1 on it, 11.7:1 on white).
+   EA has no setter for these, so override its theme variables (inline <style> in layout.html.twig)
+   with doubled selectors to win regardless of load order.
+   https://symfony.com/bundles/EasyAdminBundle/current/design.html */
+:root:root, .ea-dark-scheme.ea-dark-scheme {
+    --ea-primary-foreground: #4e236e;
+}
+:root:root {
+    --ea-primary-on-surface: #4e236e;
+}

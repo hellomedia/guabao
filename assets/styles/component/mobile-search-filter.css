@@ -24,7 +24,7 @@
     }
 
     #mobile-filter-btn-icon {
-        color: white;
+        color: var(--color-button-primary-text);
         @apply w-7;
     }
 

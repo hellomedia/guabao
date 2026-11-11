@@ -19,7 +19,7 @@
     .btn-primary {
         background-color: var(--color-button-primary);
         border: 1px solid var(--color-button-primary);
-        color: var(--color-gray-100);
+        color: var(--color-button-primary-text);
 
         position: relative;
         overflow: hidden;
@@ -28,7 +28,7 @@
         transition: background-color 0.3s ease, color 0.3s ease;
 
         &:hover {
-            color: var(--color-gray-100);
+            color: var(--color-button-primary-text);
             background-color: var(--color-button-primary-hover);
             border: 1px solid var(--color-button-primary-hover);
         }
@@ -103,7 +103,7 @@
 
         background-color: var(--color-button-primary);
         border: 1px solid var(--color-button-primary);
-        color: var(--color-gray-100);
+        color: var(--color-button-primary-text);
 
         &:hover {
             color: var(--color-gray-100);

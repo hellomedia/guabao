@@ -31,6 +31,7 @@
         --color-button-default: var(--color-gray-200);
         --color-button-primary: var(--color-theme);
         --color-button-primary-hover: var(--color-theme-lighter);
+        --color-button-primary-text: var(--color-gray-100);
         --color-button-focus-visible: orange;
         --color-button-warning: var(--color-amber-600);
         --color-button-danger: var(--color-red-700);
