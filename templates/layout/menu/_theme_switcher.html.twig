@@ -1,10 +1,10 @@
-<div id="theme-switcher" class="h-6 xl:px-3">
+<div id="theme-switcher">
 	{% set target_theme = (theme == 'light' ? 'dark' : 'light') %}
 	<a 
 		href="?theme={{ target_theme }}"
 		{# plain link = full page load (Turbo Drive is off), needed for the session to save the theme #}
 		{# NB: avoid browser cache (private HTTP cache), or invalidate it when theme changes #}
 	>
-		<twig:ux:icon name="theme" class="h-6"/>
+		<twig:ux:icon name="theme"/>
 	</a>
 </div>

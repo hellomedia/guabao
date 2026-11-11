@@ -4,20 +4,20 @@
         {% for breadcrumb in this.breadcrumbs %}
 
             {% if loop.first %}
-                <li class="hidden md:inline-flex">
+                <li class="breadcrumb-home">
                     <a href="{{ path(breadcrumb.route, breadcrumb.routeParams) }}"
-                        class="inline-flex items-baseline breadcrumb-item breadcrumb-link-hover"
+                        class="breadcrumb-item breadcrumb-link-hover"
                     >
                         <twig:ux:icon name="home" class="breadcrumb-home-svg" />
 
-                        <span class="hidden md:block">{{ breadcrumb.item|trans(domain: 'breadcrumbs') }}</span>
+                        <span class="breadcrumb-home-label">{{ breadcrumb.item|trans(domain: 'breadcrumbs') }}</span>
                     </a>
                 </li>
             {% endif %}
 
             {% if not loop.first and not loop.last %}
                 <li>
-                    <div class="flex items-baseline">
+                    <div class="breadcrumb-step">
                         <svg class="breadcrumb-separator {{ loop.index == 2 ? 'breadcrumb-separator-second' }}"
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@
 
             {% if loop.last and not loop.first %}
                 <li aria-current="page">
-                    <div class="flex items-baseline">
+                    <div class="breadcrumb-step">
                         <svg class="breadcrumb-separator {{ loop.index == 2 ? 'breadcrumb-separator-second' }}"
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"

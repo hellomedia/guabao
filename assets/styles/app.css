@@ -51,6 +51,7 @@
 @import "./component/modal-icon.css";
 @import "./component/modal-animation.css";
 @import "./component/video.css";
+@import "./component/toast.css";
 
 @import "./content/trip.css";
 @import "./content/food.css";

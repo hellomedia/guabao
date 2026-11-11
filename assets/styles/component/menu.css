@@ -62,4 +62,78 @@
         background-color: var(--color-menu-border-hover);
         transition: left 0.3s ease, width 0.3s ease, background-color 0.3s ease;
     }
+
+    .main-menu-bar {
+        display: flex;
+        justify-content: space-between;
+        height: calc(var(--spacing) * 16);
+    }
+
+    .main-menu-group {
+        display: flex;
+    }
+
+    .main-menu-logo {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+
+        a {
+            display: flex;
+            align-items: center;
+        }
+
+        img {
+            height: 44px;
+        }
+    }
+
+    /* cancel the SVG's built-in side margin where the white badge isn't visible
+       (dark mode; light mode from md up, where the menu is white) */
+    .main-menu-logo-dark {
+        margin-inline-start: calc(var(--spacing) * -1.5);
+    }
+    .main-menu-logo-light {
+        @media (width >= 48rem) {
+            margin-inline-start: calc(var(--spacing) * -1.5);
+        }
+    }
+
+    .main-menu-language {
+        display: none;
+        @media (width >= 48rem) {
+            display: flex;
+            align-items: center;
+            margin-right: calc(var(--spacing) * 5);
+        }
+    }
+
+    #language-switcher .dropdown-button svg,
+    #theme-switcher svg {
+        height: calc(var(--spacing) * 6);
+    }
+
+    #theme-switcher {
+        height: calc(var(--spacing) * 6);
+        @media (width >= 80rem) {
+            padding-inline: calc(var(--spacing) * 3);
+        }
+    }
+
+    .main-menu-mobile {
+        display: flex;
+        align-items: center;
+        margin-right: calc(var(--spacing) * -2);
+        @media (width >= 64rem) {
+            display: none;
+        }
+    }
+
+    .main-menu-mobile-button {
+        margin-right: calc(var(--spacing) * 2);
+    }
+
+    .main-menu-mobile-button-icon {
+        height: calc(var(--spacing) * 7);
+    }
 }

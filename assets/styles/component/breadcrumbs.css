@@ -76,4 +76,29 @@
             }
         }
     }
+
+
+    #breadcrumbs .breadcrumb-home {
+        display: none;
+        @media (width >= 48rem) {
+            display: inline-flex;
+        }
+
+        a {
+            display: inline-flex;
+            align-items: baseline;
+        }
+    }
+
+    .breadcrumb-home-label {
+        display: none;
+        @media (width >= 48rem) {
+            display: block;
+        }
+    }
+
+    .breadcrumb-step {
+        display: flex;
+        align-items: baseline;
+    }
 }

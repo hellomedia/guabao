@@ -15,7 +15,7 @@ import '../styles/component/photosphere.css';
         <twig:ux:icon name="sphere" />
         <img 
             src="{{ uploaded_asset(pano360)|imagine_filter('thumb_square_432') }}"
-            class="rounded shadow-sm"
+            class="gallery-thumb"
             width="700"
             height="700"
         />

@@ -136,4 +136,10 @@
         transform-origin: center;
         view-transition-name: mobile-menu-button;
     }
+
+
+    .mobile-menu-section {
+        padding-top: calc(var(--spacing) * 1);
+        padding-bottom: calc(var(--spacing) * 2);
+    }
 }

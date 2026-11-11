@@ -58,4 +58,17 @@
         color: var(--color-footer-section-title-text);
         margin-bottom: calc(var(--spacing) * 8);
     }
+
+
+    #footer-logo {
+        a {
+            display: flex;
+            align-items: center;
+        }
+
+        img {
+            height: calc(var(--spacing) * 8);
+            margin-inline-end: calc(var(--spacing) * 3);
+        }
+    }
 }
