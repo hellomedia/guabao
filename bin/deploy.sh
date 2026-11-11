@@ -90,7 +90,7 @@ cleanup () {
 }
 
 local_clone () {
-    if [ git rev-parse --show-toplevel ]; then
+    if git -C "$LOCAL_REPO" rev-parse --git-dir >/dev/null 2>&1; then
         git clone "$REPO" "$TMP_REPO" --depth=1 "--branch=$BRANCH" "--reference=$LOCAL_REPO"
     else 
         git clone "$REPO" "$TMP_REPO" --depth=1 "--branch=$BRANCH"
@@ -117,7 +117,7 @@ local_build () {
 }
 
 remote_init_dir () {
-    $SSH "$USER@$HOST" "sh -c \"mkdir -p $DEST && chmod 755 $DEST && ( cd $PREFIX/current-release && find ./ \! -path './var/cache/*' | pax -pp -rw $DEST ) || true\""
+    $SSH "$USER@$HOST" "sh -c \"mkdir -p $DEST && chmod 755 $DEST && ( cd $PREFIX/current-release && find ./ \! -path './var/cache/*' | pax -pp -rw $DEST ) || true; rm -rf $DEST/src/DataFixtures/image\""
 }
 
 rsync_local () {
@@ -127,6 +127,7 @@ rsync_local () {
         --exclude /.hg \
         --exclude /docker \
         --exclude /var/cache \
+        --exclude /src/DataFixtures/image \
         --exclude /.env\*local\* \
         ./ "$USER@$HOST:$DEST/"
 }
