@@ -1093,78 +1093,6 @@ parameters:
 			path: src/Doctrine/Listener/UserUpdatedListener.php
 
 		-
-			message: '#^Property App\\Entity\\Chain\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Chain.php
-
-		-
-			message: '#^Property App\\Entity\\Chain\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Chain.php
-
-		-
-			message: '#^Property App\\Entity\\Chain\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Chain.php
-
-		-
-			message: '#^Property App\\Entity\\Chain\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Chain.php
-
-		-
-			message: '#^Property App\\Entity\\Country\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Country.php
-
-		-
-			message: '#^Property App\\Entity\\Country\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Country.php
-
-		-
-			message: '#^Property App\\Entity\\Country\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Country.php
-
-		-
-			message: '#^Property App\\Entity\\Country\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Country.php
-
-		-
-			message: '#^Property App\\Entity\\Cuisine\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Cuisine.php
-
-		-
-			message: '#^Property App\\Entity\\Cuisine\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Cuisine.php
-
-		-
-			message: '#^Property App\\Entity\\Cuisine\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Cuisine.php
-
-		-
-			message: '#^Property App\\Entity\\Cuisine\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Cuisine.php
-
-		-
 			message: '#^Class App\\Entity\\Cuisine referenced with incorrect case\: App\\Entity\\cuisine\.$#'
 			identifier: class.nameCase
 			count: 4
@@ -1219,30 +1147,6 @@ parameters:
 			path: src/Entity/Food.php
 
 		-
-			message: '#^Property App\\Entity\\Food\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Food.php
-
-		-
-			message: '#^Property App\\Entity\\Food\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Food.php
-
-		-
-			message: '#^Property App\\Entity\\Food\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Food.php
-
-		-
-			message: '#^Property App\\Entity\\Food\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Food.php
-
-		-
 			message: '#^Property App\\Entity\\Food\:\:\$tags has unknown class App\\Entity\\Tag as its type\.$#'
 			identifier: class.notFound
 			count: 1
@@ -1259,30 +1163,6 @@ parameters:
 			identifier: doctrine.associationType
 			count: 1
 			path: src/Entity/Food.php
-
-		-
-			message: '#^Property App\\Entity\\Ingredient\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Ingredient.php
-
-		-
-			message: '#^Property App\\Entity\\Ingredient\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Ingredient.php
-
-		-
-			message: '#^Property App\\Entity\\Ingredient\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Ingredient.php
-
-		-
-			message: '#^Property App\\Entity\\Ingredient\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Ingredient.php
 
 		-
 			message: '#^Method App\\Entity\\Interface\\EntityInterface\:\:getId\(\) has no return type specified\.$#'
@@ -1381,28 +1261,10 @@ parameters:
 			path: src/Entity/Media.php
 
 		-
-			message: '#^Property App\\Entity\\Media\:\:\$type type mapping mismatch\: property can contain App\\Enum\\MediaType\|null but database expects App\\Enum\\MediaType\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Media.php
-
-		-
 			message: '#^Expression on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.expr
 			count: 1
 			path: src/Entity/Place.php
-
-		-
-			message: '#^Property App\\Entity\\SiteHighlight\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/SiteHighlight.php
-
-		-
-			message: '#^Property App\\Entity\\SiteHighlight\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/SiteHighlight.php
 
 		-
 			message: '#^Method App\\Entity\\Stats\\AnonymousVisitor\:\:getCities\(\) return type has no value type specified in iterable type array\.$#'
@@ -1421,144 +1283,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Entity/Stats/AnonymousVisitor.php
-
-		-
-			message: '#^Property App\\Entity\\Story\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Story.php
-
-		-
-			message: '#^Property App\\Entity\\Story\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Story.php
-
-		-
-			message: '#^Property App\\Entity\\Story\:\:\$show type mapping mismatch\: property can contain bool\|null but database expects bool\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Story.php
-
-		-
-			message: '#^Property App\\Entity\\Story\:\:\$showTitle type mapping mismatch\: property can contain bool\|null but database expects bool\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Story.php
-
-		-
-			message: '#^Property App\\Entity\\Story\:\:\$trip type mapping mismatch\: property can contain App\\Entity\\Trip\|null but database expects App\\Entity\\Trip\.$#'
-			identifier: doctrine.associationType
-			count: 1
-			path: src/Entity/Story.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\FoodTag\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/FoodTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\FoodTag\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/FoodTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\FoodTag\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/FoodTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\FoodTag\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/FoodTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\MediaTag\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/MediaTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\MediaTag\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/MediaTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\MediaTag\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/MediaTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\MediaTag\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/MediaTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\PlaceTag\:\:\$country type mapping mismatch\: property can contain App\\Entity\\Country\|null but database expects App\\Entity\\Country\.$#'
-			identifier: doctrine.associationType
-			count: 1
-			path: src/Entity/Tag/PlaceTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\PlaceTag\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/PlaceTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\PlaceTag\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/PlaceTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\PlaceTag\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/PlaceTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\PlaceTag\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/PlaceTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\TripTag\:\:\$key type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/TripTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\TripTag\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/TripTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\TripTag\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/TripTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\TripTag\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/TripTag.php
-
-		-
-			message: '#^Property App\\Entity\\Tag\\TripTag\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Tag/TripTag.php
 
 		-
 			message: '#^Trait App\\Entity\\Trait\\TranslatableTrait is used zero times and is not analysed\.$#'
@@ -1585,48 +1309,6 @@ parameters:
 			path: src/Entity/Trip.php
 
 		-
-			message: '#^Property App\\Entity\\Trip\:\:\$endedAt type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Trip.php
-
-		-
-			message: '#^Property App\\Entity\\Trip\:\:\$key type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Trip.php
-
-		-
-			message: '#^Property App\\Entity\\Trip\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Trip.php
-
-		-
-			message: '#^Property App\\Entity\\Trip\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Trip.php
-
-		-
-			message: '#^Property App\\Entity\\Trip\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Trip.php
-
-		-
-			message: '#^Property App\\Entity\\Trip\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Trip.php
-
-		-
-			message: '#^Property App\\Entity\\Trip\:\:\$startedAt type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/Trip.php
-
-		-
 			message: '#^Method App\\Entity\\User\:\:isAccountLocked\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
@@ -1635,36 +1317,6 @@ parameters:
 		-
 			message: '#^Method App\\Entity\\User\:\:removeRole\(\) has parameter \$role with no type specified\.$#'
 			identifier: missingType.parameter
-			count: 1
-			path: src/Entity/User.php
-
-		-
-			message: '#^Property App\\Entity\\User\:\:\$accountLanguage type mapping mismatch\: property can contain App\\Enum\\AccountLanguage\|null but database expects App\\Enum\\AccountLanguage\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/User.php
-
-		-
-			message: '#^Property App\\Entity\\User\:\:\$createdAt type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/User.php
-
-		-
-			message: '#^Property App\\Entity\\User\:\:\$password type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/User.php
-
-		-
-			message: '#^Property App\\Entity\\User\:\:\$safe type mapping mismatch\: property can contain bool\|null but database expects bool\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/Entity/User.php
-
-		-
-			message: '#^Property App\\Entity\\User\:\:\$updatedAt type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
-			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/User.php
 

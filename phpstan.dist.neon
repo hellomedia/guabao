@@ -17,6 +17,8 @@ parameters:
     doctrine:
         # real Doctrine mapping: getRepository(X::class) -> custom repository class, DQL checked
         objectManagerLoader: config/phpstan/object-manager.php
+        # entities use ?Type $x = null on NOT NULL columns (set before persist): not an error here
+        allowNullablePropertyForRequiredField: true
     symfony:
         # controlroom container = site config + controlroom config (superset); warm it first:
         #   HTTP_HOST=<HOST_CONTROLROOM> bin/console cache:warmup
