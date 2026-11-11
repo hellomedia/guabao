@@ -1,4 +1,8 @@
 includes:
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-doctrine/rules.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-symfony/rules.neon
     - phpstan-baseline.neon
 
 parameters:
@@ -10,3 +14,10 @@ parameters:
         - src/
         - packs/
         - controlroom/src/
+    doctrine:
+        # real Doctrine mapping: getRepository(X::class) -> custom repository class, DQL checked
+        objectManagerLoader: config/phpstan/object-manager.php
+    symfony:
+        # controlroom container = site config + controlroom config (superset); warm it first:
+        #   HTTP_HOST=<HOST_CONTROLROOM> bin/console cache:warmup
+        containerXmlPath: var/cache/controlroom/dev/App_KernelDevDebugContainer.xml

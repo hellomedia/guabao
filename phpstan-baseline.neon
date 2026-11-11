@@ -97,38 +97,26 @@ parameters:
 			path: controlroom/src/Controller/MealCrudController.php
 
 		-
-			message: '#^Call to an undefined method Doctrine\\ORM\\EntityRepository\<App\\Entity\\Media\>\:\:findByFood\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: controlroom/src/Controller/MediaBulkEditController.php
-
-		-
-			message: '#^Call to an undefined method Doctrine\\ORM\\EntityRepository\<App\\Entity\\Media\>\:\:findByStory\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: controlroom/src/Controller/MediaBulkEditController.php
-
-		-
-			message: '#^Call to an undefined method Doctrine\\ORM\\EntityRepository\<App\\Entity\\Media\>\:\:findUnliked\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: controlroom/src/Controller/MediaBulkEditController.php
-
-		-
-			message: '#^Call to an undefined method Doctrine\\ORM\\EntityRepository\<App\\Entity\\Media\>\:\:getFindByTripQueryBuilder\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: controlroom/src/Controller/MediaBulkEditController.php
-
-		-
 			message: '#^Method Controlroom\\Controller\\MediaBulkEditController\:\:_processBulkAddTagsForm\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
 			path: controlroom/src/Controller/MediaBulkEditController.php
 
 		-
+			message: '#^Method Controlroom\\Controller\\MediaBulkEditController\:\:_processBulkAddTagsForm\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Controller/MediaBulkEditController.php
+
+		-
 			message: '#^Method Controlroom\\Controller\\MediaBulkEditController\:\:_processBulkRemoveTagsForm\(\) has no return type specified\.$#'
 			identifier: missingType.return
+			count: 1
+			path: controlroom/src/Controller/MediaBulkEditController.php
+
+		-
+			message: '#^Method Controlroom\\Controller\\MediaBulkEditController\:\:_processBulkRemoveTagsForm\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
 			count: 1
 			path: controlroom/src/Controller/MediaBulkEditController.php
 
@@ -141,6 +129,12 @@ parameters:
 		-
 			message: '#^Method Controlroom\\Controller\\MediaController\:\:_importImages\(\) has no return type specified\.$#'
 			identifier: missingType.return
+			count: 1
+			path: controlroom/src/Controller/MediaController.php
+
+		-
+			message: '#^Method Controlroom\\Controller\\MediaController\:\:_importImages\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
 			count: 1
 			path: controlroom/src/Controller/MediaController.php
 
@@ -253,10 +247,136 @@ parameters:
 			path: controlroom/src/Controller/UserCrudController.php
 
 		-
+			message: '#^Class Controlroom\\Form\\Field\\CuisinesAutocompleteField extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Field/CuisinesAutocompleteField.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Field\\FoodAutocompleteField extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Field/FoodAutocompleteField.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Field\\FoodTagAutocompleteField extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Field/FoodTagAutocompleteField.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Field\\IngredientAutocompleteField extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Field/IngredientAutocompleteField.php
+
+		-
 			message: '#^Method Controlroom\\Form\\Field\\MapPickerField\:\:new\(\) has parameter \$label with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
 			path: controlroom/src/Form/Field/MapPickerField.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Field\\MealAutocompleteField extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Field/MealAutocompleteField.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Field\\MediaTagAutocompleteField extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Field/MediaTagAutocompleteField.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Field\\PlaceAutocompleteField extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Field/PlaceAutocompleteField.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Field\\PlaceTagAutocompleteField extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Field/PlaceTagAutocompleteField.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Field\\SimilarFoodAutocompleteField extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Field/SimilarFoodAutocompleteField.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Field\\SimilarIngredientsAutocompleteField extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Field/SimilarIngredientsAutocompleteField.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Field\\StoryAutocompleteField extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Field/StoryAutocompleteField.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Type\\CuisineQuickEditType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Type/CuisineQuickEditType.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Type\\FoodQuickEditType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Type/FoodQuickEditType.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Type\\IngredientQuickEditType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Type/IngredientQuickEditType.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Type\\MapPickerType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Type/MapPickerType.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Type\\MediaBulkAddType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Type/MediaBulkAddType.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Type\\MediaBulkEditTagsType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Type/MediaBulkEditTagsType.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Type\\MediaFoodQuickEditType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Type/MediaFoodQuickEditType.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Type\\MediaQuickEditType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Type/MediaQuickEditType.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Type\\StoryQuickEditType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Type/StoryQuickEditType.php
+
+		-
+			message: '#^Class Controlroom\\Form\\Type\\TripQuickEditType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: controlroom/src/Form/Type/TripQuickEditType.php
 
 		-
 			message: '#^Call to method getConnectionActivity\(\) on an unknown class App\\Stats\\Provider\\ConnectionStatsProvider\.$#'
@@ -517,6 +637,18 @@ parameters:
 			path: packs/Security/BotDetector.php
 
 		-
+			message: '#^Method Pack\\Security\\BotDetector\:\:_isSuspiciousRegistrationForm\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: packs/Security/BotDetector.php
+
+		-
+			message: '#^Method Pack\\Security\\BotDetector\:\:detectBotOnRegistrationForm\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: packs/Security/BotDetector.php
+
+		-
 			message: '#^Negated boolean expression is always false\.$#'
 			identifier: booleanNot.alwaysFalse
 			count: 1
@@ -527,12 +659,6 @@ parameters:
 			identifier: missingType.return
 			count: 1
 			path: packs/Security/Controller/LoginController.php
-
-		-
-			message: '#^Call to an undefined method Doctrine\\ORM\\EntityRepository\<App\\Entity\\User\>\:\:findUserByIdentifier\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: packs/Security/Controller/RegistrationController.php
 
 		-
 			message: '#^Method Pack\\Security\\Controller\\RegistrationController\:\:checkYourEmail\(\) has no return type specified\.$#'
@@ -547,14 +673,8 @@ parameters:
 			path: packs/Security/Controller/RegistrationController.php
 
 		-
-			message: '#^Call to an undefined method Doctrine\\ORM\\EntityRepository\<App\\Entity\\User\>\:\:findUserByIdentifier\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: packs/Security/Controller/ResetPasswordController.php
-
-		-
-			message: '#^Property Pack\\Security\\Entity\\ResetPasswordRequest\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property Pack\\Security\\Entity\\ResetPasswordRequest\:\:\$user type mapping mismatch\: property can contain App\\Entity\\User\|null but database expects App\\Entity\\User\.$#'
+			identifier: doctrine.associationType
 			count: 1
 			path: packs/Security/Entity/ResetPasswordRequest.php
 
@@ -563,6 +683,30 @@ parameters:
 			identifier: nullCoalesce.property
 			count: 2
 			path: packs/Security/Entity/Trait/UserSecurityTrait.php
+
+		-
+			message: '#^Class Pack\\Security\\Form\\ChangePasswordForm extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: packs/Security/Form/ChangePasswordForm.php
+
+		-
+			message: '#^Class Pack\\Security\\Form\\Field\\HoneypotField extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: packs/Security/Form/Field/HoneypotField.php
+
+		-
+			message: '#^Class Pack\\Security\\Form\\RegistrationForm extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: packs/Security/Form/RegistrationForm.php
+
+		-
+			message: '#^Class Pack\\Security\\Form\\ResetPasswordRequestForm extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: packs/Security/Form/ResetPasswordRequestForm.php
 
 		-
 			message: '#^Method Pack\\Security\\Mailer\\SecurityMailer\:\:sendRegistrationValidationLink\(\) has no return type specified\.$#'
@@ -943,12 +1087,6 @@ parameters:
 			path: src/Controller/FoodController.php
 
 		-
-			message: '#^Call to an undefined method App\\Repository\\TripTagRepository\:\:findOneByKey\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: src/Controller/TripController.php
-
-		-
 			message: '#^Method App\\Controller\\TripController\:\:preExecute\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
@@ -1147,20 +1285,74 @@ parameters:
 			path: src/Doctrine/Listener/UserUpdatedListener.php
 
 		-
-			message: '#^Property App\\Entity\\Chain\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\Chain\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Chain.php
 
 		-
-			message: '#^Property App\\Entity\\Country\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\Chain\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Chain.php
+
+		-
+			message: '#^Property App\\Entity\\Chain\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Chain.php
+
+		-
+			message: '#^Property App\\Entity\\Chain\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Chain.php
+
+		-
+			message: '#^Property App\\Entity\\Country\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Country.php
 
 		-
-			message: '#^Property App\\Entity\\Cuisine\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\Country\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Country.php
+
+		-
+			message: '#^Property App\\Entity\\Country\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Country.php
+
+		-
+			message: '#^Property App\\Entity\\Country\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Country.php
+
+		-
+			message: '#^Property App\\Entity\\Cuisine\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Cuisine.php
+
+		-
+			message: '#^Property App\\Entity\\Cuisine\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Cuisine.php
+
+		-
+			message: '#^Property App\\Entity\\Cuisine\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Cuisine.php
+
+		-
+			message: '#^Property App\\Entity\\Cuisine\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Cuisine.php
 
@@ -1207,14 +1399,38 @@ parameters:
 			path: src/Entity/Food.php
 
 		-
+			message: '#^Property App\\Entity\\Food\:\:\$children type mapping mismatch\: property can contain Doctrine\\Common\\Collections\\Collection but database expects Doctrine\\Common\\Collections\\Collection&iterable\<App\\Entity\\Food\>\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: src/Entity/Food.php
+
+		-
 			message: '#^Property App\\Entity\\Food\:\:\$children with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/Entity/Food.php
 
 		-
-			message: '#^Property App\\Entity\\Food\:\:\$similarTo is never read, only written\.$#'
-			identifier: property.onlyWritten
+			message: '#^Property App\\Entity\\Food\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Property App\\Entity\\Food\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Property App\\Entity\\Food\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Property App\\Entity\\Food\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Food.php
 
@@ -1225,14 +1441,38 @@ parameters:
 			path: src/Entity/Food.php
 
 		-
-			message: '#^Property App\\Entity\\Ingredient\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\Food\:\:\$tags type mapping mismatch\: database can contain Doctrine\\Common\\Collections\\Collection&iterable\<App\\Entity\\Tag\\FoodTag\> but property expects Doctrine\\Common\\Collections\\Collection\<int, App\\Entity\\Tag\>\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Property App\\Entity\\Food\:\:\$tags type mapping mismatch\: property can contain Doctrine\\Common\\Collections\\Collection\<int, App\\Entity\\Tag\> but database expects Doctrine\\Common\\Collections\\Collection&iterable\<App\\Entity\\Tag\\FoodTag\>\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: src/Entity/Food.php
+
+		-
+			message: '#^Property App\\Entity\\Ingredient\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Ingredient.php
 
 		-
-			message: '#^Property App\\Entity\\Ingredient\:\:\$similarTo is never read, only written\.$#'
-			identifier: property.onlyWritten
+			message: '#^Property App\\Entity\\Ingredient\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Ingredient.php
+
+		-
+			message: '#^Property App\\Entity\\Ingredient\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Ingredient.php
+
+		-
+			message: '#^Property App\\Entity\\Ingredient\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Ingredient.php
 
@@ -1297,12 +1537,6 @@ parameters:
 			path: src/Entity/Meal.php
 
 		-
-			message: '#^Property App\\Entity\\Meal\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
-			count: 1
-			path: src/Entity/Meal.php
-
-		-
 			message: '#^Using nullsafe method call on non\-nullable type Doctrine\\Common\\Collections\\Collection\<int, App\\Entity\\Tag\\PlaceTag\>\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
@@ -1333,14 +1567,14 @@ parameters:
 			path: src/Entity/Media.php
 
 		-
-			message: '#^Property App\\Entity\\Media\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
+			message: '#^Property App\\Entity\\Media\:\:\$isTripCover \(bool\|null\) is never assigned bool so it can be removed from the property type\.$#'
 			identifier: property.unusedType
 			count: 1
 			path: src/Entity/Media.php
 
 		-
-			message: '#^Property App\\Entity\\Media\:\:\$isTripCover \(bool\|null\) is never assigned bool so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\Media\:\:\$type type mapping mismatch\: property can contain App\\Enum\\MediaType\|null but database expects App\\Enum\\MediaType\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Media.php
 
@@ -1351,28 +1585,16 @@ parameters:
 			path: src/Entity/Place.php
 
 		-
-			message: '#^Property App\\Entity\\Place\:\:\$id is never written, only read\.$#'
-			identifier: property.onlyRead
-			count: 1
-			path: src/Entity/Place.php
-
-		-
-			message: '#^Property App\\Entity\\SiteHighlight\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\SiteHighlight\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/SiteHighlight.php
 
 		-
-			message: '#^Property App\\Entity\\Stats\\AnonymousPageView\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\SiteHighlight\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
-			path: src/Entity/Stats/AnonymousPageView.php
-
-		-
-			message: '#^Property App\\Entity\\Stats\\AnonymousVisit\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
-			count: 1
-			path: src/Entity/Stats/AnonymousVisit.php
+			path: src/Entity/SiteHighlight.php
 
 		-
 			message: '#^Method App\\Entity\\Stats\\AnonymousVisitor\:\:getCities\(\) return type has no value type specified in iterable type array\.$#'
@@ -1393,50 +1615,140 @@ parameters:
 			path: src/Entity/Stats/AnonymousVisitor.php
 
 		-
-			message: '#^Property App\\Entity\\Stats\\AnonymousVisitor\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
-			count: 1
-			path: src/Entity/Stats/AnonymousVisitor.php
-
-		-
-			message: '#^Property App\\Entity\\Story\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\Story\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Story.php
 
 		-
-			message: '#^Property App\\Entity\\Story\:\:\$show \(bool\|null\) is never assigned null so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\Story\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Story.php
 
 		-
-			message: '#^Property App\\Entity\\Story\:\:\$showTitle \(bool\|null\) is never assigned null so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\Story\:\:\$show type mapping mismatch\: property can contain bool\|null but database expects bool\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Story.php
 
 		-
-			message: '#^Property App\\Entity\\Tag\\FoodTag\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\Story\:\:\$showTitle type mapping mismatch\: property can contain bool\|null but database expects bool\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Story.php
+
+		-
+			message: '#^Property App\\Entity\\Story\:\:\$trip type mapping mismatch\: property can contain App\\Entity\\Trip\|null but database expects App\\Entity\\Trip\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: src/Entity/Story.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\FoodTag\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Tag/FoodTag.php
 
 		-
-			message: '#^Property App\\Entity\\Tag\\MediaTag\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\Tag\\FoodTag\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/FoodTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\FoodTag\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/FoodTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\FoodTag\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/FoodTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\MediaTag\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Tag/MediaTag.php
 
 		-
-			message: '#^Property App\\Entity\\Tag\\PlaceTag\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\Tag\\MediaTag\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/MediaTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\MediaTag\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/MediaTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\MediaTag\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/MediaTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\PlaceTag\:\:\$country type mapping mismatch\: property can contain App\\Entity\\Country\|null but database expects App\\Entity\\Country\.$#'
+			identifier: doctrine.associationType
 			count: 1
 			path: src/Entity/Tag/PlaceTag.php
 
 		-
-			message: '#^Property App\\Entity\\Tag\\TripTag\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\Tag\\PlaceTag\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/PlaceTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\PlaceTag\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/PlaceTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\PlaceTag\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/PlaceTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\PlaceTag\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/PlaceTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\TripTag\:\:\$key type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/TripTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\TripTag\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/TripTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\TripTag\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/TripTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\TripTag\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Tag/TripTag.php
+
+		-
+			message: '#^Property App\\Entity\\Tag\\TripTag\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Tag/TripTag.php
 
@@ -1453,14 +1765,56 @@ parameters:
 			path: src/Entity/Trait/TranslationTrait.php
 
 		-
+			message: '#^Property App\\Entity\\Trip\:\:\$children type mapping mismatch\: property can contain Doctrine\\Common\\Collections\\Collection but database expects Doctrine\\Common\\Collections\\Collection&iterable\<App\\Entity\\Trip\>\.$#'
+			identifier: doctrine.associationType
+			count: 1
+			path: src/Entity/Trip.php
+
+		-
 			message: '#^Property App\\Entity\\Trip\:\:\$children with generic interface Doctrine\\Common\\Collections\\Collection does not specify its types\: TKey, T$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/Entity/Trip.php
 
 		-
-			message: '#^Property App\\Entity\\Trip\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\Trip\:\:\$endedAt type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Trip.php
+
+		-
+			message: '#^Property App\\Entity\\Trip\:\:\$key type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Trip.php
+
+		-
+			message: '#^Property App\\Entity\\Trip\:\:\$nameEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Trip.php
+
+		-
+			message: '#^Property App\\Entity\\Trip\:\:\$nameFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Trip.php
+
+		-
+			message: '#^Property App\\Entity\\Trip\:\:\$slugEn type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Trip.php
+
+		-
+			message: '#^Property App\\Entity\\Trip\:\:\$slugFr type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/Trip.php
+
+		-
+			message: '#^Property App\\Entity\\Trip\:\:\$startedAt type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/Trip.php
 
@@ -1477,8 +1831,32 @@ parameters:
 			path: src/Entity/User.php
 
 		-
-			message: '#^Property App\\Entity\\User\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
-			identifier: property.unusedType
+			message: '#^Property App\\Entity\\User\:\:\$accountLanguage type mapping mismatch\: property can contain App\\Enum\\AccountLanguage\|null but database expects App\\Enum\\AccountLanguage\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$createdAt type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$password type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$safe type mapping mismatch\: property can contain bool\|null but database expects bool\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Property App\\Entity\\User\:\:\$updatedAt type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
 			count: 1
 			path: src/Entity/User.php
 
@@ -1583,6 +1961,18 @@ parameters:
 			identifier: isset.variable
 			count: 1
 			path: src/EventSubscriber/ControllerSubscriber.php
+
+		-
+			message: '#^Class App\\Form\\Stats\\AnonymousPageViewType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Form/Stats/AnonymousPageViewType.php
+
+		-
+			message: '#^Class App\\Form\\Stats\\AnonymousVisitType extends generic class Symfony\\Component\\Form\\AbstractType but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Form/Stats/AnonymousVisitType.php
 
 		-
 			message: '#^Method App\\Form\\Type\\AjaxSubmitType\:\:getParent\(\) never returns null so it can be removed from the return type\.$#'
