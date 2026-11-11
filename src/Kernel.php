@@ -85,4 +85,13 @@ class Kernel extends BaseKernel
         return $this->getProjectDir() . '/var/cache/' . $dir . '/' . $this->environment;
     }
 
+    /**
+     * Symfony 8.1 refuses to boot with an APP_ENV not listed here. Guabao only has dev and prod.
+     *
+     * @return list<string> An array of allowed values for APP_ENV
+     */
+    private function getAllowedEnvs(): array
+    {
+        return ['prod', 'dev'];
+    }
 }
