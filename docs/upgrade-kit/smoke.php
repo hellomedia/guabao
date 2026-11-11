@@ -18,6 +18,8 @@
  *   SMOKE_KERNEL        Kernel class (default: App\Kernel)
  *   SMOKE_ENV           Kernel environment (default: dev)
  *   SMOKE_DEBUG         0 to boot without debug, like prod error pages (default: 1)
+ *   SMOKE_COLD          1 to wipe the smoke kernel cache first (it lives in sys_get_temp_dir(), not var/cache):
+ *                       cold-cache-only deprecations (Twig compilation, Doctrine metadata) then reach the log
  *   SMOKE_DUMP          Directory to save each response body into (optional)
  *   SMOKE_COOKIES       1 to also print the names of the cookies each response sets (optional)
  *
@@ -42,6 +44,10 @@ $dumpDir = getenv('SMOKE_DUMP') ?: null;
 // Host-dependent kernels read HTTP_HOST while booting: set it before and after Dotenv.
 $_SERVER['HTTP_HOST'] = $host;
 require $projectDir . '/vendor/autoload.php';
+// like public/index.php through symfony/runtime: without it, runtime deprecations never reach var/log/<env>.log
+if ($debug) {
+    Symfony\Component\ErrorHandler\Debug::enable();
+}
 (new Symfony\Component\Dotenv\Dotenv())->bootEnv($projectDir . '/.env');
 $_SERVER['HTTP_HOST'] = $host;
 
@@ -78,6 +84,9 @@ require $smokeKernelFile;
 $smokeKernelClass::$projectDirOverride = $projectDir;
 $smokeKernelClass::$cacheDirOverride = sys_get_temp_dir() . '/smoke-cache-' . md5($projectDir . $host . $firewall . (int) $debug);
 
+if (getenv('SMOKE_COLD')) {
+    (new Symfony\Component\Filesystem\Filesystem())->remove($smokeKernelClass::$cacheDirOverride);
+}
 $kernel = new $smokeKernelClass($env, $debug);
 $kernel->boot();
 
