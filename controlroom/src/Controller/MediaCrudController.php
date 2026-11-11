@@ -12,6 +12,7 @@ use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -31,6 +32,21 @@ class MediaCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Media::class;
+    }
+
+    /**
+     * Default (guessed) fields, except enum columns: EA guesses fields from the Doctrine column type only,
+     * so enum-backed string columns became TextFields and the detail page crashed ("Object of class
+     * App\\Enum\\MediaType could not be converted to string"). ChoiceField reads enumType from the mapping.
+     * Image/VideoCrudController define their own fields.
+     */
+    public function configureFields(string $pageName): iterable
+    {
+        foreach (parent::configureFields($pageName) as $field) {
+            $property = $field->getAsDto()->getProperty();
+
+            yield in_array($property, ['type', 'videoOrientation'], true) ? ChoiceField::new($property) : $field;
+        }
     }
 
     public function configureFilters(Filters $filters): Filters
