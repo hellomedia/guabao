@@ -53,7 +53,6 @@
         /* TOP MENU */
         --color-menu-background: var(--color-white);
         --color-menu-background-mobile: var(--color-theme);
-        --color-logo-background: var(--color-theme);
         --color-menu-text: var(--color-gray-500);
         --color-menu-text-hover: var(--color-gray-700);
         --color-menu-text-current: var(--color-gray-700);

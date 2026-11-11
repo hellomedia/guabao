@@ -11,10 +11,6 @@
         }
     }
 
-    .logo {
-        background-color: var(--color-logo-background);
-    }
-
     #main-menu-items {
         display: none;
         @media (min-width: theme(--breakpoint-lg)) {

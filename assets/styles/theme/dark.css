@@ -52,7 +52,6 @@
         /* TOP MENU */
         --color-menu-background: var(--color-secondary-background);
         --color-menu-background-mobile: var(--color-menu-background);
-        --color-logo-background: var(--color-menu-background);
         --color-menu-text: var(--color-gray-500);
         --color-menu-text-hover: var(--color-gray-300);
         --color-menu-text-current: var(--color-gray-300);
