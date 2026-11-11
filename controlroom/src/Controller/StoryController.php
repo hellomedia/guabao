@@ -6,11 +6,12 @@ use App\Controller\BaseController;
 use App\Entity\Story;
 use Controlroom\Form\Type\StoryQuickEditType;
 use Doctrine\ORM\EntityManager;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Routing\Attribute\Route;
 
 class StoryController extends BaseController
@@ -24,8 +25,8 @@ class StoryController extends BaseController
     /**
      * Route must not conflict with easyadmin /story/{id}/edit
      */
-    #[Route('/story/{id:story}/quick-edit', name: 'admin_story_quick_edit', methods: ['POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function quickEdit(Request $request, Story $story, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[AdminRoute('/story/{id}/quick-edit', name: 'story_quick_edit', options: ['methods' => ['POST']])]
+    public function quickEdit(Request $request, #[MapEntity(id: 'id')] Story $story, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         // form names must match between batch edit forms and ajax edit form
         $form = $formFactory->createNamed(

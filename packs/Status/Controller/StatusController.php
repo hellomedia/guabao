@@ -3,18 +3,16 @@
 namespace Pack\Status\Controller;
 
 use App\Controller\BaseController;
-use Controlroom\Controller\DashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Pack\Status\Chart\OpCacheChartProvider;
 use Pack\Status\Chart\RealpathCacheChartProvider;
 use Pack\Status\Model\OpCacheStatus;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 
-#[Route(path: '/status', name: 'controlroom_status_')]
+#[AdminRoute('/status', name: 'status')]
 class StatusController extends BaseController
 {
-    #[Route(path: '/opcache', name: 'opcache', defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    #[AdminRoute('/opcache', name: 'opcache')]
     public function opcache(OpCacheChartProvider $charts): Response
     {
         $opCache = new OpCacheStatus();
@@ -33,7 +31,7 @@ class StatusController extends BaseController
         ]);
     }
 
-    #[Route(path: '/realpath_cache', name: 'realpath_cache', defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    #[AdminRoute('/realpath_cache', name: 'realpath_cache')]
     public function realpathCache(RealpathCacheChartProvider $charts): Response
     {
         $realpathChart = $charts->getRealpathCacheChart();
@@ -43,7 +41,7 @@ class StatusController extends BaseController
         ]);
     }
 
-    #[Route(path: '/phpinfo', name: 'phpinfo', defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    #[AdminRoute('/phpinfo', name: 'phpinfo')]
     public function phpinfo(): Response
     {
         ob_start();

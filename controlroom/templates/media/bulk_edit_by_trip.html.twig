@@ -7,7 +7,7 @@
 {% block page_actions %}
     {% embed '@admin/_top_links.html.twig' %}
         {% block add_pictures %}
-            <a class="btn" href="{{ path('admin_media_bulk_add', {'trip': trip.id}) }}">
+            <a class="btn" href="{{ path('controlroom_media_bulk_add', {'trip': trip.id}) }}">
                 + Pictures
             </a>
         {% endblock %}
@@ -61,7 +61,7 @@
     {% if trip.parent %}
         <div id="parent">
             Parent:
-            <a href="{{ path('admin_media_bulk_edit_by_trip', {id: trip.parent.id}) }}">{{ trip.parent }}</a>
+            <a href="{{ path('controlroom_media_bulk_edit_by_trip', {id: trip.parent.id}) }}">{{ trip.parent }}</a>
         </div>
     {% endif %}
 
@@ -70,7 +70,7 @@
             Children:
             {% for child in trip.children %}
                 <div id="children-list">
-                    <a href="{{ path('admin_media_bulk_edit_by_trip', {id: child.id}) }}">{{ child }}</a>
+                    <a href="{{ path('controlroom_media_bulk_edit_by_trip', {id: child.id}) }}">{{ child }}</a>
                 </div>
             {% endfor %}
         </div>
@@ -101,7 +101,7 @@
                             {{ story }}
                             <a class="btn btn-sm" style="margin-left: 10px;"
                                 target="_blank"
-                                href="{{ path('admin_media_bulk_add', {'trip': story.trip.id, 'story': story.id}) }}">
+                                href="{{ path('controlroom_media_bulk_add', {'trip': story.trip.id, 'story': story.id}) }}">
                                 + Pictures
                             </a>
                             <a class="btn btn-sm" style="margin-left: 10px;"
@@ -111,7 +111,7 @@
                             </a>
                         </h5>
 
-                        <a href="{{ path('admin_media_bulk_edit_by_story', { id: story.id}) }}">
+                        <a href="{{ path('controlroom_media_bulk_edit_by_story', { id: story.id}) }}">
                             <div class="story-medias">
                                 {% for media in story.medias %}
                                     {% if media.isImage %}
@@ -145,7 +145,7 @@
 
     <div id="gallery" 
         data-controller="infinite-scroll fancybox"
-        data-infinite-scroll-next-page-url-value="{{ pager.hasNextPage ? path('admin_media_bulk_edit_by_trip', { id: trip.id, page: pager.nextPage }) }}"
+        data-infinite-scroll-next-page-url-value="{{ pager.hasNextPage ? path('controlroom_media_bulk_edit_by_trip', { id: trip.id, page: pager.nextPage }) }}"
     >
         <div class="current-page">
             {% for media in pager %}

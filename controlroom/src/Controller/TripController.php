@@ -6,11 +6,11 @@ use App\Controller\BaseController;
 use App\Entity\Trip;
 use Controlroom\Form\Type\TripQuickEditType;
 use Doctrine\ORM\EntityManager;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 class TripController extends BaseController
 {
@@ -23,8 +23,8 @@ class TripController extends BaseController
     /**
      * Route must not conflict with easyadmin /trip/{id}/edit
      */
-    #[Route('/trip/{id:trip}/quick-edit', name: 'admin_trip_quick_edit', methods: ['POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function quickEdit(Request $request, Trip $trip, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[AdminRoute('/trip/{id}/quick-edit', name: 'trip_quick_edit', options: ['methods' => ['POST']])]
+    public function quickEdit(Request $request, #[MapEntity(id: 'id')] Trip $trip, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         // form names must match between batch edit forms and ajax edit form
         $form = $formFactory->createNamed(

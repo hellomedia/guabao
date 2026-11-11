@@ -116,7 +116,7 @@ class TripCrudController extends AbstractCrudController
 
         $bulkEditMedias = Action::new('editMedias', 'Bulk edit')
             ->linkToUrl(function (Trip $trip) {
-                return $this->urlGenerator->generate('admin_media_bulk_edit_by_trip', [
+                return $this->urlGenerator->generate('controlroom_media_bulk_edit_by_trip', [
                     'id' => $trip->getId(),
                 ]);
             })
@@ -124,14 +124,14 @@ class TripCrudController extends AbstractCrudController
 
         $addImages = Action::new('addImages', '+ Bulk add images')
             ->linkToUrl(function (Trip $trip) {
-                return $this->urlGenerator->generate('admin_media_bulk_add', [
+                return $this->urlGenerator->generate('controlroom_media_bulk_add', [
                     'trip' => $trip->getId(),
                 ]);
             })
         ;
 
         $globalAddImages = Action::new('addImages', '+ Bulk add images')
-            ->linkToUrl($this->urlGenerator->generate('admin_media_bulk_add'))
+            ->linkToUrl($this->urlGenerator->generate('controlroom_media_bulk_add'))
             ->createAsGlobalAction()
         ;
 

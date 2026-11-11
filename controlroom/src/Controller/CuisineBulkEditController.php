@@ -6,11 +6,11 @@ use App\Controller\BaseController;
 use App\Entity\Cuisine;
 use Controlroom\Form\Type\CuisineQuickEditType;
 use Doctrine\ORM\EntityManager;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 class CuisineBulkEditController extends BaseController
 {
@@ -23,7 +23,7 @@ class CuisineBulkEditController extends BaseController
     // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
     // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
     // NB: this was not necessary with the old ea routing strategy
-    #[Route('/cuisine/bulk-edit', name: 'admin_cuisine_bulk_edit', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    #[AdminRoute('/cuisine/bulk-edit', name: 'cuisine_bulk_edit', options: ['methods' => ['GET']])]
     public function bulkEdit(EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         $cuisines = $entityManager->getRepository(Cuisine::class)->findAll();
@@ -49,8 +49,8 @@ class CuisineBulkEditController extends BaseController
      * 
      * Route must not conflict with easyadmin /cuisine/{id}/edit
      */
-    #[Route('/cuisine/{id:cuisine}/quick-edit', name: 'admin_cuisine_quick_edit', methods: ['POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function quickEdit(Request $request, Cuisine $cuisine, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[AdminRoute('/cuisine/{id}/quick-edit', name: 'cuisine_quick_edit', options: ['methods' => ['POST']])]
+    public function quickEdit(Request $request, #[MapEntity(id: 'id')] Cuisine $cuisine, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         // form names must match with batch edit forms
         $form = $formFactory->createNamed(

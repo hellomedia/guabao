@@ -72,7 +72,7 @@ class StoryCrudController extends AbstractCrudController
 
         $bulkEditMedias = Action::new('editMedias', 'Bulk edit')
             ->linkToUrl(function (Story $story) {
-                return $this->urlGenerator->generate('admin_media_bulk_edit_by_story', [
+                return $this->urlGenerator->generate('controlroom_media_bulk_edit_by_story', [
                     'id' => $story->getId(),
                 ]);
             })
@@ -80,14 +80,14 @@ class StoryCrudController extends AbstractCrudController
 
         $addImages = Action::new('addImages', '+ Bulk add images')
             ->linkToUrl(function (Story $story) {
-                return $this->urlGenerator->generate('admin_media_bulk_add', [
+                return $this->urlGenerator->generate('controlroom_media_bulk_add', [
                     'story' => $story->getId(),
                 ]);
             })
         ;
     
         $globalAddImages = Action::new('addImages', '+ Bulk add images')
-            ->linkToUrl($this->urlGenerator->generate('admin_media_bulk_add'))
+            ->linkToUrl($this->urlGenerator->generate('controlroom_media_bulk_add'))
             ->createAsGlobalAction();
 
         return $actions

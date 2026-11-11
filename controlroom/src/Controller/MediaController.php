@@ -14,13 +14,13 @@ use Controlroom\Form\Type\MediaBulkAddType;
 use Controlroom\Form\Type\MediaQuickEditType;
 use Controlroom\Form\Type\MediaFoodQuickEditType;
 use Doctrine\ORM\EntityManager;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 class MediaController extends BaseController
 {
@@ -38,8 +38,8 @@ class MediaController extends BaseController
      * 
      * Route must not conflict with easyadmin /media/{id}/edit
      */
-    #[Route('/media/{id:media}/quick-edit', name: 'admin_media_quick_edit', methods: ['POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function quickEdit(Request $request, Media $media, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[AdminRoute('/media/{id}/quick-edit', name: 'media_quick_edit', options: ['methods' => ['POST']])]
+    public function quickEdit(Request $request, #[MapEntity(id: 'id')] Media $media, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         // form names must match with batch edit forms
         $form = $formFactory->createNamed(
@@ -72,8 +72,8 @@ class MediaController extends BaseController
         ]);
     }
 
-    #[Route('/media/{id:media}/food-quick-edit', name: 'admin_media_food_quick_edit', methods: ['POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function foodQuickEdit(Request $request, Media $media, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[AdminRoute('/media/{id}/food-quick-edit', name: 'media_food_quick_edit', options: ['methods' => ['POST']])]
+    public function foodQuickEdit(Request $request, #[MapEntity(id: 'id')] Media $media, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         // form names must match with batch edit forms
         $form = $formFactory->createNamed(
@@ -104,7 +104,7 @@ class MediaController extends BaseController
         ]);
     }
 
-    #[Route('/media/bulk-add', name: 'admin_media_bulk_add', methods: ['GET', 'POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    #[AdminRoute('/media/bulk-add', name: 'media_bulk_add', options: ['methods' => ['GET', 'POST']])]
     public function bulkAdd(Request $request, EntityManager $entityManager): Response
     {
         if ($request->query->has('trip')) {
@@ -135,13 +135,13 @@ class MediaController extends BaseController
 
             // if images linked to trip, go to trip edit page
             if ($form->get('trip')->getData()) {
-                return $this->redirectToRoute('admin_media_bulk_edit_by_trip', [
+                return $this->redirectToRoute('controlroom_media_bulk_edit_by_trip', [
                     'id' => $form->get('trip')->getData()->getId(),
                 ]);
             }
 
             // else go to unlinked images bulk edit
-            return $this->redirectToRoute('admin_media_bulk_edit_unlinked');
+            return $this->redirectToRoute('controlroom_media_bulk_edit_unlinked');
         }
 
         return $this->render('@admin/media/bulk_add.html.twig', [

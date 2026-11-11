@@ -31,7 +31,7 @@ class CuisineCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         $bulkEdit = Action::new('bulkEdit', 'Bulk edit')
-            ->linkToRoute('admin_cuisine_bulk_edit')
+            ->linkToRoute('controlroom_cuisine_bulk_edit')
             ->setIcon('fa fa-edit')
             ->createAsGlobalAction();
 

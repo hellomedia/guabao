@@ -2,26 +2,11 @@
 
 namespace Controlroom\Controller;
 
-use App\Entity\Chain;
-use App\Entity\Country;
-use App\Entity\Cuisine;
 use App\Entity\Food;
-use App\Entity\Ingredient;
 use App\Entity\Interface\EntityInterface;
-use App\Entity\Meal;
 use App\Entity\Media;
 use App\Entity\Place;
-use App\Entity\SiteHighlight;
-use App\Entity\Stats\AnonymousPageView;
-use App\Entity\Stats\AnonymousVisit;
-use App\Entity\Stats\AnonymousVisitor;
-use App\Entity\Story;
-use App\Entity\Tag\FoodTag;
-use App\Entity\Tag\MediaTag;
-use App\Entity\Tag\PlaceTag;
-use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
-use App\Entity\User;
 use App\Repository\Stats\AnonymousVisitorRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -34,12 +19,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 // For localized easyadmin, use routePath: '/{_locale}/'
 // setting locale prefix in easyadmin.yaml does not seem to work
-#[AdminDashboard(routePath: '/', routeName: 'controlroom')]
+// detail route constrained to numeric ids: EA generates its catch-all /<crud>/{entityId} before our
+// #[AdminRoute] pages, which would otherwise swallow /cuisine/bulk-edit, /media/bulk-add, etc.
+#[AdminDashboard(routePath: '/', routeName: 'controlroom', routes: ['detail' => ['routePath' => '/{entityId<\\d+>}']])]
 class DashboardController extends AbstractDashboardController
 {
     public function __construct(
@@ -49,9 +35,6 @@ class DashboardController extends AbstractDashboardController
     {
     }
 
-    // route attribute here is deprecated and should be removed in next version
-    // but at the moment, removing it cause error: 'missing controlroom_dashboard' route
-    #[Route('/', name: 'controlroom_dashboard')]
     public function index(): Response
     {
         $notableVisitorsOrderedByLastSeen = $this->anonymousVisitorRepository->findNotableVisitorsOrderedByLastSeen();
@@ -114,41 +97,39 @@ class DashboardController extends AbstractDashboardController
             ]);
 
         yield MenuItem::section('Site');
-        yield MenuItem::linkToCrud('Highlights', 'fa fa-star', SiteHighlight::class);
+        yield MenuItem::linkTo(SiteHighlightCrudController::class, 'Highlights', 'fa fa-star');
 
         yield MenuItem::section('Trips');
-        yield MenuItem::linkToCrud('Trips', 'fa fa-globe', Trip::class);
-        yield MenuItem::linkToCrud('Stories', 'fa fa-comment-dots', Story::class);
-        yield MenuItem::linkToCrud('Trip Tags', 'fa fa-tag', TripTag::class);
+        yield MenuItem::linkTo(TripCrudController::class, 'Trips', 'fa fa-globe');
+        yield MenuItem::linkTo(StoryCrudController::class, 'Stories', 'fa fa-comment-dots');
+        yield MenuItem::linkTo(TripTagCrudController::class, 'Trip Tags', 'fa fa-tag');
 
         yield MenuItem::section('Food');
-        yield MenuItem::linkToCrud('Food', 'fa fa-pizza-slice', Food::class);
-        yield MenuItem::linkToCrud('Meals', 'fa fa-utensils', Meal::class);
-        yield MenuItem::linkToCrud('Ingredients', 'fa fa-carrot', Ingredient::class);
-        yield MenuItem::linkToCrud('Food Tags', 'fa fa-tag', FoodTag::class);
-        yield MenuItem::linkToCrud('Cuisines', 'fa fa-utensils', Cuisine::class);
+        yield MenuItem::linkTo(FoodCrudController::class, 'Food', 'fa fa-pizza-slice');
+        yield MenuItem::linkTo(MealCrudController::class, 'Meals', 'fa fa-utensils');
+        yield MenuItem::linkTo(IngredientCrudController::class, 'Ingredients', 'fa fa-carrot');
+        yield MenuItem::linkTo(FoodTagCrudController::class, 'Food Tags', 'fa fa-tag');
+        yield MenuItem::linkTo(CuisineCrudController::class, 'Cuisines', 'fa fa-utensils');
 
         yield MenuItem::section('Medias');
-        yield MenuItem::linkToCrud('Images', 'fa fa-photo', Media::class)
-            ->setController(ImageCrudController::class);
-        yield MenuItem::linkToCrud('Videos', 'fa fa-video', Media::class)
-            ->setController(VideoCrudController::class);
-        yield MenuItem::linkToCrud('Media Tags', 'fa fa-tag', MediaTag::class);
-        yield MenuItem::linkToUrl('Unlinked images', 'fa fa-photo', $this->urlGenerator->generate('admin_media_bulk_edit_unlinked'));
+        yield MenuItem::linkTo(ImageCrudController::class, 'Images', 'fa fa-photo');
+        yield MenuItem::linkTo(VideoCrudController::class, 'Videos', 'fa fa-video');
+        yield MenuItem::linkTo(MediaTagCrudController::class, 'Media Tags', 'fa fa-tag');
+        yield MenuItem::linkToUrl('Unlinked images', 'fa fa-photo', $this->urlGenerator->generate('controlroom_media_bulk_edit_unlinked'));
 
         yield MenuItem::section('Places');
-        yield MenuItem::linkToCrud('Places', 'fa fa-map-marker', Place::class);
-        yield MenuItem::linkToCrud('Chains', 'fa fa-store', Chain::class);
-        yield MenuItem::linkToCrud('Place Tags', 'fa fa-tag', PlaceTag::class);
-        yield MenuItem::linkToCrud('Countries', 'fa fa-flag', Country::class);
+        yield MenuItem::linkTo(PlaceCrudController::class, 'Places', 'fa fa-map-marker');
+        yield MenuItem::linkTo(ChainCrudController::class, 'Chains', 'fa fa-store');
+        yield MenuItem::linkTo(PlaceTagCrudController::class, 'Place Tags', 'fa fa-tag');
+        yield MenuItem::linkTo(CountryCrudController::class, 'Countries', 'fa fa-flag');
 
         yield MenuItem::section('Users');
-        yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class);
+        yield MenuItem::linkTo(UserCrudController::class, 'Users', 'fa fa-user');
 
         yield MenuItem::section('Stats');
-        yield MenuItem::linkToCrud('Visitors', 'fa fa-user', AnonymousVisitor::class);
-        yield MenuItem::linkToCrud('Visits', 'fa fa-user', AnonymousVisit::class);
-        yield MenuItem::linkToCrud('Page views', 'fa fa-user', AnonymousPageView::class);
+        yield MenuItem::linkTo(AnonymousVisitorCrudController::class, 'Visitors', 'fa fa-user');
+        yield MenuItem::linkTo(AnonymousVisitCrudController::class, 'Visits', 'fa fa-user');
+        yield MenuItem::linkTo(AnonymousPageViewCrudController::class, 'Page views', 'fa fa-user');
     }
 
     public function configureActions(): Actions
@@ -172,7 +153,7 @@ class DashboardController extends AbstractDashboardController
             })
             ->add(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE)
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
-                return $action->setLabel('Sauver → Edit')->setIcon(false);
+                return $action->setLabel('Sauver → Edit')->setIcon(null);
             })
             ->add(Crud::PAGE_EDIT, Action::INDEX)
             ->add(Crud::PAGE_EDIT, Action::DETAIL)

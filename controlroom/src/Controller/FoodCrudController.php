@@ -124,13 +124,13 @@ class FoodCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         $bulkEdit = Action::new('bulkEdit', 'Bulk edit')
-            ->linkToUrl($this->urlGenerator->generate('admin_food_bulk_edit'))
+            ->linkToUrl($this->urlGenerator->generate('controlroom_food_bulk_edit'))
             ->createAsGlobalAction()
         ;
 
         $bulkEditMedias = Action::new('bulkEditMedias', 'Bulk edit')
             ->linkToUrl(function (Food $food) {
-                return $this->urlGenerator->generate('admin_media_bulk_edit_by_food', [
+                return $this->urlGenerator->generate('controlroom_media_bulk_edit_by_food', [
                     'id' => $food->getId(),
                 ]);
             })

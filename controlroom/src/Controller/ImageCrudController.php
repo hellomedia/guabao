@@ -40,7 +40,7 @@ class ImageCrudController extends MediaCrudController
     public function configureActions(Actions $actions): Actions
     {
         $addMutiple = Action::new('addMultiple', 'Add multiple')
-            ->linkToUrl($this->urlGenerator->generate('admin_media_bulk_add'))
+            ->linkToUrl($this->urlGenerator->generate('controlroom_media_bulk_add'))
             ->setIcon('fa fa-images')
             ->createAsGlobalAction()
         ;

@@ -14,14 +14,14 @@ use Controlroom\Form\Type\StoryQuickEditType;
 use Controlroom\Form\Type\TripQuickEditType;
 use Controlroom\Form\Type\MediaFoodQuickEditType;
 use Doctrine\ORM\EntityManager;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 class MediaBulkEditController extends BaseController
 {
@@ -34,8 +34,8 @@ class MediaBulkEditController extends BaseController
     // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
     // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
     // NB: this was not necessary with the old ea routing strategy
-    #[Route('/trip/{id:trip}/media/bulk-edit/{page<\d+>?1}', name: 'admin_media_bulk_edit_by_trip', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function bulkEditByTrip(Trip $trip, int $page, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[AdminRoute('/trip/{id}/media/bulk-edit/{page}', name: 'media_bulk_edit_by_trip', options: ['methods' => ['GET'], 'requirements' => ['page' => '\d+'], 'defaults' => ['page' => 1]])]
+    public function bulkEditByTrip(#[MapEntity(id: 'id')] Trip $trip, int $page, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         $queryBuilder = $entityManager->getRepository(Media::class)
             ->getFindByTripQueryBuilder($trip, adminList: true);
@@ -77,8 +77,8 @@ class MediaBulkEditController extends BaseController
     // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
     // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
     // NB: this was not necessary with the old ea routing strategy
-    #[Route('/story/{id:story}/media/bulk-edit', name: 'admin_media_bulk_edit_by_story', methods: ['GET', 'POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function bulkEditByStory(Story $story, Request $request, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[AdminRoute('/story/{id}/media/bulk-edit', name: 'media_bulk_edit_by_story', options: ['methods' => ['GET', 'POST']])]
+    public function bulkEditByStory(#[MapEntity(id: 'id')] Story $story, Request $request, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         $bulkAddTagsForm = $formFactory->createNamed(
             // form names must match with story quick edit form
@@ -126,7 +126,7 @@ class MediaBulkEditController extends BaseController
 
     // Bulk edit medias not linked to a trip or food
     // usually medias - not linked to a trip - just uploaded, and waiting to be linked to food.
-    #[Route('/media/unlinked/bulk-edit/{page<\d+>?1}', name: 'admin_media_bulk_edit_unlinked', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    #[AdminRoute('/media/unlinked/bulk-edit/{page}', name: 'media_bulk_edit_unlinked', options: ['methods' => ['GET'], 'requirements' => ['page' => '\d+'], 'defaults' => ['page' => 1]])]
     public function bulkEditUnlinked(int $page, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         $medias = $entityManager->getRepository(Media::class)->findUnliked();
@@ -151,8 +151,8 @@ class MediaBulkEditController extends BaseController
     // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
     // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
     // NB: this was not necessary with the old ea routing strategy
-    #[Route('/story/{id:story}/media/bulk-add-tags', name: 'admin_media_bulk_add_tags_by_story', methods: ['GET', 'POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function bulkAddTagsByStory(Story $story, Request $request, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[AdminRoute('/story/{id}/media/bulk-add-tags', name: 'media_bulk_add_tags_by_story', options: ['methods' => ['GET', 'POST']])]
+    public function bulkAddTagsByStory(#[MapEntity(id: 'id')] Story $story, Request $request, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         $form = $formFactory->createNamed(
             name: 'media_bulk_add_tags_form_' . $story->getId(),
@@ -170,7 +170,7 @@ class MediaBulkEditController extends BaseController
             $this->addFlash('success', 'Tag added successfully');
         }
 
-        return $this->redirectToRoute('admin_media_bulk_edit_by_story', [
+        return $this->redirectToRoute('controlroom_media_bulk_edit_by_story', [
             'id' => $story->getId(),
         ]);
     }
@@ -178,8 +178,8 @@ class MediaBulkEditController extends BaseController
     // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
     // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
     // NB: this was not necessary with the old ea routing strategy
-    #[Route('/story/{id:story}/media/bulk-remove-tags', name: 'admin_media_bulk_remove_tags_by_story', methods: ['GET', 'POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function bulkRemoveTagsByStory(Story $story, Request $request, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[AdminRoute('/story/{id}/media/bulk-remove-tags', name: 'media_bulk_remove_tags_by_story', options: ['methods' => ['GET', 'POST']])]
+    public function bulkRemoveTagsByStory(#[MapEntity(id: 'id')] Story $story, Request $request, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         $form = $formFactory->createNamed(
             name: 'media_bulk_remove_tags_form_' . $story->getId(),
@@ -197,7 +197,7 @@ class MediaBulkEditController extends BaseController
             $this->addFlash('success', 'Tag removed successfully');
         }
 
-        return $this->redirectToRoute('admin_media_bulk_edit_by_story', [
+        return $this->redirectToRoute('controlroom_media_bulk_edit_by_story', [
             'id' => $story->getId(),
         ]);
     }
@@ -205,8 +205,8 @@ class MediaBulkEditController extends BaseController
     // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
     // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
     // NB: this was not necessary with the old ea routing strategy
-    #[Route('/food/{id:food}/media/bulk-edit', name: 'admin_media_bulk_edit_by_food', methods: ['GET', 'POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function bulkEditByFood(Food $food, Request $request, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[AdminRoute('/food/{id}/media/bulk-edit', name: 'media_bulk_edit_by_food', options: ['methods' => ['GET', 'POST']])]
+    public function bulkEditByFood(#[MapEntity(id: 'id')] Food $food, Request $request, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         $foodForm = $formFactory->createNamed(
             // form names must match with story quick edit form

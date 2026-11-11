@@ -6,11 +6,11 @@ use App\Controller\BaseController;
 use App\Entity\Food;
 use Controlroom\Form\Type\FoodQuickEditType;
 use Doctrine\ORM\EntityManager;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 class FoodBulkEditController extends BaseController
 {
@@ -23,7 +23,7 @@ class FoodBulkEditController extends BaseController
     // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
     // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
     // NB: this was not necessary with the old ea routing strategy
-    #[Route('/food/bulk-edit', name: 'admin_food_bulk_edit', methods: ['GET'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
+    #[AdminRoute('/food/bulk-edit', name: 'food_bulk_edit', options: ['methods' => ['GET']])]
     public function bulkEdit(EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         $foodList = $entityManager->getRepository(Food::class)->findAll();
@@ -49,8 +49,8 @@ class FoodBulkEditController extends BaseController
      * 
      * Route must not conflict with easyadmin /food/{id}/edit
      */
-    #[Route('/food/{id:food}/quick-edit', name: 'admin_food_quick_edit', methods: ['POST'], defaults: [EA::DASHBOARD_CONTROLLER_FQCN => DashboardController::class])]
-    public function quickEdit(Request $request, Food $food, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
+    #[AdminRoute('/food/{id}/quick-edit', name: 'food_quick_edit', options: ['methods' => ['POST']])]
+    public function quickEdit(Request $request, #[MapEntity(id: 'id')] Food $food, EntityManager $entityManager, FormFactoryInterface $formFactory): Response
     {
         // form names must match with batch edit forms
         $form = $formFactory->createNamed(

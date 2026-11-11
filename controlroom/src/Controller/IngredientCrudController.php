@@ -47,7 +47,7 @@ class IngredientCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         $bulkEdit = Action::new('bulkEdit', 'Bulk edit')
-            ->linkToRoute('admin_ingredient_bulk_edit')
+            ->linkToRoute('controlroom_ingredient_bulk_edit')
             ->setIcon('fa fa-edit')
             ->createAsGlobalAction();
 

@@ -7,7 +7,7 @@
 {% block page_actions %}
 	{% embed '@admin/_top_links.html.twig' %}
 		{% block add_pictures %}
-			<a class="btn" href="{{ path('admin_media_bulk_add', {'story': story.id}) }}">
+			<a class="btn" href="{{ path('controlroom_media_bulk_add', {'story': story.id}) }}">
 				+ Pictures
 			</a>
 		{% endblock %}
@@ -39,7 +39,7 @@
 
 {% block main %}
     <div id="trip">
-        Trip: <a href="{{ path('admin_media_bulk_edit_by_trip', { id: story.trip.id }) }}">{{ story.trip }}</a>
+        Trip: <a href="{{ path('controlroom_media_bulk_edit_by_trip', { id: story.trip.id }) }}">{{ story.trip }}</a>
     </div>
 
     <div id="story">
