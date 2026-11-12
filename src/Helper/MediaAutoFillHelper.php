@@ -105,6 +105,10 @@ class MediaAutoFillHelper
             return;
         }
 
+        if ($media->getTakenAt() === null) {
+            return; // no EXIF date (screenshot, stripped photo): nothing to group meals by, assign by hand
+        }
+
         $meal = $this->mealRepository->findOneByMediaDate($media->getTakenAt());
 
         if (!$meal) {
