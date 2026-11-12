@@ -19,6 +19,8 @@ return (new PhpCsFixer\Config())
         'phpdoc_summary' => false,
         // Promoted constructors keep their `) {}`.
         'single_line_empty_body' => true,
+        // Root classes are imported (`use Exception;` … `new Exception()`), not written `\Exception`.
+        'global_namespace_import' => ['import_classes' => true, 'import_constants' => false, 'import_functions' => false],
     ])
     ->setFinder($finder)
 ;
