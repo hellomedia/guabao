@@ -799,12 +799,6 @@ parameters:
 			path: packs/Status/Model/OpCacheStatus.php
 
 		-
-			message: '#^Strict comparison using \=\=\= between true and true will always evaluate to true\.$#'
-			identifier: identical.alwaysTrue
-			count: 2
-			path: packs/Status/Model/OpCacheStatus.php
-
-		-
 			message: '#^Variable \$dirs might not be defined\.$#'
 			identifier: variable.undefined
 			count: 1
@@ -1489,21 +1483,6 @@ parameters:
 			path: src/Helper/DateHelper.php
 
 		-
-			message: '''
-				#^PHPDoc tag @var has invalid value \(\$precision string \<'date'\|'time'\>
-				     'time'   \=\> 
-				        \- difference between yesterday at 4pm and today \('now'\) at 3pm is 0\.
-				        \- difference between yesterday at 4pm and today \('now'\) at 5pm is 1\.
-				     'date' \=\> 
-				        \- difference between yesterday at 4pm \(or any other time, all forced to 00\:00\:\:00\)
-				        and today \('today'\) \(which means today 00\:00\:00\) is 1\.
-				        Thus the difference between any event yesterday and 'today' is 1, when called at any time\.\)\: Unexpected token "\$precision", expected type at offset 52 on line 4$#
-			'''
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Helper/DateHelper.php
-
-		-
 			message: '#^Method App\\Helper\\GoogleMapsApiHelper\:\:findNearbyPlace\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1790,18 +1769,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Repository/TripRepository.php
-
-		-
-			message: '#^Method App\\Service\\Media\\ImageCacheWarmer\:\:__construct\(\) has parameter \$filterSets with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Service/Media/ImageCacheWarmer.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$filters$#'
-			identifier: parameter.notFound
-			count: 1
-			path: src/Service/Media/ImageCacheWarmer.php
 
 		-
 			message: '#^Property App\\Service\\Media\\ImageCacheWarmer\:\:\$filters type has no value type specified in iterable type array\.$#'

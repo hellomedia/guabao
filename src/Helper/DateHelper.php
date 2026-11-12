@@ -101,7 +101,7 @@ class DateHelper
     /**
      * Get days since event
      * 
-     * @var $precision string <'date'|'time'>
+     * @param 'date'|'time'|null $precision
      *      'time'   => 
      *         - difference between yesterday at 4pm and today ('now') at 3pm is 0.
      *         - difference between yesterday at 4pm and today ('now') at 5pm is 1.

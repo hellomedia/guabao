@@ -12,7 +12,7 @@ final class ImageCacheWarmer
     private array $filters;
 
     /**
-     * @param string[] $filters
+     * @param array<string, mixed> $filterSets liip_imagine filter sets, keyed by name
      */
     public function __construct(
         private UploadHelper $uploadHelper,

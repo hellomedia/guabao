@@ -9,7 +9,6 @@ namespace Pack\Status\Model;
  */
 class OpCacheStatus
 {
-    public const THOUSAND_SEPARATOR = true;
 
     private $configuration;
     private $status;
@@ -61,7 +60,7 @@ class OpCacheStatus
                     if ($k === 'start_time' || $k === 'last_restart_time') {
                         $v = ($v ? date(DATE_RFC822, $v) : 'never');
                     }
-                    if (self::THOUSAND_SEPARATOR === true && is_int($v)) {
+                    if (is_int($v)) {
                         $v = number_format($v);
                     }
                     if (is_array($v)) {
@@ -271,11 +270,7 @@ class OpCacheStatus
 
     private function _formatValue($value): mixed
     {
-        if (self::THOUSAND_SEPARATOR === true) {
-            return number_format($value);
-        } else {
-            return $value;
-        }
+        return number_format($value);
     }
 
     private function _sizeForHumans(int $bytes): string
