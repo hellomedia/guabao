@@ -2,6 +2,7 @@
 
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -25,12 +26,10 @@ buildTestDatabaseIfOutdated(dirname(__DIR__));
  */
 function buildTestDatabaseIfOutdated(string $projectDir): void
 {
-    $fixtureFiles = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($projectDir . '/src/DataFixtures', FilesystemIterator::SKIP_DOTS));
     $inputs = [
         ...glob($projectDir . '/migrations/*.php'),
-        ...array_filter(array_map('strval', iterator_to_array($fixtureFiles, false)), static fn (string $file): bool => str_ends_with($file, '.php')),
+        ...array_keys(iterator_to_array((new Finder())->files()->in($projectDir . '/src/DataFixtures')->name('*.php')->sortByName())),
     ];
-    sort($inputs);
     $checksum = hash('xxh128', implode('', array_map(
         static fn (string $file): string => $file . hash_file('xxh128', $file),
         $inputs,
