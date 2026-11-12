@@ -1,106 +1,95 @@
 # AGENTS.md
 
-This is a Symfony project. Check `composer.json` for the exact Symfony/PHP version
-in use, and read `symfony.lock` to see which recipes ran. Don't assume Doctrine,
-Twig, API Platform, Messenger, or Lock are installed unless one of those says so.
+Guabao: a food and travel site (trips, meals, food, photos and 360° panoramas, stories), with an
+admin called the controlroom. Symfony 8.1, PHP 8.5, PostgreSQL 17. UI in English (no prefix) and
+French (`/fr`).
 
-## Ask before generating
+## Stack and layout
 
-If the task doesn't specify, ask rather than guess:
-
-- Persistence: Doctrine ORM, Doctrine ODM, or none?
-- Interface: server-rendered (Twig), API (Serializer, maybe API Platform), or both?
-- Auth: SecurityBundle, and which authenticator?
-
-If you can't ask (no interactive channel), state the assumption you're making and
-pick the smallest option (e.g. no persistence layer) rather than scaffolding a
-full stack nobody asked for.
-
-## Adding features: Flex, not hand-wiring
-
-Install new capabilities with `composer require <package>` (e.g. `symfony/lock`,
-`symfony/messenger`, `orm-pack`) and let the Flex recipe register the bundle and
-generate its config. Don't hand-edit `config/bundles.php` or hand-write a bundle's
-base config; that's what the recipe is for. Don't skip a good-fit component just
-because it isn't installed yet; installing it is one command.
+- Doctrine ORM + migrations, Twig + AssetMapper + Stimulus/Symfony UX (plain CSS, no build step),
+  SecurityBundle, Form, Validator, Messenger (Doctrine transport), Lock, Mailer (Postmark),
+  LiipImagine (thumbnails), Imagick (uploads converted to AVIF), Sentry.
+- One codebase, two kernels picked by `HTTP_HOST` (`src/Kernel.php`): the public site, and the
+  controlroom (EasyAdmin, `controlroom/`) whose config is loaded on top only for `HOST_CONTROLROOM`.
+  On the CLI, reach the controlroom container with `HTTP_HOST=<HOST_CONTROLROOM> bin/console ...`
+  (e.g. `debug:router`, `lint:container`). Each host has its own cache dir: `var/cache/{site,controlroom}/<env>`.
+- The public site has no user accounts: the admin logs in on the controlroom host only.
+- `packs/` holds self-contained modules (Chart, Media, Security, Status) with their own code and templates.
+- Uploads go to `%uploads_path%` (`public/uploads`; `var/test/uploads` in test) through
+  `Pack\Media\Helper\UploadHelper`. Vich is installed but no entity uses it.
+- Environments: dev, prod and test only (`Kernel::getAllowedEnvs()`).
 
 ## Conventions
 
-Follow https://symfony.com/doc/current/best_practices.html to write idiomatic
-Symfony:
+Follow https://symfony.com/doc/current/best_practices.html. The points that matter most:
 
-- Use PHP attributes for framework metadata, and not only on controllers:
-  `#[Route]`, `#[MapRequestPayload]`, `#[IsGranted]` on actions, `#[Assert\...]`
-  on properties, `#[AsCommand]`, `#[AsEventListener]`, `#[AsMessageHandler]`, and
-  `#[AsAlias]` / `#[AsTaggedItem]` / `#[Autoconfigure]` on services. No YAML or
-  XML routing.
-- Rely on autowiring and autoconfiguration. Type-hint constructor arguments and
-  let the container resolve them. Where a type-hint can't express it, stay in the
-  class with `#[Autowire]` (parameters, env vars, expressions) or `#[Target]` (one
-  of several implementations of an interface). A YAML service definition is the
-  last resort, not the first.
-- Controllers extend `AbstractController`, stay thin, and delegate to services.
-- Use the framework for what it already does: Form for server-rendered forms,
-  Validator for validation, Serializer for JSON, Messenger for async work,
-  Security (voters, authenticators) for access control, Twig `path()`/`url()`
-  instead of hardcoded URLs.
-- Before hand-writing infrastructure (locks, queues, caches, HTTP clients,
-  mailers, schedulers) or reaching for a third-party library, check whether a
-  Symfony component covers it. It usually does.
+- PHP attributes for framework metadata: `#[Route]`, `#[IsGranted]`, `#[Assert\...]`, `#[AsCommand]`,
+  `#[AsEventListener]`, `#[AsMessageHandler]`... No new YAML or XML routes: the existing YAML only
+  imports attribute routes per host and the EasyAdmin routes.
+- Autowiring and autoconfiguration. Where a type-hint can't express it, `#[Autowire]` or `#[Target]` in
+  the class. A YAML service definition (or a new `bind:`) is the last resort.
+- Thin controllers extending `AbstractController`; logic goes in services.
+- Use the framework for what it already does: Form, Validator, Serializer, Messenger, voters,
+  `path()`/`url()` in Twig. Before hand-writing infrastructure (locks, queues, caches, HTTP clients),
+  check for a Symfony component. `LockFactory` for mutual exclusion, never a hand-built flag.
+- Request data: `#[MapRequestPayload]` / `#[MapQueryString]`, not `json_decode()`.
+- Constructor property promotion; `readonly` for DTOs and value objects.
+- New capability: `composer require <package>` and let the Flex recipe register it. Never hand-edit
+  `config/bundles.php` or hand-write a bundle's base config.
+- `maker-bundle`: pass every argument and `--no-interaction`; if a maker still prompts, write the code.
+- Translations: grep all locales for a key before adding it (a duplicate key breaks the YAML file).
 
-Three specifics worth spelling out, because they are easy to get wrong:
+## Database
 
-- Bind request data with `#[MapRequestPayload]` / `#[MapQueryString]` on action
-  arguments, which wires up Serializer and Validator for you, instead of calling
-  `json_decode()` or `SerializerInterface` by hand. If neither package is
-  installed yet, `composer require` them rather than falling back to manual
-  parsing.
-- Use constructor property promotion, and `readonly` for DTOs and value objects.
-- Use `symfony/lock` (`LockFactory`) for mutual exclusion. A hand-built flag or
-  lock file looks fine in review and is usually wrong under concurrency.
-
-## Everyday workflow
-
-- Run the app with `symfony serve -d`, and commands with `symfony console ...`
-  (or `bin/console` when the Symfony CLI isn't available).
-- When something fails, read `var/log/dev.log` and the web profiler
-  (`/_profiler`) before changing code.
-- If `maker-bundle` is installed, prefer `bin/console make:*` with every argument
-  passed up front and `--no-interaction` where supported: makers prompt on a
-  terminal by default, which hangs a non-interactive shell. If a maker still
-  needs interactive input, hand-write the code instead.
-- If Doctrine ORM is installed, schema changes go through migrations
-  (`bin/console make:migration`, then `doctrine:migrations:migrate`), never
+- Schema changes only through migrations (`make:migration`, `doctrine:migrations:migrate`), never
   `doctrine:schema:update` or hand-written SQL.
-- `.env` is committed and holds defaults only. Real secrets belong in `.env.local`
-  (git-ignored) or the secrets vault (`bin/console secrets:set`), read via
-  `%env(...)%`.
+- Never edit a migration that has already run (check `doctrine:migrations:status`): add a follow-up one.
+- Fixtures: `doctrine:fixtures:load` (doctrine-fixtures-bundle + Foundry factories). In dev they
+  process ~400 MB of photos from `src/DataFixtures/images/`, which is left out of releases.
 
-## Testing
+## Configuration and secrets
 
-Install `symfony/test-pack` if it isn't already. Functional/HTTP tests extend
-`WebTestCase`; service-level tests extend `KernelTestCase`. Run
-`php bin/phpunit` (falls back to `vendor/bin/phpunit`). A feature isn't done
-until it has a test that exercises it the way a caller would, an HTTP request for
-a controller or a service call for a service, not just "it didn't throw."
+- `.env` is committed and holds defaults only. Real values go in `.env.local` / `.env.test.local`
+  (git-ignored) or the secrets vault.
+- The dev `MAILER_DSN` can be a real Postmark account: anything that may send emails outside the test
+  environment (a local server, a console command, `/_check/messenger/email`) should run with
+  `MAILER_DSN=null://null`.
+- `bin/deploy.sh` (prod, or `TRACK=staging`) runs `composer install`, `importmap:install`,
+  `asset-map:compile` and `cache:warmup`, and `symfony/requirements-checker` runs from composer's
+  scripts: don't remove "unused" tooling without asking. Tests are not part of the deploy.
 
-## Code style
+## Checks before committing
 
-Symfony's coding standard, the `@Symfony` php-cs-fixer ruleset (a PSR-12-derived
-superset). Run `vendor/bin/php-cs-fixer fix` if `friendsofphp/php-cs-fixer` is
-installed; it isn't part of the skeleton by default.
+```bash
+vendor/bin/php-cs-fixer fix                    # @Symfony + house style, see .php-cs-fixer.dist.php
+vendor/bin/phpstan analyse                     # no new errors; don't add to phpstan-baseline.neon
+bin/console lint:container                     # and again with HTTP_HOST=<HOST_CONTROLROOM>
+bin/console lint:twig templates packs controlroom/templates   # bare lint:twig also lints vendor: 4 harmless errors
+bin/console lint:translation                   # after translation changes
+php bin/phpunit                                # after changes to controllers, templates, queries or forms
+```
+
+phpstan reads the controlroom container: after config changes, warm it first with
+`HTTP_HOST=<HOST_CONTROLROOM> bin/console cache:warmup`.
+
+## Tests
+
+Deliberately small: static checks above, one smoke test, unit tests only for tricky services
+(typically after a bug). Not run on deploy, no commit hook.
+
+- `tests/Smoke/PagesTest.php` requests every page without route parameters, anonymously on the site
+  and anonymously and as admin on the controlroom, and fails only on a 5xx. New pages are picked up
+  from the router. Never assert on markup, wording, redirects or dates that age.
+- The test database `guabao_test` (migrations + fixtures) is built by `tests/bootstrap.php` only when
+  a migration or fixture file changes; each test is rolled back by dama/doctrine-test-bundle.
+  `TEST_DB_REBUILD=1 php bin/phpunit` forces a rebuild. In test, picture fixtures upload a 64×32
+  placeholder (`tests/fixtures/placeholder.jpg`) instead of the real photos.
+- A new machine needs `.env.test.local` with `DATABASE_URL` (same as `.env.local`); the database
+  user needs CREATEDB.
 
 ## Discover, don't guess
 
-Framework APIs change between versions and your training data may be stale. Look
-things up in the project instead of relying on memory:
-
-- `bin/console about`: versions, environment, paths.
-- `bin/console debug:router`, `debug:container`, `debug:autowiring <name>`,
-  `debug:config <bundle>`, `config:dump-reference <bundle>`: what exists and how
-  it is configured.
-- `bin/console lint:container`, plus `lint:twig templates/` and
-  `lint:yaml config/` where those packages are installed: validate before running.
-- Read the installed source and docblocks under `vendor/`.
-- Docs: https://symfony.com/doc/current/ (switch to the version matching
-  `composer.json` if it differs).
+Framework APIs change between versions. Look things up in the project rather than relying on memory:
+`bin/console about`, `debug:router`, `debug:container`, `debug:autowiring <name>`,
+`config:dump-reference <bundle>`, the source and docblocks under `vendor/`, and
+https://symfony.com/doc/current/. When something fails, read `var/log/<env>.log` and the profiler first.
