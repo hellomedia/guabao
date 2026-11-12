@@ -5,6 +5,7 @@ namespace App\Repository\Stats;
 use App\Entity\Stats\AnonymousVisitor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use SortDirection;
 
 final class AnonymousVisitorRepository extends ServiceEntityRepository
 {
@@ -18,7 +19,7 @@ final class AnonymousVisitorRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('v')
             ->select('v')
             ->andWhere('v.pageCount > 2')
-            ->orderBy('v.lastSeenAt', \SortDirection::Descending)
+            ->orderBy('v.lastSeenAt', SortDirection::Descending)
             ->getQuery()
             ->getResult();
     }
@@ -28,7 +29,7 @@ final class AnonymousVisitorRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('v')
             ->select('v')
             ->andWhere('v.pageCount > 2')
-            ->orderBy('v.pageCount', \SortDirection::Descending)
+            ->orderBy('v.pageCount', SortDirection::Descending)
             ->getQuery()
             ->getResult();
     }

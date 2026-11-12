@@ -4,6 +4,7 @@ namespace App\Stats;
 
 use GeoIp2\Database\Reader;
 use Symfony\Component\HttpFoundation\Request;
+use Throwable;
 
 final class GeoIpService
 {
@@ -33,7 +34,7 @@ final class GeoIpService
                 countryCode: $city->country->isoCode ?: null,
                 cityName: $city->city->name ?: null,
             );
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // throw $e;
 
             return new GeoIpResult(null, null);

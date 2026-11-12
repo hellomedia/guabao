@@ -8,6 +8,7 @@ use App\Entity\Trip;
 use App\Repository\MealRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\TripRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
 
 class MediaAutoFillHelper
@@ -34,7 +35,7 @@ class MediaAutoFillHelper
         // the time difference between UTC and php/server timezone.
 
         if (!empty($exif['DateTimeOriginal'])) {
-            $date = \DateTimeImmutable::createFromFormat(
+            $date = DateTimeImmutable::createFromFormat(
                 'Y:m:d H:i:s',
                 $exif['DateTimeOriginal'],
             );

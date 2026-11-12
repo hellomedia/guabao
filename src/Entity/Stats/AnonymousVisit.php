@@ -3,6 +3,7 @@
 namespace App\Entity\Stats;
 
 use App\Entity\Interface\EntityInterface;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -22,10 +23,10 @@ class AnonymousVisit implements EntityInterface
     private ?AnonymousVisitor $visitor = null;
 
     #[ORM\Column]
-    private \DateTimeImmutable $startedAt;
+    private DateTimeImmutable $startedAt;
 
     #[ORM\Column]
-    private \DateTimeImmutable $lastSeenAt;
+    private DateTimeImmutable $lastSeenAt;
 
     #[ORM\Column]
     private int $pageCount = 0;
@@ -70,24 +71,24 @@ class AnonymousVisit implements EntityInterface
         return $this;
     }
 
-    public function getStartedAt(): ?\DateTimeImmutable
+    public function getStartedAt(): ?DateTimeImmutable
     {
         return $this->startedAt;
     }
 
-    public function setStartedAt(\DateTimeImmutable $startedAt): static
+    public function setStartedAt(DateTimeImmutable $startedAt): static
     {
         $this->startedAt = $startedAt;
 
         return $this;
     }
 
-    public function getLastSeenAt(): ?\DateTimeImmutable
+    public function getLastSeenAt(): ?DateTimeImmutable
     {
         return $this->lastSeenAt;
     }
 
-    public function setLastSeenAt(\DateTimeImmutable $lastSeenAt): static
+    public function setLastSeenAt(DateTimeImmutable $lastSeenAt): static
     {
         $this->lastSeenAt = $lastSeenAt;
 

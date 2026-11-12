@@ -8,6 +8,7 @@ use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -41,7 +42,7 @@ class TripQuickEditType extends AbstractType
                 'class' => TripTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
-                        ->orderBy('t.nameEn', \SortDirection::Ascending);
+                        ->orderBy('t.nameEn', SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -52,7 +53,7 @@ class TripQuickEditType extends AbstractType
                 'class' => Country::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('c')
-                        ->orderBy('c.nameEn', \SortDirection::Ascending);
+                        ->orderBy('c.nameEn', SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -65,7 +66,7 @@ class TripQuickEditType extends AbstractType
                 'required' => false,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('h')
-                        ->orderBy('h.nameEn', \SortDirection::Ascending);
+                        ->orderBy('h.nameEn', SortDirection::Ascending);
                 },
                 'multiple' => true,
                 'autocomplete' => true,

@@ -3,6 +3,7 @@
 namespace Pack\Security\Entity\Trait;
 
 use App\Entity\User;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Pack\Security\Doctrine\Types\CiText;
@@ -114,7 +115,7 @@ trait UserSecurityTrait
     private ?float $kotcopScore = null;
 
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
-    private ?\DateTimeImmutable $kotcopUpdatedAt = null;
+    private ?DateTimeImmutable $kotcopUpdatedAt = null;
 
     /**
      * ===========================
@@ -545,12 +546,12 @@ trait UserSecurityTrait
         return $this;
     }
 
-    public function getKotcopUpdatedAt(): ?\DateTimeImmutable
+    public function getKotcopUpdatedAt(): ?DateTimeImmutable
     {
         return $this->kotcopUpdatedAt;
     }
 
-    public function setKotcopUpdatedAt(?\DateTimeImmutable $kotcopUpdatedAt): static
+    public function setKotcopUpdatedAt(?DateTimeImmutable $kotcopUpdatedAt): static
     {
         $this->kotcopUpdatedAt = $kotcopUpdatedAt;
 

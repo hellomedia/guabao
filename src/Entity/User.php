@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Interface\EntityInterface;
 use App\Enum\AccountLanguage;
 use App\Repository\UserRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Pack\Security\Entity\Trait\UserSecurityTrait;
@@ -33,16 +34,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Equatab
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
-    private ?\DateTimeImmutable $lastLogin = null;
+    private ?DateTimeImmutable $lastLogin = null;
 
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
-    private ?\DateTimeImmutable $lastActiveAt = null;
+    private ?DateTimeImmutable $lastActiveAt = null;
 
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE)]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE)]
-    private ?\DateTimeImmutable $updatedAt = null;
+    private ?DateTimeImmutable $updatedAt = null;
 
     public function __toString()
     {
@@ -78,50 +79,50 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Equatab
         return $this;
     }
 
-    public function getLastLogin(): ?\DateTimeImmutable
+    public function getLastLogin(): ?DateTimeImmutable
     {
         return $this->lastLogin;
     }
 
-    public function setLastLogin(?\DateTimeImmutable $lastLogin): static
+    public function setLastLogin(?DateTimeImmutable $lastLogin): static
     {
         $this->lastLogin = $lastLogin;
 
         return $this;
     }
 
-    public function getLastActiveAt(): ?\DateTimeImmutable
+    public function getLastActiveAt(): ?DateTimeImmutable
     {
         return $this->lastActiveAt;
     }
 
-    public function setLastActiveAt(?\DateTimeImmutable $lastActiveAt): static
+    public function setLastActiveAt(?DateTimeImmutable $lastActiveAt): static
     {
         $this->lastActiveAt = $lastActiveAt;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(?\DateTimeImmutable $createdAt = null): static
+    public function setCreatedAt(?DateTimeImmutable $createdAt = null): static
     {
-        $this->createdAt = $createdAt ?? new \DateTimeImmutable();
+        $this->createdAt = $createdAt ?? new DateTimeImmutable();
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt = null): static
+    public function setUpdatedAt(?DateTimeImmutable $updatedAt = null): static
     {
-        $this->updatedAt = $updatedAt ?? new \DateTimeImmutable();
+        $this->updatedAt = $updatedAt ?? new DateTimeImmutable();
 
         return $this;
     }

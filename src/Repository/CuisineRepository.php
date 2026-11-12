@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Cuisine;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use SortDirection;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -24,7 +25,7 @@ class CuisineRepository extends ServiceEntityRepository
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
         return $this->createQueryBuilder('c')
-            ->orderBy('c.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('c.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }
@@ -37,7 +38,7 @@ class CuisineRepository extends ServiceEntityRepository
             ->leftJoin('c.food', 'f')
             ->addSelect('COUNT(DISTINCT f.id) AS foodCount')
             ->groupBy('c.id')
-            ->orderBy('c.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('c.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
 

@@ -3,9 +3,11 @@
 namespace App\Entity\Stats;
 
 use App\Entity\Interface\EntityInterface;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Locale;
 
 /**
  * An anonymous visitor is really a browser
@@ -28,10 +30,10 @@ class AnonymousVisitor implements EntityInterface
     private string $visitorId;
 
     #[ORM\Column]
-    private \DateTimeImmutable $firstSeenAt;
+    private DateTimeImmutable $firstSeenAt;
 
     #[ORM\Column]
-    private \DateTimeImmutable $lastSeenAt;
+    private DateTimeImmutable $lastSeenAt;
 
     #[ORM\Column]
     private int $pageCount = 0;
@@ -99,24 +101,24 @@ class AnonymousVisitor implements EntityInterface
         return $this;
     }
 
-    public function getFirstSeenAt(): ?\DateTimeImmutable
+    public function getFirstSeenAt(): ?DateTimeImmutable
     {
         return $this->firstSeenAt;
     }
 
-    public function setFirstSeenAt(\DateTimeImmutable $firstSeenAt): static
+    public function setFirstSeenAt(DateTimeImmutable $firstSeenAt): static
     {
         $this->firstSeenAt = $firstSeenAt;
 
         return $this;
     }
 
-    public function getLastSeenAt(): ?\DateTimeImmutable
+    public function getLastSeenAt(): ?DateTimeImmutable
     {
         return $this->lastSeenAt;
     }
 
-    public function setLastSeenAt(\DateTimeImmutable $lastSeenAt): static
+    public function setLastSeenAt(DateTimeImmutable $lastSeenAt): static
     {
         $this->lastSeenAt = $lastSeenAt;
 
@@ -190,7 +192,7 @@ class AnonymousVisitor implements EntityInterface
         $names = [];
 
         foreach ($this->getCountryCodes() as $code) {
-            $name = \Locale::getDisplayRegion('-' . $code, 'en');
+            $name = Locale::getDisplayRegion('-' . $code, 'en');
 
             $names[] = $name ?: $code;
         }

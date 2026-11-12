@@ -5,6 +5,7 @@ namespace Controlroom\Form\Field;
 use App\Entity\Tag\FoodTag;
 use App\Repository\FoodTagRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
@@ -24,7 +25,7 @@ class FoodTagAutocompleteField extends AbstractType
             'searchable_fields' => ['nameEn', 'nameFr'],
             'query_builder' => function (FoodTagRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('ft')
-                ->orderBy('ft.nameEn', \SortDirection::Ascending)
+                ->orderBy('ft.nameEn', SortDirection::Ascending)
                 ;
             },
             'multiple' => true,

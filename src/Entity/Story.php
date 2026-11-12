@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use SortDirection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: StoryRepository::class)]
@@ -53,7 +54,7 @@ class Story implements LocalizedNameInterface, LocalizedSlugInterface, EntityInt
     /**
      * @var Collection<int, Media>
      */
-    #[ORM\OrderBy(['takenAt' => \SortDirection::Ascending])]
+    #[ORM\OrderBy(['takenAt' => SortDirection::Ascending])]
     #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'story', fetch: 'EAGER')]
     private Collection $medias;
 

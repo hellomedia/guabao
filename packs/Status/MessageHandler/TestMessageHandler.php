@@ -2,6 +2,7 @@
 
 namespace Pack\Status\MessageHandler;
 
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
 use Pack\Status\Entity\TestMessageLog;
 use Pack\Status\Message\TestMessage;
@@ -41,7 +42,7 @@ final class TestMessageHandler
 
             $testMessageLog->setMessageId($message->getId());
             $testMessageLog->setMessageCreatedAt($message->getCreatedAt());
-            $testMessageLog->setMessageProcessedAt(new \DateTimeImmutable());
+            $testMessageLog->setMessageProcessedAt(new DateTimeImmutable());
 
             $this->entityManager->flush();
 
@@ -54,7 +55,7 @@ final class TestMessageHandler
 
         $testMessageLog->setMessageId($message->getId());
         $testMessageLog->setMessageCreatedAt($message->getCreatedAt());
-        $testMessageLog->setMessageProcessedAt(new \DateTimeImmutable());
+        $testMessageLog->setMessageProcessedAt(new DateTimeImmutable());
 
         $this->entityManager->persist($testMessageLog);
         $this->entityManager->flush();

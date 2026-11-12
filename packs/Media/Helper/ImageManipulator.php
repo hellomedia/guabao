@@ -3,6 +3,8 @@
 namespace Pack\Media\Helper;
 
 use App\Entity\Media;
+use Exception;
+use Imagick;
 
 class ImageManipulator
 {
@@ -32,7 +34,7 @@ class ImageManipulator
     public function optimize(Media $image, ?bool $resize = false, ?bool $convert = true, int $maxWidth = self::MAX_WIDTH, int $maxHeight = self::MAX_HEIGHT)
     {
         try {
-            $imagick = new \Imagick();
+            $imagick = new Imagick();
 
             $originalPath = $this->uploadsPath . '/' . $image->getPath();
 
@@ -72,55 +74,55 @@ class ImageManipulator
             if (file_exists($originalPath) && $newPath != $originalPath) {
                 unlink($originalPath);
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             exit('Error when resizing uploaded image : ' . $e->getMessage());
         }
     }
 
-    private function _autoRotateImage(\Imagick $imagick)
+    private function _autoRotateImage(Imagick $imagick)
     {
         $orientation = $imagick->getImageOrientation();
 
         switch ($orientation) {
-            case \Imagick::ORIENTATION_UNDEFINED:
+            case Imagick::ORIENTATION_UNDEFINED:
                 break;
 
-            case \Imagick::ORIENTATION_TOPRIGHT:
+            case Imagick::ORIENTATION_TOPRIGHT:
                 $imagick->flopimage();
                 break;
 
-            case \Imagick::ORIENTATION_BOTTOMRIGHT:
+            case Imagick::ORIENTATION_BOTTOMRIGHT:
                 $imagick->rotateimage('#000', 180); // rotate 180 degrees
                 break;
 
-            case \Imagick::ORIENTATION_BOTTOMLEFT:
+            case Imagick::ORIENTATION_BOTTOMLEFT:
                 $imagick->flipimage();
                 break;
 
-            case \Imagick::ORIENTATION_LEFTTOP:
+            case Imagick::ORIENTATION_LEFTTOP:
                 $imagick->rotateimage('#000', 90);
                 $imagick->flopimage();
                 break;
 
-            case \Imagick::ORIENTATION_RIGHTTOP:
+            case Imagick::ORIENTATION_RIGHTTOP:
                 $imagick->rotateimage('#000', 90); // rotate 90 degrees CW
                 break;
 
-            case \Imagick::ORIENTATION_RIGHTBOTTOM:
+            case Imagick::ORIENTATION_RIGHTBOTTOM:
                 $imagick->rotateimage('#000', -90);
                 $imagick->flopimage();
                 break;
 
-            case \Imagick::ORIENTATION_LEFTBOTTOM:
+            case Imagick::ORIENTATION_LEFTBOTTOM:
                 $imagick->rotateimage('#000', -90); // rotate 90 degrees CCW
                 break;
         }
 
         // Now that it's auto-rotated, make sure the EXIF data is correct in case the EXIF gets saved with the image!
-        $imagick->setImageOrientation(\Imagick::ORIENTATION_TOPLEFT);
+        $imagick->setImageOrientation(Imagick::ORIENTATION_TOPLEFT);
     }
 
-    private function _resize(\Imagick $imagick, Media $image, int $maxWidth = self::MAX_WIDTH, int $maxHeight = self::MAX_HEIGHT): void
+    private function _resize(Imagick $imagick, Media $image, int $maxWidth = self::MAX_WIDTH, int $maxHeight = self::MAX_HEIGHT): void
     {
         $originalWidth = $imagick->getImageWidth();
         $originalHeight = $imagick->getImageHeight();
@@ -144,7 +146,7 @@ class ImageManipulator
         }
     }
 
-    private function _convertToAvif(\Imagick $imagick, Media $image): void
+    private function _convertToAvif(Imagick $imagick, Media $image): void
     {
         if ($imagick->getImageFormat() !== 'AVIF') {
             $newFilename = $this->_replaceExtensionWithAvif($image->getFilename());

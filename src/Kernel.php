@@ -2,6 +2,7 @@
 
 namespace App;
 
+use ReflectionObject;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -59,7 +60,7 @@ class Kernel extends BaseKernel
 
         $routes->import($configDir . '/routes.yaml');
 
-        if (false !== ($fileName = (new \ReflectionObject($this))->getFileName())) {
+        if (false !== ($fileName = (new ReflectionObject($this))->getFileName())) {
             $routes->import($fileName, 'attribute');
         }
     }

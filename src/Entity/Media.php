@@ -9,6 +9,7 @@ use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Enum\MediaType;
 use App\Enum\VideoOrientation;
 use App\Repository\MediaRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -53,7 +54,7 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
-    private ?\DateTimeImmutable $takenAt = null;
+    private ?DateTimeImmutable $takenAt = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
@@ -182,12 +183,12 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
         return $this->id;
     }
 
-    public function getTakenAt(): ?\DateTimeImmutable
+    public function getTakenAt(): ?DateTimeImmutable
     {
         return $this->takenAt;
     }
 
-    public function setTakenAt(?\DateTimeImmutable $takenAt): static
+    public function setTakenAt(?DateTimeImmutable $takenAt): static
     {
         $this->takenAt = $takenAt;
 

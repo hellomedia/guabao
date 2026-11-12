@@ -8,6 +8,7 @@ use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -71,7 +72,7 @@ class StoryQuickEditType extends AbstractType
                 'class' => MediaTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
-                        ->orderBy('t.nameEn', \SortDirection::Ascending);
+                        ->orderBy('t.nameEn', SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -84,7 +85,7 @@ class StoryQuickEditType extends AbstractType
                     return $repo->createQueryBuilder('pt')
                         ->where('pt.country IN (:countries)')
                         ->setParameter('countries', $story->getTrip()->getCountries())
-                        ->orderBy('pt.nameEn', \SortDirection::Ascending);
+                        ->orderBy('pt.nameEn', SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -97,7 +98,7 @@ class StoryQuickEditType extends AbstractType
                 'required' => false,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('h')
-                        ->orderBy('h.nameEn', \SortDirection::Ascending);
+                        ->orderBy('h.nameEn', SortDirection::Ascending);
                 },
                 'multiple' => true,
                 'autocomplete' => true,

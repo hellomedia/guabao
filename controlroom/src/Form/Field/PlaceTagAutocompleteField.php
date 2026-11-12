@@ -5,6 +5,7 @@ namespace Controlroom\Form\Field;
 use App\Entity\Tag\PlaceTag;
 use App\Repository\PlaceTagRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,11 +33,11 @@ class PlaceTagAutocompleteField extends AbstractType
                         return $repo->createQueryBuilder('pt')
                             ->where('pt.country IN (:countries)')
                             ->setParameter('countries', $countries)
-                            ->orderBy('pt.nameEn', \SortDirection::Ascending);
+                            ->orderBy('pt.nameEn', SortDirection::Ascending);
                     }
 
                     return $repo->createQueryBuilder('pt')
-                        ->orderBy('pt.nameEn', \SortDirection::Ascending);
+                        ->orderBy('pt.nameEn', SortDirection::Ascending);
                 };
             },
             'multiple' => true,

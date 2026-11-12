@@ -7,6 +7,7 @@ use App\Entity\Tag\PlaceTag;
 use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Enum\MealType;
 use App\Repository\MealRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,7 +23,7 @@ class Meal implements EntityInterface
     private ?int $id = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $enjoyedAt = null;
+    private ?DateTimeImmutable $enjoyedAt = null;
 
     #[ORM\Column(nullable: true, enumType: MealType::class)]
     private ?MealType $type = null;
@@ -82,12 +83,12 @@ class Meal implements EntityInterface
         return $this->id;
     }
 
-    public function getEnjoyedAt(): ?\DateTimeImmutable
+    public function getEnjoyedAt(): ?DateTimeImmutable
     {
         return $this->enjoyedAt;
     }
 
-    public function setEnjoyedAt(?\DateTimeImmutable $enjoyedAt): static
+    public function setEnjoyedAt(?DateTimeImmutable $enjoyedAt): static
     {
         $this->enjoyedAt = $enjoyedAt;
 

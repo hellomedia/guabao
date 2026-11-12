@@ -3,6 +3,7 @@
 namespace Controlroom\Controller;
 
 use App\Controller\BaseController;
+use LogicException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -91,6 +92,6 @@ class SecurityController extends BaseController
     #[Route(path: '/login-check', name: 'controlroom_login_check')]
     public function loginCheck(): never
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the login check of your firewall.');
+        throw new LogicException('This method can be blank - it will be intercepted by the login check of your firewall.');
     }
 }

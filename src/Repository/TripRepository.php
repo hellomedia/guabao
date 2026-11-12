@@ -4,11 +4,13 @@ namespace App\Repository;
 
 use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
+use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use SortDirection;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -59,7 +61,7 @@ class TripRepository extends ServiceEntityRepository
 
         return $this->createCardQueryBuilder()
             ->where('t.parent IS NULL')
-            ->orderBy($sortField, \SortDirection::Descending)
+            ->orderBy($sortField, SortDirection::Descending)
             ->getQuery()
             ->getResult();
     }
@@ -80,7 +82,7 @@ class TripRepository extends ServiceEntityRepository
             ->join('t.tags', 'tt')
             ->where('t.parent IS NULL')
             ->andWhere('tt.slugEn = :slugEn')
-            ->orderBy($sortField, \SortDirection::Descending)
+            ->orderBy($sortField, SortDirection::Descending)
             ->setParameter('slugEn', $tag->getSlugEn())
             ->getQuery()
             ->getResult();
@@ -101,7 +103,7 @@ class TripRepository extends ServiceEntityRepository
             ->leftJoin('child.tags', 'childTag')->addSelect('childTag')
             ->where('t.slug' . \ucfirst($locale) . ' = :slug')
             ->setParameter('slug', $slug)
-            ->orderBy('child.startedAt', \SortDirection::Ascending)
+            ->orderBy('child.startedAt', SortDirection::Ascending)
             ->getQuery()
             ->getOneOrNullResult();
     }
@@ -117,7 +119,7 @@ class TripRepository extends ServiceEntityRepository
             ->leftJoin('t.tags', 'tag')->addSelect('tag');
     }
 
-    public function findOneByMediaDate(?\DateTimeImmutable $mediaTakenAt): ?Trip
+    public function findOneByMediaDate(?DateTimeImmutable $mediaTakenAt): ?Trip
     {
         if ($mediaTakenAt == null) {
             return null;
@@ -130,7 +132,7 @@ class TripRepository extends ServiceEntityRepository
             ->andWhere('t.startedAt < :mediaTakenAt')
             ->andWhere('t.endedAt > :mediaTakenAt')
             ->setParameter('mediaTakenAt', $mediaTakenAt)
-            ->orderBy('t.parent', \SortDirection::Ascending) // default is NULLS LAST for ASC !
+            ->orderBy('t.parent', SortDirection::Ascending) // default is NULLS LAST for ASC !
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
@@ -169,7 +171,7 @@ class TripRepository extends ServiceEntityRepository
         return $this->createCardQueryBuilder()
             ->join('t.siteHighlights', 'h')
             ->where('h.nameEn = :highlightName')
-            ->orderBy('t.startedAt', \SortDirection::Descending)
+            ->orderBy('t.startedAt', SortDirection::Descending)
             ->setParameter('highlightName', $highlightName)
             ->getQuery()
             ->getResult();

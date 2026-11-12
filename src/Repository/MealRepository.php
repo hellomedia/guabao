@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Meal;
+use DateInterval;
+use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,9 +18,9 @@ class MealRepository extends ServiceEntityRepository
         parent::__construct($registry, Meal::class);
     }
 
-    public function findOneByMediaDate(\DateTimeImmutable $mediaTakenAt): ?Meal
+    public function findOneByMediaDate(DateTimeImmutable $mediaTakenAt): ?Meal
     {
-        $interval = new \DateInterval('PT30M');
+        $interval = new DateInterval('PT30M');
 
         $start = $mediaTakenAt->sub($interval);
         $end = $mediaTakenAt->add($interval);

@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use SortDirection;
 
 class SiteHighlightCrudController extends AbstractCrudController
 {
@@ -46,7 +47,7 @@ class SiteHighlightCrudController extends AbstractCrudController
             ->setTemplatePath('@admin/field/trips.html.twig')
             ->setFormTypeOption('query_builder', function (EntityRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('t')
-                    ->orderBy('t.startedAt', \SortDirection::Descending);
+                    ->orderBy('t.startedAt', SortDirection::Descending);
             })
             ->setFormTypeOption('group_by', function (Trip $trip, $key, $value) {
                 if ($trip->hasParent()) {
@@ -62,8 +63,8 @@ class SiteHighlightCrudController extends AbstractCrudController
             ->setFormTypeOption('query_builder', function (EntityRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('s')
                     ->join('s.trip', 't')
-                    ->addOrderBy('t.startedAt', \SortDirection::Descending)
-                    ->addOrderBy('s.displayOrder', \SortDirection::Ascending);
+                    ->addOrderBy('t.startedAt', SortDirection::Descending)
+                    ->addOrderBy('s.displayOrder', SortDirection::Ascending);
             })
             ->setFormTypeOption('group_by', function (Story $story, $key, $value) {
                 return $story->getTrip()->getNameEn();
@@ -76,9 +77,9 @@ class SiteHighlightCrudController extends AbstractCrudController
                 return $repo->createQueryBuilder('p')
                     ->join('p.placeTags', 'pt')
                     ->join('p.country', 'c')
-                    ->addOrderBy('c.nameEn', \SortDirection::Ascending)
-                    ->addOrderBy('pt.nameEn', \SortDirection::Ascending)
-                    ->addOrderBy('p.name', \SortDirection::Ascending);
+                    ->addOrderBy('c.nameEn', SortDirection::Ascending)
+                    ->addOrderBy('pt.nameEn', SortDirection::Ascending)
+                    ->addOrderBy('p.name', SortDirection::Ascending);
             })
             ->setFormTypeOption('group_by', function (Place $place, $key, $value) {
                 return $place->getPlaceTags()->first()->getNameEn();
@@ -91,9 +92,9 @@ class SiteHighlightCrudController extends AbstractCrudController
                 return $repo->createQueryBuilder('m')
                     ->join('m.placeTags', 'pt')
                     ->join('pt.country', 'c')
-                    ->addOrderBy('c.nameEn', \SortDirection::Ascending)
-                    ->addOrderBy('pt.nameEn', \SortDirection::Ascending)
-                    ->addOrderBy('m.enjoyedAt', \SortDirection::Descending);
+                    ->addOrderBy('c.nameEn', SortDirection::Ascending)
+                    ->addOrderBy('pt.nameEn', SortDirection::Ascending)
+                    ->addOrderBy('m.enjoyedAt', SortDirection::Descending);
             })
             ->setFormTypeOption('group_by', function (Meal $meal, $key, $value) {
                 return $meal->getPlaceTags()->first()->getNameEn();

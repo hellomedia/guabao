@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Country;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use SortDirection;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -24,7 +25,7 @@ class CountryRepository extends ServiceEntityRepository
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
         return $this->createQueryBuilder('c')
-            ->orderBy('c.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('c.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }
@@ -39,7 +40,7 @@ class CountryRepository extends ServiceEntityRepository
             ->innerJoin('m.food', 'f')
             ->addSelect('COUNT(DISTINCT f.id) AS foodCount')
             ->groupBy('c.id')
-            ->orderBy('c.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('c.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
 

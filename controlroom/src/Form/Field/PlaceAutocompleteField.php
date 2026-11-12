@@ -5,6 +5,7 @@ namespace Controlroom\Form\Field;
 use App\Entity\Place;
 use App\Repository\PlaceRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,11 +33,11 @@ class PlaceAutocompleteField extends AbstractType
                         return $repo->createQueryBuilder('p')
                             ->where('p.country IN (:countries)')
                             ->setParameter('countries', $countries)
-                            ->orderBy('p.name', \SortDirection::Ascending);
+                            ->orderBy('p.name', SortDirection::Ascending);
                     }
 
                     return $repo->createQueryBuilder('p')
-                        ->orderBy('p.name', \SortDirection::Ascending);
+                        ->orderBy('p.name', SortDirection::Ascending);
                 };
             },
             'multiple' => false,

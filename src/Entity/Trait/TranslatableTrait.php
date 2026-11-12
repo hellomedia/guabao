@@ -2,6 +2,8 @@
 
 namespace App\Entity\Trait;
 
+use Exception;
+
 trait TranslatableTrait
 {
     // Add this property in your entity
@@ -40,7 +42,7 @@ trait TranslatableTrait
     public function hasCurrentLocaleTranslation(): bool
     {
         if ($this->getTranslations()->count() > 1) {
-            throw new \Exception('More than 1 translations in translations array. Call to getCurrentTranslation() not reliable.');
+            throw new Exception('More than 1 translations in translations array. Call to getCurrentTranslation() not reliable.');
         }
 
         if ($this->getTranslations()->count() == 0) {

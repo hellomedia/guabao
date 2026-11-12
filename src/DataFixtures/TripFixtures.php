@@ -6,6 +6,7 @@ use App\DataFixtures\Tag\TripTagFixtures;
 use App\Entity\Country;
 use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -229,8 +230,8 @@ To this day, my most stunning and immersive hiking experience!',
             $trip->setNameFr($item['nameFr']);
             $trip->setNameEn($item['nameEn']);
 
-            $trip->setStartedAt(\DateTimeImmutable::createFromFormat('d/m/Y', $item['startedAt']));
-            $trip->setEndedAt(\DateTimeImmutable::createFromFormat('d/m/Y', $item['endedAt']));
+            $trip->setStartedAt(DateTimeImmutable::createFromFormat('d/m/Y', $item['startedAt']));
+            $trip->setEndedAt(DateTimeImmutable::createFromFormat('d/m/Y', $item['endedAt']));
 
             $trip->setHeadlineFr($item['headlineFr'] ?? '');
             $trip->setHeadlineEn($item['headlineEn'] ?? '');

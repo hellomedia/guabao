@@ -10,6 +10,7 @@ use App\Entity\Trip;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use SortDirection;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -38,7 +39,7 @@ class MediaRepository extends ServiceEntityRepository
             // optimization
             ->leftJoin('m.meal', 'meal')->addSelect('meal')
             ->leftJoin('meal.placeTags', 'placeTags')->addSelect('placeTags')
-            ->orderBy('m.takenAt', \SortDirection::Descending)
+            ->orderBy('m.takenAt', SortDirection::Descending)
             ->getQuery()
             ->getResult();
 
@@ -136,7 +137,7 @@ class MediaRepository extends ServiceEntityRepository
             ->addSelect('trip')
             ->where('trip = :trip')
             ->setParameter('trip', $trip)
-            ->orderBy('m.takenAt', \SortDirection::Ascending)
+            ->orderBy('m.takenAt', SortDirection::Ascending)
         ;
 
         if ($gallery) {
@@ -174,7 +175,7 @@ class MediaRepository extends ServiceEntityRepository
             ->addSelect('story')
             ->where('story = :story')
             ->setParameter('story', $story)
-            ->orderBy('m.takenAt', \SortDirection::Ascending)
+            ->orderBy('m.takenAt', SortDirection::Ascending)
         ;
     }
 
@@ -202,7 +203,7 @@ class MediaRepository extends ServiceEntityRepository
             ->addSelect('meal')
             ->leftJoin('m.story', 'story')
             ->addSelect('story')
-            ->orderBy('m.takenAt', \SortDirection::Ascending)
+            ->orderBy('m.takenAt', SortDirection::Ascending)
         ;
     }
 
@@ -223,7 +224,7 @@ class MediaRepository extends ServiceEntityRepository
             ->andWhere('m.story IS NULL')
             ->andWhere('m.food IS EMPTY') // m.food is a collection
             ->andWhere('m.meal IS NULL')
-            ->orderBy('m.takenAt', \SortDirection::Ascending)
+            ->orderBy('m.takenAt', SortDirection::Ascending)
             ->getQuery()
             ->getResult()
         ;

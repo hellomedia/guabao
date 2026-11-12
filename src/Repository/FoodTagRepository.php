@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Tag\FoodTag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use SortDirection;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -24,7 +25,7 @@ class FoodTagRepository extends ServiceEntityRepository
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
         return $this->createQueryBuilder('ft')
-            ->orderBy('ft.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('ft.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }
@@ -37,7 +38,7 @@ class FoodTagRepository extends ServiceEntityRepository
             ->leftJoin('ft.food', 'f')
             ->addSelect('COUNT(DISTINCT f.id) AS foodCount')
             ->groupBy('ft.id')
-            ->orderBy('ft.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('ft.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
 

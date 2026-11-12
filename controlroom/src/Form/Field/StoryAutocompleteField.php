@@ -5,6 +5,7 @@ namespace Controlroom\Form\Field;
 use App\Entity\Story;
 use App\Repository\StoryRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,7 +35,7 @@ class StoryAutocompleteField extends AbstractType
                         return $repo->createQueryBuilder('s')
                             ->where('s.trip = :trip')
                             ->setParameter('trip', $currentTrip)
-                            ->orderBy('s.displayOrder', \SortDirection::Ascending);
+                            ->orderBy('s.displayOrder', SortDirection::Ascending);
                     }
 
                     return $repo->createQueryBuilder('s');

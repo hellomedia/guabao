@@ -7,6 +7,7 @@ use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +27,7 @@ class MediaBulkEditTagsType extends AbstractType
                     return $repo->createQueryBuilder('pt')
                         ->where('pt.country IN (:countries)')
                         ->setParameter('countries', $trip->getCountries())
-                        ->orderBy('pt.nameEn', \SortDirection::Ascending);
+                        ->orderBy('pt.nameEn', SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -37,7 +38,7 @@ class MediaBulkEditTagsType extends AbstractType
                 'class' => MediaTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
-                        ->orderBy('t.nameEn', \SortDirection::Ascending);
+                        ->orderBy('t.nameEn', SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -50,7 +51,7 @@ class MediaBulkEditTagsType extends AbstractType
                     return $repo->createQueryBuilder('p')
                         ->where('p.country IN (:countries)')
                         ->setParameter('countries', $trip->getCountries())
-                        ->orderBy('p.name', \SortDirection::Ascending);
+                        ->orderBy('p.name', SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => false,

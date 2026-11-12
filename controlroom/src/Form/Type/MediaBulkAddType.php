@@ -8,6 +8,7 @@ use App\Entity\Tag\PlaceTag;
 use App\Entity\Trip;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -59,7 +60,7 @@ class MediaBulkAddType extends AbstractType
                 'class' => Trip::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
-                        ->orderBy('t.startedAt', \SortDirection::Descending);
+                        ->orderBy('t.startedAt', SortDirection::Descending);
                 },
                 'required' => false,
                 'multiple' => false,
@@ -91,7 +92,7 @@ class MediaBulkAddType extends AbstractType
                         return $repo->createQueryBuilder('s')
                             ->where('s.trip = :trip')
                             ->setParameter('trip', $selectedTrip)
-                            ->orderBy('s.displayOrder', \SortDirection::Ascending);
+                            ->orderBy('s.displayOrder', SortDirection::Ascending);
                     },
                     'multiple' => false,
                     'autocomplete' => true,
@@ -116,11 +117,11 @@ class MediaBulkAddType extends AbstractType
                         return $repo->createQueryBuilder('pt')
                             ->where('pt.country IN (:countries)')
                             ->setParameter('countries', $trip->getCountries())
-                            ->orderBy('pt.nameEn', \SortDirection::Ascending);
+                            ->orderBy('pt.nameEn', SortDirection::Ascending);
                     }
 
                     return $repo->createQueryBuilder('pt')
-                        ->orderBy('pt.nameEn', \SortDirection::Ascending);
+                        ->orderBy('pt.nameEn', SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,
@@ -131,7 +132,7 @@ class MediaBulkAddType extends AbstractType
                 'class' => MediaTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('t')
-                        ->orderBy('t.nameEn', \SortDirection::Ascending);
+                        ->orderBy('t.nameEn', SortDirection::Ascending);
                 },
                 'required' => false,
                 'multiple' => true,

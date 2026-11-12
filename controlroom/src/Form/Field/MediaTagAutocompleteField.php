@@ -5,6 +5,7 @@ namespace Controlroom\Form\Field;
 use App\Entity\Tag\MediaTag;
 use App\Repository\MediaTagRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
@@ -25,7 +26,7 @@ class MediaTagAutocompleteField extends AbstractType
             'searchable_fields' => ['nameEn', 'nameFr'],
             'query_builder' => function (MediaTagRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('t')
-                    ->addOrderBy('t.nameEn', \SortDirection::Ascending)
+                    ->addOrderBy('t.nameEn', SortDirection::Ascending)
                 ;
             },
             'multiple' => true,

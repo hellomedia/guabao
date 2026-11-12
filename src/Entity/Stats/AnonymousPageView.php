@@ -3,6 +3,7 @@
 namespace App\Entity\Stats;
 
 use App\Entity\Interface\EntityInterface;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,7 +20,7 @@ class AnonymousPageView implements EntityInterface
     private AnonymousVisit $visit;
 
     #[ORM\Column]
-    private \DateTimeImmutable $visitedAt;
+    private DateTimeImmutable $visitedAt;
 
     #[ORM\Column(length: 255)]
     private string $path;
@@ -43,12 +44,12 @@ class AnonymousPageView implements EntityInterface
         return $this->id;
     }
 
-    public function getVisitedAt(): ?\DateTimeImmutable
+    public function getVisitedAt(): ?DateTimeImmutable
     {
         return $this->visitedAt;
     }
 
-    public function setVisitedAt(\DateTimeImmutable $visitedAt): static
+    public function setVisitedAt(DateTimeImmutable $visitedAt): static
     {
         $this->visitedAt = $visitedAt;
 

@@ -15,6 +15,7 @@ use App\Entity\Trait\OriginalNameTrait;
 use App\Entity\Trait\SearchableNameTrait;
 use App\Enum\Level;
 use App\Repository\FoodRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -370,7 +371,7 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, Searchable
      * @return array<int, array{
      *     type: 'meal'|'date',
      *     meal: ?Meal,
-     *     date: ?\DateTimeImmutable,
+     *     date: ?DateTimeImmutable,
      *     medias: Media[],
      *     place: ?Place,
      *     placeTags: PlaceTags[],

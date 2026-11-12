@@ -5,6 +5,7 @@ namespace Controlroom\Form\Field;
 use App\Entity\Ingredient;
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
@@ -24,7 +25,7 @@ class SimilarIngredientsAutocompleteField extends AbstractType
             'searchable_fields' => ['nameEn', 'nameFr'],
             'query_builder' => function (IngredientRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('i')
-                    ->addOrderBy('i.nameEn', \SortDirection::Ascending)
+                    ->addOrderBy('i.nameEn', SortDirection::Ascending)
                 ;
             },
             'multiple' => true,

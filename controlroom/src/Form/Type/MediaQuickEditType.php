@@ -14,6 +14,7 @@ use Controlroom\Form\Field\PlaceTagAutocompleteField;
 use Controlroom\Form\Field\StoryAutocompleteField;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -58,7 +59,7 @@ class MediaQuickEditType extends AbstractType
                         // of show children
                         ->orWhere('t.id IN (:children)')
                         ->setParameter('children', $currentTrip->getChildren())
-                        ->orderBy('t.startedAt', \SortDirection::Descending);
+                        ->orderBy('t.startedAt', SortDirection::Descending);
                 },
                 'multiple' => false,
                 'autocomplete' => true,
@@ -97,7 +98,7 @@ class MediaQuickEditType extends AbstractType
                 'required' => false,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('h')
-                        ->orderBy('h.nameEn', \SortDirection::Ascending);
+                        ->orderBy('h.nameEn', SortDirection::Ascending);
                 },
                 'multiple' => true,
                 'autocomplete' => true,

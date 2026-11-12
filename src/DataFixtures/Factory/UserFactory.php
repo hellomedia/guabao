@@ -4,6 +4,7 @@ namespace App\DataFixtures\Factory;
 
 use App\Entity\User;
 use App\Enum\AccountLanguage;
+use DateTimeImmutable;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
@@ -35,7 +36,7 @@ final class UserFactory extends PersistentObjectFactory
             'accountLanguage' => AccountLanguage::FRENCH,
             'adminReviewed' => false,
             'closed' => false,
-            'createdAt' => new \DateTimeImmutable(),
+            'createdAt' => new DateTimeImmutable(),
             'enabled' => true,
             'hellbanned' => false,
             'locked' => false,

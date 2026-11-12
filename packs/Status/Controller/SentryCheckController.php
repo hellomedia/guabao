@@ -4,6 +4,7 @@ namespace Pack\Status\Controller;
 
 use App\Controller\BaseController;
 use Psr\Log\LoggerInterface;
+use RuntimeException;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
@@ -20,6 +21,6 @@ class SentryCheckController extends BaseController
         $this->logger->error('My test log error from visiting /_check/sentry');
 
         // test if an uncaught exception logs to sentry
-        throw new \RuntimeException('My test exception from visiting /_check/sentry');
+        throw new RuntimeException('My test exception from visiting /_check/sentry');
     }
 }

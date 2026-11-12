@@ -6,6 +6,7 @@ use App\Entity\Media;
 use App\Enum\MediaType;
 use App\Helper\GoogleMapsApiHelper;
 use App\Helper\MediaAutoFillHelper;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -90,7 +91,7 @@ class MediaCrudController extends AbstractCrudController
 
             // set takenAt from hint
             if ($media->getTakenAtHint() != null) {
-                $takenAt = \DateTimeImmutable::createFromFormat('Ymd_His', $media->getTakenAtHint());
+                $takenAt = DateTimeImmutable::createFromFormat('Ymd_His', $media->getTakenAtHint());
                 $media->setTakenAt($takenAt);
                 $media->setTakenAtHint(null);
             }

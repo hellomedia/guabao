@@ -5,6 +5,7 @@ namespace Controlroom\Form\Field;
 use App\Entity\Cuisine;
 use App\Repository\CuisineRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
@@ -24,7 +25,7 @@ class CuisinesAutocompleteField extends AbstractType
             'searchable_fields' => ['nameEn', 'nameFr'],
             'query_builder' => function (CuisineRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('c')
-                    ->addOrderBy('c.nameEn', \SortDirection::Ascending)
+                    ->addOrderBy('c.nameEn', SortDirection::Ascending)
                 ;
             },
             'multiple' => true,

@@ -7,7 +7,9 @@ use App\Entity\Stats\AnonymousVisit;
 use App\Entity\Stats\AnonymousVisitor;
 use App\Repository\Stats\AnonymousVisitorRepository;
 use App\Repository\Stats\AnonymousVisitRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -81,7 +83,7 @@ final class AnonymousTrackingService
         $session = $this->getSession($request);
         $session->start();
 
-        $now = new \DateTimeImmutable();
+        $now = new DateTimeImmutable();
 
         $visitorId = $request->cookies->get(self::VISITOR_COOKIE_NAME);
         $isNewVisitorCookie = false;
@@ -139,7 +141,7 @@ final class AnonymousTrackingService
         Request $request,
         SessionInterface $session,
         AnonymousVisitor $visitor,
-        \DateTimeImmutable $now,
+        DateTimeImmutable $now,
     ): AnonymousVisit {
         $visitId = $session->get(self::SESSION_VISIT_ID_KEY);
 
@@ -179,7 +181,7 @@ final class AnonymousTrackingService
     private function getSession(Request $request): SessionInterface
     {
         if (!$request->hasSession()) {
-            throw new \LogicException('Anonymous tracking requires Symfony session to be enabled.');
+            throw new LogicException('Anonymous tracking requires Symfony session to be enabled.');
         }
 
         return $request->getSession();

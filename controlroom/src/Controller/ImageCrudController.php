@@ -21,6 +21,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use SortDirection;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ImageCrudController extends MediaCrudController
@@ -105,7 +106,7 @@ class ImageCrudController extends MediaCrudController
             ->setHelp('Leave empty for auto-fill from exif data')
             ->setFormTypeOption('query_builder', function (EntityRepository $repo): QueryBuilder {
                 return $repo->createQueryBuilder('t')
-                    ->orderBy('t.startedAt', \SortDirection::Descending);
+                    ->orderBy('t.startedAt', SortDirection::Descending);
             })
             ->setFormTypeOption('group_by', function (Trip $trip, $key, $value) {
                 if ($trip->hasParent()) {

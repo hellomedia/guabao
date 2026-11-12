@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Story;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use SortDirection;
 
 /**
  * @extends ServiceEntityRepository<Story>
@@ -50,7 +51,7 @@ class StoryRepository extends ServiceEntityRepository
             ->leftJoin('t.parent', 'p')->addSelect('p')
             ->join('s.siteHighlights', 'h')
             ->where('h.nameEn = :highlightName')
-            ->orderBy('t.startedAt', \SortDirection::Descending)
+            ->orderBy('t.startedAt', SortDirection::Descending)
             ->setParameter('highlightName', $highlightName)
             ->getQuery()
             ->getResult();

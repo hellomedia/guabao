@@ -6,6 +6,7 @@ use App\Entity\Media;
 use Liip\ImagineBundle\Service\FilterService;
 use Pack\Media\Helper\UploadHelper;
 use Psr\Log\LoggerInterface;
+use Throwable;
 
 final class ImageCacheWarmer
 {
@@ -69,7 +70,7 @@ final class ImageCacheWarmer
             try {
                 $this->filterService->warmupCache($path, $filter);
                 ++$warmed;
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 ++$failed;
                 $errors[] = sprintf('[%s] %s', $filter, $e->getMessage());
 

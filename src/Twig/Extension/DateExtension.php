@@ -4,6 +4,7 @@ namespace App\Twig\Extension;
 
 use App\Entity\Trip;
 use App\Helper\DateHelper;
+use DateTimeImmutable;
 use IntlDateFormatter;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Environment as TwigEnvironment;
@@ -50,7 +51,7 @@ class DateExtension extends AbstractExtension
     /**
      * Format date for calendar, with i18n.
      */
-    public function agendaDate(\DateTimeImmutable $datetime, string $variant, ?string $lang = null, bool $withMinutes = true): ?string
+    public function agendaDate(DateTimeImmutable $datetime, string $variant, ?string $lang = null, bool $withMinutes = true): ?string
     {
         $formatter = null;
         if ($datetime == null) {
@@ -65,14 +66,14 @@ class DateExtension extends AbstractExtension
 
         // DAY
         if ($variant == 'short') {
-            $formatter = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE, null, null, 'ccc');
+            $formatter = new IntlDateFormatter($lang, IntlDateFormatter::NONE, IntlDateFormatter::NONE, null, null, 'ccc');
         } elseif ($variant == 'long') {
-            $formatter = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE, null, null, 'cccc');
+            $formatter = new IntlDateFormatter($lang, IntlDateFormatter::NONE, IntlDateFormatter::NONE, null, null, 'cccc');
         }
         $day = $formatter->format($datetime);
 
         // DATE
-        $formatter = new \IntlDateFormatter($lang, \IntlDateFormatter::SHORT, \IntlDateFormatter::NONE);
+        $formatter = new IntlDateFormatter($lang, IntlDateFormatter::SHORT, IntlDateFormatter::NONE);
         $date = $formatter->format($datetime);
 
         if (date('Y', $timestamp) == date('Y')) {
@@ -85,9 +86,9 @@ class DateExtension extends AbstractExtension
 
         // TIME
         if ($withMinutes) {
-            $formatter = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::SHORT);
+            $formatter = new IntlDateFormatter($lang, IntlDateFormatter::NONE, IntlDateFormatter::SHORT);
         } else {
-            $formatter = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE, null, null, 'HH');
+            $formatter = new IntlDateFormatter($lang, IntlDateFormatter::NONE, IntlDateFormatter::NONE, null, null, 'HH');
         }
         $time = $formatter->format($datetime);
 
@@ -110,7 +111,7 @@ class DateExtension extends AbstractExtension
      * NL: "28-05-19"
      * ZH: "19/5/28" (!!)
      */
-    public function chatDate(\DateTimeImmutable $datetime, ?string $lang = null, array $options = []): ?string
+    public function chatDate(DateTimeImmutable $datetime, ?string $lang = null, array $options = []): ?string
     {
         if ($datetime == null) {
             return null;
@@ -122,7 +123,7 @@ class DateExtension extends AbstractExtension
 
         $timestamp = $datetime->getTimeStamp();
 
-        $formatter = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::SHORT);
+        $formatter = new IntlDateFormatter($lang, IntlDateFormatter::NONE, IntlDateFormatter::SHORT);
         $time = $formatter->format($datetime);
 
         // TODAY : time only
@@ -130,7 +131,7 @@ class DateExtension extends AbstractExtension
             return $time;
         }
 
-        $formatter = new \IntlDateFormatter($lang, \IntlDateFormatter::SHORT, \IntlDateFormatter::NONE);
+        $formatter = new IntlDateFormatter($lang, IntlDateFormatter::SHORT, IntlDateFormatter::NONE);
 
         $date = $formatter->format($datetime);
 
@@ -155,7 +156,7 @@ class DateExtension extends AbstractExtension
         return $date;
     }
 
-    public function shortDate(?\DateTimeImmutable $datetime, ?string $lang = null): ?string
+    public function shortDate(?DateTimeImmutable $datetime, ?string $lang = null): ?string
     {
         if ($datetime == null) {
             return null;
@@ -167,7 +168,7 @@ class DateExtension extends AbstractExtension
 
         $timestamp = $datetime->getTimeStamp();
 
-        $formatter = new \IntlDateFormatter($lang, \IntlDateFormatter::SHORT, \IntlDateFormatter::NONE);
+        $formatter = new IntlDateFormatter($lang, IntlDateFormatter::SHORT, IntlDateFormatter::NONE);
 
         $date = $formatter->format($datetime);
 
@@ -191,7 +192,7 @@ class DateExtension extends AbstractExtension
      *
      * So we define the pattern for our 3 backend languages and add a sensible default
      */
-    public function dayAndMonth(?\DateTimeImmutable $datetime, ?string $lang = null): ?string
+    public function dayAndMonth(?DateTimeImmutable $datetime, ?string $lang = null): ?string
     {
         if ($datetime == null) {
             return null;
@@ -202,10 +203,10 @@ class DateExtension extends AbstractExtension
         }
 
         $formatter = match ($lang) {
-            'fr' => new \IntlDateFormatter($lang, pattern: 'd MMMM'),
-            'en' => new \IntlDateFormatter($lang, pattern: 'MMMM d'),
-            'nl' => new \IntlDateFormatter($lang, pattern: 'MMMM d'),
-            default => new \IntlDateFormatter($lang, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE),
+            'fr' => new IntlDateFormatter($lang, pattern: 'd MMMM'),
+            'en' => new IntlDateFormatter($lang, pattern: 'MMMM d'),
+            'nl' => new IntlDateFormatter($lang, pattern: 'MMMM d'),
+            default => new IntlDateFormatter($lang, IntlDateFormatter::LONG, IntlDateFormatter::NONE),
         };
 
         $date = $formatter->format($datetime);
@@ -216,7 +217,7 @@ class DateExtension extends AbstractExtension
     /**
      * ex: Mercredi 15 janvier / Wednesday January 15
      */
-    public function dayAndMonthWithDayOfWeek(?\DateTimeImmutable $datetime, ?string $lang = null): ?string
+    public function dayAndMonthWithDayOfWeek(?DateTimeImmutable $datetime, ?string $lang = null): ?string
     {
         if ($datetime == null) {
             return null;
@@ -226,7 +227,7 @@ class DateExtension extends AbstractExtension
             $lang = $this->requestStack->getCurrentRequest()->getLocale();
         }
 
-        $formatter = new \IntlDateFormatter($lang, pattern: 'EEEE');
+        $formatter = new IntlDateFormatter($lang, pattern: 'EEEE');
         $dayOfWeek = $formatter->format($datetime);
 
         $dayAndMonth = $this->dayAndMonth($datetime, $lang);
@@ -237,7 +238,7 @@ class DateExtension extends AbstractExtension
     /**
      * ex: Janvier 2024 / January 2024
      */
-    public function monthAndYear(?\DateTimeImmutable $datetime, ?string $lang = null): ?string
+    public function monthAndYear(?DateTimeImmutable $datetime, ?string $lang = null): ?string
     {
         if ($datetime == null) {
             return null;
@@ -247,7 +248,7 @@ class DateExtension extends AbstractExtension
             $lang = $this->requestStack->getCurrentRequest()->getLocale();
         }
 
-        $formatter = new \IntlDateFormatter($lang, pattern: 'MMMM y');
+        $formatter = new IntlDateFormatter($lang, pattern: 'MMMM y');
 
         return $formatter->format($datetime);
     }
@@ -255,7 +256,7 @@ class DateExtension extends AbstractExtension
     /**
      * ex: 9h00 / 9:00 am
      */
-    public function time(?\DateTimeImmutable $datetime, ?string $lang = null): ?string
+    public function time(?DateTimeImmutable $datetime, ?string $lang = null): ?string
     {
         if ($datetime == null) {
             return null;
@@ -265,7 +266,7 @@ class DateExtension extends AbstractExtension
             $lang = $this->requestStack->getCurrentRequest()->getLocale();
         }
 
-        $formatter = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::SHORT);
+        $formatter = new IntlDateFormatter($lang, IntlDateFormatter::NONE, IntlDateFormatter::SHORT);
 
         return $formatter->format($datetime);
     }

@@ -2,35 +2,36 @@
 
 namespace App\Entity\Trait;
 
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 trait HasPeriodTrait
 {
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    private ?\DateTimeImmutable $startedAt = null;
+    private ?DateTimeImmutable $startedAt = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    private ?\DateTimeImmutable $endedAt = null;
+    private ?DateTimeImmutable $endedAt = null;
 
-    public function getStartedAt(): ?\DateTimeImmutable
+    public function getStartedAt(): ?DateTimeImmutable
     {
         return $this->startedAt;
     }
 
-    public function setStartedAt(\DateTimeImmutable $startedAt): static
+    public function setStartedAt(DateTimeImmutable $startedAt): static
     {
         $this->startedAt = $startedAt;
 
         return $this;
     }
 
-    public function getEndedAt(): ?\DateTimeImmutable
+    public function getEndedAt(): ?DateTimeImmutable
     {
         return $this->endedAt;
     }
 
-    public function setEndedAt(\DateTimeImmutable $endedAt): static
+    public function setEndedAt(DateTimeImmutable $endedAt): static
     {
         $this->endedAt = $endedAt;
 

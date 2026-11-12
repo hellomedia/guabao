@@ -18,6 +18,7 @@ use App\Repository\TripRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use SortDirection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Index('trip_started_at_idx', ['started_at'])]
@@ -68,7 +69,7 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     private ?Trip $parent = null;
 
     #[ORM\OneToMany(targetEntity: Trip::class, mappedBy: 'parent')]
-    #[ORM\OrderBy(['startedAt' => \SortDirection::Ascending])]
+    #[ORM\OrderBy(['startedAt' => SortDirection::Ascending])]
     private Collection $children;
 
     #[Assert\GreaterThanOrEqual(1)]
@@ -88,7 +89,7 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     /**
      * @var Collection<int, Story>
      */
-    #[ORM\OrderBy(['displayOrder' => \SortDirection::Ascending])]
+    #[ORM\OrderBy(['displayOrder' => SortDirection::Ascending])]
     #[ORM\OneToMany(targetEntity: Story::class, mappedBy: 'trip')]
     private Collection $stories;
 

@@ -2,6 +2,7 @@
 
 namespace Pack\Status\Entity;
 
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,10 +29,10 @@ class TestMessageLog
     private ?string $messageId = null;
 
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
-    private ?\DateTimeImmutable $messageCreatedAt = null;
+    private ?DateTimeImmutable $messageCreatedAt = null;
 
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
-    private ?\DateTimeImmutable $messageProcessedAt = null;
+    private ?DateTimeImmutable $messageProcessedAt = null;
 
     public function getId()
     {
@@ -48,22 +49,22 @@ class TestMessageLog
         return $this->messageId;
     }
 
-    public function setMessageCreatedAt(\DateTimeImmutable $messageCreatedAt): void
+    public function setMessageCreatedAt(DateTimeImmutable $messageCreatedAt): void
     {
         $this->messageCreatedAt = $messageCreatedAt;
     }
 
-    public function getMessageCreatedAt(): ?\DateTimeImmutable
+    public function getMessageCreatedAt(): ?DateTimeImmutable
     {
         return $this->messageCreatedAt;
     }
 
-    public function setMessageProcessedAt(\DateTimeImmutable $messageProcessedAt): void
+    public function setMessageProcessedAt(DateTimeImmutable $messageProcessedAt): void
     {
         $this->messageProcessedAt = $messageProcessedAt;
     }
 
-    public function getMessageProcessedAt(): ?\DateTimeImmutable
+    public function getMessageProcessedAt(): ?DateTimeImmutable
     {
         return $this->messageProcessedAt;
     }

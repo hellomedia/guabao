@@ -5,6 +5,8 @@ namespace App\Command;
 use App\Entity\Media;
 use App\Service\Media\ImageCacheWarmer;
 use Doctrine\ORM\EntityManagerInterface;
+use InvalidArgumentException;
+use SortDirection;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -187,7 +189,7 @@ final class WarmImageCacheCommand extends Command
         $qb = $this->entityManager->createQueryBuilder()
             ->select('m')
             ->from(Media::class, 'm')
-            ->orderBy('m.id', \SortDirection::Ascending);
+            ->orderBy('m.id', SortDirection::Ascending);
 
         if (null !== $idFrom) {
             $qb
@@ -235,7 +237,7 @@ final class WarmImageCacheCommand extends Command
     private function toPositiveInt(string $value, string $name): int
     {
         if (!ctype_digit($value) || (int) $value <= 0) {
-            throw new \InvalidArgumentException(sprintf('The "%s" option must be a positive integer.', $name));
+            throw new InvalidArgumentException(sprintf('The "%s" option must be a positive integer.', $name));
         }
 
         return (int) $value;

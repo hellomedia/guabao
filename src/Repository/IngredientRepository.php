@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Ingredient;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use SortDirection;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -27,7 +28,7 @@ class IngredientRepository extends ServiceEntityRepository
         $locale = $this->requestStack->getCurrentRequest()?->getLocale() ?? 'en';
 
         return $this->createQueryBuilder('i')
-            ->orderBy('i.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('i.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }
@@ -40,7 +41,7 @@ class IngredientRepository extends ServiceEntityRepository
             ->leftJoin('i.food', 'f')
             ->addSelect('COUNT(DISTINCT f.id) AS foodCount')
             ->groupBy('i.id')
-            ->orderBy('i.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('i.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
 
@@ -58,7 +59,7 @@ class IngredientRepository extends ServiceEntityRepository
             ->leftJoin('i.food', 'f')
             ->addSelect('COUNT(DISTINCT f.id) AS foodCount')
             ->groupBy('i.id')
-            ->orderBy('i.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('i.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
 
@@ -104,7 +105,7 @@ class IngredientRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('i')
             ->where('i.favourite = true')
-            ->orderBy('i.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('i.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }
@@ -118,7 +119,7 @@ class IngredientRepository extends ServiceEntityRepository
             ->leftJoin('i.food', 'f')
             ->addSelect('COUNT(DISTINCT f.id) AS foodCount')
             ->groupBy('i.id')
-            ->orderBy('i.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('i.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
 
@@ -134,7 +135,7 @@ class IngredientRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('i')
             ->where('i.favourite != true')
-            ->orderBy('i.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('i.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }
@@ -148,7 +149,7 @@ class IngredientRepository extends ServiceEntityRepository
             ->leftJoin('i.food', 'f')
             ->addSelect('COUNT(DISTINCT f.id) AS foodCount')
             ->groupBy('i.id')
-            ->orderBy('i.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('i.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
 

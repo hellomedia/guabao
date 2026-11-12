@@ -5,6 +5,7 @@ namespace Controlroom\Form\Field;
 use App\Entity\Meal;
 use App\Repository\MealRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -36,11 +37,11 @@ class MealAutocompleteField extends AbstractType
                             ->join('m.medias', 'media')
                             ->where('media.trip = :current_trip')
                             ->setParameter('current_trip', $currentTrip)
-                            ->orderBy('m.enjoyedAt', \SortDirection::Ascending);
+                            ->orderBy('m.enjoyedAt', SortDirection::Ascending);
                     }
 
                     return $repo->createQueryBuilder('m')
-                        ->orderBy('m.enjoyedAt', \SortDirection::Ascending);
+                        ->orderBy('m.enjoyedAt', SortDirection::Ascending);
                 };
             },
         ]);

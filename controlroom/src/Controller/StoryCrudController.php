@@ -16,6 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+use SortDirection;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class StoryCrudController extends AbstractCrudController
@@ -102,7 +103,7 @@ class StoryCrudController extends AbstractCrudController
             ->setFormTypeOptions([
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('t')
-                        ->orderBy('t.startedAt', \SortDirection::Descending);
+                        ->orderBy('t.startedAt', SortDirection::Descending);
                 },
                 'choice_label' => function (Trip $trip): string {
                     if ($trip->hasParent()) {

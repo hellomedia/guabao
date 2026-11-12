@@ -2,13 +2,14 @@
 
 namespace Pack\Media\Helper;
 
+use SplFileInfo;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ExifExtractor
 {
     public function extractExifData(File $file): array|false
     {
-        if (!$file instanceof \SplFileInfo || !\file_exists($file->getPathname())) {
+        if (!$file instanceof SplFileInfo || !\file_exists($file->getPathname())) {
             return false;
         }
 

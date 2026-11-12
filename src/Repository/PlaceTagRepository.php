@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Tag\PlaceTag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use SortDirection;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -24,7 +25,7 @@ class PlaceTagRepository extends ServiceEntityRepository
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
         return $this->createQueryBuilder('pt')
-            ->orderBy('pt.name' . \ucfirst($locale), \SortDirection::Ascending)
+            ->orderBy('pt.name' . \ucfirst($locale), SortDirection::Ascending)
             ->getQuery()
             ->getResult();
     }

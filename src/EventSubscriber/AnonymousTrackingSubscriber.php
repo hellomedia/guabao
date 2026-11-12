@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Stats\AnonymousTrackingService;
+use DateTimeImmutable;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -51,7 +52,7 @@ final class AnonymousTrackingSubscriber implements EventSubscriberInterface
         $cookie = Cookie::create(
             name: AnonymousTrackingService::VISITOR_COOKIE_NAME,
             value: $visitorId,
-            expire: new \DateTimeImmutable('+12 months'),
+            expire: new DateTimeImmutable('+12 months'),
             path: '/',
             secure: $request->isSecure(),
             httpOnly: true,

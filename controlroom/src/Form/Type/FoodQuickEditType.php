@@ -13,6 +13,7 @@ use Controlroom\Form\Field\IngredientAutocompleteField;
 use Controlroom\Form\Field\SimilarFoodAutocompleteField;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use SortDirection;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -57,7 +58,7 @@ class FoodQuickEditType extends AbstractType
                         ->innerJoin('m.food', 'f')
                         ->andWhere('f = :food')
                         ->setParameter('food', $food)
-                        ->orderBy('m.id', \SortDirection::Ascending);
+                        ->orderBy('m.id', SortDirection::Ascending);
                 },
             ])
             ->add('tags', FoodTagAutocompleteField::class)
@@ -96,7 +97,7 @@ class FoodQuickEditType extends AbstractType
                 'required' => false,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('h')
-                        ->orderBy('h.nameEn', \SortDirection::Ascending);
+                        ->orderBy('h.nameEn', SortDirection::Ascending);
                 },
                 'multiple' => true,
                 'autocomplete' => true,
