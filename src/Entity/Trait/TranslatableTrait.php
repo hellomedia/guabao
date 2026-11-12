@@ -37,7 +37,6 @@ trait TranslatableTrait
     //     return $this;
     // }
 
-
     public function hasCurrentLocaleTranslation(): bool
     {
         if ($this->getTranslations()->count() > 1) {

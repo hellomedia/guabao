@@ -8,22 +8,22 @@ use Doctrine\Persistence\ObjectManager;
 
 class FoodTagFixtures extends Fixture
 {
-    const BREAKFAST = 'breakfast';
-    const DISH = 'dish';
-    const DESSERT = 'dessert';
-    const BAKERY = 'bakery';
-    const FRUIT = 'fruit';
-    const SOUP = 'soup';
-    const DRINK = 'drink';
-    const STREETFOOD = 'streefood';
-    const HEALTHY = 'healthy';
-    const DUMPLINGS = 'dumplings';
-    const SANDWHICH = 'sandwhich';
-    const BAO = 'bao';
-    const HOME_COOKING = 'homecooking';
-    const VEGETARIAN = 'vege';
-    const GROCERIES = 'groceries';
-    const DISCOVERY = 'discovery';
+    public const BREAKFAST = 'breakfast';
+    public const DISH = 'dish';
+    public const DESSERT = 'dessert';
+    public const BAKERY = 'bakery';
+    public const FRUIT = 'fruit';
+    public const SOUP = 'soup';
+    public const DRINK = 'drink';
+    public const STREETFOOD = 'streefood';
+    public const HEALTHY = 'healthy';
+    public const DUMPLINGS = 'dumplings';
+    public const SANDWHICH = 'sandwhich';
+    public const BAO = 'bao';
+    public const HOME_COOKING = 'homecooking';
+    public const VEGETARIAN = 'vege';
+    public const GROCERIES = 'groceries';
+    public const DISCOVERY = 'discovery';
 
     private const array FOOD_TAGS = [
         [
@@ -110,15 +110,14 @@ class FoodTagFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach(self::FOOD_TAGS as $item) {
-            
+        foreach (self::FOOD_TAGS as $item) {
             $foodTag = new FoodTag();
 
             $foodTag->setNameFr($item['nameFr']);
             $foodTag->setNameEn($item['nameEn']);
 
             $this->setReference('foodTag-' . $item['key'], $foodTag);
-        
+
             $manager->persist($foodTag);
         }
 

@@ -7,15 +7,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\DateTimeFilter;
-use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
-use Faker\Provider\Text;
 
 class AnonymousVisitorCrudController extends AbstractCrudController
 {
@@ -53,7 +50,7 @@ class AnonymousVisitorCrudController extends AbstractCrudController
             ->formatValue(static function ($value, $entity) {
                 return $value ?: '—';
             });
-        
+
         yield TextField::new('citiesAsString', 'Cities')
             ->onlyOnIndex()
             ->formatValue(static function ($value, $entity) {

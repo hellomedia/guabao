@@ -3,7 +3,6 @@
 namespace Pack\Media\Helper;
 
 use Pack\Media\Entity\Interface\UploadedAssetEntityInterface;
-use Pack\Media\Helper\ImageManipulator;
 use Symfony\Component\Asset\Context\RequestStackContext;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -11,8 +10,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * https://symfonycasts.com/screencast/symfony-uploads
- * 
- * 
+ *
  * config/parameters.yaml:
  * uploads_dir: 'uploads'
  * uploads_base_url: '/%uploads_dir%'
@@ -77,7 +75,7 @@ class UploadHelper
         // Slugging: $this->slugger->slug(...) sanitizes the filename to safe characters (usually alphanumeric + - or _).
         // Appending a unique token: $token helps avoid collisions.
         // Guessing the extension: guessExtension() is often reliable
-    
+
         $newFilename = $this->slugger->slug(mb_substr($originalFilename, 0, 100)) . '-' .
             $token . '.' .
             $file->guessExtension();
@@ -88,7 +86,7 @@ class UploadHelper
         $image->setPath(imageUploadsDir: self::IMAGE_DIR);
 
         $destination = $this->uploadsPath . '/' . self::IMAGE_DIR . '/' . $image->getSubDirs();
-    
+
         $file->move($destination, $newFilename);
     }
 
@@ -103,9 +101,9 @@ class UploadHelper
      * Returns public path for uploaded assets, for use in twig uploaded_asset function
      *
      * https://symfonycasts.com/screencast/symfony-uploads/assets-context
-     * 
+     *
      * https://symfonycasts.com/screencast/symfony-uploads/absolute-asset-paths
-     * 
+     *
      * NB: Only works when requestStack is set (not in command or queue).
      * In command or queue, use siteProvider::getAbsoluteUrl() as in HK
      * or refer to the solution in the symfony cast episode

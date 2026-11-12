@@ -43,7 +43,7 @@ class FoodCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Food')
             ->setDefaultSort([
                 'cuisines' => 'ASC',
-                'nameEn' => 'ASC'
+                'nameEn' => 'ASC',
             ])
             // search fields implemented with custom strategy for normalizing accents
             // in createIndexQueryBuilder()
@@ -67,23 +67,23 @@ class FoodCrudController extends AbstractCrudController
         yield AssociationField::new('cover')
             ->setTemplatePath('@media/easyadmin/field/food_cover.html.twig')
             ->hideOnForm();
-    
+
         yield AssociationField::new('medias')
             ->setTemplatePath('@media/easyadmin/field/thumbnail_list.html.twig')
             ->hideOnForm();
-            
+
         yield TextField::new('nameEn');
         yield TextField::new('nameFr');
         yield TextField::new('nameOriginal');
 
         yield AssociationField::new('parent')
             ->setFormTypeOptions([
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('f')
-                    ->where('f.parent IS NULL')
-                    ->orderBy('f.nameEn', \SortDirection::Ascending); // change to the field you want
-            },
-        ]);
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('f')
+                        ->where('f.parent IS NULL')
+                        ->orderBy('f.nameEn', \SortDirection::Ascending); // change to the field you want
+                },
+            ]);
 
         yield AssociationField::new('children')
             ->setTemplatePath('@admin/field/food_list.html.twig');
@@ -104,17 +104,15 @@ class FoodCrudController extends AbstractCrudController
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@admin/field/food_list.html.twig');
 
-
         yield AssociationField::new('ingredients')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@admin/field/ingredients.html.twig');
 
         yield BooleanField::new('isFavourite', 'Favourite')
             ->renderAsSwitch(false);
-        yield ChoiceField::new('loveLevel',' Love');
+        yield ChoiceField::new('loveLevel', ' Love');
         yield ChoiceField::new('healthyLevel', 'Healthy');
         yield ChoiceField::new('localLevel', 'Local');
-
     }
 
     /**
@@ -167,7 +165,7 @@ class FoodCrudController extends AbstractCrudController
         // Search: Normalize search terms for accent-insensitive search
         // Normalize input exactly like SearchableName listener does
         $normalized = (string) $this->slugger->slug(mb_strtolower($searchTerm), ' ');
-        
+
         $qb->andWhere('entity.nameSearch LIKE :q')
             ->setParameter('q', '%' . $normalized . '%');
 

@@ -19,7 +19,7 @@ class MediaRepository extends ServiceEntityRepository
 {
     public function __construct(
         ManagerRegistry $registry,
-        private RequestStack $requestStack
+        private RequestStack $requestStack,
     ) {
         parent::__construct($registry, Media::class);
     }
@@ -62,7 +62,6 @@ class MediaRepository extends ServiceEntityRepository
 
         // return $filtered;
 
-
         $groups = [];
 
         foreach ($medias as $media) {
@@ -73,29 +72,29 @@ class MediaRepository extends ServiceEntityRepository
                 $key = 'meal_' . $meal->getId();
                 // Adjust these according to your Meal entity
                 $groupDate = $meal->getEnjoyedAt();
-                $type  = 'meal';
+                $type = 'meal';
                 $place = $meal->getPlace();
                 $placeTags = $meal->getPlaceTags()->toArray();
             } else {
                 // Group by date
                 $takenAt = $media->getTakenAt();
                 $dateKey = $takenAt?->format('Y-m-d') ?? 'no_date';
-                $key      = 'date_' . $dateKey;
+                $key = 'date_' . $dateKey;
                 $groupDate = $takenAt?->setTime(0, 0);
-                $type     = 'date';
+                $type = 'date';
                 $place = $media->getPlace();
                 $placeTags = $media->getPlaceTags()->toArray();
             }
 
             if (!isset($groups[$key])) {
                 $groups[$key] = [
-                    'type'   => $type,
-                    'meal'   => $meal ?? null,
-                    'date'   => $groupDate,
+                    'type' => $type,
+                    'meal' => $meal ?? null,
+                    'date' => $groupDate,
                     'medias' => [],
-                    'place'  => $place,
+                    'place' => $place,
                     'placeTags' => $placeTags,
-                    'sort'   => $groupDate?->getTimestamp() ?? 0,
+                    'sort' => $groupDate?->getTimestamp() ?? 0,
                 ];
             }
 
@@ -105,7 +104,7 @@ class MediaRepository extends ServiceEntityRepository
         // Sort groups chronologically
         $groups = array_values($groups);
         usort($groups, static function (array $a, array $b): int {
-            // b <=> a for newest first 
+            // b <=> a for newest first
             // a <=> b for oldest first
             return $b['sort'] <=> $a['sort'];
         });
@@ -209,7 +208,7 @@ class MediaRepository extends ServiceEntityRepository
 
     /**
      * Media not linked to a trip / food / meal / story
-     * 
+     *
      * Use case: upload medias not linked to a trip, for food.
      * ===> find them and handle them (assign to food)
      */
@@ -229,5 +228,4 @@ class MediaRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-
 }

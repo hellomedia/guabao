@@ -17,7 +17,7 @@ class SiteHighlight implements LocalizedNameInterface, EntityInterface
     use LocalizedNameTrait;
 
     use LocalizedDescriptionTrait;
-    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -217,5 +217,4 @@ class SiteHighlight implements LocalizedNameInterface, EntityInterface
 
         return $this;
     }
-
 }

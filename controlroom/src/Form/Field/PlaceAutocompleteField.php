@@ -26,7 +26,6 @@ class PlaceAutocompleteField extends AbstractType
             'searchable_fields' => ['name'],
             'query_builder' => function (Options $options) {
                 return function (PlaceRepository $repo) use ($options): QueryBuilder {
-
                     $countries = $options['extra_options']['countries'] ?? null;
 
                     if ($countries) {
@@ -35,7 +34,7 @@ class PlaceAutocompleteField extends AbstractType
                             ->setParameter('countries', $countries)
                             ->orderBy('p.name', \SortDirection::Ascending);
                     }
-                
+
                     return $repo->createQueryBuilder('p')
                         ->orderBy('p.name', \SortDirection::Ascending);
                 };

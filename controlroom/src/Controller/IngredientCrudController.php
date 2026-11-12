@@ -36,7 +36,7 @@ class IngredientCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Ingredient')
             ->setEntityLabelInPlural('Ingredients')
             ->setDefaultSort([
-                'nameEn' => 'ASC'
+                'nameEn' => 'ASC',
             ])
             // search fields implemented with custom strategy for normalizing accents
             // in createIndexQueryBuilder()

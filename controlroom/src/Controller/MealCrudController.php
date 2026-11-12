@@ -3,7 +3,6 @@
 namespace Controlroom\Controller;
 
 use App\Entity\Meal;
-use App\Entity\Tag\PlaceTag;
 use App\Helper\GoogleMapsApiHelper;
 use App\Helper\MealAutoFillHelper;
 use Doctrine\ORM\EntityManagerInterface;
@@ -46,7 +45,7 @@ class MealCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Meal')
             ->setEntityLabelInPlural('Meals')
             ->setDefaultSort([
-                'enjoyedAt' => 'DESC'
+                'enjoyedAt' => 'DESC',
             ])
             ->setSearchFields([
                 'place.name',
@@ -105,8 +104,8 @@ class MealCrudController extends AbstractCrudController
                         'meal' => [
                             'comparison' => '=',
                             'value' => $meal->getId(),
-                        ]
-                    ]
+                        ],
+                    ],
                 ]);
             })
             ->setIcon('fa fa-images')

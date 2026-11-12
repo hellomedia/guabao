@@ -22,7 +22,7 @@ final class ImageCacheWarmer
     ) {
         $this->filters = array_filter(
             array_keys($filterSets),
-            fn(string $name) => str_starts_with($name, 'thumb_')
+            fn (string $name) => str_starts_with($name, 'thumb_')
         );
     }
 

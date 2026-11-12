@@ -6,21 +6,19 @@ use App\Controller\BaseController;
 use App\Entity\Story;
 use Controlroom\Form\Type\StoryQuickEditType;
 use Doctrine\ORM\EntityManager;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
-use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Routing\Attribute\Route;
 
 class StoryController extends BaseController
 {
     public function __construct(
         private EntityManager $entityManager,
-    )
-    {
-    }
+    ) {}
 
     /**
      * Route must not conflict with easyadmin /story/{id}/edit

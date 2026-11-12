@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Translation;
 
 use Symfony\Component\Translation\TranslatableMessage as SymfonyTranslatableMessage;
@@ -17,7 +18,4 @@ use Symfony\Component\Translation\TranslatableMessage as SymfonyTranslatableMess
  * twig:
  *  {{ foo|trans }}
  */
-class TranslatableMessage extends SymfonyTranslatableMessage
-{
-
-}
+class TranslatableMessage extends SymfonyTranslatableMessage {}

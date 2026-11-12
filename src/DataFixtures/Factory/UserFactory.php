@@ -4,7 +4,6 @@ namespace App\DataFixtures\Factory;
 
 use App\Entity\User;
 use App\Enum\AccountLanguage;
-use DateTimeImmutable;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
@@ -18,10 +17,7 @@ final class UserFactory extends PersistentProxyObjectFactory
      *
      * @todo inject services if required
      */
-    public function __construct(private UserPasswordHasherInterface $userPasswordHasher)
-    {
-        
-    }
+    public function __construct(private UserPasswordHasherInterface $userPasswordHasher) {}
 
     public static function class(): string
     {
@@ -39,7 +35,7 @@ final class UserFactory extends PersistentProxyObjectFactory
             'accountLanguage' => AccountLanguage::FRENCH,
             'adminReviewed' => false,
             'closed' => false,
-            'createdAt' => new DateTimeImmutable(),
+            'createdAt' => new \DateTimeImmutable(),
             'enabled' => true,
             'hellbanned' => false,
             'locked' => false,

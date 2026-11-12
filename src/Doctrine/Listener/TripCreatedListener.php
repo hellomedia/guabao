@@ -18,9 +18,7 @@ class TripCreatedListener
 {
     public function __construct(
         private SluggerInterface $slugger,
-    )
-    {
-    }
+    ) {}
 
     public function preCreate(Trip $trip, PrePersistEventArgs $args)
     {

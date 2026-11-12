@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait LocalizedNameTrait
 {
     #[Assert\NotBlank()]
-    #[Assert\Length(max:100)]
+    #[Assert\Length(max: 100)]
     #[ORM\Column(length: 100)]
     private ?string $nameFr = null;
 
@@ -18,7 +18,7 @@ trait LocalizedNameTrait
     private ?string $nameEn = null;
 
     /**
-     * Does not include locale flexibility 
+     * Does not include locale flexibility
      * but convenient for easyadmin fields, filters, etc.
      */
     public function __toString(): string

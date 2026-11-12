@@ -8,22 +8,22 @@ use Doctrine\Persistence\ObjectManager;
 
 class CuisineFixtures extends Fixture
 {
-    const BELGIAN = 'belgian';
-    const FRENCH = 'french';
-    const ITALIAN = 'italian';
-    const AMERICAN = 'american';
-    const TEXMEX = 'texmex';
-    const CHINESE = 'chinese';
-    const KOREAN = 'korean';
-    const VIETNAMESE = 'vietnamese';
-    const TAIWANESE = 'taiwanese';
-    const HONGKONG = 'hongkong';
-    const THAI = 'thai';
-    const MALAYSIAN = 'malaisian';
-    const HOKIEN = 'hokien';
-    const INDIAN = 'indian';
-    const INDONESIAN = 'indonesian';
-    const FILIPINO = 'filipino';
+    public const BELGIAN = 'belgian';
+    public const FRENCH = 'french';
+    public const ITALIAN = 'italian';
+    public const AMERICAN = 'american';
+    public const TEXMEX = 'texmex';
+    public const CHINESE = 'chinese';
+    public const KOREAN = 'korean';
+    public const VIETNAMESE = 'vietnamese';
+    public const TAIWANESE = 'taiwanese';
+    public const HONGKONG = 'hongkong';
+    public const THAI = 'thai';
+    public const MALAYSIAN = 'malaisian';
+    public const HOKIEN = 'hokien';
+    public const INDIAN = 'indian';
+    public const INDONESIAN = 'indonesian';
+    public const FILIPINO = 'filipino';
 
     private const array CUISINES = [
         [
@@ -110,15 +110,14 @@ class CuisineFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach(self::CUISINES as $item) {
-
+        foreach (self::CUISINES as $item) {
             $cuisine = new Cuisine();
 
             $cuisine->setNameFr($item['nameFr']);
             $cuisine->setNameEn($item['nameEn']);
 
             $this->setReference('cuisine-' . $item['key'], $cuisine);
-        
+
             $manager->persist($cuisine);
         }
 

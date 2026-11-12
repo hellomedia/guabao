@@ -3,17 +3,12 @@
 namespace Pack\Media\Helper;
 
 use App\Entity\Media;
-use Imagick;
 
 class ImageManipulator
 {
-
     public function __construct(
         private string $uploadsPath,
-    )
-    {
-        
-    }
+    ) {}
 
     // // What max size should we keep ?
     // // full HD is 1920x1080 , or 1080p
@@ -31,7 +26,7 @@ class ImageManipulator
      * More efficient in terms of image quality to handle all image manipulation in 1 go:
      * - resizing
      * - conversion
-     * 
+     *
      * instead of resizing (or saving withtout resizing but still degrading the image quality), then converting
      */
     public function optimize(Media $image, ?bool $resize = false, ?bool $convert = true, int $maxWidth = self::MAX_WIDTH, int $maxHeight = self::MAX_HEIGHT)
@@ -77,9 +72,8 @@ class ImageManipulator
             if (file_exists($originalPath) && $newPath != $originalPath) {
                 unlink($originalPath);
             }
-
         } catch (\Exception $e) {
-            exit('Error when resizing uploaded image : '.$e->getMessage());
+            exit('Error when resizing uploaded image : ' . $e->getMessage());
         }
     }
 
@@ -126,7 +120,7 @@ class ImageManipulator
         $imagick->setImageOrientation(\Imagick::ORIENTATION_TOPLEFT);
     }
 
-    private function _resize(Imagick $imagick, Media $image, int $maxWidth = self::MAX_WIDTH, int $maxHeight = self::MAX_HEIGHT): void
+    private function _resize(\Imagick $imagick, Media $image, int $maxWidth = self::MAX_WIDTH, int $maxHeight = self::MAX_HEIGHT): void
     {
         $originalWidth = $imagick->getImageWidth();
         $originalHeight = $imagick->getImageHeight();
@@ -150,16 +144,15 @@ class ImageManipulator
         }
     }
 
-    private function _convertToAvif(Imagick $imagick, Media $image): void
+    private function _convertToAvif(\Imagick $imagick, Media $image): void
     {
         if ($imagick->getImageFormat() !== 'AVIF') {
-
             $newFilename = $this->_replaceExtensionWithAvif($image->getFilename());
 
             $image->setFilename($newFilename);
 
             // filename must be set first
-            $image->setPath(imageUploadsDir: UploadHelper::IMAGE_DIR); 
+            $image->setPath(imageUploadsDir: UploadHelper::IMAGE_DIR);
 
             $imagick->setImageFormat('AVIF');
         }

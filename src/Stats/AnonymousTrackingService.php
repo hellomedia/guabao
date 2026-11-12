@@ -48,7 +48,7 @@ final class AnonymousTrackingService
         if ($this->botDetector->isBot($request)) {
             return false;
         }
-    
+
         if ($this->isBroswerPrefetch($request)) {
             return false;
         }

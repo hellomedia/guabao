@@ -6,27 +6,26 @@ use App\DataFixtures\Tag\TripTagFixtures;
 use App\Entity\Country;
 use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
-use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class TripFixtures extends Fixture implements DependentFixtureInterface
 {
-    const TRIP_CHINA_23 = 'china-23';
-    const TRIP_THAILAND_22 = 'thailand-22';
-    const TRIP_SPAIN_22 = 'spain-22';
-    const TRIP_VERDON_21 = 'verdon-21';
-    const TRIP_MORGON_21 = 'morgon-21';
-    const TRIP_MARTELANGE_21 = 'martelange-21';
-    const TRIP_SART_TILMAN_21 = 'sart-21';
-    const TRIP_SPAIN_20 = 'spain-20';
-    const TRIP_SARDAIGNE_19 = 'sardaigne-19';
-    const TRIP_CHINA_18 = 'china-18';
-    const TRIP_SWITZERLAND_18 = 'swiss-18';
-    const TRIP_VERCORS_17 = 'vercors-17';
-    const TRIP_PHILIPPINES_15 = 'phil-15';
-    const TRIP_PHILIPPINES_12 = 'phil-12';
+    public const TRIP_CHINA_23 = 'china-23';
+    public const TRIP_THAILAND_22 = 'thailand-22';
+    public const TRIP_SPAIN_22 = 'spain-22';
+    public const TRIP_VERDON_21 = 'verdon-21';
+    public const TRIP_MORGON_21 = 'morgon-21';
+    public const TRIP_MARTELANGE_21 = 'martelange-21';
+    public const TRIP_SART_TILMAN_21 = 'sart-21';
+    public const TRIP_SPAIN_20 = 'spain-20';
+    public const TRIP_SARDAIGNE_19 = 'sardaigne-19';
+    public const TRIP_CHINA_18 = 'china-18';
+    public const TRIP_SWITZERLAND_18 = 'swiss-18';
+    public const TRIP_VERCORS_17 = 'vercors-17';
+    public const TRIP_PHILIPPINES_15 = 'phil-15';
+    public const TRIP_PHILIPPINES_12 = 'phil-12';
 
     public function getDependencies(): array
     {
@@ -179,7 +178,7 @@ La première nuit fut froide et humide. Nous n'avions pas d 'expérience du bivo
             notre campement a été encerlé par un troupeau de moutons et reçu la visite d'un grand animal (sûrement un cerf) au milieu de la nuit.
 
 A ce jour, ma rando la plus immersive et sans doute la plus belle!",
-            'descriptionEn' => "First experience of self-supported hike!
+            'descriptionEn' => 'First experience of self-supported hike!
 
 In the largest natural reserve in France, my friend David and I lost contact with civilization for 5 days.
 
@@ -195,7 +194,7 @@ We finished the trek without a way to cook our food.
 
 I felt connected to nature like never before.
 
-To this day, my most stunning and immersive hiking experience!",
+To this day, my most stunning and immersive hiking experience!',
         ],
         [
             'key' => self::TRIP_PHILIPPINES_15,
@@ -223,25 +222,24 @@ To this day, my most stunning and immersive hiking experience!",
 
     public function load(ObjectManager $manager): void
     {
-        foreach(self::TRIPS as $item) {
-            
+        foreach (self::TRIPS as $item) {
             $trip = new Trip();
 
             $trip->setKey($item['key']);
             $trip->setNameFr($item['nameFr']);
             $trip->setNameEn($item['nameEn']);
 
-            $trip->setStartedAt(DateTimeImmutable::createFromFormat('d/m/Y', $item['startedAt']));
-            $trip->setEndedAt(DateTimeImmutable::createFromFormat('d/m/Y', $item['endedAt']));
+            $trip->setStartedAt(\DateTimeImmutable::createFromFormat('d/m/Y', $item['startedAt']));
+            $trip->setEndedAt(\DateTimeImmutable::createFromFormat('d/m/Y', $item['endedAt']));
 
             $trip->setHeadlineFr($item['headlineFr'] ?? '');
             $trip->setHeadlineEn($item['headlineEn'] ?? '');
-            
+
             $trip->setDescriptionFr($item['descriptionFr'] ?? '');
             $trip->setDescriptionEn($item['descriptionEn'] ?? '');
 
             $this->setReference($item['key'], $trip);
-            
+
             foreach ($item['countries'] as $country) {
                 $trip->addCountry($this->getReference('country-' . $country, Country::class));
             }

@@ -21,7 +21,7 @@ enum MealType: string implements TranslatableInterface
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
         return match ($this) {
-            self::BREAKFAST  => $translator->trans('meal.breakfast', domain: 'enum', locale: $locale),
+            self::BREAKFAST => $translator->trans('meal.breakfast', domain: 'enum', locale: $locale),
             self::LUNCH => $translator->trans('meal.lunch', domain: 'enum', locale: $locale),
             self::DINNER => $translator->trans('meal.dinner', domain: 'enum', locale: $locale),
             self::SNACK => $translator->trans('meal.snack', domain: 'enum', locale: $locale),
@@ -36,7 +36,7 @@ enum MealType: string implements TranslatableInterface
     public function toEnglish(): string
     {
         return match ($this) {
-            self::BREAKFAST  => 'Breakfast',
+            self::BREAKFAST => 'Breakfast',
             self::LUNCH => 'Lunch',
             self::DINNER => 'Dinner',
             self::SNACK => 'Snack',

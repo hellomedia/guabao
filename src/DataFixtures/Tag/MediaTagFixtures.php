@@ -8,17 +8,17 @@ use Doctrine\Persistence\ObjectManager;
 
 class MediaTagFixtures extends Fixture
 {
-    const BIVOUAC = 'bivouac';
-    const HIKING = 'hiking';
-    const SELF_SUPPORTED_HIKE = 'selfsupported';
-    const WORKING_PLACE = 'workingplace';
-    const LIBRARY = 'library';
-    const STRANGERS = 'strangers';
-    const KIDS = 'kids';
-    const HOME_COOKING = 'homecooking';
-    const FOOD_COURT = 'foodcourt';
-    const FUNKY = 'funky';
-    const COLOR = 'color';
+    public const BIVOUAC = 'bivouac';
+    public const HIKING = 'hiking';
+    public const SELF_SUPPORTED_HIKE = 'selfsupported';
+    public const WORKING_PLACE = 'workingplace';
+    public const LIBRARY = 'library';
+    public const STRANGERS = 'strangers';
+    public const KIDS = 'kids';
+    public const HOME_COOKING = 'homecooking';
+    public const FOOD_COURT = 'foodcourt';
+    public const FUNKY = 'funky';
+    public const COLOR = 'color';
 
     private const array PICTURE_TAGS = [
         [
@@ -80,15 +80,14 @@ class MediaTagFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach(self::PICTURE_TAGS as $item) {
-            
-            $tag = new MediaTag;
+        foreach (self::PICTURE_TAGS as $item) {
+            $tag = new MediaTag();
 
             $tag->setNameFr($item['nameFr']);
             $tag->setNameEn($item['nameEn']);
 
             $this->setReference('mediaTag-' . $item['key'], $tag);
-        
+
             $manager->persist($tag);
         }
 

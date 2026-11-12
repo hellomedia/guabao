@@ -15,8 +15,7 @@ class TripTagRepository extends ServiceEntityRepository
     public function __construct(
         private RequestStack $requestStack,
         ManagerRegistry $registry,
-    )
-    {
+    ) {
         parent::__construct($registry, TripTag::class);
     }
 
@@ -25,7 +24,7 @@ class TripTagRepository extends ServiceEntityRepository
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
         return $this->findOneBy([
-            'slug' . \ucfirst($locale) => $slug
+            'slug' . \ucfirst($locale) => $slug,
         ]);
     }
 }

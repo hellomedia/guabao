@@ -22,8 +22,7 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
     public function __construct(
         private EntityManager $entityManager,
         private UserRepository $repository,
-    ) {
-    }
+    ) {}
 
     public function loadUserByIdentifier($email): UserInterface
     {
@@ -62,7 +61,7 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
         if (!$user instanceof User) {
             throw new UnsupportedUserException('Account is not supported.');
         }
-        
+
         $user->setPassword($newHashedPassword);
 
         $this->entityManager->flush();

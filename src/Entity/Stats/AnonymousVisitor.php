@@ -60,7 +60,7 @@ class AnonymousVisitor implements EntityInterface
 
     public function __toString()
     {
-        return $this->alias ?? ('visitor' . $this->id );
+        return $this->alias ?? ('visitor' . $this->id);
     }
 
     public function getVisitorId(): ?string
@@ -142,7 +142,7 @@ class AnonymousVisitor implements EntityInterface
 
     public function incrementPageCount(): void
     {
-        $this->pageCount++;
+        ++$this->pageCount;
     }
 
     /**
@@ -178,8 +178,8 @@ class AnonymousVisitor implements EntityInterface
     public function getCountryCodes(): array
     {
         $countries = $this->visits
-            ->map(fn(AnonymousVisit $visit) => $visit->getCountryCode())
-            ->filter(fn(?string $country) => $country !== null)
+            ->map(fn (AnonymousVisit $visit) => $visit->getCountryCode())
+            ->filter(fn (?string $country) => $country !== null)
             ->toArray();
 
         return array_values(array_unique($countries));
@@ -208,8 +208,8 @@ class AnonymousVisitor implements EntityInterface
     public function getCities(): array
     {
         $cities = $this->visits
-            ->map(fn(AnonymousVisit $visit) => $visit->getCityName())
-            ->filter(fn(?string $city) => $city !== null)
+            ->map(fn (AnonymousVisit $visit) => $visit->getCityName())
+            ->filter(fn (?string $city) => $city !== null)
             ->toArray();
 
         return array_values(array_unique($cities));
@@ -219,5 +219,4 @@ class AnonymousVisitor implements EntityInterface
     {
         return implode(', ', $this->getCities());
     }
-
 }

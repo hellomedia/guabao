@@ -11,9 +11,9 @@ use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class StoryQuickEditType extends AbstractType
@@ -27,14 +27,14 @@ class StoryQuickEditType extends AbstractType
                 'label' => 'Name EN',
             ])
             ->add('descriptionEn', TextareaType::class, [
-                'label' => "Text above gallery EN",
+                'label' => 'Text above gallery EN',
                 'required' => false,
                 'attr' => [
                     'rows' => 3,
                 ],
-             ])
+            ])
             ->add('textBelowGalleryEn', TextareaType::class, [
-                'label' => "Text below gallery EN",
+                'label' => 'Text below gallery EN',
                 'required' => false,
                 'attr' => [
                     'rows' => 3,
@@ -44,26 +44,26 @@ class StoryQuickEditType extends AbstractType
                 'label' => 'Name FR',
             ])
             ->add('descriptionFr', TextareaType::class, [
-                'label' => "Text above gallery FR",
+                'label' => 'Text above gallery FR',
                 'required' => false,
                 'attr' => [
                     'rows' => 3,
                 ],
             ])
             ->add('textBelowGalleryFr', TextareaType::class, [
-                'label' => "Text below gallery FR",
+                'label' => 'Text below gallery FR',
                 'required' => false,
                 'attr' => [
                     'rows' => 3,
                 ],
             ])
             ->add('show', CheckboxType::class, [
-                'label'    => 'show',
+                'label' => 'show',
                 'required' => false,
                 'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('showTitle', CheckboxType::class, [
-                'label'    => 'show title',
+                'label' => 'show title',
                 'required' => false,
                 'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])

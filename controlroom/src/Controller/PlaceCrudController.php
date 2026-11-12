@@ -3,7 +3,6 @@
 namespace Controlroom\Controller;
 
 use App\Entity\Place;
-use App\Entity\Tag\PlaceTag;
 use App\Helper\PlaceAutoFillHelper;
 use Controlroom\Form\Field\MapPickerField;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,12 +35,12 @@ class PlaceCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Places')
             ->setDefaultSort([
                 'country' => 'ASC',
-                'name' => 'ASC'
+                'name' => 'ASC',
             ])
             ->setFormOptions([
                 'attr' => [
                     'data-controller' => 'map-picker',
-                ]
+                ],
             ])
         ;
     }
@@ -59,7 +58,7 @@ class PlaceCrudController extends AbstractCrudController
     {
         // Tried including everything inside MapPickerField.php, MapPïckerType.php and map_picker_form_theme.html.twig
         // but since mapPicker property must be un-mapped, all elements inside were unmapped as well
-        // so instead, we 
+        // so instead, we
         //    - add mapped properties the normal way, with data-map-picker-target
         //    - add MapPickerField containing only unmapped inputs
         //    - add 'data-controller=map-picker" to the form in configureCrud
@@ -83,7 +82,7 @@ class PlaceCrudController extends AbstractCrudController
         ;
 
         yield AssociationField::new('chain');
-        
+
         yield AssociationField::new('placeTags')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@admin/field/tags.html.twig')
@@ -92,7 +91,7 @@ class PlaceCrudController extends AbstractCrudController
         yield AssociationField::new('country')
                 ->setFormTypeOption('help', 'Leave blank for autofill from place tag')
         ;
-                    
+
         yield TextareaField::new('descriptionEn', 'Description EN');
         yield TextareaField::new('descriptionFr', 'Description FR');
 

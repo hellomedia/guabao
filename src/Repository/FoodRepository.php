@@ -41,13 +41,13 @@ class FoodRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    
+
     public function findOneBySlug(string $slug): ?Food
     {
         $locale = $this->requestStack->getCurrentRequest()->getLocale();
 
         return $this->findOneBy([
-            'slug' . \ucfirst($locale) => $slug
+            'slug' . \ucfirst($locale) => $slug,
         ]);
     }
 

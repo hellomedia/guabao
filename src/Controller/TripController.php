@@ -24,7 +24,7 @@ class TripController extends BaseController
     public function index(TripRepository $tripRepository, Request $request): Response
     {
         $trips = $tripRepository->findAll(sort: $request->query->get('s'));
-        
+
         return $this->render('trip/index.html.twig', [
             'trips' => $trips,
         ]);
@@ -57,12 +57,11 @@ class TripController extends BaseController
     #[Route('/trip/{slug}', name: 'trip_show')]
     public function show(
         #[MapEntity(expr: 'repository.findOneBySlug(slug)')] Trip $trip,
-    ): Response
-    {
+    ): Response {
         $this->addBreadcrumb($trip);
 
         return $this->render('trip/show.html.twig', [
-            'trip' => $trip
+            'trip' => $trip,
         ]);
     }
 
@@ -81,14 +80,13 @@ class TripController extends BaseController
             'medias' => $medias,
         ]);
     }
-    
+
     #[Route('/trip/{parent}/{trip}', name: 'child_trip_show')]
     public function showChildTrip(
         #[MapEntity(expr: 'repository.findOneBySlug(parent)')] Trip $parent,
         #[MapEntity(expr: 'repository.findOneBySlug(trip)')] Trip $trip,
         MediaRepository $mediaRepository,
-    ): Response
-    {
+    ): Response {
         $this->addBreadcrumb($parent);
         // no need for this one since we have the top links serving as title
         // $this->addBreadcrumb($trip);
@@ -100,6 +98,4 @@ class TripController extends BaseController
             'medias' => $medias,
         ]);
     }
-
-
 }

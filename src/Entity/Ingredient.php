@@ -175,5 +175,4 @@ class Ingredient implements LocalizedNameInterface, LocalizedSlugInterface, Sear
     {
         return $this->similar;
     }
-
 }

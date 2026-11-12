@@ -18,9 +18,7 @@ class CountryCreatedListener
 {
     public function __construct(
         private SluggerInterface $slugger,
-    )
-    {
-    }
+    ) {}
 
     public function createSlugs(Country $country, PrePersistEventArgs $args)
     {

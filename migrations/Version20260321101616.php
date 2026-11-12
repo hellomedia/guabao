@@ -35,7 +35,7 @@ final class Version20260321101616 extends AbstractMigration
         $this->addSql(<<<'SQL'
             ALTER TABLE food ADD additional_text_en TEXT DEFAULT NULL
         SQL);
-        
+
         $this->addSql(<<<'SQL'
             ALTER TABLE food ADD additional_text_fr TEXT DEFAULT NULL
         SQL);

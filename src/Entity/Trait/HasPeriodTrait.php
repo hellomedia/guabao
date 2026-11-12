@@ -13,7 +13,6 @@ trait HasPeriodTrait
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $endedAt = null;
 
-
     public function getStartedAt(): ?\DateTimeImmutable
     {
         return $this->startedAt;

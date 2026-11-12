@@ -168,7 +168,7 @@ class AnonymousVisit implements EntityInterface
 
     public function incrementPageCount(): void
     {
-        $this->pageCount++;
+        ++$this->pageCount;
     }
 
     public function getIp(): ?string

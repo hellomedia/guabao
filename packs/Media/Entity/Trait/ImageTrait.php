@@ -30,7 +30,7 @@ trait ImageTrait
     #[ORM\Column(type: Types::JSON, nullable: true)]
     private ?array $exifData = null;
 
-    /** 
+    /**
      * Dimensions before resizing at upload
      * (useful for Kotcop)
      */
@@ -40,7 +40,7 @@ trait ImageTrait
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $originalWidth = null;
 
-    /** 
+    /**
      * Dimensions after resizing at upload
      * (useful for width/height image attributes)
      */

@@ -2,10 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entity\Media;
 use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
-use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,8 +19,7 @@ class TripRepository extends ServiceEntityRepository
     public function __construct(
         private RequestStack $requestStack,
         ManagerRegistry $registry,
-    )
-    {
+    ) {
         parent::__construct($registry, Trip::class);
     }
 
@@ -59,7 +56,7 @@ class TripRepository extends ServiceEntityRepository
             'a' => 't.adventureRating',
             default => 't.startedAt',
         };
-    
+
         return $this->createCardQueryBuilder()
             ->where('t.parent IS NULL')
             ->orderBy($sortField, \SortDirection::Descending)
@@ -69,7 +66,7 @@ class TripRepository extends ServiceEntityRepository
 
     public function findAllByTag(TripTag $tag, ?string $sort): array
     {
-        $sortField = match($sort) {
+        $sortField = match ($sort) {
             'd' => 't.startedAt',
             'u' => 't.duration',
             'a' => 't.adventureRating',
@@ -120,7 +117,7 @@ class TripRepository extends ServiceEntityRepository
             ->leftJoin('t.tags', 'tag')->addSelect('tag');
     }
 
-    public function findOneByMediaDate(?DateTimeImmutable $mediaTakenAt): ?Trip
+    public function findOneByMediaDate(?\DateTimeImmutable $mediaTakenAt): ?Trip
     {
         if ($mediaTakenAt == null) {
             return null;
@@ -154,7 +151,7 @@ class TripRepository extends ServiceEntityRepository
             ->setParameter('trip', $trip);
 
         // build expected array collection of place tags
-        return new ArrayCollection(array_map(fn($row) => $row['pt'], $query->getResult()));
+        return new ArrayCollection(array_map(fn ($row) => $row['pt'], $query->getResult()));
     }
 
     public function findTopSlowTravelTrips(): array

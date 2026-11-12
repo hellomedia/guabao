@@ -6,14 +6,13 @@ use App\Entity\Media;
 use App\Enum\MediaType;
 use App\Helper\GoogleMapsApiHelper;
 use App\Helper\MediaAutoFillHelper;
-use Pack\Media\Helper\ExifExtractor;
-use Pack\Media\Helper\UploadHelper;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+use Pack\Media\Helper\ExifExtractor;
+use Pack\Media\Helper\UploadHelper;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -25,9 +24,7 @@ class MediaCrudController extends AbstractCrudController
         protected ExifExtractor $exifExtractor,
         protected UploadHelper $uploadHelper,
         protected UrlGeneratorInterface $urlGenerator,
-    )
-    {
-    }
+    ) {}
 
     public static function getEntityFqcn(): string
     {
@@ -71,14 +68,13 @@ class MediaCrudController extends AbstractCrudController
         parent::updateEntity($entityManager, $entityInstance);
     }
 
-    protected function _customFormProcessing(Media $media): void 
+    protected function _customFormProcessing(Media $media): void
     {
         // 'Media' = entity name
         // 'imageFile' = name of field with FileType form type
         $uploadedFile = $this->getContext()->getRequest()->files->get('Media')['imageFile'] ?? null;
 
         if ($uploadedFile instanceof UploadedFile) {
-
             $media->setType(MediaType::IMAGE);
 
             // extract exif before upload -- exif data lost during conversion from jpeg to avif
@@ -90,12 +86,11 @@ class MediaCrudController extends AbstractCrudController
 
         // Video from Vimeo
         if ($media->getVimeoId() != null) {
-
             $media->setType(MediaType::VIDEO);
-            
+
             // set takenAt from hint
             if ($media->getTakenAtHint() != null) {
-                $takenAt = DateTimeImmutable::createFromFormat('Ymd_His', $media->getTakenAtHint());
+                $takenAt = \DateTimeImmutable::createFromFormat('Ymd_His', $media->getTakenAtHint());
                 $media->setTakenAt($takenAt);
                 $media->setTakenAtHint(null);
             }

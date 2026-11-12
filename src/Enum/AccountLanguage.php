@@ -20,7 +20,7 @@ enum AccountLanguage: string implements TranslatableInterface
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
         return match ($this) {
-            self::FRENCH  => $translator->trans('locale.fr', domain: 'enum', locale: $locale),
+            self::FRENCH => $translator->trans('locale.fr', domain: 'enum', locale: $locale),
             self::ENGLISH => $translator->trans('locale.en', domain: 'enum', locale: $locale),
             self::NEDERLANDS => $translator->trans('locale.nl', domain: 'enum', locale: $locale),
         };

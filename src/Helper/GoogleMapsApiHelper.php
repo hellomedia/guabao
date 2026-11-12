@@ -79,7 +79,7 @@ class GoogleMapsApiHelper
         if (!$lat || !$lng) {
             return null;
         }
-    
+
         $url = sprintf(
             'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=%d&key=%s',
             $lat,

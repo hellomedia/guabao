@@ -20,8 +20,7 @@ abstract class BaseMailer
         protected TranslatorInterface $translator,
         protected EntityManager $entityManager,
         private BodyRendererInterface $bodyRenderer,
-    ) {
-    }
+    ) {}
 
     protected function send(TemplatedEmail $email, ?string $from = 'postmaster'): void
     {

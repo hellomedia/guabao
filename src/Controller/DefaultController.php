@@ -22,7 +22,7 @@ class DefaultController extends BaseController
         $topHistoricalPlaces = $storyRepository->findTopHistoricalPlaces();
         $topPersonalExperiences = $storyRepository->findTopPersonalExperiences();
         $topFoodDiscoveries = $foodRepository->findTopDiscoveries();
-        
+
         return $this->render('default/homepage.html.twig', [
             'top_slow_travel_trips' => $topSlowTravelTrips,
             'top_hiking_trips' => $topHikingTrips,

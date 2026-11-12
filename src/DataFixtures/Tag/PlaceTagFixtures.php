@@ -11,7 +11,6 @@ use Doctrine\Persistence\ObjectManager;
 
 class PlaceTagFixtures extends Fixture implements DependentFixtureInterface
 {
-
     public function getDependencies(): array
     {
         return [
@@ -23,17 +22,17 @@ class PlaceTagFixtures extends Fixture implements DependentFixtureInterface
         'Belgium' => [
             [
                 'nameFr' => 'Liège',
-                'nameEn' => 'Liege'
+                'nameEn' => 'Liege',
             ],
         ],
         'France' => [
             [
                 'nameFr' => 'Vercors',
-                'nameEn' => 'Vercors'
+                'nameEn' => 'Vercors',
             ],
             [
                 'nameFr' => 'Verdon',
-                'nameEn' => 'France'
+                'nameEn' => 'France',
             ],
         ],
         'Thailand' => [
@@ -204,7 +203,7 @@ class PlaceTagFixtures extends Fixture implements DependentFixtureInterface
                 'nameEn' => 'Taichung',
             ],
         ],
-        'Japan' =>  [
+        'Japan' => [
             [
                 'nameFr' => 'Kirishima',
                 'nameEn' => 'Kirishima',
@@ -252,18 +251,17 @@ class PlaceTagFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        foreach(self::PLACE_TAGS as $country => $placeTags) {
-
-            foreach($placeTags as $item) {
+        foreach (self::PLACE_TAGS as $country => $placeTags) {
+            foreach ($placeTags as $item) {
                 $placeTag = new PlaceTag();
-    
+
                 $placeTag->setNameFr($item['nameFr']);
                 $placeTag->setNameEn($item['nameEn']);
-    
+
                 $placeTag->setCountry($this->getReference('country-' . $country, Country::class));
-    
+
                 $this->setReference('placeTag-' . $item['nameEn'], $placeTag);
-            
+
                 $manager->persist($placeTag);
             }
         }

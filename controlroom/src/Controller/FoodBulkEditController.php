@@ -6,19 +6,17 @@ use App\Controller\BaseController;
 use App\Entity\Food;
 use Controlroom\Form\Type\FoodQuickEditType;
 use Doctrine\ORM\EntityManager;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
-use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 class FoodBulkEditController extends BaseController
 {
     public function __construct(
         private EntityManager $entityManager,
-    )
-    {
-    }
+    ) {}
 
     // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
     // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
@@ -46,7 +44,7 @@ class FoodBulkEditController extends BaseController
 
     /**
      * Called in ajax from bulk edit forms
-     * 
+     *
      * Route must not conflict with easyadmin /food/{id}/edit
      */
     #[AdminRoute('/food/{id}/quick-edit', name: 'food_quick_edit', options: ['methods' => ['POST']])]

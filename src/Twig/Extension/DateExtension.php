@@ -184,11 +184,11 @@ class DateExtension extends AbstractExtension
 
     /**
      * ex: 15 janvier / January 15
-     * 
+     *
      * \IntlDateFormatter::LONG gives the year and there is apparently no good way to remove it
      * https://stackoverflow.com/questions/35129924/how-to-format-date-with-a-intldateformatter-using-medium-or-full-datetype-but-w
      * https://stackoverflow.com/questions/69228978/how-do-i-force-phps-intldateformatter-to-ignore-the-year-only-from-the-output/69229859
-     * 
+     *
      * So we define the pattern for our 3 backend languages and add a sensible default
      */
     public function dayAndMonth(?\DateTimeImmutable $datetime, ?string $lang = null): ?string
@@ -253,7 +253,7 @@ class DateExtension extends AbstractExtension
     }
 
     /**
-     * ex: 9h00 / 9:00 am 
+     * ex: 9h00 / 9:00 am
      */
     public function time(?\DateTimeImmutable $datetime, ?string $lang = null): ?string
     {
@@ -265,12 +265,12 @@ class DateExtension extends AbstractExtension
             $lang = $this->requestStack->getCurrentRequest()->getLocale();
         }
 
-        $formatter = new \IntlDateFormatter($lang, IntlDateFormatter::NONE, IntlDateFormatter::SHORT);
+        $formatter = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::SHORT);
 
         return $formatter->format($datetime);
     }
 
-    public function tripDuration(Trip $trip) 
+    public function tripDuration(Trip $trip)
     {
         return $this->dateHelpler->getApproximateDuration($trip->getStartedAt(), $trip->getEndedAt());
     }

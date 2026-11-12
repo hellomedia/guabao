@@ -2,11 +2,9 @@
 
 namespace Controlroom\Form\Type;
 
-use App\Entity\Cuisine;
 use App\Entity\Food;
 use App\Entity\Media;
 use App\Entity\SiteHighlight;
-use App\Entity\Tag\FoodTag;
 use App\Enum\Level;
 use App\Repository\MediaRepository;
 use Controlroom\Form\Field\CuisinesAutocompleteField;
@@ -36,14 +34,14 @@ class FoodQuickEditType extends AbstractType
             ->add('nameFr')
             ->add('nameOriginal')
             ->add('descriptionEn', TextareaType::class, [
-                'label' => "EN",
+                'label' => 'EN',
                 'required' => false,
                 'attr' => [
                     'rows' => 3,
                 ],
             ])
             ->add('descriptionFr', TextareaType::class, [
-                'label' => "FR",
+                'label' => 'FR',
                 'required' => false,
                 'attr' => [
                     'rows' => 3,
@@ -52,7 +50,7 @@ class FoodQuickEditType extends AbstractType
             ->add('cover', EntityType::class, [
                 'class' => Media::class,
                 'attr' => [
-                    'data-cover-picker-target' => "input",
+                    'data-cover-picker-target' => 'input',
                 ],
                 'query_builder' => function (MediaRepository $repo) use ($food): QueryBuilder {
                     return $repo->createQueryBuilder('m')
@@ -67,25 +65,25 @@ class FoodQuickEditType extends AbstractType
             ->add('ingredients', IngredientAutocompleteField::class)
             ->add('similar', SimilarFoodAutocompleteField::class)
             ->add('isFavourite', CheckboxType::class, [
-                'label'    => 'favourite',
+                'label' => 'favourite',
                 'required' => false,
                 'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
-            ->add('loveLevel', EnumType::class,  [
+            ->add('loveLevel', EnumType::class, [
                 'class' => Level::class,
                 'required' => false,
                 'expanded' => false,
                 'multiple' => false,
                 'autocomplete' => true,
             ])
-            ->add('healthyLevel', EnumType::class,  [
+            ->add('healthyLevel', EnumType::class, [
                 'class' => Level::class,
                 'required' => false,
                 'expanded' => false,
                 'multiple' => false,
                 'autocomplete' => true,
             ])
-            ->add('localLevel', EnumType::class,  [
+            ->add('localLevel', EnumType::class, [
                 'class' => Level::class,
                 'required' => false,
                 'expanded' => false,

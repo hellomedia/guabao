@@ -88,8 +88,7 @@ class CountryFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach(self::COUNTRIES as $item) {
-            
+        foreach (self::COUNTRIES as $item) {
             $country = new Country();
 
             $country->setCode($item['code']);
@@ -97,7 +96,7 @@ class CountryFixtures extends Fixture
             $country->setNameEn($item['nameEn']);
 
             $this->setReference('country-' . $item['nameEn'], $country);
-        
+
             $manager->persist($country);
         }
 

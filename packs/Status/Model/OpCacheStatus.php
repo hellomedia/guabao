@@ -9,7 +9,6 @@ namespace Pack\Status\Model;
  */
 class OpCacheStatus
 {
-
     private $configuration;
     private $status;
     private $d3Scripts = [];
@@ -28,9 +27,8 @@ class OpCacheStatus
     public function getStatusDataRows(): string
     {
         $rows = [];
-        
-        foreach ($this->status as $key => $value) {
 
+        foreach ($this->status as $key => $value) {
             if ($key === 'scripts') {
                 continue;
             }
@@ -64,7 +62,7 @@ class OpCacheStatus
                         $v = number_format($v);
                     }
                     if (is_array($v)) {
-                        $v = "<array>";
+                        $v = '<array>';
                     }
 
                     $rows[] = "<tr><th>$k</th><td>$v</td></tr>\n";
@@ -111,17 +109,19 @@ class OpCacheStatus
     {
         foreach ($this->status['scripts'] as $key => $data) {
             $dirs[dirname($key)][basename($key)] = $data;
-            $this->_arrayPset($this->d3Scripts, $key, array(
+            $this->_arrayPset($this->d3Scripts, $key, [
                 'name' => basename($key),
                 'size' => $data['memory_consumption'],
-            ));
+            ]);
         }
 
         asort($dirs);
 
         $basename = '';
         while (true) {
-            if (count($this->d3Scripts) != 1) break;
+            if (count($this->d3Scripts) != 1) {
+                break;
+            }
             $basename .= DIRECTORY_SEPARATOR . key($this->d3Scripts);
             $this->d3Scripts = reset($this->d3Scripts);
         }
@@ -135,7 +135,7 @@ class OpCacheStatus
             $file_plural = $count > 1 ? 's' : null;
             $m = 0;
             foreach ($files as $file => $data) {
-                $m += $data["memory_consumption"];
+                $m += $data['memory_consumption'];
             }
             $m = $this->_sizeForHumans($m);
 
@@ -147,8 +147,8 @@ class OpCacheStatus
 
             foreach ($files as $file => $data) {
                 $rows[] = "<tr id=\"row-{$id}\">";
-                $rows[] = "<td>" . $this->_formatValue($data["hits"]) . "</td>";
-                $rows[] = "<td>" . $this->_sizeForHumans($data["memory_consumption"]) . "</td>";
+                $rows[] = '<td>' . $this->_formatValue($data['hits']) . '</td>';
+                $rows[] = '<td>' . $this->_sizeForHumans($data['memory_consumption']) . '</td>';
                 $rows[] = $count > 1 ? "<td>{$file}</td>" : "<td>{$dir}/{$file}</td>";
                 $rows[] = '</tr>';
             }
@@ -161,7 +161,7 @@ class OpCacheStatus
 
     public function getScriptStatusCount(): int
     {
-        return count($this->status["scripts"]);
+        return count($this->status['scripts']);
     }
 
     public function isFull(): bool
@@ -259,7 +259,7 @@ class OpCacheStatus
             return $value;
         }
 
-        $array = array('name' => $name, 'children' => array());
+        $array = ['name' => $name, 'children' => []];
 
         foreach ($value as $k => $v) {
             $array['children'][] = $this->_processPartition($v, $k);
@@ -277,19 +277,20 @@ class OpCacheStatus
     {
         if ($bytes > 1048576) {
             return sprintf('%d M', $bytes / 1048576);
-        } else {
-            if ($bytes > 1024) {
-                return sprintf('%d K', $bytes / 1024);
-            } else {
-                return sprintf('%d bytes', $bytes);
-            }
         }
+        if ($bytes > 1024) {
+            return sprintf('%d K', $bytes / 1024);
+        }
+
+        return sprintf('%d bytes', $bytes);
     }
 
     // Borrowed from Laravel
     private function _arrayPset(&$array, $key, $value): array
     {
-        if (is_null($key)) return $array = $value;
+        if (is_null($key)) {
+            return $array = $value;
+        }
         $keys = explode(DIRECTORY_SEPARATOR, ltrim($key, DIRECTORY_SEPARATOR));
         while (count($keys) > 1) {
             $key = array_shift($keys);

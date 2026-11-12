@@ -17,7 +17,7 @@ class Place implements EntityInterface
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]   
+    #[ORM\Column]
     private int $id;
 
     #[ORM\Column(length: 255, nullable: true)]

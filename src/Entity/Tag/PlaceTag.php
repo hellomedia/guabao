@@ -3,7 +3,6 @@
 namespace App\Entity\Tag;
 
 use App\Entity\Country;
-use App\Entity\Food;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Interface\LocalizedNameInterface;
 use App\Entity\Interface\LocalizedSlugInterface;

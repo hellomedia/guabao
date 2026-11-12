@@ -4,10 +4,10 @@ namespace Pack\Media\Doctrine\Listener;
 
 use App\Entity\Media;
 use App\Enum\MediaType;
-use Pack\Media\Helper\UploadHelper;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PostRemoveEventArgs;
 use Doctrine\ORM\Events;
+use Pack\Media\Helper\UploadHelper;
 
 /**
  * https://symfony.com/doc/current/doctrine/events.html
@@ -18,9 +18,7 @@ class MediaRemovedListener
     public function __construct(
         private UploadHelper $uploadHelper,
         private string $uploadsPath,
-    )
-    {
-    }
+    ) {}
 
     public function removeFileFromDisk(Media $media, PostRemoveEventArgs $args)
     {

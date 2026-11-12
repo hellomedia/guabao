@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Country;
 use App\Entity\Food;
 use App\Repository\CountryRepository;
-use App\Repository\FoodRepository;
 use App\Repository\MediaRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +27,7 @@ class FoodByCountryController extends BaseController
         $this->addBreadcrumb('food.countries');
 
         return $this->render('food/country/index.html.twig', [
-            'countries_with_counts' => $countriesWithCounts
+            'countries_with_counts' => $countriesWithCounts,
         ]);
     }
 
@@ -50,7 +49,7 @@ class FoodByCountryController extends BaseController
     public function food(
         #[MapEntity(expr: 'repository.findOneBySlugEn(slugCountry)')] Country $country,
         #[MapEntity(expr: 'repository.findOneBySlugEnWithMedias(slugEn)')] Food $food,
-        Request $request
+        Request $request,
     ): Response {
         $this->addBreadcrumb('food.countries', 'food_countries_index');
         $this->addBreadcrumb($country->getName(
@@ -58,7 +57,7 @@ class FoodByCountryController extends BaseController
             ['slugEn' => $country->getSlugEn()],
             isLarge: true
         );
-        //$this->addBreadcrumb($food->getName($request->getLocale()));
+        // $this->addBreadcrumb($food->getName($request->getLocale()));
 
         return $this->render('food/show.html.twig', [
             'food' => $food,

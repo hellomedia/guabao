@@ -13,8 +13,8 @@ use App\Entity\Trait\LocalizedSlugTrait;
 use App\Repository\StoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: StoryRepository::class)]
@@ -155,7 +155,7 @@ class Story implements LocalizedNameInterface, LocalizedSlugInterface, EntityInt
      */
     public function getDisplayableMedias(): Collection
     {
-        return $this->medias->filter(function($media) {
+        return $this->medias->filter(function ($media) {
             return $media->getShowInStory();
         });
     }
@@ -165,7 +165,7 @@ class Story implements LocalizedNameInterface, LocalizedSlugInterface, EntityInt
      */
     public function getDisplayableImages(): Collection
     {
-        return $this->medias->filter(function(Media $media) {
+        return $this->medias->filter(function (Media $media) {
             return $media->getShowInStory() && $media->isImage() && !$media->is360();
         });
     }
@@ -175,7 +175,7 @@ class Story implements LocalizedNameInterface, LocalizedSlugInterface, EntityInt
      */
     public function getCover(): ?Media
     {
-        $images = $this->medias->filter(function(Media $media) {
+        $images = $this->medias->filter(function (Media $media) {
             return $media->isStoryCover();
         });
 
@@ -191,7 +191,7 @@ class Story implements LocalizedNameInterface, LocalizedSlugInterface, EntityInt
      */
     public function getDisplayable360s(): Collection
     {
-        return $this->medias->filter(function(Media $media) {
+        return $this->medias->filter(function (Media $media) {
             return $media->getShowInStory() && $media->is360();
         });
     }
@@ -201,7 +201,7 @@ class Story implements LocalizedNameInterface, LocalizedSlugInterface, EntityInt
      */
     public function getDisplayableVideos(): Collection
     {
-        return $this->medias->filter(function($media) {
+        return $this->medias->filter(function ($media) {
             return $media->getShowInStory() && $media->isVideo();
         });
     }
@@ -222,7 +222,7 @@ class Story implements LocalizedNameInterface, LocalizedSlugInterface, EntityInt
      */
     public function getDisplayableSecondaryVideos(): Collection
     {
-        return $this->medias->filter(function($media) {
+        return $this->medias->filter(function ($media) {
             return $media->getShowInStory() && $media->isVideo() && !$media->isPrimaryVideo();
         });
     }

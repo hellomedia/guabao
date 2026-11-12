@@ -45,7 +45,7 @@ final class BotDetectorService
             return true;
         }
 
-        if (empty($_SERVER["HTTP_ACCEPT_LANGUAGE"])) {
+        if (empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             return true;
         }
 

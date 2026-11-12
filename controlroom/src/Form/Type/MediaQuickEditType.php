@@ -17,8 +17,8 @@ use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MediaQuickEditType extends AbstractType
@@ -31,14 +31,14 @@ class MediaQuickEditType extends AbstractType
 
         $builder
             ->add('descriptionEn', TextareaType::class, [
-                'label' => "EN",
+                'label' => 'EN',
                 'required' => false,
                 'attr' => [
                     'rows' => 3,
                 ],
             ])
             ->add('descriptionFr', TextareaType::class, [
-                'label' => "FR",
+                'label' => 'FR',
                 'required' => false,
                 'attr' => [
                     'rows' => 3,
@@ -64,7 +64,7 @@ class MediaQuickEditType extends AbstractType
                 'autocomplete' => true,
             ])
             ->add('showInTrip', CheckboxType::class, [
-                'label'    => 'show in trip',
+                'label' => 'show in trip',
                 'required' => false,
                 'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
@@ -84,18 +84,18 @@ class MediaQuickEditType extends AbstractType
                 // https://symfony.com/bundles/ux-autocomplete/current/index.html#passing-extra-options-to-the-ajax-powered-autocomplete
                 'extra_options' => [
                     'current_trip' => $currentTrip->getId(), // only scalar values and arrays of scalars
-            ],
+                ],
             ])
             ->add('showInStory', CheckboxType::class, [
-                'label'    => 'show in story',
+                'label' => 'show in story',
                 'required' => false,
                 'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
-                ])
+            ])
             ->add('siteHighlights', EntityType::class, [
                 'label' => 'Highlights',
                 'class' => SiteHighlight::class,
                 'required' => false,
-                'query_builder' => function (EntityRepository $repo) : QueryBuilder {
+                'query_builder' => function (EntityRepository $repo): QueryBuilder {
                     return $repo->createQueryBuilder('h')
                         ->orderBy('h.nameEn', \SortDirection::Ascending);
                 },
@@ -107,13 +107,13 @@ class MediaQuickEditType extends AbstractType
                 // Passing extra options to ajax query builder
                 // https://symfony.com/bundles/ux-autocomplete/current/index.html#passing-extra-options-to-the-ajax-powered-autocomplete
                 'extra_options' => [
-                    'countries' => $countries->map(fn(Country $country) => $country->getId())->toArray(), // only scalar values and arrays of scalars
-            ],
+                    'countries' => $countries->map(fn (Country $country) => $country->getId())->toArray(), // only scalar values and arrays of scalars
+                ],
             ])
             ->add('tags', MediaTagAutocompleteField::class)
             ->add('food', FoodAutocompleteField::class)
             ->add('showInFood', CheckboxType::class, [
-                'label'    => 'show in food meal',
+                'label' => 'show in food meal',
                 'required' => false,
                 'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
@@ -121,7 +121,7 @@ class MediaQuickEditType extends AbstractType
                 'label' => 'Is meal',
                 'required' => false,
                 'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
-                'help' => 'Set to true to auto-create meal or auto-fill with existing meal based on taken_at time +- 30 minutes'
+                'help' => 'Set to true to auto-create meal or auto-fill with existing meal based on taken_at time +- 30 minutes',
             ])
             ->add('meal', MealAutocompleteField::class, [
                 'required' => false,
@@ -130,7 +130,7 @@ class MediaQuickEditType extends AbstractType
                 'extra_options' => [
                     'current_trip' => $currentTrip->getId(), // only scalar values and arrays of scalars
                 ],
-                'help' => "Leave empty if using the 'set meal' flag to auto-fill or auto-create meal", 
+                'help' => "Leave empty if using the 'set meal' flag to auto-fill or auto-create meal",
             ])
             ->add('is360', CheckboxType::class, [
                 'label' => '360',
@@ -143,17 +143,17 @@ class MediaQuickEditType extends AbstractType
                 'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('size2', CheckboxType::class, [
-                'label'    => 'size 2',
+                'label' => 'size 2',
                 'required' => false,
                 'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('size3', CheckboxType::class, [
-                'label'    => 'size 3',
+                'label' => 'size 3',
                 'required' => false,
                 'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
             ->add('isPrimaryVideo', CheckboxType::class, [
-                'label'    => 'Primary vid',
+                'label' => 'Primary vid',
                 'required' => false,
                 'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
@@ -161,7 +161,7 @@ class MediaQuickEditType extends AbstractType
                 // Passing extra options to ajax query builder
                 // https://symfony.com/bundles/ux-autocomplete/current/index.html#passing-extra-options-to-the-ajax-powered-autocomplete
                 'extra_options' => [
-                    'countries' => $countries->map(fn(Country $country) => $country->getId())->toArray(), // only scalar values and arrays of scalars
+                    'countries' => $countries->map(fn (Country $country) => $country->getId())->toArray(), // only scalar values and arrays of scalars
                 ],
             ])
         ;

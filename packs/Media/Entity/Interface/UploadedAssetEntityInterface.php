@@ -2,7 +2,7 @@
 
 namespace Pack\Media\Entity\Interface;
 
-interface UploadedAssetEntityInterface 
+interface UploadedAssetEntityInterface
 {
     public function getPath(): ?string;
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Helper;
 
@@ -17,12 +17,10 @@ class MediaAutoFillHelper
         private TripRepository $tripRepository,
         private PlaceRepository $placeRepository,
         private MealRepository $mealRepository,
-        private GoogleMapsApiHelper $mapsApiHelper, 
+        private GoogleMapsApiHelper $mapsApiHelper,
         private EntityManager $entityManager,
         private string $uploadsPath,
-    )
-    { 
-    }
+    ) {}
 
     public function setTakenAt(Media $media, array|false $exif)
     {
@@ -38,13 +36,13 @@ class MediaAutoFillHelper
         if (!empty($exif['DateTimeOriginal'])) {
             $date = \DateTimeImmutable::createFromFormat(
                 'Y:m:d H:i:s',
-                $exif['DateTimeOriginal'],            
+                $exif['DateTimeOriginal'],
             );
 
             if ($date !== false) {
                 $media->setTakenAt($date);
             }
-        }   
+        }
     }
 
     public function autoAssignTrip(Media $media)
@@ -118,7 +116,7 @@ class MediaAutoFillHelper
 
     private function _autoCreateMeal(Media $media): Meal
     {
-        $meal = new Meal;
+        $meal = new Meal();
 
         $meal->setEnjoyedAt($media->getTakenAt());
 
@@ -144,7 +142,7 @@ class MediaAutoFillHelper
         if ($media->getPlace() != null) {
             return null;
         }
-    
+
         $lat = $media->getLatitude();
         $lng = $media->getLongitude();
 

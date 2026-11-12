@@ -35,13 +35,13 @@ class PopulateStorySlugsCommand extends Command
         foreach ($stories as $story) {
             $story->setSlugFr($this->slugger->slug(\mb_strtolower($story->getNameFr())));
             $story->setSlugEn($this->slugger->slug(\mb_strtolower($story->getNameEn())));
-            $count ++;
+            ++$count;
         }
 
         // Persist and flush
         $this->entityManager->flush();
 
-        $io->success( $count . ' stories updated successfully');
+        $io->success($count . ' stories updated successfully');
 
         return Command::SUCCESS;
     }

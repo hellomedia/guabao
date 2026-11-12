@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -158,7 +157,7 @@ final class WarmImageCacheCommand extends Command
         if ([] !== $skipReasons) {
             $io->section('Skipped media');
             $io->listing(array_map(
-                fn(string $reason, int $count) => sprintf('%s: %d', $reason, $count),
+                fn (string $reason, int $count) => sprintf('%s: %d', $reason, $count),
                 array_keys($skipReasons),
                 $skipReasons,
             ));

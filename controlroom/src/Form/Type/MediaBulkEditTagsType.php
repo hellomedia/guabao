@@ -43,7 +43,7 @@ class MediaBulkEditTagsType extends AbstractType
                 'multiple' => true,
                 'autocomplete' => true,
                 // 'by_reference' => false, // not needed here. Form is not tied to a class, we handle it by hand in MediuBulkEditController
-        ])
+            ])
             ->add('place', EntityType::class, [
                 'class' => Place::class,
                 'query_builder' => function (EntityRepository $repo) use ($trip): QueryBuilder {

@@ -7,11 +7,11 @@ use App\Entity\Media;
 use App\Entity\Trip;
 use App\Enum\MediaType;
 use App\Helper\MediaAutoFillHelper;
-use Pack\Media\Helper\ExifExtractor;
-use Pack\Media\Helper\UploadHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Pack\Media\Helper\ExifExtractor;
+use Pack\Media\Helper\UploadHelper;
 
 class Pano360Fixtures extends Fixture implements DependentFixtureInterface
 {
@@ -19,9 +19,7 @@ class Pano360Fixtures extends Fixture implements DependentFixtureInterface
         private MediaAutoFillHelper $autoFillHelper,
         private UploadHelper $uploadHelper,
         private ExifExtractor $exifExtractor,
-    )
-    {   
-    }
+    ) {}
 
     public function getDependencies(): array
     {
@@ -32,34 +30,32 @@ class Pano360Fixtures extends Fixture implements DependentFixtureInterface
     }
 
     public function load(ObjectManager $manager): void
-    { 
+    {
         foreach (TripFixtures::TRIPS as $trip) {
-
             $key = $trip['key'];
 
             $dir = __DIR__ . '/../images/trips/' . $key . '/360/';
 
             foreach (glob($dir . '*.jpg') as $originalPath) {
-
                 $media = new Media();
-                
+
                 $media->setType(MediaType::IMAGE);
-                
+
                 $media->setIs360(true);
-                
+
                 $uploadedFile = $this->uploadHelper->createUploadedFileForFixtures($originalPath);
-                
+
                 // extract exif before converting to avif (exif lost in conversion)
                 $exif = $this->exifExtractor->extractExifData($uploadedFile);
 
                 $this->uploadHelper->uploadImage($media, $uploadedFile);
 
                 $trip = $this->getReference($key, Trip::class);
-                
+
                 $media->setTrip($trip);
 
                 $this->_updateAutoFields($media, $exif);
-        
+
                 $manager->persist($media);
             }
         }

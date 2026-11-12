@@ -12,13 +12,11 @@ use App\Entity\Tag\MediaTag;
 use App\Entity\Tag\PlaceTag;
 use App\Enum\MediaType;
 use App\Helper\MediaAutoFillHelper;
-use Pack\Media\Helper\ExifExtractor;
-use Pack\Media\Helper\UploadHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Vich\UploaderBundle\Naming\OrignameNamer;
+use Pack\Media\Helper\ExifExtractor;
+use Pack\Media\Helper\UploadHelper;
 
 class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -28,21 +26,21 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
             'food' => FoodFixtures::TOMATO,
             'tags' => [MediaTagFixtures::HOME_COOKING],
             'isMeal' => false,
-            'placeTags' => ['Liege']
+            'placeTags' => ['Liege'],
         ],
         [
             'filename' => 'thai_muslim_1',
             'food' => FoodFixtures::WONTON_NOODLE_SOUP_WITH_ROASTED_DUCK,
             'tags' => [],
             'isMeal' => true,
-            'placeTags' => ['Chiang Mai']
+            'placeTags' => ['Chiang Mai'],
         ],
         [
             'filename' => 'thai_muslim_2',
             'food' => FoodFixtures::WONTON_NOODLE_SOUP_WITH_ROASTED_DUCK,
             'tags' => [],
             'isMeal' => true,
-            'placeTags' => ['Chiang Mai']
+            'placeTags' => ['Chiang Mai'],
         ],
     ];
 
@@ -65,12 +63,11 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         foreach (self::FOOD_PICTURES as $item) {
-
             $media = new Media();
-            
+
             $media->setType(MediaType::IMAGE);
-            
-            $originalPath = __DIR__ . '/../images/food/' . $item['filename']. '.jpg';
+
+            $originalPath = __DIR__ . '/../images/food/' . $item['filename'] . '.jpg';
 
             $uploadedFile = $this->uploadHelper->createUploadedFileForFixtures($originalPath);
 
@@ -80,7 +77,7 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
             $this->uploadHelper->uploadImage($media, $uploadedFile);
 
             $media->setIsMeal($item['isMeal']);
-            
+
             foreach ($item['tags'] as $tag) {
                 $media->addTag($this->getReference('mediaTag-' . $tag, MediaTag::class));
             }
@@ -93,7 +90,7 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
 
             $media->setFood($this->getReference('food-' . $item['food'], Food::class));
 
-            $this->setReference('media-'. $item['filename'], $media);
+            $this->setReference('media-' . $item['filename'], $media);
 
             $manager->persist($media);
 

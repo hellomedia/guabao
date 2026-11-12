@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait ShortNameTrait
 {
-    #[Assert\Length(max:35)]
+    #[Assert\Length(max: 35)]
     #[ORM\Column(length: 35, nullable: true)]
     private ?string $shortNameFr = null;
 

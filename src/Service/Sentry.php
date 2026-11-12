@@ -30,17 +30,16 @@ class Sentry
      * If flag is false, nothing is sent.
      * If flag is true, it seems like we still need this.
      * I don't get it, but it seems to work with both the flag and this.
-     * 
+     *
      * If user exists, send the user id for sentry.
      * Else, send the ip, which will be used as user identifier.
-     * 
+     *
      * IP should be useful for linking sentry errors belonging to a bot,
      * which would not have an account (thus no ip in controlroom) and no js tracker data.
      */
     public function getBeforeSend(): callable
     {
         return function (Event $event): ?Event {
-
             $request = $this->requestStack->getCurrentRequest();
 
             // If there's no request (e.g., in a worker, in the queue), skip filtering
@@ -51,14 +50,12 @@ class Sentry
             $exceptions = $event->getExceptions();
 
             foreach ($exceptions as $exceptionDataBag) {
-
                 \assert($exceptionDataBag instanceof ExceptionDataBag);
 
                 $exceptionType = $exceptionDataBag->getType();
 
                 // Ignore MethodNotAllowedHttpException for specific endpoints
                 if ($exceptionType === MethodNotAllowedHttpException::class) {
-
                     $path = $request->getPathInfo();
 
                     // List of URL endings to ignore

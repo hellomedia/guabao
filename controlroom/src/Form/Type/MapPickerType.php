@@ -20,7 +20,7 @@ class MapPickerType extends AbstractType
                 ],
                 'help' => 'Google Place ID and address will only be filled when selecting from the search auto-complete.
                     If you find a place by navigating the map, click on it to get the name, copy/paste in the search bar,
-                    then select it from the autocomplete options.'
+                    then select it from the autocomplete options.',
             ])
         ;
     }

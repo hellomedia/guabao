@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Food;
 use App\Entity\Tag\FoodTag;
-use App\Repository\FoodTagRepository;
 use App\Repository\FoodRepository;
+use App\Repository\FoodTagRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,10 +24,10 @@ class FoodByTagController extends BaseController
     {
         $tagsWithCounts = $foodTagRepository->findAllWithFoodCount();
 
-        //$this->addBreadcrumb('food.tags');
+        // $this->addBreadcrumb('food.tags');
 
         return $this->render('food/tag/index.html.twig', [
-            'tags_with_counts' => $tagsWithCounts
+            'tags_with_counts' => $tagsWithCounts,
         ]);
     }
 
@@ -36,7 +36,7 @@ class FoodByTagController extends BaseController
     {
         $foodList = $foodRepository->findByFoodTag($tag);
 
-        //$this->addBreadcrumb('food.index', 'food_index');
+        // $this->addBreadcrumb('food.index', 'food_index');
         $this->addBreadcrumb($tag->getName($request->getLocale()));
 
         return $this->render('food/tag/tag.html.twig', [
@@ -49,16 +49,15 @@ class FoodByTagController extends BaseController
     public function food(
         #[MapEntity(expr: 'repository.findOneBySlugEn(slugTag)')] FoodTag $tag,
         #[MapEntity(expr: 'repository.findOneBySlugEnWithMedias(slugEn)')] Food $food,
-        Request $request
-        ): Response
-    {
-        //$this->addBreadcrumb('food.tags', 'food_index');
+        Request $request,
+    ): Response {
+        // $this->addBreadcrumb('food.tags', 'food_index');
         $this->addBreadcrumb(
             $tag->getName($request->getLocale()),
             'food_tags_tag', ['slugEn' => $tag->getSlugEn()],
             isLarge: true
         );
-        //$this->addBreadcrumb($food->getName($request->getLocale()));
+        // $this->addBreadcrumb($food->getName($request->getLocale()));
 
         return $this->render('food/show.html.twig', [
             'food' => $food,

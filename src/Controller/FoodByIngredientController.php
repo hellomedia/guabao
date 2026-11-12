@@ -49,16 +49,15 @@ class FoodByIngredientController extends BaseController
     public function food(
         #[MapEntity(expr: 'repository.findOneBySlugEn(slugIngredient)')] Ingredient $ingredient,
         #[MapEntity(expr: 'repository.findOneBySlugEnWithMedias(slugEn)')] Food $food,
-        Request $request
-        ): Response
-    {
+        Request $request,
+    ): Response {
         $this->addBreadcrumb('food.ingredients', 'food_cuisines_index');
         $this->addBreadcrumb(
             $ingredient->getName($request->getLocale()),
             'food_ingredients_ingredient', ['slugEn' => $ingredient->getSlugEn()],
             isLarge: true
         );
-        //$this->addBreadcrumb($food->getName($request->getLocale()));
+        // $this->addBreadcrumb($food->getName($request->getLocale()));
 
         return $this->render('food/show.html.twig', [
             'food' => $food,

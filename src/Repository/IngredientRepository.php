@@ -44,9 +44,9 @@ class IngredientRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-        return array_map(fn($row) => [
-            'ingredient'    => $row[0],
-            'food_count'  => (int)$row['foodCount'],
+        return array_map(fn ($row) => [
+            'ingredient' => $row[0],
+            'food_count' => (int) $row['foodCount'],
         ], $result);
     }
 
@@ -63,7 +63,7 @@ class IngredientRepository extends ServiceEntityRepository
             ->getResult();
 
         // First normalize result
-        $normalized = array_map(fn($row) => [
+        $normalized = array_map(fn ($row) => [
             'ingredient' => $row[0],
             'food_count' => (int) $row['foodCount'],
         ], $result);
@@ -73,19 +73,19 @@ class IngredientRepository extends ServiceEntityRepository
         foreach ($normalized as $entry) {
             $ingredient = $entry['ingredient'];
             $foodType = $ingredient->getFoodType();
-            
+
             if (!$foodType) {
                 continue;
             }
 
             $key = $foodType->value;
-  
+
             if (!isset($grouped[$key])) {
                 $grouped[$key] = [
                     'sort_order' => $foodType->getSortOrder(),
-                    'type'       => $foodType,
-                    'label'      => $foodType->trans($this->translator),
-                    'items'      => [],
+                    'type' => $foodType,
+                    'label' => $foodType->trans($this->translator),
+                    'items' => [],
                 ];
             }
 
@@ -93,7 +93,7 @@ class IngredientRepository extends ServiceEntityRepository
         }
 
         // Sort by sort_order
-        uasort($grouped, fn($a, $b) => $a['sort_order'] <=> $b['sort_order']);
+        uasort($grouped, fn ($a, $b) => $a['sort_order'] <=> $b['sort_order']);
 
         return $grouped;
     }
@@ -122,9 +122,9 @@ class IngredientRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-        return array_map(fn($row) => [
-            'ingredient'    => $row[0],
-            'food_count'  => (int)$row['foodCount'],
+        return array_map(fn ($row) => [
+            'ingredient' => $row[0],
+            'food_count' => (int) $row['foodCount'],
         ], $result);
     }
 
@@ -152,9 +152,9 @@ class IngredientRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-        return array_map(fn($row) => [
-            'ingredient'    => $row[0],
-            'food_count'  => (int)$row['foodCount'],
+        return array_map(fn ($row) => [
+            'ingredient' => $row[0],
+            'food_count' => (int) $row['foodCount'],
         ], $result);
     }
 }

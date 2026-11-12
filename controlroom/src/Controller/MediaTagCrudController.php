@@ -21,11 +21,11 @@ class MediaTagCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Media Tag')
             ->setEntityLabelInPlural('Media Tags')
             ->setDefaultSort([
-                'nameEn' => 'ASC'
+                'nameEn' => 'ASC',
             ])
             ->setSearchFields([
                 'nameEn',
-                'nameFr'
+                'nameFr',
             ])
         ;
     }

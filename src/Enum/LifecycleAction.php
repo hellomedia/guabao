@@ -7,7 +7,7 @@ namespace App\Enum;
  */
 enum LifecycleAction: string
 {
-    const ROUTING_REQUIREMENT = 'publish|unpublish|archive|unarchive|delete';
+    public const ROUTING_REQUIREMENT = 'publish|unpublish|archive|unarchive|delete';
 
     case PUBLISH = 'publish';
     case UNPUBLISH = 'unpublish';

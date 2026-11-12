@@ -32,7 +32,7 @@ class MediaBulkAddType extends AbstractType
         $builder = new DynamicFormBuilder($builder);
 
         $constraints = [
-            new Count(max: 20), // same as server max_file_uploads  
+            new Count(max: 20), // same as server max_file_uploads
             new All(constraints: [
                 new File(
                     maxSize: '50M', // same as server upload_max_filesize
@@ -46,14 +46,14 @@ class MediaBulkAddType extends AbstractType
 
         $builder
             ->add('files', FileType::class, [
-                    'label' => 'images',
-                    'multiple' => true,
-                    'required' => true,
-                    'constraints' => $constraints,
-                    'attr' => [
-                        'accept' => 'image/*',
-                    ],
-                ]
+                'label' => 'images',
+                'multiple' => true,
+                'required' => true,
+                'constraints' => $constraints,
+                'attr' => [
+                    'accept' => 'image/*',
+                ],
+            ]
             )
             ->add('trip', EntityType::class, [
                 'class' => Trip::class,
@@ -68,17 +68,18 @@ class MediaBulkAddType extends AbstractType
                     if ($trip->hasParent()) {
                         return $trip->getParent()->getNameEn();
                     }
+
                     return $trip->getNameEn();
                 },
                 'data' => $trip,
                 'placeholder' => '', // add an empty placeholder instead of a default trip selected
             ])
             ->add('showInTrip', CheckboxType::class, [
-                'label'    => 'show in trip',
+                'label' => 'show in trip',
                 'required' => false,
                 'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])
-            ->addDependent('story', 'trip', function(DependentField $field, ?Trip $selectedTrip) use ($story) {
+            ->addDependent('story', 'trip', function (DependentField $field, ?Trip $selectedTrip) use ($story) {
                 if ($selectedTrip === null) {
                     return;
                 }
@@ -97,7 +98,7 @@ class MediaBulkAddType extends AbstractType
                     'data' => $story,
                 ]);
             })
-            ->addDependent('showInStory', 'trip', function (DependentField $field, ?Trip $selectedTrip) use ($story){
+            ->addDependent('showInStory', 'trip', function (DependentField $field, ?Trip $selectedTrip) use ($story) {
                 if ($selectedTrip === null) {
                     return;
                 }
@@ -117,6 +118,7 @@ class MediaBulkAddType extends AbstractType
                             ->setParameter('countries', $trip->getCountries())
                             ->orderBy('pt.nameEn', \SortDirection::Ascending);
                     }
+
                     return $repo->createQueryBuilder('pt')
                         ->orderBy('pt.nameEn', \SortDirection::Ascending);
                 },
@@ -124,7 +126,7 @@ class MediaBulkAddType extends AbstractType
                 'multiple' => true,
                 'autocomplete' => true,
                 // 'by_reference' => false, // not needed here. Form is not tied to a class, we handle it by hand in mediaController::_importImages
-        ])
+            ])
             ->add('tags', EntityType::class, [
                 'class' => MediaTag::class,
                 'query_builder' => function (EntityRepository $repo): QueryBuilder {
@@ -135,9 +137,9 @@ class MediaBulkAddType extends AbstractType
                 'multiple' => true,
                 'autocomplete' => true,
                 // 'by_reference' => false, // not needed here. Form is not tied to a class, we handle it by hand in mediaController::_importImages
-        ])
+            ])
             ->add('showInFood', CheckboxType::class, [
-                'label'    => 'show in food meal',
+                'label' => 'show in food meal',
                 'required' => false,
                 'label_attr' => ['class' => 'checkbox-switch'], // EasyAdmin switch component (<twig:ea:Switch>)
             ])

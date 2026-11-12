@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Helper;
 
@@ -10,9 +10,7 @@ class BreadcrumbsHelper
 {
     public function __construct(
         private RequestStack $requestStack,
-    )
-    {
-    }
+    ) {}
 
     private array $breadcrumbs = [];
 
@@ -23,11 +21,11 @@ class BreadcrumbsHelper
         if ($item instanceof Trip) {
             $route = 'trip_show';
             $routeParams = [
-                'slug' => $item->getSlug($locale)
+                'slug' => $item->getSlug($locale),
             ];
             $item = $item->getShortNameWithFallback($locale);
         }
-    
+
         if ($item instanceof Ingredient) {
             $route = 'food_ingredients';
             $routeParams = [
@@ -35,7 +33,7 @@ class BreadcrumbsHelper
             ];
             $item = $item->getName($locale);
         }
-    
+
         $this->breadcrumbs[] = [
             'item' => $item,
             'route' => $route,

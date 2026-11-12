@@ -8,23 +8,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * UNUSED at the moment, but kept as an example on how to create a custom button type.
  * (a bit tricky)
- * 
+ *
  * Normally, for a custom form type, we are supposed to extend AbstractType
  * and set the parent to what we want to extendw ith getParent()
- * 
+ *
  * BUT WITH SUBMIT, which is an unusual form type (not a data type),
  * the conventional approach does not work.
- * 
+ *
  * It gives the error "Can't get a way to read the property "foo" in class "App\Entity\Booking".
  * Because it doesn't understand the field is not mapped, and if you try to add "mapped" => false,
  * it does not handle it.
- * 
+ *
  * Basically, extending AbstractType and setting the parent as SubmitType is not enough to
  * get the internal SubmitType behaviour.
- * 
+ *
  * SOLUTION:
  * If we extend SubmitType, we get the correct behaviour !
- * 
+ *
  * ---------------------------------
  * For loader behaviour, this field builds on top of
  *  - form theme {% block button_widget %}

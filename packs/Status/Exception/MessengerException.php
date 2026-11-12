@@ -2,7 +2,4 @@
 
 namespace Pack\Status\Exception;
 
-class MessengerException extends \RuntimeException
-{
-    
-}
+class MessengerException extends \RuntimeException {}

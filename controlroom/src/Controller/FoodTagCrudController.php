@@ -20,7 +20,7 @@ class FoodTagCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Food Tag')
             ->setEntityLabelInPlural('Food Tags')
             ->setDefaultSort([
-                'nameEn' => 'ASC'
+                'nameEn' => 'ASC',
             ])
         ;
     }

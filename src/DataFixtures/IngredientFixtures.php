@@ -9,26 +9,26 @@ use Doctrine\Persistence\ObjectManager;
 class IngredientFixtures extends Fixture
 {
     // favourites
-    const ZUCHINI = 'zuchini';
-    const ADVOCADO = 'advocado';
-    const APPLE = 'apple';
-    const MANGO = 'mango';
-    const PEAR = 'pear';
-    const STRAWBERRY = 'strawberry';
-    const SWEET_POTATO = 'sweetpotato';
-    const LENTILS = 'lentils';
-    const TARO = 'taro';
-    const CINAMON = 'cinamon';
-    const EGGS = 'eggs';
-    const CHOCOLATE = 'chocolate';
-    const MUNGBEAN = 'mungbean';
-    
+    public const ZUCHINI = 'zuchini';
+    public const ADVOCADO = 'advocado';
+    public const APPLE = 'apple';
+    public const MANGO = 'mango';
+    public const PEAR = 'pear';
+    public const STRAWBERRY = 'strawberry';
+    public const SWEET_POTATO = 'sweetpotato';
+    public const LENTILS = 'lentils';
+    public const TARO = 'taro';
+    public const CINAMON = 'cinamon';
+    public const EGGS = 'eggs';
+    public const CHOCOLATE = 'chocolate';
+    public const MUNGBEAN = 'mungbean';
+
     // other
-    const NOODLES = 'noodles';
-    const SPAGHETTI = 'spaghetti';
-    const TOMATO = 'tomato';
-    const FETA = 'feta';
-    const DUCK = 'duck';
+    public const NOODLES = 'noodles';
+    public const SPAGHETTI = 'spaghetti';
+    public const TOMATO = 'tomato';
+    public const FETA = 'feta';
+    public const DUCK = 'duck';
 
     private const array INGREDIENTS = [
         [
@@ -143,9 +143,8 @@ class IngredientFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach(self::INGREDIENTS as $item) {
-            
-            $ingredient = new Ingredient;
+        foreach (self::INGREDIENTS as $item) {
+            $ingredient = new Ingredient();
 
             $ingredient->setNameFr($item['nameFr']);
             $ingredient->setNameEn($item['nameEn']);
@@ -153,7 +152,7 @@ class IngredientFixtures extends Fixture
             $ingredient->setFavourite($item['favourite']);
 
             $this->setReference('ingredient-' . $item['key'], $ingredient);
-        
+
             $manager->persist($ingredient);
         }
 

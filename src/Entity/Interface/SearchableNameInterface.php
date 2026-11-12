@@ -4,7 +4,7 @@ namespace App\Entity\Interface;
 
 /**
  * Marker interface
- * 
+ *
  * Indicates that the entity has a searchableName property
  */
 interface SearchableNameInterface

@@ -8,19 +8,19 @@ use App\Entity\Story;
 use App\Entity\Trip;
 use App\Enum\MediaType;
 use App\Helper\MediaAutoFillHelper;
+use Controlroom\Form\Type\MediaBulkAddType;
+use Controlroom\Form\Type\MediaFoodQuickEditType;
+use Controlroom\Form\Type\MediaQuickEditType;
+use Doctrine\ORM\EntityManager;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 use Pack\Media\Helper\ExifExtractor;
 use Pack\Media\Helper\UploadHelper;
-use Controlroom\Form\Type\MediaBulkAddType;
-use Controlroom\Form\Type\MediaQuickEditType;
-use Controlroom\Form\Type\MediaFoodQuickEditType;
-use Doctrine\ORM\EntityManager;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
-use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 class MediaController extends BaseController
 {
@@ -29,13 +29,11 @@ class MediaController extends BaseController
         private ExifExtractor $exifExtractor,
         private MediaAutoFillHelper $autoFillHelper,
         private EntityManager $entityManager,
-    )
-    {
-    }
+    ) {}
 
     /**
      * Called in ajax from bulk edit forms
-     * 
+     *
      * Route must not conflict with easyadmin /media/{id}/edit
      */
     #[AdminRoute('/media/{id}/quick-edit', name: 'media_quick_edit', options: ['methods' => ['POST']])]
@@ -53,7 +51,7 @@ class MediaController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->_updateAutoFieldsAtQuickEdit($media);
-            
+
             $entityManager->persist($media);
             $entityManager->flush();
 
@@ -120,7 +118,6 @@ class MediaController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $submitBtn = $form->get('submit');
             assert($submitBtn instanceof ClickableInterface);
 
@@ -130,7 +127,7 @@ class MediaController extends BaseController
                     'form' => $form,
                 ]);
             }
-    
+
             $this->_importImages($form);
 
             // if images linked to trip, go to trip edit page
@@ -161,7 +158,6 @@ class MediaController extends BaseController
         $showInFood = $form->get('showInFood')->getData();
 
         foreach ($uploadedFiles as $uploadedFile) {
-
             $media = new Media();
 
             $media->setType(MediaType::IMAGE);
@@ -193,7 +189,7 @@ class MediaController extends BaseController
 
             $this->entityManager->persist($media);
             $this->entityManager->flush();
-            
+
             $this->addFlash('success', 'Image successfully imported');
         }
     }
@@ -218,5 +214,4 @@ class MediaController extends BaseController
 
         $this->autoFillHelper->autoAssignMeal($media);
     }
-
 }

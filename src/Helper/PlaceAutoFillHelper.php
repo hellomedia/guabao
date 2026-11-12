@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Helper;
 
@@ -7,9 +7,7 @@ use App\Entity\Place;
 class PlaceAutoFillHelper
 {
     public function __construct(
-    )
-    { 
-    }
+    ) {}
 
     public function autoAssignCountry(Place $place): void
     {

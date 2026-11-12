@@ -13,9 +13,7 @@ class AppExtension extends AbstractExtension implements GlobalsInterface
 {
     public function __construct(
         private RequestStack $requestStack,
-    ) {
-
-    }
+    ) {}
 
     /**
      * NB: Simple globals can be set in config/packages/twig.yaml

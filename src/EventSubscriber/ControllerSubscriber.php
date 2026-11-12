@@ -3,13 +3,13 @@
 namespace App\EventSubscriber;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class ControllerSubscriber implements EventSubscriberInterface
 {
@@ -22,7 +22,7 @@ class ControllerSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::CONTROLLER => 'onKernelController'
+            KernelEvents::CONTROLLER => 'onKernelController',
         ];
     }
 
@@ -42,7 +42,6 @@ class ControllerSubscriber implements EventSubscriberInterface
             }
 
             if (isset($controller)) {
-
                 $this->_setTheme($event->getRequest());
 
                 if (method_exists($controller, 'preExecute')) {
@@ -67,16 +66,16 @@ class ControllerSubscriber implements EventSubscriberInterface
         if ($request->query->has('theme')) {
             // theme set from query
             $theme = $request->query->get('theme');
-            
+
             $setTheme = true;
         }
 
-        if (!($theme)) {
+        if (!$theme) {
             // theme retrieved from session
             $theme = $request->getSession()->get('theme');
         }
 
-        if (!($theme)) {
+        if (!$theme) {
             // theme set from headers
             $acceptHeader = $request->headers->get('accept');
             $theme = (str_contains($acceptHeader, 'prefers-color-scheme: dark')) ? 'dark' : 'light';
@@ -84,7 +83,7 @@ class ControllerSubscriber implements EventSubscriberInterface
             $setTheme = true;
         }
 
-        if (!($theme)) {
+        if (!$theme) {
             // theme set to default
             $theme = 'light';
 
@@ -92,7 +91,6 @@ class ControllerSubscriber implements EventSubscriberInterface
         }
 
         if ($setTheme) {
-
             $request->getSession()->set('theme', $theme);
             // Important: change in session data is NOT saved correctly inside an AJAX request (turbo drive)
             // A workaround would be to save manually with $this->requestStack->getSession()->save()

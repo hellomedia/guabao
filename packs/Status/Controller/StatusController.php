@@ -3,11 +3,11 @@
 namespace Pack\Status\Controller;
 
 use App\Controller\BaseController;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 use Pack\Status\Chart\OpCacheChartProvider;
 use Pack\Status\Chart\RealpathCacheChartProvider;
 use Pack\Status\Model\OpCacheStatus;
 use Symfony\Component\HttpFoundation\Response;
-use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 
 #[AdminRoute('/status', name: 'status')]
 class StatusController extends BaseController

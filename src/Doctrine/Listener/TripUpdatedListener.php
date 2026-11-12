@@ -18,9 +18,7 @@ class TripUpdatedListener
 {
     public function __construct(
         private SluggerInterface $slugger,
-    )
-    {
-    }
+    ) {}
 
     // NB: only goes through here if something else is updated
     public function preUpdate(Trip $trip, PreUpdateEventArgs $args)

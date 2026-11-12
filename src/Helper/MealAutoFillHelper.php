@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Helper;
 
@@ -14,11 +14,9 @@ class MealAutoFillHelper
         private TripRepository $tripRepository,
         private PlaceRepository $placeRepository,
         private MealRepository $mealRepository,
-        private GoogleMapsApiHelper $mapsApiHelper, 
+        private GoogleMapsApiHelper $mapsApiHelper,
         private EntityManager $entityManager,
-    )
-    { 
-    }
+    ) {}
 
     public function autoAssignPlace(Meal $meal): void
     {

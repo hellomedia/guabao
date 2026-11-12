@@ -2,7 +2,6 @@
 
 namespace App\Enum;
 
-use App\Entity\Interface\ContextualCategoryFilterInterface;
 use App\Enum\Trait\EnumUtilsTrait;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -19,7 +18,7 @@ enum Gender: string implements TranslatableInterface
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
         return match ($this) {
-            self::MEN  => $translator->trans('gender.men', domain: 'enum', locale: $locale),
+            self::MEN => $translator->trans('gender.men', domain: 'enum', locale: $locale),
             self::WOMEN => $translator->trans('gender.women', domain: 'enum', locale: $locale),
         };
     }

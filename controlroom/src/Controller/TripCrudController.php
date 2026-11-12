@@ -2,7 +2,6 @@
 
 namespace Controlroom\Controller;
 
-use App\Entity\Tag\TripTag;
 use App\Entity\Trip;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -26,9 +25,7 @@ class TripCrudController extends AbstractCrudController
 {
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
-    )
-    {  
-    }
+    ) {}
 
     public static function getEntityFqcn(): string
     {
@@ -53,7 +50,7 @@ class TripCrudController extends AbstractCrudController
         yield Field::new('cover.path', 'Cover')
             ->setTemplatePath('@media/easyadmin/field/media.html.twig')
             ->onlyOnDetail();
-    
+
         yield TextField::new('nameEn', 'Name EN');
         yield TextField::new('nameFr', 'Name FR');
 
@@ -67,7 +64,7 @@ class TripCrudController extends AbstractCrudController
                 },
                 'choice_label' => function (Trip $trip): string {
                     return $trip->getPeriod() . ' ' . $trip->getName();
-                }
+                },
             ]);
         yield AssociationField::new('children')
             ->setTemplatePath('@admin/field/trips.html.twig');
@@ -108,8 +105,8 @@ class TripCrudController extends AbstractCrudController
                         'trip' => [
                             'comparison' => '=',
                             'value' => $trip->getId(),
-                        ]
-                    ]
+                        ],
+                    ],
                 ]);
             })
             ->setIcon('fa fa-images');

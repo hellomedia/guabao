@@ -3,7 +3,6 @@
 namespace Controlroom\Controller;
 
 use App\Entity\Story;
-use App\Entity\Tag\MediaTag;
 use App\Entity\Trip;
 use Doctrine\ORM\EntityRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -22,10 +21,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class StoryCrudController extends AbstractCrudController
 {
     public function __construct(
-        private UrlGeneratorInterface $urlGenerator)
-    {
-        
-    }
+        private UrlGeneratorInterface $urlGenerator) {}
 
     public static function getEntityFqcn(): string
     {
@@ -64,8 +60,8 @@ class StoryCrudController extends AbstractCrudController
                         'story' => [
                             'comparison' => '=',
                             'value' => $story->getId(),
-                        ]
-                    ]
+                        ],
+                    ],
                 ]);
             })
             ->setIcon('fa fa-images');
@@ -85,7 +81,7 @@ class StoryCrudController extends AbstractCrudController
                 ]);
             })
         ;
-    
+
         $globalAddImages = Action::new('addImages', '+ Bulk add images')
             ->linkToUrl($this->urlGenerator->generate('controlroom_media_bulk_add'))
             ->createAsGlobalAction();
@@ -112,8 +108,9 @@ class StoryCrudController extends AbstractCrudController
                     if ($trip->hasParent()) {
                         return $trip->getParent()->getShortNameWithFallback() . ' ' . $trip->getName();
                     }
+
                     return $trip->getName();
-                }
+                },
             ]);
 
         yield NumberField::new('displayOrder');

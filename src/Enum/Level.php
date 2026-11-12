@@ -22,7 +22,7 @@ enum Level: int implements TranslatableInterface
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
         return match ($this) {
-            self::LEVEL_1  => $translator->trans('level.1', domain: 'enum', locale: $locale),
+            self::LEVEL_1 => $translator->trans('level.1', domain: 'enum', locale: $locale),
             self::LEVEL_2 => $translator->trans('level.2', domain: 'enum', locale: $locale),
             self::LEVEL_3 => $translator->trans('level.3', domain: 'enum', locale: $locale),
             self::LEVEL_4 => $translator->trans('level.4', domain: 'enum', locale: $locale),

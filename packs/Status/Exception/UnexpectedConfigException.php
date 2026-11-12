@@ -2,7 +2,4 @@
 
 namespace Pack\Status\Exception;
 
-class UnexpectedConfigException extends \RuntimeException
-{
-    
-}
+class UnexpectedConfigException extends \RuntimeException {}

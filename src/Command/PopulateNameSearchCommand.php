@@ -4,7 +4,6 @@ namespace App\Command;
 
 use App\Entity\Food;
 use App\Entity\Ingredient;
-use App\Entity\Story;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -38,7 +37,6 @@ class PopulateNameSearchCommand extends Command
         $count = 0;
 
         foreach ($foods as $food) {
-
             $io->info($food->getNameEn());
 
             $text = trim(mb_strtolower($food->getNameFr() . ' ' . $food->getNameEn() . ' ' . $food->getOriginalName()));
@@ -46,12 +44,12 @@ class PopulateNameSearchCommand extends Command
 
             $food->setNameSearch($normalized);
 
-            $count ++;
+            ++$count;
         }
 
         $this->entityManager->flush();
 
-        $io->success( $count . ' foods updated successfully');
+        $io->success($count . ' foods updated successfully');
 
         $io->info('ingredients');
 
@@ -64,7 +62,6 @@ class PopulateNameSearchCommand extends Command
         $count = 0;
 
         foreach ($ingredients as $ingredient) {
-
             $io->info($ingredient->getNameEn());
 
             $text = trim(mb_strtolower($ingredient->getNameFr() . ' ' . $ingredient->getNameEn()));
@@ -72,7 +69,7 @@ class PopulateNameSearchCommand extends Command
 
             $ingredient->setNameSearch($normalized);
 
-            $count++;
+            ++$count;
         }
 
         $this->entityManager->flush();

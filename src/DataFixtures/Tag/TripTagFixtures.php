@@ -29,7 +29,7 @@ class TripTagFixtures extends Fixture
             'nameFr' => 'Solo',
             'nameEn' => 'Solo',
         ],
-        [   
+        [
             'key' => self::WITH_FRIENDS,
             'nameFr' => 'Entre amis',
             'nameEn' => 'With friends',
@@ -38,8 +38,7 @@ class TripTagFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach(self::TRIP_TAGS as $item) {
-            
+        foreach (self::TRIP_TAGS as $item) {
             $tripTag = new TripTag();
 
             $tripTag->setKey($item['key']);
@@ -47,7 +46,7 @@ class TripTagFixtures extends Fixture
             $tripTag->setNameEn($item['nameEn']);
 
             $this->setReference('triptag-' . $item['key'], $tripTag);
-        
+
             $manager->persist($tripTag);
         }
 

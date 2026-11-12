@@ -31,8 +31,5 @@ final class Version20250823130905 extends AbstractMigration
         SQL);
     }
 
-    public function down(Schema $schema): void
-    {
-
-    }
+    public function down(Schema $schema): void {}
 }

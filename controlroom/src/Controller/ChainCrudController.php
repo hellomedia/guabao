@@ -22,7 +22,7 @@ class ChainCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Chain')
             ->setEntityLabelInPlural('Chains')
             ->setDefaultSort([
-                'nameEn' => 'ASC'
+                'nameEn' => 'ASC',
             ])
         ;
     }
@@ -35,7 +35,7 @@ class ChainCrudController extends AbstractCrudController
         yield TextField::new('originalName');
 
         yield BooleanField::new('favourite');
-                    
+
         yield TextareaField::new('descriptionEn', 'Description EN');
         yield TextareaField::new('descriptionFr', 'Description FR');
     }

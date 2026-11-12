@@ -2,8 +2,6 @@
 
 namespace Controlroom\Controller;
 
-use App\Entity\Tag\MediaTag;
-use App\Entity\Tag\PlaceTag;
 use App\Entity\Trip;
 use App\Enum\MediaType;
 use Doctrine\ORM\EntityRepository;
@@ -54,7 +52,7 @@ class ImageCrudController extends MediaCrudController
     {
         yield FormField::addFieldset('Image');
 
-        /**
+        /*
          * Image fields
          * ============
          */
@@ -68,7 +66,7 @@ class ImageCrudController extends MediaCrudController
         yield TextField::new('path', 'Thumbs')
             ->setTemplatePath('@media/easyadmin/field/media.html.twig')
             ->onlyOnDetail();
-        
+
         // CREATE
         yield Field::new('imageFile')
             ->setFormType(FileType::class)
@@ -92,8 +90,8 @@ class ImageCrudController extends MediaCrudController
                 'help' => 'Existing image: ' . $filename ?? ' - ',
             ])
             ->onlyWhenUpdating();
-        
-        /**
+
+        /*
          * End Image fields
          * ================
          */
@@ -106,15 +104,16 @@ class ImageCrudController extends MediaCrudController
         yield AssociationField::new('trip')
             ->setHelp('Leave empty for auto-fill from exif data')
             ->setFormTypeOption('query_builder', function (EntityRepository $repo): QueryBuilder {
-                    return $repo->createQueryBuilder('t')
-                        ->orderBy('t.startedAt', \SortDirection::Descending);
-                })
+                return $repo->createQueryBuilder('t')
+                    ->orderBy('t.startedAt', \SortDirection::Descending);
+            })
             ->setFormTypeOption('group_by', function (Trip $trip, $key, $value) {
-                    if ($trip->hasParent()) {
-                        return $trip->getParent()->getNameEn();
-                    }
-                    return $trip->getNameEn();
-                })
+                if ($trip->hasParent()) {
+                    return $trip->getParent()->getNameEn();
+                }
+
+                return $trip->getNameEn();
+            })
         ;
 
         yield BooleanField::new('isTripCover', 'Cover');
@@ -126,7 +125,7 @@ class ImageCrudController extends MediaCrudController
         yield AssociationField::new('food')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@admin/field/food_list.html.twig');
-        
+
         yield BooleanField::new('isMeal');
         yield AssociationField::new('meal')
             ->hideOnIndex()
@@ -156,12 +155,12 @@ class ImageCrudController extends MediaCrudController
 
         // TAGS
         yield FormField::addFieldset('Tags');
-        
+
         yield AssociationField::new('tags')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@admin/field/tags.html.twig')
         ;
-        
+
         yield AssociationField::new('placeTags', 'Places')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@admin/field/tags.html.twig')

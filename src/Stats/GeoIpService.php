@@ -27,7 +27,6 @@ final class GeoIpService
         }
 
         try {
-
             $city = $this->getReader()->city($ip);
 
             return new GeoIpResult(
@@ -35,8 +34,7 @@ final class GeoIpService
                 cityName: $city->city->name ?: null,
             );
         } catch (\Throwable $e) {
-
-            //throw $e;
+            // throw $e;
 
             return new GeoIpResult(null, null);
         }

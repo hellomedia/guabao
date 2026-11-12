@@ -41,9 +41,9 @@ class CuisineRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-        return array_map(fn($row) => [
-            'cuisine'    => $row[0],
-            'food_count'  => (int)$row['foodCount'],
+        return array_map(fn ($row) => [
+            'cuisine' => $row[0],
+            'food_count' => (int) $row['foodCount'],
         ], $result);
     }
 }

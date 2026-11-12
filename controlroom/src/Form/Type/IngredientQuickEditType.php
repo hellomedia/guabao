@@ -16,7 +16,7 @@ class IngredientQuickEditType extends AbstractType
         $builder
             ->add('nameEn')
             ->add('nameFr')
-            ->add('foodType', EnumType::class,  [
+            ->add('foodType', EnumType::class, [
                 'class' => FoodType::class,
                 'required' => false,
                 'expanded' => false,

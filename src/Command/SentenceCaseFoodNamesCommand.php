@@ -29,7 +29,6 @@ class SentenceCaseFoodNamesCommand extends Command
         $foods = $this->em->getRepository(Food::class)->findAll();
 
         foreach ($foods as $food) {
-
             $io->info('before: ' . $food->getNameEn());
 
             $food->setNameEn($this->toSentenceCase($food->getNameEn()));

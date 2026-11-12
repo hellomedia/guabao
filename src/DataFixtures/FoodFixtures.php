@@ -13,8 +13,8 @@ use Doctrine\Persistence\ObjectManager;
 
 class FoodFixtures extends Fixture implements DependentFixtureInterface
 {
-    const TOMATO = 'tomato';
-    const WONTON_NOODLE_SOUP_WITH_ROASTED_DUCK = 'wontonducksoup';
+    public const TOMATO = 'tomato';
+    public const WONTON_NOODLE_SOUP_WITH_ROASTED_DUCK = 'wontonducksoup';
 
     private const FOOD = [
         [
@@ -23,7 +23,7 @@ class FoodFixtures extends Fixture implements DependentFixtureInterface
             'nameEn' => 'Belgian Tomato',
             'tags' => [FoodTagFixtures::HOME_COOKING],
             'cuisine' => CuisineFixtures::BELGIAN,
-            'ingredients' => [IngredientFixtures::TOMATO]
+            'ingredients' => [IngredientFixtures::TOMATO],
         ],
         [
             'key' => self::WONTON_NOODLE_SOUP_WITH_ROASTED_DUCK,
@@ -31,7 +31,7 @@ class FoodFixtures extends Fixture implements DependentFixtureInterface
             'nameEn' => 'Wonton noodle soup with roasted duck',
             'tags' => [FoodTagFixtures::SOUP],
             'cuisine' => CuisineFixtures::THAI,
-            'ingredients' => [IngredientFixtures::DUCK, IngredientFixtures::NOODLES]
+            'ingredients' => [IngredientFixtures::DUCK, IngredientFixtures::NOODLES],
         ],
     ];
 
@@ -47,8 +47,7 @@ class FoodFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         foreach (self::FOOD as $item) {
-
-            $food = new Food;
+            $food = new Food();
 
             $food->setNameFr($item['nameFr']);
             $food->setNameEn($item['nameEn']);
@@ -64,7 +63,7 @@ class FoodFixtures extends Fixture implements DependentFixtureInterface
             }
 
             $this->setReference('food-' . $item['key'], $food);
-            
+
             $manager->persist($food);
         }
 

@@ -18,7 +18,6 @@ use App\Repository\TripRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Index('trip_started_at_idx', ['started_at'])]
@@ -49,6 +48,7 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
      * Let's link to countries directly from trip
      * This is duplication since pics are linked to trip and placetags, which are linked to countries
      * But it seems like it also belongs to the trip itself, and is not much work
+     *
      * @var Collection<int, Country>
      */
     #[ORM\ManyToMany(targetEntity: Country::class)]
@@ -142,7 +142,7 @@ class Trip implements LocalizedNameInterface, LocalizedSlugInterface, HasPeriodI
     }
 
     public function setCover(?Media $cover): static
-    { 
+    {
         $this->cover = $cover;
 
         return $this;

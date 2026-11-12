@@ -26,7 +26,6 @@ class PlaceTagAutocompleteField extends AbstractType
             'searchable_fields' => ['nameEn', 'nameFr'],
             'query_builder' => function (Options $options) {
                 return function (PlaceTagRepository $repo) use ($options): QueryBuilder {
-
                     $countries = $options['extra_options']['countries'] ?? null;
 
                     if ($countries) {
@@ -35,7 +34,7 @@ class PlaceTagAutocompleteField extends AbstractType
                             ->setParameter('countries', $countries)
                             ->orderBy('pt.nameEn', \SortDirection::Ascending);
                     }
-                
+
                     return $repo->createQueryBuilder('pt')
                         ->orderBy('pt.nameEn', \SortDirection::Ascending);
                 };

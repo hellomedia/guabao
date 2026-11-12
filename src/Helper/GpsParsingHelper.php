@@ -28,8 +28,10 @@ class GpsParsingHelper
     {
         if (str_contains($part, '/')) {
             [$num, $den] = explode('/', $part);
-            return (float)$num / (float)$den;
+
+            return (float) $num / (float) $den;
         }
-        return (float)$part;
+
+        return (float) $part;
     }
 }

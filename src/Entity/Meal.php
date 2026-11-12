@@ -59,12 +59,12 @@ class Meal implements EntityInterface
     }
 
     /**
-     * Meals are created automatically from a food media 
+     * Meals are created automatically from a food media
      * in MediaAutoFillHelper::setMeal when isMeal flag is set to true
      */
     public function __toString()
     {
-        return  $this->getNameAndTime();
+        return $this->getNameAndTime();
     }
 
     public function getNameAndTime(): string

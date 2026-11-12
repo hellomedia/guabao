@@ -2,11 +2,8 @@
 
 namespace Controlroom\Controller;
 
-use App\Entity\Food;
 use App\Entity\Interface\EntityInterface;
 use App\Entity\Media;
-use App\Entity\Place;
-use App\Entity\Trip;
 use App\Repository\Stats\AnonymousVisitorRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -20,7 +17,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Option\Font;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\GrayScale;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Theme;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -34,9 +30,7 @@ class DashboardController extends AbstractDashboardController
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
         private AnonymousVisitorRepository $anonymousVisitorRepository,
-    )
-    {
-    }
+    ) {}
 
     public function index(): Response
     {
@@ -93,7 +87,7 @@ class DashboardController extends AbstractDashboardController
             ->addAssetMapperEntry('controlroom')
             // you can also import multiple entries
             // it's equivalent to calling {{ importmap(['app', 'admin']) }}
-            //->addAssetMapperEntry('app', 'admin')
+            // ->addAssetMapperEntry('app', 'admin')
         ;
     }
 

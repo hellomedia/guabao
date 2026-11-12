@@ -55,7 +55,7 @@ class SearchableNameListener
             $text = trim(mb_strtolower($entity->getNameFr() . ' ' . $entity->getNameEn() . ' ' . $entity->getOriginalName()));
         } else {
             $text = trim(mb_strtolower($entity->getNameFr() . ' ' . $entity->getNameEn()));
-        };
+        }
 
         $normalized = (string) $this->slugger->slug($text, ' ');
 

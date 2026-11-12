@@ -28,7 +28,6 @@ class StoryAutocompleteField extends AbstractType
             // https://symfony.com/bundles/ux-autocomplete/current/index.html#passing-extra-options-to-the-ajax-powered-autocomplete
             'query_builder' => function (Options $options) {
                 return function (StoryRepository $repo) use ($options): QueryBuilder {
-
                     $currentTrip = $options['extra_options']['current_trip'] ?? null;
 
                     if ($currentTrip) {

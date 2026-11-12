@@ -17,9 +17,7 @@ use App\Enum\Level;
 use App\Repository\FoodRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Index(name: 'food_name_search_idx', columns: ['name_search'])]
 #[ORM\Entity(repositoryClass: FoodRepository::class)]
@@ -209,7 +207,7 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, Searchable
     {
         $meals = [];
 
-        foreach($this->medias as $media) {
+        foreach ($this->medias as $media) {
             $meal = $media->getMeal();
             if ($meal instanceof Meal && !isset($seen[$meal->getId()])) {
                 $seen[$meal->getId()] = true;
@@ -219,7 +217,6 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, Searchable
 
         return $meals;
     }
-
 
     public function isTopLevelFood(): bool
     {
@@ -360,16 +357,16 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, Searchable
 
     /**
      * Grouping logic for images in the food details page
-     * 
+     *
      * Images are grouped by date and by meal, with meal having precedence
-     * 
-     * ie: 
+     *
+     * ie:
      *   If a food image belongs to a meal, it is grouped in meal.
      *   If a food image does not belong to a meal, it is grouped by date.
-     * 
+     *
      * If a meal contains 1 image tagged with the food,
      * all images from the meal are included, even those not tagged with the food.
-     * 
+     *
      * @return array<int, array{
      *     type: 'meal'|'date',
      *     meal: ?Meal,
@@ -392,29 +389,29 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, Searchable
                 $key = 'meal_' . $meal->getId();
                 // Adjust these according to your Meal entity
                 $groupDate = $meal->getEnjoyedAt();
-                $type  = 'meal';
+                $type = 'meal';
                 $place = $meal->getPlace();
                 $placeTags = $meal->getPlaceTags()->toArray();
             } else {
                 // Group by date
                 $takenAt = $media->getTakenAt();
                 $dateKey = $takenAt?->format('Y-m-d') ?? 'no_date';
-                $key      = 'date_' . $dateKey;
+                $key = 'date_' . $dateKey;
                 $groupDate = $takenAt?->setTime(0, 0);
-                $type     = 'date';
+                $type = 'date';
                 $place = $media->getPlace();
                 $placeTags = $media->getPlaceTags()->toArray();
             }
 
             if (!isset($groups[$key])) {
                 $groups[$key] = [
-                    'type'   => $type,
-                    'meal'   => $meal ?? null,
-                    'date'   => $groupDate,
+                    'type' => $type,
+                    'meal' => $meal ?? null,
+                    'date' => $groupDate,
                     'medias' => [],
-                    'place'  => $place,
+                    'place' => $place,
                     'placeTags' => $placeTags,
-                    'sort'   => $groupDate?->getTimestamp() ?? 0,
+                    'sort' => $groupDate?->getTimestamp() ?? 0,
                 ];
 
                 // if it's a meal, when the group is created,
@@ -436,7 +433,7 @@ class Food implements LocalizedNameInterface, LocalizedSlugInterface, Searchable
         // Sort groups chronologically
         $groups = array_values($groups);
         usort($groups, static function (array $a, array $b): int {
-            // b <=> a for newest first 
+            // b <=> a for newest first
             // a <=> b for oldest first
             return $b['sort'] <=> $a['sort'];
         });

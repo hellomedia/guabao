@@ -66,12 +66,12 @@ class AppExtensionRuntime implements RuntimeExtensionInterface
         return $this->router->generate($item, $parameters, $referenceType);
     }
 
-    private function _getTripPath(Trip $trip, array $parameters, int $referenceType): string 
+    private function _getTripPath(Trip $trip, array $parameters, int $referenceType): string
     {
         if ($trip->isTopLevelTrip()) {
             return $this->_getTopLevelTripPath($trip, $parameters, $referenceType);
         }
-    
+
         // trip leg
         return $this->_getTripLegPath($trip, $parameters, $referenceType);
     }
@@ -100,7 +100,7 @@ class AppExtensionRuntime implements RuntimeExtensionInterface
     private function _getStoryPath(Story $story, array $parameters, int $referenceType): string
     {
         $tripPath = $this->_getTripPath($story->getTrip(), $parameters, $referenceType);
-        
+
         return $tripPath . '#' . $story->getSlugEn();
     }
 

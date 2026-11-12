@@ -2,8 +2,6 @@
 
 namespace Controlroom\Controller;
 
-use App\Entity\Tag\MediaTag;
-use App\Entity\Tag\PlaceTag;
 use App\Enum\MediaType;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -14,11 +12,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class VideoCrudController extends MediaCrudController
 {
@@ -43,10 +39,10 @@ class VideoCrudController extends MediaCrudController
         yield TextField::new('takenAtHint')
             ->onlyOnForms()
             ->setHelp('String formatted as \'Ymd_His\' used to extract takenAt. eg: 20170816_190356');
-        
+
         yield DateTimeField::new('takenAt')
             ->setHelp('Leave empty for auto-fill from exif data');
-        
+
         yield TextField::new('vimeoId');
 
         yield ChoiceField::new('videoOrientation');
@@ -68,12 +64,12 @@ class VideoCrudController extends MediaCrudController
 
         // TAGS
         yield FormField::addFieldset('Tags');
-        
+
         yield AssociationField::new('tags')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@admin/field/tags.html.twig')
         ;
-        
+
         yield AssociationField::new('placeTags', 'Place tags')
             ->setFormTypeOption('by_reference', false) // important for ManyToMany when using add/remove methods
             ->setTemplatePath('@admin/field/tags.html.twig')

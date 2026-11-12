@@ -28,7 +28,7 @@ class SiteHighlightCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Site Highlight')
             ->setEntityLabelInPlural('Site Highlights')
             ->setDefaultSort([
-                'nameEn' => 'ASC'
+                'nameEn' => 'ASC',
             ])
         ;
     }
@@ -52,6 +52,7 @@ class SiteHighlightCrudController extends AbstractCrudController
                 if ($trip->hasParent()) {
                     return $trip->getParent()->getNameEn();
                 }
+
                 return $trip->getNameEn();
             })
         ;
@@ -68,7 +69,7 @@ class SiteHighlightCrudController extends AbstractCrudController
                 return $story->getTrip()->getNameEn();
             })
         ;
-    
+
         yield AssociationField::new('places')
             ->setTemplatePath('@admin/field/places.html.twig')
             ->setFormTypeOption('query_builder', function (EntityRepository $repo): QueryBuilder {

@@ -39,9 +39,9 @@ final class AnonymousTrackingSubscriber implements EventSubscriberInterface
         if (!$event->isMainRequest()) {
             return;
         }
-            
+
         $request = $event->getRequest();
-        
+
         $visitorId = $this->trackingService->getNewVisitorIdToSetAsCookie($request);
 
         if (!$visitorId) {

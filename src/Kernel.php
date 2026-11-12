@@ -50,8 +50,8 @@ class Kernel extends BaseKernel
 
         // FIRST -- for controlroom routes - ie: /login or / -- first route wins
         // if ($_SERVER['HTTP_HOST'] ?? 'undefined' == $_SERVER['HOST_CONTROLROOM']) {
-            $routes->import($controlroomConfigDir . '/routes.yaml');
-            $routes->import($controlroomConfigDir . '/routes/easyadmin.yaml');
+        $routes->import($controlroomConfigDir . '/routes.yaml');
+        $routes->import($controlroomConfigDir . '/routes/easyadmin.yaml');
         // }
 
         $routes->import($configDir . '/{routes}/' . $this->environment . '/*.{php,yaml}');
@@ -72,7 +72,7 @@ class Kernel extends BaseKernel
      */
     public function getCacheDir(): string
     {
-        $dir = match($this->getRequestHost()) {
+        $dir = match ($this->getRequestHost()) {
             $_SERVER['HOST_CONTROLROOM'] => 'controlroom',
             $_SERVER['HOST'] => 'site',
             default => 'site',

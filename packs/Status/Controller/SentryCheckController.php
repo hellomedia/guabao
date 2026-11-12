@@ -11,11 +11,9 @@ use Symfony\Component\Routing\Attribute\Route;
  */
 class SentryCheckController extends BaseController
 {
-    public function __construct(private LoggerInterface $logger)
-    {
-    }
+    public function __construct(private LoggerInterface $logger) {}
 
-    #[Route(name: "sentry_check", path: "/_check/sentry")]
+    #[Route(name: 'sentry_check', path: '/_check/sentry')]
     public function checkSentryLogging()
     {
         // test if monolog integration logs to sentry

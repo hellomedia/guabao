@@ -20,7 +20,7 @@ class CountryCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Country')
             ->setEntityLabelInPlural('Countries')
             ->setDefaultSort([
-                'nameEn' => 'ASC'
+                'nameEn' => 'ASC',
             ])
         ;
     }

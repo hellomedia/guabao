@@ -21,7 +21,7 @@ class TripTagCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Trip Tag')
             ->setEntityLabelInPlural('Trip Tags')
             ->setDefaultSort([
-                'nameEn' => 'ASC'
+                'nameEn' => 'ASC',
             ])
         ;
     }
@@ -29,7 +29,7 @@ class TripTagCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('key');
-        
+
         yield TextField::new('nameEn', 'Name EN');
         yield TextField::new('nameFr', 'Name FR');
 

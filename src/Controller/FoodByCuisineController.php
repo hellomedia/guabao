@@ -27,7 +27,7 @@ class FoodByCuisineController extends BaseController
         $this->addBreadcrumb('food.cuisines');
 
         return $this->render('food/cuisine/index.html.twig', [
-            'cuisines_with_counts' => $cuisinesWithCounts
+            'cuisines_with_counts' => $cuisinesWithCounts,
         ]);
     }
 
@@ -49,16 +49,15 @@ class FoodByCuisineController extends BaseController
     public function food(
         #[MapEntity(expr: 'repository.findOneBySlugEn(slugCuisine)')] Cuisine $cuisine,
         #[MapEntity(expr: 'repository.findOneBySlugEnWithMedias(slugEn)')] Food $food,
-        Request $request
-        ): Response
-    {
+        Request $request,
+    ): Response {
         $this->addBreadcrumb('food.cuisines', 'food_cuisines_index');
         $this->addBreadcrumb(
             $cuisine->getName($request->getLocale()), 'food_cuisines_cuisine',
             ['slugEn' => $cuisine->getSlugEn()],
             isLarge: true
         );
-        //$this->addBreadcrumb($food->getName($request->getLocale()));
+        // $this->addBreadcrumb($food->getName($request->getLocale()));
 
         return $this->render('food/show.html.twig', [
             'food' => $food,

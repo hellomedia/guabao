@@ -16,7 +16,7 @@ class CuisineQuickEditType extends AbstractType
         $builder
             ->add('nameEn')
             ->add('nameFr')
-            ->add('country', EntityType::class,  [
+            ->add('country', EntityType::class, [
                 'class' => Country::class,
                 'required' => false,
                 'expanded' => false,

@@ -7,24 +7,21 @@ use App\Entity\Media;
 use App\Entity\Trip;
 use App\Enum\MediaType;
 use App\Helper\MediaAutoFillHelper;
-use Pack\Media\Helper\ExifExtractor;
-use Pack\Media\Helper\UploadHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Pack\Media\Helper\ExifExtractor;
+use Pack\Media\Helper\UploadHelper;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
 class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterface
 {
-
     public function __construct(
         private MediaAutoFillHelper $autoFillHelper,
         private UploadHelper $uploadHelper,
         private ExifExtractor $exifExtractor,
-    )
-    {   
-    }
+    ) {}
 
     public function getDependencies(): array
     {
@@ -36,13 +33,12 @@ class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterf
     public function load(ObjectManager $manager): void
     {
         $this->_removeOldFiles();
-                
-        foreach (TripFixtures::TRIPS as $trip) {
 
+        foreach (TripFixtures::TRIPS as $trip) {
             $media = new Media();
 
             $media->setType(MediaType::IMAGE);
-            
+
             $originalPath = __DIR__ . '/../images/trips/' . $trip['key'] . '/cover.jpg';
 
             $uploadedFile = $this->uploadHelper->createUploadedFileForFixtures($originalPath);
@@ -59,7 +55,7 @@ class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterf
             $trip->setCover($media);
 
             $this->_updateAutoFields($media, $exif);
-    
+
             $manager->persist($media);
         }
 

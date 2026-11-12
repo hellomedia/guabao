@@ -9,27 +9,25 @@ use App\Entity\Story;
 use App\Entity\Trip;
 use Controlroom\Form\Type\FoodQuickEditType;
 use Controlroom\Form\Type\MediaBulkEditTagsType;
+use Controlroom\Form\Type\MediaFoodQuickEditType;
 use Controlroom\Form\Type\MediaQuickEditType;
 use Controlroom\Form\Type\StoryQuickEditType;
 use Controlroom\Form\Type\TripQuickEditType;
-use Controlroom\Form\Type\MediaFoodQuickEditType;
 use Doctrine\ORM\EntityManager;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
-use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 class MediaBulkEditController extends BaseController
 {
     public function __construct(
         private EntityManager $entityManager,
-    )
-    {
-    }
+    ) {}
 
     // EA defaults option add the ea variable in twig, needed to extend easyadmin templates
     // see https://github.com/EasyCorp/EasyAdminBundle/pull/6765
@@ -58,7 +56,7 @@ class MediaBulkEditController extends BaseController
             )->createView();
         }
 
-        // FORM 2: Quick Edit Trip 
+        // FORM 2: Quick Edit Trip
         $tripForm = $formFactory->createNamed(
             // form names must match with story quick edit form
             name: 'trip_quick_edit_form_' . $trip->getId(),
@@ -164,7 +162,7 @@ class MediaBulkEditController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->_processBulkAddTagsForm($form, $story);
-           
+
             $entityManager->flush();
 
             $this->addFlash('success', 'Tag added successfully');
@@ -191,7 +189,7 @@ class MediaBulkEditController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->_processBulkRemoveTagsForm($form, $story);
-           
+
             $entityManager->flush();
 
             $this->addFlash('success', 'Tag removed successfully');
@@ -272,5 +270,4 @@ class MediaBulkEditController extends BaseController
             }
         }
     }
-
 }

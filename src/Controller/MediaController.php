@@ -13,9 +13,9 @@ class MediaController extends BaseController
     public function index(MediaRepository $mediaRepository): Response
     {
         $medias = $mediaRepository->findAll();
-        
+
         return $this->render('media/index.html.twig', [
-            'medias' => $medias
+            'medias' => $medias,
         ]);
     }
 
@@ -23,7 +23,7 @@ class MediaController extends BaseController
     public function show(Media $media): Response
     {
         return $this->render('media/show.html.twig', [
-            'media' => $media
+            'media' => $media,
         ]);
     }
 }

@@ -13,7 +13,7 @@ trait TranslationTrait
     // protected ?TranslatableEntity $translatable = null;
 
     // Add these methods with specific signatures
-    
+
     // public function getTranslatable(): TranslatableInterface
     // {
     //     return $this->translatable;
@@ -25,7 +25,7 @@ trait TranslationTrait
     // }
 
     #[ORM\Column(length: 10)]
-    protected $locale = null;
+    protected $locale;
 
     public function getLocale(): string
     {
@@ -36,7 +36,6 @@ trait TranslationTrait
     {
         $this->locale = $locale;
     }
-
 
     public function isNotYetAttached(): bool
     {

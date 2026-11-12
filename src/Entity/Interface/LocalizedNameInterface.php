@@ -4,7 +4,7 @@ namespace App\Entity\Interface;
 
 /**
  * Marker interface
- * 
+ *
  * Indicates that the entity has i18n name in DB
  */
 interface LocalizedNameInterface

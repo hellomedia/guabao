@@ -6,19 +6,17 @@ use App\Controller\BaseController;
 use App\Entity\Trip;
 use Controlroom\Form\Type\TripQuickEditType;
 use Doctrine\ORM\EntityManager;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
-use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 class TripController extends BaseController
 {
     public function __construct(
         private EntityManager $entityManager,
-    )
-    {
-    }
+    ) {}
 
     /**
      * Route must not conflict with easyadmin /trip/{id}/edit

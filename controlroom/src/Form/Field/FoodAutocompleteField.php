@@ -20,7 +20,7 @@ class FoodAutocompleteField extends AbstractType
             'label' => 'Food',
             'class' => Food::class,
             'placeholder' => '',
-            // choose which fields to use in the search. 
+            // choose which fields to use in the search.
             // if not passed, *all* fields are used
             // NB: relationships can be used. ie: category.name
             'searchable_fields' => ['nameEn', 'nameFr'],

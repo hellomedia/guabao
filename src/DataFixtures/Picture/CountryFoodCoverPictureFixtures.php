@@ -4,22 +4,19 @@ namespace App\DataFixtures\Picture;
 
 use App\DataFixtures\TripFixtures;
 use App\Helper\MediaAutoFillHelper;
-use Pack\Media\Helper\ExifExtractor;
-use Pack\Media\Helper\UploadHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Pack\Media\Helper\ExifExtractor;
+use Pack\Media\Helper\UploadHelper;
 
 class CountryFoodCoverPictureFixtures extends Fixture implements DependentFixtureInterface
 {
-
     public function __construct(
         private MediaAutoFillHelper $autoFillHelper,
         private UploadHelper $uploadHelper,
         private ExifExtractor $exifExtractor,
-    )
-    {   
-    }
+    ) {}
 
     public function getDependencies(): array
     {
@@ -30,10 +27,5 @@ class CountryFoodCoverPictureFixtures extends Fixture implements DependentFixtur
         ];
     }
 
-    public function load(ObjectManager $manager): void
-    {     
-
-       
-    }
-
+    public function load(ObjectManager $manager): void {}
 }

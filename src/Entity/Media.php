@@ -8,14 +8,13 @@ use App\Entity\Tag\PlaceTag;
 use App\Entity\Trait\LocalizedDescriptionTrait;
 use App\Enum\MediaType;
 use App\Enum\VideoOrientation;
-use Pack\Media\Entity\Interface\UploadedAssetEntityInterface;
-use Pack\Media\Entity\Trait\ImageTrait;
 use App\Repository\MediaRepository;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Pack\Media\Entity\Interface\UploadedAssetEntityInterface;
+use Pack\Media\Entity\Trait\ImageTrait;
 
 #[ORM\Index('media_taken_at_idx', ['taken_at'])]
 #[ORM\Index('media_show_in_trip_idx', ['show_in_trip'])]
@@ -48,7 +47,6 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
     /**
      * END Override image trait properties and mapping
      */
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -69,9 +67,10 @@ class Media implements EntityInterface, UploadedAssetEntityInterface
      * Which might happen regularly (place is attached only for shops etc)
      * For consistency, we always add placeTags to the media
      * It is also the safe link to country.
+     *
      * @var Collection<int, PlaceTag>
      */
-    #[ORM\ManyToMany(targetEntity: PlaceTag::class, inversedBy:'medias')]
+    #[ORM\ManyToMany(targetEntity: PlaceTag::class, inversedBy: 'medias')]
     private Collection $placeTags;
 
     /**

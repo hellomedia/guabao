@@ -23,7 +23,7 @@ class CuisineCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Cuisine')
             ->setEntityLabelInPlural('Cuisines')
             ->setDefaultSort([
-                'country' => 'ASC'
+                'country' => 'ASC',
             ])
         ;
     }
@@ -44,7 +44,7 @@ class CuisineCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield AssociationField::new('country');
-        
+
         yield TextField::new('nameEn', 'Name EN');
         yield TextField::new('nameFr', 'Name FR');
 
