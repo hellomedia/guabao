@@ -21,6 +21,10 @@ parameters:
 
     uploads_dir: 'uploads'
     uploads_base_url: '/%uploads_dir%'
+    # where uploaded files are written (UploadHelper, ImageManipulator)
+    uploads_path: '%kernel.project_dir%/public/%uploads_dir%'
+    # when set, picture fixtures upload this file instead of the real photos (see UploadHelper)
+    fixtures_placeholder_image: ~
 
     google_backend_api_key: '%env(GOOGLE_BACKEND_API_KEY)%'
     google_maps_js_api_key: '%env(GOOGLE_MAPS_JS_API_KEY)%'
@@ -31,3 +35,10 @@ parameters:
     deliverability_issues: false
 
     geoip_database_path: '%kernel.project_dir%/var/geoip/GeoLite2-City.mmdb'
+
+# Tests never write into public/, and their fixtures skip the 424 MB of photo processing:
+# tests/bootstrap.php builds the test database with one tiny placeholder image instead.
+when@test:
+    parameters:
+        uploads_path: '%kernel.project_dir%/var/test/uploads'
+        fixtures_placeholder_image: '%kernel.project_dir%/tests/fixtures/placeholder.jpg'

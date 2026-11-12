@@ -4,6 +4,7 @@ namespace Pack\Media\Helper;
 
 use Pack\Media\Entity\Interface\UploadedAssetEntityInterface;
 use Symfony\Component\Asset\Context\RequestStackContext;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -29,6 +30,8 @@ class UploadHelper
         private ImageManipulator $imageManipulator,
         private TranslatorInterface $translator,
         private SluggerInterface $slugger,
+        #[Autowire('%fixtures_placeholder_image%')]
+        private ?string $fixturesPlaceholderImage = null,
     ) {}
 
     public function uploadImage(UploadedAssetEntityInterface $image, UploadedFile $file, ?bool $resize = false, ?bool $convert = true)
@@ -43,7 +46,8 @@ class UploadHelper
         // Copy to a temporary file (unique filename each time)
         // so that original file is not moved by upload process and still avaialable for next time
         $tempPath = sys_get_temp_dir() . '/' . uniqid('upload_', true) . '.jpg';
-        copy($originalPath, $tempPath);
+        // In test, a tiny placeholder stands in for the photo (keeps its name): no heavy image processing
+        copy($this->fixturesPlaceholderImage ?? $originalPath, $tempPath);
 
         $uploadedFile = new UploadedFile(
             $tempPath,

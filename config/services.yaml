@@ -14,7 +14,7 @@ services:
             $emailDomain: '%email_domain%'
             $environment: '%env(string:APP_ENV)%'
             $projectDir: '%kernel.project_dir%'
-            $uploadsPath: '%kernel.project_dir%/public/%uploads_dir%'
+            $uploadsPath: '%uploads_path%'
             $uploadedAssetsBaseUrl: '%uploads_base_url%'
             $deliverabilityIssues: '%deliverability_issues%'
             $googleBackendApiKey: '%google_backend_api_key%'

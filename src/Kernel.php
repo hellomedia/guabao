@@ -96,12 +96,12 @@ class Kernel extends BaseKernel
     }
 
     /**
-     * Symfony 8.1 refuses to boot with an APP_ENV not listed here. Guabao only has dev and prod.
+     * Symfony 8.1 refuses to boot with an APP_ENV not listed here. test: php bin/phpunit.
      *
      * @return list<string> An array of allowed values for APP_ENV
      */
     private function getAllowedEnvs(): array
     {
-        return ['prod', 'dev'];
+        return ['prod', 'dev', 'test'];
     }
 }
