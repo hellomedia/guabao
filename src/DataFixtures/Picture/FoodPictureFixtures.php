@@ -88,7 +88,7 @@ class FoodPictureFixtures extends Fixture implements DependentFixtureInterface
 
             $this->_updateAutoFields($media, $exif);
 
-            $media->setFood($this->getReference('food-' . $item['food'], Food::class));
+            $media->addFood($this->getReference('food-' . $item['food'], Food::class));
 
             $this->setReference('media-' . $item['filename'], $media);
 

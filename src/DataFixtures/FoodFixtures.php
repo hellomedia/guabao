@@ -56,7 +56,7 @@ class FoodFixtures extends Fixture implements DependentFixtureInterface
                 $food->addTag($this->getReference('foodTag-' . $foodTag, FoodTag::class));
             }
 
-            $food->setCuisine($this->getReference('cuisine-' . $item['cuisine'], Cuisine::class));
+            $food->addCuisine($this->getReference('cuisine-' . $item['cuisine'], Cuisine::class));
 
             foreach ($item['ingredients'] as $ingredient) {
                 $food->addIngredient($this->getReference('ingredient-' . $ingredient, Ingredient::class));

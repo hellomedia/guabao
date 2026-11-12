@@ -895,12 +895,6 @@ parameters:
 			path: src/Controller/TripController.php
 
 		-
-			message: '#^Call to an undefined method App\\Entity\\Food\:\:setCuisine\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/DataFixtures/FoodFixtures.php
-
-		-
 			message: '#^Property App\\DataFixtures\\Picture\\CountryFoodCoverPictureFixtures\:\:\$autoFillHelper is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
@@ -917,12 +911,6 @@ parameters:
 			identifier: property.onlyWritten
 			count: 1
 			path: src/DataFixtures/Picture/CountryFoodCoverPictureFixtures.php
-
-		-
-			message: '#^Call to an undefined method App\\Entity\\Media\:\:setFood\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/DataFixtures/Picture/FoodPictureFixtures.php
 
 		-
 			message: '#^Method App\\DataFixtures\\Picture\\FoodPictureFixtures\:\:_updateAutoFields\(\) has no return type specified\.$#'
