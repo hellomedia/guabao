@@ -16,7 +16,6 @@
         "beberlei/doctrineextensions": "^1.5",
         "doctrine/dbal": "^4.0",
         "doctrine/doctrine-bundle": "^3.3",
-        "doctrine/doctrine-fixtures-bundle": "^4.0",
         "doctrine/doctrine-migrations-bundle": "^4.0",
         "doctrine/orm": "^3.3",
         "easycorp/easyadmin-bundle": "^5.9",
@@ -74,6 +73,7 @@
     "minimum-stability": "stable",
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.7",
+        "doctrine/doctrine-fixtures-bundle": "^4.3",
         "friendsofphp/php-cs-fixer": "^3.95",
         "phpstan/phpdoc-parser": "^2.0",
         "phpstan/phpstan": "^2.3",

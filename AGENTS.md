@@ -17,6 +17,8 @@ French (`/fr`).
 - `packs/` holds self-contained modules (Chart, Media, Security, Status) with their own code and templates.
 - Uploads go to `%uploads_path%` (`public/uploads`; `var/test/uploads` in test) through
   `Pack\Media\Helper\UploadHelper`. Vich is installed but no entity uses it.
+  Never write or delete files under a hardcoded `public/` path: the test suite must not touch the
+  dev uploads.
 - Environments: dev, prod and test only (`Kernel::getAllowedEnvs()`).
 
 ## Conventions
@@ -46,6 +48,8 @@ Follow https://symfony.com/doc/current/best_practices.html. The points that matt
 - Never edit a migration that has already run (check `doctrine:migrations:status`): add a follow-up one.
 - Fixtures: `doctrine:fixtures:load` (doctrine-fixtures-bundle + Foundry factories). In dev they
   process ~400 MB of photos from `src/DataFixtures/images/`, which is left out of releases.
+  The bundle is dev/test only (`require-dev`). Loading empties `%uploads_path%/image` first
+  (`TripCoverPictureFixtures`): in dev, that deletes every file in `public/uploads/image`.
 
 ## Configuration and secrets
 

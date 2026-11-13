@@ -13,7 +13,6 @@ use Doctrine\Persistence\ObjectManager;
 use Pack\Media\Helper\ExifExtractor;
 use Pack\Media\Helper\UploadHelper;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 
 class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -21,6 +20,7 @@ class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterf
         private MediaAutoFillHelper $autoFillHelper,
         private UploadHelper $uploadHelper,
         private ExifExtractor $exifExtractor,
+        private string $uploadsPath,
     ) {}
 
     public function getDependencies(): array
@@ -32,7 +32,10 @@ class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterf
 
     public function load(ObjectManager $manager): void
     {
-        $this->_removeOldFiles();
+        // The purge has just emptied the media table: drop the files it orphaned.
+        // %uploads_path% is public/uploads in dev, var/test/uploads in test; the bundle is dev/test only.
+        // Runs first: the other picture fixtures depend on this one.
+        (new Filesystem())->remove($this->uploadsPath . '/' . UploadHelper::IMAGE_DIR);
 
         foreach (TripFixtures::TRIPS as $trip) {
             $media = new Media();
@@ -72,21 +75,5 @@ class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterf
         // but if we do add place fixtures
         // we could query the DB  as long as PlaceFixtures is added to the dependencies
         $this->autoFillHelper->autoAssignPlace($media);
-    }
-
-    private function _removeOldFiles()
-    {
-        $filesystem = new Filesystem();
-        $uploadDir = __DIR__ . '/../../../public/uploads/media';
-
-        // Delete all files in the upload directory (but not the directory itself)
-        if ($filesystem->exists($uploadDir)) {
-            $finder = new Finder();
-            $finder->files()->in($uploadDir);
-
-            foreach ($finder as $file) {
-                $filesystem->remove($file->getRealPath());
-            }
-        }
     }
 }
