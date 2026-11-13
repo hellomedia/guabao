@@ -28,6 +28,9 @@ on false positives "99% of the time". Sentry reports production errors. So:
 - **Unit tests only for tricky services**, case by case, typically after a bug.
 - **Nothing in the deploy script, no commit hook.** Claude runs the checks before committing.
   The user never has to.
+- **The test suite never touches dev data.** Its own database (`dbname_suffix`), and uploads or
+  generated files under `var/test/` (override the upload path parameter in `when@test`). The
+  bootstrap wipes that folder on each rebuild, so it doesn't accumulate.
 - **The test database is never rebuilt on every run.** On some projects fixtures take ~3 min
   (image processing). Make heavy fixtures skip that work in the test environment (tiny placeholder
   image) if the rebuild itself is too slow.
@@ -51,6 +54,10 @@ all that with `php bin/phpunit` (TCU: ~6 s), so the check actually gets run afte
   `symfony/test-pack` is unpacked into phpunit, browser-kit and css-selector. dama/doctrine-test-bundle
   wraps each test in a rolled-back transaction, so the database is built once and never drifts. It
   is not in the test pack because Doctrine is optional in Symfony and the bundle is third-party.
+- Find where uploads and generated files are written or cleaned up:
+  `grep -rn "public/\|kernel.project_dir" src config`. Every write and delete must go through a
+  path parameter that `when@test` can point under `var/test/`. Fix any hardcoded `public/...` path
+  (in fixtures too) before the first test run: it would hit the user's dev uploads.
 - Commit the stock recipes as they are, as one commit, before changing anything.
 
 ## 2. php-cs-fixer
