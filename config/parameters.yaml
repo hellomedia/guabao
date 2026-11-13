@@ -23,6 +23,9 @@ parameters:
     uploads_base_url: '/%uploads_dir%'
     # where uploaded files are written (UploadHelper, ImageManipulator)
     uploads_path: '%kernel.project_dir%/public/%uploads_dir%'
+    # LiipImagine: where thumbnails are cached (under media/cache/) and where originals are read from
+    thumbs_web_root: '%kernel.project_dir%/public/'
+    thumbs_data_root: '%env(PUBLIC_DIR_SYSTEM_PATH)%'
     # when set, picture fixtures upload this file instead of the real photos (see UploadHelper)
     fixtures_placeholder_image: ~
 
@@ -41,4 +44,7 @@ parameters:
 when@test:
     parameters:
         uploads_path: '%kernel.project_dir%/var/test/uploads'
+        # thumbnails cached in var/test/media/cache, generated from var/test/uploads
+        thumbs_web_root: '%kernel.project_dir%/var/test/'
+        thumbs_data_root: '%kernel.project_dir%/var/test/'
         fixtures_placeholder_image: '%kernel.project_dir%/tests/fixtures/placeholder.jpg'

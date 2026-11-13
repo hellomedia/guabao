@@ -48,8 +48,9 @@ Follow https://symfony.com/doc/current/best_practices.html. The points that matt
 - Never edit a migration that has already run (check `doctrine:migrations:status`): add a follow-up one.
 - Fixtures: `doctrine:fixtures:load` (doctrine-fixtures-bundle + Foundry factories). In dev they
   process ~400 MB of photos from `src/DataFixtures/images/`, which is left out of releases.
-  The bundle is dev/test only (`require-dev`). Loading empties `%uploads_path%/image` first
-  (`TripCoverPictureFixtures`): in dev, that deletes every file in `public/uploads/image`.
+  The bundle is dev/test only (`require-dev`). Loading first empties `%uploads_path%/image` and the
+  LiipImagine cache (`TripCoverPictureFixtures`): in dev, every file in `public/uploads/image` and
+  `public/media/cache`. In test, both live under `var/test/` (`config/parameters.yaml`).
 
 ## Configuration and secrets
 

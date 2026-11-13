@@ -10,6 +10,7 @@ use App\Helper\MediaAutoFillHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Pack\Media\Helper\ExifExtractor;
 use Pack\Media\Helper\UploadHelper;
 use Symfony\Component\Filesystem\Filesystem;
@@ -21,6 +22,7 @@ class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterf
         private UploadHelper $uploadHelper,
         private ExifExtractor $exifExtractor,
         private string $uploadsPath,
+        private CacheManager $thumbsCacheManager,
     ) {}
 
     public function getDependencies(): array
@@ -32,10 +34,12 @@ class TripCoverPictureFixtures extends Fixture implements DependentFixtureInterf
 
     public function load(ObjectManager $manager): void
     {
-        // The purge has just emptied the media table: drop the files it orphaned.
-        // %uploads_path% is public/uploads in dev, var/test/uploads in test; the bundle is dev/test only.
+        // The purge has just emptied the media table: drop the files it orphaned, and their thumbnails.
+        // In dev: public/uploads and public/media/cache; in test: the same under var/test/
+        // (uploads_path, thumbs_web_root). The bundle is dev/test only.
         // Runs first: the other picture fixtures depend on this one.
         (new Filesystem())->remove($this->uploadsPath . '/' . UploadHelper::IMAGE_DIR);
+        $this->thumbsCacheManager->remove();
 
         foreach (TripFixtures::TRIPS as $trip) {
             $media = new Media();

@@ -6,12 +6,12 @@ liip_imagine:
     resolvers:
         default:
             web_path:
-                web_root: "%kernel.project_dir%/public/"
+                web_root: "%thumbs_web_root%"
                 cache_prefix: media/cache
     loaders:
         default:
             filesystem:
-                data_root: "%env(PUBLIC_DIR_SYSTEM_PATH)%" # public path fed to liip filter
+                data_root: "%thumbs_data_root%" # public path fed to liip filter
     
     driver: imagick
 
