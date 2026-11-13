@@ -14,7 +14,7 @@ class AdminUserFixtures extends Fixture
             'name' => 'Admin',
             'email' => 'admin@guabao.me',
             'roles' => ['ROLE_SUPER_ADMIN'],
-            'password' => 'changeme',
+            'password' => '000000',
         ]);
     }
 }
