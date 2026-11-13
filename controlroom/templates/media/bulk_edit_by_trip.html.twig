@@ -7,7 +7,7 @@
 {% block page_actions %}
     {% embed '@admin/_top_links.html.twig' %}
         {% block add_pictures %}
-            <a class="btn" href="{{ path('controlroom_media_bulk_add', {'trip': trip.id}) }}">
+            <a class="btn btn-secondary" href="{{ path('controlroom_media_bulk_add', {'trip': trip.id}) }}">
                 + Pictures
             </a>
         {% endblock %}
@@ -99,12 +99,12 @@
                     <div>
                         <h5>
                             {{ story }}
-                            <a class="btn btn-sm" style="margin-left: 10px;"
+                            <a class="btn btn-secondary btn-sm" style="margin-left: 10px;"
                                 target="_blank"
                                 href="{{ path('controlroom_media_bulk_add', {'trip': story.trip.id, 'story': story.id}) }}">
                                 + Pictures
                             </a>
-                            <a class="btn btn-sm" style="margin-left: 10px;"
+                            <a class="btn btn-secondary btn-sm" style="margin-left: 10px;"
                                 target="_blank"
                                 href="{{ path('controlroom_story_edit', {entityId: story.id}) }}">
                                 Edit
