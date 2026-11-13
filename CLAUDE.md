@@ -2,6 +2,8 @@
 
 Project rules are in AGENTS.md, which Claude Code loads on its own. This file only holds what is
 specific to running Claude in this project's dev container (the `claude-code` compose service).
+Preferences shared by all of Nicolas's projects are in `~/.claude/CLAUDE.md`, a link to
+`/home/node/shared/CLAUDE.md` (host `../claude-shared`, see its README.md).
 
 - PHP 8.5 with pdo_pgsql, gd and imagick is available: run `bin/console`, phpstan, php-cs-fixer and
   `php bin/phpunit` directly. There is no docker CLI and no sudo.
