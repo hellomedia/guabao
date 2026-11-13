@@ -91,6 +91,7 @@ services:
     volumes:
       - "./:/data/www"                       # your code (Claude reads, edits, commits here)
       - "claude-config:/home/node/.claude"   # persists your Claude login. Named volume, /home/node is **inside** container, not on host
+      - "../claude-shared:/home/node/shared" # folder shared by all projects; entrypoint links ~/.claude/CLAUDE.md to its CLAUDE.md
 
 
 ###> doctrine/doctrine-bundle ###
@@ -108,10 +109,12 @@ services:
 ###< doctrine/doctrine-bundle ###
 
 # NAMED VOLUMES
-
+# important to add claude-config here, so the volume name is scoped to the project (guabao_claude-config)
+# which is key to having per-project memory in claude
 volumes:
   db-data:
   db-pgadmin:
+  claude-config:
   #shared_certs:  # not neeeded since we use http internally between nginx and caddy
 
 # NB: Named Volumes vs Bind Mounts
