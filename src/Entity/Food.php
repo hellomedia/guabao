@@ -21,6 +21,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Index(name: 'food_name_search_idx', columns: ['name_search'])]
+// Food pages look a food up by slug; SluggableListener keeps them unique
+#[ORM\UniqueConstraint(name: 'food_slug_en_unique', columns: ['slug_en'])]
+#[ORM\UniqueConstraint(name: 'food_slug_fr_unique', columns: ['slug_fr'])]
 #[ORM\Entity(repositoryClass: FoodRepository::class)]
 class Food implements LocalizedNameInterface, LocalizedSlugInterface, SearchableNameInterface, OriginalNameInterface, EntityInterface
 {
