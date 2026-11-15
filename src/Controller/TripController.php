@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\DataFixtures\Tag\TripTagFixtures;
 use App\Entity\Trip;
+use App\Enum\TripTagKey;
 use App\Repository\MediaRepository;
 use App\Repository\TripRepository;
 use App\Repository\TripTagRepository;
@@ -33,7 +33,7 @@ class TripController extends BaseController
     #[Route('/trip/t/hiking', name: 'trip_index_hiking')]
     public function indexByHiking(TripRepository $tripRepository, TripTagRepository $tripTagRepository, Request $request): Response
     {
-        $hikingTripTag = $tripTagRepository->findOneByKey(TripTagFixtures::HIKING);
+        $hikingTripTag = $tripTagRepository->findOneByKey(TripTagKey::HIKING->value);
 
         $trips = $tripRepository->findAllByTag($hikingTripTag, sort: $request->query->get('s'));
 
@@ -45,7 +45,7 @@ class TripController extends BaseController
     #[Route('/trip/t/slow-travel', name: 'trip_index_slow_travel')]
     public function indexBySlowTravel(TripRepository $tripRepository, TripTagRepository $tripTagRepository, Request $request): Response
     {
-        $slowTravelTripTag = $tripTagRepository->findOneByKey(TripTagFixtures::SLOW_TRAVEL);
+        $slowTravelTripTag = $tripTagRepository->findOneByKey(TripTagKey::SLOW_TRAVEL->value);
 
         $trips = $tripRepository->findAllByTag($slowTravelTripTag, sort: $request->query->get('s'));
 

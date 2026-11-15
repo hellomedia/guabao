@@ -3,15 +3,16 @@
 namespace App\DataFixtures\Tag;
 
 use App\Entity\Tag\TripTag;
+use App\Enum\TripTagKey;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 class TripTagFixtures extends Fixture
 {
-    public const SLOW_TRAVEL = 'slowtravel';
-    public const HIKING = 'hiking';
-    public const SOLO = 'solo';
-    public const WITH_FRIENDS = 'friends';
+    public const SLOW_TRAVEL = TripTagKey::SLOW_TRAVEL->value;
+    public const HIKING = TripTagKey::HIKING->value;
+    public const SOLO = TripTagKey::SOLO->value;
+    public const WITH_FRIENDS = TripTagKey::WITH_FRIENDS->value;
 
     private const array TRIP_TAGS = [
         [
